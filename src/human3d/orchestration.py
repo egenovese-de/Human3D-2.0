@@ -42,6 +42,9 @@ class Coordinator:
 
     def submit(self, kind):
         with self._lock:
+            for previous in tuple(self._jobs.values()):
+                if previous.kind == kind and previous.state in {"queued", "running"}:
+                    self._jobs[previous.id] = replace(previous, state="stale")
             job = Job(str(uuid4()), self.project_id, self.generation,
                       self.dependencies, kind)
             self._jobs[job.id] = job
