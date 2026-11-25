@@ -14,6 +14,8 @@ from human3d.bootstrap import freeze_neutral
 from human3d.fitting import _optimize, _scorer
 from human3d.frozen_body import deform_vertices, load_frozen_body, morph_controls
 from human3d.mask_review import SubjectMask
+from human3d.native_rig import validate_rebind
+from human3d.regional_morphs import regional_controls
 
 
 def silhouette(vertices, faces, camera, size):
@@ -36,10 +38,28 @@ def compare(reference, prediction):
     return {"iou": intersection / union, "symmetric_contour_px": float(contour)}
 
 
+def sensitivity(body, neutral):
+    baseline = np.asarray(neutral)
+    report = {}
+    for name in (*morph_controls(body), *regional_controls(body)):
+        displacement = {}
+        for amount in (-.5, .5):
+            vertices = deform_vertices(body, {name: amount})
+            validate_rebind(body, vertices)
+            distance = np.linalg.norm(np.asarray(vertices) - baseline, axis=1)
+            displacement[str(amount)] = {
+                "moving_vertices": int(np.count_nonzero(distance > 1e-5)),
+                "max_displacement_mm": float(100 * distance.max()),
+            }
+        report[name] = displacement
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("product", "assets", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
+    parser.add_argument("--regional", action="store_true")
     args = parser.parse_args()
     product_sha = revision(args.product)
     lab_sha = revision(Path(__file__).parents[1])
@@ -49,6 +69,8 @@ def main():
     body = load_frozen_body(output / "frozen" / f"{frozen}.json")
     neutral = deform_vertices(body, {})
     truth_controls = {"hips": .375, "waist": -.25, "thigh": .25, "upperarm": .375}
+    if args.regional:
+        truth_controls |= {"abdomen_depth": .375, "glute_depth": .25, "shin_depth": -.375}
     truth = deform_vertices(body, truth_controls)
     faces = [tuple(index for index, _ in face["corners"])
              for face in body["mesh"]["faces"] if face["group"] == "body"]
@@ -73,7 +95,10 @@ def main():
                                    camera.origin + (6 - 4j), 1), 0, {})
              for key, camera in cameras.items() if key in masks}
     score = _scorer(body, masks, alignments, neutral)
-    controls, _ = _optimize(body, score, {}, morph_controls(body), (.25, .125))
+    available = tuple(morph_controls(body))
+    if args.regional:
+        available += regional_controls(body)
+    controls, _ = _optimize(body, score, {}, available, (.25, .125))
     fitted = deform_vertices(body, controls)
     configurations = {"baseline": (neutral, noisy), "camera_only": (neutral, alignments),
                       "geometry_only": (fitted, noisy), "camera_and_geometry": (fitted, alignments)}
@@ -82,6 +107,13 @@ def main():
               "vertex_rmse_mm": float(100 * np.sqrt(np.mean(np.sum(
                   (np.asarray(fitted) - np.asarray(truth)) ** 2, axis=1)))),
               "held_out_view": "held_out", "training_views": list(masks), "views": {}}
+    report["control_sensitivity"] = sensitivity(body, neutral)
+    report["saturated_controls"] = sorted(name for name, value in controls.items() if abs(value) == .5)
+    ground_truth_joints = validate_rebind(body, truth)
+    report["root_mean_square_joint_error_mm"] = float(100 * np.sqrt(np.mean([
+        np.sum((point - ground_truth_joints[name]) ** 2)
+        for name, point in validate_rebind(body, fitted).items()
+    ])))
     for name, camera in cameras.items():
         reference = silhouette(truth, faces, camera, size)
         metrics = {}
