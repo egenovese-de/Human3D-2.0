@@ -34,6 +34,21 @@ On Linux use `requirements-linux.lock` and the system libraries in [RUNTIME](DOC
 The initial pose uses image-plane limb directions. The first local empirical
 test is tracked in the [test plan](DOCS/EMPIRICAL_TEST_PLAN.md).
 
+## Run the M2 desktop build
+
+Check out `development/m2` and use the same installation and verified local
+assets as M1. For the additional torso controls, add the six bust, shoulder
+and waist measurement targets listed in the pinned MakeHuman manifest and
+freeze the rest body again.
+
+Import reference photographs of one subject. Use a photo's context menu
+to include, exclude or retry detection. Select **Fit included photos** to
+calculate a shared body and report regional coverage and overlap by photo.
+Changing the target selects a different view of the same shared revision.
+**Inspect fitted body** compares bootstrap, fitted neutral and posed geometry.
+Use **Edit body control** and **Restore body revision** to manage revisions for
+the current reference set. **Export USD** writes the current target pose.
+
 ## Product vision
 
 Human3D reconstructs editable, reusable 3D human assets from one or more photographs of the same person. A selected target determines pose and appearance; other views inform shared neutral anatomy. Planned outputs include independent clothing geometry, UVs, materials, skeleton, skin weights and editable OpenUSD for Blender.

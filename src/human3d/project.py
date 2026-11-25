@@ -62,6 +62,7 @@ class Project:
     frozen_body_digest: str | None = None
     observations: tuple[ObservationRef, ...] = ()
     shared_fit_digest: str | None = None
+    shared_fit_history: tuple[str, ...] = ()
 
     def __post_init__(self):
         UUID(self.id)
@@ -72,11 +73,20 @@ class Project:
 
         if self.shared_fit_digest is not None and not re.fullmatch(r"[0-9a-f]{64}", self.shared_fit_digest):
             raise ValueError("invalid_shared_fit_digest")
+        if len(set(self.shared_fit_history)) != len(self.shared_fit_history) or any(
+            not re.fullmatch(r"[0-9a-f]{64}", digest) for digest in self.shared_fit_history
+        ):
+            raise ValueError("invalid_shared_fit_history")
         photos = {photo.id: photo.digest for photo in self.photos.photos}
         if len({ref.photo_id for ref in self.observations}) != len(self.observations):
             raise ValueError("duplicate_photo_observation")
         if any(photos.get(ref.photo_id) != ref.photo_digest for ref in self.observations):
             raise ValueError("observation_photo_mismatch")
+
+    def with_shared_fit(self, digest: str) -> "Project":
+        history = tuple(dict.fromkeys(value for value in
+                        (*self.shared_fit_history, self.shared_fit_digest, digest) if value is not None))
+        return replace(self, shared_fit_digest=digest, shared_fit_history=history)
 
     def observation(self, photo_id: str) -> ObservationRef | None:
         return next((ref for ref in self.observations if ref.photo_id == photo_id), None)

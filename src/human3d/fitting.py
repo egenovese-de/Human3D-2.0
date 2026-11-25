@@ -1,5 +1,5 @@
 """Bounded silhouette fitting against independently aligned project views."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from io import BytesIO
 
 import numpy as np
@@ -119,3 +119,17 @@ def fit_shared(body, evidence):
             controls, best, alignments = candidate, scores, refined
     return SharedFit(Fit(controls, _mean(baseline_scores), _mean(best)), alignments,
                      evidence.dependency_digest, best)
+
+def edit_fit(body, evidence, current, name, value):
+    if name not in (*morph_controls(body), *length_controls(body)):
+        raise ValueError("unsupported_body_control")
+    if not -0.5 <= value <= 0.5:
+        raise ValueError("body_control_out_of_range")
+    if current.fit.controls.get(name, 0) == value:
+        return current
+    controls = current.fit.controls | {name: value}
+    vertices = deform_vertices(body, controls)
+    validate_rebind(body, vertices)
+    masks = {view.ref.photo_id: view.mask for view in evidence.views if view.ref.photo_id in current.scores}
+    scores = _scorer(body, masks, current.alignments, vertices)(vertices)
+    return replace(current, fit=Fit(controls, current.fit.bootstrap_iou, _mean(scores)), scores=scores)

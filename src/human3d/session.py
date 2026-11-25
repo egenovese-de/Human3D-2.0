@@ -107,7 +107,7 @@ class Session:
                 raise ValueError("shared_fit_dependencies_changed")
             digest = self.observations.write_fit(bootstrap, result)
             if digest != previous:
-                self.store.save(replace(current, shared_fit_digest=digest))
+                self.store.save(current.with_shared_fit(digest))
         return result
 
     def current_shared_fit(self):
@@ -122,6 +122,43 @@ class Session:
                     or fit.evidence_digest != fuse_observations(project, self.observations).dependency_digest):
                 return None
             return fit
+
+    def restorable_fits(self):
+        with self._lock:
+            project = self.store.load()
+            evidence = self.shared_evidence()
+            revisions = []
+            for digest in project.shared_fit_history:
+                if digest == project.shared_fit_digest:
+                    continue
+                bootstrap, fit = self.observations.read_fit(digest)
+                if bootstrap == project.frozen_body_digest and fit.evidence_digest == evidence.dependency_digest:
+                    revisions.append(digest)
+            return tuple(revisions)
+
+    def restore_shared_fit(self, digest: str):
+        with self._lock:
+            project = self.store.load()
+            if digest not in self.restorable_fits():
+                raise ValueError("shared_fit_revision_unavailable")
+            self.store.save(project.with_shared_fit(digest))
+
+    def edit_shared_control(self, name: str, value: float):
+        from .fitting import edit_fit
+        from .frozen_body import load_frozen_body
+
+        with self._lock:
+            project = self.store.load()
+            fit = self.current_shared_fit()
+            if fit is None:
+                raise ValueError("no_current_shared_fit")
+            bootstrap = project.frozen_body_digest
+            body = load_frozen_body(self.store.directory / "frozen" / f"{bootstrap}.json")
+            revised = edit_fit(body, self.shared_evidence(), fit, name, value)
+            digest = self.observations.write_fit(bootstrap, revised)
+            if digest != project.shared_fit_digest:
+                self.store.save(project.with_shared_fit(digest))
+            return revised
 
     def read_observation(self, photo_id: str):
         with self._lock:

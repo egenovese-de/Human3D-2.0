@@ -5,7 +5,7 @@ from PIL.ImageQt import ImageQt
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QLabel, QMenu, QMessageBox)
+    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QInputDialog, QLabel, QMenu, QMessageBox)
 from .session import Session
 from .originals import OriginalStore
 from .ingestion import folder_inputs
@@ -49,6 +49,14 @@ class PhotosWindow(QWidget):
         shared = QPushButton("Fit included photos")
         shared.clicked.connect(self.fit_included)
         layout.addWidget(shared)
+        revisions = QHBoxLayout()
+        edit = QPushButton("Edit body control")
+        edit.clicked.connect(lambda: self.guarded(self.edit_shared_fit))
+        revisions.addWidget(edit)
+        restore = QPushButton("Restore body revision")
+        restore.clicked.connect(lambda: self.guarded(self.restore_shared_fit))
+        revisions.addWidget(restore)
+        layout.addLayout(revisions)
 
     def guarded(self, operation):
         try:
@@ -140,6 +148,36 @@ class PhotosWindow(QWidget):
         if missing:
             summary += f"\n\nNeeds review\n{missing}"
         QMessageBox.information(self, "Shared fit", summary)
+
+    def edit_shared_fit(self):
+        from .frozen_body import morph_controls
+        from .proportions import length_controls
+
+        current = self.session.current_shared_fit() if self.session is not None else None
+        if current is None:
+            raise ValueError("Fit the included photos before editing body controls.")
+        body = load_project_body(self.store)
+        controls = (*morph_controls(body), *length_controls(body))
+        name, accepted = QInputDialog.getItem(self, "Edit body control", "Control", controls, editable=False)
+        if not accepted:
+            return
+        value, accepted = QInputDialog.getDouble(self, "Edit body control", name,
+                                                current.fit.controls.get(name, 0), -0.5, 0.5, 3)
+        if accepted:
+            self.session.edit_shared_control(name, value)
+            self.fitted_preview = None
+            self.status.setText("Body edit saved as a new revision.")
+
+    def restore_shared_fit(self):
+        revisions = self.session.restorable_fits() if self.session is not None else ()
+        if not revisions:
+            raise ValueError("No prior body revision matches the current references.")
+        digest, accepted = QInputDialog.getItem(self, "Restore body revision", "Revision",
+                                                tuple(reversed(revisions)), editable=False)
+        if accepted:
+            self.session.restore_shared_fit(digest)
+            self.fitted_preview = None
+            self.status.setText("Prior body revision restored.")
 
     def pick_model(self):
         model, _ = QFileDialog.getOpenFileName(self, "Select local Pose Landmarker model",

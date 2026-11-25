@@ -31,8 +31,8 @@
 | H3D2-M2-009 | Integrate bounded alternating optimization with validated promotion and rollback | TECHNICAL_PASS |
 | H3D2-M2-010 | Expose regional observability and neutral comparison | TECHNICAL_PASS |
 | H3D2-M2-011 | Integrate reference inclusion, selective retry and dependency-verified target switching | TECHNICAL_PASS |
-| H3D2-M2-012 | Integrate revision restoration and supported semantic edits with dependency invalidation | TODO |
-| H3D2-M2-014 | Run automated M2 regressions and Blender import checks | TODO |
+| H3D2-M2-012 | Integrate revision restoration and supported semantic edits with dependency invalidation | TECHNICAL_PASS |
+| H3D2-M2-014 | Run automated M2 regressions and Blender import checks | IN_PROGRESS |
 ## M3
 | Task ID | Task description | Status |
 |---|---|---|
