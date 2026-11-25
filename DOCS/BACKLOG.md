@@ -2,7 +2,7 @@
 ## M1
 | Task ID | Task description | Status |
 |---|---|---|
-| H3D2-M1-001 | Establish component-level redistribution, privacy and security clearance | TODO |
+| H3D2-M1-001 | Establish component-level redistribution, privacy and security clearance | IN_PROGRESS |
 | H3D2-M1-002 | Approve essential architecture, artifact and interaction contracts | TODO |
 | H3D2-M1-003 | Establish independent package, pinned runtime and targeted validation entry points | TODO |
 | H3D2-M1-004 | Implement project lifecycle, atomic persistence and PhotoSet | TODO |
