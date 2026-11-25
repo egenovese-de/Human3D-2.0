@@ -39,7 +39,7 @@ class ProjectTests(unittest.TestCase):
                 with self.assertRaises(OSError):
                     store.save(saved)
             self.assertEqual(store.snapshot.read_bytes(), before)
-            self.assertEqual(list(Path(root).iterdir()), [store.snapshot])
+            self.assertEqual({p.name for p in Path(root).iterdir()}, {"project.json", ".writer.lock"})
             store.snapshot.write_text('{"schema_version": 99}', encoding="utf-8")
             with self.assertRaises(ValueError):
                 store.load()
