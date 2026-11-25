@@ -1,4 +1,5 @@
 """Freeze a verified upstream neutral mesh and rig into a native JSON artifact."""
+from dataclasses import replace
 import hashlib
 import json
 import math
@@ -133,4 +134,12 @@ def freeze_neutral(directory: Path, artifact_directory: Path, *, with_morphs: bo
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
+    return digest
+
+def freeze_project(store, assets: Path) -> str:
+    """Attach a verified, immutable rest body to a saved project's current revision."""
+    project = store.load()
+    digest = freeze_neutral(assets, store.directory / "frozen", with_morphs=True)
+    if project.frozen_body_digest != digest:
+        store.save(replace(project, frozen_body_digest=digest))
     return digest

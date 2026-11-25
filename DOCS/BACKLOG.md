@@ -10,9 +10,9 @@
 | H3D2-M1-006 | Integrate generation-safe orchestration, capability states, progress, cancellation and retry | TECHNICAL_PASS |
 | H3D2-M1-007 | Integrate subject detection and landmark evidence | TECHNICAL_PASS |
 | H3D2-M1-008 | Integrate recoverable segmentation and validated visual subject/mask correction | TECHNICAL_PASS |
-| H3D2-M1-009 | Integrate licensed bootstrap and canonical freeze | IN_PROGRESS |
-| H3D2-M1-010 | Verify frozen-body inspection and native operations with MakeHuman unavailable | TODO |
-| H3D2-M1-011 | Integrate automatic camera and pose initialization | TODO |
+| H3D2-M1-009 | Integrate licensed bootstrap and canonical freeze | TECHNICAL_PASS |
+| H3D2-M1-010 | Verify frozen-body inspection and native operations with MakeHuman unavailable | TECHNICAL_PASS |
+| H3D2-M1-011 | Integrate automatic camera and pose initialization | IN_PROGRESS |
 | H3D2-M1-012 | Integrate automatic first overlay and visual alignment recovery before fitting approval | TODO |
 | H3D2-M1-013 | Integrate bounded native anatomical fitting | TODO |
 | H3D2-M1-014 | Integrate native rig rebinding and editable rigged USD authoring | TODO |

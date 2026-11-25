@@ -49,7 +49,7 @@ class ProjectStore:
         if type(data["schema_version"]) is not int or data["schema_version"] != 1:
             raise ValueError("unsupported project schema")
         return Project(data["id"], data["revision"], PhotoSet(
-            tuple(Photo(**p) for p in data["photos"]), data["target"]))
+            tuple(Photo(**p) for p in data["photos"]), data["target"]), data.get("frozen_body_digest"))
 
     def create(self) -> Project:
         with writer_lock(self.directory):
@@ -85,6 +85,7 @@ class ProjectStore:
         data = {
             "schema_version": 1, "id": project.id,
             "revision": project.revision, "target": project.photos.target,
+            "frozen_body_digest": project.frozen_body_digest,
             "photos": [{"id": p.id, "digest": p.digest, "name": p.name,
                         "included": p.included} for p in project.photos.photos],
         }

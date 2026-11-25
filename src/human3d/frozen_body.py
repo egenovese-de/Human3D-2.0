@@ -34,3 +34,10 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
             for axis, offset in enumerate((x, y, z)):
                 vertex[axis] += abs(value) * offset
     return tuple(map(tuple, vertices))
+
+
+def load_project_body(store) -> dict:
+    digest = store.load().frozen_body_digest
+    if digest is None:
+        raise ValueError("project_has_no_frozen_body")
+    return load_frozen_body(store.directory / "frozen" / f"{digest}.json")

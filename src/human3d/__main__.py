@@ -16,7 +16,31 @@ def main():
     freeze.add_argument("assets", type=Path)
     freeze.add_argument("artifact_directory", type=Path)
     freeze.add_argument("--with-morphs", action="store_true", help="Embed the eight verified MORPH-02 targets")
+    project_freeze = commands.add_parser("freeze-project", help="Attach a frozen rest body to a saved project")
+    project_freeze.add_argument("project", type=Path)
+    project_freeze.add_argument("--assets", type=Path, required=True)
+    inspection = commands.add_parser("inspect-body", help="Inspect the project's native rest body")
+    inspection.add_argument("project", type=Path)
     args = parser.parse_args()
+    if args.command in {"freeze-project", "inspect-body"}:
+        from .project_store import ProjectStore
+
+        store = ProjectStore(args.project)
+        try:
+            if args.command == "freeze-project":
+                from .bootstrap import freeze_project
+
+                print(freeze_project(store, args.assets))
+            else:
+                from .frozen_body import load_project_body
+
+                body = load_project_body(store)
+                mesh = body["mesh"]
+                print(f"Vertices: {len(mesh['vertices'])}, faces: {len(mesh['faces'])}, "
+                      f"bones: {len(body['rig']['bones'])}, morph targets: {len(body.get('morph_targets', {}))}")
+        except (OSError, ValueError, RuntimeError, KeyError) as error:
+            parser.exit(1, f"Frozen body operation failed: {error}\n")
+        return
     if args.command == "freeze-neutral":
         from .bootstrap import freeze_neutral
 

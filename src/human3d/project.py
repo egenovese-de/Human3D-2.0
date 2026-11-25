@@ -57,9 +57,12 @@ class Project:
     id: str
     revision: int = 0
     photos: PhotoSet = PhotoSet()
+    frozen_body_digest: str | None = None
 
     def __post_init__(self):
         UUID(self.id)
+        if self.frozen_body_digest is not None and not re.fullmatch(r"[0-9a-f]{64}", self.frozen_body_digest):
+            raise ValueError("invalid frozen body digest")
         if type(self.revision) is not int or self.revision < 0:
             raise ValueError("invalid revision")
 
