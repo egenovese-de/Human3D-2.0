@@ -34,3 +34,21 @@ Governance: one active task; proceed automatically after targeted checks except 
 | Milestone | all applicable | all applicable | required |
 
 PR checks are authoritative once PR exists; suppress equivalent push jobs, evaluate actual merge candidate where applicable. Unknown executable changes select conservatively. Required summary always runs and fails if a required job fails, is blocked or not run; not-applicable is explicit. One writer is a governance rule, not a CI concurrency guarantee.
+## M2 technical verification
+
+The local software smoke used P01 and its P05 low-light derivative from the
+synthetic bundle. It exercised per-photo detection, shared fitting, reopen,
+target switching without changing the fit digest, reference exclusion and
+reinclusion, a semantic edit, restoration, and rigged USDA export. Average
+silhouette IoU was 0.35490 at bootstrap and 0.35528 after fitting. The two
+inputs share a source, so this is a software smoke result. The local
+empirical test uses separate inputs under the empirical test plan.
+
+Blender 4.5.3 imported the resulting USDA through its Python runtime. The
+import had 13,380 vertices, 13,378 faces, UVs, 163 bones, normalized skin
+weights and a bound armature. Editing a limb bone changed the evaluated mesh.
+
+A separate procedural smoke with two distinct camera yaws exercised the
+shared objective independently of the brightness-variant photos. Both camera
+directions were recovered and average mask overlap increased from 0.96015
+to 0.96321. Required checks passed on Windows and Linux in run 45655613911.
