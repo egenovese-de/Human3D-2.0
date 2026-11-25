@@ -62,4 +62,4 @@
 | H3D2-M4-011 | Complete the existing approved desktop workspace and recovery workflow | TECHNICAL_PASS |
 | H3D2-M4-012 | Complete accessibility and desktop scaling checks | TECHNICAL_PASS |
 | H3D2-M4-015 | Complete cumulative public-distribution and release-candidate audit | TECHNICAL_PASS |
-| H3D2-M4-016 | Run final automated regressions | IN_PROGRESS |
+| H3D2-M4-016 | Run final automated regressions | TECHNICAL_PASS |

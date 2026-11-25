@@ -80,3 +80,8 @@ and the same 163-bone rig. Editing an armature joint changed the evaluated
 garment. The scene was saved, reopened, re-exported and reimported, and
 removing the top preserved the body mesh. The smoke and regressions are
 technical checks. Empirical validation is performed locally.
+
+The 150% scaling probe verified the keyboard focus order in the garment
+workspace. The installed application passed 20 tests locally. Required
+Windows and Linux checks, including the source pattern scan, passed in
+run 45662318139 on the M4 implementation commit.
