@@ -25,3 +25,6 @@ Upstream license and hash verification, individual module review, public reposit
 
 ## Upstream evidence
 MakeHuman v1.3.0 LICENSE.ASSETS.md retrieved from https://raw.githubusercontent.com/makehumancommunity/makehuman/v1.3.0/LICENSE.ASSETS.md and inspected: CC0 1.0 Universal text. This confirms the upstream asset license document exists, not that every candidate file is covered or hash-verified. Acquisition remains on HOLD until exact file scope and digests are validated.
+
+## Asset identity verification
+Upstream immutable commit: 1f508f6083b2f823dab15de924b3bde72e08d77c. Legacy reference commit: e33c396ed7b17fd5503a8e2b9c9f137179f364bf. Compared Git blob identities for every legacy assets/makehuman/data/ file against the corresponding upstream makehuman/data/ path: 357/357 match, zero mismatches. Upstream LICENSE.md section C confirms CC0 for bundled graphical assets, including base mesh and targets; section B separately licenses program logic under AGPL. Git blob identity is not an independent SHA-256 verification. Runtime acquisition must verify expected SHA-256 before use. No asset bytes transferred. Prefer upstream acquisition at immutable revision; retain CC0 notice and attribution. Other asset directories remain excluded.
