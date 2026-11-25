@@ -69,11 +69,59 @@ class Session:
             self._sync(project)
             return project
 
+    def include_reference(self, photo_id: str, included: bool):
+        with self._lock:
+            project = self.store.load()
+            if photo_id == project.photos.target and not included:
+                raise ValueError("Select another target before excluding this photo.")
+            updated = project.with_photos(project.photos.include(photo_id, included))
+            if updated != project:
+                updated = self.store.save(updated)
+            self._sync(updated)
+            return updated
+
     def shared_evidence(self):
         from .fusion import fuse_observations
 
         with self._lock:
             return fuse_observations(self.store.load(), self.observations)
+
+    def fit_shared(self):
+        from .fitting import fit_shared
+        from .frozen_body import load_frozen_body
+        from .fusion import fuse_observations
+
+        with self._lock:
+            project = self.store.load()
+            bootstrap = project.frozen_body_digest
+            if bootstrap is None:
+                raise ValueError("project_has_no_frozen_body")
+            evidence = fuse_observations(project, self.observations)
+            previous = project.shared_fit_digest
+        body = load_frozen_body(self.store.directory / "frozen" / f"{bootstrap}.json")
+        result = fit_shared(body, evidence)
+        with self._lock:
+            current = self.store.load()
+            if (current.frozen_body_digest != bootstrap or current.shared_fit_digest != previous
+                    or fuse_observations(current, self.observations).dependency_digest != evidence.dependency_digest):
+                raise ValueError("shared_fit_dependencies_changed")
+            digest = self.observations.write_fit(bootstrap, result)
+            if digest != previous:
+                self.store.save(replace(current, shared_fit_digest=digest))
+        return result
+
+    def current_shared_fit(self):
+        from .fusion import fuse_observations
+
+        with self._lock:
+            project = self.store.load()
+            if project.shared_fit_digest is None:
+                return None
+            bootstrap, fit = self.observations.read_fit(project.shared_fit_digest)
+            if (bootstrap != project.frozen_body_digest
+                    or fit.evidence_digest != fuse_observations(project, self.observations).dependency_digest):
+                return None
+            return fit
 
     def read_observation(self, photo_id: str):
         with self._lock:

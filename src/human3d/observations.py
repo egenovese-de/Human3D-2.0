@@ -91,6 +91,31 @@ class ObservationStore:
             raise ValueError("observation_dependency_mismatch")
         return SubjectMask(ref.photo_digest, payload["candidate"], _decode(payload["png"]))
 
+    def write_fit(self, bootstrap: str, value) -> str:
+        payload = {"bootstrap": bootstrap, "evidence_digest": value.evidence_digest,
+                   "fit": asdict(value.fit), "scores": value.scores, "alignments": {}}
+        for key, alignment in value.alignments.items():
+            camera = alignment.camera
+            payload["alignments"][key] = {
+                "yaw": camera.yaw_degrees, "similarity": [camera.similarity.real, camera.similarity.imag],
+                "origin": [camera.origin.real, camera.origin.imag],
+                "torso_rms_pixels": alignment.torso_rms_pixels, "limb_angles": alignment.limb_angles,
+            }
+        return self._write("shared_fit", payload)
+
+    def read_fit(self, digest: str):
+        from .alignment import Alignment, Camera
+        from .fitting import Fit, SharedFit
+
+        payload = self._read(digest, "shared_fit")
+        alignments = {
+            key: Alignment(Camera(value["yaw"], complex(*value["similarity"]), complex(*value["origin"])),
+                           value["torso_rms_pixels"], value["limb_angles"])
+            for key, value in payload["alignments"].items()
+        }
+        return payload["bootstrap"], SharedFit(Fit(**payload["fit"]), alignments,
+                                                payload["evidence_digest"], payload["scores"])
+
 
 def _encode(data: bytes) -> str:
     return base64.b64encode(data).decode("ascii")

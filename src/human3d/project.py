@@ -61,6 +61,7 @@ class Project:
     photos: PhotoSet = PhotoSet()
     frozen_body_digest: str | None = None
     observations: tuple[ObservationRef, ...] = ()
+    shared_fit_digest: str | None = None
 
     def __post_init__(self):
         UUID(self.id)
@@ -69,6 +70,8 @@ class Project:
         if type(self.revision) is not int or self.revision < 0:
             raise ValueError("invalid revision")
 
+        if self.shared_fit_digest is not None and not re.fullmatch(r"[0-9a-f]{64}", self.shared_fit_digest):
+            raise ValueError("invalid_shared_fit_digest")
         photos = {photo.id: photo.digest for photo in self.photos.photos}
         if len({ref.photo_id for ref in self.observations}) != len(self.observations):
             raise ValueError("duplicate_photo_observation")

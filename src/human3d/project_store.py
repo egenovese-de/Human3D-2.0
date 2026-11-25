@@ -51,7 +51,8 @@ class ProjectStore:
             raise ValueError("unsupported project schema")
         return Project(data["id"], data["revision"], PhotoSet(
             tuple(Photo(**p) for p in data["photos"]), data["target"]), data.get("frozen_body_digest"),
-            tuple(ObservationRef(**ref) for ref in data.get("observations", ())))
+            tuple(ObservationRef(**ref) for ref in data.get("observations", ())),
+            data.get("shared_fit_digest"))
 
     def create(self) -> Project:
         with writer_lock(self.directory):
@@ -88,6 +89,7 @@ class ProjectStore:
             "schema_version": 1, "id": project.id,
             "revision": project.revision, "target": project.photos.target,
             "frozen_body_digest": project.frozen_body_digest,
+            "shared_fit_digest": project.shared_fit_digest,
             "observations": [asdict(ref) for ref in project.observations],
             "photos": [{"id": p.id, "digest": p.digest, "name": p.name,
                         "included": p.included} for p in project.photos.photos],
