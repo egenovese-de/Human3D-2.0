@@ -12,6 +12,7 @@ from .ingestion import folder_inputs
 from .thumbnails import thumbnail
 from .mask_dialog import MaskDialog
 from .vision import PoseLandmarker
+from .frozen_body import load_project_body
 
 
 class PhotosWindow(QWidget):
@@ -27,7 +28,8 @@ class PhotosWindow(QWidget):
                                 ("Open project", self.open_project),
                                 ("Add photos", self.add_photos),
                                 ("Add folder", self.add_folder),
-                                ("Review target mask", self.review_target_mask)):
+                                ("Review target mask", self.review_target_mask),
+                                ("Freeze rest body", self.freeze_rest_body)):
             button = QPushButton(label)
             button.clicked.connect(callback)
             toolbar.addWidget(button)
@@ -84,6 +86,20 @@ class PhotosWindow(QWidget):
         self.status.setText(counts + " | Reconstruction unavailable")
         return results
 
+    def freeze_rest_body(self):
+        if self.store is None:
+            self.status.setText("Create or open a project first.")
+            return
+        assets = QFileDialog.getExistingDirectory(self, "Select verified bootstrap assets directory")
+        if assets:
+            self.guarded(lambda: self.attach_rest_body(Path(assets)))
+
+    def attach_rest_body(self, assets):
+        from .bootstrap import freeze_project
+
+        freeze_project(self.store, assets)
+        self.status.setText("Rest body attached. Review the target mask to inspect alignment.")
+
     def review_target_mask(self):
         if self.session is None or self.session.snapshot().project.photos.target is None:
             self.status.setText("Select a target photo first.")
@@ -104,7 +120,8 @@ class PhotosWindow(QWidget):
         original = OriginalStore(self.store.directory).verify(evidence.photo_digest)
         with Image.open(original) as image:
             photo = ImageQt(ImageOps.exif_transpose(image).convert("RGB"))
-        if MaskDialog(photo, evidence, self.session.apply_mask, self).exec():
+        body = load_project_body(self.store) if self.store.load().frozen_body_digest else None
+        if MaskDialog(photo, evidence, self.session.apply_mask, self, body=body).exec():
             self.status.setText("Subject mask applied for this session.")
 
     def refresh(self):

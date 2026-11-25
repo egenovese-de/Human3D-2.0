@@ -1,12 +1,16 @@
 """Minimal photo overlay and mask correction controls."""
+from dataclasses import replace
+
 from PIL import Image
 from PIL.ImageQt import ImageQt
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QPointF, Qt
 from PySide6.QtGui import QPainter, QColor
 from PySide6.QtWidgets import (QComboBox, QDialog, QDialogButtonBox, QHBoxLayout,
-                               QLabel, QPushButton, QVBoxLayout, QWidget)
+                               QLabel, QPushButton, QSpinBox, QVBoxLayout, QWidget)
 
+from .alignment import initialize_alignment
 from .mask_review import MaskDraft
+from .native_rig import posed_segments, rebind_joints
 
 
 class MaskCanvas(QWidget):
@@ -16,6 +20,7 @@ class MaskCanvas(QWidget):
         self.draft = None
         self.add = True
         self.previous = None
+        self.overlay_segments = ()
         self.setMinimumSize(480, 360)
 
     def frame(self):
@@ -37,6 +42,13 @@ class MaskCanvas(QWidget):
                 if landmark.observed:
                     painter.drawEllipse(int(landmark.x * size.width()) - 2,
                                         int(landmark.y * size.height()) - 2, 4, 4)
+
+        painter.setPen(QColor("cyan"))
+        for head, tail in self.overlay_segments:
+            points = [QPointF(point.real * size.width() / self.photo.width(),
+                              point.imag * size.height() / self.photo.height())
+                      for point in (head, tail)]
+            painter.drawLine(*points)
 
     def point(self, event):
         size = self.frame()
@@ -66,7 +78,7 @@ class MaskCanvas(QWidget):
 
 
 class MaskDialog(QDialog):
-    def __init__(self, photo, evidence, apply, parent=None):
+    def __init__(self, photo, evidence, apply, parent=None, *, body=None):
         super().__init__(parent)
         self.setWindowTitle("Review subject mask")
         self.resize(760, 620)
@@ -75,6 +87,9 @@ class MaskDialog(QDialog):
         layout.addLayout(controls)
         self.canvas = MaskCanvas(photo)
         layout.addWidget(self.canvas, 1)
+        self.body = body
+        self.alignment = None
+        self.offsets = []
         self.drafts = [MaskDraft(evidence, index) for index in range(len(evidence.candidates))]
         subjects = QComboBox()
         for index in range(len(self.drafts)):
@@ -89,6 +104,18 @@ class MaskDialog(QDialog):
         undo = QPushButton("Undo")
         undo.clicked.connect(self.undo)
         controls.addWidget(undo)
+        if body is not None:
+            for label, limit, default in (("Horizontal", photo.width(), 0),
+                                           ("Vertical", photo.height(), 0),
+                                           ("Scale %", 200, 100)):
+                adjust = QSpinBox()
+                adjust.setRange(-limit if default == 0 else 25, limit)
+                adjust.setValue(default)
+                adjust.setPrefix(label + " ")
+                adjust.valueChanged.connect(self.update_overlay)
+                self.offsets.append(adjust)
+                controls.addWidget(adjust)
+            self.update_overlay()
         self.message = QLabel("")
         layout.addWidget(self.message)
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
@@ -99,6 +126,29 @@ class MaskDialog(QDialog):
 
     def select_candidate(self, index):
         self.canvas.draft = self.drafts[index]
+        self.alignment = None
+        if self.body is not None:
+            try:
+                self.alignment = initialize_alignment(self.body, self.canvas.draft.evidence, index)
+            except ValueError:
+                pass
+        self.update_overlay()
+
+    def update_overlay(self):
+        self.canvas.overlay_segments = ()
+        if self.alignment is not None:
+            x, y, scale = (control.value() for control in self.offsets) if len(self.offsets) == 3 else (0, 0, 100)
+            camera = self.alignment.camera
+            center = complex(self.canvas.photo.width(), self.canvas.photo.height()) / 2
+            factor = scale / 100
+            camera = replace(camera, similarity=camera.similarity * factor,
+                             origin=center + (camera.origin - center) * factor + complex(x, y))
+            rig = self.body["rig"]
+            joints = rebind_joints(rig, self.body["mesh"]["vertices"])
+            segments = posed_segments(rig, joints, replace(self.alignment, camera=camera))
+            self.canvas.overlay_segments = tuple(
+                (camera.project(head), camera.project(tail)) for head, tail in segments.values()
+            )
         self.canvas.update()
 
     def set_mode(self, index):
