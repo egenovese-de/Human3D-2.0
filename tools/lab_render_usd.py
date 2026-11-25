@@ -33,6 +33,7 @@ def configure_scene():
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.film_transparent = False
+    scene.world = bpy.data.worlds.new("LAB_World")
     scene.world.color = (0.12, 0.12, 0.12)
     return scene
 
