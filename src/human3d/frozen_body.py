@@ -29,9 +29,12 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
     morphs = body.get("morph_targets", {})
     supported = morph_controls(body)
     length_edits = {}
+    head_width = controls.get("head_width")
     for name, value in sorted(controls.items()):
         if not math.isfinite(value) or not -1 <= value <= 1:
             raise ValueError(f"out_of_range_morph: {name}")
+        if name == "head_width":
+            continue
         if name.endswith("_length"):
             length_edits[name] = value
             continue
@@ -52,6 +55,13 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
                 raise ValueError(f"unsupported_morph: {name}")
             if value:
                 vertices = lengthen(body, vertices, name, value)
+    if head_width is not None:
+        from .face import has_head_control, widen_head
+
+        if not has_head_control(body):
+            raise ValueError("head_control_unavailable")
+        if head_width:
+            vertices = widen_head(body, vertices, head_width)
     return tuple(map(tuple, vertices))
 
 

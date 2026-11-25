@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from .alignment import Alignment, refine_views
+from .face import has_head_control
 from .frozen_body import deform_vertices, morph_controls
 from .native_rig import pose_transforms, rebind_joints, skin_vertices, validate_rebind
 from .proportions import length_controls
@@ -121,7 +122,10 @@ def fit_shared(body, evidence):
                      evidence.dependency_digest, best)
 
 def edit_fit(body, evidence, current, name, value):
-    if name not in (*morph_controls(body), *length_controls(body)):
+    supported = (*morph_controls(body), *length_controls(body))
+    if has_head_control(body):
+        supported += ("head_width",)
+    if name not in supported:
         raise ValueError("unsupported_body_control")
     if not -0.5 <= value <= 0.5:
         raise ValueError("body_control_out_of_range")

@@ -54,6 +54,9 @@ class PhotosWindow(QWidget):
         edit = QPushButton("Edit body control")
         edit.clicked.connect(lambda: self.guarded(self.edit_shared_fit))
         revisions.addWidget(edit)
+        refine_head = QPushButton("Refine head width")
+        refine_head.clicked.connect(lambda: self.guarded(self.refine_head_width))
+        revisions.addWidget(refine_head)
         restore = QPushButton("Restore body revision")
         restore.clicked.connect(lambda: self.guarded(self.restore_shared_fit))
         revisions.addWidget(restore)
@@ -158,6 +161,18 @@ class PhotosWindow(QWidget):
             summary += f"\n\nNeeds review\n{missing}"
         QMessageBox.information(self, "Shared fit", summary)
 
+    def refine_head_width(self):
+        from .face import propose_head_width
+
+        current = self.session.current_shared_fit() if self.session is not None else None
+        if current is None:
+            raise ValueError("Fit included photos first.")
+        proposal, views = propose_head_width(load_project_body(self.store), self.session.shared_evidence(), current)
+        edited = self.session.edit_shared_control("head_width", proposal)
+        self.fitted_preview = None
+        self.status.setText(f"Head-width control {proposal:+.2f} from {views} eye view(s). "
+                            f"Silhouette overlap {edited.fit.fitted_iou:.1%}.")
+
     def edit_shared_fit(self):
         from .frozen_body import morph_controls
         from .proportions import length_controls
@@ -167,6 +182,10 @@ class PhotosWindow(QWidget):
             raise ValueError("Fit the included photos before editing body controls.")
         body = load_project_body(self.store)
         controls = (*morph_controls(body), *length_controls(body))
+        from .face import has_head_control
+
+        if has_head_control(body):
+            controls += ("head_width",)
         name, accepted = QInputDialog.getItem(self, "Edit body control", "Control", controls, editable=False)
         if not accepted:
             return
