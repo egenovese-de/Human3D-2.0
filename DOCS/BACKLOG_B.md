@@ -22,7 +22,7 @@
 | B4-001 | Benchmark expanded native morph capacity | DONE |
 | B4-002 | Benchmark regional and volumetric fitting | PARTIAL |
 | B4-003 | Benchmark coherent held-out view reconstruction | DONE |
-| B4-004 | Benchmark topology, surface quality and rig invariance | PARTIAL |
+| B4-004 | Benchmark topology, surface quality and rig invariance | DONE |
 | B4-005 | Benchmark pose, hands, contact and facial geometry | PARTIAL |
 | B4-006 | Benchmark texture consistency and garment separation | PARTIAL |
 | B5-001 | Execute final integrated synthetic regression suite | PARTIAL |
