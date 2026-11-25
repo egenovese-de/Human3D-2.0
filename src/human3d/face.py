@@ -63,3 +63,18 @@ def propose_head_width(body, evidence, current):
     choices = (original, -0.5, -0.25, 0.0, 0.25, 0.5)
     proposal = min(choices, key=residual)
     return proposal, len(samples)
+
+
+def widen_jaw(body, vertices, amount):
+    """Widen the lower face using the jaw's existing skin influence."""
+    from .native_rig import rebind_joints
+
+    rig = body["rig"]
+    jaw = rig["bones"].get("jaw")
+    if jaw is None:
+        raise ValueError("jaw_control_unavailable")
+    points = np.asarray(vertices, dtype=float).copy()
+    center = rebind_joints(rig, vertices)[jaw["head"]][0]
+    weight = np.asarray([skin.get("jaw", 0.0) for skin in rig["skin"]])
+    points[:, 0] += (points[:, 0] - center) * weight * .18 * amount
+    return points.tolist()

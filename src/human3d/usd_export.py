@@ -7,7 +7,7 @@ import json
 from pxr import Gf, Sdf, Tf, Usd, UsdGeom, UsdShade, UsdSkel, UsdUtils, Vt
 
 from .frozen_body import deform_vertices
-from .native_rig import pose_transforms, skin_vertices, validate_rebind
+from .native_rig import infer_support_plane, pose_transforms, skin_vertices, validate_rebind
 from .garments import measure_clearance, posed_garment, verify_layers
 
 
@@ -91,7 +91,7 @@ def _bind_mesh(stage, path, vertices, faces, texcoords, skin, joint_indices, ske
     return mesh
 
 
-def export_body(destination: Path, body, fit, alignment, *, texture=None, roughness=0.65, garments=()):
+def export_body(destination: Path, body, fit, alignment, *, texture=None, roughness=0.65, garments=(), ground=False):
     suffix = destination.suffix.lower()
     if texture is None and suffix not in {".usd", ".usda", ".usdc"}:
         raise ValueError("Use an OpenUSD filename ending in .usd, .usda, or .usdc.")
@@ -104,8 +104,9 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
     joints = validate_rebind(body, vertices)
     transforms = pose_transforms(rig, joints, alignment)
     manifest = {"schema_version": 1, "garments": []}
-    if garments:
+    if garments or ground:
         posed_body = skin_vertices(vertices, rig["skin"], transforms)
+    if garments:
         layer = verify_layers([item.garment for item in garments], body, posed_body, transforms)
         if layer is not None and layer.violations:
             raise ValueError("The garment layers do not have sufficient sampled clearance.")
@@ -142,6 +143,12 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
         stage = Usd.Stage.CreateNew(str(output))
         root = UsdSkel.Root.Define(stage, "/Human")
         stage.SetDefaultPrim(root.GetPrim())
+        if ground:
+            body_vertices = sorted({index for face in faces for index, _ in face})
+            floor = infer_support_plane(rig, posed_body, body_vertices)
+            if floor is not None:
+                root.AddTranslateOp().Set(Gf.Vec3d(0, -floor, 0))
+                root.GetPrim().SetCustomDataByKey("supportPlaneY", floor)
         UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.y)
         UsdGeom.SetStageMetersPerUnit(stage, 0.1)
         skeleton = UsdSkel.Skeleton.Define(stage, "/Human/Rig")

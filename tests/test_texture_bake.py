@@ -4,10 +4,24 @@ import numpy as np
 
 from human3d.alignment import Alignment, Camera
 from human3d.appearance import AppearanceView
-from human3d.texture_bake import bake_atlas
+from human3d.texture_bake import _blend_observed_seams, bake_atlas
 
 
 class TextureBakeTests(unittest.TestCase):
+    def test_uv_seam_blends_only_observed_equivalent_edges(self):
+        vertices = np.array([[0, 1, 2], [1, 0, 3]])
+        uv_indices = np.array([[0, 1, 2], [4, 3, 5]])
+        uv = np.array([[0, 0], [1, 0], [0, 1], [0, 3], [1, 3], [0, 2]])
+        color = np.zeros((4, 4, 3), dtype=np.uint8)
+        color[3, :2] = 200
+        observed = np.ones((4, 4), dtype=bool)
+        observed[3, 1] = False
+        blended = _blend_observed_seams(color, observed, vertices, uv_indices, uv)
+        self.assertEqual(blended[0, 0].tolist(), [100] * 3)
+        self.assertEqual(blended[3, 0].tolist(), [100] * 3)
+        self.assertEqual(blended[0, 1].tolist(), [0] * 3)
+        self.assertEqual(blended[3, 1].tolist(), [200] * 3)
+
     def test_hidden_face_does_not_receive_observed_color(self):
         vertices = [(0, 0, 0), (1, 0, 0), (0, 1, 0),
                     (0, 0, 1), (1, 0, 1), (0, 1, 1)]

@@ -86,6 +86,38 @@ def _project_view(view, neutral, joints, rig, geometry, image_size, *, occluder=
     return projected, depth, z_buffer, facing
 
 
+def _blend_observed_seams(color, observed, geometry, uv_indices, uv):
+    """Match observed texels on both UV copies of a shared geometric edge."""
+    edges = {}
+    for vertices, corners in zip(geometry, uv_indices):
+        for first, last in ((0, 1), (1, 2), (2, 0)):
+            if vertices[first] > vertices[last]:
+                first, last = last, first
+            edge = (vertices[first], vertices[last])
+            edges.setdefault(edge, set()).add((corners[first], corners[last]))
+    blended = color.astype(float)
+    counts = np.ones(observed.shape, dtype=float)
+    height, width = observed.shape
+    for copies in edges.values():
+        if len(copies) != 2:
+            continue
+        first, second = (uv[list(pair)] for pair in sorted(copies))
+        samples = max(2, int(max(np.linalg.norm(edge[1] - edge[0]) for edge in (first, second))) + 1)
+        t = np.linspace(0, 1, samples)[:, None]
+        a = np.rint(first[0] * (1 - t) + first[1] * t).astype(int)
+        b = np.rint(second[0] * (1 - t) + second[1] * t).astype(int)
+        a, b = (np.clip(points, (0, 0), (width - 1, height - 1)) for points in (a, b))
+        ax, ay = a.T
+        bx, by = b.T
+        keep = observed[ay, ax] & observed[by, bx]
+        ax, ay, bx, by = (axis[keep] for axis in (ax, ay, bx, by))
+        np.add.at(blended, (ay, ax), color[by, bx])
+        np.add.at(blended, (by, bx), color[ay, ax])
+        np.add.at(counts, (ay, ax), 1)
+        np.add.at(counts, (by, bx), 1)
+    return np.rint(blended / counts[:, :, None]).astype(np.uint8)
+
+
 def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     if target not in views or not 64 <= size <= 2048:
         raise ValueError("invalid_appearance_target_or_size")
@@ -114,7 +146,10 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     if not target_view.foreground.any():
         raise ValueError("appearance_target_has_no_foreground")
     target_light = np.median(target_view.rgb[target_view.foreground].mean(axis=1))
-    for key, (view, image_size) in views.items():
+    for key in (target, *sorted(key for key in views if key != target)):
+        view, image_size = views[key]
+        view_colors = np.zeros_like(color_sum)
+        view_weights = np.zeros_like(weights)
         height, width = view.foreground.shape
         if not view.foreground.any():
             continue
@@ -139,14 +174,27 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
             u, v = u[visible], v[visible]
             boundary_weight = np.clip(edge_distance[v, u] / 3, .25, 1)
             weight = boundary_weight * facing[index] ** 2 * (3.0 if key == target else 1.0)
-            color_sum[b, a] += weight[:, None] * np.clip(view.rgb[v, u].astype(float) * gain, 0, 255)
-            weights[b, a] += weight
+            view_colors[b, a] += weight[:, None] * view.rgb[v, u]
+            view_weights[b, a] += weight
             skin_sum[b, a] += weight * view.skin_candidate[v, u]
+        if key == target:
+            target_colors, target_weights = view_colors, view_weights
+        else:
+            overlap = (view_weights > .1) & (target_weights > .3)
+            if np.count_nonzero(overlap) >= 64:
+                target_samples = (target_colors[overlap] / target_weights[overlap, None]).mean(axis=1)
+                current_samples = (view_colors[overlap] / view_weights[overlap, None]).mean(axis=1)
+                valid = (current_samples > 24) & (target_samples > 24)
+                if np.count_nonzero(valid) >= 64:
+                    gain = np.clip(np.median(target_samples[valid] / current_samples[valid]), .7, 1.4)
+        color_sum += np.minimum(view_colors * gain, 255 * view_weights[:, :, None])
+        weights += view_weights
     observed = weights > 0
     if not observed.any():
         raise ValueError("No visible UV samples. Review the silhouette and alignment.")
     color = np.full((size, size, 3), 145, dtype=np.uint8)
     color[observed] = np.rint(color_sum[observed] / weights[observed, None]).astype(np.uint8)
+    color = _blend_observed_seams(color, observed, geometry, uv_indices, uv)
     distances, nearest = distance_transform_edt(~observed, return_indices=True)
     padding = ~observed & (distances <= 4)
     color[padding] = color[tuple(nearest[:, padding])]

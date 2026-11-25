@@ -28,12 +28,39 @@ class SharedFit:
     scores: dict[str, float]
 
 
-def _scorer(body, masks, alignments, reference_vertices, *, edge=256):
+def _region_weights(view, size):
+    """Assign confidence to pixels using the nearest measured skeletal segment."""
+    from .fusion import REGIONS
+
+    pose = view.detection.visible_pose(view.candidate)
+    width, height = size
+    y, x = np.ogrid[:height, :width]
+    distance = np.full((height, width), np.inf)
+    weights = np.ones((height, width))
+    for region, indices in REGIONS.items():
+        if region not in view.observed_regions:
+            continue
+        confidence = min(pose[index].visibility * pose[index].presence for index in indices)
+        pairs = ((11, 12), (23, 24), (11, 23), (12, 24)) if region == "torso" else zip(indices, indices[1:])
+        for first, last in pairs:
+            a, b = pose[first], pose[last]
+            dx, dy = (b.x - a.x) * width, (b.y - a.y) * height
+            ox, oy = x - a.x * width, y - a.y * height
+            t = np.clip((ox * dx + oy * dy) / max(dx * dx + dy * dy, 1e-6), 0, 1)
+            squared = (ox - t * dx) ** 2 + (oy - t * dy) ** 2
+            closer = squared < distance
+            distance[closer] = squared[closer]
+            weights[closer] = confidence
+    return weights
+
+
+def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=None):
     mesh, rig = body["mesh"], body["rig"]
     faces = [tuple(index for index, _ in face["corners"])
              for face in mesh["faces"] if face["group"] == "body"]
     joints = rebind_joints(rig, reference_vertices)
     views = {}
+    observed_views = {view.ref.photo_id: view for view in evidence.views} if evidence else {}
     for key, mask in masks.items():
         alignment = alignments[key]
         with Image.open(BytesIO(mask.png)) as source:
@@ -42,11 +69,12 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256):
             observed = np.asarray(source.resize(size, Image.Resampling.NEAREST)) > 0
         if not observed.any() or observed.all():
             raise ValueError("insufficient_silhouette_at_fit_resolution")
-        views[key] = (scale, size, observed, pose_transforms(rig, joints, alignment), alignment.camera)
+        regional = _region_weights(observed_views[key], size) if key in observed_views else None
+        views[key] = (scale, size, observed, pose_transforms(rig, joints, alignment), alignment.camera, regional)
 
     def score(vertices):
         scores = {}
-        for key, (scale, size, observed, transforms, camera) in views.items():
+        for key, (scale, size, observed, transforms, camera, regional) in views.items():
             posed = skin_vertices(vertices, rig["skin"], transforms)
             points = [camera.project(vertex) * scale for vertex in posed]
             output = Image.new("1", size)
@@ -54,7 +82,11 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256):
             for face in faces:
                 draw.polygon([(points[index].real, points[index].imag) for index in face], fill=1)
             predicted = np.asarray(output)
-            scores[key] = np.count_nonzero(predicted & observed) / np.count_nonzero(predicted | observed)
+            overlap, union = predicted & observed, predicted | observed
+            if regional is None:
+                scores[key] = np.count_nonzero(overlap) / np.count_nonzero(union)
+            else:
+                scores[key] = regional[overlap].sum() / regional[union].sum()
         return scores
 
     return score
@@ -65,6 +97,7 @@ def _confidence_weights(evidence, keys):
     from .fusion import REGIONS
 
     weights = {}
+    contradictory = {key for key, reason in evidence.unresolved if reason == "inconsistent_anatomical_ratios"}
     for view in evidence.views:
         key = view.ref.photo_id
         if key not in keys:
@@ -74,7 +107,8 @@ def _confidence_weights(evidence, keys):
             min(pose[index].visibility * pose[index].presence for index in indices)
             for name, indices in REGIONS.items() if name in view.observed_regions
         ]
-        weights[key] = sum(region_scores) / len(REGIONS) if region_scores else .25
+        confidence = sum(region_scores) / len(REGIONS) if region_scores else .25
+        weights[key] = confidence * (.35 if key in contradictory else 1)
     return weights
 
 
@@ -129,11 +163,12 @@ def fit_shared(body, evidence):
     baseline_scores = scorer(neutral)
     weights = _confidence_weights(evidence, masks)
     supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
-    coarse = _scorer(body, masks, alignments, neutral, edge=128)
+    coarse = _scorer(body, masks, alignments, neutral, edge=128, evidence=evidence)
+    objective = _scorer(body, masks, alignments, neutral, evidence=evidence)
     seed, _ = _optimize(body, coarse, {}, supported, (0.25,), weights=weights)
     if _mean(scorer(deform_vertices(body, seed)), weights) < _mean(baseline_scores, weights):
         seed = {}
-    controls, _ = _optimize(body, scorer, seed, supported, (0.25, 0.125), weights=weights)
+    controls, _ = _optimize(body, objective, seed, supported, (0.25, 0.125), weights=weights)
     vertices = deform_vertices(body, controls)
     best = _scorer(body, masks, alignments, vertices)(vertices)
     if _mean(best) < _mean(baseline_scores):
@@ -144,7 +179,7 @@ def fit_shared(body, evidence):
     adjusted = body | {"rig": body["rig"] | {"joints": rebound}}
     refined, _ = refine_views(adjusted, evidence)
     if masks.keys() <= refined.keys():
-        second = _scorer(body, masks, refined, vertices)
+        second = _scorer(body, masks, refined, vertices, evidence=evidence)
         candidate, _ = _optimize(body, second, controls, supported, (0.125,), weights=weights)
         revised = deform_vertices(body, candidate)
         scores = _scorer(body, masks, refined, revised)(revised)
@@ -157,6 +192,8 @@ def edit_fit(body, evidence, current, name, value):
     supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
     if has_head_control(body):
         supported += ("head_width",)
+    if "jaw" in body["rig"]["bones"]:
+        supported += ("jaw_width",)
     if name not in supported:
         raise ValueError("unsupported_body_control")
     if not -0.5 <= value <= 0.5:

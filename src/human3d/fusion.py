@@ -2,6 +2,8 @@
 from dataclasses import dataclass
 from hashlib import sha256
 import json
+from math import dist, isfinite
+from statistics import median
 
 from .mask_review import SubjectMask
 from .observations import ObservationRef, ObservationStore
@@ -36,6 +38,43 @@ class SharedEvidence:
         if region not in REGIONS:
             raise ValueError("unknown_anatomical_region")
         return tuple(view.ref.photo_id for view in self.views if region in view.observed_regions)
+
+
+def _segment_profile(view):
+    world = view.detection.world_landmarks
+    if view.candidate >= len(world) or len(world[view.candidate]) != 33:
+        return {}
+    points = world[view.candidate]
+    scale = (dist(points[11], points[23]) + dist(points[12], points[24])) / 2
+    if not isfinite(scale) or scale <= 1e-6 or "torso" not in view.observed_regions:
+        return {}
+    profile = {}
+    for name in view.observed_regions:
+        if name == "torso":
+            continue
+        indices = REGIONS[name]
+        for first, last in zip(indices, indices[1:]):
+            length = dist(points[first], points[last]) / scale
+            if isfinite(length) and length > .02:
+                profile[first, last] = length
+    return profile
+
+
+def inconsistent_references(views):
+    """Flag large, independent segment-ratio outliers for review."""
+    profiles = {view.ref.photo_id: _segment_profile(view) for view in views}
+    measurements = {}
+    for profile in profiles.values():
+        for segment, ratio in profile.items():
+            measurements.setdefault(segment, []).append(ratio)
+    medians = {segment: median(values) for segment, values in measurements.items() if len(values) >= 3}
+    flags = {}
+    for key, profile in profiles.items():
+        outliers = [segment for segment, value in profile.items()
+                    if segment in medians and not .55 <= value / medians[segment] <= 1.8]
+        if len(outliers) >= 2:
+            flags[key] = tuple(outliers)
+    return flags
 
 
 def fuse_observations(project: Project, store: ObservationStore) -> SharedEvidence:
@@ -79,5 +118,6 @@ def fuse_observations(project: Project, store: ObservationStore) -> SharedEviden
             unresolved.append((photo.id, "insufficient_visible_landmarks"))
             continue
         views.append(ViewEvidence(ref, detection, candidate, mask, regions))
-    key = json.dumps({"algorithm_version": 1, "included": dependencies}, separators=(",", ":"))
+    unresolved.extend((key, "inconsistent_anatomical_ratios") for key in inconsistent_references(views))
+    key = json.dumps({"algorithm_version": 2, "included": dependencies}, separators=(",", ":"))
     return SharedEvidence(sha256(key.encode("utf-8")).hexdigest(), tuple(views), tuple(unresolved))

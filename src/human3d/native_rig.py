@@ -164,3 +164,30 @@ def foot_height_difference(rig, joints, transforms, body_height):
         head = joints[rig["bones"][name]["head"]]
         heights.append((rotation @ head + shift)[1])
     return abs(heights[0] - heights[1]) / body_height
+
+
+def infer_support_plane(rig, posed, body_vertices):
+    """Return the horizontal plane at the lowest supported sole in model units.
+
+    The result normalizes asset placement. Photographs without calibration do
+    not establish world elevation or whether the person is airborne.
+    """
+    points = np.asarray(posed)
+    soles = []
+    for side in ("L", "R"):
+        foot = f"foot.{side}"
+        indices = [
+            index for index in body_vertices
+            if sum(weight for name, weight in rig["skin"][index].items()
+                   if name == foot or (name.startswith("toe") and name.endswith(f".{side}"))) >= .8
+        ]
+        if indices:
+            soles.append(float(points[indices, 1].min()))
+    if not soles:
+        return None
+    height = float(np.ptp(points[body_vertices, 1]))
+    floor = min(soles)
+    # A lower hand or knee indicates a different support configuration.
+    if floor - float(points[body_vertices, 1].min()) > .005 * height:
+        return None
+    return floor

@@ -192,6 +192,8 @@ class PhotosWindow(QWidget):
 
         if has_head_control(body):
             controls += ("head_width",)
+        if "jaw" in body["rig"]["bones"]:
+            controls += ("jaw_width",)
         name, accepted = QInputDialog.getItem(self, "Edit body control", "Control", controls, editable=False)
         if not accepted:
             return

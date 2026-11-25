@@ -37,7 +37,7 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
     for name, value in sorted(controls.items()):
         if not math.isfinite(value) or not -1 <= value <= 1:
             raise ValueError(f"out_of_range_morph: {name}")
-        if name == "head_width":
+        if name in {"head_width", "jaw_width"}:
             continue
         if name in regional:
             regional_edits[name] = value
@@ -71,6 +71,10 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
             raise ValueError("head_control_unavailable")
         if head_width:
             vertices = widen_head(body, vertices, head_width)
+    if "jaw_width" in controls:
+        from .face import widen_jaw
+
+        vertices = widen_jaw(body, vertices, controls["jaw_width"])
     return tuple(map(tuple, vertices))
 
 
