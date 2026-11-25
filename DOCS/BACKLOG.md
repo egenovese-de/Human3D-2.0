@@ -14,11 +14,9 @@
 | H3D2-M1-010 | Verify frozen-body inspection and native operations with MakeHuman unavailable | TODO |
 | H3D2-M1-011 | Integrate automatic camera and pose initialization | TODO |
 | H3D2-M1-012 | Integrate automatic first overlay and visual alignment recovery before fitting approval | TODO |
-| H3D2-M1-013 | Integrate bounded native anatomical fitting with controlled bootstrap comparison | TODO |
+| H3D2-M1-013 | Integrate bounded native anatomical fitting | TODO |
 | H3D2-M1-014 | Integrate native rig rebinding and editable rigged USD authoring | TODO |
 | H3D2-M1-015 | Expose actual neutral/posed 3D inspection and export validation | TODO |
-| H3D2-M1-016 | Execute real-photo vertical slice and Blender inspection | TODO |
-| H3D2-M1-017 | Execute M1 acceptance gate | TODO |
 ## M2
 | Task ID | Task description | Status |
 |---|---|---|
@@ -34,8 +32,7 @@
 | H3D2-M2-010 | Expose regional observability and neutral comparison | TODO |
 | H3D2-M2-011 | Integrate reference inclusion, selective retry and dependency-verified target switching | TODO |
 | H3D2-M2-012 | Integrate revision restoration and supported semantic edits with dependency invalidation | TODO |
-| H3D2-M2-013 | Execute controlled held-out single-photo versus multi-photo benchmark | TODO |
-| H3D2-M2-014 | Execute M2 regression and Blender gate | TODO |
+| H3D2-M2-014 | Run automated M2 regressions and Blender import checks | TODO |
 ## M3
 | Task ID | Task description | Status |
 |---|---|---|
@@ -49,8 +46,6 @@
 | H3D2-M3-008 | Implement target appearance, lighting-aware materials and inspector | TODO |
 | H3D2-M3-009 | Implement uncertainty-aware unseen texture completion and coverage views | TODO |
 | H3D2-M3-010 | Integrate textured rigged USD packaging and export interface | TODO |
-| H3D2-M3-011 | Execute real-photo appearance and Blender deformation validation | TODO |
-| H3D2-M3-012 | Execute M3 acceptance gate | TODO |
 ## M4
 | Task ID | Task description | Status |
 |---|---|---|
@@ -66,7 +61,5 @@
 | H3D2-M4-010 | Integrate final USD assembly, manifest and Blender reporting | TODO |
 | H3D2-M4-011 | Complete the existing approved desktop workspace and recovery workflow | TODO |
 | H3D2-M4-012 | Complete accessibility and desktop scaling checks | TODO |
-| H3D2-M4-013 | Execute complete real-photo reconstruction and Blender inspection | TODO |
-| H3D2-M4-014 | Execute scored end-to-end usability validation | TODO |
 | H3D2-M4-015 | Complete cumulative public-distribution and release-candidate audit | TODO |
-| H3D2-M4-016 | Execute final regression and product-owner acceptance | TODO |
+| H3D2-M4-016 | Run final automated regressions | TODO |
