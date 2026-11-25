@@ -5,10 +5,33 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from dataclasses import replace
 from threading import RLock
+from contextlib import contextmanager
 
 from .project import Photo, PhotoSet, Project
 
 _LOCK = RLock()
+
+
+@contextmanager
+def writer_lock(directory: Path):
+    """Serialize writers across processes on local Windows/POSIX filesystems."""
+    directory.mkdir(parents=True, exist_ok=True)
+    with _LOCK, (directory / ".writer.lock").open("a+b") as handle:
+        if os.name == "nt":
+            import msvcrt
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            if os.name == "nt":
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 class RevisionConflict(RuntimeError):
@@ -28,7 +51,7 @@ class ProjectStore:
             tuple(Photo(**p) for p in data["photos"]), data["target"]))
 
     def create(self) -> Project:
-        with _LOCK:
+        with writer_lock(self.directory):
             self.directory.mkdir(parents=True, exist_ok=True)
             if self.snapshot.exists():
                 raise FileExistsError(self.snapshot)
@@ -37,7 +60,7 @@ class ProjectStore:
             return project
 
     def save(self, project: Project) -> Project:
-        with _LOCK:
+        with writer_lock(self.directory):
             current = self.load()
             if current.id != project.id or current.revision != project.revision:
                 raise RevisionConflict("project identity or revision changed")
