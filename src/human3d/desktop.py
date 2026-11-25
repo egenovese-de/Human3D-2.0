@@ -4,9 +4,9 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QListWidget, QListWidgetItem, QFileDialog, QLabel, QMessageBox)
-from .project_store import ProjectStore
+from .session import Session
 from .originals import OriginalStore
-from .ingestion import import_photos, folder_inputs
+from .ingestion import folder_inputs
 from .thumbnails import thumbnail
 
 
@@ -14,6 +14,7 @@ class PhotosWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.store = None
+        self.session = None
         self.setWindowTitle("Human3D 2.0")
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
@@ -51,12 +52,9 @@ class PhotosWindow(QWidget):
             self.guarded(lambda: self.attach(directory, False))
 
     def attach(self, directory, create=False):
-        store = ProjectStore(Path(directory))
-        if create:
-            store.create()
-        else:
-            store.load()
-        self.store = store
+        session = Session(Path(directory), create)
+        self.session = session
+        self.store = session.store
         self.refresh()
 
     def add_photos(self):
@@ -74,7 +72,7 @@ class PhotosWindow(QWidget):
             self.guarded(lambda: self.ingest(folder_inputs(Path(directory))))
 
     def ingest(self, paths):
-        results = import_photos(self.store, paths)
+        results = self.session.ingest(paths)
         self.refresh()
         counts = ", ".join(f"{status}: {sum(r.status == status for r in results)}"
                            for status in ("accepted", "duplicate", "rejected"))
@@ -82,7 +80,8 @@ class PhotosWindow(QWidget):
         return results
 
     def refresh(self):
-        project = self.store.load()
+        snapshot = self.session.snapshot()
+        project = snapshot.project
         self.photos.clear()
         for photo in project.photos.photos:
             pixmap = QPixmap()
@@ -97,9 +96,7 @@ class PhotosWindow(QWidget):
 
     def select_target(self, item):
         def select():
-            project = self.store.load()
-            self.store.save(project.with_photos(
-                project.photos.select(item.data(Qt.ItemDataRole.UserRole))))
+            self.session.select_target(item.data(Qt.ItemDataRole.UserRole))
             self.refresh()
         self.guarded(select)
 
