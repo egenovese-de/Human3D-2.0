@@ -5,6 +5,31 @@ from human3d.vision import Landmark, SubjectEvidence
 
 
 class SubjectEvidenceTests(unittest.TestCase):
+    def test_external_visibility_is_photo_bound_and_can_only_reduce_observation(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+
+        from human3d.anatomical_evidence import AnatomicalEvidence, RegionVisibility, yaw_conflicts
+        from human3d.observations import ObservationRef, ObservationStore
+
+        visible = Landmark(.5, .5, 1, 1)
+        uncertain = Landmark(.5, .5, .5, .5)
+        pose = (visible,) * 15 + (uncertain,) + (visible,) * 17
+        external = AnatomicalEvidence("photo", "fixture", "v1", 0,
+                                      (RegionVisibility("face", False, .95),
+                                       RegionVisibility("left_arm", True, .95)), 179, .95)
+        detection = SubjectEvidence("photo", "model", (120, 120), (pose,), anatomical=external)
+        with self.assertRaisesRegex(ValueError, "binding_mismatch"):
+            replace(detection, photo_digest="other")
+        with TemporaryDirectory() as directory:
+            store = ObservationStore(Path(directory))
+            record = ObservationRef("id", "photo", store.write_detection(detection))
+            self.assertEqual(store.read_detection(record), detection)
+        self.assertFalse(detection.visible_pose(0)[0].observed)
+        self.assertFalse(detection.visible_pose(0)[15].observed)
+        self.assertFalse(yaw_conflicts(external, -179))
+        self.assertTrue(yaw_conflicts(external, 12))
+
     def test_full_body_coverage_keeps_partial_candidates_for_review(self):
         visible = Landmark(0.5, 0.5, 0.95, 0.95)
         pose = (visible,) * 33

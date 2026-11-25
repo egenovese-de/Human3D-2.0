@@ -1,13 +1,16 @@
 """Local subject candidates in normalized, EXIF-oriented image coordinates."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from hashlib import sha256
 from io import BytesIO
+from math import atan2, degrees, hypot, isfinite
 from pathlib import Path
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
 
 from PIL import Image, ImageOps
+
+from .anatomical_evidence import AnatomicalEvidence, apply_visibility
 
 # Nose, shoulders, hips, knees and ankles in MediaPipe pose order.
 FULL_BODY_ANCHORS = (0, 11, 12, 23, 24, 25, 26, 27, 28)
@@ -41,9 +44,28 @@ class Landmark:
     def observed(self) -> bool:
         return (
             0 <= self.x <= 1 and 0 <= self.y <= 1
-            and self.visibility is not None and self.visibility >= MIN_ANCHOR_CONFIDENCE
-            and self.presence is not None and self.presence >= MIN_ANCHOR_CONFIDENCE
+            and self.visibility is not None and MIN_ANCHOR_CONFIDENCE <= self.visibility <= 1
+            and self.presence is not None and MIN_ANCHOR_CONFIDENCE <= self.presence <= 1
         )
+
+
+def estimate_world_yaw(pose, world):
+    """Resolve front/back ambiguity using signed transverse torso axes."""
+    if len(pose) != 33 or len(world) != 33:
+        return None
+    axes = []
+    for left, right in ((11, 12), (23, 24)):
+        if not (pose[left].observed and pose[right].observed):
+            continue
+        x = world[left][0] - world[right][0]
+        z = world[left][2] - world[right][2]
+        length = hypot(x, z)
+        if isfinite(length) and length >= 0.05:
+            axes.append(complex(x, z) / length)
+    consensus = sum(axes)
+    if len(axes) < 2 or abs(consensus) / len(axes) < 0.85:
+        return None
+    return degrees(atan2(consensus.imag, consensus.real))
 
 
 @dataclass(frozen=True)
@@ -54,6 +76,24 @@ class SubjectEvidence:
     candidates: tuple[tuple[Landmark, ...], ...]
     masks: tuple[bytes | None, ...] = ()
     world_landmarks: tuple[tuple[tuple[float, float, float], ...], ...] = ()
+    anatomical: AnatomicalEvidence | None = None
+
+    def __post_init__(self):
+        if self.anatomical is not None and (
+            self.anatomical.photo_digest != self.photo_digest
+            or self.anatomical.candidate >= len(self.candidates)
+        ):
+            raise ValueError("provider_evidence_binding_mismatch")
+
+    def visible_pose(self, candidate: int):
+        pose = self.candidates[candidate]
+        world = self.world_landmarks[candidate] if candidate < len(self.world_landmarks) else ()
+        yaw = estimate_world_yaw(pose, world)
+        if yaw is not None and abs(yaw) > 100:
+            pose = tuple(replace(point, visibility=0.0) if i <= 10 else point
+                         for i, point in enumerate(pose))
+        evidence = self.anatomical
+        return apply_visibility(pose, evidence if evidence and evidence.candidate == candidate else None)
 
     @property
     def review_reason(self) -> str | None:

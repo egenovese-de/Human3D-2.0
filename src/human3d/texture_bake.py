@@ -111,11 +111,14 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     weights = np.zeros((size, size))
     skin_sum = np.zeros_like(weights)
     target_view, _ = views[target]
+    if not target_view.foreground.any():
+        raise ValueError("appearance_target_has_no_foreground")
     target_light = np.median(target_view.rgb[target_view.foreground].mean(axis=1))
     for key, (view, image_size) in views.items():
         height, width = view.foreground.shape
         if not view.foreground.any():
             continue
+        edge_distance = distance_transform_edt(view.foreground)
         projected, depth, z_buffer, facing = _project_view(view, neutral, joints, rig, geometry, image_size, occluder=occluder)
         intensity = np.median(view.rgb[view.foreground].mean(axis=1))
         gain = 1.0 if key == target else np.clip(target_light / max(intensity, 1), 0.7, 1.4)
@@ -134,8 +137,9 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
                 continue
             a, b = x[visible], y[visible]
             u, v = u[visible], v[visible]
-            weight = facing[index] ** 2 * (3.0 if key == target else 1.0)
-            color_sum[b, a] += weight * np.clip(view.rgb[v, u].astype(float) * gain, 0, 255)
+            boundary_weight = np.clip(edge_distance[v, u] / 3, .25, 1)
+            weight = boundary_weight * facing[index] ** 2 * (3.0 if key == target else 1.0)
+            color_sum[b, a] += weight[:, None] * np.clip(view.rgb[v, u].astype(float) * gain, 0, 255)
             weights[b, a] += weight
             skin_sum[b, a] += weight * view.skin_candidate[v, u]
     observed = weights > 0

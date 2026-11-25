@@ -1,8 +1,9 @@
 """Initial weak-perspective camera and image-plane pose observations."""
 from dataclasses import dataclass, field
-from math import atan2, cos, degrees, hypot, isfinite, radians, sin
+from math import atan2, cos, hypot, isfinite, radians, sin
 
-from .vision import SubjectEvidence
+from .anatomical_evidence import yaw_conflicts
+from .vision import SubjectEvidence, estimate_world_yaw
 
 TORSO = {
     11: "upperarm01.L", 12: "upperarm01.R",
@@ -13,6 +14,8 @@ LIMBS = {
     "upperarm01.R": (12, 14), "lowerarm01.R": (14, 16),
     "upperleg01.L": (23, 25), "lowerleg01.L": (25, 27),
     "upperleg01.R": (24, 26), "lowerleg01.R": (26, 28),
+    "wrist.L": (15, 19), "wrist.R": (16, 20),
+    "foot.L": (27, 31), "foot.R": (28, 32),
 }
 
 
@@ -37,57 +40,44 @@ class Alignment:
     limb_depth_ratios: dict[str, float] = field(default_factory=dict)
 
 
-def _world_yaw(pose, world):
-    """Resolve the front/back ambiguity from signed transverse torso axes."""
-    if len(world) != 33:
-        return None
-    axes = []
-    for left, right in ((11, 12), (23, 24)):
-        if not (pose[left].observed and pose[right].observed):
-            continue
-        x = world[left][0] - world[right][0]
-        z = world[left][2] - world[right][2]
-        length = hypot(x, z)
-        if isfinite(length) and length >= 0.05:
-            axes.append(complex(x, z) / length)
-    consensus = sum(axes)
-    if len(axes) < 2 or abs(consensus) / len(axes) < 0.85:
-        return None
-    return degrees(atan2(consensus.imag, consensus.real))
-
-
 def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, *, refine=False) -> Alignment:
     if not 0 <= candidate < len(evidence.candidates):
         raise ValueError("invalid_subject_candidate")
-    pose = evidence.candidates[candidate]
+    pose = evidence.visible_pose(candidate)
     if len(pose) != 33 or not all(pose[index].observed for index in TORSO):
         raise ValueError("insufficient_torso_evidence")
     width, height = evidence.image_size
     observed = [complex(landmark.x * width, landmark.y * height) for landmark in pose]
     targets = [observed[index] for index in TORSO]
-    target_center = sum(targets) / len(targets)
+    weights = [pose[index].visibility * pose[index].presence for index in TORSO]
+    total_weight = sum(weights)
+    target_center = sum(weight * point for weight, point in zip(weights, targets)) / total_weight
     rig = body["rig"]
     rest = [rig["joints"][rig["bones"][bone]["head"]] for bone in TORSO.values()]
     world = evidence.world_landmarks[candidate] if candidate < len(evidence.world_landmarks) else ()
-    yaw = _world_yaw(pose, world)
+    yaw = estimate_world_yaw(pose, world)
+    external = evidence.anatomical
+    if external and external.candidate == candidate and external.yaw is not None and external.yaw_confidence >= .8:
+        if not yaw_conflicts(external, yaw):
+            yaw = external.yaw
     lower, upper = (-45, 45) if yaw is None else (yaw - 15, yaw + 15)
 
     def evaluate(yaw):
         yaw = (yaw + 180) % 360 - 180
         unit_camera = Camera(yaw, 1, 0, 1)
         points = [unit_camera.project(vertex) for vertex in rest]
-        center = sum(points) / len(points)
+        center = sum(weight * point for weight, point in zip(weights, points)) / total_weight
         centered = [point - center for point in points]
-        variance = sum(abs(point) ** 2 for point in centered)
+        variance = sum(weight * abs(point) ** 2 for weight, point in zip(weights, centered))
         if variance <= 1e-12:
             return None
-        similarity = sum(point.conjugate() * (target - target_center)
-                         for point, target in zip(centered, targets)) / variance
+        similarity = sum(weight * point.conjugate() * (target - target_center)
+                         for weight, point, target in zip(weights, centered, targets)) / variance
         if similarity.real <= 1e-6:
             return None
         camera = Camera(yaw, similarity, target_center - similarity * center, 1)
-        rms = (sum(abs(camera.project(vertex) - target) ** 2
-                   for vertex, target in zip(rest, targets)) / len(rest)) ** 0.5
+        rms = (sum(weight * abs(camera.project(vertex) - target) ** 2
+                   for weight, vertex, target in zip(weights, rest, targets)) / total_weight) ** 0.5
         return rms, camera
 
     candidates = [result for offset in range(round((upper - lower) / 5) + 1)
@@ -106,7 +96,7 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
     angles = {}
     depths = {}
     for name, (first, last) in LIMBS.items():
-        if pose[first].observed and pose[last].observed:
+        if name in rig["bones"] and pose[first].observed and pose[last].observed:
             direction = observed[last] - observed[first]
             if abs(direction) > 1:
                 angles[name] = atan2(direction.imag, direction.real)

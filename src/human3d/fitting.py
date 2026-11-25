@@ -10,6 +10,7 @@ from .face import has_head_control
 from .frozen_body import deform_vertices, morph_controls
 from .native_rig import pose_transforms, rebind_joints, skin_vertices, validate_rebind
 from .proportions import length_controls
+from .regional_morphs import regional_controls
 
 
 @dataclass(frozen=True)
@@ -27,7 +28,7 @@ class SharedFit:
     scores: dict[str, float]
 
 
-def _scorer(body, masks, alignments, reference_vertices):
+def _scorer(body, masks, alignments, reference_vertices, *, edge=256):
     mesh, rig = body["mesh"], body["rig"]
     faces = [tuple(index for index, _ in face["corners"])
              for face in mesh["faces"] if face["group"] == "body"]
@@ -36,7 +37,7 @@ def _scorer(body, masks, alignments, reference_vertices):
     for key, mask in masks.items():
         alignment = alignments[key]
         with Image.open(BytesIO(mask.png)) as source:
-            scale = min(1.0, 256 / max(source.size))
+            scale = min(1.0, edge / max(source.size))
             size = tuple(max(1, round(value * scale)) for value in source.size)
             observed = np.asarray(source.resize(size, Image.Resampling.NEAREST)) > 0
         if not observed.any() or observed.all():
@@ -87,7 +88,7 @@ def fit_body(body, mask, alignment):
     neutral = deform_vertices(body, {})
     scorer = _scorer(body, {"target": mask}, {"target": alignment}, neutral)
     baseline = _mean(scorer(neutral))
-    controls, best = _optimize(body, scorer, {}, morph_controls(body), (0.25, 0.125))
+    controls, best = _optimize(body, scorer, {}, (*morph_controls(body), *regional_controls(body)), (0.25, 0.125))
     return Fit(controls, baseline, _mean(best))
 
 
@@ -100,8 +101,12 @@ def fit_shared(body, evidence):
     neutral = deform_vertices(body, {})
     scorer = _scorer(body, masks, alignments, neutral)
     baseline_scores = scorer(neutral)
-    supported = (*morph_controls(body), *length_controls(body))
-    controls, _ = _optimize(body, scorer, {}, supported, (0.25, 0.125))
+    supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
+    coarse = _scorer(body, masks, alignments, neutral, edge=128)
+    seed, _ = _optimize(body, coarse, {}, supported, (0.25,))
+    if _mean(scorer(deform_vertices(body, seed))) < _mean(baseline_scores):
+        seed = {}
+    controls, _ = _optimize(body, scorer, seed, supported, (0.25, 0.125))
     vertices = deform_vertices(body, controls)
     best = _scorer(body, masks, alignments, vertices)(vertices)
     if _mean(best) < _mean(baseline_scores):
@@ -122,7 +127,7 @@ def fit_shared(body, evidence):
                      evidence.dependency_digest, best)
 
 def edit_fit(body, evidence, current, name, value):
-    supported = (*morph_controls(body), *length_controls(body))
+    supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
     if has_head_control(body):
         supported += ("head_width",)
     if name not in supported:

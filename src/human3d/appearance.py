@@ -32,7 +32,7 @@ def prepare_view(originals: OriginalStore, view, alignment, *, limit=640):
     total = rgb.sum(axis=2)
     chroma = rgb / np.maximum(total[:, :, None], 1)
     samples = []
-    pose = view.detection.candidates[view.candidate]
+    pose = view.detection.visible_pose(view.candidate)
     if abs(alignment.camera.yaw_degrees) <= 30:
         for index in (0, 2, 5):
             landmark = pose[index]

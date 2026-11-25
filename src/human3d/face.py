@@ -39,7 +39,7 @@ def propose_head_width(body, evidence, current):
         alignment = current.alignments.get(view.ref.photo_id)
         if alignment is None or abs(alignment.camera.yaw_degrees) > 20:
             continue
-        face = view.detection.candidates[view.candidate]
+        face = view.detection.visible_pose(view.candidate)
         eyes = [face[index] for _, index in EYE_CENTERS]
         if not all(eye.observed for eye in eyes):
             continue

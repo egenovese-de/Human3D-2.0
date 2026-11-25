@@ -59,7 +59,7 @@ def fuse_observations(project: Project, store: ObservationStore) -> SharedEviden
         candidate = mask.candidate if mask is not None else 0
         if not 0 <= candidate < len(detection.candidates):
             raise ValueError("invalid_observation_candidate")
-        pose = detection.candidates[candidate]
+        pose = detection.visible_pose(candidate)
         if len(pose) != 33:
             unresolved.append((photo.id, "invalid_landmark_count"))
             continue
@@ -67,6 +67,14 @@ def fuse_observations(project: Project, store: ObservationStore) -> SharedEviden
             mask = SubjectMask(photo.digest, candidate, detection.masks[candidate])
         regions = tuple(name for name, indices in REGIONS.items()
                         if all(pose[index].observed for index in indices))
+        # In-frame but unsupported feet can be hallucinated on studio objects.
+        # Preserve the detection for manual review and keep cropped views usable.
+        feet = pose[27:29]
+        if (ref.correction is None and detection.masks
+                and all(0 <= foot.x <= 1 and 0 <= foot.y <= 1 for foot in feet)
+                and not any(foot.observed for foot in feet)):
+            unresolved.append((photo.id, "subject_review_required"))
+            continue
         if not regions:
             unresolved.append((photo.id, "insufficient_visible_landmarks"))
             continue

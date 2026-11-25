@@ -9,6 +9,7 @@ import re
 from tempfile import NamedTemporaryFile
 
 from .mask_review import SubjectMask
+from .anatomical_evidence import AnatomicalEvidence
 from .vision import Landmark, SubjectEvidence
 
 
@@ -63,6 +64,8 @@ class ObservationStore:
 
     def write_detection(self, value: SubjectEvidence) -> str:
         payload = asdict(value)
+        if value.anatomical is None:
+            payload.pop("anatomical")
         payload["masks"] = [_encode(mask) if mask is not None else None for mask in value.masks]
         return self._write("subject_detection", payload)
 
@@ -75,6 +78,7 @@ class ObservationStore:
             tuple(tuple(Landmark(**point) for point in pose) for pose in payload["candidates"]),
             tuple(_decode(mask) if mask is not None else None for mask in payload["masks"]),
             tuple(tuple(tuple(point) for point in pose) for pose in payload.get("world_landmarks", ())),
+            AnatomicalEvidence.from_record(payload["anatomical"]) if "anatomical" in payload else None,
         )
 
     def write_correction(self, value: SubjectMask, ref: ObservationRef) -> str:
