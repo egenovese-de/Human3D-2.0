@@ -15,7 +15,7 @@ Owner approval of plan recorded 2026-11-25. Foundational recommendations adopted
 | ADR-005 | Native camera first; learned alternative only on evidence | Before M1-011 | Blocks alignment |
 | ADR-007 | Explicit scale uncertainty, optional measurements; calibrate metrics | Before M1 fitting evaluation | Misleading anatomy |
 | ADR-008/UXD-004 | Portable editable USD, honest partial export; pin Blender composition | Before M1-014 | Export rework |
-| ADR-004 | Optional provider-independent VLM; select provider or explicitly defer | Before M2-002 | Provider branch only |
+| ADR-004 | External VLM provider deferred. M2 uses project-local detection and mask evidence. | M2 | External provider branch |
 | UXD-006 | Limited semantic edits; define controls | Before M2-012 | Revision ambiguity |
 | Pose scope | Expand supported poses from evidence | Before M3-001 | Unbounded validation |
 | Face scope | Supported visible features, no unsupported likeness claims | Before M3-004 | Unbounded refinement |

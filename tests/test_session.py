@@ -87,9 +87,12 @@ class SessionTests(unittest.TestCase):
             draft.paint((8, 8), (24, 24), 2, add=True)
             mask = session.apply_mask(draft)
             session.detect_photo(second.id, Detector())
+            shared = session.shared_evidence()
+            self.assertEqual(set(shared.supporting_views("torso")), {first.id, second.id})
             session.select_target(second.id)
 
             reopened = Session(root / "project")
+            self.assertEqual(reopened.shared_evidence(), shared)
             self.assertEqual(reopened.read_observation(first.id), (evidence, mask))
             self.assertEqual(reopened.read_observation(second.id)[0].photo_digest, second.digest)
             self.assertEqual(reopened.snapshot().project.photos.target, second.id)

@@ -69,6 +69,12 @@ class Session:
             self._sync(project)
             return project
 
+    def shared_evidence(self):
+        from .fusion import fuse_observations
+
+        with self._lock:
+            return fuse_observations(self.store.load(), self.observations)
+
     def read_observation(self, photo_id: str):
         with self._lock:
             ref = self.store.load().observation(photo_id)
