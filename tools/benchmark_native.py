@@ -62,6 +62,7 @@ def main():
     for name in ("product", "manifest", "assets", "model", "output"):
         parser.add_argument(f"--{name}", required=True, type=Path)
     parser.add_argument("--target")
+    parser.add_argument("--ground", action="store_true")
     parser.add_argument("--simulated-evidence", type=Path)
     parser.add_argument("--garment", choices=("top", "shorts", "trousers"))
     args = parser.parse_args()
@@ -123,10 +124,10 @@ def main():
         report["cameras"] = {key: {"yaw": value.camera.yaw_degrees, "torso_rms_px": value.torso_rms_pixels}
                              for key, value in shared.alignments.items()}
         report["photo_ids"] = {path.name: photo_ids[row["sha256"]] for path, row in cases}
-        export_body(args.output / "native.usdc", body, shared.fit, alignment)
+        export_body(args.output / "native.usdc", body, shared.fit, alignment, ground=args.ground)
         atlas = bake_atlas(body, shared.fit.controls, views, target)
         report["observed_uv_fraction"] = atlas.observed_fraction
-        export_body(args.output / "native.usdz", body, shared.fit, alignment, texture=atlas.color)
+        export_body(args.output / "native.usdz", body, shared.fit, alignment, texture=atlas.color, ground=args.ground)
         if args.garment:
             view, size = views[target]
             try:
@@ -137,7 +138,7 @@ def main():
                 shell = GarmentAsset(garment.garment, baked.color, baked.observed_fraction)
                 body_color = neutralize_covered_body_color(body, atlas.color, [garment.garment])
                 export_body(args.output / "garment.usdz", body, shared.fit, alignment,
-                            texture=body_color, garments=[shell])
+                            texture=body_color, garments=[shell], ground=args.ground)
                 report["garment"] = {"result": "PASS", "category": args.garment,
                                      "candidate_overlap": garment.overlap,
                                      "observed_uv_fraction": baked.observed_fraction}
