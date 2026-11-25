@@ -12,7 +12,7 @@ Tasks: H3D2-M1-001 through H3D2-M1-003.
 
 Validation objective: demonstrate foundation on actual inputs.
 
-Where to test: Local CLI / Windows and Linux.
+Where to test: Windows and Linux CLI; owner approved equivalent GitHub Actions evidence for D1-01 only on 2026-11-25.
 
 Test input: Actual candidate source inventory, license texts and authorized fixture manifest.
 
@@ -34,7 +34,7 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Recheck rejected items without copying them.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: PASS under owner-approved CI equivalence for D1-01 only. Evidence: foundation and security dispatcher run 45642499455 at 39ee9badb133bddfad7a3377892adba1668f49bb; hash-enforced runtime run 45641848574; asset integrity run 45638877256; clearance and fixture policy documents. No legacy source admitted; no public photo fixtures admitted. Local screenshots waived for this delivery only. Branch protection remains a manual administrative action; later empirical gates unchanged.
 
 ## D1-02 — Project and orchestration
 
