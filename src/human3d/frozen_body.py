@@ -28,9 +28,13 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
     vertices = [list(vertex) for vertex in body["mesh"]["vertices"]]
     morphs = body.get("morph_targets", {})
     supported = morph_controls(body)
+    length_edits = {}
     for name, value in sorted(controls.items()):
         if not math.isfinite(value) or not -1 <= value <= 1:
             raise ValueError(f"out_of_range_morph: {name}")
+        if name.endswith("_length"):
+            length_edits[name] = value
+            continue
         direction = "incr" if value >= 0 else "decr"
         try:
             offsets = morphs[f"{supported[name]}-{direction}"]
@@ -40,6 +44,14 @@ def deform_vertices(body: dict, controls: dict[str, float]) -> tuple[tuple[float
             vertex = vertices[index]
             for axis, offset in enumerate((x, y, z)):
                 vertex[axis] += abs(value) * offset
+    if length_edits:
+        from .proportions import length_controls, lengthen
+
+        for name, value in length_edits.items():
+            if name not in length_controls(body):
+                raise ValueError(f"unsupported_morph: {name}")
+            if value:
+                vertices = lengthen(body, vertices, name, value)
     return tuple(map(tuple, vertices))
 
 
