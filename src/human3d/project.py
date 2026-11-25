@@ -3,6 +3,8 @@ from dataclasses import dataclass, replace
 from uuid import UUID, uuid4
 import re
 
+from .observations import ObservationRef
+
 
 @dataclass(frozen=True)
 class Photo:
@@ -58,6 +60,7 @@ class Project:
     revision: int = 0
     photos: PhotoSet = PhotoSet()
     frozen_body_digest: str | None = None
+    observations: tuple[ObservationRef, ...] = ()
 
     def __post_init__(self):
         UUID(self.id)
@@ -65,6 +68,23 @@ class Project:
             raise ValueError("invalid frozen body digest")
         if type(self.revision) is not int or self.revision < 0:
             raise ValueError("invalid revision")
+
+        photos = {photo.id: photo.digest for photo in self.photos.photos}
+        if len({ref.photo_id for ref in self.observations}) != len(self.observations):
+            raise ValueError("duplicate_photo_observation")
+        if any(photos.get(ref.photo_id) != ref.photo_digest for ref in self.observations):
+            raise ValueError("observation_photo_mismatch")
+
+    def observation(self, photo_id: str) -> ObservationRef | None:
+        return next((ref for ref in self.observations if ref.photo_id == photo_id), None)
+
+    def with_observation(self, ref: ObservationRef) -> "Project":
+        previous = self.observation(ref.photo_id)
+        if previous == ref:
+            return self
+        refs = {item.photo_id: item for item in self.observations}
+        refs[ref.photo_id] = ref
+        return replace(self, observations=tuple(refs.values()))
 
     @classmethod
     def new(cls) -> "Project":

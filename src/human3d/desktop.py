@@ -160,8 +160,8 @@ class PhotosWindow(QWidget):
         def fit(draft, alignment):
             from .fitting import fit_body
 
-            project = self.store.load()
             mask = self.session.apply_mask(draft)
+            project = self.store.load()
             result = fit_body(body, mask, alignment)
             if self.store.load() != project:
                 raise ValueError("The project changed during fitting. Review the current target again.")
@@ -172,8 +172,9 @@ class PhotosWindow(QWidget):
             self.session.apply_mask(draft)
             self.fitted_preview = None
 
-        if MaskDialog(photo, evidence, apply, self, body=body, fit=fit).exec():
-            self.status.setText("Subject mask applied for this session.")
+        _, correction = self.session.read_observation(self.store.load().photos.target)
+        if MaskDialog(photo, evidence, apply, self, body=body, fit=fit, correction=correction).exec():
+            self.status.setText("Subject mask saved to the project.")
         elif self.fitted_preview is not None:
             self.status.setText("Fitted body ready for inspection or USD export.")
 

@@ -1,5 +1,5 @@
 """Application session boundary for project commands and capability snapshots."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from threading import RLock
 from .project import Project
@@ -9,6 +9,7 @@ from .ingestion import import_photos
 from .originals import OriginalStore
 from .vision import SubjectEvidence
 from .mask_review import MaskDraft, SubjectMask
+from .observations import ObservationRef, ObservationStore
 
 
 @dataclass(frozen=True)
@@ -32,6 +33,7 @@ class Session:
     def __init__(self, directory: Path, create=False):
         self._lock = RLock()
         self.store = ProjectStore(directory)
+        self.observations = ObservationStore(self.store.directory)
         project = self.store.create() if create else self.store.load()
         self.coordinator = Coordinator(project.id)
         self._sync(project)
@@ -67,24 +69,51 @@ class Session:
             self._sync(project)
             return project
 
+    def read_observation(self, photo_id: str):
+        with self._lock:
+            ref = self.store.load().observation(photo_id)
+            if ref is None:
+                return None
+            return self.observations.read_detection(ref), self.observations.read_correction(ref)
+
     def detect_target(self, detector) -> SubjectEvidence | None:
-        """Run detection on the caller's worker and promote only current evidence."""
+        return self._detect_photo(detector, None)
+
+    def detect_photo(self, photo_id: str, detector) -> SubjectEvidence | None:
+        return self._detect_photo(detector, photo_id)
+
+    def _detect_photo(self, detector, photo_id):
         with self._lock:
             project = self.store.load()
             self._sync(project)
-            if project.photos.target is None:
-                raise ValueError("no_target_photo")
-            photo = next(photo for photo in project.photos.photos if photo.id == project.photos.target)
-            job = self.coordinator.submit("subject_evidence")
+            selected = photo_id if photo_id is not None else project.photos.target
+            photo = next((item for item in project.photos.photos if item.id == selected and item.included), None)
+            if photo is None:
+                raise ValueError("no_target_photo" if photo_id is None else "photo_unavailable")
+            initial_ref = project.observation(photo.id)
+            kind = "subject_evidence" if photo_id is None else f"subject_evidence:{photo.id}"
+            job = self.coordinator.submit(kind)
             self.coordinator.start(job.id)
         try:
             original = OriginalStore(self.store.directory).path(photo.digest)
             evidence = detector.detect(original, photo.digest)
             with self._lock:
-                self._sync(self.store.load())
+                current = self.store.load()
+                self._sync(current)
+
+                def publish():
+                    digest = self.observations.write_detection(evidence)
+                    if initial_ref is not None and initial_ref.detection == digest:
+                        return
+                    self.store.save(current.with_observation(ObservationRef(photo.id, photo.digest, digest)))
+
                 promoted = self.coordinator.finish(
                     job.id, evidence,
-                    lambda result: isinstance(result, SubjectEvidence) and result.photo_digest == photo.digest,
+                    lambda result: (
+                        isinstance(result, SubjectEvidence) and result.photo_digest == photo.digest
+                        and current.observation(photo.id) == initial_ref
+                    ),
+                    publish=publish,
                 )
         except Exception:
             self.coordinator.fail(job.id, "subject_detection_failed")
@@ -94,13 +123,20 @@ class Session:
     def apply_mask(self, draft: MaskDraft) -> SubjectMask:
         mask = draft.validate()
         with self._lock:
-            self._sync(self.store.load())
-            generation, _, artifacts = self.coordinator.snapshot_with_generation()
-            current = artifacts.get("subject_evidence")
-            if current is None or current[0] != generation or current[1] is not draft.evidence:
+            project = self.store.load()
+            self._sync(project)
+            ref = project.observation(project.photos.target)
+            if ref is None or self.observations.read_detection(ref) != draft.evidence:
                 raise ValueError("subject_evidence_changed")
+
+            def publish():
+                digest = self.observations.write_correction(mask, ref)
+                updated = project.with_observation(replace(ref, correction=digest))
+                if updated != project:
+                    self.store.save(updated)
+
             job = self.coordinator.submit("subject_mask")
             self.coordinator.start(job.id)
-            if not self.coordinator.finish(job.id, mask, lambda result: result == mask):
+            if not self.coordinator.finish(job.id, mask, lambda result: result == mask, publish=publish):
                 raise ValueError("mask_promotion_rejected")
             return mask

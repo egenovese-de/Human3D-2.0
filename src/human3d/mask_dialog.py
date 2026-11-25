@@ -78,7 +78,7 @@ class MaskCanvas(QWidget):
 
 
 class MaskDialog(QDialog):
-    def __init__(self, photo, evidence, apply, parent=None, *, body=None, fit=None):
+    def __init__(self, photo, evidence, apply, parent=None, *, body=None, fit=None, correction=None):
         super().__init__(parent)
         self.setWindowTitle("Review subject mask")
         self.resize(760, 620)
@@ -97,7 +97,13 @@ class MaskDialog(QDialog):
             subjects.addItem(f"Subject {index + 1}")
         controls.addWidget(subjects)
         subjects.currentIndexChanged.connect(self.select_candidate)
-        self.select_candidate(0)
+        if correction is not None:
+            from io import BytesIO
+
+            with Image.open(BytesIO(correction.png)) as source:
+                self.drafts[correction.candidate].image = source.convert("L")
+            subjects.setCurrentIndex(correction.candidate)
+        self.select_candidate(subjects.currentIndex())
         mode = QComboBox()
         mode.addItems(["Add foreground", "Remove foreground"])
         mode.currentIndexChanged.connect(self.set_mode)

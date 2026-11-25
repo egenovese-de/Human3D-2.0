@@ -3,11 +3,12 @@ import json
 import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from dataclasses import replace
+from dataclasses import asdict, replace
 from threading import RLock
 from contextlib import contextmanager
 
 from .project import Photo, PhotoSet, Project
+from .observations import ObservationRef
 from .originals import OriginalStore
 
 _LOCK = RLock()
@@ -49,7 +50,8 @@ class ProjectStore:
         if type(data["schema_version"]) is not int or data["schema_version"] != 1:
             raise ValueError("unsupported project schema")
         return Project(data["id"], data["revision"], PhotoSet(
-            tuple(Photo(**p) for p in data["photos"]), data["target"]), data.get("frozen_body_digest"))
+            tuple(Photo(**p) for p in data["photos"]), data["target"]), data.get("frozen_body_digest"),
+            tuple(ObservationRef(**ref) for ref in data.get("observations", ())))
 
     def create(self) -> Project:
         with writer_lock(self.directory):
@@ -86,6 +88,7 @@ class ProjectStore:
             "schema_version": 1, "id": project.id,
             "revision": project.revision, "target": project.photos.target,
             "frozen_body_digest": project.frozen_body_digest,
+            "observations": [asdict(ref) for ref in project.observations],
             "photos": [{"id": p.id, "digest": p.digest, "name": p.name,
                         "included": p.included} for p in project.photos.photos],
         }

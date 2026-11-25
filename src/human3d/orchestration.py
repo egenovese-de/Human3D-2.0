@@ -81,7 +81,7 @@ class Coordinator:
         with self._lock:
             return self._jobs[job_id].state in {"cancelling", "cancelled", "stale"}
 
-    def finish(self, job_id, artifact, validate):
+    def finish(self, job_id, artifact, validate, *, publish=None):
         with self._lock:
             job = self._jobs[job_id]
             if job.state == "cancelling":
@@ -106,6 +106,12 @@ class Coordinator:
             if not valid:
                 self._jobs[job_id] = replace(job, state="failed", error="validation_failed")
                 return False
+            if publish is not None:
+                try:
+                    publish()
+                except Exception:
+                    self._jobs[job_id] = replace(job, state="failed", error="publication_failed")
+                    raise
             self._active[job.kind] = (job.generation, artifact)
             self._jobs[job_id] = replace(job, state="succeeded")
             return True

@@ -20,7 +20,7 @@
 ## M2
 | Task ID | Task description | Status |
 |---|---|---|
-| H3D2-M2-001 | Extend immutable per-photo evidence and binding | TODO |
+| H3D2-M2-001 | Extend immutable per-photo evidence and binding | TECHNICAL_PASS |
 | H3D2-M2-002 | Integrate optional provider-independent GPT/VLM evidence without blocking local reconstruction | TODO |
 | H3D2-M2-003 | Implement shared evidence fusion | TODO |
 | H3D2-M2-004 | Extend native torso controls | TODO |
