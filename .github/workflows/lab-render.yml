@@ -35,7 +35,7 @@ jobs:
           Invoke-WebRequest "$base/blender-4.5.3.sha256" -OutFile checksums.txt
           $matches = @(Get-Content checksums.txt | Where-Object { $_ -match [regex]::Escape($archive) })
           if ($matches.Count -ne 1) { throw 'Official checksum entry missing or ambiguous' }
-          $expected = ($matches[0].Trim() -split '\\s+')[0]
+          $expected = ($matches[0].Trim() -split '\s+')[0]
           $actual = (Get-FileHash $archive -Algorithm SHA256).Hash
           if ($actual -ine $expected) { throw 'Blender official SHA256 mismatch' }
           Expand-Archive $archive -DestinationPath blender
