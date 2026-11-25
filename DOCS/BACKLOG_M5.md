@@ -13,8 +13,8 @@
 | M5-009 | Integrate visibility-aware anatomical evidence | DONE |
 | M5-010 | Implement full-angle camera orientation estimation | DONE |
 | M5-011 | Improve camera scale, translation and projection refinement | DONE |
-| M5-012 | Implement confidence-weighted regional multi-view fusion | PARTIAL |
-| M5-013 | Detect contradictory and inconsistent reference observations | PARTIAL |
+| M5-012 | Implement confidence-weighted regional multi-view fusion | DONE |
+| M5-013 | Detect contradictory and inconsistent reference observations | DONE |
 | M5-014 | Audit native morph coverage, sensitivity and saturation | DONE |
 | M5-015 | Extend native torso and abdominal deformation capacity | DONE |
 | M5-016 | Extend pelvis, hip and gluteal deformation capacity | DONE |
@@ -22,14 +22,14 @@
 | M5-018 | Implement regional silhouette and volumetric fitting objectives | PARTIAL |
 | M5-019 | Implement bounded coarse-to-fine geometry optimization | DONE |
 | M5-020 | Implement anatomical regularization and surface quality constraints | DONE |
-| M5-021 | Validate canonical topology, UV invariance and rig rebinding | PARTIAL |
+| M5-021 | Validate canonical topology, UV invariance and rig rebinding | DONE |
 | M5-022 | Optimize shared anatomy fitting and held-out view consistency | PARTIAL |
 | M5-023 | Improve depth-aware skeletal pose reconstruction | PARTIAL |
 | M5-024 | Improve hand, wrist and limb orientation | PARTIAL |
-| M5-025 | Implement ground-plane estimation and contact constraints | TODO |
-| M5-026 | Extend native facial geometry refinement | TODO |
+| M5-025 | Implement ground-plane estimation and contact constraints | PARTIAL |
+| M5-026 | Extend native facial geometry refinement | DONE |
 | M5-027 | Improve occlusion-aware texture projection and regional visibility | PARTIAL |
-| M5-028 | Improve multi-view color consistency and UV seam handling | PARTIAL |
+| M5-028 | Improve multi-view color consistency and UV seam handling | DONE |
 | M5-029 | Separate body, hair and garment appearance contributions | PARTIAL |
 | M5-030 | Improve supported garment boundaries, fitting and collision handling | PARTIAL |
 | M5-031 | Resolve integrated pipeline regressions and validate runtime stability | PARTIAL |
