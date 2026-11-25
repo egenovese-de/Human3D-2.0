@@ -1,6 +1,7 @@
 """Local subject candidates in normalized, EXIF-oriented image coordinates."""
 from dataclasses import dataclass
 from hashlib import sha256
+from io import BytesIO
 from pathlib import Path
 
 from PIL import Image, ImageOps
@@ -34,6 +35,7 @@ class SubjectEvidence:
     model_digest: str
     image_size: tuple[int, int]
     candidates: tuple[tuple[Landmark, ...], ...]
+    masks: tuple[bytes | None, ...] = ()
 
     @property
     def review_reason(self) -> str | None:
@@ -50,7 +52,7 @@ class SubjectEvidence:
 class PoseLandmarker:
     """Use the explicitly provisioned MediaPipe Lite v1 model on CPU."""
 
-    def __init__(self, model_path: Path):
+    def __init__(self, model_path: Path, *, segmentation: bool = False):
         model = model_path.read_bytes()
         if sha256(model).hexdigest() != MODEL_SHA256:
             raise ValueError("pose_model_digest_mismatch")
@@ -63,7 +65,9 @@ class PoseLandmarker:
         options = tasks.vision.PoseLandmarkerOptions(
             base_options=tasks.BaseOptions(model_asset_buffer=model),
             num_poses=4,
+            output_segmentation_masks=segmentation,
         )
+        self._segmentation = segmentation
         self._detector = tasks.vision.PoseLandmarker.create_from_options(options)
 
     def detect(self, original_path: Path, photo_digest: str) -> SubjectEvidence:
@@ -78,7 +82,29 @@ class PoseLandmarker:
             tuple(Landmark(point.x, point.y, point.visibility, point.presence) for point in pose)
             for pose in result.pose_landmarks
         )
-        return SubjectEvidence(photo_digest, MODEL_SHA256, image.size, candidates)
+        masks = ()
+        if self._segmentation:
+            raw_masks = result.segmentation_masks or ()
+            if len(raw_masks) != len(candidates):
+                masks = (None,) * len(candidates)
+            else:
+                masks = tuple(self._mask_png(mask.numpy_view(), image.size) for mask in raw_masks)
+        return SubjectEvidence(photo_digest, MODEL_SHA256, image.size, candidates, masks)
+
+    @staticmethod
+    def _mask_png(probabilities, image_size: tuple[int, int]) -> bytes | None:
+        import numpy as np
+
+        if probabilities.shape != image_size[::-1]:
+            return None
+        if not np.isfinite(probabilities).all() or probabilities.min() < 0 or probabilities.max() > 1:
+            return None
+        foreground = probabilities >= 0.5
+        if not foreground.any() or foreground.all():
+            return None
+        buffer = BytesIO()
+        Image.fromarray(foreground.astype("uint8") * 255).save(buffer, format="PNG")
+        return buffer.getvalue()
 
     def close(self):
         self._detector.close()
