@@ -1,6 +1,6 @@
 # M1 redistribution and security clearance
 
-Status: IN_PROGRESS. Default deny; no legacy component is cleared for copying by this document alone.
+Status: DONE for initial default-deny baseline. Default deny; no legacy component is cleared for copying by this document alone.
 
 Original code: Apache-2.0, owner approved 2026-11-25.
 Legacy inventory: 1063 tracked files; no history migration.
@@ -37,3 +37,6 @@ Scanned all 13 tracked files in development/m1 at 9c9db044b50a0da79d190892c35c93
 
 ## Executed upstream integrity verification
 PASS: GitHub Actions run 45638877256, commit a4a97219b81efff7b5bbc4a773d34860aebe25d3, 2026-11-25. Log: PASS: 367 manifest entries verified. All entries downloaded from pinned upstream and checked for byte length and SHA-256; no asset bytes persisted. This supersedes earlier outstanding digest checks. Checkout action emitted Node 20 deprecation warning; job succeeded. Legacy source remains HOLD; fixture policy and remaining security acceptance still apply.
+
+## Initial gate closure
+PASS: security screening run 45639389830 at e17214592d84d587e5735b0e2cc02c52fd15d11a, 24 reachable commits screened for specified credential patterns. No matches. This is a limited pattern scan, not a specialist audit. Fixture policy established in FIXTURE_POLICY.md; no fixtures admitted. Initial admission baseline complete: original code Apache-2.0, verified upstream CC0 assets eligible subject to runtime integrity, all other components denied until separately cleared. No legacy source approved. Future component admission and final release audit remain mandatory.
