@@ -31,3 +31,6 @@ Upstream immutable commit: 1f508f6083b2f823dab15de924b3bde72e08d77c. Legacy refe
 
 ## Incremental admission register
 All legacy source remains HOLD. Reviewed candidates: frozen_body, frozen_bootstrap, frozen_deform, frozen_rig, baseline_makehuman, morphology_body, makehuman_pose, mesh, errors. No source clearance inferred from docstrings. Bootstrap dependencies require independent implementation or explicit per-file provenance clearance. MORPH-02: nine data files and one license match upstream Git blobs; separate pinned manifest recorded. Public fixtures must be newly procedural or separately authorized. No legacy photos, models or history admitted. SHA-256 acquisition checks and public repository security scan remain outstanding. Incremental review does not waive M1-001 acceptance.
+
+## Public tree screening
+Scanned all 13 tracked files in development/m1 at 9c9db044b50a0da79d190892c35c93f556ea6186. All readable; no matches for private key headers, common GitHub/AWS/OpenAI token patterns or quoted credential assignments. Tree contains documentation, manifests and license only; no photographs or legacy source. PASS for limited current-tree screening only. Full history and specialist scanner not run. Runtime asset digest verification remains outstanding.
