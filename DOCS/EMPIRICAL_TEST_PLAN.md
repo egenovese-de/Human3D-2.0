@@ -123,7 +123,7 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Undo correction or retry/exclude affected photo.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: D1-03 empirical NOT_RUN. M1-008 technical smoke passed on Linux Qt offscreen with the synthetic frontal fixture: segmentation, brush gesture, undo and application to the current session. Corrections are session-local until persistent artifact storage is integrated.
 
 ## D1-04 — Freeze independence
 

@@ -8,6 +8,7 @@ from .orchestration import Coordinator, Job
 from .ingestion import import_photos
 from .originals import OriginalStore
 from .vision import SubjectEvidence
+from .mask_review import MaskDraft, SubjectMask
 
 
 @dataclass(frozen=True)
@@ -89,3 +90,17 @@ class Session:
             self.coordinator.fail(job.id, "subject_detection_failed")
             raise
         return evidence if promoted else None
+
+    def apply_mask(self, draft: MaskDraft) -> SubjectMask:
+        mask = draft.validate()
+        with self._lock:
+            self._sync(self.store.load())
+            generation, _, artifacts = self.coordinator.snapshot_with_generation()
+            current = artifacts.get("subject_evidence")
+            if current is None or current[0] != generation or current[1] is not draft.evidence:
+                raise ValueError("subject_evidence_changed")
+            job = self.coordinator.submit("subject_mask")
+            self.coordinator.start(job.id)
+            if not self.coordinator.finish(job.id, mask, lambda result: result == mask):
+                raise ValueError("mask_promotion_rejected")
+            return mask

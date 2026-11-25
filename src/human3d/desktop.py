@@ -1,5 +1,7 @@
 """Minimal desktop workflow; reconstruction is not yet available."""
 from pathlib import Path
+from PIL import Image, ImageOps
+from PIL.ImageQt import ImageQt
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
@@ -8,6 +10,8 @@ from .session import Session
 from .originals import OriginalStore
 from .ingestion import folder_inputs
 from .thumbnails import thumbnail
+from .mask_dialog import MaskDialog
+from .vision import PoseLandmarker
 
 
 class PhotosWindow(QWidget):
@@ -22,7 +26,8 @@ class PhotosWindow(QWidget):
         for label, callback in (("New project", self.new_project),
                                 ("Open project", self.open_project),
                                 ("Add photos", self.add_photos),
-                                ("Add folder", self.add_folder)):
+                                ("Add folder", self.add_folder),
+                                ("Review target mask", self.review_target_mask)):
             button = QPushButton(label)
             button.clicked.connect(callback)
             toolbar.addWidget(button)
@@ -38,7 +43,7 @@ class PhotosWindow(QWidget):
     def guarded(self, operation):
         try:
             operation()
-        except (OSError, ValueError, RuntimeError, KeyError) as error:
+        except (OSError, ValueError, RuntimeError, KeyError, ImportError) as error:
             QMessageBox.warning(self, "Operation failed", str(error))
 
     def new_project(self):
@@ -78,6 +83,29 @@ class PhotosWindow(QWidget):
                            for status in ("accepted", "duplicate", "rejected"))
         self.status.setText(counts + " | Reconstruction unavailable")
         return results
+
+    def review_target_mask(self):
+        if self.session is None or self.session.snapshot().project.photos.target is None:
+            self.status.setText("Select a target photo first.")
+            return
+        model, _ = QFileDialog.getOpenFileName(self, "Select local Pose Landmarker model", filter="MediaPipe model (*.task)")
+        if model:
+            self.guarded(lambda: self.analyze_mask(Path(model)))
+
+    def analyze_mask(self, model):
+        detector = PoseLandmarker(model, segmentation=True)
+        try:
+            evidence = self.session.detect_target(detector)
+        finally:
+            detector.close()
+        if evidence is None or not evidence.candidates:
+            self.status.setText("No current subject candidate. Select another photo and retry.")
+            return
+        original = OriginalStore(self.store.directory).verify(evidence.photo_digest)
+        with Image.open(original) as image:
+            photo = ImageQt(ImageOps.exif_transpose(image).convert("RGB"))
+        if MaskDialog(photo, evidence, self.session.apply_mask, self).exec():
+            self.status.setText("Subject mask applied for this session.")
 
     def refresh(self):
         snapshot = self.session.snapshot()
