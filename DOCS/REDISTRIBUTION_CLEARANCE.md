@@ -22,3 +22,6 @@ For every imported component record origin, immutable revision, path, digest, li
 
 ## Outstanding
 Upstream license and hash verification, individual module review, public repository scan, fixture manifest and validation evidence. No clearance PASS claimed.
+
+## Upstream evidence
+MakeHuman v1.3.0 LICENSE.ASSETS.md retrieved from https://raw.githubusercontent.com/makehumancommunity/makehuman/v1.3.0/LICENSE.ASSETS.md and inspected: CC0 1.0 Universal text. This confirms the upstream asset license document exists, not that every candidate file is covered or hash-verified. Acquisition remains on HOLD until exact file scope and digests are validated.
