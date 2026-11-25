@@ -1,0 +1,56 @@
+name: Blender probe
+on:
+  push:
+    branches: [development/m1]
+    paths: ['.github/workflows/blender-probe.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-2022
+    timeout-minutes: 25
+    steps:
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $base = 'https://download.blender.org/release/Blender4.5'
+          $archive = 'blender-4.5.3-windows-x64.zip'
+          Invoke-WebRequest "$base/$archive" -OutFile $archive
+          Invoke-WebRequest "$base/blender-4.5.3.sha256" -OutFile checksums.txt
+          $line = Get-Content checksums.txt | Where-Object { $_ -match [regex]::Escape($archive) }
+          if (@($line).Count -ne 1) { throw 'Missing unique official checksum' }
+          $expected = ($line.Trim() -split '\s+')[0]
+          if ((Get-FileHash $archive -Algorithm SHA256).Hash -ne $expected) { throw 'Checksum mismatch' }
+          Expand-Archive $archive -DestinationPath blender
+          $exe = (Get-ChildItem blender -Recurse -Filter blender.exe | Select-Object -First 1).FullName
+          if (!$exe) { throw 'Blender executable missing' }
+          "BLENDER_EXE=$exe" >> $env:GITHUB_ENV
+      - run: python -m pip install usd-core==25.5.1
+      - shell: pwsh
+        run: |
+          @'
+          from pxr import Usd, UsdGeom
+          s = Usd.Stage.CreateNew("probe.usda")
+          m = UsdGeom.Mesh.Define(s, "/Probe")
+          m.CreatePointsAttr([(0,0,0),(1,0,0),(0,1,0)])
+          m.CreateFaceVertexCountsAttr([3])
+          m.CreateFaceVertexIndicesAttr([0,1,2])
+          s.GetRootLayer().Save()
+          '@ | Set-Content -Encoding utf8 make_probe.py
+          python make_probe.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          @'
+          import bpy
+          from pathlib import Path
+          assert bpy.app.version == (4,5,3), bpy.app.version
+          bpy.ops.wm.read_factory_settings(use_empty=True)
+          assert 'FINISHED' in bpy.ops.wm.usd_import(filepath=str(Path("probe.usda").resolve()))
+          meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH']
+          assert len(meshes) == 1 and len(meshes[0].data.vertices) == 3
+          print("PASS: Blender USD mesh import")
+          '@ | Set-Content -Encoding utf8 verify_probe.py
+          & $env:BLENDER_EXE --background --python-exit-code 1 --python verify_probe.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
