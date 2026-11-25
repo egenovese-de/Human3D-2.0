@@ -36,10 +36,10 @@
 ## M3
 | Task ID | Task description | Status |
 |---|---|---|
-| H3D2-M3-001 | Extend supported target pose estimation and inspection | TODO |
-| H3D2-M3-002 | Integrate pose refinement, contact checks and visual correction | TODO |
-| H3D2-M3-003 | Validate skeleton deformation across articulations | TODO |
-| H3D2-M3-004 | Integrate facial evidence and native head refinement with affected rig validation | TODO |
+| H3D2-M3-001 | Extend supported target pose estimation and inspection | TECHNICAL_PASS |
+| H3D2-M3-002 | Integrate pose refinement, contact checks and visual correction | TECHNICAL_PASS |
+| H3D2-M3-003 | Validate skeleton deformation across articulations | TECHNICAL_PASS |
+| H3D2-M3-004 | Integrate facial evidence and native head refinement with affected rig validation | IN_PROGRESS |
 | H3D2-M3-005 | Implement exposed-skin and appearance segmentation | TODO |
 | H3D2-M3-006 | Integrate native UV texture baking and accessible projection preview | TODO |
 | H3D2-M3-007 | Implement multi-view visibility and seam blending | TODO |

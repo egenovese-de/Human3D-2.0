@@ -1,6 +1,6 @@
 """Initial weak-perspective camera and image-plane pose observations."""
-from dataclasses import dataclass
-from math import atan2, cos, radians, sin
+from dataclasses import dataclass, field
+from math import atan2, cos, hypot, isfinite, radians, sin
 
 from .vision import SubjectEvidence
 
@@ -33,6 +33,7 @@ class Alignment:
     camera: Camera
     torso_rms_pixels: float
     limb_angles: dict[str, float]
+    limb_depth_ratios: dict[str, float] = field(default_factory=dict)
 
 
 def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, *, refine=False) -> Alignment:
@@ -77,12 +78,19 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
                           and (result := evaluate(angle)) is not None]
             best = min([best, *candidates], key=lambda result: result[0])
     angles = {}
+    depths = {}
+    world = evidence.world_landmarks[candidate] if candidate < len(evidence.world_landmarks) else ()
     for name, (first, last) in LIMBS.items():
         if pose[first].observed and pose[last].observed:
             direction = observed[last] - observed[first]
             if abs(direction) > 1:
                 angles[name] = atan2(direction.imag, direction.real)
-    return Alignment(best[1], best[0], angles)
+                if len(world) == 33:
+                    dx, dy, dz = (b - a for a, b in zip(world[first], world[last]))
+                    lateral = hypot(dx, dy)
+                    if lateral > 1e-4 and all(map(isfinite, (dx, dy, dz))):
+                        depths[name] = max(-2.0, min(2.0, dz / lateral))
+    return Alignment(best[1], best[0], angles, depths)
 
 def refine_views(body, evidence):
     """Solve each usable photo in its own image coordinates and pose."""

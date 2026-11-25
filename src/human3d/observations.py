@@ -74,6 +74,7 @@ class ObservationStore:
             ref.photo_digest, payload["model_digest"], tuple(payload["image_size"]),
             tuple(tuple(Landmark(**point) for point in pose) for pose in payload["candidates"]),
             tuple(_decode(mask) if mask is not None else None for mask in payload["masks"]),
+            tuple(tuple(tuple(point) for point in pose) for pose in payload.get("world_landmarks", ())),
         )
 
     def write_correction(self, value: SubjectMask, ref: ObservationRef) -> str:
@@ -100,6 +101,7 @@ class ObservationStore:
                 "yaw": camera.yaw_degrees, "similarity": [camera.similarity.real, camera.similarity.imag],
                 "origin": [camera.origin.real, camera.origin.imag],
                 "torso_rms_pixels": alignment.torso_rms_pixels, "limb_angles": alignment.limb_angles,
+                "limb_depth_ratios": alignment.limb_depth_ratios,
             }
         return self._write("shared_fit", payload)
 
@@ -110,7 +112,7 @@ class ObservationStore:
         payload = self._read(digest, "shared_fit")
         alignments = {
             key: Alignment(Camera(value["yaw"], complex(*value["similarity"]), complex(*value["origin"])),
-                           value["torso_rms_pixels"], value["limb_angles"])
+                           value["torso_rms_pixels"], value["limb_angles"], value.get("limb_depth_ratios", {}))
             for key, value in payload["alignments"].items()
         }
         return payload["bootstrap"], SharedFit(Fit(**payload["fit"]), alignments,

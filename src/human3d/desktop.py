@@ -21,6 +21,7 @@ class PhotosWindow(QWidget):
         self.store = None
         self.session = None
         self.fitted_preview = None
+        self.pose_corrections = {}
         self.setWindowTitle("Human3D 2.0")
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
@@ -103,18 +104,26 @@ class PhotosWindow(QWidget):
         self.status.setText(counts + " | Reconstruction unavailable")
         return results
 
+    def _corrected_fit(self, project, body, fit, alignment):
+        saved = self.pose_corrections.get((project.id, project.revision))
+        if saved is not None and saved[0] == fit:
+            alignment = saved[1]
+        return body, fit, alignment
+
     def current_fit(self):
         if self.store is not None and self.fitted_preview is not None:
             project = self.store.load()
             project_id, revision, body, result, alignment = self.fitted_preview
             if project.id == project_id and project.revision == revision:
-                return body, result, alignment
+                return self._corrected_fit(project, body, result, alignment)
         if self.session is not None:
             shared = self.session.current_shared_fit()
             if shared is not None:
-                target = self.store.load().photos.target
+                project = self.store.load()
+                target = project.photos.target
                 if target in shared.alignments:
-                    return load_project_body(self.store), shared.fit, shared.alignments[target]
+                    return self._corrected_fit(project, load_project_body(self.store), shared.fit,
+                                               shared.alignments[target])
         self.status.setText("Fit the current target or the included photos first.")
         return None
 
@@ -222,7 +231,12 @@ class PhotosWindow(QWidget):
         def inspect():
             fit = self.current_fit()
             if fit is not None:
-                BodyPreview(*fit, parent=self).exec()
+                project = self.store.load()
+                def save_pose(alignment):
+                    if self.store.load() == project:
+                        self.pose_corrections[(project.id, project.revision)] = (fit[1], alignment)
+
+                BodyPreview(*fit, parent=self, on_pose_applied=save_pose).exec()
 
         self.guarded(inspect)
 

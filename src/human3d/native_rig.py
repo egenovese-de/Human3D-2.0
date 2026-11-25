@@ -1,4 +1,4 @@
-"""Rebind native joint locators and evaluate bounded image-plane pose."""
+"""Rebind native joint locators and evaluate bounded target articulation."""
 from math import atan2, cos, pi, radians, sin
 
 import numpy as np
@@ -9,13 +9,36 @@ def rebind_joints(rig, vertices):
     return {name: points[indices].mean(axis=0) for name, indices in rig["joint_vertices"].items()}
 
 
+def _rotation(axis, angle):
+    x, y, z = axis
+    skew = np.asarray(((0, -z, y), (z, 0, -x), (-y, x, 0)))
+    return np.eye(3) + sin(angle) * skew + (1 - cos(angle)) * (skew @ skew)
+
+
+def _swing(source, target):
+    source_norm = np.linalg.norm(source)
+    target_norm = np.linalg.norm(target)
+    if min(source_norm, target_norm) < 1e-10:
+        return np.eye(3)
+    source, target = source / source_norm, target / target_norm
+    axis = np.cross(source, target)
+    sine = np.linalg.norm(axis)
+    cosine = np.clip(source @ target, -1, 1)
+    if sine < 1e-10:
+        if cosine > 0:
+            return np.eye(3)
+        axis = np.cross(source, np.eye(3)[np.argmin(np.abs(source))])
+        return _rotation(axis / np.linalg.norm(axis), pi)
+    return _rotation(axis / sine, atan2(sine, cosine))
+
+
 def pose_transforms(rig, joints, alignment):
     bones = rig["bones"]
     transforms = {}
     yaw = radians(alignment.camera.yaw_degrees)
     axis = np.asarray((-sin(yaw), 0.0, cos(yaw)))
-    x, y, z = axis
-    skew = np.asarray(((0, -z, y), (z, 0, -x), (-y, x, 0)))
+    right = np.asarray((-cos(yaw), 0.0, -sin(yaw)))
+    down = np.asarray((0.0, -1.0, 0.0))
 
     def solve(name):
         if name in transforms:
@@ -27,10 +50,17 @@ def pose_transforms(rig, joints, alignment):
         tail = rotation @ joints[bone["tail"]] + translation
         if name in alignment.limb_angles:
             direction = alignment.camera.project(tail) - alignment.camera.project(head)
-            if abs(direction) > 1:
-                delta = alignment.limb_angles[name] - atan2(direction.imag, direction.real)
-                delta = (delta + pi) % (2 * pi) - pi
-                turn = np.eye(3) + sin(delta) * skew + (1 - cos(delta)) * (skew @ skew)
+            angle = alignment.limb_angles[name]
+            depth = alignment.limb_depth_ratios.get(name)
+            turn = None
+            if depth is not None:
+                image = complex(cos(angle), sin(angle)) / alignment.camera.similarity
+                image /= abs(image)
+                turn = _swing(tail - head, image.real * right + image.imag * down + depth * axis)
+            elif abs(direction) > 1:
+                delta = (angle - atan2(direction.imag, direction.real) + pi) % (2 * pi) - pi
+                turn = _rotation(axis, delta)
+            if turn is not None:
                 translation = head + turn @ (translation - head)
                 rotation = turn @ rotation
         transforms[name] = (rotation, translation)
@@ -99,3 +129,32 @@ def validate_rebind(body, vertices):
         if np.linalg.norm(joints[bone["head"]] - joints[bone["tail"]]) <= 1e-10:
             raise ValueError("deformation_collapsed_bone")
     return joints
+
+
+def validate_pose(body, neutral, posed):
+    vertices = np.asarray(posed, dtype=float)
+    if vertices.shape != np.shape(neutral) or not np.isfinite(vertices).all():
+        raise ValueError("invalid_posed_vertices")
+    faces = [face["corners"] for face in body["mesh"]["faces"] if face["group"] == "body"]
+    triangles = np.asarray([[face[0][0], face[i][0], face[i + 1][0]]
+                            for face in faces for i in range(1, len(face) - 1)])
+
+    def areas(points):
+        a, b, c = np.asarray(points)[triangles].transpose((1, 0, 2))
+        return np.linalg.norm(np.cross(b - a, c - a), axis=1)
+
+    if np.any((areas(neutral) > 1e-10) & (areas(vertices) <= 1e-10)):
+        raise ValueError("pose_collapsed_body_face")
+
+
+def foot_height_difference(rig, joints, transforms, body_height):
+    """Relative foot-height diagnostic. A floor plane is not inferred."""
+    if body_height <= 0 or any(f"foot.{side}" not in rig["bones"] for side in ("L", "R")):
+        return None
+    heights = []
+    for side in ("L", "R"):
+        name = f"foot.{side}"
+        rotation, shift = transforms[name]
+        head = joints[rig["bones"][name]["head"]]
+        heights.append((rotation @ head + shift)[1])
+    return abs(heights[0] - heights[1]) / body_height

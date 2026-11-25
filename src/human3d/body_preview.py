@@ -1,13 +1,14 @@
 """Interactive orthographic inspection of fitted neutral and posed geometry."""
+from dataclasses import replace
 from math import cos, radians, sin
 
 import numpy as np
 from PySide6.QtCore import QPointF, Qt
 from PySide6.QtGui import QColor, QPainter, QPolygonF
-from PySide6.QtWidgets import QCheckBox, QDialog, QHBoxLayout, QLabel, QSlider, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QCheckBox, QComboBox, QDialog, QHBoxLayout, QLabel, QPushButton, QSlider, QSpinBox, QVBoxLayout, QWidget
 
 from .frozen_body import deform_vertices
-from .native_rig import pose_transforms, validate_rebind, skin_vertices
+from .native_rig import foot_height_difference, pose_transforms, validate_pose, validate_rebind, skin_vertices
 
 
 class MeshCanvas(QWidget):
@@ -56,7 +57,7 @@ class MeshCanvas(QWidget):
 
 
 class BodyPreview(QDialog):
-    def __init__(self, body, fit, alignment, parent=None):
+    def __init__(self, body, fit, alignment, parent=None, *, on_pose_applied=None):
         super().__init__(parent)
         self.setWindowTitle("Inspect fitted body")
         self.resize(680, 560)
@@ -64,7 +65,9 @@ class BodyPreview(QDialog):
         rig = body["rig"]
         neutral = deform_vertices(body, fit.controls)
         joints = validate_rebind(body, neutral)
-        posed = skin_vertices(neutral, rig["skin"], pose_transforms(rig, joints, alignment))
+        transforms = pose_transforms(rig, joints, alignment)
+        posed = skin_vertices(neutral, rig["skin"], transforms)
+        validate_pose(body, neutral, posed)
         canvas = MeshCanvas(body["mesh"], neutral, posed)
         controls = QHBoxLayout()
         toggle = QCheckBox("Target pose")
@@ -81,3 +84,57 @@ class BodyPreview(QDialog):
         controls.addWidget(orbit)
         layout.addLayout(controls)
         layout.addWidget(canvas)
+        contact = QLabel()
+        layout.addWidget(contact)
+
+        def report_contact(current):
+            difference = foot_height_difference(rig, joints, current, np.ptp(np.asarray(neutral)[:, 1]))
+            if difference is not None:
+                contact.setText(f"Relative foot-height difference: {difference:.1%} of body height. Floor unknown.")
+
+        report_contact(transforms)
+        if on_pose_applied is not None and alignment.limb_angles:
+            edits = QHBoxLayout()
+            limb = QComboBox()
+            names = tuple(alignment.limb_angles)
+            for name in names:
+                limb.addItem(name)
+            adjustment = QSpinBox()
+            adjustment.setRange(-35, 35)
+            adjustment.setSuffix("°")
+            offsets = {}
+            staged = [alignment]
+            apply = QPushButton("Apply pose correction")
+
+            def update_pose(value):
+                offsets[limb.currentText()] = value
+                angles = {name: angle + radians(offsets.get(name, 0)) for name, angle in alignment.limb_angles.items()}
+                candidate = replace(alignment, limb_angles=angles)
+                current = pose_transforms(rig, joints, candidate)
+                vertices = skin_vertices(neutral, rig["skin"], current)
+                try:
+                    validate_pose(body, neutral, vertices)
+                except ValueError as error:
+                    contact.setText(str(error))
+                    apply.setDisabled(True)
+                    return
+                staged[0] = candidate
+                canvas.vertices = (canvas.vertices[0], vertices)
+                compare.setChecked(False)
+                toggle.setChecked(True)
+                canvas.update()
+                report_contact(current)
+                apply.setEnabled(True)
+
+            def change_limb(name):
+                adjustment.blockSignals(True)
+                adjustment.setValue(offsets.get(name, 0))
+                adjustment.blockSignals(False)
+
+            limb.currentTextChanged.connect(change_limb)
+            adjustment.valueChanged.connect(update_pose)
+            apply.clicked.connect(lambda: on_pose_applied(staged[0]))
+            edits.addWidget(limb)
+            edits.addWidget(adjustment)
+            edits.addWidget(apply)
+            layout.addLayout(edits)

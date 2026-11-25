@@ -36,6 +36,7 @@ class SubjectEvidence:
     image_size: tuple[int, int]
     candidates: tuple[tuple[Landmark, ...], ...]
     masks: tuple[bytes | None, ...] = ()
+    world_landmarks: tuple[tuple[tuple[float, float, float], ...], ...] = ()
 
     @property
     def review_reason(self) -> str | None:
@@ -89,7 +90,9 @@ class PoseLandmarker:
                 masks = (None,) * len(candidates)
             else:
                 masks = tuple(self._mask_png(mask.numpy_view(), image.size) for mask in raw_masks)
-        return SubjectEvidence(photo_digest, MODEL_SHA256, image.size, candidates, masks)
+        world = tuple(tuple((point.x, point.y, point.z) for point in pose)
+                      for pose in result.pose_world_landmarks)
+        return SubjectEvidence(photo_digest, MODEL_SHA256, image.size, candidates, masks, world)
 
     @staticmethod
     def _mask_png(probabilities, image_size: tuple[int, int]) -> bytes | None:
