@@ -1,0 +1,18 @@
+name: Asset integrity
+on:
+  push:
+    branches: [development/m1]
+    paths:
+      - 'DOCS/manifests/**'
+      - 'tools/verify_upstream_assets.py'
+      - '.github/workflows/asset-integrity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: python3 tools/verify_upstream_assets.py
