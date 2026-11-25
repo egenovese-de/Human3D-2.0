@@ -150,7 +150,14 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
         skeleton.CreateRestTransformsAttr(local(rest))
         animation = UsdSkel.Animation.Define(stage, "/Human/Pose")
         animation.CreateJointsAttr(paths)
-        animation.SetTransforms(local(posed))
+        pose = local(posed)
+        animation.SetTransforms(pose)
+        # Blender imports a constant authored animation when it spans two samples.
+        stage.SetStartTimeCode(1)
+        stage.SetEndTimeCode(2)
+        for frame in (1, 2):
+            if not animation.SetTransforms(pose, Usd.TimeCode(frame)):
+                raise ValueError("pose_sample_authoring_failed")
         UsdSkel.BindingAPI.Apply(skeleton.GetPrim()).CreateAnimationSourceRel().SetTargets([animation.GetPath()])
         mesh = _bind_mesh(stage, "/Human/Body", vertices, faces, mesh_data["texcoords"],
                           rig["skin"], joint_indices, skeleton.GetPath())

@@ -3,6 +3,9 @@ from dataclasses import dataclass
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
+import subprocess
+import sys
+from tempfile import TemporaryDirectory
 
 from PIL import Image, ImageOps
 
@@ -11,6 +14,20 @@ FULL_BODY_ANCHORS = (0, 11, 12, 23, 24, 25, 26, 27, 28)
 MIN_ANCHOR_CONFIDENCE = 0.8
 
 MODEL_SHA256 = "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+MAX_INFERENCE_EDGE = 2048
+MASK_ROW_ALIGNMENT = 16
+
+
+def _inference_image(image: Image.Image) -> tuple[Image.Image, tuple[int, int]]:
+    image.thumbnail((MAX_INFERENCE_EDGE, MAX_INFERENCE_EDGE), Image.Resampling.LANCZOS)
+    width, height = image.size
+    # MediaPipe 0.10.33 aborts while copying padded float mask rows.
+    aligned_width = ((width + MASK_ROW_ALIGNMENT - 1) // MASK_ROW_ALIGNMENT) * MASK_ROW_ALIGNMENT
+    if aligned_width == width:
+        return image, image.size
+    padded = Image.new("RGB", (aligned_width, height))
+    padded.paste(image)
+    return padded, image.size
 
 
 @dataclass(frozen=True)
@@ -51,6 +68,39 @@ class SubjectEvidence:
 
 
 class PoseLandmarker:
+    """Run native inference in a disposable process before publishing evidence."""
+
+    def __init__(self, model_path: Path, *, segmentation: bool = False):
+        if sha256(model_path.read_bytes()).hexdigest() != MODEL_SHA256:
+            raise ValueError("pose_model_digest_mismatch")
+        self._model_path = model_path.resolve()
+        self._segmentation = segmentation
+
+    def detect(self, original_path: Path, photo_digest: str) -> SubjectEvidence:
+        from .observations import ObservationRef, ObservationStore
+
+        with TemporaryDirectory(prefix="human3d-vision-") as directory:
+            command = [sys.executable, "-m", "human3d.vision_worker", str(self._model_path),
+                       str(original_path.resolve()), photo_digest, directory]
+            if self._segmentation:
+                command.append("--segmentation")
+            try:
+                result = subprocess.run(command, capture_output=True, text=True, timeout=120)
+            except subprocess.TimeoutExpired as error:
+                raise RuntimeError("Subject detection timed out. Retry this photo.") from error
+            if result.returncode:
+                if result.stdout.strip() == "photo_digest_mismatch":
+                    raise ValueError("photo_digest_mismatch")
+                raise RuntimeError(f"Subject detector failed (exit {result.returncode}). Retry this photo.")
+            return ObservationStore(Path(directory)).read_detection(
+                ObservationRef("", photo_digest, result.stdout.strip())
+            )
+
+    def close(self):
+        pass
+
+
+class _NativePoseLandmarker:
     """Use the explicitly provisioned MediaPipe Lite v1 model on CPU."""
 
     def __init__(self, model_path: Path, *, segmentation: bool = False):
@@ -78,9 +128,12 @@ class PoseLandmarker:
             source.seek(0)
             with Image.open(source) as photo:
                 image = ImageOps.exif_transpose(photo).convert("RGB")
-        result = self._detector.detect(self._image(image_format=self._format, data=self._array(image)))
+        original_size = image.size
+        inference, content_size = _inference_image(image)
+        x_scale = inference.width / content_size[0]
+        result = self._detector.detect(self._image(image_format=self._format, data=self._array(inference)))
         candidates = tuple(
-            tuple(Landmark(point.x, point.y, point.visibility, point.presence) for point in pose)
+            tuple(Landmark(point.x * x_scale, point.y, point.visibility, point.presence) for point in pose)
             for pose in result.pose_landmarks
         )
         masks = ()
@@ -89,21 +142,31 @@ class PoseLandmarker:
             if len(raw_masks) != len(candidates):
                 masks = (None,) * len(candidates)
             else:
-                masks = tuple(self._mask_png(mask.numpy_view(), image.size) for mask in raw_masks)
+                masks = tuple(
+                    self._mask_png(mask.numpy_view(), inference.size, content_size, original_size)
+                    if mask.is_contiguous() else None
+                    for mask in raw_masks
+                )
         world = tuple(tuple((point.x, point.y, point.z) for point in pose)
                       for pose in result.pose_world_landmarks)
-        return SubjectEvidence(photo_digest, MODEL_SHA256, image.size, candidates, masks, world)
+        return SubjectEvidence(photo_digest, MODEL_SHA256, original_size, candidates, masks, world)
 
     @staticmethod
-    def _mask_png(probabilities, image_size: tuple[int, int]) -> bytes | None:
+    def _mask_png(probabilities, image_size: tuple[int, int], content_size=None, original_size=None) -> bytes | None:
         import numpy as np
 
         if probabilities.shape == (*image_size[::-1], 1):
             probabilities = probabilities[:, :, 0]
         if probabilities.shape != image_size[::-1]:
             return None
+        width, height = content_size or image_size
+        probabilities = probabilities[:height, :width]
         if not np.isfinite(probabilities).all() or probabilities.min() < 0 or probabilities.max() > 1:
             return None
+        if original_size is not None and original_size != (width, height):
+            probabilities = np.asarray(
+                Image.fromarray(probabilities).resize(original_size, Image.Resampling.BILINEAR)
+            )
         foreground = probabilities >= 0.5
         if not foreground.any() or foreground.all():
             return None
