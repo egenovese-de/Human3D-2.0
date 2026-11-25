@@ -87,3 +87,31 @@ except RevisionConflict:
                     if p.poll() is None:
                         p.kill()
                         p.wait()
+
+    def test_persistent_import(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            source = root / "input.bin"
+            source.write_bytes(b"first original")
+            store = ProjectStore(root / "project")
+            store.create()
+            saved, added = store.import_original(source)
+            self.assertTrue(added)
+            self.assertEqual(saved.revision, 1)
+            self.assertEqual(store.import_original(source), (saved, False))
+            source.write_bytes(b"second original")
+            with patch("human3d.project_store.os.replace", side_effect=OSError):
+                with self.assertRaises(OSError):
+                    store.import_original(source)
+            self.assertEqual(store.load(), saved)
+            updated, added = store.import_original(source)
+            self.assertTrue(added)
+            self.assertEqual(updated.revision, 2)
+            source.unlink()
+            reopened = ProjectStore(root / "project").load()
+            self.assertEqual(reopened, updated)
+            originals = OriginalStore(root / "project")
+            self.assertEqual(originals.verify(reopened.photos.photos[0].digest).read_bytes(),
+                             b"first original")
+            self.assertEqual(originals.verify(reopened.photos.photos[1].digest).read_bytes(),
+                             b"second original")
