@@ -1,4 +1,6 @@
 import hashlib
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -57,3 +59,31 @@ class ProjectTests(unittest.TestCase):
             store.path(digest).write_bytes(b"corrupt")
             with self.assertRaises(ValueError):
                 store.verify(digest)
+
+    def test_concurrent_writers(self):
+        with tempfile.TemporaryDirectory() as root:
+            store = ProjectStore(Path(root))
+            store.create()
+            script = """
+import sys
+from pathlib import Path
+from human3d.project_store import ProjectStore, RevisionConflict
+from human3d.project import Project
+store = ProjectStore(Path(sys.argv[1]))
+project = Project(sys.argv[2])
+try:
+    store.save(project)
+except RevisionConflict:
+    sys.exit(3)
+"""
+            args = [sys.executable, "-c", script, root, store.load().id]
+            processes = [subprocess.Popen(args) for _ in range(2)]
+            try:
+                results = sorted(p.wait(timeout=30) for p in processes)
+                self.assertEqual(results, [0, 3])
+                self.assertEqual(store.load().revision, 1)
+            finally:
+                for p in processes:
+                    if p.poll() is None:
+                        p.kill()
+                        p.wait()
