@@ -60,12 +60,36 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256):
     return score
 
 
-def _mean(scores):
-    return sum(scores.values()) / len(scores)
+def _confidence_weights(evidence, keys):
+    """Aggregate reliable anatomical regions without treating hidden points as measurements."""
+    from .fusion import REGIONS
+
+    weights = {}
+    for view in evidence.views:
+        key = view.ref.photo_id
+        if key not in keys:
+            continue
+        pose = view.detection.visible_pose(view.candidate)
+        region_scores = [
+            min(pose[index].visibility * pose[index].presence for index in indices)
+            for name, indices in REGIONS.items() if name in view.observed_regions
+        ]
+        weights[key] = sum(region_scores) / len(REGIONS) if region_scores else .25
+    return weights
 
 
-def _optimize(body, score, controls, supported, steps):
+def _mean(scores, weights=None):
+    if weights is None:
+        return sum(scores.values()) / len(scores)
+    return sum(value * weights[key] for key, value in scores.items()) / sum(weights[key] for key in scores)
+
+
+def _optimize(body, score, controls, supported, steps, *, weights=None):
     best = score(deform_vertices(body, controls))
+    def objective(scores, values):
+        return _mean(scores, weights) - .0005 * sum(value ** 2 for value in values.values())
+
+    best_objective = objective(best, controls)
     for step in steps:
         for name in supported:
             center = controls.get(name, 0)
@@ -75,12 +99,14 @@ def _optimize(body, score, controls, supported, steps):
                 candidate = controls | {name: value}
                 vertices = deform_vertices(body, candidate)
                 result = score(vertices)
-                if _mean(result) > _mean(best) + 1e-6:
+                candidate_objective = objective(result, candidate)
+                if candidate_objective > best_objective + 1e-6:
                     try:
                         validate_rebind(body, vertices)
                     except ValueError:
                         continue
                     best, controls = result, candidate
+                    best_objective = candidate_objective
     return controls, best
 
 
@@ -101,12 +127,13 @@ def fit_shared(body, evidence):
     neutral = deform_vertices(body, {})
     scorer = _scorer(body, masks, alignments, neutral)
     baseline_scores = scorer(neutral)
+    weights = _confidence_weights(evidence, masks)
     supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
     coarse = _scorer(body, masks, alignments, neutral, edge=128)
-    seed, _ = _optimize(body, coarse, {}, supported, (0.25,))
-    if _mean(scorer(deform_vertices(body, seed))) < _mean(baseline_scores):
+    seed, _ = _optimize(body, coarse, {}, supported, (0.25,), weights=weights)
+    if _mean(scorer(deform_vertices(body, seed)), weights) < _mean(baseline_scores, weights):
         seed = {}
-    controls, _ = _optimize(body, scorer, seed, supported, (0.25, 0.125))
+    controls, _ = _optimize(body, scorer, seed, supported, (0.25, 0.125), weights=weights)
     vertices = deform_vertices(body, controls)
     best = _scorer(body, masks, alignments, vertices)(vertices)
     if _mean(best) < _mean(baseline_scores):
@@ -118,7 +145,7 @@ def fit_shared(body, evidence):
     refined, _ = refine_views(adjusted, evidence)
     if masks.keys() <= refined.keys():
         second = _scorer(body, masks, refined, vertices)
-        candidate, _ = _optimize(body, second, controls, supported, (0.125,))
+        candidate, _ = _optimize(body, second, controls, supported, (0.125,), weights=weights)
         revised = deform_vertices(body, candidate)
         scores = _scorer(body, masks, refined, revised)(revised)
         if _mean(scores) > _mean(best) + 1e-6:

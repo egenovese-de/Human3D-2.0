@@ -5,6 +5,34 @@ from human3d.vision import Landmark, SubjectEvidence
 
 
 class SubjectEvidenceTests(unittest.TestCase):
+    def test_native_worker_failure_does_not_poison_detector_retry(self):
+        from hashlib import sha256
+        from pathlib import Path
+        from subprocess import CompletedProcess
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        from human3d.observations import ObservationStore
+        from human3d.vision import PoseLandmarker
+
+        with TemporaryDirectory() as directory:
+            model = Path(directory) / "model.task"
+            model.write_bytes(b"fixture")
+            photo = Path(directory) / "photo.png"
+            immutable = SubjectEvidence("photo", "model", (120, 120), ())
+
+            def recover(command, **kwargs):
+                record = ObservationStore(Path(command[6])).write_detection(immutable)
+                return CompletedProcess(command, 0, record, "")
+
+            with patch("human3d.vision.MODEL_SHA256", sha256(b"fixture").hexdigest()):
+                detector = PoseLandmarker(model, segmentation=True)
+            with patch("human3d.vision.subprocess.run", return_value=CompletedProcess([], -6, "", "")):
+                with self.assertRaisesRegex(RuntimeError, "detector failed"):
+                    detector.detect(photo, "photo")
+            with patch("human3d.vision.subprocess.run", side_effect=recover):
+                self.assertEqual(detector.detect(photo, "photo"), immutable)
+
     def test_external_visibility_is_photo_bound_and_can_only_reduce_observation(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory

@@ -115,8 +115,14 @@ def validate_rebind(body, vertices):
         a, b, c = points[triangles].transpose((1, 0, 2))
         return np.linalg.norm(np.cross(b - a, c - a), axis=1)
 
-    if np.any((areas(base) > 1e-10) & (areas(current) <= 1e-10)):
+    baseline_areas = areas(base)
+    adjusted_areas = areas(current)
+    if np.any((baseline_areas > 1e-10) & (adjusted_areas <= 1e-10)):
         raise ValueError("deformation_collapsed_body_face")
+    stable = baseline_areas > 1e-6
+    if np.any((adjusted_areas[stable] < .03 * baseline_areas[stable])
+              | (adjusted_areas[stable] > 30 * baseline_areas[stable])):
+        raise ValueError("deformation_excessive_face_area_change")
     bones = rig["bones"]
     for index in np.unique(triangles):
         weights = rig["skin"][index]
