@@ -1,0 +1,82 @@
+name: Lab - Blender USD render (isolated)
+on:
+  push:
+    branches: ['lab/render']
+    paths:
+      - '.github/workflows/lab-render.yml'
+      - 'tools/lab_render_usd.py'
+      - 'lab/fixtures/**'
+      - 'lab/input/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: lab-render-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - name: Checkout isolated lab branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Acquire checked Blender 4.5.3
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $base = 'https://download.blender.org/release/Blender4.5'
+          $archive = 'blender-4.5.3-windows-x64.zip'
+          Invoke-WebRequest "$base/$archive" -OutFile $archive
+          Invoke-WebRequest "$base/blender-4.5.3.sha256" -OutFile checksums.txt
+          $matches = @(Get-Content checksums.txt | Where-Object { $_ -match [regex]::Escape($archive) })
+          if ($matches.Count -ne 1) { throw 'Official checksum entry missing or ambiguous' }
+          $expected = ($matches[0].Trim() -split '\\s+')[0]
+          $actual = (Get-FileHash $archive -Algorithm SHA256).Hash
+          if ($actual -ine $expected) { throw 'Blender official SHA256 mismatch' }
+          Expand-Archive $archive -DestinationPath blender
+          $exe = (Get-ChildItem blender -Recurse -Filter blender.exe | Select-Object -First 1).FullName
+          if (!$exe) { throw 'Blender executable missing' }
+          "BLENDER_EXE=$exe" >> $env:GITHUB_ENV
+
+      - name: Resolve USD input without pretending smoke is reconstruction
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force -Path lab-output | Out-Null
+          $candidates = @(Get-ChildItem 'lab/input' -File -ErrorAction SilentlyContinue |
+              Where-Object { $_.Extension.ToLowerInvariant() -in '.usd','.usda','.usdc','.usdz' })
+          if ($candidates.Count -gt 1) { throw 'Exactly one asset permitted in lab/input' }
+          if ($candidates.Count -eq 1) {
+            $inputFile = $candidates[0].FullName
+            $label = 'Actual supplied USD asset: visual render only; photographic quality unverified'
+          } else {
+            $inputFile = (Resolve-Path 'lab/fixtures/smoke.usda').Path
+            $label = 'SMOKE ONLY: procedural cube; NOT a Human3D reconstructed person'
+          }
+          "LAB_ASSET=$inputFile" >> $env:GITHUB_ENV
+          "LAB_LABEL=$label" >> $env:GITHUB_ENV
+          Write-Host $label
+
+      - name: Render 4 textured and 4 clay views
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & $env:BLENDER_EXE --background --python-exit-code 1 --python tools/lab_render_usd.py -- --input "$env:LAB_ASSET" --out-dir lab-output --label "$env:LAB_LABEL"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $pngs = @(Get-ChildItem lab-output -Filter '*.png')
+          if ($pngs.Count -ne 8) { throw "Expected 8 PNG renders, got $($pngs.Count)" }
+          if (!(Test-Path 'lab-output/render_report.json')) { throw 'Missing render report' }
+
+      - name: Upload render artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab-render-${{ github.run_id }}
+          path: lab-output/
+          if-no-files-found: warn
+          retention-days: 7
