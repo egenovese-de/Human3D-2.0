@@ -36,3 +36,32 @@ class SessionTests(unittest.TestCase):
             reopened = Session(root / "project")
             self.assertEqual(reopened.snapshot().project.photos.target,
                              snapshot.project.photos.photos[1].id)
+
+    def test_target_detection_rejects_obsolete_evidence(self):
+        from human3d.vision import SubjectEvidence
+
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            session = Session(root / "project", True)
+            for index in range(2):
+                path = root / f"{index}.png"
+                Image.new("RGB", (32, 32), (index, 0, 0)).save(path)
+                session.ingest([path])
+            first, second = session.snapshot().project.photos.photos
+
+            class Detector:
+                def detect(self, original, digest):
+                    self.digest = digest
+                    return SubjectEvidence(digest, "test", (32, 32), ())
+
+            class SwitchingDetector(Detector):
+                def detect(self, original, digest):
+                    session.select_target(second.id)
+                    return super().detect(original, digest)
+
+            self.assertIsNone(session.detect_target(SwitchingDetector()))
+            self.assertEqual(session.snapshot().jobs[-1].state, "stale")
+            detector = Detector()
+            self.assertEqual(session.detect_target(detector).photo_digest, second.digest)
+            self.assertNotEqual(detector.digest, first.digest)
+            self.assertEqual(session.snapshot().current_artifacts, ("subject_evidence",))

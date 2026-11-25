@@ -72,6 +72,17 @@ Current status: empirical D1-02 NOT_RUN. M1-006 technical verification covers th
 
 ## D1-03 — Vision and mask recovery
 
+Technical smoke, Linux CPython 3.11.9 with locked dependencies and MediaPipe Lite v1.
+Synthetic fixtures v0.1. Nine imports reopened with matching original hashes.
+P01–P06 yielded one candidate each. N01 and N03 yielded zero, N02 yielded one
+false-positive candidate. Detection confidence probes at 0.50, 0.65, 0.75 and
+0.85 reproduced the same counts. Candidate output requires review before
+fitting. Real-photo empirical validation remains NOT_RUN.
+
+Run target analysis on a saved project with
+`human3d detect-target PROJECT --model POSE_LANDMARKER_LITE_TASK`.
+
+
 Tasks: H3D2-M1-007 through H3D2-M1-008.
 
 Validation objective: demonstrate vision and mask recovery on actual inputs.
