@@ -27,4 +27,4 @@ jobs:
       - run: |
           python -m pip download --only-binary=:all: --no-deps -r requirements-${{ matrix.platform }}.candidate.lock -d wheels
       - run: |
-          python -c "import hashlib,pathlib; files=sorted(pathlib.Path('wheels').glob('*.whl')); assert len(files)==32; print('\n'.join(p.name+' sha256:'+hashlib.file_digest(p.open('rb'),'sha256').hexdigest() for p in files))"
+          python -c "import hashlib,pathlib; files=sorted(pathlib.Path('wheels').glob('*.whl')); assert len(files)==len([line for line in pathlib.Path('requirements-${{ matrix.platform }}.candidate.lock').read_text().splitlines() if '==' in line and not line.lstrip().startswith('#')]); print('\n'.join(p.name+' sha256:'+hashlib.file_digest(p.open('rb'),'sha256').hexdigest() for p in files))"
