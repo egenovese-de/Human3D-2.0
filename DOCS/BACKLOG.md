@@ -29,8 +29,8 @@
 | H3D2-M2-007 | Implement independent per-view camera and pose refinement | TECHNICAL_PASS |
 | H3D2-M2-008 | Integrate shared native multi-view objective | TECHNICAL_PASS |
 | H3D2-M2-009 | Integrate bounded alternating optimization with validated promotion and rollback | TECHNICAL_PASS |
-| H3D2-M2-010 | Expose regional observability and neutral comparison | IN_PROGRESS |
-| H3D2-M2-011 | Integrate reference inclusion, selective retry and dependency-verified target switching | TODO |
+| H3D2-M2-010 | Expose regional observability and neutral comparison | TECHNICAL_PASS |
+| H3D2-M2-011 | Integrate reference inclusion, selective retry and dependency-verified target switching | TECHNICAL_PASS |
 | H3D2-M2-012 | Integrate revision restoration and supported semantic edits with dependency invalidation | TODO |
 | H3D2-M2-014 | Run automated M2 regressions and Blender import checks | TODO |
 ## M3

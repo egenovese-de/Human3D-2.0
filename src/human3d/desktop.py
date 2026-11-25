@@ -5,7 +5,7 @@ from PIL.ImageQt import ImageQt
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QLabel, QMessageBox)
+    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QLabel, QMenu, QMessageBox)
 from .session import Session
 from .originals import OriginalStore
 from .ingestion import folder_inputs
@@ -41,9 +41,14 @@ class PhotosWindow(QWidget):
         from PySide6.QtCore import QSize
         self.photos.setIconSize(QSize(160, 160))
         self.photos.itemClicked.connect(self.select_target)
+        self.photos.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.photos.customContextMenuRequested.connect(self.photo_actions)
         layout.addWidget(self.photos)
         self.status = QLabel("Create or open a project. Reconstruction unavailable.")
         layout.addWidget(self.status)
+        shared = QPushButton("Fit included photos")
+        shared.clicked.connect(self.fit_included)
+        layout.addWidget(shared)
 
     def guarded(self, operation):
         try:
@@ -96,24 +101,104 @@ class PhotosWindow(QWidget):
             project_id, revision, body, result, alignment = self.fitted_preview
             if project.id == project_id and project.revision == revision:
                 return body, result, alignment
-        self.status.setText("Approve alignment and fit the current target first.")
+        if self.session is not None:
+            shared = self.session.current_shared_fit()
+            if shared is not None:
+                target = self.store.load().photos.target
+                if target in shared.alignments:
+                    return load_project_body(self.store), shared.fit, shared.alignments[target]
+        self.status.setText("Fit the current target or the included photos first.")
         return None
+
+    def fit_included(self):
+        if self.session is None:
+            return
+        self.guarded(self.run_shared_fit)
+
+    def run_shared_fit(self):
+        project = self.store.load()
+        if project.frozen_body_digest is None:
+            raise ValueError("Freeze a rest body first.")
+        missing = [photo.id for photo in project.photos.photos
+                   if photo.included and project.observation(photo.id) is None]
+        if missing:
+            model = self.pick_model()
+            if not model:
+                return
+            self.detect_references(missing, model)
+        result = self.session.fit_shared()
+        self.fitted_preview = None
+        evidence = self.session.shared_evidence()
+        coverage = "\n".join(f"{region.replace('_', ' ')} {len(evidence.supporting_views(region))}"
+                             for region in ("torso", "left_arm", "right_arm", "left_leg", "right_leg"))
+        self.status.setText(f"{len(result.scores)} fitted views | overlap "
+                            f"{result.fit.bootstrap_iou:.1%} → {result.fit.fitted_iou:.1%}")
+        names = {photo.id: photo.name for photo in self.store.load().photos.photos}
+        scores = "\n".join(f"{names[key]}: {score:.1%}" for key, score in result.scores.items())
+        missing = "\n".join(f"{names[key]}: {reason.replace('_', ' ')}" for key, reason in evidence.unresolved)
+        summary = f"Supporting photos by region\n{coverage}\n\nSilhouette overlap by photo\n{scores}"
+        if missing:
+            summary += f"\n\nNeeds review\n{missing}"
+        QMessageBox.information(self, "Shared fit", summary)
+
+    def pick_model(self):
+        model, _ = QFileDialog.getOpenFileName(self, "Select local Pose Landmarker model",
+                                                filter="MediaPipe model (*.task)")
+        return Path(model) if model else None
+
+    def detect_references(self, ids, model):
+        detector = PoseLandmarker(model, segmentation=True)
+        try:
+            for photo_id in ids:
+                self.session.detect_photo(photo_id, detector)
+        finally:
+            detector.close()
+
+    def photo_actions(self, point):
+        item = self.photos.itemAt(point)
+        if self.session is None or item is None:
+            return
+        photo_id = item.data(Qt.ItemDataRole.UserRole)
+        project = self.store.load()
+        photo = next(photo for photo in project.photos.photos if photo.id == photo_id)
+        menu = QMenu(self)
+        inclusion = menu.addAction("Exclude from fit" if photo.included else "Include in fit")
+        inclusion.setEnabled(photo_id != project.photos.target)
+        retry = menu.addAction("Retry detection")
+        retry.setEnabled(photo.included)
+        choice = menu.exec(self.photos.viewport().mapToGlobal(point))
+        if choice is inclusion:
+            self.guarded(lambda: self.set_reference_inclusion(photo_id, not photo.included))
+        elif choice is retry:
+            model = self.pick_model()
+            if model:
+                self.guarded(lambda: self.detect_references((photo_id,), model))
+
+    def set_reference_inclusion(self, photo_id, included):
+        self.session.include_reference(photo_id, included)
+        self.refresh()
 
     def inspect_fitted_body(self):
         from .body_preview import BodyPreview
 
-        fit = self.current_fit()
-        if fit is not None:
-            self.guarded(lambda: BodyPreview(*fit, parent=self).exec())
+        def inspect():
+            fit = self.current_fit()
+            if fit is not None:
+                BodyPreview(*fit, parent=self).exec()
+
+        self.guarded(inspect)
 
     def export_fitted_body(self):
+        self.guarded(self.choose_export_destination)
+
+    def choose_export_destination(self):
         fit = self.current_fit()
         if fit is None:
             return
         destination, _ = QFileDialog.getSaveFileName(self, "Export rigged body", "body.usda",
                                                     "OpenUSD (*.usd *.usda *.usdc)")
         if destination:
-            self.guarded(lambda: self.write_fitted_body(Path(destination), fit))
+            self.write_fitted_body(Path(destination), fit)
 
     def write_fitted_body(self, destination, fit):
         from .usd_export import export_body
@@ -188,6 +273,8 @@ class PhotosWindow(QWidget):
             item = QListWidgetItem(QIcon(pixmap), photo.name)
             item.setData(Qt.ItemDataRole.UserRole, photo.id)
             self.photos.addItem(item)
+            if not photo.included:
+                item.setText(photo.name + " [Excluded]")
             if photo.id == project.photos.target:
                 item.setText(photo.name + " [Target]")
                 self.photos.setCurrentItem(item)
@@ -195,7 +282,11 @@ class PhotosWindow(QWidget):
 
     def select_target(self, item):
         def select():
-            self.session.select_target(item.data(Qt.ItemDataRole.UserRole))
+            photo_id = item.data(Qt.ItemDataRole.UserRole)
+            if not any(photo.id == photo_id and photo.included for photo in self.store.load().photos.photos):
+                self.status.setText("Include this photo before selecting it as the target.")
+                return
+            self.session.select_target(photo_id)
             self.refresh()
         self.guarded(select)
 

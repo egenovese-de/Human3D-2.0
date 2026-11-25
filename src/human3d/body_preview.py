@@ -20,9 +20,11 @@ class MeshCanvas(QWidget):
         ])
         self.angle = 0
         self.posed = False
+        self.bootstrap = np.asarray(mesh["vertices"])
+        self.show_bootstrap = False
 
     def paintEvent(self, event):
-        vertices = self.vertices[int(self.posed)]
+        vertices = self.bootstrap if self.show_bootstrap else self.vertices[int(self.posed)]
         angle = radians(self.angle)
         horizontal = vertices[:, 0] * cos(angle) + vertices[:, 2] * sin(angle)
         depth = -vertices[:, 0] * sin(angle) + vertices[:, 2] * cos(angle)
@@ -42,6 +44,10 @@ class MeshCanvas(QWidget):
 
     def set_angle(self, angle):
         self.angle = angle
+        self.update()
+
+    def set_bootstrap(self, checked):
+        self.show_bootstrap = checked
         self.update()
 
     def set_posed(self, checked):
@@ -64,6 +70,10 @@ class BodyPreview(QDialog):
         toggle = QCheckBox("Target pose")
         toggle.toggled.connect(canvas.set_posed)
         controls.addWidget(toggle)
+        compare = QCheckBox("Bootstrap neutral")
+        compare.toggled.connect(canvas.set_bootstrap)
+        compare.toggled.connect(lambda checked: toggle.setDisabled(checked))
+        controls.addWidget(compare)
         controls.addWidget(QLabel("Orbit"))
         orbit = QSlider(Qt.Orientation.Horizontal)
         orbit.setRange(-180, 180)

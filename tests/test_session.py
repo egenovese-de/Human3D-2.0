@@ -96,6 +96,13 @@ class SessionTests(unittest.TestCase):
             self.assertEqual(reopened.read_observation(first.id), (evidence, mask))
             self.assertEqual(reopened.read_observation(second.id)[0].photo_digest, second.digest)
             self.assertEqual(reopened.snapshot().project.photos.target, second.id)
+            reopened.include_reference(first.id, False)
+            excluded = reopened.shared_evidence()
+            self.assertEqual(excluded.supporting_views("torso"), (second.id,))
+            self.assertNotEqual(excluded.dependency_digest, shared.dependency_digest)
+            self.assertEqual(reopened.read_observation(first.id), (evidence, mask))
+            reopened.include_reference(first.id, True)
+            self.assertEqual(reopened.shared_evidence(), shared)
             with self.assertRaisesRegex(ValueError, "subject_evidence_changed"):
                 reopened.apply_mask(draft)
             reopened.select_target(first.id)
