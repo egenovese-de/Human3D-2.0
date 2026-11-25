@@ -15,12 +15,13 @@ def main():
     freeze = commands.add_parser("freeze-neutral", help="Freeze a verified neutral mesh and rig")
     freeze.add_argument("assets", type=Path)
     freeze.add_argument("artifact_directory", type=Path)
+    freeze.add_argument("--with-morphs", action="store_true", help="Embed the eight verified MORPH-02 targets")
     args = parser.parse_args()
     if args.command == "freeze-neutral":
         from .bootstrap import freeze_neutral
 
         try:
-            print(freeze_neutral(args.assets, args.artifact_directory))
+            print(freeze_neutral(args.assets, args.artifact_directory, with_morphs=args.with_morphs))
         except (OSError, ValueError) as error:
             parser.exit(1, f"Freeze failed: {error}\n")
         return
