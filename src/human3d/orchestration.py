@@ -30,6 +30,11 @@ class Coordinator:
         with self._lock:
             return tuple(self._jobs.values()), dict(self._active)
 
+    def snapshot_with_generation(self):
+        with self._lock:
+            jobs, artifacts = self.snapshot()
+            return self.generation, jobs, artifacts
+
     def invalidate(self, dependencies):
         with self._lock:
             dependencies = tuple(sorted(dependencies.items()))

@@ -68,7 +68,7 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Reopen last saved project; retry import or resume.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: empirical D1-02 NOT_RUN. M1-006 technical verification covers the in-memory coordinator and application snapshots with automated tests. Actual reconstruction cancellation and recovery remain D1-07 checks.
 
 ## D1-03 — Vision and mask recovery
 

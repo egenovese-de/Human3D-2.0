@@ -20,6 +20,8 @@ class SessionSnapshot:
     import_photos: Capability
     select_target: Capability
     reconstruct: Capability
+    current_artifacts: tuple[str, ...]
+    stale_artifacts: tuple[str, ...]
 
 
 class Session:
@@ -38,10 +40,12 @@ class Session:
     def snapshot(self):
         project = self.store.load()
         self._sync(project)
-        jobs, _ = self.coordinator.snapshot()
+        generation, jobs, artifacts = self.coordinator.snapshot_with_generation()
+        current = tuple(sorted(kind for kind, (revision, _) in artifacts.items() if revision == generation))
+        stale = tuple(sorted(kind for kind, (revision, _) in artifacts.items() if revision != generation))
         return SessionSnapshot(project, jobs, Capability(True),
                                Capability(bool(project.photos.photos), "" if project.photos.photos else "no_photos"),
-                               Capability(False, "engine_unavailable"))
+                               Capability(False, "engine_unavailable"), current, stale)
 
     def ingest(self, paths):
         results = import_photos(self.store, paths)
