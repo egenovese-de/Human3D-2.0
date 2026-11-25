@@ -1,0 +1,39 @@
+name: Locked runtime
+on:
+  push:
+    branches: [development/m1]
+    paths:
+      - 'requirements-*.candidate.lock'
+      - '.github/workflows/locked-runtime.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux
+          - os: windows-2022
+            platform: windows
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - run: python -m venv .venv
+      - run: |
+          python -m pip --python .venv install --only-binary=:all: --no-deps -r requirements-${{ matrix.platform }}.candidate.lock
+          python -m pip --python .venv check
+      - run: python -m pip --python .venv freeze
+      - if: runner.os == 'Linux'
+        run: .venv/bin/python -c "import numpy, scipy, PIL, mediapipe; from PySide6.QtWidgets import QApplication; from pxr import Usd; app=QApplication([]); assert Usd.Stage.CreateInMemory()"
+      - if: runner.os == 'Windows'
+        run: .venv/Scripts/python.exe -c "import numpy, scipy, PIL, mediapipe; from PySide6.QtWidgets import QApplication; from pxr import Usd; app=QApplication([]); assert Usd.Stage.CreateInMemory()"
