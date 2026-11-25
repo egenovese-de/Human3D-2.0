@@ -1,6 +1,6 @@
 """Initial weak-perspective camera and image-plane pose observations."""
 from dataclasses import dataclass, field
-from math import atan2, cos, hypot, isfinite, radians, sin
+from math import atan2, cos, degrees, hypot, isfinite, radians, sin
 
 from .vision import SubjectEvidence
 
@@ -37,6 +37,25 @@ class Alignment:
     limb_depth_ratios: dict[str, float] = field(default_factory=dict)
 
 
+def _world_yaw(pose, world):
+    """Resolve the front/back ambiguity from signed transverse torso axes."""
+    if len(world) != 33:
+        return None
+    axes = []
+    for left, right in ((11, 12), (23, 24)):
+        if not (pose[left].observed and pose[right].observed):
+            continue
+        x = world[left][0] - world[right][0]
+        z = world[left][2] - world[right][2]
+        length = hypot(x, z)
+        if isfinite(length) and length >= 0.05:
+            axes.append(complex(x, z) / length)
+    consensus = sum(axes)
+    if len(axes) < 2 or abs(consensus) / len(axes) < 0.85:
+        return None
+    return degrees(atan2(consensus.imag, consensus.real))
+
+
 def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, *, refine=False) -> Alignment:
     if not 0 <= candidate < len(evidence.candidates):
         raise ValueError("invalid_subject_candidate")
@@ -49,7 +68,12 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
     target_center = sum(targets) / len(targets)
     rig = body["rig"]
     rest = [rig["joints"][rig["bones"][bone]["head"]] for bone in TORSO.values()]
+    world = evidence.world_landmarks[candidate] if candidate < len(evidence.world_landmarks) else ()
+    yaw = _world_yaw(pose, world)
+    lower, upper = (-45, 45) if yaw is None else (yaw - 15, yaw + 15)
+
     def evaluate(yaw):
+        yaw = (yaw + 180) % 360 - 180
         unit_camera = Camera(yaw, 1, 0, 1)
         points = [unit_camera.project(vertex) for vertex in rest]
         center = sum(points) / len(points)
@@ -66,21 +90,21 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
                    for vertex, target in zip(rest, targets)) / len(rest)) ** 0.5
         return rms, camera
 
-    candidates = [result for angle in range(-45, 46, 5)
-                  if (result := evaluate(angle)) is not None]
+    candidates = [result for offset in range(round((upper - lower) / 5) + 1)
+                  if (result := evaluate(lower + 5 * offset)) is not None]
     if not candidates:
         raise ValueError("camera_initialization_failed")
     best = min(candidates, key=lambda result: result[0])
     if refine:
         for step in (1.0, 0.2, 0.04):
             center = best[1].yaw_degrees
+            center += 360 * round(((lower + upper) / 2 - center) / 360)
             candidates = [result for offset in range(-4, 5)
-                          if -45 <= (angle := center + step * offset) <= 45
+                          if lower <= (angle := center + step * offset) <= upper
                           and (result := evaluate(angle)) is not None]
             best = min([best, *candidates], key=lambda result: result[0])
     angles = {}
     depths = {}
-    world = evidence.world_landmarks[candidate] if candidate < len(evidence.world_landmarks) else ()
     for name, (first, last) in LIMBS.items():
         if pose[first].observed and pose[last].observed:
             direction = observed[last] - observed[first]

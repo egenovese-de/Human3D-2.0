@@ -43,9 +43,28 @@ class SubjectEvidenceTests(unittest.TestCase):
 
     def test_single_channel_segmentation_with_explicit_channel_axis(self):
         import numpy as np
-        from human3d.vision import PoseLandmarker
+        from human3d.vision import _NativePoseLandmarker
 
         mask = np.array([[0., 1., 0.], [1., 1., 0.]], dtype=np.float32)
-        expected = PoseLandmarker._mask_png(mask, (3, 2))
+        expected = _NativePoseLandmarker._mask_png(mask, (3, 2))
         self.assertIsNotNone(expected)
-        self.assertEqual(PoseLandmarker._mask_png(mask[:, :, None], (3, 2)), expected)
+        self.assertEqual(_NativePoseLandmarker._mask_png(mask[:, :, None], (3, 2)), expected)
+
+    def test_inference_pads_float_mask_rows_and_discards_padding(self):
+        from io import BytesIO
+
+        import numpy as np
+        from PIL import Image
+        from human3d.vision import _NativePoseLandmarker, _inference_image
+
+        inference, content = _inference_image(Image.new("RGB", (19, 11)))
+        self.assertEqual(inference.size, (32, 11))
+        self.assertEqual(content, (19, 11))
+        pixels = np.zeros((11, 32), dtype=np.float32)
+        pixels[:, 19:] = 1
+        self.assertIsNone(_NativePoseLandmarker._mask_png(pixels, inference.size, content, (38, 22)))
+        pixels[3:8, 6:12] = 1
+        png = _NativePoseLandmarker._mask_png(pixels, inference.size, content, (38, 22))
+        with Image.open(BytesIO(png)) as mask:
+            self.assertEqual(mask.size, (38, 22))
+            self.assertEqual(mask.getbbox(), (12, 6, 24, 16))

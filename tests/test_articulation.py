@@ -2,11 +2,34 @@ import unittest
 
 import numpy as np
 
-from human3d.alignment import Alignment, Camera
+from human3d.alignment import Alignment, Camera, TORSO, initialize_alignment
 from human3d.native_rig import pose_transforms, skin_vertices, validate_pose
+from human3d.vision import Landmark, SubjectEvidence
 
 
 class ArticulationTests(unittest.TestCase):
+    def test_camera_recovers_rear_and_profile_orientation(self):
+        from math import cos, radians, sin
+
+        joints = {name: (x, y, 0) for name, (x, y) in zip(
+            TORSO.values(), ((2, 3), (-2, 3), (1, 0), (-1, 0))
+        )}
+        body = {"rig": {"joints": joints, "bones": {name: {"head": name} for name in joints}}}
+        for angle in (-179, -90, 89, 178):
+            camera = Camera(angle, 10 + 1j, 100 + 100j, 1)
+            pose = [Landmark(0, 0, 0, 0)] * 33
+            world = [(0, 0, 0)] * 33
+            for index, bone in TORSO.items():
+                x, y, _ = joints[bone]
+                point = camera.project(joints[bone])
+                pose[index] = Landmark(point.real / 200, point.imag / 200, 1, 1)
+                world[index] = (x * cos(radians(angle)) / 10, -y / 10, x * sin(radians(angle)) / 10)
+            evidence = SubjectEvidence("photo", "model", (200, 200), (tuple(pose),),
+                                       world_landmarks=(tuple(world),))
+            result = initialize_alignment(body, evidence, 0, refine=True)
+            self.assertAlmostEqual(result.camera.yaw_degrees, angle)
+            self.assertLess(result.torso_rms_pixels, 1e-7)
+
     def test_spatial_swing_keeps_bone_lengths_and_propagates_to_child(self):
         rig = {"bones": {
             "upperarm01.L": {"head": "shoulder", "tail": "elbow", "parent": None},
