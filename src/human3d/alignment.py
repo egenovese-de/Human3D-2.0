@@ -21,11 +21,12 @@ class Camera:
     yaw_degrees: float
     similarity: complex
     origin: complex
+    horizontal_sign: int = -1
 
     def project(self, vertex):
         x, y, z = vertex
         yaw = radians(self.yaw_degrees)
-        return self.similarity * complex(-x * cos(yaw) - z * sin(yaw), -y) + self.origin
+        return self.similarity * complex(self.horizontal_sign * (x * cos(yaw) + z * sin(yaw)), -y) + self.origin
 
 
 @dataclass(frozen=True)
@@ -49,7 +50,7 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
     rig = body["rig"]
     rest = [rig["joints"][rig["bones"][bone]["head"]] for bone in TORSO.values()]
     def evaluate(yaw):
-        unit_camera = Camera(yaw, 1, 0)
+        unit_camera = Camera(yaw, 1, 0, 1)
         points = [unit_camera.project(vertex) for vertex in rest]
         center = sum(points) / len(points)
         centered = [point - center for point in points]
@@ -60,7 +61,7 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
                          for point, target in zip(centered, targets)) / variance
         if similarity.real <= 1e-6:
             return None
-        camera = Camera(yaw, similarity, target_center - similarity * center)
+        camera = Camera(yaw, similarity, target_center - similarity * center, 1)
         rms = (sum(abs(camera.project(vertex) - target) ** 2
                    for vertex, target in zip(rest, targets)) / len(rest)) ** 0.5
         return rms, camera
@@ -89,7 +90,7 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
                     dx, dy, dz = (b - a for a, b in zip(world[first], world[last]))
                     lateral = hypot(dx, dy)
                     if lateral > 1e-4 and all(map(isfinite, (dx, dy, dz))):
-                        depths[name] = max(-2.0, min(2.0, dz / lateral))
+                        depths[name] = max(-2.0, min(2.0, -dz / lateral))
     return Alignment(best[1], best[0], angles, depths)
 
 def refine_views(body, evidence):

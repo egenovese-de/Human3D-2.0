@@ -98,7 +98,7 @@ class ObservationStore:
         for key, alignment in value.alignments.items():
             camera = alignment.camera
             payload["alignments"][key] = {
-                "yaw": camera.yaw_degrees, "similarity": [camera.similarity.real, camera.similarity.imag],
+                "yaw": camera.yaw_degrees, "horizontal_sign": camera.horizontal_sign, "similarity": [camera.similarity.real, camera.similarity.imag],
                 "origin": [camera.origin.real, camera.origin.imag],
                 "torso_rms_pixels": alignment.torso_rms_pixels, "limb_angles": alignment.limb_angles,
                 "limb_depth_ratios": alignment.limb_depth_ratios,
@@ -111,7 +111,7 @@ class ObservationStore:
 
         payload = self._read(digest, "shared_fit")
         alignments = {
-            key: Alignment(Camera(value["yaw"], complex(*value["similarity"]), complex(*value["origin"])),
+            key: Alignment(Camera(value["yaw"], complex(*value["similarity"]), complex(*value["origin"]), value.get("horizontal_sign", -1)),
                            value["torso_rms_pixels"], value["limb_angles"], value.get("limb_depth_ratios", {}))
             for key, value in payload["alignments"].items()
         }

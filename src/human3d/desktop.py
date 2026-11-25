@@ -60,6 +60,9 @@ class PhotosWindow(QWidget):
         restore = QPushButton("Restore body revision")
         restore.clicked.connect(lambda: self.guarded(self.restore_shared_fit))
         revisions.addWidget(restore)
+        appearance = QPushButton("Inspect appearance")
+        appearance.clicked.connect(lambda: self.guarded(self.inspect_appearance))
+        revisions.addWidget(appearance)
         layout.addLayout(revisions)
 
     def guarded(self, operation):
@@ -258,6 +261,50 @@ class PhotosWindow(QWidget):
                 BodyPreview(*fit, parent=self, on_pose_applied=save_pose).exec()
 
         self.guarded(inspect)
+
+    def inspect_appearance(self):
+        from .appearance import prepare_view
+        from .appearance_dialog import AppearanceDialog
+        from .texture_bake import bake_atlas
+
+        current = self.current_fit()
+        if current is None:
+            return
+        body, fit, target_alignment = current
+        project = self.store.load()
+        target = project.photos.target
+        shared = self.session.current_shared_fit()
+        alignments = (shared.alignments if shared is not None and shared.fit == fit else {}) | {target: target_alignment}
+        evidence = self.session.shared_evidence()
+        originals = OriginalStore(self.store.directory)
+        views = {
+            view.ref.photo_id: (prepare_view(originals, view, alignments[view.ref.photo_id]), view.detection.image_size)
+            for view in evidence.views
+            if view.mask is not None and view.ref.photo_id in alignments
+            and alignments[view.ref.photo_id].camera.horizontal_sign == 1
+        }
+        if target not in views:
+            raise ValueError("Review the target mask and refit with M3 before baking appearance.")
+        atlas = bake_atlas(body, fit.controls, views, target)
+        if self.store.load() != project:
+            raise ValueError("The project changed during texture baking. Bake the current target again.")
+
+        def export(color, roughness):
+            def save():
+                from .usd_export import export_body
+
+                if self.store.load() != project:
+                    raise ValueError("The project changed. Rebuild the target appearance before exporting.")
+                destination, _ = QFileDialog.getSaveFileName(self, "Export textured body", "body.usdz",
+                                                            "OpenUSD package (*.usdz)")
+                if destination:
+                    export_body(Path(destination), body, fit, target_alignment,
+                                texture=color, roughness=roughness)
+                    self.status.setText("Textured, rigged USDZ exported and validated.")
+
+            self.guarded(save)
+
+        AppearanceDialog(atlas, export, parent=self).exec()
 
     def export_fitted_body(self):
         self.guarded(self.choose_export_destination)

@@ -37,7 +37,7 @@ def pose_transforms(rig, joints, alignment):
     transforms = {}
     yaw = radians(alignment.camera.yaw_degrees)
     axis = np.asarray((-sin(yaw), 0.0, cos(yaw)))
-    right = np.asarray((-cos(yaw), 0.0, -sin(yaw)))
+    right = alignment.camera.horizontal_sign * np.asarray((cos(yaw), 0.0, sin(yaw)))
     down = np.asarray((0.0, -1.0, 0.0))
 
     def solve(name):
@@ -59,7 +59,7 @@ def pose_transforms(rig, joints, alignment):
                 turn = _swing(tail - head, image.real * right + image.imag * down + depth * axis)
             elif abs(direction) > 1:
                 delta = (angle - atan2(direction.imag, direction.real) + pi) % (2 * pi) - pi
-                turn = _rotation(axis, delta)
+                turn = _rotation(axis, -alignment.camera.horizontal_sign * delta)
             if turn is not None:
                 translation = head + turn @ (translation - head)
                 rotation = turn @ rotation

@@ -49,6 +49,20 @@ Changing the target selects a different view of the same shared revision.
 Use **Edit body control** and **Restore body revision** to manage revisions for
 the current reference set. **Export USD** writes the current target pose.
 
+## Run the M3 desktop build
+
+Check out `development/m3` and use the M2 installation and local assets.
+Run **Fit included photos** again for projects fitted by earlier builds.
+**Inspect fitted body** shows the target articulation and allows bounded
+per-limb corrections. Pose corrections apply to the active session and are
+included in export. The relative foot-height check does not estimate a floor.
+
+**Inspect appearance** shows the UV atlas, observed coverage, padding, and
+skin-color candidates from local image evidence. The texture prioritizes the
+target and balances exposure across visible reference samples. Unseen areas use
+neutral color where nearby padding is unavailable. Use **Export textured USDZ**
+to package the mesh, rig, pose, material and albedo together.
+
 ## Product vision
 
 Human3D reconstructs editable, reusable 3D human assets from one or more photographs of the same person. A selected target determines pose and appearance; other views inform shared neutral anatomy. Planned outputs include independent clothing geometry, UVs, materials, skeleton, skin weights and editable OpenUSD for Blender.

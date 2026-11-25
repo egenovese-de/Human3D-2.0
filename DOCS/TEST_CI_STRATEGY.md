@@ -52,3 +52,15 @@ A separate procedural smoke with two distinct camera yaws exercised the
 shared objective independently of the brightness-variant photos. Both camera
 directions were recovered and average mask overlap increased from 0.96015
 to 0.96321. Required checks passed on Windows and Linux in run 45655613911.
+
+## M3 technical verification
+
+Spatial pose was exercised with the synthetic frontal fixture and two
+procedural articulation configurations. Native mesh and rig checks passed.
+The M3 appearance smoke used P01 and its low-light P05 derivative. At 512
+pixels, 41.2% of UV domain texels were observed. The coverage view identified
+nearby padding and unobserved texels separately. A procedural overlap test
+verified that an occluded triangle received no observed color. Blender 4.5.3
+imported the resulting USDZ with the packed 512 × 512 albedo, editable
+material, UVs, armature binding and 163 bones. Local empirical evaluation
+remains in the test plan.
