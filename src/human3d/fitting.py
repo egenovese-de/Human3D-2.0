@@ -5,7 +5,7 @@ from io import BytesIO
 import numpy as np
 from PIL import Image, ImageDraw
 
-from .frozen_body import deform_vertices
+from .frozen_body import deform_vertices, morph_controls
 from .native_rig import pose_transforms, rebind_joints, skin_vertices
 
 
@@ -42,9 +42,7 @@ def fit_body(body, mask, alignment):
     controls = {}
     best = baseline = score(controls)
     for step in (0.25, 0.125):
-        for name in ("hips", "thigh", "calf", "upperarm"):
-            if f"{name}-circ-incr" not in body.get("morph_targets", {}):
-                continue
+        for name in morph_controls(body):
             center = controls.get(name, 0)
             for value in (center - step, center + step):
                 candidate = controls | {name: value}

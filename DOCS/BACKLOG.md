@@ -23,7 +23,7 @@
 | H3D2-M2-001 | Extend immutable per-photo evidence and binding | TECHNICAL_PASS |
 | H3D2-M2-002 | Integrate optional provider-independent GPT/VLM evidence without blocking local reconstruction | DEFERRED |
 | H3D2-M2-003 | Implement shared evidence fusion | TECHNICAL_PASS |
-| H3D2-M2-004 | Extend native torso controls | TODO |
+| H3D2-M2-004 | Extend native torso controls | TECHNICAL_PASS |
 | H3D2-M2-005 | Extend native limb and proportion controls | TODO |
 | H3D2-M2-006 | Integrate revision-aware rig rebinding and deformation validation | TODO |
 | H3D2-M2-007 | Implement independent per-view camera and pose refinement | TODO |

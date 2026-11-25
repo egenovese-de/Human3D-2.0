@@ -26,6 +26,16 @@ MORPH_ASSETS = {
 }
 
 
+TORSO_ASSETS = {
+    "measure-bust-circ-decr.target": "3d4c9f8c7d084e4d6c35ffc3a798bc35bdbe80fd56929d03e0c6f1b31ec5c736",
+    "measure-bust-circ-incr.target": "46394c7f9cdfac31654f14950b57bbfb874c9a2fa68e48c9cc3e7bba619b75f4",
+    "measure-shoulder-dist-decr.target": "15034d390da69ce7a3e46dfee0e248d0649bf6fc0bfec575b4cacf48b7a1ba5a",
+    "measure-shoulder-dist-incr.target": "af7394300c91d64fb0b032377aae72e546c778d1d5c00daed88858c04ee9150b",
+    "measure-waist-circ-decr.target": "6a976bd7819fa037a290b381bb3e04dfd04220dddeac194c476472295d2baba8",
+    "measure-waist-circ-incr.target": "4949212ec9a5e227b177a029ee42b0be3fd3b273a211bc91c6f4d4dbf0334856",
+}
+
+
 def _verified_assets(directory: Path, expected: dict[str, str]) -> dict[str, bytes]:
     assets = {}
     for name, digest in expected.items():
@@ -112,8 +122,11 @@ def freeze_neutral(directory: Path, artifact_directory: Path, *, with_morphs: bo
     payload = {"schema_version": 1, "kind": "frozen_body", "source_asset_digests": ASSETS,
                "algorithm_version": "makehuman-neutral-v1", "mesh": mesh, "rig": rig}
     if with_morphs:
-        morph_assets = _verified_assets(directory, MORPH_ASSETS)
-        payload["source_asset_digests"] = ASSETS | MORPH_ASSETS
+        expected = MORPH_ASSETS
+        if any((directory / name).exists() for name in TORSO_ASSETS):
+            expected = expected | TORSO_ASSETS
+        morph_assets = _verified_assets(directory, expected)
+        payload["source_asset_digests"] = ASSETS | expected
         payload["morph_targets"] = _morph_targets(morph_assets, len(mesh["vertices"]))
     data = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
     digest = hashlib.sha256(data).hexdigest()
