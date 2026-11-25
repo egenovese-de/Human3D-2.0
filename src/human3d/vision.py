@@ -5,6 +5,10 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+# Nose, shoulders, hips, knees and ankles in MediaPipe pose order.
+FULL_BODY_ANCHORS = (0, 11, 12, 23, 24, 25, 26, 27, 28)
+MIN_ANCHOR_CONFIDENCE = 0.8
+
 MODEL_SHA256 = "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
 
 
@@ -15,6 +19,14 @@ class Landmark:
     visibility: float | None
     presence: float | None
 
+    @property
+    def observed(self) -> bool:
+        return (
+            0 <= self.x <= 1 and 0 <= self.y <= 1
+            and self.visibility is not None and self.visibility >= MIN_ANCHOR_CONFIDENCE
+            and self.presence is not None and self.presence >= MIN_ANCHOR_CONFIDENCE
+        )
+
 
 @dataclass(frozen=True)
 class SubjectEvidence:
@@ -22,6 +34,17 @@ class SubjectEvidence:
     model_digest: str
     image_size: tuple[int, int]
     candidates: tuple[tuple[Landmark, ...], ...]
+
+    @property
+    def review_reason(self) -> str | None:
+        if not self.candidates:
+            return "no_subject_detected"
+        if len(self.candidates) > 1:
+            return "multiple_candidates"
+        pose, = self.candidates
+        if len(pose) != 33 or not all(pose[index].observed for index in FULL_BODY_ANCHORS):
+            return "insufficient_full_body_evidence"
+        return None
 
 
 class PoseLandmarker:

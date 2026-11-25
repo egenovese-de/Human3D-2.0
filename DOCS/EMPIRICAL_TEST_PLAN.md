@@ -77,7 +77,11 @@ Synthetic fixtures v0.1. Nine imports reopened with matching original hashes.
 P01–P06 yielded one candidate each. N01 and N03 yielded zero, N02 yielded one
 false-positive candidate. Detection confidence probes at 0.50, 0.65, 0.75 and
 0.85 reproduced the same counts. Candidate output requires review before
-fitting. Real-photo empirical validation remains NOT_RUN.
+fitting. Full-body readiness requires in-frame nose, shoulders, hips, knees and
+ankles with visibility and presence at least 0.8. This provisional development
+rule kept the N02 false positive and P04 crop in review and passed P01–P03 and
+P05–P06. Detection candidates are preserved for correction. Real-photo
+empirical validation remains NOT_RUN.
 
 Run target analysis on a saved project with
 `human3d detect-target PROJECT --model POSE_LANDMARKER_LITE_TASK`.

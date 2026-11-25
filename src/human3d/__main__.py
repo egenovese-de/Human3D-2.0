@@ -33,8 +33,8 @@ def main():
     if not evidence.candidates:
         parser.exit(1, "No subject detected. Select another photo and retry.\n")
     print(f"Subject candidates: {len(evidence.candidates)}")
-    if len(evidence.candidates) > 1:
-        print("Multiple candidates require review before fitting.")
+    if evidence.review_reason:
+        parser.exit(1, f"Subject review required ({evidence.review_reason}). Select another photo and retry.\n")
 
 
 if __name__ == "__main__":
