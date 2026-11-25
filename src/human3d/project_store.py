@@ -8,6 +8,7 @@ from threading import RLock
 from contextlib import contextmanager
 
 from .project import Photo, PhotoSet, Project
+from .originals import OriginalStore
 
 _LOCK = RLock()
 
@@ -67,6 +68,18 @@ class ProjectStore:
             updated = replace(project, revision=project.revision + 1)
             self._write(updated)
             return updated
+
+    def import_original(self, source: Path) -> tuple[Project, bool]:
+        """Import exact bytes; image decoding and format validation belong to ingestion."""
+        with writer_lock(self.directory):
+            project = self.load()
+            digest = OriginalStore(self.directory).put(source)
+            photos = project.photos.add(digest, Path(source).name)
+            if photos == project.photos:
+                return project, False
+            updated = replace(project, photos=photos, revision=project.revision + 1)
+            self._write(updated)
+            return updated, True
 
     def _write(self, project: Project) -> None:
         data = {
