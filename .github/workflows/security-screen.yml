@@ -1,7 +1,6 @@
 name: Security screening
 on:
-  push:
-    branches: [development/m1]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
