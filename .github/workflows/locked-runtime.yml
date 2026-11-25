@@ -3,7 +3,7 @@ on:
   push:
     branches: [development/m1]
     paths:
-      - 'requirements-*.candidate.lock'
+      - 'requirements-*.lock'
       - '.github/workflows/locked-runtime.yml'
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libglib2.0-0t64
       - run: python -m venv .venv
       - run: |
-          python -m pip --python .venv install --only-binary=:all: --no-deps -r requirements-${{ matrix.platform }}.candidate.lock
+          python -m pip --python .venv install --only-binary=:all: --no-deps --require-hashes -r requirements-${{ matrix.platform }}.lock
           python -m pip --python .venv check
       - run: python -m pip --python .venv freeze
       - if: runner.os == 'Linux'
