@@ -66,7 +66,8 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          & $env:BLENDER_EXE --background --python-exit-code 1 --python tools/lab_render_usd.py -- --input "$env:LAB_ASSET" --out-dir "$(Resolve-Path lab-output).Path" --label "$env:LAB_LABEL"
+          $outDir = (Resolve-Path -LiteralPath lab-output).Path
+          & $env:BLENDER_EXE --background --python-exit-code 1 --python tools/lab_render_usd.py -- --input "$env:LAB_ASSET" --out-dir "$outDir" --label "$env:LAB_LABEL"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $pngs = @(Get-ChildItem lab-output -Filter '*.png')
           if ($pngs.Count -ne 8) { throw "Expected 8 PNG renders, got $($pngs.Count)" }
