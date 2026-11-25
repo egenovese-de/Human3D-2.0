@@ -6,7 +6,7 @@ import os
 from pxr import Gf, Sdf, Tf, Usd, UsdGeom, UsdSkel, Vt
 
 from .frozen_body import deform_vertices
-from .native_rig import pose_transforms, rebind_joints
+from .native_rig import pose_transforms, validate_rebind
 
 
 def _joint_paths(bones):
@@ -42,7 +42,7 @@ def export_body(destination: Path, body, fit, alignment):
         raise ValueError("Use an OpenUSD filename ending in .usd, .usda, or .usdc.")
     mesh_data, rig = body["mesh"], body["rig"]
     vertices = deform_vertices(body, fit.controls)
-    joints = rebind_joints(rig, vertices)
+    joints = validate_rebind(body, vertices)
     transforms = pose_transforms(rig, joints, alignment)
     bones = rig["bones"]
     ordered, paths = _joint_paths(bones)

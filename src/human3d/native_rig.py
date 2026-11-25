@@ -66,3 +66,36 @@ def skin_vertices(vertices, skin, transforms):
         rotation, translation = transforms[name]
         result[list(indices)] += (points[list(indices)] @ rotation.T + translation) * np.asarray(weights)[:, None]
     return result
+
+
+def validate_rebind(body, vertices):
+    """Verify one neutral revision and rebind its unchanged skeleton topology."""
+    mesh, rig = body["mesh"], body["rig"]
+    base = np.asarray(mesh["vertices"], dtype=float)
+    current = np.asarray(vertices, dtype=float)
+    if current.shape != base.shape or not np.isfinite(current).all():
+        raise ValueError("invalid_neutral_vertices")
+    faces = [face["corners"] for face in mesh["faces"] if face["group"] == "body"]
+    if not faces:
+        raise ValueError("missing_body_topology")
+    triangles = np.asarray([[face[0][0], face[i][0], face[i + 1][0]]
+                            for face in faces for i in range(1, len(face) - 1)])
+
+    def areas(points):
+        a, b, c = points[triangles].transpose((1, 0, 2))
+        return np.linalg.norm(np.cross(b - a, c - a), axis=1)
+
+    if np.any((areas(base) > 1e-10) & (areas(current) <= 1e-10)):
+        raise ValueError("deformation_collapsed_body_face")
+    bones = rig["bones"]
+    for index in np.unique(triangles):
+        weights = rig["skin"][index]
+        if (not weights or any(name not in bones or not np.isfinite(weight) or weight < 0
+                               for name, weight in weights.items())
+                or abs(sum(weights.values()) - 1.0) > 1e-4):
+            raise ValueError("invalid_body_skin_weights")
+    joints = rebind_joints(rig, current)
+    for bone in bones.values():
+        if np.linalg.norm(joints[bone["head"]] - joints[bone["tail"]]) <= 1e-10:
+            raise ValueError("deformation_collapsed_bone")
+    return joints

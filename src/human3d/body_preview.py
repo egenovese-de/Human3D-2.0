@@ -7,7 +7,7 @@ from PySide6.QtGui import QColor, QPainter, QPolygonF
 from PySide6.QtWidgets import QCheckBox, QDialog, QHBoxLayout, QLabel, QSlider, QVBoxLayout, QWidget
 
 from .frozen_body import deform_vertices
-from .native_rig import pose_transforms, rebind_joints, skin_vertices
+from .native_rig import pose_transforms, validate_rebind, skin_vertices
 
 
 class MeshCanvas(QWidget):
@@ -57,7 +57,7 @@ class BodyPreview(QDialog):
         layout = QVBoxLayout(self)
         rig = body["rig"]
         neutral = deform_vertices(body, fit.controls)
-        joints = rebind_joints(rig, neutral)
+        joints = validate_rebind(body, neutral)
         posed = skin_vertices(neutral, rig["skin"], pose_transforms(rig, joints, alignment))
         canvas = MeshCanvas(body["mesh"], neutral, posed)
         controls = QHBoxLayout()
