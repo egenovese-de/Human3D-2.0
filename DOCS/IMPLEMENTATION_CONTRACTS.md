@@ -1,0 +1,17 @@
+# M1 implementation contracts — baseline v0.2 elaboration
+Status: proposed implementation detail under approved architecture; empirical readiness not certified.
+
+## Project and photos
+Project ID and photo ID are opaque UUIDs. Photo content identity is SHA-256 of original bytes. Project-owned originals immutable; duplicate bytes skipped within project. Target is null only for empty PhotoSet; otherwise references an included photo. Selecting an excluded photo returns a recoverable error; inclusion changes are explicit. Import reports accepted, duplicate and rejected inputs independently. Persist versioned project snapshots atomically using same-filesystem temporary files and replace; single writer, revision compare-and-swap; preserve last valid snapshot on failure. Reject unknown schema versions without modifying data.
+
+## Artifact and job contracts
+Artifact envelope: schema_version, kind, content_digest, dependency_digests keyed by role, algorithm_version, uncertainty, payload reference. SHA-256 over canonical UTF-8 JSON metadata (sorted keys, compact separators, no nonfinite values) and explicit binary payload digests; timestamps and display labels excluded from semantic identity. Binary formats versioned per artifact before implementation. Immutable artifacts; mutable project pointers updated atomically. Job proposal carries project ID, generation, input dependency digests and output artifact IDs. Promotion requires matching current generation and dependencies, successful validation and noncancelled job. Workers never write active pointers. Cancelled, failed and stale proposals cannot replace valid outputs.
+
+## Interaction
+Commands return typed success or error with stable code, recoverability and permitted next actions. Snapshot exposes current target, included photos, active and stale artifacts, capabilities with reasons, job state and progress units. Job states queued/running/cancelling/cancelled/succeeded/failed/stale. UI observes snapshots and events; no engine access. Review corrections produce validated new revisions; undo restores a prior revision without altering original bytes. No estimated completion time without measurement. No JSON editing required.
+
+## Geometry boundary
+FrozenBody captures topology, UVs, neutral vertices, skeleton, weights and native deformation data required downstream. All post-freeze consumers operate on frozen artifacts only. Target selection is not a shared anatomy dependency. Per-view observations bind to photo digest and revision; uncertain/occluded regions are not measured anatomy. Camera conventions, numerical payload formats and USD composition are specified before affected tasks, consistent with deferred ADR deadlines.
+
+## Evaluation readiness
+Initial supported envelope: consenting adult subjects, one intended subject, frontal or three-quarter full-body photographs, visible major landmarks and close-fitting clothing for anatomical comparison. Fragmented masks and multiple subjects exercise recovery; unsupported regions explicitly flagged. No inferred hidden geometry presented as measured truth. Use independent annotations and fixed bootstrap/fitted evaluation camera and pose; report per-region error, coverage and regressions. Thresholds remain provisional until calibration under MILESTONE_ACCEPTANCE.md. Actual authorized dataset availability and owner review availability are not confirmed; no empirical PASS claimed. Private input inventory remains local under FIXTURE_POLICY.md.
