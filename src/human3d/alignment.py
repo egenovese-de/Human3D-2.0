@@ -18,7 +18,7 @@ LIMBS = {
 
 @dataclass(frozen=True)
 class Camera:
-    yaw_degrees: int
+    yaw_degrees: float
     similarity: complex
     origin: complex
 
@@ -35,7 +35,7 @@ class Alignment:
     limb_angles: dict[str, float]
 
 
-def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int) -> Alignment:
+def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, *, refine=False) -> Alignment:
     if not 0 <= candidate < len(evidence.candidates):
         raise ValueError("invalid_subject_candidate")
     pose = evidence.candidates[candidate]
@@ -47,26 +47,35 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int) 
     target_center = sum(targets) / len(targets)
     rig = body["rig"]
     rest = [rig["joints"][rig["bones"][bone]["head"]] for bone in TORSO.values()]
-    best = None
-    for yaw in range(-45, 46, 5):
+    def evaluate(yaw):
         unit_camera = Camera(yaw, 1, 0)
         points = [unit_camera.project(vertex) for vertex in rest]
         center = sum(points) / len(points)
         centered = [point - center for point in points]
         variance = sum(abs(point) ** 2 for point in centered)
         if variance <= 1e-12:
-            continue
+            return None
         similarity = sum(point.conjugate() * (target - target_center)
                          for point, target in zip(centered, targets)) / variance
         if similarity.real <= 1e-6:
-            continue
+            return None
         camera = Camera(yaw, similarity, target_center - similarity * center)
         rms = (sum(abs(camera.project(vertex) - target) ** 2
                    for vertex, target in zip(rest, targets)) / len(rest)) ** 0.5
-        if best is None or rms < best[0]:
-            best = (rms, camera)
-    if best is None:
+        return rms, camera
+
+    candidates = [result for angle in range(-45, 46, 5)
+                  if (result := evaluate(angle)) is not None]
+    if not candidates:
         raise ValueError("camera_initialization_failed")
+    best = min(candidates, key=lambda result: result[0])
+    if refine:
+        for step in (1.0, 0.2, 0.04):
+            center = best[1].yaw_degrees
+            candidates = [result for offset in range(-4, 5)
+                          if -45 <= (angle := center + step * offset) <= 45
+                          and (result := evaluate(angle)) is not None]
+            best = min([best, *candidates], key=lambda result: result[0])
     angles = {}
     for name, (first, last) in LIMBS.items():
         if pose[first].observed and pose[last].observed:
@@ -74,3 +83,16 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int) 
             if abs(direction) > 1:
                 angles[name] = atan2(direction.imag, direction.real)
     return Alignment(best[1], best[0], angles)
+
+def refine_views(body, evidence):
+    """Solve each usable photo in its own image coordinates and pose."""
+    alignments = {}
+    unavailable = {}
+    for view in evidence.views:
+        try:
+            alignments[view.ref.photo_id] = initialize_alignment(
+                body, view.detection, view.candidate, refine=True,
+            )
+        except ValueError as error:
+            unavailable[view.ref.photo_id] = str(error)
+    return alignments, unavailable
