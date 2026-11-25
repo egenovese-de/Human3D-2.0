@@ -6,8 +6,8 @@
 | H3D2-M1-002 | Approve essential architecture, artifact and interaction contracts | DONE |
 | H3D2-M1-003 | Establish independent package, pinned runtime and targeted validation entry points | DONE |
 | H3D2-M1-004 | Implement project lifecycle, atomic persistence and PhotoSet | TECHNICAL_PASS |
-| H3D2-M1-005 | Integrate project creation, reopening, import, thumbnails and one-click target selection | IN_PROGRESS |
-| H3D2-M1-006 | Integrate generation-safe orchestration, capability states, progress, cancellation and retry | TODO |
+| H3D2-M1-005 | Integrate project creation, reopening, import, thumbnails and one-click target selection | TECHNICAL_PASS |
+| H3D2-M1-006 | Integrate generation-safe orchestration, capability states, progress, cancellation and retry | IN_PROGRESS |
 | H3D2-M1-007 | Integrate subject detection and landmark evidence | TODO |
 | H3D2-M1-008 | Integrate recoverable segmentation and validated visual subject/mask correction | TODO |
 | H3D2-M1-009 | Integrate licensed bootstrap and canonical freeze | TODO |
