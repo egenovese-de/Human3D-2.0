@@ -48,3 +48,21 @@ def posed_segments(rig, joints, alignment):
         for name, bone in rig["bones"].items()
         for rotation, translation in (transforms[name],)
     }
+
+
+def skin_vertices(vertices, skin, transforms):
+    result = np.asarray(vertices, dtype=float).copy()
+    unweighted = np.ones(len(result), dtype=bool)
+    groups = {}
+    for index, influences in enumerate(skin):
+        if influences:
+            unweighted[index] = False
+            for name, weight in influences.items():
+                groups.setdefault(name, []).append((index, weight))
+    result[~unweighted] = 0
+    points = np.asarray(vertices, dtype=float)
+    for name, influences in groups.items():
+        indices, weights = zip(*influences)
+        rotation, translation = transforms[name]
+        result[list(indices)] += (points[list(indices)] @ rotation.T + translation) * np.asarray(weights)[:, None]
+    return result

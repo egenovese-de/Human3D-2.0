@@ -787,3 +787,14 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 Failure recovery: Quarantine offending files; fix candidate and rerun affected/full gate.
 
 Current status: NOT_RUN; no empirical or technical PASS claimed.
+
+## M1 desktop technical smoke
+
+The Linux desktop completed the synthetic P01 path from project import and
+neutral freeze to target mask review, explicit alignment approval, bounded fit,
+neutral/posed mesh orbit, and rigged USDA export. The fixed-camera 256-pixel
+silhouette comparison went from 0.3618 to 0.3722. OpenUSD reopened the export
+with a skeleton, skinning query and nonidentity joint rotations. This is a
+software smoke result. The fit is session-local and the pose is initialized
+in the image plane. Empirical testing is performed locally on the first
+testable application.

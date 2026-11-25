@@ -20,6 +20,7 @@ class PhotosWindow(QWidget):
         super().__init__()
         self.store = None
         self.session = None
+        self.fitted_preview = None
         self.setWindowTitle("Human3D 2.0")
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
@@ -29,7 +30,9 @@ class PhotosWindow(QWidget):
                                 ("Add photos", self.add_photos),
                                 ("Add folder", self.add_folder),
                                 ("Review target mask", self.review_target_mask),
-                                ("Freeze rest body", self.freeze_rest_body)):
+                                ("Freeze rest body", self.freeze_rest_body),
+                                ("Inspect fitted body", self.inspect_fitted_body),
+                                ("Export USD", self.export_fitted_body)):
             button = QPushButton(label)
             button.clicked.connect(callback)
             toolbar.addWidget(button)
@@ -61,6 +64,7 @@ class PhotosWindow(QWidget):
     def attach(self, directory, create=False):
         session = Session(Path(directory), create)
         self.session = session
+        self.fitted_preview = None
         self.store = session.store
         self.refresh()
 
@@ -86,6 +90,37 @@ class PhotosWindow(QWidget):
         self.status.setText(counts + " | Reconstruction unavailable")
         return results
 
+    def current_fit(self):
+        if self.store is not None and self.fitted_preview is not None:
+            project = self.store.load()
+            project_id, revision, body, result, alignment = self.fitted_preview
+            if project.id == project_id and project.revision == revision:
+                return body, result, alignment
+        self.status.setText("Approve alignment and fit the current target first.")
+        return None
+
+    def inspect_fitted_body(self):
+        from .body_preview import BodyPreview
+
+        fit = self.current_fit()
+        if fit is not None:
+            self.guarded(lambda: BodyPreview(*fit, parent=self).exec())
+
+    def export_fitted_body(self):
+        fit = self.current_fit()
+        if fit is None:
+            return
+        destination, _ = QFileDialog.getSaveFileName(self, "Export rigged body", "body.usda",
+                                                    "OpenUSD (*.usd *.usda *.usdc)")
+        if destination:
+            self.guarded(lambda: self.write_fitted_body(Path(destination), fit))
+
+    def write_fitted_body(self, destination, fit):
+        from .usd_export import export_body
+
+        export_body(destination, *fit)
+        self.status.setText("Rigged USD exported and reopened for validation.")
+
     def freeze_rest_body(self):
         if self.store is None:
             self.status.setText("Create or open a project first.")
@@ -109,6 +144,7 @@ class PhotosWindow(QWidget):
             self.guarded(lambda: self.analyze_mask(Path(model)))
 
     def analyze_mask(self, model):
+        self.fitted_preview = None
         detector = PoseLandmarker(model, segmentation=True)
         try:
             evidence = self.session.detect_target(detector)
@@ -121,8 +157,25 @@ class PhotosWindow(QWidget):
         with Image.open(original) as image:
             photo = ImageQt(ImageOps.exif_transpose(image).convert("RGB"))
         body = load_project_body(self.store) if self.store.load().frozen_body_digest else None
-        if MaskDialog(photo, evidence, self.session.apply_mask, self, body=body).exec():
+        def fit(draft, alignment):
+            from .fitting import fit_body
+
+            project = self.store.load()
+            mask = self.session.apply_mask(draft)
+            result = fit_body(body, mask, alignment)
+            if self.store.load() != project:
+                raise ValueError("The project changed during fitting. Review the current target again.")
+            self.fitted_preview = (project.id, project.revision, body, result, alignment)
+            return result
+
+        def apply(draft):
+            self.session.apply_mask(draft)
+            self.fitted_preview = None
+
+        if MaskDialog(photo, evidence, apply, self, body=body, fit=fit).exec():
             self.status.setText("Subject mask applied for this session.")
+        elif self.fitted_preview is not None:
+            self.status.setText("Fitted body ready for inspection or USD export.")
 
     def refresh(self):
         snapshot = self.session.snapshot()

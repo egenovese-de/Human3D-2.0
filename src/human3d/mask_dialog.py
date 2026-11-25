@@ -78,7 +78,7 @@ class MaskCanvas(QWidget):
 
 
 class MaskDialog(QDialog):
-    def __init__(self, photo, evidence, apply, parent=None, *, body=None):
+    def __init__(self, photo, evidence, apply, parent=None, *, body=None, fit=None):
         super().__init__(parent)
         self.setWindowTitle("Review subject mask")
         self.resize(760, 620)
@@ -89,6 +89,7 @@ class MaskDialog(QDialog):
         layout.addWidget(self.canvas, 1)
         self.body = body
         self.alignment = None
+        self.adjusted_alignment = None
         self.offsets = []
         self.drafts = [MaskDraft(evidence, index) for index in range(len(evidence.candidates))]
         subjects = QComboBox()
@@ -122,6 +123,9 @@ class MaskDialog(QDialog):
         buttons.button(QDialogButtonBox.StandardButton.Ok).setText("Apply mask")
         buttons.accepted.connect(lambda: self.apply(apply))
         buttons.rejected.connect(self.reject)
+        if fit is not None and body is not None:
+            run_fit = buttons.addButton("Approve alignment and fit", QDialogButtonBox.ButtonRole.ActionRole)
+            run_fit.clicked.connect(lambda: self.fit(fit))
         layout.addWidget(buttons)
 
     def select_candidate(self, index):
@@ -136,6 +140,7 @@ class MaskDialog(QDialog):
 
     def update_overlay(self):
         self.canvas.overlay_segments = ()
+        self.adjusted_alignment = None
         if self.alignment is not None:
             x, y, scale = (control.value() for control in self.offsets) if len(self.offsets) == 3 else (0, 0, 100)
             camera = self.alignment.camera
@@ -145,7 +150,8 @@ class MaskDialog(QDialog):
                              origin=center + (camera.origin - center) * factor + complex(x, y))
             rig = self.body["rig"]
             joints = rebind_joints(rig, self.body["mesh"]["vertices"])
-            segments = posed_segments(rig, joints, replace(self.alignment, camera=camera))
+            self.adjusted_alignment = replace(self.alignment, camera=camera)
+            segments = posed_segments(rig, joints, self.adjusted_alignment)
             self.canvas.overlay_segments = tuple(
                 (camera.project(head), camera.project(tail)) for head, tail in segments.values()
             )
@@ -165,3 +171,19 @@ class MaskDialog(QDialog):
             self.message.setText(str(error))
         else:
             self.accept()
+
+    def fit(self, operation):
+        if self.adjusted_alignment is None:
+            self.message.setText("Select a subject with visible torso landmarks.")
+            return
+        draft = self.canvas.draft
+        single = replace(draft.evidence, candidates=(draft.evidence.candidates[draft.candidate],))
+        if single.review_reason:
+            self.message.setText("Use a full-body view with visible shoulders, hips, knees and ankles.")
+            return
+        try:
+            result = operation(draft, self.adjusted_alignment)
+        except (ValueError, RuntimeError) as error:
+            self.message.setText(str(error))
+        else:
+            self.message.setText(f"Silhouette overlap: {result.bootstrap_iou:.1%} → {result.fitted_iou:.1%}")

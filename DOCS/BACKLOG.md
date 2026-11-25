@@ -14,9 +14,9 @@
 | H3D2-M1-010 | Verify frozen-body inspection and native operations with MakeHuman unavailable | TECHNICAL_PASS |
 | H3D2-M1-011 | Integrate automatic camera and pose initialization | TECHNICAL_PASS |
 | H3D2-M1-012 | Integrate automatic first overlay and visual alignment recovery before fitting approval | TECHNICAL_PASS |
-| H3D2-M1-013 | Integrate bounded native anatomical fitting | IN_PROGRESS |
-| H3D2-M1-014 | Integrate native rig rebinding and editable rigged USD authoring | TODO |
-| H3D2-M1-015 | Expose actual neutral/posed 3D inspection and export validation | TODO |
+| H3D2-M1-013 | Integrate bounded native anatomical fitting | TECHNICAL_PASS |
+| H3D2-M1-014 | Integrate native rig rebinding and editable rigged USD authoring | TECHNICAL_PASS |
+| H3D2-M1-015 | Expose actual neutral/posed 3D inspection and export validation | TECHNICAL_PASS |
 ## M2
 | Task ID | Task description | Status |
 |---|---|---|
