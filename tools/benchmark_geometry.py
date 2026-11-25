@@ -38,6 +38,22 @@ def compare(reference, prediction):
     return {"iou": intersection / union, "symmetric_contour_px": float(contour)}
 
 
+def band_iou(reference, prediction, camera, joints, bones):
+    """Evaluate fixed vertical bands bounded by known neutral rig landmarks."""
+    expected, actual = np.asarray(reference), np.asarray(prediction)
+    landmarks = ("head", "upperarm01.L", "upperleg01.L", "lowerleg01.L")
+    boundaries = [0]
+    boundaries.extend(round(camera.project(joints[bones[name]["head"]]).imag) for name in landmarks)
+    boundaries.append(expected.shape[0])
+    scores = {}
+    for index, label in enumerate(("cranial", "neck", "trunk", "thigh", "lower_leg")):
+        low, high = boundaries[index:index + 2]
+        target, result = expected[low:high], actual[low:high]
+        union = np.count_nonzero(target | result)
+        scores[label] = np.count_nonzero(target & result) / union if union else None
+    return scores
+
+
 def sensitivity(body, neutral):
     baseline = np.asarray(neutral)
     report = {}
@@ -110,9 +126,10 @@ def main():
     report["control_sensitivity"] = sensitivity(body, neutral)
     report["saturated_controls"] = sorted(name for name, value in controls.items() if abs(value) == .5)
     ground_truth_joints = validate_rebind(body, truth)
+    fitted_joints = validate_rebind(body, fitted)
     report["root_mean_square_joint_error_mm"] = float(100 * np.sqrt(np.mean([
         np.sum((point - ground_truth_joints[name]) ** 2)
-        for name, point in validate_rebind(body, fitted).items()
+        for name, point in fitted_joints.items()
     ])))
     for name, camera in cameras.items():
         reference = silhouette(truth, faces, camera, size)
@@ -123,10 +140,16 @@ def main():
             current_camera = configuration[name].camera if name in configuration else camera
             predicted = silhouette(vertices, faces, current_camera, size)
             metrics[case] = compare(reference, predicted)
+            metrics[case]["band_iou"] = band_iou(reference, predicted, camera, ground_truth_joints,
+                                                 body["rig"]["bones"])
             if case == "camera_and_geometry":
                 expected, actual = np.asarray(reference), np.asarray(predicted)
                 overlay = np.stack((expected, actual, np.zeros_like(actual)), axis=2)
                 Image.fromarray(overlay.astype(np.uint8) * 255).save(output / f"{name}_overlay.png")
+        metrics["fitted_projected_joint_rmse_px"] = float(np.sqrt(np.mean([
+            abs(camera.project(point) - camera.project(ground_truth_joints[joint])) ** 2
+            for joint, point in fitted_joints.items()
+        ])))
         report["views"][name] = {"yaw": camera.yaw_degrees, "scale": camera.similarity,
                                  "origin": [camera.origin.real, camera.origin.imag], "metrics": metrics}
     (output / "geometry.json").write_text(json.dumps(report, indent=2) + "\n")
