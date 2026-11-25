@@ -127,6 +127,13 @@ Current status: D1-03 empirical NOT_RUN. M1-008 technical smoke passed on Linux 
 
 ## D1-04 — Freeze independence
 
+Development probe: `human3d freeze-neutral VERIFIED_ASSET_DIRECTORY ARTIFACT_DIRECTORY`.
+Repeated runs produced the same SHA-256 and a single immutable artifact with
+19,158 vertices, 18,486 faces, 21,334 UVs and 163 bones. All face indices were
+in range, body vertices had skin weights and nonempty weight sets summed to
+one within 1e-12. This probe uses the neutral upstream mesh; native morph
+controls and the integrated reconstruction flow remain pending.
+
 Tasks: H3D2-M1-009 through H3D2-M1-010.
 
 Validation objective: demonstrate freeze independence on actual inputs.

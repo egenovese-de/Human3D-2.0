@@ -12,7 +12,18 @@ def main():
     detection = commands.add_parser("detect-target", help="Inspect subject candidates in a saved project's target")
     detection.add_argument("project", type=Path)
     detection.add_argument("--model", type=Path, required=True, help="Local Pose Landmarker Lite v1 bundle")
+    freeze = commands.add_parser("freeze-neutral", help="Freeze a verified neutral mesh and rig")
+    freeze.add_argument("assets", type=Path)
+    freeze.add_argument("artifact_directory", type=Path)
     args = parser.parse_args()
+    if args.command == "freeze-neutral":
+        from .bootstrap import freeze_neutral
+
+        try:
+            print(freeze_neutral(args.assets, args.artifact_directory))
+        except (OSError, ValueError) as error:
+            parser.exit(1, f"Freeze failed: {error}\n")
+        return
     if args.command != "detect-target":
         return
 
