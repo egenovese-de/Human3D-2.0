@@ -64,3 +64,19 @@ verified that an occluded triangle received no observed color. Blender 4.5.3
 imported the resulting USDZ with the packed 512 × 512 albedo, editable
 material, UVs, armature binding and 163 bones. Local empirical evaluation
 remains in the test plan.
+
+
+## M4 technical verification
+
+The synthetic frontal smoke fit a top, shorts and trousers, projected a
+separate garment UV map and packaged the independent garment with the body.
+Each tested shell passed the 1 mm sampled penetration tolerance after
+bounded correction. A neutral inner/outer pair passed the sampled layer
+check and coincident layers were rejected. Qt offscreen checks exercised
+the 1024 × 720 and 1440 × 900 layouts, fitting, removal and 3D outfit orbit.
+
+Blender 4.5.3 imported separate body and top meshes with packed materials
+and the same 163-bone rig. Editing an armature joint changed the evaluated
+garment. The scene was saved, reopened, re-exported and reimported, and
+removing the top preserved the body mesh. The smoke and regressions are
+technical checks. Empirical validation is performed locally.

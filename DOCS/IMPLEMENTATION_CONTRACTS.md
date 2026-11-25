@@ -18,3 +18,27 @@ Initial supported envelope: consenting adult subjects, one intended subject, fro
 
 ## On-demand synthetic evaluation inputs
 Owner direction: generate photorealistic test images in ChatGPT when needed. Record generation provenance, input digest, intended scenario and limitations locally. Generated images are synthetic, not real-photo ground truth; same-subject consistency must be checked rather than assumed. Keep generated images outside public CI unless separately admitted under fixture policy. Real-photo acceptance requirements remain unchanged; missing authorized real inputs block those gates, not synthetic preparation. No benchmark thresholds changed.
+
+
+## M4 garment development contract
+
+Supported categories are close-fitting tops, shorts and trousers. A project may
+use one lower garment, a base top and an optional outer top. The independent
+shell lives in fitted neutral body space, keeps its own positions, topology and
+face-varying UV indices, and records correspondence to the body for weight
+transfer. Body topology and UVs are preserved. All shells use the same bind rig.
+
+The development baseline uses 6 mm initial body ease, 4 mm layer clearance
+and 1 mm sample tolerance. Contact within tolerance is permitted. Collision
+checks sample garment vertices and triangle centers against nearby body
+triangles. Layer checks evaluate shared source regions. They do not guarantee
+continuous triangle intersection freedom between samples. Correction is
+limited to 20 mm of local rest-space displacement, and export rejects
+remaining failed samples. These are development bounds for the first testable
+build. Local empirical calibration follows the test plan.
+
+Garment category is supplied by the operator. Candidate segmentation uses the
+aligned region, foreground and skin-color candidates. Visible colors are
+projected into garment UV space; unobserved texels remain neutral or use nearby
+padding. The export records sampled clearance and observed UV fractions. Draft
+garment fitting is dialog-local. USDZ retains each independent garment.

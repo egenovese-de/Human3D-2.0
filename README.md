@@ -63,6 +63,21 @@ target and balances exposure across visible reference samples. Unseen areas use
 neutral color where nearby padding is unavailable. Use **Export textured USDZ**
 to package the mesh, rig, pose, material and albedo together.
 
+## Run the M4 desktop build
+
+Check out `development/m4` and use the same desktop setup and local assets.
+Sync to the updated platform lock. On Linux the detector also needs `libgles2`.
+Fit the target or included photos, then choose **Assemble garments**. Fit a
+close-fitting top, shorts or trousers and inspect the photo coverage. Use
+**Apply edits** for ease and hem changes. Open the posed 3D preview or remove
+a garment from the assembly. A base top may be paired with an outer top if
+the sampled layer separation passes.
+
+**Export garment assembly** packages the body and separate rigged garment
+meshes with materials, textures and a sampled clearance manifest. Exports
+are blocked when sampled penetrations exceed tolerance. The assembly draft
+is local to the dialog. Save an export to keep the resulting meshes.
+
 ## Product vision
 
 Human3D reconstructs editable, reusable 3D human assets from one or more photographs of the same person. A selected target determines pose and appearance; other views inform shared neutral anatomy. Planned outputs include independent clothing geometry, UVs, materials, skeleton, skin weights and editable OpenUSD for Blender.

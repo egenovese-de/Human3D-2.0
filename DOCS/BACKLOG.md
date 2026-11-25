@@ -49,17 +49,17 @@
 ## M4
 | Task ID | Task description | Status |
 |---|---|---|
-| H3D2-M4-001 | Approve supported garment categories, rest-space contracts and collision tolerances | TODO |
-| H3D2-M4-002 | Implement garment segmentation and coverage evidence | TODO |
-| H3D2-M4-003 | Integrate independent native garment prototype and object hierarchy | TODO |
-| H3D2-M4-005 | Establish independent garment rest-space representation and compatible UVs | TODO |
-| H3D2-M4-004 | Integrate photo-driven garment fitting and supported visual edits | TODO |
-| H3D2-M4-006 | Implement garment textures and materials | TODO |
-| H3D2-M4-007 | Implement weight transfer and pose deformation | TODO |
-| H3D2-M4-008 | Integrate measurable collision detection, correction and fit feedback | TODO |
-| H3D2-M4-009 | Implement supported layering and clearance validation | TODO |
-| H3D2-M4-010 | Integrate final USD assembly, manifest and Blender reporting | TODO |
-| H3D2-M4-011 | Complete the existing approved desktop workspace and recovery workflow | TODO |
-| H3D2-M4-012 | Complete accessibility and desktop scaling checks | TODO |
-| H3D2-M4-015 | Complete cumulative public-distribution and release-candidate audit | TODO |
-| H3D2-M4-016 | Run final automated regressions | TODO |
+| H3D2-M4-001 | Approve supported garment categories, rest-space contracts and collision tolerances | TECHNICAL_PASS |
+| H3D2-M4-002 | Implement garment segmentation and coverage evidence | TECHNICAL_PASS |
+| H3D2-M4-003 | Integrate independent native garment prototype and object hierarchy | TECHNICAL_PASS |
+| H3D2-M4-005 | Establish independent garment rest-space representation and compatible UVs | TECHNICAL_PASS |
+| H3D2-M4-004 | Integrate photo-driven garment fitting and supported visual edits | TECHNICAL_PASS |
+| H3D2-M4-006 | Implement garment textures and materials | TECHNICAL_PASS |
+| H3D2-M4-007 | Implement weight transfer and pose deformation | TECHNICAL_PASS |
+| H3D2-M4-008 | Integrate measurable collision detection, correction and fit feedback | TECHNICAL_PASS |
+| H3D2-M4-009 | Implement supported layering and clearance validation | TECHNICAL_PASS |
+| H3D2-M4-010 | Integrate final USD assembly, manifest and Blender reporting | TECHNICAL_PASS |
+| H3D2-M4-011 | Complete the existing approved desktop workspace and recovery workflow | TECHNICAL_PASS |
+| H3D2-M4-012 | Complete accessibility and desktop scaling checks | TECHNICAL_PASS |
+| H3D2-M4-015 | Complete cumulative public-distribution and release-candidate audit | TECHNICAL_PASS |
+| H3D2-M4-016 | Run final automated regressions | IN_PROGRESS |

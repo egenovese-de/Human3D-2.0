@@ -63,6 +63,9 @@ class PhotosWindow(QWidget):
         appearance = QPushButton("Inspect appearance")
         appearance.clicked.connect(lambda: self.guarded(self.inspect_appearance))
         revisions.addWidget(appearance)
+        garment = QPushButton("Assemble garments")
+        garment.clicked.connect(lambda: self.guarded(self.assemble_garments))
+        revisions.addWidget(garment)
         layout.addLayout(revisions)
 
     def guarded(self, operation):
@@ -262,10 +265,8 @@ class PhotosWindow(QWidget):
 
         self.guarded(inspect)
 
-    def inspect_appearance(self):
+    def _prepare_appearance(self):
         from .appearance import prepare_view
-        from .appearance_dialog import AppearanceDialog
-        from .texture_bake import bake_atlas
 
         current = self.current_fit()
         if current is None:
@@ -285,6 +286,37 @@ class PhotosWindow(QWidget):
         }
         if target not in views:
             raise ValueError("Review the target mask and refit with M3 before baking appearance.")
+        return project, body, fit, target_alignment, views, target
+
+    def assemble_garments(self):
+        from .garment_dialog import GarmentDialog
+
+        context = self._prepare_appearance()
+        if context is None:
+            return
+        project, body, fit, target_alignment, views, target = context
+
+        def export(color, garments):
+            from .usd_export import export_body
+
+            if self.store.load() != project:
+                raise ValueError("The project changed. Reopen the assembly before exporting.")
+            destination, _ = QFileDialog.getSaveFileName(self, "Export garment assembly", "outfit.usdz",
+                                                        "OpenUSD package (*.usdz)")
+            if destination:
+                export_body(Path(destination), body, fit, target_alignment, texture=color, garments=garments)
+                self.status.setText("Body and independent garments exported with their shared rig.")
+
+        GarmentDialog(body, fit, views, target, export, parent=self).exec()
+
+    def inspect_appearance(self):
+        from .appearance_dialog import AppearanceDialog
+        from .texture_bake import bake_atlas
+
+        context = self._prepare_appearance()
+        if context is None:
+            return
+        project, body, fit, target_alignment, views, target = context
         atlas = bake_atlas(body, fit.controls, views, target)
         if self.store.load() != project:
             raise ValueError("The project changed during texture baking. Bake the current target again.")

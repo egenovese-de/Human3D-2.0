@@ -50,7 +50,7 @@ def _triangles(mesh):
     return np.asarray(corners, dtype=int)
 
 
-def _project_view(view, mesh, neutral, joints, rig, geometry, image_size):
+def _project_view(view, neutral, joints, rig, geometry, image_size, *, occluder=None):
     camera = view.alignment.camera
     if camera.horizontal_sign != 1:
         raise ValueError("Refit the photos with the M3 camera model before baking appearance.")
@@ -63,23 +63,41 @@ def _project_view(view, mesh, neutral, joints, rig, geometry, image_size):
     projected = np.asarray([(point.real * width / source_width, point.imag * height / source_height)
                             for vertex in posed for point in (camera.project(vertex),)])
     z_buffer = np.full((height, width), -np.inf)
-    for indices in geometry:
-        sample = _samples(projected[indices], width, height)
-        if sample is not None:
-            x, y, bary = sample
-            z_buffer[y, x] = np.maximum(z_buffer[y, x], bary @ depth[indices])
+
+    def raster(image_points, depths, triangles):
+        for indices in triangles:
+            sample = _samples(image_points[indices], width, height)
+            if sample is not None:
+                x, y, bary = sample
+                z_buffer[y, x] = np.maximum(z_buffer[y, x], bary @ depths[indices])
+
+    raster(projected, depth, geometry)
+    if occluder is not None:
+        points, faces, skin = occluder
+        posed_body = skin_vertices(points, skin, pose_transforms(rig, joints, view.alignment))
+        body_projected = np.asarray([
+            (pixel.real * width / source_width, pixel.imag * height / source_height)
+            for vertex in posed_body for pixel in (camera.project(vertex),)
+        ])
+        raster(body_projected, posed_body @ forward, faces)
     norms = np.cross(posed[geometry[:, 1]] - posed[geometry[:, 0]],
                      posed[geometry[:, 2]] - posed[geometry[:, 0]])
     facing = np.clip(np.abs(norms @ forward) / np.maximum(np.linalg.norm(norms, axis=1), 1e-9), 0, 1)
     return projected, depth, z_buffer, facing
 
 
-def bake_atlas(body, controls, views, target, *, size=512):
+def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     if target not in views or not 64 <= size <= 2048:
         raise ValueError("invalid_appearance_target_or_size")
     mesh, rig = body["mesh"], body["rig"]
     neutral = deform_vertices(body, controls)
     joints = validate_rebind(body, neutral)
+    occluder = None
+    if garment is not None:
+        occluder = (neutral, _triangles(mesh)[:, :, 0], rig["skin"])
+        neutral = garment.points
+        mesh = {"texcoords": garment.uv, "faces": [{"group": "body", "corners": face} for face in garment.faces]}
+        rig = rig | {"skin": garment.skin}
     triangles = _triangles(mesh)
     geometry, uv_indices = triangles[:, :, 0], triangles[:, :, 1]
     uv = np.asarray(mesh["texcoords"])
@@ -98,7 +116,7 @@ def bake_atlas(body, controls, views, target, *, size=512):
         height, width = view.foreground.shape
         if not view.foreground.any():
             continue
-        projected, depth, z_buffer, facing = _project_view(view, mesh, neutral, joints, rig, geometry, image_size)
+        projected, depth, z_buffer, facing = _project_view(view, neutral, joints, rig, geometry, image_size, occluder=occluder)
         intensity = np.median(view.rgb[view.foreground].mean(axis=1))
         gain = 1.0 if key == target else np.clip(target_light / max(intensity, 1), 0.7, 1.4)
         for index, sample in enumerate(atlas_pixels):
@@ -135,3 +153,18 @@ def bake_atlas(body, controls, views, target, *, size=512):
     skin[observed & (skin_sum > 0.75 * weights)] = 255
     return Atlas(Image.fromarray(color), Image.fromarray(coverage), Image.fromarray(skin),
                  np.count_nonzero(observed) / max(1, np.count_nonzero(domain)))
+
+def neutralize_covered_body_color(body, atlas, garments):
+    """Neutralize baked clothing color under covered body UV islands."""
+    result = np.array(atlas.convert("RGB"))
+    height, width = result.shape[:2]
+    vertices = [set(garment.body_indices) for garment in garments]
+    uv = np.asarray(body["mesh"]["texcoords"])
+    uv = np.column_stack((uv[:, 0] * (width - 1), (1 - uv[:, 1]) * (height - 1)))
+    for face in _triangles(body["mesh"]):
+        if any(all(index in covered for index in face[:, 0]) for covered in vertices):
+            sample = _samples(uv[face[:, 1]], width, height)
+            if sample is not None:
+                x, y, _ = sample
+                result[y, x] = (145, 145, 145)
+    return Image.fromarray(result)

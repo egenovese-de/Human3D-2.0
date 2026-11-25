@@ -12,13 +12,14 @@ from .native_rig import foot_height_difference, pose_transforms, validate_pose, 
 
 
 class MeshCanvas(QWidget):
-    def __init__(self, mesh, neutral, posed):
+    def __init__(self, mesh, neutral, posed, face_colors=None):
         super().__init__()
         self.setMinimumSize(600, 480)
         self.vertices = (np.asarray(neutral), np.asarray(posed))
         self.faces = np.asarray([
             [index for index, _ in face["corners"]] for face in mesh["faces"] if face["group"] == "body"
         ])
+        self.face_colors = face_colors
         self.angle = 0
         self.posed = False
         self.bootstrap = np.asarray(mesh["vertices"])
@@ -41,6 +42,8 @@ class MeshCanvas(QWidget):
         painter.setPen(QColor("#344652"))
         painter.setBrush(QColor("#8aacbe"))
         for index in np.argsort(depth[self.faces].mean(axis=1)):
+            if self.face_colors is not None:
+                painter.setBrush(self.face_colors[index])
             painter.drawPolygon(QPolygonF([QPointF(x[i], y[i]) for i in self.faces[index]]))
 
     def set_angle(self, angle):

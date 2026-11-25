@@ -98,6 +98,8 @@ class PoseLandmarker:
     def _mask_png(probabilities, image_size: tuple[int, int]) -> bytes | None:
         import numpy as np
 
+        if probabilities.shape == (*image_size[::-1], 1):
+            probabilities = probabilities[:, :, 0]
         if probabilities.shape != image_size[::-1]:
             return None
         if not np.isfinite(probabilities).all() or probabilities.min() < 0 or probabilities.max() > 1:

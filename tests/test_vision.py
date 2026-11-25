@@ -40,3 +40,12 @@ class SubjectEvidenceTests(unittest.TestCase):
         draft.paint((4, 4), (8, 4), 3, add=False)
         with self.assertRaises(ValueError):
             draft.validate()
+
+    def test_single_channel_segmentation_with_explicit_channel_axis(self):
+        import numpy as np
+        from human3d.vision import PoseLandmarker
+
+        mask = np.array([[0., 1., 0.], [1., 1., 0.]], dtype=np.float32)
+        expected = PoseLandmarker._mask_png(mask, (3, 2))
+        self.assertIsNotNone(expected)
+        self.assertEqual(PoseLandmarker._mask_png(mask[:, :, None], (3, 2)), expected)

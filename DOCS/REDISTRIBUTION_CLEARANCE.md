@@ -40,3 +40,27 @@ PASS: GitHub Actions run 45638877256, commit a4a97219b81efff7b5bbc4a773d34860aeb
 
 ## Initial gate closure
 PASS: security screening run 45639389830 at e17214592d84d587e5735b0e2cc02c52fd15d11a, 24 reachable commits screened for specified credential patterns. No matches. This is a limited pattern scan, not a specialist audit. Fixture policy established in FIXTURE_POLICY.md; no fixtures admitted. Initial admission baseline complete: original code Apache-2.0, verified upstream CC0 assets eligible subject to runtime integrity, all other components denied until separately cleared. No legacy source approved. Future component admission and final release audit remain mandatory.
+
+
+## M4 release-candidate source audit
+
+The candidate branch contains application source, tests, documentation and
+dependency manifests. It includes no models, photos, frozen meshes, exported
+people or third-party runtime binaries. Source assets are provisioned locally
+from separately tracked upstream manifests. The detector weights are required
+at runtime and remain excluded from distribution. The Windows and Linux
+locks describe dependencies installed from upstream package indexes.
+
+A review of 32 version pins against PyPI's per-version advisory metadata
+identified reported issues for Pillow 11.3.0, Protobuf 4.25.9 and usd-core
+25.5.1. The operational locks now use Pillow 13.0.0 and usd-core 25.11.
+MediaPipe 0.10.33 replaces the old runtime and drops its Protobuf and
+JAX dependency chain. The 25 distinct resulting version pins returned no
+non-withdrawn PyPI advisories at the check on 2026-11-25. This is a
+point-in-time metadata review and excludes native libraries or bundled
+components whose advisories are tracked separately. Historical candidate
+locks remain evidence for their earlier runtime probes.
+
+Local source-branch verification does not authorize publication of a binary
+distribution. The full redistribution package review and the local empirical
+tests remain separate from the development branch checks.
