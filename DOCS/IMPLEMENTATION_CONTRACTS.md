@@ -1,5 +1,5 @@
 # M1 implementation contracts — baseline v0.2 elaboration
-Status: proposed implementation detail under approved architecture; empirical readiness not certified.
+Status: implementation baseline established under approved architecture; empirical readiness not certified.
 
 ## Project and photos
 Project ID and photo ID are opaque UUIDs. Photo content identity is SHA-256 of original bytes. Project-owned originals immutable; duplicate bytes skipped within project. Target is null only for empty PhotoSet; otherwise references an included photo. Selecting an excluded photo returns a recoverable error; inclusion changes are explicit. Import reports accepted, duplicate and rejected inputs independently. Persist versioned project snapshots atomically using same-filesystem temporary files and replace; single writer, revision compare-and-swap; preserve last valid snapshot on failure. Reject unknown schema versions without modifying data.
@@ -15,3 +15,6 @@ FrozenBody captures topology, UVs, neutral vertices, skeleton, weights and nativ
 
 ## Evaluation readiness
 Initial supported envelope: consenting adult subjects, one intended subject, frontal or three-quarter full-body photographs, visible major landmarks and close-fitting clothing for anatomical comparison. Fragmented masks and multiple subjects exercise recovery; unsupported regions explicitly flagged. No inferred hidden geometry presented as measured truth. Use independent annotations and fixed bootstrap/fitted evaluation camera and pose; report per-region error, coverage and regressions. Thresholds remain provisional until calibration under MILESTONE_ACCEPTANCE.md. Actual authorized dataset availability and owner review availability are not confirmed; no empirical PASS claimed. Private input inventory remains local under FIXTURE_POLICY.md.
+
+## On-demand synthetic evaluation inputs
+Owner direction: generate photorealistic test images in ChatGPT when needed. Record generation provenance, input digest, intended scenario and limitations locally. Generated images are synthetic, not real-photo ground truth; same-subject consistency must be checked rather than assumed. Keep generated images outside public CI unless separately admitted under fixture policy. Real-photo acceptance requirements remain unchanged; missing authorized real inputs block those gates, not synthetic preparation. No benchmark thresholds changed.
