@@ -34,3 +34,6 @@ All legacy source remains HOLD. Reviewed candidates: frozen_body, frozen_bootstr
 
 ## Public tree screening
 Scanned all 13 tracked files in development/m1 at 9c9db044b50a0da79d190892c35c93f556ea6186. All readable; no matches for private key headers, common GitHub/AWS/OpenAI token patterns or quoted credential assignments. Tree contains documentation, manifests and license only; no photographs or legacy source. PASS for limited current-tree screening only. Full history and specialist scanner not run. Runtime asset digest verification remains outstanding.
+
+## Executed upstream integrity verification
+PASS: GitHub Actions run 45638877256, commit a4a97219b81efff7b5bbc4a773d34860aebe25d3, 2026-11-25. Log: PASS: 367 manifest entries verified. All entries downloaded from pinned upstream and checked for byte length and SHA-256; no asset bytes persisted. This supersedes earlier outstanding digest checks. Checkout action emitted Node 20 deprecation warning; job succeeded. Legacy source remains HOLD; fixture policy and remaining security acceptance still apply.
