@@ -57,14 +57,21 @@ def fit_garment(body, fit, view, image_size, category, *, ease_mm=0, hem=0, laye
         union = np.count_nonzero(predicted | coverage)
         return np.count_nonzero(predicted & coverage) / union
 
-    best = initial
-    overlap = evaluate(initial)
+    candidates = [initial]
     if optimize:
-        for ease, length in ((min(10, ease_mm + 3), hem), (min(10, ease_mm + 6), hem),
-                             (ease_mm, max(-0.25, hem - 0.15)), (ease_mm, min(0.25, hem + 0.15))):
-            candidate = prototype(body, neutral, category, layer=layer, ease_mm=ease, hem=length)
-            score = evaluate(candidate)
-            if score > overlap:
-                best, overlap = candidate, score
-    best, report = correct_clearance(best, body, posed, transforms)
-    return GarmentFit(best, Image.fromarray(coverage).convert("L"), evaluate(best), report)
+        options = {(min(10, ease_mm + 3), hem), (min(10, ease_mm + 6), hem),
+                   (ease_mm, max(-0.25, hem - 0.15)), (ease_mm, min(0.25, hem + 0.15))}
+        options.discard((ease_mm, hem))
+        candidates.extend(prototype(body, neutral, category, layer=layer, ease_mm=ease, hem=length)
+                          for ease, length in sorted(options))
+    ranked = sorted(candidates, key=evaluate, reverse=True)
+    image = Image.fromarray(coverage).convert("L")
+    fallback = None
+    for candidate in ranked:
+        shell, report = correct_clearance(candidate, body, posed, transforms)
+        if report.violations:
+            if fallback is None or report.violations < fallback.report.violations:
+                fallback = GarmentFit(shell, image, evaluate(shell), report)
+            continue
+        return GarmentFit(shell, image, evaluate(shell), report)
+    return fallback

@@ -38,6 +38,7 @@ class Alignment:
     torso_rms_pixels: float
     limb_angles: dict[str, float]
     limb_depth_ratios: dict[str, float] = field(default_factory=dict)
+    wrist_cross_axes: dict[str, tuple[float, float, float]] = field(default_factory=dict)
 
 
 def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, *, refine=False) -> Alignment:
@@ -95,6 +96,7 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
             best = min([best, *candidates], key=lambda result: result[0])
     angles = {}
     depths = {}
+    wrist_axes = {}
     for name, (first, last) in LIMBS.items():
         if name not in rig["bones"] or not pose[first].observed:
             continue
@@ -115,10 +117,15 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
             continue
         dx, dy, dz = (sum(world[index][axis] for index in endpoints) / len(endpoints) - world[first][axis]
                       for axis in range(3))
+        if name.startswith("wrist.") and len(endpoints) == 3:
+            pinky, index = endpoints[:2]
+            a, b, c = (world[index][axis] - world[pinky][axis] for axis in range(3))
+            if all(map(isfinite, (a, b, c))) and .015 < hypot(hypot(a, b), c) < .2:
+                wrist_axes[name] = (a, b, -c)
         if all(map(isfinite, (dx, dy, dz))) and hypot(hypot(dx, dy), dz) > .01:
             lateral = hypot(dx, dy)
             depths[name] = max(-4.0, min(4.0, -dz / max(lateral, .005)))
-    return Alignment(best[1], best[0], angles, depths)
+    return Alignment(best[1], best[0], angles, depths, wrist_axes)
 
 def refine_views(body, evidence):
     """Solve each usable photo in its own image coordinates and pose."""

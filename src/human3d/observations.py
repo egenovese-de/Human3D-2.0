@@ -105,7 +105,7 @@ class ObservationStore:
                 "yaw": camera.yaw_degrees, "horizontal_sign": camera.horizontal_sign, "similarity": [camera.similarity.real, camera.similarity.imag],
                 "origin": [camera.origin.real, camera.origin.imag],
                 "torso_rms_pixels": alignment.torso_rms_pixels, "limb_angles": alignment.limb_angles,
-                "limb_depth_ratios": alignment.limb_depth_ratios,
+                "limb_depth_ratios": alignment.limb_depth_ratios, "wrist_cross_axes": alignment.wrist_cross_axes,
             }
         return self._write("shared_fit", payload)
 
@@ -116,7 +116,8 @@ class ObservationStore:
         payload = self._read(digest, "shared_fit")
         alignments = {
             key: Alignment(Camera(value["yaw"], complex(*value["similarity"]), complex(*value["origin"]), value.get("horizontal_sign", -1)),
-                           value["torso_rms_pixels"], value["limb_angles"], value.get("limb_depth_ratios", {}))
+                           value["torso_rms_pixels"], value["limb_angles"], value.get("limb_depth_ratios", {}),
+                           {name: tuple(axis) for name, axis in value.get("wrist_cross_axes", {}).items()})
             for key, value in payload["alignments"].items()
         }
         return payload["bootstrap"], SharedFit(Fit(**payload["fit"]), alignments,

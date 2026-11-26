@@ -32,6 +32,19 @@ def _swing(source, target):
     return _rotation(axis / sine, atan2(sine, cosine))
 
 
+def _wrist_roll(axis, from_vector, to_vector):
+    length = np.linalg.norm(axis)
+    if length <= 1e-8:
+        return np.eye(3)
+    axis = axis / length
+    source = from_vector - (from_vector @ axis) * axis
+    target = to_vector - (to_vector @ axis) * axis
+    if min(np.linalg.norm(source), np.linalg.norm(target)) <= .005:
+        return np.eye(3)
+    angle = atan2(axis @ np.cross(source, target), source @ target)
+    return _rotation(axis, float(np.clip(angle, -pi / 4, pi / 4)))
+
+
 def pose_transforms(rig, joints, alignment):
     bones = rig["bones"]
     transforms = {}
@@ -61,6 +74,16 @@ def pose_transforms(rig, joints, alignment):
                 delta = (angle - atan2(direction.imag, direction.real) + pi) % (2 * pi) - pi
                 turn = _rotation(axis, -alignment.camera.horizontal_sign * delta)
             if turn is not None:
+                cross_axis = alignment.wrist_cross_axes.get(name)
+                if cross_axis is not None:
+                    side = name[-2:]
+                    index, pinky = bones.get("finger2-1" + side), bones.get("finger5-1" + side)
+                    if index and pinky:
+                        canonical = joints[index["head"]] - joints[pinky["head"]]
+                        a, b, c = cross_axis
+                        roll = _wrist_roll(turn @ (tail - head), turn @ rotation @ canonical,
+                                           a * right + b * down + c * axis)
+                        turn = roll @ turn
                 translation = head + turn @ (translation - head)
                 rotation = turn @ rotation
         transforms[name] = (rotation, translation)

@@ -5,6 +5,28 @@ from human3d.vision import Landmark, SubjectEvidence
 
 
 class SubjectEvidenceTests(unittest.TestCase):
+    def test_provider_adapter_rejects_mismatched_and_ambiguous_evidence(self):
+        from pathlib import Path
+        from unittest.mock import Mock
+
+        from human3d.anatomical_evidence import AnatomicalEvidence, EvidenceAdapter
+
+        photo = Path("fixture.png")
+        pose = (Landmark(.5, .5, .95, .95),) * 33
+        subject = SubjectEvidence("hash", "detector", (100, 100), (pose,))
+        detector = Mock()
+        provider = Mock()
+        adapter = EvidenceAdapter(detector, provider)
+        detector.detect.return_value = replace(subject, candidates=(pose, pose))
+        self.assertIs(adapter.detect(photo, "hash"), detector.detect.return_value)
+        provider.observe.assert_not_called()
+        detector.detect.return_value = subject
+        provider.observe.return_value = AnatomicalEvidence("other", "fixture", "v1", 0)
+        with self.assertRaisesRegex(ValueError, "provider_evidence_binding_mismatch"):
+            adapter.detect(photo, "hash")
+        provider.observe.return_value = replace(provider.observe.return_value, photo_digest="hash")
+        self.assertEqual(adapter.detect(photo, "hash").anatomical, provider.observe.return_value)
+
     def test_unsupported_torso_form_does_not_reject_cropped_limbs(self):
         from human3d.vision import _unsupported_torso_form
 

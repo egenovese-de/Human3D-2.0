@@ -55,6 +55,28 @@ def _region_weights(view, size):
     return weights
 
 
+def _voxel_lookup(views, reference_vertices):
+    """Precompute calibrated projections for a shared neutral voxel grid."""
+    points = np.asarray(reference_vertices)
+    low, high = points.min(axis=0), points.max(axis=0)
+    margin = .1 * (high - low)
+    axes = [np.linspace(a, b, 32) for a, b in zip(low - margin, high + margin)]
+    samples = np.stack(np.meshgrid(*axes, indexing="ij"), axis=-1).reshape(-1, 3)
+    lookups = {}
+    expected = np.ones(len(samples), dtype=bool)
+    for key, (scale, size, observed, _, camera, _, _) in views.items():
+        projected = np.asarray([camera.project(point) * scale for point in samples])
+        x, y = np.rint(projected.real).astype(int), np.rint(projected.imag).astype(int)
+        valid = (x >= 0) & (x < size[0]) & (y >= 0) & (y < size[1])
+        ids = np.flatnonzero(valid)
+        pixels = y[ids] * size[0] + x[ids]
+        lookups[key] = ids, pixels
+        inside = np.zeros(len(samples), dtype=bool)
+        inside[ids] = observed.ravel()[pixels]
+        expected &= inside
+    return lookups, expected
+
+
 def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=None, carve=False):
     mesh, rig = body["mesh"], body["rig"]
     faces = [tuple(index for index, _ in face["corners"])
@@ -77,8 +99,12 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
         outside = distance_transform_edt(~observed) if (carve or regional is not None) and len(masks) >= 2 else None
         views[key] = (scale, size, observed, pose_transforms(rig, joints, alignment), alignment.camera, regional, outside)
 
+    calibrated = carve and len(views) >= 2 and all(not alignments[key].limb_angles for key in views)
+    lookups, target_volume = _voxel_lookup(views, reference_vertices) if calibrated else ({}, None)
+
     def score(vertices):
         scores = {}
+        volume = np.ones_like(target_volume) if calibrated else None
         for key, (scale, size, observed, transforms, camera, regional, outside) in views.items():
             posed = skin_vertices(vertices, rig["skin"], transforms)
             points = [camera.project(vertex) * scale for vertex in posed]
@@ -87,6 +113,11 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
             for face in faces:
                 draw.polygon([(points[index].real, points[index].imag) for index in face], fill=1)
             predicted = np.asarray(output)
+            if calibrated:
+                ids, pixels = lookups[key]
+                inside = np.zeros_like(volume)
+                inside[ids] = predicted.ravel()[pixels]
+                volume &= inside
             overlap, union = predicted & observed, predicted | observed
             if regional is None:
                 scores[key] = np.count_nonzero(overlap) / np.count_nonzero(union)
@@ -99,6 +130,9 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
                 if inside_image.any():
                     distance = outside[y[inside_image], x[inside_image]]
                     scores[key] -= .15 * np.clip(distance / (.03 * max(size)), 0, 1).mean()
+        if calibrated and target_volume.any():
+            volume_iou = np.count_nonzero(volume & target_volume) / np.count_nonzero(volume | target_volume)
+            return {key: .8 * value + .2 * volume_iou for key, value in scores.items()}
         return scores
 
     return score
@@ -164,6 +198,60 @@ def fit_body(body, mask, alignment):
     return Fit(controls, baseline, _mean(best))
 
 
+def _refine_silhouette_cameras(body, vertices, masks, alignments):
+    """Fit bounded image translation and scale with neutral geometry held fixed."""
+    joints = rebind_joints(body["rig"], vertices)
+    rig = body["rig"]
+    faces = [tuple(index for index, _ in face["corners"])
+             for face in body["mesh"]["faces"] if face["group"] == "body"]
+    refined = dict(alignments)
+    for key, mask in masks.items():
+        alignment = alignments[key]
+        camera = alignment.camera
+        transforms = pose_transforms(rig, joints, alignment)
+        posed = skin_vertices(vertices, rig["skin"], transforms)
+        with Image.open(BytesIO(mask.png)) as source:
+            scale = min(1.0, 256 / max(source.size))
+            size = tuple(max(1, round(value * scale)) for value in source.size)
+            observed = np.asarray(source.resize(size, Image.Resampling.NEAREST)) > 0
+        y, x = np.nonzero(observed)
+        if not len(y):
+            continue
+        center = complex(x.mean(), y.mean())
+        step = max(1.0, (y.max() - y.min()) * .015)
+        projected = np.asarray([camera.project(point) * scale for point in posed])
+
+        def score(factor, shift):
+            points = center + factor * (projected - center) + shift
+            xy = list(zip(points.real, points.imag))
+            image = Image.new("1", size)
+            draw = ImageDraw.Draw(image)
+            for face in faces:
+                draw.polygon([xy[index] for index in face], fill=1)
+            predicted = np.asarray(image)
+            return np.count_nonzero(predicted & observed) / np.count_nonzero(predicted | observed)
+
+        initial = score(1, 0)
+        best = (initial, 1., 0j)
+        for factors, shifts, step_size in (((.97, 1., 1.03), (-1, 0, 1), step),
+                                          ((.985, 1., 1.015), (-1, 0, 1), step / 2)):
+            _, base_factor, base_shift = best
+            for factor in factors:
+                for dx in shifts:
+                    for dy in shifts:
+                        candidate_factor = factor * base_factor
+                        candidate_shift = base_shift + complex(dx, dy) * step_size
+                        result = score(candidate_factor, candidate_shift)
+                        if result > best[0]:
+                            best = (result, candidate_factor, candidate_shift)
+        result, factor, shift = best
+        if result > initial + .002:
+            offset = (center * (1 - factor) + shift) / scale
+            refined[key] = replace(alignment, camera=replace(camera, similarity=camera.similarity * factor,
+                                                             origin=camera.origin * factor + offset))
+    return refined
+
+
 def fit_shared(body, evidence):
     alignments, _ = refine_views(body, evidence)
     masks = {view.ref.photo_id: view.mask for view in evidence.views
@@ -197,6 +285,11 @@ def fit_shared(body, evidence):
         scores = _scorer(body, masks, refined, revised)(revised)
         if _mean(scores) > _mean(best) + 1e-6:
             controls, best, alignments = candidate, scores, refined
+    vertices = deform_vertices(body, controls)
+    silhouette_cameras = _refine_silhouette_cameras(body, vertices, masks, alignments)
+    scores = _scorer(body, masks, silhouette_cameras, vertices)(vertices)
+    if _mean(scores) > _mean(best):
+        alignments, best = silhouette_cameras, scores
     return SharedFit(Fit(controls, _mean(baseline_scores), _mean(best)), alignments,
                      evidence.dependency_digest, best)
 

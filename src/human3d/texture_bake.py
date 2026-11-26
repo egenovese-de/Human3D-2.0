@@ -144,6 +144,9 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     weights = np.zeros((size, size))
     skin_sum = np.zeros_like(weights)
     hair_sum = np.zeros_like(weights)
+    head_vertices = np.asarray([sum(weight for name, weight in influences.items()
+                                    if name.startswith(("head", "jaw")) or name == "neck")
+                                for influences in rig["skin"]])
     target_view, _ = views[target]
     if not target_view.foreground.any():
         raise ValueError("appearance_target_has_no_foreground")
@@ -180,10 +183,20 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
             in_bounds = (0 <= u) & (u < width) & (0 <= v) & (v < height)
             u, v = np.clip(u, 0, width - 1), np.clip(v, 0, height - 1)
             z = bary @ depth[geometry[index]]
-            front = np.isfinite(z_buffer[v, u]) & (z >= z_buffer[v, u] - 0.09)
+            # One pixel of sampling ambiguity in model units, bounded to
+            # avoid assigning a foreground limb to a nearby hidden surface.
+            pixel_scale = abs(view.alignment.camera.similarity) * min(width / image_size[0],
+                                                                       height / image_size[1])
+            tolerance = np.clip(.7 / max(pixel_scale * facing[index], 1e-6), .02, .09)
+            front = np.isfinite(z_buffer[v, u]) & (z >= z_buffer[v, u] - tolerance)
             visible = in_bounds & front & view.foreground[v, u]
             if not visible.any():
                 continue
+            if garment is None and view.hair_candidate is not None:
+                scalp = bary @ head_vertices[geometry[index]] >= .5
+                visible &= ~view.hair_candidate[v, u] | scalp
+                if not visible.any():
+                    continue
             a, b = x[visible], y[visible]
             u, v = u[visible], v[visible]
             boundary_weight = np.clip(edge_distance[v, u] / 3, .25, 1)

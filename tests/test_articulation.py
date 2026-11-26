@@ -8,6 +8,24 @@ from human3d.vision import Landmark, SubjectEvidence
 
 
 class ArticulationTests(unittest.TestCase):
+    def test_ground_uses_lowest_supported_foot_in_asymmetric_stance(self):
+        from human3d.native_rig import infer_support_plane
+
+        rig = {"skin": [{"foot.L": 1}, {"toe1-1.R": 1}, {"root": 1}, {"hand.L": 1}]}
+        points = np.array([[0., .5, 0.], [1., -.2, 0.], [0., 2., 0.], [0., 1., 0.]])
+        self.assertAlmostEqual(infer_support_plane(rig, points, [0, 1, 2, 3]), -.2)
+        points[3, 1] = -.7
+        self.assertIsNone(infer_support_plane(rig, points, [0, 1, 2, 3]))
+
+    def test_wrist_roll_is_bounded_and_preserves_long_axis(self):
+        from human3d.native_rig import _wrist_roll
+
+        rotation = _wrist_roll(np.array([1., 0., 0.]), np.array([0., 1., 0.]), np.array([0., -1., 0.]))
+        np.testing.assert_allclose(rotation @ [1, 0, 0], [1, 0, 0])
+        self.assertAlmostEqual(rotation[1, 1], 2 ** -.5)
+        np.testing.assert_allclose(_wrist_roll(np.array([1., 0., 0.]), np.array([1., 0., 0.]),
+                                               np.array([0., -1., 0.])), np.eye(3))
+
     def test_camera_recovers_rear_and_profile_orientation(self):
         from math import cos, radians, sin
 
