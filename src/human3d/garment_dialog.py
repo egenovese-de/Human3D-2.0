@@ -18,13 +18,14 @@ from .texture_bake import bake_atlas, neutralize_covered_body_color
 
 
 class GarmentDialog(QDialog):
-    def __init__(self, body, fit, views, target, export, parent=None):
+    def __init__(self, body, fit, views, target, export, parent=None, worker=None):
         super().__init__(parent)
         self.setWindowTitle("Garment assembly")
         self.resize(660, 660)
         self.results = {}
         self.body, self.fit, self.views, self.target = body, fit, views, target
         self.export = export
+        self.worker = worker or (lambda operation: operation())
         layout = QVBoxLayout(self)
         form = QFormLayout()
         layout.addLayout(form)
@@ -88,8 +89,9 @@ class GarmentDialog(QDialog):
             if alternate in self.results:
                 raise ValueError("Remove the current lower garment before fitting another.")
         view, size = self.views[self.target]
-        result = fit_garment(self.body, self.fit, view, size, category, ease_mm=self.ease.value(),
-                             hem=self.hem.value() / 100, layer=layer, optimize=optimize)
+        ease, hem = self.ease.value(), self.hem.value() / 100
+        result = self.worker(lambda: fit_garment(self.body, self.fit, view, size, category,
+                             ease_mm=ease, hem=hem, layer=layer, optimize=optimize))
         self.results[result.garment.name] = result
         self.refresh(result.garment.name)
 
@@ -165,6 +167,10 @@ class GarmentDialog(QDialog):
             QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
 
     def export_current(self):
+        color, assets = self.worker(self.prepare_export)
+        self.export(color, assets)
+
+    def prepare_export(self):
         if not self.results:
             raise ValueError("Fit at least one garment first.")
         fitted = list(self.results.values())
@@ -190,4 +196,4 @@ class GarmentDialog(QDialog):
             assets.append(GarmentAsset(garment, atlas.color, atlas.observed_fraction))
         base = bake_atlas(self.body, self.fit.controls, self.views, self.target)
         body_color = neutralize_covered_body_color(self.body, base.color, garments)
-        self.export(body_color, assets)
+        return body_color, assets
