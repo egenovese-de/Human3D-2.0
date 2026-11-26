@@ -192,6 +192,10 @@ class PhotosWindow(QWidget):
             if shared is not None:
                 project = self.store.load()
                 target = project.photos.target
+                if any(view.geometry_only for view in self.session.shared_evidence().views
+                       if view.ref.photo_id == target):
+                    self.status.setText("The target silhouette can support shared fitting. Select a target with visible pose landmarks.")
+                    return None
                 if target in shared.alignments:
                     return self._corrected_fit(project, load_project_body(self.store), shared.fit,
                                                shared.alignments[target])
@@ -401,7 +405,7 @@ class PhotosWindow(QWidget):
         views = {
             view.ref.photo_id: (prepare_view(originals, view, alignments[view.ref.photo_id]), view.detection.image_size)
             for view in evidence.views
-            if view.mask is not None and view.ref.photo_id in alignments
+            if not view.geometry_only and view.mask is not None and view.ref.photo_id in alignments
             and alignments[view.ref.photo_id].camera.horizontal_sign == 1
         }
         if target not in views:

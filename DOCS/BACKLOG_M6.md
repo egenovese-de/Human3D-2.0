@@ -9,7 +9,7 @@
 | M6.1-003 | Integrate neutral and posed garment validation and failure diagnostics | DONE |
 | M6.1-004 | Validate layered garment collision behavior and regression performance | DONE |
 | M6.1-005 | Separate mask, landmark and pose suitability in vision evidence | DONE |
-| M6.1-006 | Integrate lateral silhouette eligibility without unsafe pose acceptance | TODO |
+| M6.1-006 | Integrate lateral silhouette eligibility without unsafe pose acceptance | DONE |
 | M6.1-007 | Replay detector stress suite and validate review behavior | TODO |
 | M6.2-001 | Implement typed evidence v2 validation, provenance and uncertainty | TODO |
 | M6.2-002 | Implement v1 compatibility, offline fallback and project migration | TODO |

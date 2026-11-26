@@ -180,3 +180,26 @@ class VisionSuitabilityTests(unittest.TestCase):
         clipped = BytesIO()
         mask.save(clipped, format="PNG")
         self.assertEqual(replace(result, masks=(clipped.getvalue(),)).suitability(0).mask_reason, "mask_touches_frame")
+
+    def test_lateral_geometry_gate_requires_native_yaw_and_one_complete_side(self):
+        from dataclasses import replace
+        from io import BytesIO
+
+        from PIL import Image, ImageDraw
+
+        from human3d.vision import Landmark, SubjectEvidence
+
+        mask = Image.new("L", (32, 32))
+        ImageDraw.Draw(mask).rectangle((12, 2, 19, 29), fill=255)
+        buffer = BytesIO()
+        mask.save(buffer, format="PNG")
+        pose = [Landmark(.5, .5, 1., 1.)] * 33
+        pose[26] = pose[28] = Landmark(.5, .9, .5, 1.)
+        world = [(0., 0., 0.)] * 33
+        world[11] = world[23] = (0., 0., .1)
+        result = SubjectEvidence("a" * 64, "b" * 64, (32, 32), (tuple(pose),),
+                                 (buffer.getvalue(),), (tuple(world),))
+        self.assertTrue(result.lateral_geometry_only(0))
+        self.assertFalse(replace(result, world_landmarks=()).lateral_geometry_only(0))
+        pose[27] = pose[28]
+        self.assertFalse(replace(result, candidates=(tuple(pose),)).lateral_geometry_only(0))

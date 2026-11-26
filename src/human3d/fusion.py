@@ -26,6 +26,7 @@ class ViewEvidence:
     candidate: int
     mask: SubjectMask | None
     observed_regions: tuple[str, ...]
+    geometry_only: bool = False
 
 
 @dataclass(frozen=True)
@@ -117,7 +118,12 @@ def fuse_observations(project: Project, store: ObservationStore) -> SharedEviden
         if not regions:
             unresolved.append((photo.id, "insufficient_visible_landmarks"))
             continue
-        views.append(ViewEvidence(ref, detection, candidate, mask, regions))
+        geometry_only = detection.review_reason is not None and (
+            detection.lateral_geometry_only(candidate)
+        )
+        views.append(ViewEvidence(ref, detection, candidate, mask, regions, geometry_only))
+        if geometry_only:
+            unresolved.append((photo.id, "geometry_only_pose_review_required"))
     unresolved.extend((key, "inconsistent_anatomical_ratios") for key in inconsistent_references(views))
     key = json.dumps({"algorithm_version": 2, "included": dependencies}, separators=(",", ":"))
     return SharedEvidence(sha256(key.encode("utf-8")).hexdigest(), tuple(views), tuple(unresolved))

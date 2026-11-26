@@ -129,6 +129,18 @@ class SubjectEvidence:
         )
         return VisionSuitability(self._mask_reason(candidate), landmarks, self.review_reason)
 
+    def lateral_geometry_only(self, candidate: int) -> bool:
+        decision = self.suitability(candidate)
+        if decision.mask_reason or decision.landmark_reason or decision.pose_reason != "insufficient_full_body_evidence":
+            return False
+        pose = self.visible_pose(candidate)
+        world = self.world_landmarks[candidate] if candidate < len(self.world_landmarks) else ()
+        yaw = estimate_world_yaw(pose, world)
+        if yaw is None or not 75 <= abs(yaw) <= 105:
+            return False
+        missing = {index for index in FULL_BODY_ANCHORS if not pose[index].observed}
+        return bool(missing) and (missing <= {25, 27} or missing <= {26, 28})
+
     def _mask_reason(self, candidate):
         mask = self.masks[candidate] if candidate < len(self.masks) else None
         if mask is None:
