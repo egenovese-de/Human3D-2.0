@@ -402,7 +402,7 @@ class PhotosWindow(QWidget):
             destination, _ = QFileDialog.getSaveFileName(self, "Export garment assembly", "outfit.usdz",
                                                         "OpenUSD package (*.usdz)")
             if destination:
-                export_body(Path(destination), body, fit, target_alignment, texture=color, garments=garments, ground=True)
+                self.run_worker(lambda: export_body(Path(destination), body, fit, target_alignment, texture=color, garments=garments, ground=True))
                 self.status.setText("Body and independent garments exported with their shared rig.")
 
         GarmentDialog(body, fit, views, target, export, parent=self).exec()
@@ -428,8 +428,8 @@ class PhotosWindow(QWidget):
                 destination, _ = QFileDialog.getSaveFileName(self, "Export textured body", "body.usdz",
                                                             "OpenUSD package (*.usdz)")
                 if destination:
-                    export_body(Path(destination), body, fit, target_alignment,
-                                texture=color, roughness=roughness, ground=True)
+                    self.run_worker(lambda: export_body(Path(destination), body, fit, target_alignment,
+                                texture=color, roughness=roughness, ground=True))
                     self.status.setText("Textured, rigged USDZ exported and validated.")
 
             self.guarded(save)
