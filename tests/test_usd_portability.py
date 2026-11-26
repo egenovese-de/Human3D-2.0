@@ -37,5 +37,6 @@ class USDPortability(unittest.TestCase):
             for frame in (1,2):
                 point = pose.GetTransforms(Usd.TimeCode(frame))[0].Transform(Gf.Vec3d(1,0,0))
                 self.assertTrue(Gf.IsClose(point,Gf.Vec3d(0,1,0),1e-5))
+            del pose, shader, stage
             with self.assertRaisesRegex(ValueError,"invalid_export_garment_name"):
                 export_body(relocated,body,SimpleNamespace(controls={}),alignment,garments=[SimpleNamespace(garment=SimpleNamespace(name="../bad"))])
