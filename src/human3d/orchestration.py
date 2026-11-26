@@ -18,13 +18,22 @@ class Job:
 
 
 class Coordinator:
-    def __init__(self, project_id):
+    def __init__(self, project_id, *, history_limit=128):
+        if type(history_limit) is not int or history_limit < 1:
+            raise ValueError("invalid history limit")
+        self.history_limit = history_limit
         self.project_id = project_id
         self.generation = 0
         self.dependencies = ()
         self._jobs = {}
         self._active = {}
         self._lock = RLock()
+
+    def _prune(self):
+        terminal = [key for key, job in self._jobs.items()
+                    if job.state in {"succeeded", "failed", "cancelled", "stale"}]
+        for key in terminal[:-self.history_limit]:
+            del self._jobs[key]
 
     def snapshot(self):
         with self._lock:
@@ -48,12 +57,14 @@ class Coordinator:
                 for job in tuple(self._jobs.values()):
                     if job.state in {"queued", "running"}:
                         self._jobs[job.id] = replace(job, state="stale")
+                self._prune()
 
     def submit(self, kind):
         with self._lock:
             for previous in tuple(self._jobs.values()):
                 if previous.kind == kind and previous.state in {"queued", "running"}:
                     self._jobs[previous.id] = replace(previous, state="stale")
+            self._prune()
             job = Job(str(uuid4()), self.project_id, self.generation,
                       self.dependencies, kind)
             self._jobs[job.id] = job
@@ -77,17 +88,22 @@ class Coordinator:
 
     def cancel(self, job_id):
         with self._lock:
-            job = self._jobs[job_id]
+            job = self._jobs.get(job_id)
+            if job is None:
+                return
             if job.state in {"queued", "running"}:
                 self._jobs[job_id] = replace(job, state="cancelled" if job.state == "queued" else "cancelling")
 
     def cancellation_requested(self, job_id):
         with self._lock:
-            return self._jobs[job_id].state in {"cancelling", "cancelled", "stale"}
+            job = self._jobs.get(job_id)
+            return job is None or job.state in {"cancelling", "cancelled", "stale"}
 
     def finish(self, job_id, artifact, validate, *, publish=None):
         with self._lock:
-            job = self._jobs[job_id]
+            job = self._jobs.get(job_id)
+            if job is None:
+                return False
             if job.state == "cancelling":
                 self._jobs[job_id] = replace(job, state="cancelled")
                 return False
@@ -101,7 +117,9 @@ class Coordinator:
         except Exception:
             valid = False
         with self._lock:
-            job = self._jobs[job_id]
+            job = self._jobs.get(job_id)
+            if job is None:
+                return False
             if job.state == "cancelling":
                 self._jobs[job_id] = replace(job, state="cancelled")
                 return False
@@ -118,11 +136,14 @@ class Coordinator:
                     raise
             self._active[job.kind] = (job.generation, artifact)
             self._jobs[job_id] = replace(job, state="succeeded")
+            self._prune()
             return True
 
     def fail(self, job_id, code):
         with self._lock:
-            job = self._jobs[job_id]
+            job = self._jobs.get(job_id)
+            if job is None:
+                return
             if job.state in {"running", "cancelling"}:
                 self._jobs[job_id] = replace(job, state="cancelled" if job.state == "cancelling" else "failed", error=code)
 
