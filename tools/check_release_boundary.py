@@ -1,5 +1,4 @@
 """Fail closed on prohibited files in tracked history and the built application wheel."""
-import re
 import subprocess
 import sys
 import zipfile
@@ -13,12 +12,12 @@ def prohibited(name):
             or any(p.lower()==".env" or p.lower().startswith(".env.") for p in path.parts))
 
 def main():
-    commits = subprocess.check_output(["git","rev-list","HEAD"],text=True).splitlines()
+    commits = subprocess.check_output(["git","rev-list","--all"],text=True).splitlines()
     for commit in commits:
         paths = subprocess.check_output(["git","ls-tree","-r","--name-only","-z",commit]).decode().split("\0")
         if any(prohibited(p) for p in paths if p):
             raise SystemExit("Prohibited asset path in reachable commit "+commit)
-    print(f"PASS: {len(commits)} candidate ancestor trees screened",flush=True)
+    print(f"PASS: {len(commits)} reachable trees screened",flush=True)
     if len(sys.argv)>1:
         for wheel in Path(sys.argv[1]).glob("*.whl"):
             with zipfile.ZipFile(wheel) as archive:
