@@ -1,5 +1,7 @@
 # Human3D 2.0
 
+For the current stabilization build, see the [installation and verification guide](DOCS/STABILIZATION_INSTALL.md).
+
 The M1 desktop build is on `development/m1`. It supports a single-target
 reconstruction flow with mask review, initial alignment, bounded body fitting,
 neutral and posed inspection, and rigged OpenUSD export.

@@ -41,25 +41,25 @@
 | S3-002 | Verify worker lifecycle, subprocess cancellation, retry and error propagation (AUD-07) | DONE |
 | S3-003 | Correct project persistence, atomic writes and interrupted-session recovery defects | DONE |
 | S3-004 | Measure timings, peak RAM, disk and job retention; correct blocking resource defects (AUD-06) | DONE |
-| S3-005 | Verify repeated target switching, project reopening and resource cleanup | TODO |
+| S3-005 | Verify repeated target switching, project reopening and resource cleanup | DONE |
 
 ## S4 — Regression and synthetic validation
 
 | ID | Task | Status |
 |---|---|---|
-| S4-001 | Add targeted regression tests for confirmed corrected defects | TODO |
-| S4-002 | Correct stabilization CI coverage and locked/manual workflow scope; run regression suite (AUD-03, AUD-04, AUD-09) | TODO |
-| S4-003 | Execute synthetic end-to-end and negative-input regression benchmarks in Lab | TODO |
-| S4-004 | Verify canonical topology, UV, rig and skin-weight invariants | TODO |
-| S4-005 | Verify direct Blender import and editable save/reopen round-trip | TODO |
-| S4-006 | Compare final candidate against pinned M5 baseline and investigate regressions | TODO |
+| S4-001 | Add targeted regression tests for confirmed corrected defects | DONE |
+| S4-002 | Correct stabilization CI coverage and locked/manual workflow scope; run regression suite (AUD-03, AUD-04, AUD-09) | TECHNICAL_PASS |
+| S4-003 | Execute synthetic end-to-end and negative-input regression benchmarks in Lab | DONE |
+| S4-004 | Verify canonical topology, UV, rig and skin-weight invariants | DONE |
+| S4-005 | Verify direct Blender import and editable save/reopen round-trip | DONE |
+| S4-006 | Compare final candidate against pinned M5 baseline and investigate regressions | DONE |
 
 ## S5 — Release Candidate 1
 
 | ID | Task | Status |
 |---|---|---|
-| S5-001 | Build reproducible Windows package or wheel and assign gated RC version (AUD-10) | TODO |
-| S5-002 | Verify clean candidate installation, Qt startup and complete synthetic GUI workflow | TODO |
-| S5-003 | Publish local installation, configuration and troubleshooting instructions | TODO |
-| S5-004 | Record final candidate revisions, artifact hashes, test results and known limitations | TODO |
-| S5-005 | Finalize RC1 readiness assessment and minimal handoff | TODO |
+| S5-001 | Build reproducible Windows package or wheel and assign gated RC version (AUD-10) | TECHNICAL_PASS |
+| S5-002 | Verify clean candidate installation, Qt startup and complete synthetic GUI workflow | DONE |
+| S5-003 | Publish local installation, configuration and troubleshooting instructions | DONE |
+| S5-004 | Record final candidate revisions, artifact hashes, test results and known limitations | TECHNICAL_PASS |
+| S5-005 | Finalize RC1 readiness assessment and minimal handoff | DONE |

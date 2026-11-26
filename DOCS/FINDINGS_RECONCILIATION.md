@@ -57,3 +57,11 @@ RESOLVED for reproduced logical-only native cancellation and main heavy-path GUI
 ## S3-004 closure — AUD-06
 
 RESOLVED for the unbounded terminal job history and the S3-004 resource profile. The terminal cap retains 128 of 1,000 completed jobs, peak Python allocations fell about 83.6% in the same probe, and 100 duplicate imports added zero bytes. [Required checks 45859948344](https://github.com/egenovese-de/Human3D-2.0/actions/runs/45859948344) certified canonical synthetic reconstruction, fitting, texture, garment and USDZ measurements on Ubuntu and Windows. All 68 regression tests passed on Ubuntu, Windows and clean Windows Server installation. [S3-004 resource profile](S3-004_RESOURCE_PROFILE.md) records stage times, peak process RSS and logical disk usage. Target switching, project reopening and cleanup remain S3-005. Empirical tests remain `NOT_RUN`.
+
+## Stabilization candidate dispositions
+
+- **AUD-03** — Stabilization push/PR workflow coverage is configured and push execution is verified on the candidate. Direct manual dispatch requires the definition on the default branch.
+- **AUD-04 and AUD-09** — The two superseded workflow definitions were removed from stabilization. Its required foundation matrix uses platform-specific binary, hash-pinned locks for the shared CI path. The default-branch integration is tracked under S4-002.
+- **AUD-10** — Independent wheel builds for the candidate report a reproducible SHA-256 per platform. RC version assignment remains gated by release acceptance.
+
+See the [candidate record](STABILIZATION_CANDIDATE.md) for test results and remaining gates.
