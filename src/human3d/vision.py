@@ -6,6 +6,8 @@ from math import atan2, degrees, hypot, isfinite
 from pathlib import Path
 import subprocess
 import sys
+from threading import Event
+from time import monotonic
 from tempfile import TemporaryDirectory
 
 from PIL import Image, ImageOps
@@ -115,6 +117,27 @@ def _unsupported_torso_form(pose):
                and point.visibility < .7 for point in distal)
 
 
+def run_cancellable(command, *, capture_output=True, text=True, timeout=120, cancel=None):
+    deadline = monotonic() + timeout
+    with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=text) as process:
+        try:
+            while True:
+                if cancel is not None and cancel.is_set():
+                    raise RuntimeError("Subject detection cancelled.")
+                remaining = deadline - monotonic()
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired(command, timeout)
+                try:
+                    stdout, stderr = process.communicate(timeout=min(.1, remaining))
+                    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+                except subprocess.TimeoutExpired:
+                    continue
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.communicate()
+
+
 class PoseLandmarker:
     """Run native inference in a disposable process before publishing evidence."""
 
@@ -123,6 +146,7 @@ class PoseLandmarker:
             raise ValueError("pose_model_digest_mismatch")
         self._model_path = model_path.resolve()
         self._segmentation = segmentation
+        self.cancel_event = Event()
 
     def detect(self, original_path: Path, photo_digest: str) -> SubjectEvidence:
         from .observations import ObservationRef, ObservationStore
@@ -133,7 +157,7 @@ class PoseLandmarker:
             if self._segmentation:
                 command.append("--segmentation")
             try:
-                result = subprocess.run(command, capture_output=True, text=True, timeout=120)
+                result = run_cancellable(command, capture_output=True, text=True, timeout=120, cancel=self.cancel_event)
             except subprocess.TimeoutExpired as error:
                 raise RuntimeError("Subject detection timed out. Retry this photo.") from error
             except OSError as error:
@@ -150,7 +174,7 @@ class PoseLandmarker:
                 raise RuntimeError("Subject detector returned invalid evidence. Retry this photo.") from error
 
     def close(self):
-        pass
+        self.cancel_event.set()
 
 
 class _NativePoseLandmarker:
