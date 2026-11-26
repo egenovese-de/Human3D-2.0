@@ -7,7 +7,7 @@ from PIL import Image
 from scipy.ndimage import distance_transform_edt
 
 from .frozen_body import deform_vertices
-from .native_rig import pose_transforms, skin_vertices, validate_rebind
+from .native_rig import pose_transforms, skin_vertices, validate_rebind, validate_pose
 
 
 @dataclass(frozen=True)
@@ -48,6 +48,8 @@ def _triangles(mesh):
             polygon = face["corners"]
             corners.extend((polygon[0], polygon[index], polygon[index + 1])
                            for index in range(1, len(polygon) - 1))
+    if not corners:
+        raise ValueError("missing_texture_topology")
     return np.asarray(corners, dtype=int)
 
 
@@ -56,6 +58,8 @@ def _project_view(view, neutral, joints, rig, geometry, image_size, *, occluder=
     if camera.horizontal_sign != 1:
         raise ValueError("Refit the photos with the M3 camera model before baking appearance.")
     posed = skin_vertices(neutral, rig["skin"], pose_transforms(rig, joints, view.alignment))
+    if not np.isfinite(posed).all():
+        raise ValueError("invalid_texture_pose")
     yaw = radians(camera.yaw_degrees)
     forward = np.array((-sin(yaw), 0, cos(yaw)))
     depth = posed @ forward
@@ -138,9 +142,22 @@ def _hidden_vertices(rig, regions):
             if sum(influences.get(bone, 0) for bone in blocked_bones) > .7}
 
 
+def _validate_view(view, image_size):
+    foreground = view.foreground
+    if (foreground.ndim != 2 or not foreground.size or foreground.dtype != np.bool_
+            or view.rgb.shape != (*foreground.shape, 3) or view.rgb.dtype != np.uint8
+            or view.skin_candidate.shape != foreground.shape or view.skin_candidate.dtype != np.bool_
+            or (view.hair_candidate is not None and
+                (view.hair_candidate.shape != foreground.shape or view.hair_candidate.dtype != np.bool_))
+            or len(image_size) != 2 or not all(np.isfinite(v) and v > 0 for v in image_size)):
+        raise ValueError("invalid_appearance_view")
+
+
 def bake_atlas(body, controls, views, target, *, size=512, garment=None):
-    if target not in views or not 64 <= size <= 2048:
+    if target not in views or type(size) is not int or not 64 <= size <= 2048:
         raise ValueError("invalid_appearance_target_or_size")
+    for view, image_size in views.values():
+        _validate_view(view, image_size)
     mesh, rig = body["mesh"], body["rig"]
     neutral = deform_vertices(body, controls)
     joints = validate_rebind(body, neutral)
@@ -152,7 +169,9 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
         rig = rig | {"skin": garment.skin}
     triangles = _triangles(mesh)
     geometry, uv_indices = triangles[:, :, 0], triangles[:, :, 1]
-    uv = np.asarray(mesh["texcoords"])
+    uv = np.asarray(mesh["texcoords"], dtype=float)
+    if uv.ndim != 2 or uv.shape[1] != 2 or not np.isfinite(uv).all() or np.any((uv < 0) | (uv > 1)):
+        raise ValueError("invalid_texture_uv")
     uv = np.column_stack((uv[:, 0], 1 - uv[:, 1])) * (size - 1)
     atlas_pixels = [_samples(uv[indices], size, size) for indices in uv_indices]
     domain = np.zeros((size, size), dtype=bool)
@@ -177,6 +196,9 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
         height, width = view.foreground.shape
         if not view.foreground.any():
             continue
+        if garment is None:
+            posed = skin_vertices(neutral, rig["skin"], pose_transforms(rig, joints, view.alignment))
+            validate_pose(body, neutral, posed)
         edge_distance = distance_transform_edt(view.foreground)
         projected, depth, z_buffer, facing = _project_view(view, neutral, joints, rig, geometry, image_size, occluder=occluder)
         intensity = np.median(view.rgb[view.foreground].mean(axis=1))
