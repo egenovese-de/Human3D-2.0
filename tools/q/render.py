@@ -17,7 +17,7 @@ def material(name, color):
 
 
 def main():
-    library, destination = map(Path, sys.argv[sys.argv.index("--") + 1:])
+    library, destination, *holdout = map(Path, sys.argv[sys.argv.index("--") + 1:])
     destination.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
@@ -38,7 +38,14 @@ def main():
         destination_data.objects = ["MBLab_human_female", "MBLab_human_male"]
     skin = material("Pilot skin", (.48, .27, .18))
     for body in destination_data.objects:
-        for variant in ("base", "wide", "asymmetric"):
+        family = body.name.removeprefix("MBLab_")
+        if holdout:
+            upstream = holdout[0]
+            identities = ("f_ca01", "f_af01") if family == "human_female" else ("m_as01", "m_la01")
+            variants = [(identity, angle) for identity in identities for angle in (0, 32)]
+        else:
+            variants = [(name, 0) for name in ("base", "wide", "asymmetric")]
+        for variant, bend in variants:
             subject = body.copy()
             subject.data = body.data.copy()
             subject.animation_data_clear()
@@ -51,6 +58,38 @@ def main():
                 polygon.material_index = 0
                 polygon.use_smooth = True
             base = [subject.matrix_world @ vertex.co for vertex in subject.data.vertices]
+            metadata = {}
+            if holdout:
+                vpath = upstream / "data" / "vertices" / f"{variant}_verts.json"
+                base = [Vector(p) for p in json.loads(vpath.read_text())]
+                assert len(base) == len(subject.data.vertices)
+                joint_dir = upstream / "data" / "joints"
+                keys = json.loads((joint_dir / f"{family}_joints.json").read_text())
+                offsets = json.loads((joint_dir / f"{family}_joints_offset.json").read_text())
+
+                def anchor(key):
+                    return sum((base[i] for i in keys[key]), Vector()) / len(keys[key]) + Vector(offsets.get(key, [0, 0, 0]))
+
+                selected = {name: [anchor(f"{name}_head"), anchor(f"{name}_tail")]
+                            for part in ("upperarm", "lowerarm", "thigh", "calf", "hand", "foot")
+                            for side in ("L", "R") for name in [f"{part}_{side}"]}
+                pivot = selected["lowerarm_L"][0].copy()
+                from mathutils import Matrix
+                sign = 1 if pivot.x > 0 else -1
+                rotation = Matrix.Rotation(math.radians(-sign * bend), 3, "Y")
+
+                def articulated(point):
+                    ramp = max(0.0, min(1.0, (sign * (point.x - pivot.x) + .02) / .075))
+                    return point.lerp(pivot + rotation @ (point - pivot), ramp * ramp * (3 - 2 * ramp))
+
+                if bend:
+                    base = [articulated(point) for point in base]
+                    selected = {name: [articulated(p) for p in points] for name, points in selected.items()}
+                floor = min(point.z for point in base)
+                metadata = {"identity": variant, "left_forearm_bend_deg": bend,
+                            "source_vertices_sha256": hashlib.sha256(vpath.read_bytes()).hexdigest(),
+                            "joint_anchors": {name: [[p.x, p.y, p.z - floor] for p in points]
+                                              for name, points in selected.items()}}
             low = min(v.z for v in base)
             high = max(v.z for v in base)
             for vertex, p in zip(subject.data.vertices, base):
@@ -66,7 +105,7 @@ def main():
                 vertex.co = (p.x, p.y, p.z - low)
             subject.matrix_world.identity()
             center = Vector((0, 0, (high - low) / 2))
-            output = destination / f"{body.name}_{variant}"
+            output = destination / (f"{body.name}_{variant}" + (f"_bend{bend}" if holdout else ""))
             output.mkdir(exist_ok=True)
             mesh = {"vertices": [list(v.co) for v in subject.data.vertices],
                     "faces": [list(p.vertices) for p in subject.data.polygons]}
@@ -92,7 +131,7 @@ def main():
                 "units": "meters", "coordinates": "Blender Z up, -Y frontal, floor Z=0",
                 "mask": "PNG alpha > 127", "camera": "orthographic", "ortho_scale_m": 2.16,
                 "size": [384, 384], "mesh_sha256": hashlib.sha256(mesh_path.read_bytes()).hexdigest(),
-                "material_rgb": [.48, .27, .18], "images": rows,
+                "material_rgb": [.48, .27, .18], **metadata, "images": rows,
             }, indent=2) + "\n")
             bpy.data.objects.remove(subject, do_unlink=True)
 

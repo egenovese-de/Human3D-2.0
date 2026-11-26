@@ -4,7 +4,7 @@
 | Q0-002 | Establish independent anatomical ground-truth meshes and asset provenance | DONE |
 | Q0-003 | Implement automated Blender multi-view rendering and ground-truth extraction | DONE |
 | Q0-004 | Implement procedural photographic transformations and optional AI photographic fixture generation | DONE |
-| Q0-005 | Validate dataset consistency, calibration, manifests and independent evaluation splits | BLOCKED |
+| Q0-005 | Validate dataset consistency, calibration, manifests and independent evaluation splits | DONE |
 | Q1-001 | Establish neutral geometry reconstruction baseline across anatomical subjects | DONE |
 | Q1-002 | Measure regional surface reconstruction errors | DONE |
 | Q1-003 | Measure circumference, proportion and volumetric reconstruction errors | DONE |
@@ -23,7 +23,7 @@
 | Q3-001 | Compare single-view and two-view reconstruction configurations | DONE |
 | Q3-002 | Compare three-view, four-view, eight-view and sixteen-view reconstruction | DONE |
 | Q3-003 | Measure the information value of individual camera orientations | DONE |
-| Q3-004 | Evaluate redundant, contradictory and differently posed reference photographs | BLOCKED |
+| Q3-004 | Evaluate redundant, contradictory and differently posed reference photographs | DONE |
 | Q3-005 | Measure held-out reconstruction accuracy and diminishing returns | DONE |
 | Q4-001 | Evaluate resolution, compression, blur and image noise | DONE |
 | Q4-002 | Evaluate illumination, exposure and background complexity | DONE |

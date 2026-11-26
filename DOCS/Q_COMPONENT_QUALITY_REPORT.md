@@ -1,5 +1,7 @@
 # Q face, pose, texture and garment evidence
 
+The [held-out follow-up](Q_HOLDOUT_FOLLOWUP.md) adds four preset identities, articulated fixtures and changed reference inputs. This report records the original pilot.
+
 - Face: the independent surface measurements include a cranial band. The controlled jaw invariant yielded {'jaw_moved_vertices': 848, 'jaw_max_displacement_mm': 3.163499999999997, 'canonical_topology_uv_rig_unchanged': True, 'neutral_support_plane': -8.1676} at input control 0.5. This local-deformation test cannot establish facial landmark accuracy.
 - Pose: 6 variants with 12 rig endpoint/direction proxies each. Pose intervention effect +6.61 across 6 variants (range +4.37 to +8.71) percentage points. Endpoint and direction errors are in the JSON. Different rig definitions limit positional interpretation, and no joint rotation truth was recorded.
 - Skinning: 6 reports with per-case maximum absolute bone-length change and calibrated units. Measurements check mechanical consistency and do not establish contact or torsion accuracy.

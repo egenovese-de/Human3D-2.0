@@ -1,5 +1,7 @@
 # Q multi-view scaling
 
+The [held-out follow-up](Q_HOLDOUT_FOLLOWUP.md) adds four preset identities, articulated fixtures and changed reference inputs. This report records the original pilot.
+
 | Configuration, held-out silhouette IoU (%) | n | Mean | Median | SD | P05 | P95 | Min |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | bootstrap | 6 | 71.041 | 70.658 | 2.964 | 67.484 | 74.740 | 66.867 |

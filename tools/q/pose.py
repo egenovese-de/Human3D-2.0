@@ -35,6 +35,9 @@ def main(pilot, upstream, native, output):
             ])
             for native_bone, mb_bone in BONES.items() for side in ("L", "R")
         }
+        if "joint_anchors" in meta:
+            truth_bones = {native_bone + "." + side: np.asarray(meta["joint_anchors"][f"{mb_bone}_{side}"])
+                           for native_bone, mb_bone in BONES.items() for side in ("L", "R")}
         session = Session(source.parent / "project")
         body = load_project_body(session.store)
         fit = session.current_shared_fit()

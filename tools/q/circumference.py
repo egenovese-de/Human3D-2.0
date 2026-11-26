@@ -14,7 +14,7 @@ def circumference(vertices, faces, z):
     points = {}
     for face in faces:
         points_on_plane = []
-        polygon = vertices[face]
+        polygon = vertices[list(face)]
         for a, b in zip(polygon, np.roll(polygon, 1, axis=0)):
             if (a[2] < z) == (b[2] < z):
                 continue

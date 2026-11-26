@@ -1,5 +1,7 @@
 # Q Blender comparative renders and failure atlas
 
+The [held-out follow-up](Q_HOLDOUT_FOLLOWUP.md) adds four preset identities, articulated fixtures and changed reference inputs. This report records the original pilot.
+
 - [MBLab_human_female_asymmetric](q/MBLab_human_female_asymmetric.png)
 - [MBLab_human_male_base](q/MBLab_human_male_base.png)
 - [Native wireframe, distance colors and baked UV texture](q/diagnostics.png)
