@@ -45,6 +45,17 @@ def main():
             body = json.loads((root/"frozen"/(digest+".json")).read_text())
             assert len(body["morph_targets"]) == 14
             assert body["source_asset_digests"] == expected
+            from human3d.texture_bake import _hidden_vertices
+            from human3d.anatomical_evidence import REGION_LANDMARKS
+            rig = body["rig"]
+            assert not _hidden_vertices(rig, ())
+            regions = {name: _hidden_vertices(rig, (name,)) for name in REGION_LANDMARKS}
+            for name, vertices in regions.items():
+                assert vertices, ("empty canonical region", name)
+                assert all(0 <= i < len(rig["skin"]) for i in vertices)
+            for left, right in (("left_arm","right_arm"),("left_leg","right_leg")):
+                assert not regions[left] & regions[right]
+            print("Canonical hidden region mapping: PASS", json.dumps({name:len(vertices) for name,vertices in regions.items()},sort_keys=True),flush=True)
             print("Actual pinned assets: PASS; frozen digest:",digest,flush=True)
 
 if __name__ == "__main__":
