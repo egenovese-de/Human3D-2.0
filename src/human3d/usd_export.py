@@ -197,10 +197,6 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
             if texture is not None:
                 _texture_material(stage, mesh, texture, directory, roughness)
             stage.GetRootLayer().Save()
-        # Release all authored stage handles before packaging or replacing files.
-        del mesh, animation, skeleton, root, stage
-        if garments:
-            del shell
         author_stage()
         if texture is not None:
             package = directory / destination.name
@@ -243,10 +239,4 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
                 if not shader or not shader.GetInput("file").Get().resolvedPath:
                     raise ValueError("exported_garment_material_validation_failed")
         validate_stage()
-        # USD objects retain stage/layer references on Windows.
-        if texture is not None:
-            del material, texture_shader
-        if garments:
-            del prim, shader
-        del reopened_pose, cache, reopened
         os.replace(output, destination)
