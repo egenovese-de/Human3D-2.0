@@ -68,6 +68,18 @@ def main():
             uv = np.asarray(body["mesh"]["texcoords"])
             assert np.isfinite(uv).all() and np.all((uv >= 0) & (uv <= 1)), (uv.min(), uv.max())
             print("Canonical UV domain: PASS", float(uv.min()), float(uv.max()), flush=True)
+            mesh = body["mesh"]
+            body_faces = [face["corners"] for face in mesh["faces"] if face["group"] == "body"]
+            body_vertices = {index for face in body_faces for index, _ in face}
+            assert all(len({index for index, _ in face}) == len(face) for face in body_faces)
+            max_weight_error = max(abs(sum(body["rig"]["skin"][i].values()) - 1)
+                                   for i in body_vertices)
+            assert max_weight_error <= 1e-4
+            print("Canonical topology and skin: PASS", json.dumps({
+                "body_vertices": len(body_vertices), "body_faces": len(body_faces),
+                "uv_coordinates": len(uv), "bones": len(body["rig"]["bones"]),
+                "max_body_weight_error": max_weight_error,
+            }), flush=True)
             assert len(body["morph_targets"]) == 14
             assert body["source_asset_digests"] == expected
             from human3d.texture_bake import _hidden_vertices

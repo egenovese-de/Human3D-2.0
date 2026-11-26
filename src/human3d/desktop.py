@@ -25,7 +25,7 @@ class PhotosWindow(QWidget):
         self.store = None
         self.session = None
         self.fitted_preview = None
-        self.pose_corrections = {}
+        self.pose_correction = None
         self.setWindowTitle("Human3D 2.0")
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
@@ -81,6 +81,12 @@ class PhotosWindow(QWidget):
     def update_actions(self):
         snapshot = self.session.snapshot() if self.session else None
         project = snapshot.project if snapshot else None
+        if project:
+            revision = (project.id, project.revision)
+            if self.fitted_preview and self.fitted_preview[:2] != revision:
+                self.fitted_preview = None
+            if self.pose_correction and self.pose_correction[:2] != revision:
+                self.pose_correction = None
         ready = bool(snapshot and snapshot.reconstruct.enabled)
         shared = None
         fitted = False
@@ -136,6 +142,7 @@ class PhotosWindow(QWidget):
         session = Session(Path(directory), create)
         self.session = session
         self.fitted_preview = None
+        self.pose_correction = None
         self.store = session.store
         self.refresh()
 
@@ -162,9 +169,9 @@ class PhotosWindow(QWidget):
         return results
 
     def _corrected_fit(self, project, body, fit, alignment):
-        saved = self.pose_corrections.get((project.id, project.revision))
-        if saved is not None and saved[0] == fit:
-            alignment = saved[1]
+        saved = self.pose_correction
+        if saved is not None and saved[:3] == (project.id, project.revision, fit):
+            alignment = saved[3]
         return body, fit, alignment
 
     def current_fit(self):
@@ -316,6 +323,7 @@ class PhotosWindow(QWidget):
         finally:
             timer.stop()
             worker.join()
+            dialog.deleteLater()
         ok, value = result[0]
         if not ok:
             raise value
@@ -364,7 +372,7 @@ class PhotosWindow(QWidget):
                 project = self.store.load()
                 def save_pose(alignment):
                     if self.store.load() == project:
-                        self.pose_corrections[(project.id, project.revision)] = (fit[1], alignment)
+                        self.pose_correction = (project.id, project.revision, fit[1], alignment)
 
                 BodyPreview(*fit, parent=self, on_pose_applied=save_pose).exec()
 

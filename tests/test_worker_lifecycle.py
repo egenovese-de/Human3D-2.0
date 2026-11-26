@@ -3,8 +3,8 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 import unittest
 from threading import get_ident
 from time import sleep
-from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QApplication
+from PySide6.QtCore import QCoreApplication, QEvent, QTimer
+from PySide6.QtWidgets import QApplication, QDialog
 from human3d.desktop import PhotosWindow
 
 class WorkerLifecycle(unittest.TestCase):
@@ -28,6 +28,8 @@ class WorkerLifecycle(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "fixture error"):
                 window.run_worker(fail)
             self.assertEqual(window.run_worker(lambda: 42), 42)
+            QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
+            self.assertEqual(window.findChildren(QDialog), [])
         finally:
             timer.stop()
             window.close()
@@ -54,6 +56,8 @@ class WorkerLifecycle(unittest.TestCase):
                 window.run_worker(work, cancelled.set)
             self.assertTrue(cleaned.is_set())
             self.assertEqual(window.run_worker(lambda: 7), 7)
+            QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
+            self.assertEqual(window.findChildren(QDialog), [])
         finally:
             window.close()
 
