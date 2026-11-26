@@ -1,6 +1,7 @@
 """Typed, photo-bound orientation and visibility evidence from external providers."""
 from dataclasses import dataclass, replace
 from math import isfinite
+import logging
 from pathlib import Path
 from typing import Protocol
 
@@ -72,11 +73,15 @@ class EvidenceAdapter:
         detection = self._detector.detect(original_path, photo_digest)
         if len(detection.candidates) != 1:
             return detection
-        evidence = self._provider.observe(original_path, photo_digest, 0)
-        if evidence is None:
+        try:
+            evidence = self._provider.observe(original_path, photo_digest, 0)
+            if evidence is None:
+                return detection
+            if not isinstance(evidence, AnatomicalEvidence) or evidence.photo_digest != photo_digest or evidence.candidate != 0:
+                raise ValueError("provider_evidence_binding_mismatch")
+        except Exception as error:
+            logging.getLogger(__name__).warning("Optional anatomical provider unavailable (%s); using native evidence", type(error).__name__)
             return detection
-        if evidence.photo_digest != photo_digest or evidence.candidate != 0:
-            raise ValueError("provider_evidence_binding_mismatch")
         return replace(detection, anatomical=evidence)
 
     def close(self):
