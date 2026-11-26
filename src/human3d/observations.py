@@ -66,6 +66,8 @@ class ObservationStore:
         payload = asdict(value)
         if value.anatomical is None:
             payload.pop("anatomical")
+        elif value.anatomical.schema_version == 1:
+            payload["anatomical"].pop("observations")
         payload["masks"] = [_encode(mask) if mask is not None else None for mask in value.masks]
         return self._write("subject_detection", payload)
 

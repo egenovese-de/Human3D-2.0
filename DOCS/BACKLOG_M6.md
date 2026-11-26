@@ -10,9 +10,9 @@
 | M6.1-004 | Validate layered garment collision behavior and regression performance | DONE |
 | M6.1-005 | Separate mask, landmark and pose suitability in vision evidence | DONE |
 | M6.1-006 | Integrate lateral silhouette eligibility without unsafe pose acceptance | DONE |
-| M6.1-007 | Replay detector stress suite and validate review behavior | TODO |
-| M6.2-001 | Implement typed evidence v2 validation, provenance and uncertainty | TODO |
-| M6.2-002 | Implement v1 compatibility, offline fallback and project migration | TODO |
+| M6.1-007 | Replay detector stress suite and validate review behavior | DONE |
+| M6.2-001 | Implement typed evidence v2 validation, provenance and uncertainty | DONE |
+| M6.2-002 | Implement v1 compatibility, offline fallback and project migration | DONE |
 | M6.2-003 | Implement supported quantitative evidence consumers and known-effect tests | TODO |
 | M6.2-004 | Implement confidence-aware regional fusion and conflict handling | TODO |
 | M6.2-005 | Validate independent landmark semantics, visibility and coordinate mapping | TODO |

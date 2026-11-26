@@ -1,0 +1,5 @@
+# M6 vision triage
+
+Mask, torso-landmark and full-pose suitability are evaluated independently. A binary, frame-contained mask and usable torso anchors allow a profile silhouette to support shared fitting when native yaw is within 75–105° of frontal and missing full-body anchors are confined to one knee/ankle pair. The focused policy uses native geometric evidence. The prior full-pose review threshold remains in effect. Geometry-only photos are excluded from automatic target articulation and from appearance sampling. The same photo can contribute to neutral fitting regardless of target selection.
+
+The Linux replay matched all 132 input SHA-256 values to Q. All eight clean profiles qualified for geometry-only use and retained pose review. Profile segmentation IoU ranged from 97.30% to 98.32%. No frontal or degraded frontal case was classified as geometry-only. All 132 full-pose review outcomes matched the release. This replay covers the four Q presets and their treatments. See [per-case metrics and revisions](https://github.com/egenovese-de/Human3D-2.0/blob/c4de8fede475ee7b7a2e17baa23a05b24200fa8a/DOCS/m6/vision-stress-replay.json).
