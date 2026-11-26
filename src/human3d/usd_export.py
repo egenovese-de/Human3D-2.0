@@ -3,6 +3,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import os
 import json
+from zipfile import ZipFile
+from math import isfinite
+import re
 
 from pxr import Gf, Sdf, Tf, Usd, UsdGeom, UsdShade, UsdSkel, UsdUtils, Vt
 
@@ -64,6 +67,8 @@ def _texture_material(stage, mesh, texture, directory, roughness, *, material_pa
 def _bind_mesh(stage, path, vertices, faces, texcoords, skin, joint_indices, skeleton_path):
     used = sorted({index for face in faces for index, _ in face})
     remap = {index: local_index for local_index, index in enumerate(used)}
+    if not used:
+        raise ValueError("empty_export_mesh")
     width = max(len(skin[index]) for index in used)
     indices, weights = [], []
     if any(not skin[index] for index in used):
@@ -92,6 +97,11 @@ def _bind_mesh(stage, path, vertices, faces, texcoords, skin, joint_indices, ske
 
 
 def export_body(destination: Path, body, fit, alignment, *, texture=None, roughness=0.65, garments=(), ground=False):
+    garments = tuple(garments)
+    if any(not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', item.garment.name) for item in garments):
+        raise ValueError("invalid_export_garment_name")
+    if any(not isfinite(item.observed_fraction) or not 0 <= item.observed_fraction <= 1 for item in garments):
+        raise ValueError("invalid_export_coverage")
     suffix = destination.suffix.lower()
     if texture is None and suffix not in {".usd", ".usda", ".usdc"}:
         raise ValueError("Use an OpenUSD filename ending in .usd, .usda, or .usdc.")
@@ -158,7 +168,8 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
         animation = UsdSkel.Animation.Define(stage, "/Human/Pose")
         animation.CreateJointsAttr(paths)
         pose = local(posed)
-        animation.SetTransforms(pose)
+        if not animation.SetTransforms(pose):
+            raise ValueError("default_pose_authoring_failed")
         # Blender imports a constant authored animation when it spans two samples.
         stage.SetStartTimeCode(1)
         stage.SetEndTimeCode(2)
@@ -189,7 +200,21 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
             if not UsdUtils.CreateNewUsdzPackage(Sdf.AssetPath(str(output)), str(package)):
                 raise ValueError("textured_package_creation_failed")
             output = package
+        if texture is not None:
+            with ZipFile(output) as archive:
+                names = archive.namelist()
+                expected = {"albedo.png", *(f"{item.garment.name}.png" for item in garments)}
+                if (archive.testzip() is not None or len(names) != len(set(names))
+                        or not expected <= {Path(name).name for name in names}):
+                    raise ValueError("invalid_texture_package")
         reopened = Usd.Stage.Open(str(output))
+        if not reopened:
+            raise ValueError("exported_stage_validation_failed")
+        reopened_pose = UsdSkel.Animation.Get(reopened, "/Human/Pose")
+        for frame in (1, 2):
+            actual = reopened_pose.GetTransforms(Usd.TimeCode(frame))
+            if len(actual) != len(pose) or any(not Gf.IsClose(a, b, 1e-5) for a, b in zip(actual, pose)):
+                raise ValueError("exported_pose_validation_failed")
         cache = UsdSkel.Cache()
         cache.Populate(UsdSkel.Root.Get(reopened, "/Human"), Usd.PrimDefaultPredicate)
         if not cache.GetSkelQuery(UsdSkel.Skeleton.Get(reopened, "/Human/Rig")):
