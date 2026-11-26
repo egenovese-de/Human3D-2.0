@@ -56,3 +56,60 @@ class ImageCoordinates(unittest.TestCase):
         self.assertEqual(draft.image.size,(20,16))
         self.assertEqual(draft.validate().photo_digest,"fixture")
         self.assertIsNone(_NativePoseLandmarker._mask_png(np.zeros((7,16)),(16,8)))
+
+    def test_application_coordinate_contract(self):
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from hashlib import sha256
+        from types import SimpleNamespace as NS
+        from human3d.project_store import ProjectStore
+        from human3d.originals import OriginalStore
+        from human3d.ingestion import import_photos
+        from human3d.thumbnails import thumbnail
+        from human3d.appearance import prepare_view
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            store = ProjectStore(root / "project")
+            store.create()
+            originals = OriginalStore(store.directory)
+            for orientation in range(1,9):
+                with self.subTest(orientation=orientation):
+                    photo = root / f"fixture-{orientation}.png"
+                    source = Image.new("RGB",(19,31),(180,120,90))
+                    source.putpixel((0,0),(255,0,0))
+                    exif = source.getexif()
+                    exif[274] = orientation
+                    source.save(photo,exif=exif)
+                    raw = photo.read_bytes()
+                    digest = sha256(raw).hexdigest()
+                    self.assertEqual(import_photos(store,[photo])[0].status,"accepted")
+                    self.assertEqual(originals.verify(digest).read_bytes(),raw)
+                    self.assertEqual(import_photos(store,[photo])[0].status,"duplicate")
+                    expected = ImageOps.exif_transpose(Image.open(photo)).convert("RGB")
+                    with Image.open(BytesIO(thumbnail(originals,digest,64))) as thumb:
+                        self.assertEqual(thumb.convert("RGB").tobytes(),expected.tobytes())
+                    native = _NativePoseLandmarker.__new__(_NativePoseLandmarker)
+                    native._segmentation = True
+                    native._array = np.asarray
+                    native._format = None
+                    native._image = lambda **kw: kw["data"]
+                    def detect(array):
+                        h,w = array.shape[:2]
+                        self.assertTrue(np.array_equal(array[:,:expected.width],np.asarray(expected)))
+                        p = NS(x=.25*expected.width/w,y=.5,visibility=1.,presence=1.,z=0.)
+                        mask = np.zeros((h,w),np.float32)
+                        mask[:,:expected.width//2] = 1
+                        return NS(pose_landmarks=[[p]*33],pose_world_landmarks=[[p]*33],
+                                  segmentation_masks=[NS(is_contiguous=lambda:True,numpy_view=lambda:mask)])
+                    native._detector = NS(detect=detect)
+                    evidence = native.detect(originals.verify(digest),digest)
+                    self.assertEqual(evidence.image_size,expected.size)
+                    self.assertAlmostEqual(evidence.candidates[0][0].x,.25)
+                    self.assertAlmostEqual(evidence.candidates[0][0].y,.5)
+                    reviewed = MaskDraft(evidence,0).validate()
+                    view = NS(ref=NS(photo_digest=digest),mask=reviewed,detection=evidence,candidate=0)
+                    appearance = prepare_view(originals,view,NS(camera=NS(yaw_degrees=0)))
+                    self.assertTrue(np.array_equal(appearance.rgb,np.asarray(expected)))
+                    self.assertTrue(appearance.foreground[:,0].all())
+                    self.assertFalse(appearance.foreground[:,-1].any())
