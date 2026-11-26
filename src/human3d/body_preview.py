@@ -113,9 +113,9 @@ class BodyPreview(QDialog):
                 offsets[limb.currentText()] = value
                 angles = {name: angle + radians(offsets.get(name, 0)) for name, angle in alignment.limb_angles.items()}
                 candidate = replace(alignment, limb_angles=angles)
-                current = pose_transforms(rig, joints, candidate)
-                vertices = skin_vertices(neutral, rig["skin"], current)
                 try:
+                    current = pose_transforms(rig, joints, candidate)
+                    vertices = skin_vertices(neutral, rig["skin"], current)
                     validate_pose(body, neutral, vertices)
                 except ValueError as error:
                     contact.setText(str(error))
