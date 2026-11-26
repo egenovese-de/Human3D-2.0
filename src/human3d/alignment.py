@@ -26,6 +26,12 @@ class Camera:
     origin: complex
     horizontal_sign: int = -1
 
+    def __post_init__(self):
+        if (not isfinite(self.yaw_degrees) or self.horizontal_sign not in (-1, 1)
+                or not all(isfinite(v) for v in (self.similarity.real, self.similarity.imag, self.origin.real, self.origin.imag))
+                or abs(self.similarity) <= 1e-12):
+            raise ValueError("invalid_camera_transform")
+
     def project(self, vertex):
         x, y, z = vertex
         yaw = radians(self.yaw_degrees)
@@ -48,6 +54,8 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
     if len(pose) != 33 or not all(pose[index].observed for index in TORSO):
         raise ValueError("insufficient_torso_evidence")
     width, height = evidence.image_size
+    if not (isfinite(width) and isfinite(height) and width > 0 and height > 0):
+        raise ValueError("invalid_camera_image_size")
     observed = [complex(landmark.x * width, landmark.y * height) for landmark in pose]
     targets = [observed[index] for index in TORSO]
     weights = [pose[index].visibility * pose[index].presence for index in TORSO]
@@ -70,11 +78,11 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
         center = sum(weight * point for weight, point in zip(weights, points)) / total_weight
         centered = [point - center for point in points]
         variance = sum(weight * abs(point) ** 2 for weight, point in zip(weights, centered))
-        if variance <= 1e-12:
+        if not isfinite(variance) or variance <= 1e-12:
             return None
         similarity = sum(weight * point.conjugate() * (target - target_center)
                          for weight, point, target in zip(weights, centered, targets)) / variance
-        if similarity.real <= 1e-6:
+        if not all(isfinite(v) for v in (similarity.real, similarity.imag)) or similarity.real <= 1e-6:
             return None
         camera = Camera(yaw, similarity, target_center - similarity * center, 1)
         rms = (sum(weight * abs(camera.project(vertex) - target) ** 2
