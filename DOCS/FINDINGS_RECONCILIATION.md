@@ -47,3 +47,6 @@ RESOLVED for mandatory RC1 scope. Optional provider failure isolation 39a9dd4; d
 
 ## S2-010 closure — AUD-05
 RESOLVED for reproduced same-session dependency invalidation defect. Correction bcb2adf and c55ac47; converted regression 6093fbe. Required checks run 45829440057 all five jobs SUCCESS; 61 tests PASS Ubuntu, Windows and clean Windows installation. Persisted mask revision advances generation, rejects obsolete preview promotion, retains prior preview as stale and new mask as current; identical correction does not advance generation. Conservative invalidation; exhaustive concurrent/cross-process and GUI/export coverage not established. See S2-010_OBSERVATION_INVALIDATION.md. No empirical testing.
+
+## S3-001 closure — AUD-02
+RESOLVED for reproduced capability/status mismatch and fit action gating. Corrections 7bef859 and 8efe5dd; regression 497fcdd. Required checks run 45832078193 all five jobs SUCCESS, 61 tests PASS Ubuntu, Windows and clean Windows installation. Readiness is conditional on registered prerequisites; offscreen Qt regression uses synthetic frozen digest and mocked fit callback. Full downstream GUI workflow not certified. See S3-001_GUI_CAPABILITY.md. No empirical tests.
