@@ -150,6 +150,8 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
     with TemporaryDirectory(dir=destination.parent) as temporary:
         directory = Path(temporary)
         output = directory / ("body.usdc" if texture is not None else destination.name)
+        pose = local(posed)
+
         def author_stage():
             stage = Usd.Stage.CreateNew(str(output))
             root = UsdSkel.Root.Define(stage, "/Human")
@@ -168,7 +170,6 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
             skeleton.CreateRestTransformsAttr(local(rest))
             animation = UsdSkel.Animation.Define(stage, "/Human/Pose")
             animation.CreateJointsAttr(paths)
-            pose = local(posed)
             if not animation.SetTransforms(pose):
                 raise ValueError("default_pose_authoring_failed")
             # Blender imports a constant authored animation when it spans two samples.
