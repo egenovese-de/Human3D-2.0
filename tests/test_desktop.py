@@ -38,6 +38,6 @@ class DesktopTests(unittest.TestCase):
                 self.assertEqual(window.store.load().photos.target, target)
                 window.attach(root / "project")
                 self.assertEqual(window.photos.currentItem().data(Qt.ItemDataRole.UserRole), target)
-                self.assertIn("Reconstruction unavailable", window.status.text())
+                self.assertIn("Freeze a rest body first", window.status.text())
             finally:
                 window.close()
