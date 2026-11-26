@@ -11,7 +11,6 @@ from time import perf_counter
 from PIL import Image
 import numpy as np
 
-from human3d.anatomical_evidence import AnatomicalEvidence, EvidenceAdapter, RegionVisibility
 from human3d.appearance import prepare_view
 from human3d.bootstrap import freeze_project
 from human3d.fitting import _scorer
@@ -32,6 +31,8 @@ class SimulatedProvider:
         self.records = json.loads(path.read_text(encoding="utf-8"))
 
     def observe(self, photo, photo_digest, candidate):
+        from human3d.anatomical_evidence import AnatomicalEvidence, RegionVisibility
+
         row = self.records.get(photo_digest)
         if row is None:
             return None
@@ -78,6 +79,8 @@ def main():
     detector = PoseLandmarker(args.model, segmentation=True)
     report["evidence_mode"] = "detector"
     if args.simulated_evidence:
+        from human3d.anatomical_evidence import EvidenceAdapter
+
         detector = EvidenceAdapter(detector, SimulatedProvider(args.simulated_evidence))
         report["evidence_mode"] = "detector_and_simulated"
         report["simulated_evidence_sha256"] = sha256(args.simulated_evidence.read_bytes()).hexdigest()
@@ -124,13 +127,15 @@ def main():
         report["cameras"] = {key: {"yaw": value.camera.yaw_degrees, "torso_rms_px": value.torso_rms_pixels}
                              for key, value in shared.alignments.items()}
         report["photo_ids"] = {path.name: photo_ids[row["sha256"]] for path, row in cases}
-        export_body(args.output / "native.usdc", body, shared.fit, alignment, ground=args.ground)
+        placement = {"ground": True} if args.ground else {}
+        export_body(args.output / "native.usdc", body, shared.fit, alignment, **placement)
         atlas = bake_atlas(body, shared.fit.controls, views, target)
         report["observed_uv_fraction"] = atlas.observed_fraction
         atlas.skin_candidate.save(args.output / "body-skin-uv.png")
-        atlas.hair_candidate.save(args.output / "hair-candidate-uv.png")
-        report["hair_candidate_texels"] = int(np.count_nonzero(np.asarray(atlas.hair_candidate)))
-        export_body(args.output / "native.usdz", body, shared.fit, alignment, texture=atlas.color, ground=args.ground)
+        if getattr(atlas, "hair_candidate", None) is not None:
+            atlas.hair_candidate.save(args.output / "hair-candidate-uv.png")
+            report["hair_candidate_texels"] = int(np.count_nonzero(np.asarray(atlas.hair_candidate)))
+        export_body(args.output / "native.usdz", body, shared.fit, alignment, texture=atlas.color, **placement)
         if args.garment:
             view, size = views[target]
             try:
@@ -142,7 +147,7 @@ def main():
                 shell = GarmentAsset(garment.garment, baked.color, baked.observed_fraction)
                 body_color = neutralize_covered_body_color(body, atlas.color, [garment.garment])
                 export_body(args.output / "garment.usdz", body, shared.fit, alignment,
-                            texture=body_color, garments=[shell], ground=args.ground)
+                            texture=body_color, garments=[shell], **placement)
                 report["garment"] = {"result": "PASS", "category": args.garment,
                                      "candidate_overlap": garment.overlap,
                                      "observed_uv_fraction": baked.observed_fraction}

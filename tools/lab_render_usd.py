@@ -19,6 +19,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
+    parser.add_argument("--framing", type=Path, help="Use camera center and span from another render report.")
     parser.add_argument("--label", default="USD asset preview (not empirical validation)")
     return parser.parse_args(args)
 
@@ -109,6 +110,9 @@ def main():
     if not meshes:
         raise RuntimeError("No renderable mesh in USD asset")
     center, span, bounds_min, bounds_max = scene_bounds(meshes)
+    if args.framing:
+        frame = json.loads(args.framing.read_text(encoding="utf-8"))
+        center, span = Vector(frame["camera_center"]), float(frame["bounding_span"])
     lighting(scene, center, span)
     render_views(scene, center, span, args.out_dir, "textured")
     clay = bpy.data.materials.new("LAB_ONLY_Clay_Override")
@@ -125,7 +129,7 @@ def main():
             "mesh_count": len(meshes),
             "mesh_names": [obj.name for obj in meshes],
             "bounds_min": bounds_min, "bounds_max": bounds_max,
-            "bounding_span": span, "blender_version": bpy.app.version_string,
+            "bounding_span": span, "camera_center": tuple(center), "blender_version": bpy.app.version_string,
             "note": "Visual smoke/inspection render only; no photographic reconstruction quality PASS."
         }, indent=2),
         encoding="utf-8",

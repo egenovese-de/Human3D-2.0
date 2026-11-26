@@ -15,7 +15,6 @@ from human3d.fitting import _optimize, _scorer
 from human3d.frozen_body import deform_vertices, load_frozen_body, morph_controls
 from human3d.mask_review import SubjectMask
 from human3d.native_rig import validate_rebind
-from human3d.regional_morphs import regional_controls
 
 
 def silhouette(vertices, faces, camera, size):
@@ -35,7 +34,8 @@ def compare(reference, prediction):
     actual_edge = actual ^ binary_erosion(actual)
     contour = (distance_transform_edt(~expected_edge)[actual_edge].mean()
                + distance_transform_edt(~actual_edge)[expected_edge].mean()) / 2
-    return {"iou": intersection / union, "symmetric_contour_px": float(contour)}
+    return {"iou": intersection / union, "symmetric_contour_px": float(contour),
+            "normalized_contour": float(contour / np.hypot(*expected.shape))}
 
 
 def band_iou(reference, prediction, camera, joints, bones):
@@ -55,6 +55,7 @@ def band_iou(reference, prediction, camera, joints, bones):
 
 
 def sensitivity(body, neutral):
+    from human3d.regional_morphs import regional_controls
     baseline = np.asarray(neutral)
     report = {}
     for name in (*morph_controls(body), *regional_controls(body)):
@@ -72,11 +73,13 @@ def sensitivity(body, neutral):
 
 
 def main():
+    from human3d.regional_morphs import regional_controls
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("product", "assets", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--regional", action="store_true")
     parser.add_argument("--carve", action="store_true")
+    parser.add_argument("--independent", action="store_true", help="Use an analytic torso displacement outside the solver basis.")
     args = parser.parse_args()
     product_sha = revision(args.product)
     lab_sha = revision(Path(__file__).parents[1])
@@ -89,6 +92,13 @@ def main():
     if args.regional:
         truth_controls |= {"abdomen_depth": .375, "glute_depth": .25, "shin_depth": -.375}
     truth = deform_vertices(body, truth_controls)
+    if args.independent:
+        truth = np.asarray(truth).copy()
+        x, y, z = truth.T
+        center_y = np.quantile(y, .58)
+        local = np.exp(-((x - .35) / 1.15) ** 2 - ((y - center_y) / 1.45) ** 2)
+        front = np.clip(z / 1.1, 0, 1)
+        truth[:, 2] += .35 * local * front
     faces = [tuple(index for index, _ in face["corners"])
              for face in body["mesh"]["faces"] if face["group"] == "body"]
     minimum, maximum = np.min(truth, axis=0), np.max(truth, axis=0)
@@ -117,10 +127,13 @@ def main():
         available += regional_controls(body)
     controls, _ = _optimize(body, score, {}, available, (.25, .125))
     fitted = deform_vertices(body, controls)
+    front_score = _scorer(body, {"front": masks["front"]}, {"front": alignments["front"]}, neutral)
+    single_controls, _ = _optimize(body, front_score, {}, available, (.25, .125))
+    single = deform_vertices(body, single_controls)
     configurations = {"baseline": (neutral, noisy), "camera_only": (neutral, alignments),
-                      "geometry_only": (fitted, noisy), "camera_and_geometry": (fitted, alignments)}
+                      "single_photo": (single, alignments), "geometry_only": (fitted, noisy), "camera_and_geometry": (fitted, alignments)}
     report = {"product_sha": product_sha, "lab_sha": lab_sha, "frozen_sha256": frozen,
-              "visual_hull_objective": args.carve, "truth_controls": truth_controls, "fitted_controls": controls,
+              "visual_hull_objective": args.carve, "independent_deformation": args.independent, "truth_controls": truth_controls, "fitted_controls": controls,
               "vertex_rmse_mm": float(100 * np.sqrt(np.mean(np.sum(
                   (np.asarray(fitted) - np.asarray(truth)) ** 2, axis=1)))),
               "held_out_view": "held_out", "training_views": list(masks), "views": {}}
@@ -151,6 +164,7 @@ def main():
             abs(camera.project(point) - camera.project(ground_truth_joints[joint])) ** 2
             for joint, point in fitted_joints.items()
         ])))
+        metrics["normalized_joint_rmse"] = metrics["fitted_projected_joint_rmse_px"] / (scale * (maximum[1] - minimum[1]))
         report["views"][name] = {"yaw": camera.yaw_degrees, "scale": camera.similarity,
                                  "origin": [camera.origin.real, camera.origin.imag], "metrics": metrics}
     (output / "geometry.json").write_text(json.dumps(report, indent=2) + "\n")
