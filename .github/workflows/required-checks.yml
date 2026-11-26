@@ -51,9 +51,11 @@ jobs:
       - if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libgles2 libglib2.0-0t64
       - if: runner.os == 'Linux'
-        run: python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-linux.lock
+        run: >-
+          python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-linux.lock
       - if: runner.os == 'Windows'
-        run: python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-windows.lock
+        run: >-
+          python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-windows.lock
       - run: python -m pip install --no-deps .
       - run: python -m pip check
       - run: python -c "import PIL, PySide6"
@@ -63,12 +65,12 @@ jobs:
       - run: python tools/verify_runtime_assets.py
       - if: runner.os == 'Linux'
         run: python tools/audit_dependency_security.py
-      - if: runner.os == 'Linux'
-        run: python -m pip wheel --no-deps --wheel-dir dist .
-      - if: runner.os == 'Linux'
-        run: python tools/check_release_boundary.py dist
+      - run: python tools/build_verified_wheel.py dist
       - if: runner.os == 'Windows'
-        run: python tools/verify_windows_install.py
+        shell: pwsh
+        run: |
+          $wheel = Get-ChildItem dist -Filter *.whl
+          python tools/verify_windows_install.py --wheel $wheel.FullName
   scan:
     runs-on: ubuntu-24.04
     timeout-minutes: 10

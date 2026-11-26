@@ -48,6 +48,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--require-windows11", action="store_true")
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--wheel", type=Path, help="Install the verified candidate wheel")
     args = parser.parse_args()
     if sys.version_info[:2] != (3,11) or struct.calcsize("P") != 8:
         raise SystemExit("CPython 3.11 x64 required")
@@ -73,7 +74,8 @@ def main():
             run("fresh venv", sys.executable,"-m","venv",venv)
             py = venv/"Scripts"/"python.exe"
             run("hashed binary dependencies",py,"-m","pip","install","--only-binary=:all:","--require-hashes","--no-deps","-r",ROOT/"requirements-windows.lock")
-            run("application install",py,"-m","pip","install","--no-deps",ROOT)
+            package = args.wheel.resolve(strict=True) if args.wheel else ROOT
+            run("application install",py,"-m","pip","install","--no-deps",package)
             run("pip check",py,"-m","pip","check")
             run("installed CLI",venv/"Scripts"/"human3d.exe","--version",cwd=tmp)
             env = dict(os.environ, QT_QPA_PLATFORM="offscreen", PYTHONNOUSERSITE="1")
