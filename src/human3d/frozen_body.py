@@ -12,10 +12,60 @@ def load_frozen_body(path: Path) -> dict:
     if not re.fullmatch(r"[a-f0-9]{64}", path.stem) or digest != path.stem:
         raise ValueError("frozen_body_digest_mismatch")
     body = json.loads(data)
-    if body["schema_version"] != 1 or body["kind"] != "frozen_body":
+    if not isinstance(body, dict) or body.get("schema_version") != 1 or body.get("kind") != "frozen_body":
         raise ValueError("unsupported_frozen_body")
+    validate_frozen_body(body)
     return body
 
+
+def validate_frozen_body(body):
+    """Validate structural references before consuming a content-addressed body."""
+    def vector(value, length):
+        return len(value) == length and all(type(x) in (int, float) and math.isfinite(x) for x in value)
+
+    def index(value, count):
+        return type(value) is int and 0 <= value < count
+
+    try:
+        mesh, rig = body["mesh"], body["rig"]
+        vertices, uv, faces = mesh["vertices"], mesh["texcoords"], mesh["faces"]
+        if not vertices or not uv or not faces or not all(vector(v, 3) for v in vertices) or not all(vector(v, 2) for v in uv):
+            raise ValueError("mesh")
+        for face in faces:
+            corners = face["corners"]
+            if len(corners) < 3 or any(len(c) != 2 or not index(c[0], len(vertices)) or not index(c[1], len(uv)) for c in corners):
+                raise ValueError("face")
+        joints, bones, skin = rig["joints"], rig["bones"], rig["skin"]
+        if not joints or not bones or len(skin) != len(vertices) or not all(vector(v, 3) for v in joints.values()):
+            raise ValueError("rig")
+        for name, bone in bones.items():
+            if bone["head"] not in joints or bone["tail"] not in joints:
+                raise ValueError("bone joint")
+            seen = {name}
+            parent = bone.get("parent")
+            while parent:
+                if parent in seen or parent not in bones:
+                    raise ValueError("bone hierarchy")
+                seen.add(parent)
+                parent = bones[parent].get("parent")
+        for influences in skin:
+            if any(name not in bones or type(w) not in (int, float) or not math.isfinite(w) or w < 0 for name,w in influences.items()):
+                raise ValueError("skin")
+            if influences and not math.isclose(math.fsum(influences.values()), 1., abs_tol=1e-6):
+                raise ValueError("skin normalization")
+        for name, indices in rig["joint_vertices"].items():
+            if name not in joints or not indices or any(not index(i, len(vertices)) for i in indices):
+                raise ValueError("joint vertices")
+        if set(rig["joint_vertices"]) != set(joints):
+            raise ValueError("joint binding")
+        for offsets in body.get("morph_targets", {}).values():
+            seen = set()
+            for entry in offsets:
+                if len(entry) != 4 or not index(entry[0], len(vertices)) or entry[0] in seen or not vector(entry[1:], 3):
+                    raise ValueError("morph")
+                seen.add(entry[0])
+    except (KeyError, TypeError, ValueError, AttributeError, OverflowError) as error:
+        raise ValueError("invalid_frozen_body_structure") from error
 
 def morph_controls(body: dict) -> dict[str, str]:
     targets = body.get("morph_targets", {})
