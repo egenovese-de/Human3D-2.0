@@ -84,6 +84,10 @@ class EvidenceAdapter:
             return detection
         return replace(detection, anatomical=evidence)
 
+    @property
+    def cancel_event(self):
+        return getattr(self._detector, "cancel_event", None)
+
     def close(self):
         self._detector.close()
 
