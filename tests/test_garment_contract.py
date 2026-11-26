@@ -23,3 +23,19 @@ class GarmentContract(unittest.TestCase):
             measure_clearance(garment,body,points,np.full((3,3),np.nan))
         with self.assertRaisesRegex(ValueError,"unsupported_layer_combination"):
             verify_layers([garment,replace(garment,name="duplicate")],body,points,transforms)
+
+    def test_rest_and_posed_contacts_report_distinct_results(self):
+        from human3d.garments import measure_garment_contacts
+
+        points = np.array([[0., 0., 0.], [2., 0., 0.], [0., 2., 0.]])
+        face = ((0, 0), (1, 1), (2, 2))
+        body = {"mesh": {"vertices": points, "faces": [{"group": "body", "corners": face}]},
+                "rig": {"bones": {"root": {}}}}
+        shell = Garment("top_base", "top", 0, points + [0, 0, .06], (face,),
+                        ((0, 0), (1, 0), (0, 1)), ({"root": 1.},) * 3, (0, 1, 2), .06)
+        posed_shell = [[.5, .5, -1], [.5, .5, 1], [.5, 1.5, 1]]
+        result = measure_garment_contacts(shell, body, points, points, posed_shell)
+        self.assertEqual(result.neutral.crossing, 0)
+        self.assertEqual(result.posed.crossing, 1)
+        self.assertEqual(result.intersections, 1)
+        self.assertIn("Posed: 1 crossing", result.describe())

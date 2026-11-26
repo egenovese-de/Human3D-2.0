@@ -4,9 +4,9 @@
 | M6.0-002 | Define versioned anatomical evidence v2 contract and v1 migration | DONE |
 | M6.0-003 | Define canonical landmark, rig and rotation conventions | DONE |
 | M6.0-004 | Define benchmark splits, metric semantics and promotion gates | DONE |
-| M6.1-001 | Reproduce eight garment false-clear cases and labeled triangle controls | TODO |
-| M6.1-002 | Implement accelerated triangle intersection validation with contact semantics | TODO |
-| M6.1-003 | Integrate neutral and posed garment validation and failure diagnostics | TODO |
+| M6.1-001 | Reproduce eight garment false-clear cases and labeled triangle controls | DONE |
+| M6.1-002 | Implement accelerated triangle intersection validation with contact semantics | DONE |
+| M6.1-003 | Integrate neutral and posed garment validation and failure diagnostics | DONE |
 | M6.1-004 | Validate layered garment collision behavior and regression performance | TODO |
 | M6.1-005 | Separate mask, landmark and pose suitability in vision evidence | TODO |
 | M6.1-006 | Integrate lateral silhouette eligibility without unsafe pose acceptance | TODO |

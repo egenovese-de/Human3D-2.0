@@ -112,7 +112,7 @@ class GarmentDialog(QDialog):
         else:
             self.coverage.clear()
             self.message.setText("No garments in the assembly.")
-        self.save.setEnabled(bool(self.results) and not any(item.report.violations for item in self.results.values()))
+        self.save.setEnabled(bool(self.results) and not any(item.blocked for item in self.results.values()))
 
     def inspect(self, name):
         if name not in self.results:
@@ -123,8 +123,9 @@ class GarmentDialog(QDialog):
         self.coverage.setPixmap(QPixmap.fromImage(ImageQt(image.convert("RGB"))))
         self.message.setText(f"Candidate-mask overlap {result.overlap:.1%}. "
                              f"{result.report.violations} penetration samples. "
-                             f"Minimum signed gap {result.report.minimum * 100:.1f} mm."
-                             + (" Adjust ease, hem or pose and retry before export." if result.report.violations else ""))
+                             f"Minimum signed gap {result.report.minimum * 100:.1f} mm. "
+                             + result.contacts.describe()
+                             + (" Adjust ease, hem or pose and retry before export." if result.blocked else ""))
 
     def preview_outfit(self):
         from .body_preview import MeshCanvas

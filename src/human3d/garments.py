@@ -5,6 +5,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 from .native_rig import rebind_joints, skin_vertices
+from .triangle_collision import TriangleContacts, triangle_contacts
 
 CATEGORIES = ("top", "shorts", "trousers")
 BASE_CLEARANCE = 0.06  # decimeters, 6 mm
@@ -186,6 +187,39 @@ def measure_clearance(garment, body, posed_body, posed_shell):
     centers = shell[_triangulate(garment.faces)].mean(axis=1)
     gaps = _signed_gaps(body_points, triangles, np.concatenate((shell, centers)))
     return ClearanceReport(int(np.count_nonzero(gaps < -TOLERANCE)), float(gaps.min()))
+
+
+
+@dataclass(frozen=True)
+class GarmentContactReport:
+    neutral: TriangleContacts
+    posed: TriangleContacts
+
+    @property
+    def intersections(self):
+        return (self.neutral.crossing + self.neutral.coplanar_overlap +
+                self.posed.crossing + self.posed.coplanar_overlap)
+
+    def describe(self):
+        return (f"Neutral: {self.neutral.crossing} crossing, {self.neutral.coplanar_overlap} overlapping, "
+                f"{self.neutral.touching} touching pairs. Posed: {self.posed.crossing} crossing, "
+                f"{self.posed.coplanar_overlap} overlapping, {self.posed.touching} touching pairs.")
+
+
+def measure_garment_contacts(garment, body, neutral_body, posed_body, posed_shell):
+    """Check the corrected rest and posed shell against the matching body."""
+    validate_garment(garment, body)
+    body_indices = _triangulate(_body_faces(body))
+    shell_indices = _triangulate(garment.faces)
+    rest_body = np.asarray(neutral_body, dtype=float)
+    target_body = np.asarray(posed_body, dtype=float)
+    target_shell = np.asarray(posed_shell, dtype=float)
+    if (rest_body.shape != np.shape(body["mesh"]["vertices"]) or
+            target_body.shape != rest_body.shape or target_shell.shape != np.shape(garment.points)):
+        raise ValueError("invalid_collision_geometry")
+    rest = triangle_contacts(rest_body[body_indices], garment.points[shell_indices])
+    target = triangle_contacts(target_body[body_indices], target_shell[shell_indices])
+    return GarmentContactReport(rest, target)
 
 
 def correct_clearance(garment, body, posed_body, transforms):

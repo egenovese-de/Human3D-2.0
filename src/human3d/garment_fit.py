@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy.ndimage import binary_dilation, label
 
-from .garments import correct_clearance, posed_garment, prototype
+from .garments import GarmentContactReport, correct_clearance, measure_garment_contacts, posed_garment, prototype
 from .native_rig import pose_transforms, skin_vertices, validate_rebind
 from .frozen_body import deform_vertices
 
@@ -16,6 +16,11 @@ class GarmentFit:
     coverage: Image.Image
     overlap: float
     report: object
+    contacts: GarmentContactReport
+
+    @property
+    def blocked(self):
+        return bool(self.report.violations or self.contacts.intersections)
 
 
 def _project(shell, points, camera, image_size, size):
@@ -69,9 +74,11 @@ def fit_garment(body, fit, view, image_size, category, *, ease_mm=0, hem=0, laye
     fallback = None
     for candidate in ranked:
         shell, report = correct_clearance(candidate, body, posed, transforms)
-        if report.violations:
-            if fallback is None or report.violations < fallback.report.violations:
-                fallback = GarmentFit(shell, image, evaluate(shell), report)
-            continue
-        return GarmentFit(shell, image, evaluate(shell), report)
+        contacts = measure_garment_contacts(shell, body, neutral, posed, posed_garment(shell, transforms))
+        result = GarmentFit(shell, image, evaluate(shell), report, contacts)
+        if not result.blocked:
+            return result
+        ranking = (contacts.intersections, report.violations)
+        if fallback is None or ranking < (fallback.contacts.intersections, fallback.report.violations):
+            fallback = result
     return fallback

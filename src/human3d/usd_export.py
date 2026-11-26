@@ -11,7 +11,7 @@ from pxr import Gf, Sdf, Tf, Usd, UsdGeom, UsdShade, UsdSkel, UsdUtils, Vt
 
 from .frozen_body import deform_vertices
 from .native_rig import infer_support_plane, pose_transforms, skin_vertices, validate_rebind, validate_pose
-from .garments import measure_clearance, posed_garment, verify_layers
+from .garments import measure_clearance, measure_garment_contacts, posed_garment, verify_layers
 
 
 def _joint_paths(bones):
@@ -122,9 +122,13 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
             raise ValueError("The garment layers do not have sufficient sampled clearance.")
         for item in garments:
             garment = item.garment
-            clearance = measure_clearance(garment, body, posed_body, posed_garment(garment, transforms))
+            posed_shell = posed_garment(garment, transforms)
+            clearance = measure_clearance(garment, body, posed_body, posed_shell)
             if clearance.violations:
                 raise ValueError(f"{garment.name} has {clearance.violations} sampled penetrations.")
+            contacts = measure_garment_contacts(garment, body, vertices, posed_body, posed_shell)
+            if contacts.intersections:
+                raise ValueError(f"{garment.name} intersects the body. {contacts.describe()}")
             manifest["garments"].append({"prim": f"/Human/Garments/{garment.name}", "category": garment.category,
                                          "layer": garment.layer, "minimum_sampled_clearance_mm": clearance.minimum * 100,
                                          "observed_uv_fraction": item.observed_fraction})
