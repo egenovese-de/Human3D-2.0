@@ -29,7 +29,7 @@
 | S2-005 | Verify frozen-body integrity and correct post-freeze dependency violations | DONE |
 | S2-006 | Resolve confirmed neutral geometry, rig rebinding and pose integration defects | DONE |
 | S2-007 | Resolve confirmed UV, texture and material integration defects | DONE |
-| S2-008 | Resolve confirmed garment geometry, skinning and collision-contract defects | TODO |
+| S2-008 | Resolve confirmed garment geometry, skinning and collision-contract defects | IN_PROGRESS |
 | S2-009 | Resolve confirmed USDZ portability, pose and Blender import defects | TODO |
 | S2-010 | Verify observation/mask revision invalidation and stale artifact promotion (AUD-05) | TODO |
 
