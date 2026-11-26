@@ -1,0 +1,8 @@
+# Q face, pose, texture and garment evidence
+
+- Face: the independent surface measurements include a cranial band. The controlled jaw invariant yielded {'jaw_moved_vertices': 848, 'jaw_max_displacement_mm': 3.163499999999997, 'canonical_topology_uv_rig_unchanged': True, 'neutral_support_plane': -8.1676} at input control 0.5. This local-deformation test cannot establish facial landmark accuracy.
+- Pose: 6 variants with 12 rig endpoint/direction proxies each. Pose intervention effect +6.61 across 6 variants (range +4.37 to +8.71) percentage points. Endpoint and direction errors are in the JSON. Different rig definitions limit positional interpretation, and no joint rotation truth was recorded.
+- Skinning: 6 reports with per-case maximum absolute bone-length change and calibrated units. Measurements check mechanical consistency and do not establish contact or torsion accuracy.
+- Texture: UV fractions use the same release coverage definition. Coverage is a count of observed UV texels, without a color, seam, or contamination accuracy claim.
+- Garments: three native close-fitted shell prototypes per completed component case. Reports retain signed minimum sampled clearances, violations, changed sample counts and maximum pose motion. Sampled signed distances do not bound all geometric triangle intersections.
+- Export: OpenUSD parsed the native USDZ packages and reported mesh and skeleton counts. It verified separate body and top meshes, UVs, skin indices and one inherited skeleton in each AI-input garment export. The host Blender build has no USD import operator. Official LTS archive fetch returned HTTP 403. No Blender edit/save/reopen verification is claimed.

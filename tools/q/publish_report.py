@@ -124,9 +124,15 @@ def write_docs(root, lab):
     success = {k: v for k, v in native.items() if "observed_uv_fraction" in v}
     failure = {k: v for k, v in native.items() if k not in success}
     ai = {name: read(root / f"ai-native-{name}/benchmark.json") for name in ("workshop", "woodland")}
+    contract = collect(root, "contract")
+    extra = collect(root, "extra-fits")
+    exports = read(root / "exports.json", {})
     historical = read(root / "historical/geometry.json")
     validation = read(root / "validation.json", [])
     sections = read(root / "sections.json", [])
+    circumference = collect(root, "circumference")
+    proportions = collect(root, "proportions")
+    volumes = collect(root, "volume")
     manifests = {}
     for path in sorted((root / "pilot").glob("*/manifest.json")):
         manifests[path.parent.name] = {
@@ -135,6 +141,7 @@ def write_docs(root, lab):
             "perspective": read(path.parent / "perspective.json"),
             "depth": read(root / "depth" / path.parent.name / "manifest.json"),
             "photographic": read(path.parent / "robustness.json"),
+            "interleaved_angles": read(root / "extra" / path.parent.name / "manifest.json"),
         }
     asset_hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in sorted((root / "assets").iterdir()) if p.is_file()}
@@ -142,6 +149,9 @@ def write_docs(root, lab):
     atlas = sorted((root / "visuals").glob("MBLab*.png"))
     for image in atlas:
         shutil.copy2(image, output / image.name)
+    diagnostic = root / "visuals/diagnostics.png"
+    if diagnostic.exists():
+        shutil.copy2(diagnostic, output / diagnostic.name)
     experiment_commit = subprocess.check_output(
         ["git", "-C", str(lab), "log", "-1", "--format=%H", "--", "tools/q"], text=True
     ).strip()
@@ -162,8 +172,13 @@ def write_docs(root, lab):
     metrics = {"application_sha": RELEASE, "lab_source_commit": experiment_commit, "native": native,
                "failure_attempts": attempts, "native_performance": perf, "geometry": evals,
                "mask_camera_ablation": ablations, "detector": photographic, "pose": pose, "components": components,
-               "ai": ai, "sections": sections, "fixture_validation": validation, "history": historical,
-               "face_control": read(root / "face.json")}
+               "ai": ai, "sections": sections, "circumference": circumference, "proportions_and_regional_iou": proportions,
+               "voxel_volume_estimates": volumes, "fixture_validation": validation, "history": historical,
+               "face_control": read(root / "face.json"), "supplementary_view_repeat": extra, "garment_usdz_structure": exports,
+               "provider_and_partial_landmark_diagnostic": contract,
+               "host_hardware": {"logical_processors": int(subprocess.check_output(["nproc"], text=True)),
+                                 "cpu_model": next((line.split(":", 1)[1].strip() for line in Path("/proc/cpuinfo").read_text().splitlines()
+                                                    if line.startswith("model name")), "unavailable")}}
     (output / "measurements.json").write_text(json.dumps(metrics, indent=2, allow_nan=False) + "\n")
     (output / "manifest.json").write_text(json.dumps({"fixtures": manifests, "runtime_asset_hashes": asset_hashes,
         "mblab_asset_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
@@ -207,17 +222,28 @@ def write_docs(root, lab):
             counter[2] += row.get("review_reason") is not None or "error" in row
             if "mask_iou" in row:
                 photo_iou[name].append(row["mask_iou"])
+    yaw_conflicts = sum(row["yaw_contract_conflict"] for rows in contract.values() for row in rows)
+    contract_views = sum(map(len, contract.values()))
+    joint_proxy = [row["observed_joint_proxy_rmse_px"] for rows in contract.values() for row in rows
+                   if row["observed_joint_proxy_rmse_px"] is not None]
+    mean_joint_rmse = f"{statistics.mean(joint_proxy):.1f} px" if joint_proxy else "unavailable"
     pose_effect = [item["oracle_limb_directions_fixed_shape_iou"] -
                    item["native_pose_calibrated_evaluation_iou"] for item in pose.values()]
     blends = [f"- [{p.stem}](q/{p.name})" for p in atlas]
+    if diagnostic.exists():
+        blends.append("- [Native wireframe, distance colors and baked UV texture](q/diagnostics.png)")
     completed = {"Q0-001", "Q0-002", "Q0-003", "Q0-004", "Q1-004", "Q2-001",
                  "Q4-001", "Q4-004", "Q6-001", "Q6-004"}
+    if circumference and proportions and volumes:
+        completed.add("Q1-003")
     if evals:
         completed |= {"Q1-001", "Q1-002", "Q1-005", "Q1-007", "Q3-001", "Q3-003", "Q3-005"}
     if ablations:
         completed |= {"Q2-002", "Q2-003", "Q6-002"}
     if pose:
         completed.add("Q2-006")
+    if extra:
+        completed.add("Q3-002")
     if stress:
         completed |= {"Q4-002", "Q4-003"}
     if stress and all(item and "detections" in item for item in ai.values()):
@@ -229,11 +255,11 @@ def write_docs(root, lab):
       "Q1-003": "Section perimeter proxies were measured. Anatomical tape correspondences and validated volumetric IoU were unavailable.",
       "Q1-006": "A torso displacement stress case was executed. Independently rigged spinal and pelvic rotations were unavailable.",
       "Q2-004": "Rig endpoints exist for selected bones. An independent 33-landmark surface protocol with detector-equivalent visibility was unavailable.",
-      "Q2-005": "The provider accepts yaw and visibility only. True measurements or mesh evidence have no provider field, and yaw disagreement can cause rejection.",
+      "Q2-005": "A calibrated yaw-only probe ran. True anatomical measurements and shape have no provider field. Oracle visibility could not be established at the provider’s region level.",
       "Q2-007": "Fixed-camera/mask fits and separate limb-direction substitutions ran. A jointly valid pose and landmark oracle was unavailable.",
       "Q2-008": "Independent meshes have different topology, UV and rig. Texture and garment builders require a compatible frozen asset and its rig/UV bindings. No compatible independent adapter was validated.",
-      "Q3-002": "Three, four and eight calibrated input cameras were executed. Sixteen calibrated fitting views were unavailable in the pilot.",
-      "Q3-004": "Redundant, truly contradictory and differing-posed views were unavailable in calibrated pairs; unrelated AI photos were kept separate.",
+      "Q3-002": "Three, four and eight calibrated input cameras were executed. The supplemented sixteen-view repeat had yet to produce verified results.",
+      "Q3-004": "The supplemental repeat includes duplicated frontal input when its report is present. Truly contradictory and differently posed calibrated pairs remain unavailable. Unrelated AI photos were kept separate.",
       "Q4-005": "Clothed AI cases lack independently paired bare-body geometry and garment masks.",
       "Q5-001": "Cranial surface distance was measured. Annotated facial landmarks and dense facial region masks were unavailable.",
       "Q5-002": "Jaw control locality was exercised. Facial profile/cranial identity ground truth and controlled expressions were unavailable.",
@@ -247,7 +273,9 @@ def write_docs(root, lab):
     for group, titles in TASKS:
         for index in range(1, len(titles) + 1):
             key = f"{group}-{index:03}"
-            if key not in completed and key not in blocked:
+            if key in completed:
+                blocked.pop(key, None)
+            elif key not in blocked:
                 blocked[key] = "Required measurement did not produce a verified output in this run."
     backlog = ["| ID | Task | Status |", "|---|---|---|"]
     for group, titles in TASKS:
@@ -267,16 +295,23 @@ Detector metrics compare binary native masks and rendered geometry; the single o
     report("DATASET_MANIFEST", "Q dataset and asset provenance", f"""
 {len(manifests)} metric fixtures from two independently sourced MB-Lab base meshes, each rendered in base, wider torso and bent/asymmetric torso variants. The meshes are more than independent morph coefficients in the Human3D basis. They come from the MB-Lab [pinned upstream](https://github.com/animate1978/MB-Lab/tree/063bff04e60f3e7c651fda628c30f5d83f3f3078), whose [license](https://github.com/animate1978/MB-Lab/blob/063bff04e60f3e7c651fda628c30f5d83f3f3078/license.txt) specifies AGPL-3.0 for the database and separate terms for non-reverse-engineering 2D renders. No MB-Lab meshes, joint databases, UV data, depth/surface rasters or raw datasets are redistributed here. Floor-normalized Y-up source geometry is never inferred from an AI photo. The Blender coordinate system is X lateral, negative Y frontal, Z up. Camera extrinsics are camera-to-world. For the orthographic baseline, the scale spans 2.16 m across 384 pixels.
 
-The controlled set has {sum(len(v['blender']['images']) for v in manifests.values())} orthographic renders, {sum(len(v['perspective'] or []) for v in manifests.values())} perspective renders and {sum(len((v['photographic'] or {}).get('images', [])) for v in manifests.values())} different stress inputs including the perspective composites. Each base mesh includes eight train and two held-out camera azimuths. The camera check compared independently projected polygon masks to Blender alpha on {sum(len(v['validation']) for v in validation)} images. The source material is a documented uniform display color. Joint anchors are calculated from pinned MB-Lab rig vertex groups and offsets. Blender BVH pass records first visible polygon and camera-depth grids locally. Hashes, transformations, seed references and camera records are in [manifest.json](q/manifest.json). Recorded camera distances and axes are metric. No experimental dataset row comes from personal photos.
+The controlled set has {sum(len(v['blender']['images']) for v in manifests.values())} baseline orthographic renders, {sum(len(v['interleaved_angles'] or []) for v in manifests.values())} supplemental orthographic renders, {sum(len(v['perspective'] or []) for v in manifests.values())} perspective renders and {sum(len((v['photographic'] or {}).get('images', [])) for v in manifests.values())} different stress inputs including the perspective composites. Each base mesh includes eight train and two held-out camera azimuths. The camera check compared independently projected polygon masks to Blender alpha on {sum(len(v['validation']) for v in validation)} images. The source material is a documented uniform display color. Joint anchors are calculated from pinned MB-Lab rig vertex groups and offsets. Blender BVH pass records first visible polygon and camera-depth grids locally. Hashes, transformations, seed references and camera records are in [manifest.json](q/manifest.json). Recorded camera distances and axes are metric. No experimental dataset row comes from personal photos.
 
 Two generated photographic fixtures represent separate fictional adults and provide detector and fitting stress cases without calibrated mesh, camera or identity correspondence. Pilot scale was chosen to validate the native and calibrated experiments before larger coverage. There are no independent subject-family test folds, animated-pose series or calibrated garments in this pilot.
 """.replace("Floor-normalized Y-up source geometry", "Floor-normalized source geometry"))
+    volume_table = defaultdict(list)
+    for item in volumes.values():
+        for name, row in item["metrics"].items():
+            if "approximate_volume_iou" in row:
+                volume_table[name].append(row["approximate_volume_iou"])
     report("GEOMETRY_CAPACITY_REPORT", "Q geometry capacity", f"""
 {len(evals)} completed independent variant evaluations. Each estimate is conditional on the rig family, rest stance and common height/floor alignment. Error mixes morphology and residual rest-stance mismatch.
 
 {table('Symmetric sampled surface error, height-aligned mm', distances)}
 
-The JSON contains region means, Chamfer, P95 error, fitted controls and saturation. Height and first-visible surface validation are independent of the release. Section metrics include hip, waist and chest convex perimeter residuals. Volume and registered vertex RMSE were left unavailable for independent meshes. The historical seeded sensitivity run recovered control displacement and saturation within the same basis. Direct-fit step refinement measures optimizer sensitivity conditional on its nearest-sample objective. A persistent residual after the direct search is evidence of a limitation under the tested rest alignment and basis; the pilot cannot uniquely attribute it to geometry capacity.
+The JSON contains region means, Chamfer, P95 error, fitted controls and saturation. All native runs used the identical frozen MakeHuman base digest. The automatic search has circumference, length and regional controls and lacks a separate base anatomy selector. The male case exposes a persistent chest-profile mismatch under the measured basis. Height and first-visible surface validation are independent of the release. Section metrics report hip, waist and chest closed-loop circumferences in height-aligned millimeters. Empty contours are retained as missing. Shoulder/hip span ratios use paired bone-anchor proxies. Volumetric IoU estimates use three-axis majority ray parity on a fixed cubic grid. MB-Lab surface boundaries make occupancy approximate, and the JSON retains ambiguous voxels and boundary edge counts. Registered vertex RMSE is unavailable for independent topologies. Fixed-band held-out IoU is reported for cranium, torso/arms and lower body. The historical seeded sensitivity run recovered control displacement and saturation within the same basis. Direct-fit step refinement measures optimizer sensitivity conditional on its nearest-sample objective. A persistent residual after the direct search is evidence of a limitation under the tested rest alignment and basis; the pilot cannot uniquely attribute it to geometry capacity.
+
+{table('Approximate height-aligned volumetric IoU (%)', volume_table, 100)}
 """)
     report("PIPELINE_ABLATION_REPORT", "Q native pipeline and ablations", f"""
 Native completed runs {len(success)}/{len(native)}. Fit objectives use detector evidence, while the table below uses independent evaluation masks on matched, fitted cameras and poses. An intervention may worsen a score when the native camera compensated for other errors.
@@ -287,8 +322,17 @@ Mask delta (percentage points) {effect(oracle_paired['mask_only'])}. Camera delt
 
 Fixed-shape ground-truth limb-direction proxy substitution on frontal silhouettes {effect(pose_effect)} percentage points. Model limb lengths, torso and root translation are fixed. This measures the pose output under one calibrated camera and exposes remaining anatomy/rig error. It does not measure a complete full-body oracle.
 
-Pose landmarks and orientation/visibility provider contracts are documented in the protocol. Unsupported independent geometry cannot be passed silently through the native UV/rig contracts. Explicit omissions are recorded in the final report.
+The calibrated yaw-only probe triggered the native provider conflict rule in {yaw_conflicts}/{contract_views} examined views. Partial 2D anchor replacement retains native visibility, world landmarks and unannotated landmarks. The visible native detector-to-rig-proxy RMSE averaged {mean_joint_rmse}; within-view alignment effects are in the JSON. The photo-bound provider has no schema fields for an independent mesh or circumference measurements. Unsupported independent geometry cannot be passed silently through the native UV/rig contracts. Explicit omissions are recorded in the final report.
 """)
+    repeat_groups = defaultdict(list)
+    repetition = []
+    for fixture, results in extra.items():
+        for key, item in results.items():
+            repeat_groups[key].append(mean(list(item["held_out"].values())))
+        identical = results["eight"]["controls"] == results["eight_repeat"]["controls"]
+        identical &= results["eight"]["held_out"] == results["eight_repeat"]["held_out"]
+        repetition.append(f"- {fixture} eight-view repeat matched controls and IoU: {identical}. "
+                          f"Wall times {results['eight']['seconds']:.2f} s and {results['eight_repeat']['seconds']:.2f} s.")
     report("MULTIVIEW_REPORT", "Q multi-view scaling", f"""
 {table('Configuration, held-out silhouette IoU (%)', held, 100)}
 
@@ -298,8 +342,9 @@ Paired held-out effects versus one frontal calibrated photograph, in percentage 
 
 """ + "\n".join(f"- {key} {effect(values)}" for key, values in paired.items()) + """
 
-The two-view front/profile and front/rear treatments differ solely in the second orientation. Four includes both profiles, eight includes 45-degree increments. Held-out values average two unused cameras per variant. Native one/four rows report neutral shapes under the same held-out cameras and fixed alignment. Their detector-mask training scores cannot be compared directly with controlled IoU. Runtime includes concurrent scheduling noise. Contradictory, redundant and different-pose cases remain open.
-""")
+The two-view front/profile and front/rear treatments differ solely in the second orientation. Four includes both profiles, eight includes 45-degree increments. Held-out values average two unused cameras per variant. Native one/four rows report neutral shapes under the same held-out cameras and fixed alignment. Their detector-mask training scores cannot be compared directly with controlled IoU. Runtime includes concurrent scheduling noise. Contradictory and different-pose cases remain open. The supplementary repeat applies an identical short 128 px coordinate pass to each configuration and includes a deliberately duplicated front image. Neither held-out angle is used among the sixteen inputs.
+
+""" + table("Supplementary held-out IoU (%)", repeat_groups, 100) + "\n\n" + "\n".join(repetition))
     report("PHOTOGRAPHIC_ROBUSTNESS_REPORT", "Q photographic robustness", f"""
 Measured {sum(c[0] for c in photo_counts.values())} detector calls. Mask statistics use available detector masks and include low-visibility cases. Missing masks are counted in the separate detector totals.
 
@@ -311,7 +356,7 @@ Measured {sum(c[0] for c in photo_counts.values())} detector calls. Mask statist
 
 The perspective rows vary focal length, camera distance and elevation with known Blender matrices. This arm measures detector segmentation robustness, without attributing improvements to camera reconstruction. The clutter and illumination gradient are deterministic pixel transforms. Crop and occlusion are measured against their documented mask conventions. Extra stress photographs are available only as local regenerable artifacts.
 
-The two photorealistic AI inputs have separate reports in the JSON. These results are qualitative for 3D accuracy, including generated clothing and backgrounds. They do not establish independent mask IoU or garment shape accuracy.
+Both photorealistic AI inputs produced a usable one-person run and exported a top. Candidate garment overlaps were 83.09% and 79.04% against native appearance-derived coverage. These results are qualitative for 3D accuracy, including generated clothing and backgrounds. They do not establish independent mask IoU or garment shape accuracy.
 """)
     report("COMPONENT_QUALITY_REPORT", "Q face, pose, texture and garment evidence", f"""
 - Face: the independent surface measurements include a cranial band. The controlled jaw invariant yielded {metrics['face_control']} at input control 0.5. This local-deformation test cannot establish facial landmark accuracy.
@@ -319,16 +364,16 @@ The two photorealistic AI inputs have separate reports in the JSON. These result
 - Skinning: {len(components)} reports with per-case maximum absolute bone-length change and calibrated units. Measurements check mechanical consistency and do not establish contact or torsion accuracy.
 - Texture: UV fractions use the same release coverage definition. Coverage is a count of observed UV texels, without a color, seam, or contamination accuracy claim.
 - Garments: three native close-fitted shell prototypes per completed component case. Reports retain signed minimum sampled clearances, violations, changed sample counts and maximum pose motion. Sampled signed distances do not bound all geometric triangle intersections.
-- Export: OpenUSD parsed the native USDZ package and reported mesh and skeleton counts. Blender {platform.python_version()} Python host metadata are tracked separately. The host Blender build has no USD import operator. Official LTS archive fetch returned HTTP 403. No Blender edit/save/reopen verification is claimed.
+- Export: OpenUSD parsed the native USDZ packages and reported mesh and skeleton counts. It verified separate body and top meshes, UVs, skin indices and one inherited skeleton in each AI-input garment export. Blender {platform.python_version()} Python host metadata are tracked separately. The host Blender build has no USD import operator. Official LTS archive fetch returned HTTP 403. No Blender edit/save/reopen verification is claimed.
 """.replace(f"Blender {platform.python_version()} Python host metadata are tracked separately. ", ""))
     report("FAILURE_ATLAS", "Q Blender comparative renders and failure atlas", "\n".join(blends) + """
 
-Rows use actual Workbench renders with matched orthographic framing, height alignment, studio shading and camera azimuth. Ground truth, native neutral, calibrated four-view neutral and bounded direct 3D fits are followed by a raster overlay. Cyan marks missed truth and orange marks predicted excess. The pilot presentations are neutral meshes; the residual includes stance and rig-family differences. Full wireframe, radiometric texture comparison, vertex heatmaps and garment-intersection visuals are not available.
+Rows use actual Workbench renders with matched orthographic framing, height alignment, studio shading and camera azimuth. Ground truth, native neutral, calibrated four-view neutral and bounded direct 3D fits are followed by a raster overlay. Cyan marks missed truth and orange marks predicted excess. The pilot presentations are neutral meshes; the residual includes stance and rig-family differences. The supplementary male case includes wireframe, native texture and a nearest-reference-vertex distance map. Blue is near zero and red is at or above 120 mm. The map is directional and sensitive to stance and tessellation. Radiometric texture comparison and garment-intersection visuals remain unavailable.
 
 Historical report reproduces a near-basis calibrated control case with 99.6724% held-out IoU. The independent fixture images reveal differences around arms, profile and torso under common alignment. Per-variant JSON permits selection by lowest held-out IoU and largest surface error, including cases outside this visual sample.
 """)
     report("FINAL_BENCHMARK_REPORT", "Human3D v0.2.0 Q benchmark", f"""
-{len(completed)}/43 tasks completed, {len(blocked)} blocked. {len(success)}/{len(native)} controlled native runs completed. {len(evals)} calibrated independent geometry sweeps, {len(ablations)} matched factorial sweeps, {len(pose)} independent pose diagnostics and {len(components)} structural component sweeps. Each calibrated geometry sweep covers six view configurations and two direct 3D search schedules.
+{len(completed)}/43 tasks completed, {len(blocked)} blocked. {len(success)}/{len(native)} controlled native runs completed. {len(evals)} calibrated independent geometry sweeps, {len(ablations)} matched factorial sweeps, {len(pose)} independent pose diagnostics and {len(components)} structural component sweeps. Each calibrated geometry sweep covers six view configurations and two direct 3D search schedules. {len(extra)} independent subjects completed a separate sixteen-view controlled repeat.
 
 Release CI jobs scan, classify, Linux foundation, Windows foundation and Required summary passed in [run 45869017319](https://github.com/egenovese-de/Human3D-2.0/actions/runs/45869017319). Local release tests 69/69. The existing calibrated Lab runner, unchanged, reproduced 99.6724% held-out IoU and 3.7899 mm vertex RMSE. The original stabilization report records 75.669% native fitting IoU and 90.128% observed UV coverage on the historical four-view fixture. Source reports are [M5](M5_FINAL_BENCHMARK.md) and [stabilization](https://github.com/egenovese-de/Human3D-2.0/blob/{RELEASE}/DOCS/STABILIZATION_CANDIDATE.md). The raw historical photographic fixture was not rerun here. Agreement to detector masks with image and pose estimation differs from a fit to exact masks formed mostly by the solver morph basis on matching topology. The 99.67%-versus-75.67% historical difference cannot be assigned to one component. Held-out independent pilot results and matched interventions bound the contributions under the published protocol.
 
@@ -349,7 +394,7 @@ Initial release detector launch failed on a missing system GLES shared object. P
 |---|---|---|---|---|
 | P1 | Limb pose. True-direction proxy substitution at fixed shape changed frontal overlap by {effect(pose_effect)} percentage points. Relative direction estimation or mapping contributes to error under the pilot stance. | Add calibrated reference joint mapping and test pose confidence and limb depth jointly before algorithm changes. | Medium. Independent articulated benchmark and fixed 3D joints. Risk to wrists, relative depth and limbs behind the torso. | Paired neutral and articulated holdout with independent joint rotations and report angle, contact and silhouette separately. |
 | P1 | Camera and mask coupling. Substitution effects in pp: mask {effect(oracle_paired['mask_only'])}, camera {effect(oracle_paired['camera_only'])}, interaction {effect(oracle_paired['interaction'])}. Camera error and compensating pose/shape are suspected controls. | Validate view calibration and separate segmentation confidence from camera quality before modifying the solver. | Medium. Depends on repeatable camera models and detector-bound evidence. Risk of worse heavily cropped cases. | Repeat the four-way factorial with perspective, view-angle coverage and held-out validation. |
-| P2 | Geometry capacity. Direct-fit and calibrated surface errors are measured in the geometry table. Basis insufficiency is suspected where errors persist, confounded by root and stance alignment. Population improvement cannot be estimated from two topology families. | Establish an articulated registration oracle and expand independent rest-shape coverage before adding bounded regional controls. | High. Correspondence, rig rebinding, UV and garment deformation are dependencies. Existing proportions and support-plane behavior can regress. | Same alignment protocol and held-out subjects with registered joints plus calibration. Measure the change at fixed objective and fixed bounds. |
+| P1 | Geometry capacity. Direct-fit and calibrated surface errors are measured in the geometry table. All 12 runs used one frozen base. The male comparison exposes a chest profile discrepancy and the automatic search lacks a base-shape selector. Stance alignment remains a confound for the aggregate error. Population improvement cannot be estimated from two topology families. | Establish an articulated registration oracle and expand independent rest-shape coverage before adding bounded regional controls. | High. Correspondence, rig rebinding, UV and garment deformation are dependencies. Existing proportions and support-plane behavior can regress. | Same alignment protocol and held-out subjects with registered joints plus calibration. Measure the change at fixed objective and fixed bounds. |
 | P2 | View utility. Front/profile and front/rear held-out deltas {effect(paired['front-profile'])} and {effect(paired['front-rear'])} pp. Appearance coverage benefits from extra views. | Evaluate view quality weighting and redundant-view rejection before making more photographs the default. | Medium. Requires matched exposure, camera metadata and contradictory/duplicate fixture families. Risk of dropping genuinely complementary evidence. | Paired held-out usage and UV coverage, with marginal latency and failure-rate reporting. |
 
 The ranges in this table are observed pilot variation. No P0 classification is supported by the completed controlled comparisons. No M6 work is implemented.
@@ -362,7 +407,7 @@ The ranges in this table are observed pilot variation. No P0 classification is s
 - Commit Lab scripts before running the unchanged historical and native runners. Set `PYTHONPATH=<release>/src:<lab>/tools` and `OPENBLAS_NUM_THREADS=1`. Set `QT_QPA_PLATFORM=offscreen` for unittest discovery in the release.
 - Seed 2471 for photographic variants and 2473 for area sampling; no stochastic production settings changed. Both held-out orientations are explicit in each manifest. Use distinct empty destinations for the native benchmark and historical baselines.
 - `render.py`, `depth.py`, `stress_cameras.py` and `comparison.py` run inside Blender with `-b -P script -- arguments`. For `stress_cameras.py`, add the Lab script directory to Blender's sys.path before loading. Use `--python-exit-code 1`. Other scripts provide arguments via `--help`, except `photographic.py`, `stress_photographs.py` and `validate.py` which take the pilot path positionally, and `validate.py` also takes the JSON output path.
-- Recommended execution sequence: provision pinned runtime, run existing `benchmark_geometry.py --regional --carve --independent`, build metric Blender fixtures, composite opaque photographs, validate, run native one and four view manifests, run `evaluate.py` and `ablate.py`, run detector stress and components, and build the comparative raster atlas. Use `evaluate.py --metrics-only` to attach native equivalent shape measurements after the independent calibration jobs. Run this consolidation script with scratch root and Lab directory.
+- Recommended execution sequence: provision pinned runtime, run existing `benchmark_geometry.py --regional --carve --independent`, build metric Blender fixtures, composite opaque photographs, validate, run native one and four view manifests, run `evaluate.py` and `ablate.py`, run detector stress and components, and build the comparative raster atlas. Use `evaluate.py --metrics-only` to attach native equivalent shape measurements after the independent calibration jobs. For the supplemental view sweep run extra_views.py in Blender, then view_repeat.py. Additional geometry diagnostics are circumference.py, proportions.py and the Blender volume.py script. Run this consolidation script with scratch root and Lab directory.
 - [Raw measurement summaries](q/measurements.json) retain per-view outcomes, failed preflights, directional measurements, deformation checks and instrument output. No large assets are included.
 """)
     return {"done": len(completed), "blocked": len(blocked), "native": len(native), "pilot": len(manifests),
