@@ -274,7 +274,15 @@ class PhotosWindow(QWidget):
 
     def run_worker(self, operation, cancel=None):
         """Modal progress keeps Qt responsive; all widget access stays on GUI thread."""
-        dialog = QDialog(self)
+        class ProgressDialog(QDialog):
+            def reject(self):
+                request_cancel()
+
+            def closeEvent(self, event):
+                request_cancel()
+                event.ignore()
+
+        dialog = ProgressDialog(QApplication.activeModalWidget() or self)
         dialog.setWindowTitle("Processing")
         layout = QVBoxLayout(dialog)
         label = QLabel("Processing. Please wait.")
@@ -298,7 +306,6 @@ class PhotosWindow(QWidget):
                 label.setText("Cancelling…")
         button.clicked.connect(request_cancel)
         # Closing the progress dialog requests cancellation, but waits for cleanup.
-        dialog.reject = request_cancel
         timer = QTimer(dialog)
         timer.timeout.connect(lambda: dialog.accept() if done.is_set() else None)
         worker = Thread(target=work)
@@ -405,7 +412,7 @@ class PhotosWindow(QWidget):
                 self.run_worker(lambda: export_body(Path(destination), body, fit, target_alignment, texture=color, garments=garments, ground=True))
                 self.status.setText("Body and independent garments exported with their shared rig.")
 
-        GarmentDialog(body, fit, views, target, export, parent=self).exec()
+        GarmentDialog(body, fit, views, target, export, parent=self, worker=self.run_worker).exec()
 
     def inspect_appearance(self):
         from .appearance_dialog import AppearanceDialog
