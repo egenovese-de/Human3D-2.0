@@ -119,10 +119,11 @@ class AuditProbes(unittest.TestCase):
         c.start(j.id)
         started=threading.Event()
         results=[]
-        real_run=subprocess.run
+        from human3d.vision import run_cancellable
+        real_run=run_cancellable
         def child(command, **kwargs):
             started.set()
-            return real_run([sys.executable,"-c","import time; time.sleep(1.5)"],**kwargs)
+            return real_run([sys.executable,"-c","import time; time.sleep(10)"],**kwargs)
         with tempfile.TemporaryDirectory() as root:
             model=Path(root)/"model.task"
             model.write_bytes(b"fixture")
@@ -135,17 +136,18 @@ class AuditProbes(unittest.TestCase):
                     results.append(type(e).__name__)
                 finally:
                     results.append(c.finish(j.id,"old",lambda _: True))
-            with patch("human3d.vision.subprocess.run",side_effect=child):
+            with patch("human3d.vision.run_cancellable",side_effect=child):
                 t=threading.Thread(target=worker)
                 t.start()
                 try:
                     self.assertTrue(started.wait(5))
                     c.cancel(j.id)
-                    t.join(.2)
-                    self.assertTrue(t.is_alive())
+                    detector.close()
+                    t.join(3)
+                    self.assertFalse(t.is_alive())
                 finally:
                     t.join(10)
             self.assertFalse(t.is_alive())
             self.assertEqual(results[-1],False)
             self.assertEqual(c.snapshot()[0][0].state,"cancelled")
-            print("AUD-07 real synthetic child not interrupted; stale publication rejected",flush=True)
+            print("AUD-07 real synthetic child interrupted; stale publication rejected",flush=True)
