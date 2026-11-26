@@ -2,10 +2,11 @@
 from pathlib import Path
 from PIL import Image, ImageOps
 from PIL.ImageQt import ImageQt
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
+from threading import Thread, Event
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QInputDialog, QLabel, QMenu, QMessageBox)
+    QPushButton, QListWidget, QListWidgetItem, QFileDialog, QInputDialog, QLabel, QMenu, QMessageBox, QDialog)
 from .session import Session
 from .originals import OriginalStore
 from .ingestion import folder_inputs
@@ -199,7 +200,7 @@ class PhotosWindow(QWidget):
             if not model:
                 return
             self.detect_references(missing, model)
-        result = self.session.fit_shared()
+        result = self.run_worker(self.session.fit_shared)
         self.fitted_preview = None
         evidence = self.session.shared_evidence()
         coverage = "\n".join(f"{region.replace('_', ' ')} {len(evidence.supporting_views(region))}"
@@ -271,11 +272,55 @@ class PhotosWindow(QWidget):
         detector = PoseLandmarker(model, segmentation=True)
         return EvidenceAdapter(detector, self._evidence_provider) if self._evidence_provider is not None else detector
 
+    def run_worker(self, operation, cancel=None):
+        """Modal progress keeps Qt responsive; all widget access stays on GUI thread."""
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Processing")
+        layout = QVBoxLayout(dialog)
+        label = QLabel("Processing. Please wait.")
+        layout.addWidget(label)
+        button = QPushButton("Cancel")
+        layout.addWidget(button)
+        button.setEnabled(cancel is not None)
+        done = Event()
+        result = []
+        def work():
+            try:
+                result.append((True, operation()))
+            except Exception as error:
+                result.append((False, error))
+            finally:
+                done.set()
+        def request_cancel():
+            if cancel is not None:
+                cancel()
+                button.setEnabled(False)
+                label.setText("Cancelling…")
+        button.clicked.connect(request_cancel)
+        # Closing the progress dialog requests cancellation, but waits for cleanup.
+        dialog.reject = request_cancel
+        timer = QTimer(dialog)
+        timer.timeout.connect(lambda: dialog.accept() if done.is_set() else None)
+        worker = Thread(target=work)
+        worker.start()
+        timer.start(50)
+        try:
+            dialog.exec()
+        finally:
+            timer.stop()
+            worker.join()
+        ok, value = result[0]
+        if not ok:
+            raise value
+        return value
+
     def detect_references(self, ids, model):
         detector = self._create_detector(model)
         try:
-            for photo_id in ids:
-                self.session.detect_photo(photo_id, detector)
+            def detect():
+                for photo_id in ids:
+                    self.session.detect_photo(photo_id, detector)
+            self.run_worker(detect, detector.close)
         finally:
             detector.close()
 
@@ -370,7 +415,7 @@ class PhotosWindow(QWidget):
         if context is None:
             return
         project, body, fit, target_alignment, views, target = context
-        atlas = bake_atlas(body, fit.controls, views, target)
+        atlas = self.run_worker(lambda: bake_atlas(body, fit.controls, views, target))
         if self.store.load() != project:
             raise ValueError("The project changed during texture baking. Bake the current target again.")
 
@@ -406,7 +451,7 @@ class PhotosWindow(QWidget):
     def write_fitted_body(self, destination, fit):
         from .usd_export import export_body
 
-        export_body(destination, *fit, ground=True)
+        self.run_worker(lambda: export_body(destination, *fit, ground=True))
         self.status.setText("Rigged USD exported and reopened for validation.")
 
     def freeze_rest_body(self):
@@ -436,7 +481,7 @@ class PhotosWindow(QWidget):
         self.fitted_preview = None
         detector = self._create_detector(model)
         try:
-            evidence = self.session.detect_target(detector)
+            evidence = self.run_worker(lambda: self.session.detect_target(detector), detector.close)
         finally:
             detector.close()
         if evidence is None or not evidence.candidates:
@@ -451,7 +496,7 @@ class PhotosWindow(QWidget):
 
             mask = self.session.apply_mask(draft)
             project = self.store.load()
-            result = fit_body(body, mask, alignment)
+            result = self.run_worker(lambda: fit_body(body, mask, alignment))
             if self.store.load() != project:
                 raise ValueError("The project changed during fitting. Review the current target again.")
             self.fitted_preview = (project.id, project.revision, body, result, alignment)
