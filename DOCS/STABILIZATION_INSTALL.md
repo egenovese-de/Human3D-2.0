@@ -2,12 +2,12 @@
 
 ## Install on Windows
 
-Use a Windows x64 machine, Git and CPython 3.11.9. From an empty working directory, clone the stabilization branch and check out the application revision identified in the [candidate record](STABILIZATION_CANDIDATE.md).
+Use a Windows x64 machine, Git and CPython 3.11.9. From an empty working directory, clone the repository and check out the v0.2.0 tag once published. Historical candidate evidence is in the [candidate record](STABILIZATION_CANDIDATE.md).
 
 ```powershell
-git clone --branch development/stabilization https://github.com/egenovese-de/Human3D-2.0.git
+git clone https://github.com/egenovese-de/Human3D-2.0.git
 Set-Location Human3D-2.0
-git checkout --detach 67455b36e4d586eae2d347c1f9e1a240a2e61ea0
+git checkout --detach v0.2.0
 py -3.11 -m venv .venv
 $python = ".\.venv\Scripts\python.exe"
 & $python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-windows.lock

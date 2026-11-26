@@ -1,6 +1,6 @@
 # Human3D 2.0
 
-For the current stabilization build, see the [installation and verification guide](DOCS/STABILIZATION_INSTALL.md).
+Version 0.2.0 is the technical release baseline (M1–M5 and stabilization). See the [installation and verification guide](DOCS/STABILIZATION_INSTALL.md) and [changelog](CHANGELOG.md). The historical milestone instructions below are retained for reference.
 
 The M1 desktop build is on `development/m1`. It supports a single-target
 reconstruction flow with mask review, initial alignment, bounded body fitting,
