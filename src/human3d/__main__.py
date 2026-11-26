@@ -23,10 +23,10 @@ def main():
     inspection.add_argument("project", type=Path)
     args = parser.parse_args()
     if args.command in {"freeze-project", "inspect-body"}:
-        from .project_store import ProjectStore
-
-        store = ProjectStore(args.project)
         try:
+            from .project_store import ProjectStore
+
+            store = ProjectStore(args.project)
             if args.command == "freeze-project":
                 from .bootstrap import freeze_project
 
@@ -38,24 +38,24 @@ def main():
                 mesh = body["mesh"]
                 print(f"Vertices: {len(mesh['vertices'])}, faces: {len(mesh['faces'])}, "
                       f"bones: {len(body['rig']['bones'])}, morph targets: {len(body.get('morph_targets', {}))}")
-        except (OSError, ValueError, RuntimeError, KeyError) as error:
+        except (OSError, ValueError, RuntimeError, KeyError, ImportError) as error:
             parser.exit(1, f"Frozen body operation failed: {error}\n")
         return
     if args.command == "freeze-neutral":
-        from .bootstrap import freeze_neutral
-
         try:
+            from .bootstrap import freeze_neutral
+
             print(freeze_neutral(args.assets, args.artifact_directory, with_morphs=args.with_morphs))
-        except (OSError, ValueError) as error:
+        except (OSError, ValueError, ImportError, RuntimeError) as error:
             parser.exit(1, f"Freeze failed: {error}\n")
         return
     if args.command != "detect-target":
         return
 
-    from .session import Session
-    from .vision import PoseLandmarker
-
     try:
+        from .session import Session
+        from .vision import PoseLandmarker
+
         session = Session(args.project)
         detector = PoseLandmarker(args.model)
         try:
