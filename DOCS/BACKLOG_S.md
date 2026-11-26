@@ -40,7 +40,7 @@
 | S3-001 | Verify reconstruction capability and mandatory GUI actions (AUD-02) | DONE |
 | S3-002 | Verify worker lifecycle, subprocess cancellation, retry and error propagation (AUD-07) | DONE |
 | S3-003 | Correct project persistence, atomic writes and interrupted-session recovery defects | DONE |
-| S3-004 | Measure timings, peak RAM, disk and job retention; correct blocking resource defects (AUD-06) | IN_PROGRESS |
+| S3-004 | Measure timings, peak RAM, disk and job retention; correct blocking resource defects (AUD-06) | DONE |
 | S3-005 | Verify repeated target switching, project reopening and resource cleanup | TODO |
 
 ## S4 — Regression and synthetic validation

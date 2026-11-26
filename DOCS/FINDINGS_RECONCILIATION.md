@@ -53,3 +53,7 @@ RESOLVED for reproduced capability/status mismatch and fit action gating. Correc
 
 ## S3-002 closure — AUD-07
 RESOLVED for reproduced logical-only native cancellation and main heavy-path GUI blocking defects. Required checks run 45835389917 at aa8c6b8 all five jobs SUCCESS; 64 tests PASS Ubuntu, Windows and clean Windows installation. Residual limitations: non-preemptible Python work, optional provider blocking, late cancellation/publication race not exhaustively tested, secondary synchronous preparation/preview paths, no full GUI or real inference cancellation certification. See S3-002_WORKER_LIFECYCLE.md. No empirical tests.
+
+## S3-004 closure — AUD-06
+
+RESOLVED for the unbounded terminal job history and the S3-004 resource profile. The terminal cap retains 128 of 1,000 completed jobs, peak Python allocations fell about 83.6% in the same probe, and 100 duplicate imports added zero bytes. [Required checks 45859948344](https://github.com/egenovese-de/Human3D-2.0/actions/runs/45859948344) certified canonical synthetic reconstruction, fitting, texture, garment and USDZ measurements on Ubuntu and Windows. All 68 regression tests passed on Ubuntu, Windows and clean Windows Server installation. [S3-004 resource profile](S3-004_RESOURCE_PROFILE.md) records stage times, peak process RSS and logical disk usage. Target switching, project reopening and cleanup remain S3-005. Empirical tests remain `NOT_RUN`.
