@@ -93,6 +93,7 @@ class Coordinator:
                 return
             if job.state in {"queued", "running"}:
                 self._jobs[job_id] = replace(job, state="cancelled" if job.state == "queued" else "cancelling")
+                self._prune()
 
     def cancellation_requested(self, job_id):
         with self._lock:
@@ -106,11 +107,13 @@ class Coordinator:
                 return False
             if job.state == "cancelling":
                 self._jobs[job_id] = replace(job, state="cancelled")
+                self._prune()
                 return False
             if job.state != "running":
                 return False
             if job.generation != self.generation or job.dependencies != self.dependencies:
                 self._jobs[job_id] = replace(job, state="stale")
+                self._prune()
                 return False
         try:
             valid = bool(validate(artifact))
@@ -122,17 +125,20 @@ class Coordinator:
                 return False
             if job.state == "cancelling":
                 self._jobs[job_id] = replace(job, state="cancelled")
+                self._prune()
                 return False
             if job.state != "running" or job.generation != self.generation:
                 return False
             if not valid:
                 self._jobs[job_id] = replace(job, state="failed", error="validation_failed")
+                self._prune()
                 return False
             if publish is not None:
                 try:
                     publish()
                 except Exception:
                     self._jobs[job_id] = replace(job, state="failed", error="publication_failed")
+                    self._prune()
                     raise
             self._active[job.kind] = (job.generation, artifact)
             self._jobs[job_id] = replace(job, state="succeeded")
@@ -146,6 +152,7 @@ class Coordinator:
                 return
             if job.state in {"running", "cancelling"}:
                 self._jobs[job_id] = replace(job, state="cancelled" if job.state == "cancelling" else "failed", error=code)
+                self._prune()
 
     def retry(self, job_id):
         with self._lock:
