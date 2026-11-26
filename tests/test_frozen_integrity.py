@@ -34,3 +34,20 @@ class FrozenIntegrity(unittest.TestCase):
                     if mutation == "morph": bad["morph_targets"] = {"bad":[[-1,0,0,0]]}
                     with self.assertRaisesRegex(ValueError,"invalid_frozen_body_structure"):
                         load_frozen_body(write(bad))
+
+    def test_frozen_binding_invalidates_artifacts(self):
+        from dataclasses import replace
+        from human3d.session import Session
+        with TemporaryDirectory() as tmp:
+            session = Session(Path(tmp),create=True)
+            project = session.store.load()
+            project = session.store.save(replace(project,frozen_body_digest="a"*64))
+            session.snapshot()
+            job = session.coordinator.submit("preview")
+            session.coordinator.start(job.id)
+            self.assertTrue(session.coordinator.finish(job.id,"preview",lambda result: True))
+            self.assertIn("preview",session.snapshot().current_artifacts)
+            session.store.save(replace(project,frozen_body_digest="b"*64))
+            snapshot = session.snapshot()
+            self.assertNotIn("preview",snapshot.current_artifacts)
+            self.assertIn("preview",snapshot.stale_artifacts)
