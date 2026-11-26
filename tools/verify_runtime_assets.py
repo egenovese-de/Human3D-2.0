@@ -61,6 +61,10 @@ def main():
             assert frozen_path.read_bytes() == original_bytes
             assert load_frozen_body(frozen_path) == original
             print("Canonical post-freeze deformation/rebind and repeat freeze immutability: PASS",flush=True)
+            import numpy as np
+            uv = np.asarray(body["mesh"]["texcoords"])
+            assert np.isfinite(uv).all() and np.all((uv >= 0) & (uv <= 1)), (uv.min(), uv.max())
+            print("Canonical UV domain: PASS", float(uv.min()), float(uv.max()), flush=True)
             assert len(body["morph_targets"]) == 14
             assert body["source_asset_digests"] == expected
             from human3d.texture_bake import _hidden_vertices
