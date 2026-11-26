@@ -22,8 +22,8 @@ class SubjectEvidenceTests(unittest.TestCase):
         provider.observe.assert_not_called()
         detector.detect.return_value = subject
         provider.observe.return_value = AnatomicalEvidence("other", "fixture", "v1", 0)
-        with self.assertRaisesRegex(ValueError, "provider_evidence_binding_mismatch"):
-            adapter.detect(photo, "hash")
+        with self.assertLogs("human3d.anatomical_evidence", level="WARNING"):
+            self.assertIs(adapter.detect(photo, "hash"), subject)
         provider.observe.return_value = replace(provider.observe.return_value, photo_digest="hash")
         self.assertEqual(adapter.detect(photo, "hash").anatomical, provider.observe.return_value)
 
