@@ -1,0 +1,971 @@
+{
+  "candidate_sha": "1591194727d0a812c8bbef15d51e18773b6b304e",
+  "lab_sha": "83771501cb282195b5b70e13e03479b9fb55fa1c",
+  "signed_axis_algebra_controls": 6,
+  "native": [
+    {
+      "name": "MBLab_human_female_f_af01_bend32-1",
+      "bones": 163,
+      "rest_chain_residual_dm": 4.440892098500626e-16,
+      "pose_chain_residual_matrix": 1.7763568394002505e-15,
+      "bind_skin_transform_residual_matrix": 1.7763568394002505e-15
+    },
+    {
+      "name": "MBLab_human_male_m_la01_bend32-1",
+      "bones": 163,
+      "rest_chain_residual_dm": 4.440892098500626e-16,
+      "pose_chain_residual_matrix": 3.552713678800501e-15,
+      "bind_skin_transform_residual_matrix": 1.7763568394002505e-15
+    }
+  ],
+  "source": [
+    {
+      "fixture": "f_af01_neutral",
+      "input_sha256": "02e71224245bfe6d098ea3e5c2f3f172e9f92a150ab7a52a41d4bd58e4fa9dc8",
+      "source_basis_closure": 0.0,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.432560833995123e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 1.2074182697257333e-06,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "f_af01_pelvis_spine_extend",
+      "input_sha256": "663b2d897c3b89fc90ee7d3e0f946409ea2fb03e0c9cfececc5fcfd2b3c9fc3d",
+      "source_basis_closure": 7.94860156305699e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 33.6270929010194,
+          "mapped_rotation_orthogonality_error": 6.814776558297249e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 43.56164895898929,
+          "mapped_rotation_orthogonality_error": 6.814165369073422e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 33.6270875680951,
+          "mapped_rotation_orthogonality_error": 6.842969754661977e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 43.56164769747957,
+          "mapped_rotation_orthogonality_error": 6.872829025894589e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 33.62709344630785,
+          "mapped_rotation_orthogonality_error": 6.9278057575168896e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 43.56164448736491,
+          "mapped_rotation_orthogonality_error": 6.950941879635408e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 16.13167013438273,
+          "mapped_rotation_orthogonality_error": 3.694557182409824e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 16.131651585097458,
+          "mapped_rotation_orthogonality_error": 3.691338813089502e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 16.131679625213103,
+          "mapped_rotation_orthogonality_error": 3.7025117996368462e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 16.131647635808584,
+          "mapped_rotation_orthogonality_error": 3.6607103324532233e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 16.131681279088447,
+          "mapped_rotation_orthogonality_error": 3.7180254629078296e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 16.13165211684359,
+          "mapped_rotation_orthogonality_error": 3.6251404816713024e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "f_af01_pelvis_spine_flex",
+      "input_sha256": "def2b9c046d34b00daf70802f01fd48d5d8b582c2886b9806ce5b5727ee6189f",
+      "source_basis_closure": 7.958548264852539e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 31.925041381208665,
+          "mapped_rotation_orthogonality_error": 6.950951689509194e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 36.03465977952269,
+          "mapped_rotation_orthogonality_error": 6.263325367017458e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 31.925040801769196,
+          "mapped_rotation_orthogonality_error": 6.975944227961936e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 36.034662641848165,
+          "mapped_rotation_orthogonality_error": 6.292542559682701e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 31.925039675133874,
+          "mapped_rotation_orthogonality_error": 6.894518145177852e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 36.034663338740906,
+          "mapped_rotation_orthogonality_error": 6.420675197738035e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 17.41892403813614,
+          "mapped_rotation_orthogonality_error": 3.737765495467797e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 17.418927998989467,
+          "mapped_rotation_orthogonality_error": 3.7431992362143635e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 17.41892510786156,
+          "mapped_rotation_orthogonality_error": 3.702933082756546e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 17.418935489304094,
+          "mapped_rotation_orthogonality_error": 3.7513212416501645e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 17.41892592635661,
+          "mapped_rotation_orthogonality_error": 3.6971864816808387e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 17.418944409899932,
+          "mapped_rotation_orthogonality_error": 3.764638001249487e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "f_af01_raised_foot",
+      "input_sha256": "efd8b95ac422f1382e4643013d461f8a0acb5596940aa5dfa22ea20b5ad41529",
+      "source_basis_closure": 1.1282440137705407e-07,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 16.388116397697313,
+          "mapped_rotation_orthogonality_error": 2.4724513756479094e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 16.38810775156718,
+          "mapped_rotation_orthogonality_error": 2.4844606432080213e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.432560833995123e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 16.388109648792113,
+          "mapped_rotation_orthogonality_error": 2.5523744972730483e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 31.1071358675665,
+          "mapped_rotation_orthogonality_error": 1.5638248116998106e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 27.172851506979832,
+          "mapped_rotation_orthogonality_error": 1.895057708223291e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 13.579435063754786,
+          "mapped_rotation_orthogonality_error": 1.3112317909680371e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "f_af01_seated",
+      "input_sha256": "3516bda14f52b38d8e25ba6f870b1cbea68742f82616ed4af69f08c222183f4e",
+      "source_basis_closure": 6.962163923152076e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 10.000010558800472,
+          "mapped_rotation_orthogonality_error": 2.826778847963139e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 10.000009204154232,
+          "mapped_rotation_orthogonality_error": 2.7672521052386994e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 10.000010730349546,
+          "mapped_rotation_orthogonality_error": 2.8474368089260676e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 9.999997687314403,
+          "mapped_rotation_orthogonality_error": 2.779094931510651e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 10.000014567874187,
+          "mapped_rotation_orthogonality_error": 2.8435242409997244e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 10.000007042332117,
+          "mapped_rotation_orthogonality_error": 2.7943941045625363e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 80.25438238842754,
+          "mapped_rotation_orthogonality_error": 4.538185486890889e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 80.25438247217603,
+          "mapped_rotation_orthogonality_error": 4.518557042620941e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 12.830041431394047,
+          "mapped_rotation_orthogonality_error": 1.1216008984640493e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 12.830046146927236,
+          "mapped_rotation_orthogonality_error": 1.1190030133280697e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 12.830053949538042,
+          "mapped_rotation_orthogonality_error": 1.122238701126008e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 12.830044165003752,
+          "mapped_rotation_orthogonality_error": 1.1185704410507506e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "f_af01_wrist_torsion",
+      "input_sha256": "462008cb2dfdb9289d921cbb963840fff7c3f6893bacd08fff8bc537e31e3749",
+      "source_basis_closure": 8.176781458174576e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 33.189852917323286,
+          "mapped_rotation_orthogonality_error": 6.49135602446838e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 62.3778245823757,
+          "mapped_rotation_orthogonality_error": 5.136978327881259e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 36.80032462482728,
+          "mapped_rotation_orthogonality_error": 5.770417239876735e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 97.63926759390527,
+          "mapped_rotation_orthogonality_error": 7.649861741819008e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 84.29718619237916,
+          "mapped_rotation_orthogonality_error": 1.2299882346189506e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_neutral",
+      "input_sha256": "0d214c719c92844da79d8f42c99877e8fbcd02ce3b30c103e04ade9d72b117c8",
+      "source_basis_closure": 0.0,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 1.3731508421856043e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 5.306173688179515e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 1.7278910468351803e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 3.476683955132841e-18,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 7.891475759067785e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_pelvis_spine_extend",
+      "input_sha256": "cc20254144d2de5deac9edcab8db35840f2f16671080f4b945e02c9ee2a0d97c",
+      "source_basis_closure": 9.549890989113408e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 33.54275140657192,
+          "mapped_rotation_orthogonality_error": 2.853736941152479e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 42.820271164679426,
+          "mapped_rotation_orthogonality_error": 2.9199721231007438e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 33.54275489430541,
+          "mapped_rotation_orthogonality_error": 2.8377960635588465e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 42.82026764456712,
+          "mapped_rotation_orthogonality_error": 2.9374319261854134e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 33.54275599214367,
+          "mapped_rotation_orthogonality_error": 2.9101763311541387e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 42.82026660200126,
+          "mapped_rotation_orthogonality_error": 2.935312207888803e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 16.13165462442376,
+          "mapped_rotation_orthogonality_error": 1.5442855365503885e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 16.13164196586187,
+          "mapped_rotation_orthogonality_error": 1.5120233116045838e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 16.131653557769095,
+          "mapped_rotation_orthogonality_error": 1.5470290710524553e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 16.13163978410507,
+          "mapped_rotation_orthogonality_error": 1.515389358503218e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 16.13165709647549,
+          "mapped_rotation_orthogonality_error": 1.5458735677026888e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 16.131640659798798,
+          "mapped_rotation_orthogonality_error": 1.5190793064386838e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_pelvis_spine_flex",
+      "input_sha256": "89cbb384cdf20ca5cdbbfb129c7c3bf8f6e39c05f23a0e5791e2f2e601eaf58c",
+      "source_basis_closure": 9.267709710769623e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 31.25421944869639,
+          "mapped_rotation_orthogonality_error": 2.9884107693595994e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 36.08226822626319,
+          "mapped_rotation_orthogonality_error": 2.603315066549711e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 31.25422351396998,
+          "mapped_rotation_orthogonality_error": 3.069186592135218e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 36.08226230584512,
+          "mapped_rotation_orthogonality_error": 2.5819190232485024e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 31.25422555669025,
+          "mapped_rotation_orthogonality_error": 3.0911869451658547e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 36.082258778408516,
+          "mapped_rotation_orthogonality_error": 2.599327060703871e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 17.418919106346877,
+          "mapped_rotation_orthogonality_error": 1.5567118771868729e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 17.41892251448132,
+          "mapped_rotation_orthogonality_error": 1.5602293273929978e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 17.418922770187752,
+          "mapped_rotation_orthogonality_error": 1.5588106216341987e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 17.41891390583852,
+          "mapped_rotation_orthogonality_error": 1.5666895723857416e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 17.418922202747225,
+          "mapped_rotation_orthogonality_error": 1.5486795044137075e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 17.418918383083415,
+          "mapped_rotation_orthogonality_error": 1.5296515105988565e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_raised_foot",
+      "input_sha256": "e2acc8a338457a7d3c83745ca2b07331d1003152a74a0a68665a739b9dd65273",
+      "source_basis_closure": 6.053548765039274e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 1.3731508421856043e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 16.388124526749706,
+          "mapped_rotation_orthogonality_error": 1.105320111865225e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 1.7278910468351803e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 16.388122133297276,
+          "mapped_rotation_orthogonality_error": 1.0994671185832874e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 16.38811081107013,
+          "mapped_rotation_orthogonality_error": 1.1038706590726251e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 31.10713190398992,
+          "mapped_rotation_orthogonality_error": 5.218801893643726e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 3.476683955132841e-18,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 27.197013407980226,
+          "mapped_rotation_orthogonality_error": 3.855891985441203e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 13.077613748456042,
+          "mapped_rotation_orthogonality_error": 1.257804316003272e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_seated",
+      "input_sha256": "a6b7bc42eecb90a150e9fa27cec656bfeffb20b734368100607448797390a9dd",
+      "source_basis_closure": 1.027039668866081e-07,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 10.0000052607358,
+          "mapped_rotation_orthogonality_error": 1.1975202593785802e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 9.999996632513005,
+          "mapped_rotation_orthogonality_error": 1.229075671882982e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 10.000016254949006,
+          "mapped_rotation_orthogonality_error": 1.1857885451261302e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 9.999998349151666,
+          "mapped_rotation_orthogonality_error": 1.2292737758343798e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 10.000017476493085,
+          "mapped_rotation_orthogonality_error": 1.183348867838218e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 9.999996174981082,
+          "mapped_rotation_orthogonality_error": 1.221516423243977e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 80.25438305929573,
+          "mapped_rotation_orthogonality_error": 1.108627227597303e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 80.25438318107206,
+          "mapped_rotation_orthogonality_error": 1.108975782204702e-05,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 16.441393695105173,
+          "mapped_rotation_orthogonality_error": 2.012757042732655e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 16.441394112947364,
+          "mapped_rotation_orthogonality_error": 2.03929921132199e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 16.441397713915713,
+          "mapped_rotation_orthogonality_error": 2.007466824476121e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 16.441393044724744,
+          "mapped_rotation_orthogonality_error": 2.056816265850875e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    },
+    {
+      "fixture": "m_la01_wrist_torsion",
+      "input_sha256": "b7ea9329181df86caf845d1095b19bad811c2428ece921654b62234ff115a2fc",
+      "source_basis_closure": 8.138317952877117e-08,
+      "source_segment_audit": {
+        "upperarm01.L": {
+          "source_change_degrees": 33.18984970573008,
+          "mapped_rotation_orthogonality_error": 2.687258500842632e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperarm01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 5.306173688179515e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.L": {
+          "source_change_degrees": 63.488661497968,
+          "mapped_rotation_orthogonality_error": 2.1764811405375945e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerarm01.R": {
+          "source_change_degrees": 36.800323036509084,
+          "mapped_rotation_orthogonality_error": 2.330714862630859e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.L": {
+          "source_change_degrees": 98.90390043285902,
+          "mapped_rotation_orthogonality_error": 3.407687078124727e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "wrist.R": {
+          "source_change_degrees": 84.86941526311809,
+          "mapped_rotation_orthogonality_error": 5.2651942037407196e-06,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "upperleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 3.476683955132841e-18,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 4.440892098500626e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "lowerleg01.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.L": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 7.891475759067785e-17,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        },
+        "foot.R": {
+          "source_change_degrees": 0.0,
+          "mapped_rotation_orthogonality_error": 2.220446049250313e-16,
+          "cross_rig_rotation_error": null,
+          "correspondence": "direction_only"
+        }
+      }
+    }
+  ]
+}
