@@ -15,7 +15,7 @@
 | S1-001 | Reconcile production/candidate dependencies and platform locks (AUD-08) | DONE |
 | S1-002 | Verify clean Windows 11 installation and native library compatibility | BLOCKED |
 | S1-003 | Verify model and bootstrap asset discovery, integrity and offline configuration | DONE |
-| S1-004 | Resolve confirmed security, privacy and redistribution blockers | TODO |
+| S1-004 | Resolve confirmed security, privacy and redistribution blockers | IN_PROGRESS |
 | S1-005 | Validate dependency failure diagnostics and optional VLM isolation | TODO |
 
 ## S2 — Pipeline and integration
