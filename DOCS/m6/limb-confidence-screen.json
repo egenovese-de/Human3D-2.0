@@ -1,0 +1,992 @@
+{
+  "candidate_sha": "f87f7f1b7cd8723f1ddd900caab6aae2227a4090",
+  "lab_sha": "d2fab9733c2d14e7bb5227ca1a7e558c50b85a89",
+  "promotion_min_mean_direction_improvement_deg": 1.0,
+  "promotion_min_held_out_iou_delta": 0.0,
+  "cases": [
+    {
+      "identity": "f_af01",
+      "mesh_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+      "bend_deg": 0,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 18.80416596737343,
+              "head_error_mm": 28.29386663045168
+            },
+            "upperarm01.R": {
+              "direction_deg": 18.828431658874674,
+              "head_error_mm": 28.293866924893063
+            },
+            "lowerarm01.L": {
+              "direction_deg": 8.948996454300238,
+              "head_error_mm": 80.57690415096904
+            },
+            "lowerarm01.R": {
+              "direction_deg": 33.12953068874821,
+              "head_error_mm": 96.65747755192466
+            },
+            "upperleg01.L": {
+              "direction_deg": 5.693082565942627,
+              "head_error_mm": 17.752533711980636
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.383272041559974,
+              "head_error_mm": 17.752533283919934
+            },
+            "lowerleg01.L": {
+              "direction_deg": 15.280592368376398,
+              "head_error_mm": 100.68111257037137
+            },
+            "lowerleg01.R": {
+              "direction_deg": 10.96946846585816,
+              "head_error_mm": 73.46452043451362
+            },
+            "wrist.L": {
+              "direction_deg": 19.707839577288027,
+              "head_error_mm": 116.08290447531196
+            },
+            "wrist.R": {
+              "direction_deg": 53.52176189873329,
+              "head_error_mm": 225.08256208767182
+            },
+            "foot.L": {
+              "direction_deg": 13.27255539839016,
+              "head_error_mm": 151.9738636361621
+            },
+            "foot.R": {
+              "direction_deg": 19.47036000857002,
+              "head_error_mm": 107.81874204055266
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.541429731925264,
+            "112.5": 0.6704023764515258
+          },
+          "mean_direction_deg": 18.584171424501267,
+          "mean_head_error_mm": 87.0359072915602
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 18.641576129315187,
+              "head_error_mm": 28.29386663045168
+            },
+            "upperarm01.R": {
+              "direction_deg": 18.984785855148125,
+              "head_error_mm": 28.293866924893063
+            },
+            "lowerarm01.L": {
+              "direction_deg": 9.889084861921102,
+              "head_error_mm": 79.9751112659634
+            },
+            "lowerarm01.R": {
+              "direction_deg": 31.825254943561454,
+              "head_error_mm": 97.22355178188022
+            },
+            "upperleg01.L": {
+              "direction_deg": 5.8011398026547285,
+              "head_error_mm": 17.752533711980636
+            },
+            "upperleg01.R": {
+              "direction_deg": 4.991771164091591,
+              "head_error_mm": 17.752533283919934
+            },
+            "lowerleg01.L": {
+              "direction_deg": 13.908557662864329,
+              "head_error_mm": 101.09443403819247
+            },
+            "lowerleg01.R": {
+              "direction_deg": 9.358057119742854,
+              "head_error_mm": 74.25435369211982
+            },
+            "wrist.L": {
+              "direction_deg": 15.496668541196584,
+              "head_error_mm": 118.76643819718775
+            },
+            "wrist.R": {
+              "direction_deg": 49.41313992781601,
+              "head_error_mm": 220.63607144015472
+            },
+            "foot.L": {
+              "direction_deg": 16.360645027100322,
+              "head_error_mm": 147.21352657643152
+            },
+            "foot.R": {
+              "direction_deg": 21.851429904695614,
+              "head_error_mm": 103.04738421080826
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5381509890997174,
+            "112.5": 0.65684899485741
+          },
+          "mean_direction_deg": 18.04350924500899,
+          "mean_head_error_mm": 86.1919726461653
+        }
+      }
+    },
+    {
+      "identity": "f_af01",
+      "mesh_sha256": "d46525b3b3d595682d8c97da55a54db1ecaf53b9478baf1908453e8e3493274c",
+      "bend_deg": 32,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 15.335823844843606,
+              "head_error_mm": 28.29386663045168
+            },
+            "upperarm01.R": {
+              "direction_deg": 17.570879462363827,
+              "head_error_mm": 28.293866924893063
+            },
+            "lowerarm01.L": {
+              "direction_deg": 6.403902092881647,
+              "head_error_mm": 69.02396783745091
+            },
+            "lowerarm01.R": {
+              "direction_deg": 30.531130517450478,
+              "head_error_mm": 92.33283210797846
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.85674384887945,
+              "head_error_mm": 17.752533711980636
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.112033795417345,
+              "head_error_mm": 17.752533283919934
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.910453089161448,
+              "head_error_mm": 94.15610901514312
+            },
+            "lowerleg01.R": {
+              "direction_deg": 12.599583128007199,
+              "head_error_mm": 79.90260720661725
+            },
+            "wrist.L": {
+              "direction_deg": 25.526798735427867,
+              "head_error_mm": 80.56158578784627
+            },
+            "wrist.R": {
+              "direction_deg": 52.49781992560699,
+              "head_error_mm": 210.71835167147987
+            },
+            "foot.L": {
+              "direction_deg": 13.35619664189942,
+              "head_error_mm": 151.2876278143048
+            },
+            "foot.R": {
+              "direction_deg": 19.43250910663939,
+              "head_error_mm": 123.40844672807722
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5435091277890467,
+            "112.5": 0.6506794564348521
+          },
+          "mean_direction_deg": 18.177822849048223,
+          "mean_head_error_mm": 82.7903607266786
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 15.211960465401473,
+              "head_error_mm": 28.29386663045168
+            },
+            "upperarm01.R": {
+              "direction_deg": 17.615467824315854,
+              "head_error_mm": 28.293866924893063
+            },
+            "lowerarm01.L": {
+              "direction_deg": 6.810003318394832,
+              "head_error_mm": 68.59622096678731
+            },
+            "lowerarm01.R": {
+              "direction_deg": 30.000066908542955,
+              "head_error_mm": 92.49268198037498
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.961605356670543,
+              "head_error_mm": 17.752533711980636
+            },
+            "upperleg01.R": {
+              "direction_deg": 4.9066987582103625,
+              "head_error_mm": 17.752533283919934
+            },
+            "lowerleg01.L": {
+              "direction_deg": 13.761718070441331,
+              "head_error_mm": 94.5513511933671
+            },
+            "lowerleg01.R": {
+              "direction_deg": 11.045578665468723,
+              "head_error_mm": 80.58491001065491
+            },
+            "wrist.L": {
+              "direction_deg": 23.221538534191367,
+              "head_error_mm": 82.01398714907332
+            },
+            "wrist.R": {
+              "direction_deg": 50.66127505260586,
+              "head_error_mm": 208.81754504666975
+            },
+            "foot.L": {
+              "direction_deg": 16.49166208578807,
+              "head_error_mm": 146.65765892147144
+            },
+            "foot.R": {
+              "direction_deg": 22.065003472367017,
+              "head_error_mm": 117.64561048338929
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5411497730711043,
+            "112.5": 0.6400899114108158
+          },
+          "mean_direction_deg": 18.062714876033198,
+          "mean_head_error_mm": 81.95439719191945
+        }
+      }
+    },
+    {
+      "identity": "f_ca01",
+      "mesh_sha256": "f31fdf0277097373219b89f1c4fd3b051a3dfe5ae78ffe5b9e676ddbc9f6dd40",
+      "bend_deg": 0,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 19.341934086194808,
+              "head_error_mm": 24.969567626743174
+            },
+            "upperarm01.R": {
+              "direction_deg": 17.66578662302472,
+              "head_error_mm": 24.969582648054033
+            },
+            "lowerarm01.L": {
+              "direction_deg": 8.410697371547235,
+              "head_error_mm": 80.69531376704131
+            },
+            "lowerarm01.R": {
+              "direction_deg": 30.258502215896815,
+              "head_error_mm": 89.99357168172695
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.903247072000888,
+              "head_error_mm": 21.016070007151587
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.609636799437953,
+              "head_error_mm": 21.016069648738206
+            },
+            "lowerleg01.L": {
+              "direction_deg": 15.335027947374561,
+              "head_error_mm": 93.57893244794619
+            },
+            "lowerleg01.R": {
+              "direction_deg": 11.412635989118531,
+              "head_error_mm": 80.03454958352366
+            },
+            "wrist.L": {
+              "direction_deg": 21.88504784329619,
+              "head_error_mm": 114.93791877347684
+            },
+            "wrist.R": {
+              "direction_deg": 51.75031819278836,
+              "head_error_mm": 207.3689391280201
+            },
+            "foot.L": {
+              "direction_deg": 12.760604240500001,
+              "head_error_mm": 149.12607414595027
+            },
+            "foot.R": {
+              "direction_deg": 19.577837749612964,
+              "head_error_mm": 118.96028724842857
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5583592938733125,
+            "112.5": 0.663230007461168
+          },
+          "mean_direction_deg": 18.24260634423275,
+          "mean_head_error_mm": 85.55557305890007
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 19.162005895502528,
+              "head_error_mm": 24.969567626743174
+            },
+            "upperarm01.R": {
+              "direction_deg": 17.765009641156798,
+              "head_error_mm": 24.969582648054033
+            },
+            "lowerarm01.L": {
+              "direction_deg": 9.13363224469179,
+              "head_error_mm": 80.0129231662325
+            },
+            "lowerarm01.R": {
+              "direction_deg": 29.364455448243035,
+              "head_error_mm": 90.35577211077243
+            },
+            "upperleg01.L": {
+              "direction_deg": 5.013593435334029,
+              "head_error_mm": 21.016070007151587
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.36543756529833,
+              "head_error_mm": 21.016069648738206
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.077463566730893,
+              "head_error_mm": 93.9909450362645
+            },
+            "lowerleg01.R": {
+              "direction_deg": 9.936733894684636,
+              "head_error_mm": 80.744383231508
+            },
+            "wrist.L": {
+              "direction_deg": 18.495805913654934,
+              "head_error_mm": 116.71682426836118
+            },
+            "wrist.R": {
+              "direction_deg": 48.74712928537313,
+              "head_error_mm": 204.26773988790774
+            },
+            "foot.L": {
+              "direction_deg": 15.746000526984192,
+              "head_error_mm": 144.18933152777535
+            },
+            "foot.R": {
+              "direction_deg": 21.947389574397434,
+              "head_error_mm": 114.42080304772057
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5553032258064516,
+            "112.5": 0.6487484061472384
+          },
+          "mean_direction_deg": 17.89622141600431,
+          "mean_head_error_mm": 84.72250101726911
+        }
+      }
+    },
+    {
+      "identity": "f_ca01",
+      "mesh_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+      "bend_deg": 32,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 16.148262913832642,
+              "head_error_mm": 24.969567626743174
+            },
+            "upperarm01.R": {
+              "direction_deg": 15.854736480953475,
+              "head_error_mm": 24.969582648054033
+            },
+            "lowerarm01.L": {
+              "direction_deg": 5.608791779083154,
+              "head_error_mm": 68.64598117922372
+            },
+            "lowerarm01.R": {
+              "direction_deg": 27.644242462538863,
+              "head_error_mm": 84.03163180994336
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.131367007124626,
+              "head_error_mm": 21.016070007151587
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.443743209325608,
+              "head_error_mm": 21.016069648738206
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.312114233863399,
+              "head_error_mm": 87.3771327398115
+            },
+            "lowerleg01.R": {
+              "direction_deg": 12.58057900844694,
+              "head_error_mm": 82.72035229276112
+            },
+            "wrist.L": {
+              "direction_deg": 26.741713184799615,
+              "head_error_mm": 82.34904566407522
+            },
+            "wrist.R": {
+              "direction_deg": 51.63666141422729,
+              "head_error_mm": 190.59710810877752
+            },
+            "foot.L": {
+              "direction_deg": 13.042632879013462,
+              "head_error_mm": 142.35992654159116
+            },
+            "foot.R": {
+              "direction_deg": 19.47181818001933,
+              "head_error_mm": 129.1902240628881
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5625552723300213,
+            "112.5": 0.6511596548004315
+          },
+          "mean_direction_deg": 17.7180552294357,
+          "mean_head_error_mm": 79.93689102747989
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 15.992645434822588,
+              "head_error_mm": 24.969567626743174
+            },
+            "upperarm01.R": {
+              "direction_deg": 15.914660928373422,
+              "head_error_mm": 24.969582648054033
+            },
+            "lowerarm01.L": {
+              "direction_deg": 6.014814904789232,
+              "head_error_mm": 68.0763776678907
+            },
+            "lowerarm01.R": {
+              "direction_deg": 27.174047221976313,
+              "head_error_mm": 84.24495134864836
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.252003923190066,
+              "head_error_mm": 21.016070007151587
+            },
+            "upperleg01.R": {
+              "direction_deg": 5.26433252566447,
+              "head_error_mm": 21.016069648738206
+            },
+            "lowerleg01.L": {
+              "direction_deg": 13.194032063316513,
+              "head_error_mm": 87.79891466919209
+            },
+            "lowerleg01.R": {
+              "direction_deg": 11.051669253488663,
+              "head_error_mm": 83.39672012949522
+            },
+            "wrist.L": {
+              "direction_deg": 24.45680987288074,
+              "head_error_mm": 83.60194164483687
+            },
+            "wrist.R": {
+              "direction_deg": 49.864581536565375,
+              "head_error_mm": 188.9852693581513
+            },
+            "foot.L": {
+              "direction_deg": 15.856099721257143,
+              "head_error_mm": 137.6388484177871
+            },
+            "foot.R": {
+              "direction_deg": 22.18769513278555,
+              "head_error_mm": 123.94542117869597
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5607457276022786,
+            "112.5": 0.6398449508788344
+          },
+          "mean_direction_deg": 17.601949376592508,
+          "mean_head_error_mm": 79.13831119544872
+        }
+      }
+    },
+    {
+      "identity": "m_as01",
+      "mesh_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+      "bend_deg": 0,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 22.928081768395884,
+              "head_error_mm": 25.642826267781494
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.625696073622727,
+              "head_error_mm": 25.64282963162522
+            },
+            "lowerarm01.L": {
+              "direction_deg": 7.661252636578027,
+              "head_error_mm": 66.32364737494544
+            },
+            "lowerarm01.R": {
+              "direction_deg": 34.21459886460726,
+              "head_error_mm": 90.97382202798376
+            },
+            "upperleg01.L": {
+              "direction_deg": 3.742673085867885,
+              "head_error_mm": 36.7275028090002
+            },
+            "upperleg01.R": {
+              "direction_deg": 9.086037226982642,
+              "head_error_mm": 36.7275028090002
+            },
+            "lowerleg01.L": {
+              "direction_deg": 16.28205870907922,
+              "head_error_mm": 92.03670371182244
+            },
+            "lowerleg01.R": {
+              "direction_deg": 15.025300669421751,
+              "head_error_mm": 92.18088270436306
+            },
+            "wrist.L": {
+              "direction_deg": 19.473847009717566,
+              "head_error_mm": 108.61804238784461
+            },
+            "wrist.R": {
+              "direction_deg": 49.977182544129306,
+              "head_error_mm": 227.11153416160704
+            },
+            "foot.L": {
+              "direction_deg": 15.583364121452181,
+              "head_error_mm": 118.94163033012701
+            },
+            "foot.R": {
+              "direction_deg": 22.182844724783234,
+              "head_error_mm": 126.5660401953729
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5693575895395111,
+            "112.5": 0.6838471023427867
+          },
+          "mean_direction_deg": 19.14857811955314,
+          "mean_head_error_mm": 87.29108036762278
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 22.798936892811156,
+              "head_error_mm": 25.642826267781494
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.849472026734315,
+              "head_error_mm": 25.64282963162522
+            },
+            "lowerarm01.L": {
+              "direction_deg": 8.492795585003838,
+              "head_error_mm": 65.79357933140547
+            },
+            "lowerarm01.R": {
+              "direction_deg": 32.977765320839495,
+              "head_error_mm": 91.90208511948452
+            },
+            "upperleg01.L": {
+              "direction_deg": 3.5387381969024205,
+              "head_error_mm": 36.7275028090002
+            },
+            "upperleg01.R": {
+              "direction_deg": 8.807424097247258,
+              "head_error_mm": 36.7275028090002
+            },
+            "lowerleg01.L": {
+              "direction_deg": 15.169282671031537,
+              "head_error_mm": 91.72831033010318
+            },
+            "lowerleg01.R": {
+              "direction_deg": 13.602953664534096,
+              "head_error_mm": 91.99643634798794
+            },
+            "wrist.L": {
+              "direction_deg": 16.33834184698305,
+              "head_error_mm": 111.06536579117915
+            },
+            "wrist.R": {
+              "direction_deg": 46.051335240155495,
+              "head_error_mm": 223.08673049939833
+            },
+            "foot.L": {
+              "direction_deg": 17.82310512358091,
+              "head_error_mm": 114.65952990903695
+            },
+            "foot.R": {
+              "direction_deg": 23.973099936583598,
+              "head_error_mm": 121.58654885045169
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5674401056404452,
+            "112.5": 0.6773204097908104
+          },
+          "mean_direction_deg": 18.618604216867265,
+          "mean_head_error_mm": 86.37993730803787
+        }
+      }
+    },
+    {
+      "identity": "m_as01",
+      "mesh_sha256": "3b5b3d8b9244e8373974cb6d032fefe4d48cded1b05dca7e09caaf7c64109dec",
+      "bend_deg": 32,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 19.594649510916362,
+              "head_error_mm": 25.642826267781494
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.862079110519353,
+              "head_error_mm": 25.64282963162522
+            },
+            "lowerarm01.L": {
+              "direction_deg": 7.238601133769741,
+              "head_error_mm": 53.22792222994552
+            },
+            "lowerarm01.R": {
+              "direction_deg": 33.81424681244764,
+              "head_error_mm": 91.91884551875164
+            },
+            "upperleg01.L": {
+              "direction_deg": 4.073102061187347,
+              "head_error_mm": 36.7275028090002
+            },
+            "upperleg01.R": {
+              "direction_deg": 7.954461556655016,
+              "head_error_mm": 36.7275028090002
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.693738359660943,
+              "head_error_mm": 99.59725163803385
+            },
+            "lowerleg01.R": {
+              "direction_deg": 14.11421212802126,
+              "head_error_mm": 86.29144806966778
+            },
+            "wrist.L": {
+              "direction_deg": 21.905910640948843,
+              "head_error_mm": 85.54627601189253
+            },
+            "wrist.R": {
+              "direction_deg": 50.384262036703426,
+              "head_error_mm": 227.31460341889874
+            },
+            "foot.L": {
+              "direction_deg": 13.940849311103095,
+              "head_error_mm": 128.76197584075877
+            },
+            "foot.R": {
+              "direction_deg": 23.58615318014911,
+              "head_error_mm": 120.91587723911164
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5724995255266654,
+            "112.5": 0.6920432527032939
+          },
+          "mean_direction_deg": 18.763522153506845,
+          "mean_head_error_mm": 84.8595717903723
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 19.491614405549353,
+              "head_error_mm": 25.642826267781494
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.948176001590316,
+              "head_error_mm": 25.64282963162522
+            },
+            "lowerarm01.L": {
+              "direction_deg": 7.705496966343986,
+              "head_error_mm": 52.81775370930053
+            },
+            "lowerarm01.R": {
+              "direction_deg": 33.140392487473314,
+              "head_error_mm": 92.27376017867545
+            },
+            "upperleg01.L": {
+              "direction_deg": 3.9578721449783933,
+              "head_error_mm": 36.7275028090002
+            },
+            "upperleg01.R": {
+              "direction_deg": 7.715359856030746,
+              "head_error_mm": 36.7275028090002
+            },
+            "lowerleg01.L": {
+              "direction_deg": 13.730353689787293,
+              "head_error_mm": 99.46857540664253
+            },
+            "lowerleg01.R": {
+              "direction_deg": 12.867712748630698,
+              "head_error_mm": 86.198218577766
+            },
+            "wrist.L": {
+              "direction_deg": 19.511770060150344,
+              "head_error_mm": 87.10027579490422
+            },
+            "wrist.R": {
+              "direction_deg": 48.07193592279503,
+              "head_error_mm": 224.9470765256149
+            },
+            "foot.L": {
+              "direction_deg": 15.918997753025108,
+              "head_error_mm": 125.36385970422897
+            },
+            "foot.R": {
+              "direction_deg": 25.108297155546644,
+              "head_error_mm": 116.40115178937792
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5715975211694025,
+            "112.5": 0.687982085095795
+          },
+          "mean_direction_deg": 18.430664932658434,
+          "mean_head_error_mm": 84.10927776699313
+        }
+      }
+    },
+    {
+      "identity": "m_la01",
+      "mesh_sha256": "dc1854813d4b44714340ea13a725cafd8c552e18ed386db4e6e7bb6880e4f66d",
+      "bend_deg": 0,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 25.581172827242614,
+              "head_error_mm": 27.288284245353108
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.111214029869389,
+              "head_error_mm": 27.288284245353108
+            },
+            "lowerarm01.L": {
+              "direction_deg": 9.083269762329223,
+              "head_error_mm": 80.67370596384244
+            },
+            "lowerarm01.R": {
+              "direction_deg": 33.7951494388633,
+              "head_error_mm": 91.41187535856302
+            },
+            "upperleg01.L": {
+              "direction_deg": 2.9554038666714137,
+              "head_error_mm": 42.522361407549646
+            },
+            "upperleg01.R": {
+              "direction_deg": 8.159946245893302,
+              "head_error_mm": 42.522361407549646
+            },
+            "lowerleg01.L": {
+              "direction_deg": 13.836729868793629,
+              "head_error_mm": 97.0813854620662
+            },
+            "lowerleg01.R": {
+              "direction_deg": 12.966242601321818,
+              "head_error_mm": 92.44707819125352
+            },
+            "wrist.L": {
+              "direction_deg": 19.520433318508044,
+              "head_error_mm": 132.03692596060222
+            },
+            "wrist.R": {
+              "direction_deg": 50.28681929849667,
+              "head_error_mm": 234.71531894069398
+            },
+            "foot.L": {
+              "direction_deg": 13.236612919084173,
+              "head_error_mm": 121.51792853903261
+            },
+            "foot.R": {
+              "direction_deg": 23.05661003440688,
+              "head_error_mm": 127.34710698461087
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5814834160355185,
+            "112.5": 0.679959616355376
+          },
+          "mean_direction_deg": 18.799133684290037,
+          "mean_head_error_mm": 93.07105139220586
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 25.43456353754694,
+              "head_error_mm": 27.288284245353108
+            },
+            "upperarm01.R": {
+              "direction_deg": 13.336185137913494,
+              "head_error_mm": 27.28828424535311
+            },
+            "lowerarm01.L": {
+              "direction_deg": 9.647891263646544,
+              "head_error_mm": 80.03483778922134
+            },
+            "lowerarm01.R": {
+              "direction_deg": 32.87965820607129,
+              "head_error_mm": 92.41147678549136
+            },
+            "upperleg01.L": {
+              "direction_deg": 2.8366994021795375,
+              "head_error_mm": 42.522361407549646
+            },
+            "upperleg01.R": {
+              "direction_deg": 7.926177315463508,
+              "head_error_mm": 42.522361407549646
+            },
+            "lowerleg01.L": {
+              "direction_deg": 12.967691842156931,
+              "head_error_mm": 96.9640683284848
+            },
+            "lowerleg01.R": {
+              "direction_deg": 11.8083736484925,
+              "head_error_mm": 92.41497129307204
+            },
+            "wrist.L": {
+              "direction_deg": 16.818528391807458,
+              "head_error_mm": 133.57237390789166
+            },
+            "wrist.R": {
+              "direction_deg": 47.26871816665154,
+              "head_error_mm": 231.848078001871
+            },
+            "foot.L": {
+              "direction_deg": 14.510033090698542,
+              "head_error_mm": 118.17631819659783
+            },
+            "foot.R": {
+              "direction_deg": 24.34135806622043,
+              "head_error_mm": 123.39425095890509
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5800529490907512,
+            "112.5": 0.6744419642857142
+          },
+          "mean_direction_deg": 18.314656505737393,
+          "mean_head_error_mm": 92.36980554727839
+        }
+      }
+    },
+    {
+      "identity": "m_la01",
+      "mesh_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+      "bend_deg": 32,
+      "results": {
+        "native": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 21.793259827360973,
+              "head_error_mm": 27.288284245353108
+            },
+            "upperarm01.R": {
+              "direction_deg": 14.041064612602996,
+              "head_error_mm": 27.288284245353108
+            },
+            "lowerarm01.L": {
+              "direction_deg": 8.87462358199152,
+              "head_error_mm": 64.17855185387431
+            },
+            "lowerarm01.R": {
+              "direction_deg": 34.26662795619157,
+              "head_error_mm": 95.66869072624431
+            },
+            "upperleg01.L": {
+              "direction_deg": 3.691250038512083,
+              "head_error_mm": 42.522361407549646
+            },
+            "upperleg01.R": {
+              "direction_deg": 8.756597296311199,
+              "head_error_mm": 42.522361407549646
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.945935345998572,
+              "head_error_mm": 99.12640886751845
+            },
+            "lowerleg01.R": {
+              "direction_deg": 15.509036449075012,
+              "head_error_mm": 93.07724841391007
+            },
+            "wrist.L": {
+              "direction_deg": 21.163329450116304,
+              "head_error_mm": 110.20110193603183
+            },
+            "wrist.R": {
+              "direction_deg": 51.4745991397472,
+              "head_error_mm": 242.2998445127862
+            },
+            "foot.L": {
+              "direction_deg": 14.31591098558846,
+              "head_error_mm": 124.699504028729
+            },
+            "foot.R": {
+              "direction_deg": 22.64300032882874,
+              "head_error_mm": 135.63952352494331
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5828260869565217,
+            "112.5": 0.6922111985403124
+          },
+          "mean_direction_deg": 19.28960291769372,
+          "mean_head_error_mm": 92.04268043082025
+        },
+        "attenuated": {
+          "segments": {
+            "upperarm01.L": {
+              "direction_deg": 21.6812933958926,
+              "head_error_mm": 27.288284245353108
+            },
+            "upperarm01.R": {
+              "direction_deg": 14.129583050572418,
+              "head_error_mm": 27.288284245353108
+            },
+            "lowerarm01.L": {
+              "direction_deg": 9.258773539168002,
+              "head_error_mm": 63.69159226540283
+            },
+            "lowerarm01.R": {
+              "direction_deg": 33.699595748229086,
+              "head_error_mm": 96.05595459913147
+            },
+            "upperleg01.L": {
+              "direction_deg": 3.560416865004936,
+              "head_error_mm": 42.522361407549646
+            },
+            "upperleg01.R": {
+              "direction_deg": 8.51435930483389,
+              "head_error_mm": 42.522361407549646
+            },
+            "lowerleg01.L": {
+              "direction_deg": 14.063881820434723,
+              "head_error_mm": 98.96636904086022
+            },
+            "lowerleg01.R": {
+              "direction_deg": 14.185190410065431,
+              "head_error_mm": 92.87983964748214
+            },
+            "wrist.L": {
+              "direction_deg": 19.18687784566343,
+              "head_error_mm": 111.32903665074738
+            },
+            "wrist.R": {
+              "direction_deg": 49.56550570187256,
+              "head_error_mm": 240.29240737068292
+            },
+            "foot.L": {
+              "direction_deg": 16.1185054830242,
+              "head_error_mm": 121.22035820068301
+            },
+            "foot.R": {
+              "direction_deg": 24.399567245722828,
+              "head_error_mm": 130.6966440398529
+            }
+          },
+          "held_out_iou": {
+            "22.5": 0.5810324649993498,
+            "112.5": 0.6874148114493412
+          },
+          "mean_direction_deg": 19.030295867540342,
+          "mean_head_error_mm": 91.22945776005403
+        }
+      }
+    }
+  ]
+}
