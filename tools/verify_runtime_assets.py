@@ -42,7 +42,9 @@ def main():
             assert report["status"] == "PASS"
             PoseLandmarker(model).close()
             digest = freeze_neutral(assets,root/"frozen",with_morphs=True)
-            body = json.loads((root/"frozen"/(digest+".json")).read_text())
+            from human3d.frozen_body import load_frozen_body
+            body = load_frozen_body(root/"frozen"/(digest+".json"))
+            print("Canonical frozen structure: PASS",flush=True)
             assert len(body["morph_targets"]) == 14
             assert body["source_asset_digests"] == expected
             from human3d.texture_bake import _hidden_vertices
