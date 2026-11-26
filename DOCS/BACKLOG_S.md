@@ -16,7 +16,7 @@
 | S1-002 | Verify clean Windows 11 installation and native library compatibility | BLOCKED |
 | S1-003 | Verify model and bootstrap asset discovery, integrity and offline configuration | DONE |
 | S1-004 | Resolve confirmed security, privacy and redistribution blockers | DONE |
-| S1-005 | Validate dependency failure diagnostics and optional VLM isolation | TODO |
+| S1-005 | Validate dependency failure diagnostics and optional VLM isolation | IN_PROGRESS |
 
 ## S2 — Pipeline and integration
 
