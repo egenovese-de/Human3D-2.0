@@ -154,3 +154,29 @@ class SubjectEvidenceTests(unittest.TestCase):
         with Image.open(BytesIO(png)) as mask:
             self.assertEqual(mask.size, (38, 22))
             self.assertEqual(mask.getbbox(), (12, 6, 24, 16))
+
+
+class VisionSuitabilityTests(unittest.TestCase):
+    def test_mask_and_landmarks_can_pass_while_full_pose_requires_review(self):
+        from dataclasses import replace
+        from io import BytesIO
+
+        from PIL import Image, ImageDraw
+
+        from human3d.vision import Landmark, SubjectEvidence, VisionSuitability
+
+        mask = Image.new("L", (32, 32))
+        ImageDraw.Draw(mask).rectangle((12, 2, 19, 29), fill=255)
+        buffer = BytesIO()
+        mask.save(buffer, format="PNG")
+        pose = [Landmark(.5, .5, 1., 1.)] * 33
+        pose[27] = Landmark(.5, .9, .5, 1.)
+        result = SubjectEvidence("a" * 64, "b" * 64, (32, 32), (tuple(pose),), (buffer.getvalue(),))
+        self.assertEqual(result.suitability(0), VisionSuitability(None, None, "insufficient_full_body_evidence"))
+        self.assertEqual(replace(result, candidates=result.candidates * 2).suitability(0),
+                         VisionSuitability("multiple_candidates", "multiple_candidates", "multiple_candidates"))
+        self.assertEqual(replace(result, masks=(b"invalid",)).suitability(0).mask_reason, "invalid_mask_geometry")
+        ImageDraw.Draw(mask).rectangle((12, 0, 19, 2), fill=255)
+        clipped = BytesIO()
+        mask.save(clipped, format="PNG")
+        self.assertEqual(replace(result, masks=(clipped.getvalue(),)).suitability(0).mask_reason, "mask_touches_frame")

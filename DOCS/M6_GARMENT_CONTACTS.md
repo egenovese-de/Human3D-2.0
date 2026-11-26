@@ -4,4 +4,9 @@ The release clearance samples signed gaps at shell vertices and triangle centroi
 
 The replay on 12 original Q posed cases reproduced zero sampled penetrations per case. Eight shorts and trousers cases each had 34 transverse pairs. Four top cases had zero intersections. Classifier timing was approximately 0.35–0.79 s per case on Linux, with CPython 3.11.9, NumPy 1.26.4 and one OpenBLAS thread. These cases cover two Q identities and two target poses per identity. [Per-case evidence and exact candidate SHA](https://github.com/egenovese-de/Human3D-2.0/blob/8f3a477155986c8f3bdf90a59143e3035daf35a8/DOCS/m6/garment-contact-replay.json).
 
-The synthetic controls cover separation, crossing, point and edge contact, coplanar overlap, input winding, broad-phase selectivity and invalid triangles. A garment-level fixture verifies different neutral and posed results. Layer-to-layer exact validation and the integrated performance gate remain M6.1-004.
+The synthetic controls cover separation, crossing, point and edge contact, coplanar overlap, input winding, broad-phase selectivity and invalid triangles. A garment-level fixture verifies different neutral and posed results.
+
+
+The paired layer check found 52 intersections per base/outer assembly across the two Q target poses, despite zero sampled violations. Both base/shorts pair checks had zero layer intersections. Body-versus-garment checks are separate. The two assemblies of each type measured about 0.52–0.60 s on the release and 0.64–1.08 s on the candidate in the initial paired run. The geometric pass rejects the colliding pair and preserves the sampled report. See the [paired release and candidate records](https://github.com/egenovese-de/Human3D-2.0/tree/8db69e7450c850a004d09bffd53c3d3714996d71/DOCS/m6).
+
+The pinned Linux runtime probe also completed the integrated synthetic top and USDZ export. This single top smoke check covers the normal export entry point. It does not qualify Blender import/editability or Windows installation.

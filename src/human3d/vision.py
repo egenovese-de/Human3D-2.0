@@ -15,6 +15,7 @@ from PIL import Image, ImageOps
 from .anatomical_evidence import AnatomicalEvidence, apply_visibility
 
 # Nose, shoulders, hips, knees and ankles in MediaPipe pose order.
+TORSO_ANCHORS = (11, 12, 23, 24)
 FULL_BODY_ANCHORS = (0, 11, 12, 23, 24, 25, 26, 27, 28)
 MIN_ANCHOR_CONFIDENCE = 0.8
 
@@ -71,6 +72,13 @@ def estimate_world_yaw(pose, world):
 
 
 @dataclass(frozen=True)
+class VisionSuitability:
+    mask_reason: str | None
+    landmark_reason: str | None
+    pose_reason: str | None
+
+
+@dataclass(frozen=True)
 class SubjectEvidence:
     photo_digest: str
     model_digest: str
@@ -106,6 +114,40 @@ class SubjectEvidence:
         pose, = self.candidates
         if len(pose) != 33 or not all(pose[index].observed for index in FULL_BODY_ANCHORS):
             return "insufficient_full_body_evidence"
+        return None
+
+
+    def suitability(self, candidate: int) -> VisionSuitability:
+        """Evaluate mask, torso-anchor and full-pose evidence independently."""
+        if not 0 <= candidate < len(self.candidates):
+            raise ValueError("invalid_subject_candidate")
+        if len(self.candidates) > 1:
+            return VisionSuitability("multiple_candidates", "multiple_candidates", "multiple_candidates")
+        pose = self.visible_pose(candidate)
+        landmarks = None if len(pose) == 33 and all(pose[i].observed for i in TORSO_ANCHORS) else (
+            "insufficient_torso_evidence"
+        )
+        return VisionSuitability(self._mask_reason(candidate), landmarks, self.review_reason)
+
+    def _mask_reason(self, candidate):
+        mask = self.masks[candidate] if candidate < len(self.masks) else None
+        if mask is None:
+            return "mask_missing"
+        try:
+            with Image.open(BytesIO(mask)) as source:
+                if source.size != self.image_size:
+                    return "invalid_mask_geometry"
+                image = source.convert("L")
+                counts = image.histogram()
+                bounds = image.getbbox()
+        except (OSError, ValueError):
+            return "invalid_mask_geometry"
+        if not counts[0] or not counts[255] or any(counts[1:255]):
+            return "invalid_mask_geometry"
+        left, top, right, bottom = bounds
+        width, height = self.image_size
+        if left == 0 or top == 0 or right == width or bottom == height:
+            return "mask_touches_frame"
         return None
 
 
