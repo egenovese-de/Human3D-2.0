@@ -1,6 +1,9 @@
 """Explicit CI-only provisioning followed by offline verification; no asset publication."""
 import json
+import platform
+import sys
 import tempfile
+from time import perf_counter
 from pathlib import Path
 from urllib.request import urlopen
 from unittest.mock import patch
@@ -81,9 +84,38 @@ def main():
             profile_pipeline(body, root, assets)
             print("Actual pinned assets: PASS; frozen digest:",digest,flush=True)
 
+def peak_process_rss_bytes():
+    if sys.platform == "win32":
+        import ctypes
+        from ctypes import wintypes
+
+        class MemoryCounters(ctypes.Structure):
+            _fields_ = [("size", wintypes.DWORD), ("page_faults", wintypes.DWORD)] + [
+                (name, ctypes.c_size_t) for name in (
+                    "peak_working_set", "working_set", "peak_paged_pool", "paged_pool",
+                    "peak_nonpaged_pool", "nonpaged_pool", "pagefile", "peak_pagefile",
+                )
+            ]
+
+        counters = MemoryCounters()
+        counters.size = ctypes.sizeof(counters)
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.GetCurrentProcess.restype = wintypes.HANDLE
+        query = ctypes.WinDLL("psapi", use_last_error=True).GetProcessMemoryInfo
+        query.argtypes = [wintypes.HANDLE, ctypes.POINTER(MemoryCounters), wintypes.DWORD]
+        query.restype = wintypes.BOOL
+        if not query(kernel.GetCurrentProcess(), ctypes.byref(counters), counters.size):
+            raise ctypes.WinError(ctypes.get_last_error())
+        return counters.peak_working_set
+
+    import resource
+
+    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return peak if sys.platform == "darwin" else peak * 1024
+
+
 def profile_pipeline(body, root, assets):
     """Canonical mesh, synthetic raster, no real photographs or inference."""
-    import time
     import numpy as np
     from io import BytesIO
     from PIL import Image, ImageDraw
@@ -97,37 +129,54 @@ def profile_pipeline(body, root, assets):
     from human3d.usd_export import export_body
     from human3d.frozen_body import deform_vertices
     from human3d.native_rig import validate_rebind, pose_transforms, skin_vertices
+    def disk_bytes():
+        return sum(p.stat().st_size for p in root.rglob("*") if p.is_file())
+
     def measure(name, operation):
-        start = time.perf_counter()
+        started = perf_counter()
         result = operation()
-        print("AUD-06 stage " + json.dumps({"stage": name, "seconds": time.perf_counter()-start,
-              "disk_bytes": sum(p.stat().st_size for p in root.rglob("*") if p.is_file())}), flush=True)
+        seconds = perf_counter() - started
+        print("AUD-06 stage " + json.dumps({
+            "stage": name,
+            "seconds": seconds,
+            "peak_process_rss_bytes": peak_process_rss_bytes(),
+            "disk_bytes": disk_bytes(),
+        }), flush=True)
         return result
-    measure("freeze", lambda: freeze_neutral(assets, root/"profile-frozen", with_morphs=True))
-    points = np.asarray(body["mesh"]["vertices"])
-    lo, hi = points.min(axis=0), points.max(axis=0)
-    scale = 200 / (hi[1]-lo[1])
-    camera = Camera(0, scale, complex(128-scale*(hi[0]+lo[0])/2,128+scale*(hi[1]+lo[1])/2),1)
-    alignment = Alignment(camera,0,{})
-    size = (256,256)
-    raster = Image.new("L",size)
-    draw = ImageDraw.Draw(raster)
-    projected = [camera.project(p) for p in points]
-    for face in body["mesh"]["faces"]:
-        if face["group"] == "body":
-            draw.polygon([(projected[i].real,projected[i].imag) for i,_ in face["corners"]],fill=255)
-    buffer = BytesIO()
-    raster.save(buffer,format="PNG")
-    mask = SubjectMask("a"*64,0,buffer.getvalue())
+
+    def synthetic_view():
+        points = np.asarray(body["mesh"]["vertices"])
+        lo, hi = points.min(axis=0), points.max(axis=0)
+        scale = 200 / (hi[1] - lo[1])
+        center = (hi + lo) / 2
+        camera = Camera(0, scale, complex(128 - scale * center[0], 128 + scale * center[1]), 1)
+        alignment = Alignment(camera, 0, {})
+        size = (256, 256)
+        raster = Image.new("L", size)
+        draw = ImageDraw.Draw(raster)
+        projected = [camera.project(point) for point in points]
+        for face in body["mesh"]["faces"]:
+            if face["group"] == "body":
+                draw.polygon([(projected[i].real, projected[i].imag) for i, _ in face["corners"]], fill=255)
+        buffer = BytesIO()
+        raster.save(buffer, format="PNG")
+        mask = SubjectMask("a" * 64, 0, buffer.getvalue())
+        foreground = np.asarray(raster) > 0
+        rgb = np.full((*foreground.shape, 3), 120, dtype=np.uint8)
+        view = AppearanceView(rgb, foreground, np.zeros_like(foreground), alignment)
+        return mask, alignment, view, size
+
+    initial_disk_bytes = disk_bytes()
+    initial_peak_rss = peak_process_rss_bytes()
+    started = perf_counter()
+    measure("freeze", lambda: freeze_neutral(assets, root / "profile-frozen", with_morphs=True))
+    mask, alignment, view, size = measure("synthetic_view", synthetic_view)
     fit = measure("fit_body",lambda: fit_body(body,mask,alignment))
     def pose():
         neutral = deform_vertices(body,fit.controls)
         joints = validate_rebind(body,neutral)
         return skin_vertices(neutral,body["rig"]["skin"],pose_transforms(body["rig"],joints,alignment))
     measure("deform_rebind_pose",pose)
-    foreground = np.asarray(raster)>0
-    rgb = np.full((256,256,3),120,dtype=np.uint8)
-    view = AppearanceView(rgb,foreground,np.zeros_like(foreground),alignment)
     views = {"target":(view,size)}
     atlas = measure("body_atlas_256",lambda: bake_atlas(body,fit.controls,views,"target",size=256))
     garment = measure("garment_top",lambda: fit_garment(body,fit,view,size,"top",optimize=False))
@@ -135,8 +184,18 @@ def profile_pipeline(body, root, assets):
     destination = root/"profile.usdz"
     measure("usdz",lambda: export_body(destination,body,fit,alignment,texture=atlas.color,
         garments=[GarmentAsset(garment.garment,garment_atlas.color,garment_atlas.observed_fraction)]))
-    assert destination.stat().st_size > 0
-    print("AUD-06 package_bytes",destination.stat().st_size,flush=True)
+    package_bytes = destination.stat().st_size
+    assert package_bytes > 0
+    print("AUD-06 summary " + json.dumps({
+        "platform": platform.platform(),
+        "python": platform.python_version(),
+        "wall_seconds": perf_counter() - started,
+        "initial_peak_process_rss_bytes": initial_peak_rss,
+        "peak_process_rss_bytes": peak_process_rss_bytes(),
+        "initial_disk_bytes": initial_disk_bytes,
+        "final_disk_bytes": disk_bytes(),
+        "package_bytes": package_bytes,
+    }), flush=True)
 
 if __name__ == "__main__":
     main()
