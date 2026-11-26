@@ -35,12 +35,16 @@ class Coordinator:
             jobs, artifacts = self.snapshot()
             return self.generation, jobs, artifacts
 
-    def invalidate(self, dependencies):
+    def invalidate(self, dependencies, *, retain_kind=None):
         with self._lock:
             dependencies = tuple(sorted(dependencies.items()))
             if dependencies != self.dependencies:
                 self.dependencies = dependencies
                 self.generation += 1
+                if retain_kind in self._active:
+                    revision, artifact = self._active[retain_kind]
+                    if revision == self.generation - 1:
+                        self._active[retain_kind] = (self.generation, artifact)
                 for job in tuple(self._jobs.values()):
                     if job.state in {"queued", "running"}:
                         self._jobs[job.id] = replace(job, state="stale")
