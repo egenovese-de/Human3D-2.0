@@ -28,12 +28,12 @@ class NativeRecovery(unittest.TestCase):
                 (CompletedProcess([],-6,"",""),"detector failed"),
             ]:
                 with self.subTest(message=message):
-                    with patch("human3d.vision.subprocess.run",side_effect=[failure] if isinstance(failure,Exception) else None,return_value=failure):
+                    with patch("human3d.vision.run_cancellable",side_effect=[failure] if isinstance(failure,Exception) else None,return_value=failure):
                         with self.assertRaisesRegex(RuntimeError,message):
                             detector.detect(photo,"photo")
-                    with patch("human3d.vision.subprocess.run",side_effect=recover):
+                    with patch("human3d.vision.run_cancellable",side_effect=recover):
                         self.assertEqual(detector.detect(photo,"photo"),evidence)
-            with patch("human3d.vision.subprocess.run",return_value=CompletedProcess([],1,"photo_digest_mismatch","")):
+            with patch("human3d.vision.run_cancellable",return_value=CompletedProcess([],1,"photo_digest_mismatch","")):
                 with self.assertRaisesRegex(ValueError,"photo_digest_mismatch"):
                     detector.detect(photo,"photo")
 
