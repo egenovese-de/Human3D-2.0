@@ -1,0 +1,391 @@
+{
+  "f_af01": {
+    "matched": {
+      "neutral_iou": {
+        "22.5": 0.7090919307709598,
+        "112.5": 0.7326447112482393
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6071428571428571,
+      "controls": {
+        "bust": 0.375,
+        "hips": -0.25,
+        "shoulder": -0.5,
+        "upperarm": 0.25,
+        "waist": -0.25,
+        "upperarm_length": 0.0,
+        "forearm_length": -0.5,
+        "thigh_length": 0.5,
+        "calf_length": 0.5,
+        "abdomen_depth": -0.5,
+        "glute_depth": 0.0,
+        "shin_depth": -0.375,
+        "calf": -0.125
+      },
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 1.975131729000168
+        },
+        "rgb-yaw-90.png": {
+          "sha256": "08e3bf4811a538de7fbfa51262f25c32f73a91ab86e1f4c5ed7b12d4784f319c",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 1.299568494000141
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "4e4f13dcc82ee9812d7405f30b9135f8056911ce1cf65534e01ff748a70e8105",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 1.5975383750001129
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "0947c9fe4557b30078ce7e00e0968a864abfabf689c36ad9741071b50a3b7350",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.418477879999955
+        }
+      },
+      "fit_seconds": 150.41061873000035
+    },
+    "different-pose": {
+      "neutral_iou": {
+        "22.5": 0.7356486796785304,
+        "112.5": 0.7691726742190182
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6401557984671441,
+      "controls": {},
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.8440240099998846
+        },
+        "different-pose-yaw-90.png": {
+          "sha256": "90ac5b8825fae40c812dc23e5cf99deea0d58019e5131ca7c8c4b0e12fc78498",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 1.988857717999963
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "4e4f13dcc82ee9812d7405f30b9135f8056911ce1cf65534e01ff748a70e8105",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.307110180000109
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "0947c9fe4557b30078ce7e00e0968a864abfabf689c36ad9741071b50a3b7350",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.4277619139998023
+        }
+      },
+      "fit_seconds": 113.64441915399948
+    },
+    "contradictory": {
+      "neutral_iou": {
+        "22.5": 0.7356486796785304,
+        "112.5": 0.7691726742190182
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6401557984671441,
+      "controls": {},
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 3.315019366999877
+        },
+        "contradictory-yaw-90.png": {
+          "sha256": "63ff3d7e296e26a11b71da19b904c6d1b4e277e77b572e84f70884b855fb47c3",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.1406619539998246
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "4e4f13dcc82ee9812d7405f30b9135f8056911ce1cf65534e01ff748a70e8105",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.4153738619997966
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "0947c9fe4557b30078ce7e00e0968a864abfabf689c36ad9741071b50a3b7350",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.148138213000493
+        }
+      },
+      "fit_seconds": 134.13388530999964
+    }
+  },
+  "m_la01": {
+    "matched": {
+      "neutral_iou": {
+        "22.5": 0.6379832692742482,
+        "112.5": 0.7762871230363491
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6306710539435637,
+      "controls": {},
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8c05d65663c3d98864ee95de74e060386fc459171ab9f7e56a9a3c8c07c41d3c",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.197163947000263
+        },
+        "rgb-yaw-90.png": {
+          "sha256": "e21efe1db66175743ece5676f7ae45a4b78bb95e5bd1f639a2f4803860de3dea",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 1.850868015999822
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "86a5d2ac77f984f57715b1250e40d6321b13a256f74ff751f17bc456cc0080c8",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 1.6681142480001654
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "a6597d2e7221e185b9514682bbffef0146751ba0fb997a039257cfd66d5e7ea3",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.2880277809999825
+        }
+      },
+      "fit_seconds": 136.6313639609998
+    },
+    "different-pose": {
+      "neutral_iou": {
+        "22.5": 0.639206849932402,
+        "112.5": 0.7697124964417876
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6178407503492317,
+      "controls": {
+        "bust": 0.125,
+        "calf": -0.125,
+        "hips": -0.125,
+        "shoulder": 0.125,
+        "thigh": 0.125,
+        "upperarm": 0.125,
+        "waist": 0.125,
+        "upperarm_length": -0.125,
+        "forearm_length": -0.125,
+        "thigh_length": 0.125,
+        "calf_length": 0.125,
+        "abdomen_depth": -0.125,
+        "glute_depth": 0.125,
+        "shin_depth": -0.125
+      },
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8c05d65663c3d98864ee95de74e060386fc459171ab9f7e56a9a3c8c07c41d3c",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 3.063919457999873
+        },
+        "different-pose-yaw-90.png": {
+          "sha256": "fb870d92da94b180968cbc50dbf8478f8bc1c9ca48b654eeee357cf0dc413f17",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.12594409500025
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "86a5d2ac77f984f57715b1250e40d6321b13a256f74ff751f17bc456cc0080c8",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.1578738269995483
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "a6597d2e7221e185b9514682bbffef0146751ba0fb997a039257cfd66d5e7ea3",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.109253960999922
+        }
+      },
+      "fit_seconds": 121.72846712000046
+    },
+    "contradictory": {
+      "neutral_iou": {
+        "22.5": 0.6363063630636306,
+        "112.5": 0.7687183283038206
+      },
+      "used_views": 4,
+      "unresolved": [],
+      "target_fit_iou": 0.6164272708881247,
+      "controls": {
+        "bust": 0.125,
+        "calf": -0.125,
+        "hips": -0.125,
+        "thigh": 0.125,
+        "upperarm": 0.125,
+        "waist": 0.125,
+        "forearm_length": -0.125,
+        "thigh_length": 0.125,
+        "calf_length": 0.125,
+        "abdomen_depth": -0.125,
+        "glute_depth": 0.125,
+        "forearm_depth": 0.125,
+        "shin_depth": -0.125
+      },
+      "input_detections": {
+        "rgb-yaw-0.png": {
+          "sha256": "8c05d65663c3d98864ee95de74e060386fc459171ab9f7e56a9a3c8c07c41d3c",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.9320614910002405
+        },
+        "contradictory-yaw-90.png": {
+          "sha256": "e7e13e4d5f75c439c0b88ac5a89fea0c8d5416f18093fe7e91275cf844673d0c",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 1.7750766389999626
+        },
+        "rgb-yaw-180.png": {
+          "sha256": "86a5d2ac77f984f57715b1250e40d6321b13a256f74ff751f17bc456cc0080c8",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": null,
+          "masks": 1,
+          "seconds": 2.1701899270001377
+        },
+        "rgb-yaw-270.png": {
+          "sha256": "a6597d2e7221e185b9514682bbffef0146751ba0fb997a039257cfd66d5e7ea3",
+          "image_size": [
+            384,
+            384
+          ],
+          "candidates": 1,
+          "reason": "insufficient_full_body_evidence",
+          "masks": 1,
+          "seconds": 2.1398982360001355
+        }
+      },
+      "fit_seconds": 133.14908214800016
+    }
+  }
+}

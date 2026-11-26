@@ -1,0 +1,446 @@
+[
+  {
+    "identity": "f_af01",
+    "category": "top",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 2.36958181804587,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 29.479513217123728,
+    "independent_boundary_mm": 71.79222737280743,
+    "boundary_vertices": 232,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 170,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 32.65715740305989,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "top",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 3.958687225603729,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 27.92624756853467,
+    "independent_boundary_mm": 82.24755139712248,
+    "boundary_vertices": 224,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 210,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 32.65715740305989,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "top",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 3.0571368868766853,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 23.05394446064353,
+    "independent_boundary_mm": 65.78221069871795,
+    "boundary_vertices": 224,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 288,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 32.65715740305989,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "shorts",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": -0.815712790006191,
+    "triangle_intersection_pairs": 34,
+    "garment_triangles_intersecting": 14,
+    "independent_pattern_surface_mm": 25.82199732038889,
+    "independent_boundary_mm": 187.7575822179551,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 322,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 469,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "shorts",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 88,
+    "release_sampled_minimum_mm": -4.935379673600805,
+    "triangle_intersection_pairs": 376,
+    "garment_triangles_intersecting": 190,
+    "independent_pattern_surface_mm": 27.997610840043244,
+    "independent_boundary_mm": 180.1704543256728,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 829,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 469,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "shorts",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 200,
+    "release_sampled_minimum_mm": -7.196539617461613,
+    "triangle_intersection_pairs": 726,
+    "garment_triangles_intersecting": 312,
+    "independent_pattern_surface_mm": 34.586057025446046,
+    "independent_boundary_mm": 191.30282988364084,
+    "boundary_vertices": 282,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 1253,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 469,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "trousers",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": -0.815712790006191,
+    "triangle_intersection_pairs": 34,
+    "garment_triangles_intersecting": 14,
+    "independent_pattern_surface_mm": 22.363448219466065,
+    "independent_boundary_mm": 176.64681427593464,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 322,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 443,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "trousers",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 88,
+    "release_sampled_minimum_mm": -4.935379673600805,
+    "triangle_intersection_pairs": 376,
+    "garment_triangles_intersecting": 190,
+    "independent_pattern_surface_mm": 23.43126450461253,
+    "independent_boundary_mm": 174.18332603780794,
+    "boundary_vertices": 274,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 829,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 443,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "f_af01",
+    "category": "trousers",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 200,
+    "release_sampled_minimum_mm": -7.196539617461613,
+    "triangle_intersection_pairs": 726,
+    "garment_triangles_intersecting": 312,
+    "independent_pattern_surface_mm": 25.881040822313846,
+    "independent_boundary_mm": 181.44437431151135,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 1253,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 443,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "top",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 2.36958181804587,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 39.03292995649106,
+    "independent_boundary_mm": 79.30099883083754,
+    "boundary_vertices": 232,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 170,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 43.11255563279075,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "top",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 3.958687225603729,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 37.88963707890586,
+    "independent_boundary_mm": 89.86140402381656,
+    "boundary_vertices": 224,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 210,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 43.11255563279075,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "top",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": 3.0571368868766853,
+    "triangle_intersection_pairs": 0,
+    "garment_triangles_intersecting": 0,
+    "independent_pattern_surface_mm": 31.81172160344529,
+    "independent_boundary_mm": 71.95460248609064,
+    "boundary_vertices": 224,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 288,
+      "capped_boundary_loops": 5
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": 43.11255563279075,
+      "capped_boundary_loops": 2,
+      "volume_definition": "virtual triangle fan closure; liters of enclosed envelope"
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "shorts",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": -0.815712790006191,
+    "triangle_intersection_pairs": 34,
+    "garment_triangles_intersecting": 14,
+    "independent_pattern_surface_mm": 28.44981366735533,
+    "independent_boundary_mm": 207.49717841359572,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 322,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 433,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "shorts",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 88,
+    "release_sampled_minimum_mm": -4.935379673600805,
+    "triangle_intersection_pairs": 376,
+    "garment_triangles_intersecting": 190,
+    "independent_pattern_surface_mm": 31.68378580610063,
+    "independent_boundary_mm": 199.45898918363665,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 829,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 433,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "shorts",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 200,
+    "release_sampled_minimum_mm": -7.196539617461613,
+    "triangle_intersection_pairs": 726,
+    "garment_triangles_intersecting": 312,
+    "independent_pattern_surface_mm": 39.6803245597777,
+    "independent_boundary_mm": 211.59547690481767,
+    "boundary_vertices": 282,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 1253,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 433,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "trousers",
+    "ease_mm": 0,
+    "hem_dm": 0,
+    "release_sampled_violations": 0,
+    "release_sampled_minimum_mm": -0.815712790006191,
+    "triangle_intersection_pairs": 34,
+    "garment_triangles_intersecting": 14,
+    "independent_pattern_surface_mm": 26.23057542658161,
+    "independent_boundary_mm": 196.51331656589494,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 322,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 409,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "trousers",
+    "ease_mm": 5,
+    "hem_dm": 0.25,
+    "release_sampled_violations": 88,
+    "release_sampled_minimum_mm": -4.935379673600805,
+    "triangle_intersection_pairs": 376,
+    "garment_triangles_intersecting": 190,
+    "independent_pattern_surface_mm": 28.45868879291774,
+    "independent_boundary_mm": 194.64418758939703,
+    "boundary_vertices": 274,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 829,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 409,
+      "capped_boundary_loops": 6
+    }
+  },
+  {
+    "identity": "m_la01",
+    "category": "trousers",
+    "ease_mm": 10,
+    "hem_dm": -0.25,
+    "release_sampled_violations": 200,
+    "release_sampled_minimum_mm": -7.196539617461613,
+    "triangle_intersection_pairs": 726,
+    "garment_triangles_intersecting": 312,
+    "independent_pattern_surface_mm": 32.015295196966186,
+    "independent_boundary_mm": 202.49677952227032,
+    "boundary_vertices": 278,
+    "native_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 1253,
+      "capped_boundary_loops": 11
+    },
+    "independent_volume": {
+      "closed_cap_volume_l": null,
+      "volume_exclusion": "closed proxy self-intersections",
+      "self_intersection_pairs": 409,
+      "capped_boundary_loops": 6
+    }
+  }
+]

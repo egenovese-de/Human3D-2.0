@@ -47,3 +47,7 @@ Machine-readable [measurements](q/measurements.json) and [dataset hashes](q/mani
 ## Follow-up after the historical pilot
 
 The historical counts and blocker descriptions above describe the original pilot. The current record is [Q follow-up completion](Q_FOLLOWUP_COMPLETION.md), with [task reconciliation](Q_BLOCKER_RECONCILIATION.md) and [current backlog](BACKLOG_Q.md). The independent geometry and pose estimates are paired by subject and explicitly distinguish interaction cells, references and independent identities.
+
+## Finalization evidence
+
+The [Q finalization report](Q_FINALIZATION_REPORT.md) and [numerical summary](q/finalization/summary.json) contain the last matched controls, complete articulated fit screening and frozen-policy outcomes. The original benchmark and its sample scope are preserved above.

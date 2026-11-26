@@ -42,3 +42,7 @@ The coordinate path is height-aligned Blender XYZ metres, orthographic camera ra
 - Alignment uses yaw confidence ≥0.8 and vetoes provider yaw over 45° away from the detector's circular yaw. The final alignment searches a neighborhood around the selected yaw. External yaw therefore controls a prior rather than a calibrated camera transform.
 - Vision and appearance use the same confidence gate for hidden region flags. Vision suppresses observations, and appearance marks strongly region-bound vertices as unavailable. True visibility cannot synthesize missing x/y/world landmarks. The adapter does not override native full-body review.
 - The supported regional oracle used ray-derived projected surface visibility and a prespecified 5% cutoff. The resulting Boolean is a property of the sampled fixture and cutoff. The deterministic confidence is not a probability of API correctness. Area, morphology, body-size and circumference annotations remain outside the v1 fields.
+
+## Final Q disposition
+
+The nine residual rows remain BLOCKED following finalization. The latest per-task work, exact outstanding dependencies and research dispositions are in [Q final blocker disposition](Q_FINAL_BLOCKER_DISPOSITION.md). The historical rows above record the follow-up review.

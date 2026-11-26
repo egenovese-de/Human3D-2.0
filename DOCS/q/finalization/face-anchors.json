@@ -1,0 +1,548 @@
+[
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "nose_tip",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      192,
+      68.5
+    ],
+    "xyz_m": [
+      0.0,
+      -0.1593766212463379,
+      1.5421380996704102
+    ],
+    "polygon": 16744,
+    "detector_index_candidate": 0,
+    "detector_to_pick_px": 2.099483029880582,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 7.704930375890707
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "eye_R_center",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      187,
+      62
+    ],
+    "xyz_m": [
+      -0.02812499925494194,
+      -0.12736845016479492,
+      1.5787006616592407
+    ],
+    "polygon": 6832,
+    "detector_index_candidate": 5,
+    "detector_to_pick_px": 1.2137240359391828,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.09151338664119
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "eye_L_center",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      197.5,
+      62
+    ],
+    "xyz_m": [
+      0.030937500298023224,
+      -0.127302885055542,
+      1.5787006616592407
+    ],
+    "polygon": 557,
+    "detector_index_candidate": 2,
+    "detector_to_pick_px": 3.223936880953347,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.146489700380297
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "mouth_R",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      188,
+      72
+    ],
+    "xyz_m": [
+      -0.02250000089406967,
+      -0.13970088958740234,
+      1.522450566291809
+    ],
+    "polygon": 15776,
+    "detector_index_candidate": 10,
+    "detector_to_pick_px": 0.9887499880919752,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 8.54273064038503
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "mouth_L",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      196.5,
+      72
+    ],
+    "xyz_m": [
+      0.025312500074505806,
+      -0.13674330711364746,
+      1.522450566291809
+    ],
+    "polygon": 2019,
+    "detector_index_candidate": 9,
+    "detector_to_pick_px": 3.650034729694084,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 8.572197250357254
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "chin",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      192,
+      78
+    ],
+    "xyz_m": [
+      0.0,
+      -0.13703346252441406,
+      1.4887006282806396
+    ],
+    "polygon": 16732,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.097764443230072
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "jaw_R",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      184,
+      74
+    ],
+    "xyz_m": [
+      -0.04500000178813934,
+      -0.10353946685791016,
+      1.5112006664276123
+    ],
+    "polygon": 16652,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 14.720764733713722
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "jaw_L",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      200,
+      74
+    ],
+    "xyz_m": [
+      0.04500000178813934,
+      -0.10353922843933105,
+      1.5112006664276123
+    ],
+    "polygon": 15147,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 14.72032408221877
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "cheek_R",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      182.5,
+      67
+    ],
+    "xyz_m": [
+      -0.053437501192092896,
+      -0.10856938362121582,
+      1.550575613975525
+    ],
+    "polygon": 16004,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 11.861965857361572
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 0,
+    "feature": "cheek_L",
+    "source_image_sha256": "b8c4d986ef17b7fa72261d37d9f91b3553458d05bd76eb54401d23e2ae603839",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      202,
+      67
+    ],
+    "xyz_m": [
+      0.05624999850988388,
+      -0.10393214225769043,
+      1.550575613975525
+    ],
+    "polygon": 2052,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 20.18494417224532
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 90,
+    "feature": "nose_tip",
+    "source_image_sha256": "6d4951ab2809cf15caaf55f980fa2557f54b757ef56d4c68422b35647ea28fed",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      164.5,
+      68
+    ],
+    "xyz_m": [
+      0.009982824325561523,
+      -0.15468767285346985,
+      1.5449501276016235
+    ],
+    "polygon": 2023,
+    "detector_index_candidate": 0,
+    "detector_to_pick_px": 6.799684870392078,
+    "valid_neighbor_rays": 3,
+    "one_pixel_surface_sensitivity_max_mm": 8.437188786615097
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 90,
+    "feature": "chin",
+    "source_image_sha256": "6d4951ab2809cf15caaf55f980fa2557f54b757ef56d4c68422b35647ea28fed",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      169.5,
+      78.5
+    ],
+    "xyz_m": [
+      0.020041942596435547,
+      -0.1265626847743988,
+      1.4858876466751099
+    ],
+    "polygon": 1671,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 9.471347889775608
+  },
+  {
+    "identity": "f_af01",
+    "yaw_deg": 90,
+    "feature": "ear_L",
+    "source_image_sha256": "6d4951ab2809cf15caaf55f980fa2557f54b757ef56d4c68422b35647ea28fed",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "xy_px": [
+      185.5,
+      63
+    ],
+    "xyz_m": [
+      0.07273030281066895,
+      -0.03656267002224922,
+      1.5730751752853394
+    ],
+    "polygon": 2238,
+    "detector_index_candidate": 7,
+    "detector_to_pick_px": 5.759432277318922,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 11.3997778464439
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "nose_tip",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      192,
+      55
+    ],
+    "xyz_m": [
+      0.0,
+      -0.17787694931030273,
+      1.686315655708313
+    ],
+    "polygon": 2524,
+    "detector_index_candidate": 0,
+    "detector_to_pick_px": 0.5331965265421419,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.145622217642781
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "eye_R_center",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      185.5,
+      49.5
+    ],
+    "xyz_m": [
+      -0.03656249865889549,
+      -0.14107918739318848,
+      1.7172530889511108
+    ],
+    "polygon": 7056,
+    "detector_index_candidate": 5,
+    "detector_to_pick_px": 0.2725427504838663,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.552990811305207
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "eye_L_center",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      197,
+      49.5
+    ],
+    "xyz_m": [
+      0.02812499925494194,
+      -0.14018821716308594,
+      1.7172530889511108
+    ],
+    "polygon": 1104,
+    "detector_index_candidate": 2,
+    "detector_to_pick_px": 0.9594621349335998,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.607167237536979
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "mouth_R",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      188,
+      60
+    ],
+    "xyz_m": [
+      -0.02250000089406967,
+      -0.15420937538146973,
+      1.6581906080245972
+    ],
+    "polygon": 15748,
+    "detector_index_candidate": 10,
+    "detector_to_pick_px": 1.434136095986695,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 7.400880476628358
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "mouth_L",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      195.5,
+      60
+    ],
+    "xyz_m": [
+      0.019687499850988388,
+      -0.15580272674560547,
+      1.6581906080245972
+    ],
+    "polygon": 2220,
+    "detector_index_candidate": 9,
+    "detector_to_pick_px": 0.9301474042269131,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 7.040886354095722
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "chin",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      192,
+      68
+    ],
+    "xyz_m": [
+      0.0,
+      -0.1563091278076172,
+      1.6131906509399414
+    ],
+    "polygon": 2312,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.328949228214004
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "jaw_R",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      183,
+      63.5
+    ],
+    "xyz_m": [
+      -0.05062500014901161,
+      -0.11741137504577637,
+      1.638503074645996
+    ],
+    "polygon": 15706,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 11.608158530237608
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "jaw_L",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      200,
+      63.5
+    ],
+    "xyz_m": [
+      0.04500000178813934,
+      -0.12557125091552734,
+      1.638503074645996
+    ],
+    "polygon": 2137,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 9.91041871632534
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "cheek_R",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      181,
+      55
+    ],
+    "xyz_m": [
+      -0.06187500059604645,
+      -0.12498998641967773,
+      1.686315655708313
+    ],
+    "polygon": 15910,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 12.251445955898244
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 0,
+    "feature": "cheek_L",
+    "source_image_sha256": "d01b67091ba69170f691b213311a8395994074396dd084c855408fa85ff70490",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      202,
+      55
+    ],
+    "xyz_m": [
+      0.05624999850988388,
+      -0.1290879249572754,
+      1.686315655708313
+    ],
+    "polygon": 2467,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 6.959155182628233
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 90,
+    "feature": "nose_tip",
+    "source_image_sha256": "73008dd501ea65f44dc70e29a9b2717e1b7663a9619530498cc99239cab1bc97",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      161,
+      55
+    ],
+    "xyz_m": [
+      0.00646662712097168,
+      -0.17437517642974854,
+      1.6863151788711548
+    ],
+    "polygon": 1706,
+    "detector_index_candidate": 0,
+    "detector_to_pick_px": 3.826315698588063,
+    "valid_neighbor_rays": 3,
+    "one_pixel_surface_sensitivity_max_mm": 7.185766393064878
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 90,
+    "feature": "chin",
+    "source_image_sha256": "73008dd501ea65f44dc70e29a9b2717e1b7663a9619530498cc99239cab1bc97",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      165,
+      68
+    ],
+    "xyz_m": [
+      0.0168917179107666,
+      -0.15187518298625946,
+      1.6131901741027832
+    ],
+    "polygon": 2109,
+    "detector_index_candidate": null,
+    "detector_to_pick_px": null,
+    "valid_neighbor_rays": 3,
+    "one_pixel_surface_sensitivity_max_mm": 8.873915870846139
+  },
+  {
+    "identity": "m_la01",
+    "yaw_deg": 90,
+    "feature": "ear_L",
+    "source_image_sha256": "73008dd501ea65f44dc70e29a9b2717e1b7663a9619530498cc99239cab1bc97",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "xy_px": [
+      184,
+      54
+    ],
+    "xyz_m": [
+      0.07970476150512695,
+      -0.04500017315149307,
+      1.6919400691986084
+    ],
+    "polygon": 2884,
+    "detector_index_candidate": 7,
+    "detector_to_pick_px": 5.250943975109881,
+    "valid_neighbor_rays": 4,
+    "one_pixel_surface_sensitivity_max_mm": 10.441722505874969
+  }
+]

@@ -23,3 +23,48 @@
 - The independent ring-mesh export runs through `independent_layer_export.py` and the same USDZ round-trip runner. `blender_layers_atlas.py` renders the directly imported assets and a controlled armature edit. Blender Foundation publishes the [4.5 LTS release](https://www.blender.org/releases/4-5/) and the [module distribution](https://pypi.org/project/bpy/4.5.17/).
 - Twelve unchanged articulated cases produced identical numeric outputs in a repeated execution. Two asymmetric fixture inputs were intentionally revised and excluded from that equality check. Reproducibility artifacts record the final input hashes and the repeat comparison.
 - Run `face_capacity.py` on the compatible expanded human presets. `face_variations.py` regenerates separate profile/expression geometry from the expression target sources and reports their input hashes.
+
+## Finalization reproduction
+
+The finalization starts at Lab parent `9cc1552b201d55e97eacbb1959b009e139ae85d8`. Use the unchanged release commit `480195f05fb2d1ed6c71dceabf4ba54b8bed69db` and the pinned inputs described above. Configure two Python 3.11 environments, one for the release lock and one with Blender's bpy 4.5.17 plus the pinned numeric and release packages. Place release `src` and `tools`, and Lab `tools`, `tools/q` and `tools/q/followup` on PYTHONPATH, with release `src` first. The finalization jobs reuse the existing verified lab datasets and native project fixtures. They require no additional external photo or asset download.
+
+Set `LAB` to the Lab checkout, `PREVIOUS` to the pilot/holdout output root with `assets`, `holdout`, `holdout-native`, `holdout-mixed` and `eval`, and `FOLLOWUP` to the prior extension root with `rig-fixtures`, `clothes` and `visibility.json`. Create a fresh `OUT` directory with `mkdir -p "$OUT"`. Commands below assume `python` from the release virtual environment and `$BLENDER_PY` from the Blender virtual environment.
+
+```bash
+f="$LAB/tools/q/followup"
+q="$LAB/tools/q/finalization"
+python "$f/fit_acceptance.py" "$PREVIOUS" "$OUT/acceptance.json"
+python "$q/fit_screen.py" "$PREVIOUS" "$OUT/acceptance.json" "$OUT/fit-projects" "$OUT/fit-screen.json"
+python "$q/rig_landmarks.py" "$FOLLOWUP/rig-fixtures" "$PREVIOUS" "$OUT/landmark-photos" "$OUT/rig-landmarks.json"
+"$BLENDER_PY" "$q/face_anchors.py" "$FOLLOWUP/rig-fixtures" "$PREVIOUS/assets/pose.task" "$OUT/landmark-photos" "$OUT/face-anchors.json"
+python "$q/annotation_plate.py" "$FOLLOWUP/rig-fixtures" "$OUT" "$OUT/annotation-plate.png"
+python "$q/evidence_boundaries.py" "$OUT/evidence-boundaries.json"
+python "$q/appearance_visibility.py" "$PREVIOUS" "$OUT/appearance-visibility.json"
+python "$f/evidence_visibility.py" "$FOLLOWUP/rig-fixtures" "$PREVIOUS" "$FOLLOWUP/visibility.json" "$OUT/evidence-photos" "$OUT/evidence.json"
+python "$f/pose_camera.py" "$PREVIOUS" "$OUT/factorial.json"
+python "$f/pose_camera.py" "$PREVIOUS" "$OUT/upstream.json" --truth-mask
+python "$f/geometry_transfer.py" "$PREVIOUS" "$OUT/transfer-with-native.json" --include-native-fit
+python "$f/reference_diagnostics.py" "$PREVIOUS" "$FOLLOWUP/clothes" "$OUT/reference-photos" "$OUT/references.json"
+python "$LAB/tools/q/mixed_references.py" score "$PREVIOUS/holdout" "$PREVIOUS/holdout-native" "$PREVIOUS/holdout-mixed" "$OUT/mixed-score.json"
+for identity in f_af01 m_la01; do
+  for treatment in different-pose contradictory; do
+    python "$q/reference_sets.py" "$PREVIOUS" "$OUT/reference-projects" \
+      "$OUT/reference-$identity-$treatment.json" "$identity" "$treatment"
+  done
+done
+python - "$OUT" <<'PYTHON'
+import json
+from pathlib import Path
+import sys
+out = Path(sys.argv[1])
+rows = [row for identity in ("f_af01", "m_la01") for treatment in ("different-pose", "contradictory")
+        for row in json.loads((out / f"reference-{identity}-{treatment}.json").read_text())]
+(out / "reference-sets.json").write_text(json.dumps(rows, indent=2) + "\n")
+PYTHON
+python "$q/input_inventory.py" "$PREVIOUS" "$FOLLOWUP" "$LAB/DOCS/q/followup/fixture-index.json" "$OUT/input-hashes.json"
+"$BLENDER_PY" "$f/garment_collision.py" "$FOLLOWUP/rig-fixtures" "$FOLLOWUP/clothes" "$PREVIOUS" "$OUT/garment.json"
+"$BLENDER_PY" "$q/garment_pose.py" "$PREVIOUS" "$OUT/garment-pose.json"
+python "$q/summarize.py" "$OUT" "$OUT/summary.json"
+```
+
+Refer to [fixture index](q/followup/fixture-index.json) and [dataset manifest](Q_DATASET_MANIFEST.md) for generation and input identity. Finalization input hashes appear in the [reused input inventory](q/finalization/input-hashes.json). The finalization retained all tested identities and treatments for the published fit screen. Compare measurements by fixture and condition, ignoring runtime and using numerical precision appropriate to the installed platform. The [artifact hashes](q/finalization/SHA256SUMS) verify the exact published bytes.

@@ -1,0 +1,888 @@
+[
+  {
+    "identity": "f_af01",
+    "fixture_sha256": "d46525b3b3d595682d8c97da55a54db1ecaf53b9478baf1908453e8e3493274c",
+    "cells": [
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5738348661775343,
+          "22.5": 0.5435091277890467,
+          "112.5": 0.6506794564348521
+        },
+        "training_mask_iou": 0.6192590713017001,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 36.17313843732511,
+        "sampled_chamfer_mm2": 3179.906483649587,
+        "p95_mm": 122.08019130736655,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.950028426849212,
+          "torso_and_arms": 34.136901825905134,
+          "lower_body": 42.35940474378831
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6088390846729853,
+          "22.5": 0.5742533681676144,
+          "112.5": 0.6522576361221779
+        },
+        "training_mask_iou": 0.6293626707132018,
+        "fit_seconds": 18.80072906500004,
+        "controls": {
+          "calf": 0.375,
+          "shoulder": -0.25,
+          "thigh": 0.25,
+          "upperarm": 0.125,
+          "waist": -0.25,
+          "forearm_length": -0.375,
+          "thigh_length": 0.375,
+          "abdomen_depth": -0.125,
+          "shin_depth": 0.125,
+          "bust": -0.125,
+          "hips": 0.125,
+          "upperarm_length": -0.125
+        },
+        "symmetric_mean_mm": 35.16104408512347,
+        "sampled_chamfer_mm2": 3056.988503580065,
+        "p95_mm": 120.46572914125619,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.090768177986627,
+          "torso_and_arms": 34.33269030625794,
+          "lower_body": 39.442586458644676
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6103923535934942,
+          "22.5": 0.631180950337874,
+          "112.5": 0.7302112153316688
+        },
+        "training_mask_iou": 0.6990691489361702,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 21.42376444112378,
+        "sampled_chamfer_mm2": 754.0030111206294,
+        "p95_mm": 59.17609245923645,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.966865461422246,
+          "torso_and_arms": 18.54604683964656,
+          "lower_body": 26.011342114816866
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6505295816839628,
+          "22.5": 0.6686377692182499,
+          "112.5": 0.7214314221098843
+        },
+        "training_mask_iou": 0.7065346534653465,
+        "fit_seconds": 17.681431256999986,
+        "controls": {
+          "calf": 0.375,
+          "shoulder": 0.25,
+          "upperarm": -0.125,
+          "waist": -0.25,
+          "upperarm_length": 0.25,
+          "thigh_length": 0.375,
+          "abdomen_depth": -0.25,
+          "shin_depth": 0.25,
+          "bust": 0.125,
+          "hips": 0.125,
+          "forearm_length": 0.125,
+          "calf_length": -0.125
+        },
+        "symmetric_mean_mm": 19.780610878589773,
+        "sampled_chamfer_mm2": 623.1116365331208,
+        "p95_mm": 52.46720216435239,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.056129462011631,
+          "torso_and_arms": 17.965444822167257,
+          "lower_body": 22.35940359173161
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5471353108492483,
+          "22.5": 0.5685150764147047,
+          "112.5": 0.6177921092564491
+        },
+        "training_mask_iou": 0.5376623376623376,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 31.994174740121462,
+        "sampled_chamfer_mm2": 2120.987026738604,
+        "p95_mm": 107.11091065484715,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.015379531385369,
+          "torso_and_arms": 23.267593254958697,
+          "lower_body": 42.794574831588
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5277930654925702,
+          "22.5": 0.5359308671922377,
+          "112.5": 0.6171820433043368
+        },
+        "training_mask_iou": 0.5603517186250999,
+        "fit_seconds": 17.512337803000037,
+        "controls": {
+          "bust": -0.25,
+          "calf": 0.25,
+          "hips": -0.375,
+          "shoulder": -0.375,
+          "thigh": 0.375,
+          "upperarm": 0.25,
+          "waist": -0.375,
+          "upperarm_length": 0.375,
+          "calf_length": -0.375,
+          "forearm_length": -0.125
+        },
+        "symmetric_mean_mm": 34.27671439387484,
+        "sampled_chamfer_mm2": 2473.7517063462014,
+        "p95_mm": 114.47089771794356,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.959928476777925,
+          "torso_and_arms": 22.10326191740013,
+          "lower_body": 47.46707171184785
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6103923535934942,
+          "22.5": 0.631180950337874,
+          "112.5": 0.7302112153316688
+        },
+        "training_mask_iou": 0.6023501762632197,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 21.423764441123765,
+        "sampled_chamfer_mm2": 754.0030111206279,
+        "p95_mm": 59.17609245923638,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.966865461422246,
+          "torso_and_arms": 18.546046839646667,
+          "lower_body": 26.01134211481673
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.574085554866708,
+          "22.5": 0.5870439004019419,
+          "112.5": 0.7100187516742567
+        },
+        "training_mask_iou": 0.6263736263736264,
+        "fit_seconds": 21.543262587999834,
+        "controls": {
+          "bust": -0.25,
+          "calf": 0.25,
+          "hips": -0.375,
+          "shoulder": -0.375,
+          "thigh": 0.25,
+          "upperarm": 0.375,
+          "waist": -0.25,
+          "upperarm_length": 0.25,
+          "forearm_length": -0.375,
+          "calf_length": -0.375,
+          "forearm_depth": 0.125
+        },
+        "symmetric_mean_mm": 23.997251621308454,
+        "sampled_chamfer_mm2": 1008.6803153956016,
+        "p95_mm": 71.28185618036069,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.058536080026977,
+          "torso_and_arms": 17.99302306048693,
+          "lower_body": 31.544179142646435
+        }
+      }
+    ]
+  },
+  {
+    "identity": "f_ca01",
+    "fixture_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+    "cells": [
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5990312450098473,
+          "22.5": 0.5625552723300213,
+          "112.5": 0.6511596548004315
+        },
+        "training_mask_iou": 0.6209075970168121,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 34.52106579962994,
+        "sampled_chamfer_mm2": 2816.830728894027,
+        "p95_mm": 116.82238117562036,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.048534391044555,
+          "torso_and_arms": 31.74602517014174,
+          "lower_body": 41.32652935043992
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5556982178624621,
+          "22.5": 0.5295515445674706,
+          "112.5": 0.6428143114131522
+        },
+        "training_mask_iou": 0.6292134831460674,
+        "fit_seconds": 19.251063058,
+        "controls": {
+          "bust": -0.125,
+          "hips": -0.375,
+          "shoulder": 0.125,
+          "thigh": 0.375,
+          "forearm_length": -0.375,
+          "thigh_length": 0.375,
+          "calf_length": -0.125,
+          "glute_depth": -0.125,
+          "abdomen_depth": -0.125
+        },
+        "symmetric_mean_mm": 37.717873020527215,
+        "sampled_chamfer_mm2": 3265.536094547749,
+        "p95_mm": 126.90990628830937,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.28959504519576,
+          "torso_and_arms": 31.704243448270184,
+          "lower_body": 46.95796161718539
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6332790445168295,
+          "22.5": 0.653350940904589,
+          "112.5": 0.7391991208187375
+        },
+        "training_mask_iou": 0.6893829759242205,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 20.491666932772475,
+        "sampled_chamfer_mm2": 686.7656045418304,
+        "p95_mm": 57.10253515701413,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.130687260079894,
+          "torso_and_arms": 17.256847739776322,
+          "lower_body": 25.428982367521748
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.7183624936300322,
+          "22.5": 0.7286048235361196,
+          "112.5": 0.7365007850365213
+        },
+        "training_mask_iou": 0.6966041693981906,
+        "fit_seconds": 12.258731410999872,
+        "controls": {
+          "bust": -0.125,
+          "calf": 0.375,
+          "hips": 0.25,
+          "shoulder": 0.25,
+          "upperarm": 0.125,
+          "upperarm_length": 0.25,
+          "thigh": -0.125
+        },
+        "symmetric_mean_mm": 18.03176261197495,
+        "sampled_chamfer_mm2": 490.1522538226936,
+        "p95_mm": 43.990721063544456,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.288840563235848,
+          "torso_and_arms": 17.395775776631687,
+          "lower_body": 19.701426318512013
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5694147130997755,
+          "22.5": 0.5865638533854441,
+          "112.5": 0.6222564497497112
+        },
+        "training_mask_iou": 0.5629802095459837,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 30.647478998590184,
+        "sampled_chamfer_mm2": 1955.4283552948193,
+        "p95_mm": 103.54359213247056,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.107988122776332,
+          "torso_and_arms": 21.24152913460297,
+          "lower_body": 42.01915502181749
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5483771569433032,
+          "22.5": 0.5530377329272699,
+          "112.5": 0.6231324059763009
+        },
+        "training_mask_iou": 0.5844888366627498,
+        "fit_seconds": 23.473663794999993,
+        "controls": {
+          "bust": -0.25,
+          "calf": 0.375,
+          "hips": -0.375,
+          "shoulder": -0.375,
+          "thigh": 0.25,
+          "upperarm": 0.375,
+          "waist": -0.375,
+          "upperarm_length": 0.375,
+          "forearm_length": -0.375,
+          "calf_length": -0.375,
+          "forearm_depth": 0.125,
+          "thigh_length": 0.125
+        },
+        "symmetric_mean_mm": 32.744825559809854,
+        "sampled_chamfer_mm2": 2271.7624607673974,
+        "p95_mm": 110.70473199222157,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.952209295212732,
+          "torso_and_arms": 20.43832396088271,
+          "lower_body": 46.3411743288826
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6332790445168295,
+          "22.5": 0.653350940904589,
+          "112.5": 0.7391991208187375
+        },
+        "training_mask_iou": 0.6263762855414398,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 20.49166693277267,
+        "sampled_chamfer_mm2": 686.7656045418457,
+        "p95_mm": 57.10253515701448,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.130687260079894,
+          "torso_and_arms": 17.25684773977636,
+          "lower_body": 25.42898236752212
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6003065215093542,
+          "22.5": 0.6145833333333334,
+          "112.5": 0.7312640392076781
+        },
+        "training_mask_iou": 0.6514669926650367,
+        "fit_seconds": 26.199960725999972,
+        "controls": {
+          "bust": -0.25,
+          "calf": 0.375,
+          "hips": -0.375,
+          "shoulder": -0.375,
+          "thigh": 0.25,
+          "upperarm": 0.25,
+          "waist": -0.25,
+          "upperarm_length": 0.375,
+          "forearm_length": -0.375,
+          "thigh_length": 0.375,
+          "calf_length": -0.25
+        },
+        "symmetric_mean_mm": 23.031128871759147,
+        "sampled_chamfer_mm2": 931.114999825102,
+        "p95_mm": 68.6149006580025,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 10.207289219640458,
+          "torso_and_arms": 16.559782589640157,
+          "lower_body": 30.234282512942155
+        }
+      }
+    ]
+  },
+  {
+    "identity": "m_as01",
+    "fixture_sha256": "3b5b3d8b9244e8373974cb6d032fefe4d48cded1b05dca7e09caaf7c64109dec",
+    "cells": [
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5871389074268281,
+          "22.5": 0.5724995255266654,
+          "112.5": 0.6920432527032939
+        },
+        "training_mask_iou": 0.6178274200613229,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 37.65706123842364,
+        "sampled_chamfer_mm2": 3100.1609402575473,
+        "p95_mm": 113.60542118044876,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.359651109588354,
+          "torso_and_arms": 40.3330888909464,
+          "lower_body": 42.927952491409314
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5575855689176689,
+          "22.5": 0.5438983986747653,
+          "112.5": 0.6878042768225796
+        },
+        "training_mask_iou": 0.6295770029511422,
+        "fit_seconds": 17.738720005999994,
+        "controls": {
+          "bust": 0.375,
+          "hips": -0.375,
+          "thigh": 0.375,
+          "thigh_length": 0.375,
+          "calf_length": -0.25,
+          "abdomen_depth": 0.125,
+          "glute_depth": 0.125,
+          "forearm_depth": -0.25,
+          "shin_depth": 0.125,
+          "calf": 0.125,
+          "upperarm": 0.125,
+          "waist": -0.125
+        },
+        "symmetric_mean_mm": 40.07518134393994,
+        "sampled_chamfer_mm2": 3472.717146087264,
+        "p95_mm": 121.52945546509454,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.339007197140013,
+          "torso_and_arms": 39.28132079714178,
+          "lower_body": 47.85157350467616
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6387509220555693,
+          "22.5": 0.6529687188683004,
+          "112.5": 0.7259606488620243
+        },
+        "training_mask_iou": 0.67523205795789,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 25.51484984379412,
+        "sampled_chamfer_mm2": 1032.5775877880417,
+        "p95_mm": 66.41875520014918,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.328299856274773,
+          "torso_and_arms": 21.07390531471969,
+          "lower_body": 34.10955518773188
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6011050245561013,
+          "22.5": 0.612401988908013,
+          "112.5": 0.7047048246928379
+        },
+        "training_mask_iou": 0.6940963991421154,
+        "fit_seconds": 22.23777691500004,
+        "controls": {
+          "bust": 0.375,
+          "calf": 0.375,
+          "hips": -0.375,
+          "shoulder": 0.25,
+          "thigh": 0.25,
+          "upperarm": 0.25,
+          "upperarm_length": 0.25,
+          "forearm_length": -0.375,
+          "thigh_length": 0.375,
+          "glute_depth": -0.375,
+          "shin_depth": 0.125,
+          "waist": 0.125,
+          "abdomen_depth": -0.125
+        },
+        "symmetric_mean_mm": 28.425046473068853,
+        "sampled_chamfer_mm2": 1414.5312363695798,
+        "p95_mm": 84.12789675185175,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.052569043156854,
+          "torso_and_arms": 19.40021452302899,
+          "lower_body": 40.2670623584728
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5778251599147122,
+          "22.5": 0.5962882622318632,
+          "112.5": 0.6840426172274725
+        },
+        "training_mask_iou": 0.5803996194100857,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 32.091747640135544,
+        "sampled_chamfer_mm2": 1888.2186571413731,
+        "p95_mm": 96.71469977978951,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.391725448650773,
+          "torso_and_arms": 26.517711378048514,
+          "lower_body": 42.80804348373214
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5533655634064708,
+          "22.5": 0.5606409473239039,
+          "112.5": 0.6719899515521264
+        },
+        "training_mask_iou": 0.5954230973922299,
+        "fit_seconds": 24.216557046999924,
+        "controls": {
+          "bust": 0.375,
+          "calf": 0.125,
+          "hips": -0.375,
+          "shoulder": -0.375,
+          "thigh": 0.375,
+          "upperarm": 0.125,
+          "forearm_length": -0.375,
+          "thigh_length": -0.25,
+          "calf_length": -0.25,
+          "shin_depth": 0.125,
+          "waist": 0.125,
+          "upperarm_length": 0.125,
+          "forearm_depth": 0.125
+        },
+        "symmetric_mean_mm": 34.693285397964964,
+        "sampled_chamfer_mm2": 2297.525154308753,
+        "p95_mm": 107.01099400052831,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.207542910517029,
+          "torso_and_arms": 25.363729645081207,
+          "lower_body": 49.1501633378885
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6387509220555693,
+          "22.5": 0.6529687188683004,
+          "112.5": 0.7259606488620243
+        },
+        "training_mask_iou": 0.637089715536105,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 25.514849843793936,
+        "sampled_chamfer_mm2": 1032.5775877880233,
+        "p95_mm": 66.41875520014842,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.328299856274773,
+          "torso_and_arms": 21.073905314719607,
+          "lower_body": 34.10955518773156
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6036250894347722,
+          "22.5": 0.6098708531374526,
+          "112.5": 0.7226588679705112
+        },
+        "training_mask_iou": 0.6534458200942259,
+        "fit_seconds": 21.121532169000147,
+        "controls": {
+          "bust": 0.375,
+          "calf": 0.125,
+          "hips": -0.375,
+          "thigh": 0.375,
+          "waist": 0.125,
+          "forearm_length": -0.375,
+          "thigh_length": 0.375,
+          "calf_length": -0.375
+        },
+        "symmetric_mean_mm": 28.117986614566835,
+        "sampled_chamfer_mm2": 1346.0509929517723,
+        "p95_mm": 81.19337179345791,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.336364485678146,
+          "torso_and_arms": 20.00576119284433,
+          "lower_body": 39.561950091608736
+        }
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "fixture_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+    "cells": [
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5951468153698701,
+          "22.5": 0.5828260869565217,
+          "112.5": 0.6922111985403124
+        },
+        "training_mask_iou": 0.6212412675913739,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 39.66359144437733,
+        "sampled_chamfer_mm2": 3429.705704149833,
+        "p95_mm": 117.77651363236906,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.694088332553003,
+          "torso_and_arms": 44.33456270471134,
+          "lower_body": 44.188027573380104
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5616900932843696,
+          "22.5": 0.5489792489288414,
+          "112.5": 0.6760492726157962
+        },
+        "training_mask_iou": 0.6322639225181598,
+        "fit_seconds": 13.950398158999633,
+        "controls": {
+          "bust": 0.375,
+          "calf": -0.25,
+          "hips": -0.375,
+          "shoulder": 0.25,
+          "upperarm": 0.375,
+          "waist": 0.375,
+          "thigh_length": 0.375,
+          "abdomen_depth": 0.375,
+          "glute_depth": -0.25,
+          "thigh": 0.125
+        },
+        "symmetric_mean_mm": 42.585445686181735,
+        "sampled_chamfer_mm2": 3864.412185388779,
+        "p95_mm": 128.45106260579612,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.683131675149811,
+          "torso_and_arms": 42.53339030574382,
+          "lower_body": 51.629435348963156
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6342747512604292,
+          "22.5": 0.6524877428727075,
+          "112.5": 0.7220105345735739
+        },
+        "training_mask_iou": 0.6667708333333333,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 26.579025407894875,
+        "sampled_chamfer_mm2": 1101.8894378842128,
+        "p95_mm": 68.21453212401029,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.722275279936976,
+          "torso_and_arms": 22.542982626823875,
+          "lower_body": 35.357426666734824
+        }
+      },
+      {
+        "camera": "native",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6261670011342815,
+          "22.5": 0.6389933212437525,
+          "112.5": 0.7011224934612031
+        },
+        "training_mask_iou": 0.6854362902391057,
+        "fit_seconds": 24.284784676000072,
+        "controls": {
+          "bust": 0.375,
+          "calf": 0.25,
+          "shoulder": 0.375,
+          "thigh": 0.125,
+          "upperarm": 0.375,
+          "upperarm_length": 0.375,
+          "forearm_length": -0.25,
+          "thigh_length": 0.25,
+          "calf_length": 0.25,
+          "abdomen_depth": 0.375,
+          "glute_depth": -0.125,
+          "shin_depth": -0.25,
+          "hips": -0.125,
+          "waist": 0.125
+        },
+        "symmetric_mean_mm": 27.4903151423789,
+        "sampled_chamfer_mm2": 1216.2563113757096,
+        "p95_mm": 75.31094368319584,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.671607872527492,
+          "torso_and_arms": 20.808315817616567,
+          "lower_body": 37.787990297302244
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.5858577116150251,
+          "22.5": 0.6059361335630051,
+          "112.5": 0.6793103448275862
+        },
+        "training_mask_iou": 0.5902226524685382,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 32.984386365955174,
+        "sampled_chamfer_mm2": 1983.9724989513404,
+        "p95_mm": 99.01359451183957,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.573863884838694,
+          "torso_and_arms": 27.194666542688275,
+          "lower_body": 44.725919795435956
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "native",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.5578730038343235,
+          "22.5": 0.5664314731665597,
+          "112.5": 0.675910821098423
+        },
+        "training_mask_iou": 0.6020151133501259,
+        "fit_seconds": 20.290146920000097,
+        "controls": {
+          "bust": 0.375,
+          "calf": 0.25,
+          "hips": -0.375,
+          "thigh": 0.375,
+          "upperarm_length": -0.25,
+          "calf_length": -0.375,
+          "shoulder": 0.125,
+          "forearm_length": -0.125,
+          "thigh_length": 0.125,
+          "shin_depth": -0.125
+        },
+        "symmetric_mean_mm": 35.6574901309681,
+        "sampled_chamfer_mm2": 2422.6841305679654,
+        "p95_mm": 110.45651006390946,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.742073481941672,
+          "torso_and_arms": 26.244837029912528,
+          "lower_body": 50.37056111951164
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "bootstrap",
+        "fixed_camera_iou": {
+          "0": 0.6342747512604292,
+          "22.5": 0.6524877428727075,
+          "112.5": 0.7220105345735739
+        },
+        "training_mask_iou": 0.6408048853739113,
+        "fit_seconds": null,
+        "controls": {},
+        "symmetric_mean_mm": 26.57902540789463,
+        "sampled_chamfer_mm2": 1101.8894378841883,
+        "p95_mm": 68.2145321240099,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.722275279936976,
+          "torso_and_arms": 22.542982626823633,
+          "lower_body": 35.35742666673449
+        }
+      },
+      {
+        "camera": "calibrated",
+        "pose": "direction_proxy",
+        "shape": "fitted",
+        "fixed_camera_iou": {
+          "0": 0.6014959123325796,
+          "22.5": 0.6095133230565954,
+          "112.5": 0.715297134574646
+        },
+        "training_mask_iou": 0.6590428211586902,
+        "fit_seconds": 22.13225618999968,
+        "controls": {
+          "bust": 0.375,
+          "hips": -0.375,
+          "shoulder": 0.25,
+          "thigh": 0.25,
+          "upperarm_length": -0.25,
+          "thigh_length": 0.125,
+          "calf_length": -0.375,
+          "calf": -0.125,
+          "upperarm": 0.125,
+          "forearm_length": -0.125
+        },
+        "symmetric_mean_mm": 28.97704370974349,
+        "sampled_chamfer_mm2": 1414.9145093415405,
+        "p95_mm": 82.45033638683189,
+        "truth_to_prediction_region_mean_mm": {
+          "head": 9.685531181503862,
+          "torso_and_arms": 21.082550986176496,
+          "lower_body": 41.63581627603225
+        }
+      }
+    ]
+  }
+]

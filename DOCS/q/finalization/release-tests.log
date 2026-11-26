@@ -1,0 +1,18 @@
+..........AUD-06 profile {"peak_process_rss_bytes": 196026368, "initial_disk_bytes": 2290, "final_disk_bytes": 2290, "duplicate_imports": 100, "elapsed_s": 0.2940610349999133}
+..AUD-06 jobs=128 active=1 traced_current=37936 traced_peak=44837 elapsed_s=0.054082
+.AUD-07 real synthetic child interrupted; stale publication rejected
+.......This plugin does not support propagateSizeHints()
+......./workspace/scratch/8e026cf7b86d/release/tests/test_image_coordinates.py:30: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  self.assertEqual(list(oriented.getdata()), [(i*40,0,0) for i in order])
+......................This plugin does not support propagateSizeHints()
+.................This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+..This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+.
+----------------------------------------------------------------------
+Ran 69 tests in 2.760s
+
+OK

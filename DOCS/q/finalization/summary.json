@@ -1,0 +1,136 @@
+{
+  "release_commit": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "lab_parent": "9cc1552b201d55e97eacbb1959b009e139ae85d8",
+  "backlog": {
+    "done": 39,
+    "blocked": 9
+  },
+  "readiness": "CONDITIONALLY_READY_FOR_M6_PLANNING",
+  "landmark_proxies": {
+    "fixtures": 12,
+    "views": 48,
+    "anchors": 576,
+    "native_iou": 0.551981689486011,
+    "proxy_iou": 0.5883573964198288,
+    "roundtrip_max_m": 1.7817696036042146e-15,
+    "rig_chain_residual": 1.1830280580160668e-07
+  },
+  "face": {
+    "picks": 26,
+    "surface_hits": 26,
+    "matched_detector_count": 14,
+    "min_detector_difference_px": 0.2725427504838663,
+    "max_detector_difference_px": 6.799684870392078
+  },
+  "factorial": {
+    "native/native/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6184354468851432,
+      "posed_surface_mm": 37.00371422993901
+    },
+    "native/native/fitted": {
+      "count": 4,
+      "held_out_iou": 0.6069510071640497,
+      "posed_surface_mm": 38.88488603394309
+    },
+    "native/direction_proxy/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6884212340711844,
+      "posed_surface_mm": 23.502326656396313
+    },
+    "native/direction_proxy/fitted": {
+      "count": 4,
+      "held_out_iou": 0.6890496785258227,
+      "posed_surface_mm": 23.43193377650312
+    },
+    "calibrated/native/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6200881058320296,
+      "posed_surface_mm": 31.92944693620059
+    },
+    "calibrated/native/fitted": {
+      "count": 4,
+      "held_out_iou": 0.6005320303176448,
+      "posed_surface_mm": 34.34307887065444
+    },
+    "calibrated/direction_proxy/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6884212340711844,
+      "posed_surface_mm": 23.50232665639625
+    },
+    "calibrated/direction_proxy/fitted": {
+      "count": 4,
+      "held_out_iou": 0.6625312754195519,
+      "posed_surface_mm": 26.030852704344483
+    }
+  },
+  "raster_mask_oracle": {
+    "calibrated/native/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6200881058320296,
+      "posed_surface_mm": 31.92944693620059
+    },
+    "calibrated/native/fitted": {
+      "count": 4,
+      "held_out_iou": 0.6023582312698056,
+      "posed_surface_mm": 34.23631231560904
+    },
+    "calibrated/direction_proxy/bootstrap": {
+      "count": 4,
+      "held_out_iou": 0.6884212340711844,
+      "posed_surface_mm": 23.50232665639625
+    },
+    "calibrated/direction_proxy/fitted": {
+      "count": 4,
+      "held_out_iou": 0.661549965128598,
+      "posed_surface_mm": 26.108802379208996
+    }
+  },
+  "garment": {
+    "posed_shell_conditions": 12,
+    "cap_screens": 24,
+    "cap_screen_passes": 0,
+    "false_clear_counts": {
+      "34": 8
+    }
+  },
+  "motion_fit_screen": {
+    "screened": 8,
+    "scored": 8,
+    "confusion_by_held_out_iou": {
+      "beneficial_accept": 0,
+      "beneficial_reject": 2,
+      "harmful_accept": 0,
+      "harmful_reject": 2,
+      "tie_accept": 0,
+      "tie_reject": 4
+    },
+    "mean_bootstrap_iou": 0.6184354468851432,
+    "mean_fitted_iou": 0.6171462784176139,
+    "mean_selected_iou": 0.6184354468851432,
+    "mean_bootstrap_neutral_surface_mm": 29.568296227007927,
+    "mean_fitted_neutral_surface_mm": 29.82051429450238,
+    "mean_selected_neutral_surface_mm": 29.568296227007927,
+    "min_neutral_surface_delta_mm": -0.18004846384922502,
+    "max_neutral_surface_delta_mm": 1.3096720598070917,
+    "iou_beneficial_but_surface_worse": 2,
+    "median_rule_overhead_seconds": 2.5239999104087474e-06
+  },
+  "neutral_evaluation_confusion_by_held_out_iou": {
+    "beneficial_accept": 0,
+    "beneficial_reject": 0,
+    "harmful_accept": 1,
+    "harmful_reject": 3,
+    "tie_accept": 0,
+    "tie_reject": 4
+  },
+  "references": {
+    "cases": 14,
+    "invalid_cases": 4,
+    "invalid_geometry_accepted": 4,
+    "invalid_appearance_accepted": 4,
+    "bake_conditions": 16,
+    "mean_uv_with_profile": 0.8326970443349754,
+    "mean_uv_profile_omitted": 0.7817149014778325
+  }
+}

@@ -41,7 +41,7 @@ def transfer(native, truth, faces, limit):
     return displacement
 
 
-def main(previous, output):
+def main(previous, output, *, include_native_fit=False):
     rows = []
     for folder in sorted((previous/"holdout").glob("*_bend0")):
         meta = json.loads((folder/"manifest.json").read_text())
@@ -65,13 +65,17 @@ def main(previous, output):
         alignment=fit.alignments[view.ref.photo_id]
         record={"identity":meta["identity"],"source_mesh_sha256":meta["mesh_sha256"],"conditions":[]}
         appearance = prepare_view(OriginalStore(project),view,alignment)
-        for name, change in (
+        conditions = (
             ("exact_contract_control",np.zeros_like(base)),
             ("registered_bounded_12mm",transfer(world(base),actual,faces,.012)@BASIS/factor),
             ("registered_bounded_24mm",transfer(world(base),actual,faces,.024)@BASIS/factor),
             ("registered_damped_03mm",transfer(world(base),actual,faces,.012)@BASIS/factor*.25),
             ("registered_damped_0p6mm",transfer(world(base),actual,faces,.012)@BASIS/factor*.05),
-        ):
+        )
+        if include_native_fit:
+            fitted = np.asarray(deform_vertices(body, fit.fit.controls))
+            conditions += (("native_reconstructed", fitted - base),)
+        for name, change in conditions:
             neutral=base+change
             entry=dict(condition=name,maximum_transfer_mm=float(np.linalg.norm(change,axis=1).max()*factor*1000),
                        distance_before_pose=metric_distance(actual,tree,sample_surface(world(neutral),faces,12000,2474),regions))
@@ -103,4 +107,5 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("previous",type=Path)
     parser.add_argument("output",type=Path)
+    parser.add_argument("--include-native-fit", action="store_true")
     main(**vars(parser.parse_args()))

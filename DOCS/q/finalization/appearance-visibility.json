@@ -1,0 +1,98 @@
+[
+  {
+    "identity": "f_af01",
+    "confidence": null,
+    "hidden_regions": [],
+    "observed_uv_fraction": 0.3708374384236453,
+    "mean_rgb": [
+      130.57534790039062,
+      123.09945678710938,
+      119.09671020507812
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "confidence": 0.799,
+    "hidden_regions": [],
+    "observed_uv_fraction": 0.3708374384236453,
+    "mean_rgb": [
+      130.57534790039062,
+      123.09945678710938,
+      119.09671020507812
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "confidence": 0.8,
+    "hidden_regions": [
+      "left_arm"
+    ],
+    "observed_uv_fraction": 0.34881773399014776,
+    "mean_rgb": [
+      131.71981811523438,
+      124.6778564453125,
+      120.90087890625
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "confidence": 1,
+    "hidden_regions": [
+      "left_arm"
+    ],
+    "observed_uv_fraction": 0.34881773399014776,
+    "mean_rgb": [
+      131.71981811523438,
+      124.6778564453125,
+      120.90087890625
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "confidence": null,
+    "hidden_regions": [],
+    "observed_uv_fraction": 0.3703448275862069,
+    "mean_rgb": [
+      130.08961486816406,
+      122.80264282226562,
+      118.91978454589844
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "confidence": 0.799,
+    "hidden_regions": [],
+    "observed_uv_fraction": 0.3703448275862069,
+    "mean_rgb": [
+      130.08961486816406,
+      122.80264282226562,
+      118.91978454589844
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "confidence": 0.8,
+    "hidden_regions": [
+      "left_arm"
+    ],
+    "observed_uv_fraction": 0.34839901477832513,
+    "mean_rgb": [
+      131.1368408203125,
+      124.31666564941406,
+      120.69651794433594
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "confidence": 1,
+    "hidden_regions": [
+      "left_arm"
+    ],
+    "observed_uv_fraction": 0.34839901477832513,
+    "mean_rgb": [
+      131.1368408203125,
+      124.31666564941406,
+      120.69651794433594
+    ]
+  }
+]

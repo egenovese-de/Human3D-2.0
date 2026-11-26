@@ -1,0 +1,176 @@
+{
+  "binding": [
+    {
+      "candidates": 0,
+      "digest_matches": true,
+      "candidate_index": 0,
+      "attached": false
+    },
+    {
+      "candidates": 0,
+      "digest_matches": false,
+      "candidate_index": 0,
+      "attached": false
+    },
+    {
+      "candidates": 0,
+      "digest_matches": true,
+      "candidate_index": 1,
+      "attached": false
+    },
+    {
+      "candidates": 1,
+      "digest_matches": true,
+      "candidate_index": 0,
+      "attached": true
+    },
+    {
+      "candidates": 1,
+      "digest_matches": false,
+      "candidate_index": 0,
+      "attached": false
+    },
+    {
+      "candidates": 1,
+      "digest_matches": true,
+      "candidate_index": 1,
+      "attached": false
+    },
+    {
+      "candidates": 2,
+      "digest_matches": true,
+      "candidate_index": 0,
+      "attached": false
+    },
+    {
+      "candidates": 2,
+      "digest_matches": false,
+      "candidate_index": 0,
+      "attached": false
+    },
+    {
+      "candidates": 2,
+      "digest_matches": true,
+      "candidate_index": 1,
+      "attached": false
+    }
+  ],
+  "visibility": [
+    {
+      "confidence": 0.799,
+      "provider_visible": false,
+      "suppressed_indices": []
+    },
+    {
+      "confidence": 0.799,
+      "provider_visible": true,
+      "suppressed_indices": []
+    },
+    {
+      "confidence": 0.8,
+      "provider_visible": false,
+      "suppressed_indices": [
+        13,
+        15,
+        17,
+        19,
+        21
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "provider_visible": true,
+      "suppressed_indices": []
+    },
+    {
+      "confidence": 1,
+      "provider_visible": false,
+      "suppressed_indices": [
+        13,
+        15,
+        17,
+        19,
+        21
+      ]
+    },
+    {
+      "confidence": 1,
+      "provider_visible": true,
+      "suppressed_indices": []
+    }
+  ],
+  "yaw": [
+    {
+      "provider_deg": 45,
+      "detector_deg": 0,
+      "confidence": 0.799,
+      "conflict": false
+    },
+    {
+      "provider_deg": 45,
+      "detector_deg": 0,
+      "confidence": 0.8,
+      "conflict": false
+    },
+    {
+      "provider_deg": 45,
+      "detector_deg": 0,
+      "confidence": 1,
+      "conflict": false
+    },
+    {
+      "provider_deg": 45.001,
+      "detector_deg": 0,
+      "confidence": 0.799,
+      "conflict": false
+    },
+    {
+      "provider_deg": 45.001,
+      "detector_deg": 0,
+      "confidence": 0.8,
+      "conflict": true
+    },
+    {
+      "provider_deg": 45.001,
+      "detector_deg": 0,
+      "confidence": 1,
+      "conflict": true
+    },
+    {
+      "provider_deg": -179,
+      "detector_deg": 179,
+      "confidence": 0.799,
+      "conflict": false
+    },
+    {
+      "provider_deg": -179,
+      "detector_deg": 179,
+      "confidence": 0.8,
+      "conflict": false
+    },
+    {
+      "provider_deg": -179,
+      "detector_deg": 179,
+      "confidence": 1,
+      "conflict": false
+    },
+    {
+      "provider_deg": 90,
+      "detector_deg": null,
+      "confidence": 0.799,
+      "conflict": false
+    },
+    {
+      "provider_deg": 90,
+      "detector_deg": null,
+      "confidence": 0.8,
+      "conflict": false
+    },
+    {
+      "provider_deg": 90,
+      "detector_deg": null,
+      "confidence": 1,
+      "conflict": false
+    }
+  ]
+}

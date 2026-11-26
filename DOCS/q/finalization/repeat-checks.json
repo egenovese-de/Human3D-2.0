@@ -1,0 +1,17 @@
+{
+  "evidence-boundaries": {
+    "original_sha256": "1253a6952fd2fd4460d5f97568e14592ade749fe9070ebc0912ec42d5a205853",
+    "repeat_sha256": "1253a6952fd2fd4460d5f97568e14592ade749fe9070ebc0912ec42d5a205853",
+    "byte_identical": true
+  },
+  "face-anchors": {
+    "original_sha256": "e38d9e8bda0ee58eef94e67a6f99b7e2141cf4bf16cb35688bb25c9b041dc9dc",
+    "repeat_sha256": "e38d9e8bda0ee58eef94e67a6f99b7e2141cf4bf16cb35688bb25c9b041dc9dc",
+    "byte_identical": true
+  },
+  "garment-pose": {
+    "original_sha256": "2483675315935057719c79733d23810addfa03275d1c4d3027ae6aa642a827a2",
+    "repeat_sha256": "2483675315935057719c79733d23810addfa03275d1c4d3027ae6aa642a827a2",
+    "byte_identical": true
+  }
+}

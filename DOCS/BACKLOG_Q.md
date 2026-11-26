@@ -48,3 +48,5 @@
 | Q7-003 | Evaluate joint camera, pose and shape estimation interactions | BLOCKED |
 | Q7-004 | Evaluate reference consistency, view utility and separate geometry/appearance selection | BLOCKED |
 | Q7-005 | Investigate lateral-view review behavior and photographic degradation thresholds | DONE |
+
+<!-- Q finalization review verified the existing 39 DONE and 9 BLOCKED entries. -->
