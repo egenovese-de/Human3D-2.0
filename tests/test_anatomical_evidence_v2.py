@@ -56,3 +56,22 @@ class AnatomicalEvidenceV2Tests(unittest.TestCase):
             new_digest = store.write_detection(new)
             self.assertNotEqual(new_digest, digest)
             self.assertEqual(store.read_detection(ObservationRef("photo", PHOTO_DIGEST, new_digest)), new)
+
+    def test_supported_visibility_caps_detector_evidence_and_conflicts_fall_back(self):
+        from human3d.anatomical_evidence import apply_visibility
+
+        cap = replace(self.observation(), region="left_arm", kind="visibility",
+                      definition="regional.landmark_visibility_cap@v1", frame="photo", units="fraction",
+                      interval=(.4, .5), uncertainty=.05)
+        native = (Landmark(.5, .5, .95, .99),) * 33
+        evidence = AnatomicalEvidence(PHOTO_DIGEST, "fixture", "model", 0, schema_version=2,
+                                      observations=(cap, self.observation()))
+        adapted = apply_visibility(native, evidence)
+        self.assertEqual(adapted[13].visibility, .55)
+        self.assertFalse(adapted[13].observed)
+        self.assertEqual(adapted[14], native[14])
+        self.assertEqual(apply_visibility(native, replace(evidence, observations=(cap, cap))), adapted)
+        conflict = replace(cap, interval=(.8, .9))
+        self.assertEqual(apply_visibility(native, replace(evidence, observations=(cap, conflict))), native)
+        high = replace(cap, interval=(.95, 1.))
+        self.assertEqual(apply_visibility(native, replace(evidence, observations=(high,))), native)

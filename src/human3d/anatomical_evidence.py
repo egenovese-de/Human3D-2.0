@@ -190,13 +190,36 @@ class EvidenceAdapter:
         self._detector.close()
 
 
+def _landmark_visibility_caps(evidence):
+    """Resolve the photo-local cap definition with conservative interval agreement."""
+    intervals = {}
+    for item in evidence.observations:
+        if (item.definition != "regional.landmark_visibility_cap@v1" or item.kind != "visibility"
+                or item.frame != "photo" or item.uncertainty is None):
+            continue
+        if item.interval is not None:
+            low, high = item.interval
+        elif item.value is not None:
+            low = high = item.value
+        else:
+            continue
+        intervals.setdefault(item.region, []).append((max(0., low - item.uncertainty),
+                                                      min(1., high + item.uncertainty)))
+    # A single conservative bound per photo and region avoids boosting
+    # confidence when one source provides repeated records.
+    caps = {region: max(high for _, high in ranges) for region, ranges in intervals.items()
+            if max(low for low, _ in ranges) <= min(high for _, high in ranges)}
+    caps.update({item.region: 0. for item in evidence.regions if not item.visible and item.confidence >= .8})
+    return caps
+
+
 def apply_visibility(pose, evidence: AnatomicalEvidence | None):
     if evidence is None:
         return pose
-    hidden = {i for item in evidence.regions if not item.visible and item.confidence >= .8
-              for i in REGION_LANDMARKS[item.region]}
-    return tuple(replace(point, visibility=0.0) if i in hidden else point
-                 for i, point in enumerate(pose))
+    caps = {index: value for region, value in _landmark_visibility_caps(evidence).items()
+            for index in REGION_LANDMARKS[region]}
+    return tuple(replace(point, visibility=min(point.visibility, caps[i]) if point.visibility is not None else 0.)
+                 if i in caps else point for i, point in enumerate(pose))
 
 
 def yaw_conflicts(external: AnatomicalEvidence, detector_yaw: float | None):
