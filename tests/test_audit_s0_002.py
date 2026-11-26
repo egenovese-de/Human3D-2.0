@@ -99,6 +99,7 @@ class AuditProbes(unittest.TestCase):
     def test_aud06_retention(self):
         import tracemalloc
         c = Coordinator("fixture")
+        started = time.perf_counter()
         tracemalloc.start()
         try:
             for i in range(1000):
@@ -107,9 +108,9 @@ class AuditProbes(unittest.TestCase):
                 c.finish(j.id,i,lambda _: True)
             current, peak = tracemalloc.get_traced_memory()
             jobs, artifacts=c.snapshot()
-            self.assertEqual(len(jobs),1000)
+            self.assertEqual(len(jobs),128)
             self.assertEqual(len(artifacts),1)
-            print(f"AUD-06 jobs={len(jobs)} active={len(artifacts)} traced_current={current} traced_peak={peak}",flush=True)
+            print(f"AUD-06 jobs={len(jobs)} active={len(artifacts)} traced_current={current} traced_peak={peak} elapsed_s={time.perf_counter()-started:.6f}",flush=True)
         finally:
             tracemalloc.stop()
 
@@ -151,3 +152,59 @@ class AuditProbes(unittest.TestCase):
             self.assertEqual(results[-1],False)
             self.assertEqual(c.snapshot()[0][0].state,"cancelled")
             print("AUD-07 real synthetic child interrupted; stale publication rejected",flush=True)
+
+    def test_aud06_evicted_worker_cannot_publish(self):
+        c = Coordinator("fixture", history_limit=4)
+        old = c.submit("preview")
+        c.start(old.id)
+        live = c.submit("other")
+        c.start(live.id)
+        for i in range(20):
+            job = c.submit("preview")
+            c.start(job.id)
+            self.assertTrue(c.finish(job.id, i, lambda _: True))
+        self.assertTrue(c.cancellation_requested(old.id))
+        self.assertFalse(c.finish(old.id, "stale", lambda _: True,
+                                  publish=lambda: self.fail("late publication")))
+        c.fail(old.id, "late")
+        jobs, artifacts = c.snapshot()
+        self.assertEqual(len(jobs), 5)
+        self.assertEqual(artifacts["preview"][1], 19)
+        self.assertTrue(c.finish(live.id, "valid", lambda _: True))
+        self.assertEqual(len(c.snapshot()[0]), 4)
+
+    def test_aud06_disk_and_rss_profile(self):
+        import json
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            source = root / "fixture.png"
+            Image.new("RGB", (512,512), "white").save(source)
+            session = Session(root / "project", True)
+            started = time.perf_counter()
+            session.ingest([source])
+            initial = sum(p.stat().st_size for p in session.store.directory.rglob("*") if p.is_file())
+            for _ in range(100):
+                session.ingest([source])
+            final = sum(p.stat().st_size for p in session.store.directory.rglob("*") if p.is_file())
+            self.assertEqual(initial, final)
+            if sys.platform == "win32":
+                import ctypes
+                from ctypes import wintypes
+                class Counters(ctypes.Structure):
+                    _fields_ = [("cb", wintypes.DWORD), ("faults", wintypes.DWORD)] + [
+                        (name, ctypes.c_size_t) for name in ("peak", "working", "quota_peak_paged",
+                        "quota_paged", "quota_peak_nonpaged", "quota_nonpaged", "pagefile", "peak_pagefile")]
+                counters = Counters()
+                counters.cb = ctypes.sizeof(counters)
+                kernel = ctypes.windll.kernel32
+                kernel.GetCurrentProcess.restype = wintypes.HANDLE
+                query = ctypes.windll.psapi.GetProcessMemoryInfo
+                query.argtypes = [wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD]
+                self.assertTrue(query(kernel.GetCurrentProcess(), ctypes.byref(counters), counters.cb))
+                peak = counters.peak
+            else:
+                import resource
+                peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == "darwin" else 1024)
+            print("AUD-06 profile " + json.dumps({"peak_process_rss_bytes": peak,
+                "initial_disk_bytes": initial, "final_disk_bytes": final,
+                "duplicate_imports": 100, "elapsed_s": time.perf_counter()-started}), flush=True)
