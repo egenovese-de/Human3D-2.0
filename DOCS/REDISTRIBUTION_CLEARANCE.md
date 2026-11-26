@@ -1,0 +1,66 @@
+# M1 redistribution and security clearance
+
+Status: DONE for initial default-deny baseline. Default deny; no legacy component is cleared for copying by this document alone.
+
+Original code: Apache-2.0, owner approved 2026-11-25.
+Legacy inventory: 1063 tracked files; no history migration.
+
+| Component | Disposition | Evidence / remaining gate |
+|---|---|---|
+| Original application modules | HOLD | Per-file authorship, dependency, secret and private-data review |
+| MakeHuman v1.3.0 mesh and morph assets | HOLD | Legacy provenance declares CC0; verify upstream terms and exact hashes before acquisition |
+| MakeHuman rig and weights | HOLD | Legacy provenance declares CC0; verify upstream terms and exact hashes |
+| MakeHuman AGPL source | EXCLUDED | No vendoring |
+| MediaPipe model assets | HOLD | Verify model-specific terms and digest |
+| Other model weights and mesh bundles | EXCLUDED pending review | No implicit license inheritance |
+| Legacy photographs and derivatives | EXCLUDED | Private local evaluation only |
+| Legacy history, workflows and configuration | EXCLUDED by default | Recreate independently |
+| New synthetic fixtures | Eligible after review | Procedural, no personal data, documented generator and license |
+
+## Public admission rule
+For every imported component record origin, immutable revision, path, digest, license, attribution, modification and reviewer disposition. Review content for secrets, personal data and incompatible code before any public write. Unknown provenance means deny. External assets are acquired from verified upstream rather than copied from private history where feasible. No private photos, derived human assets, credentials or local project data in CI, logs or artifacts.
+
+## Outstanding
+Upstream license and hash verification, individual module review, public repository scan, fixture manifest and validation evidence. No clearance PASS claimed.
+
+## Upstream evidence
+MakeHuman v1.3.0 LICENSE.ASSETS.md retrieved from https://raw.githubusercontent.com/makehumancommunity/makehuman/v1.3.0/LICENSE.ASSETS.md and inspected: CC0 1.0 Universal text. This confirms the upstream asset license document exists, not that every candidate file is covered or hash-verified. Acquisition remains on HOLD until exact file scope and digests are validated.
+
+## Asset identity verification
+Upstream immutable commit: 1f508f6083b2f823dab15de924b3bde72e08d77c. Legacy reference commit: e33c396ed7b17fd5503a8e2b9c9f137179f364bf. Compared Git blob identities for every legacy assets/makehuman/data/ file against the corresponding upstream makehuman/data/ path: 357/357 match, zero mismatches. Upstream LICENSE.md section C confirms CC0 for bundled graphical assets, including base mesh and targets; section B separately licenses program logic under AGPL. Git blob identity is not an independent SHA-256 verification. Runtime acquisition must verify expected SHA-256 before use. No asset bytes transferred. Prefer upstream acquisition at immutable revision; retain CC0 notice and attribution. Other asset directories remain excluded.
+
+## Incremental admission register
+All legacy source remains HOLD. Reviewed candidates: frozen_body, frozen_bootstrap, frozen_deform, frozen_rig, baseline_makehuman, morphology_body, makehuman_pose, mesh, errors. No source clearance inferred from docstrings. Bootstrap dependencies require independent implementation or explicit per-file provenance clearance. MORPH-02: nine data files and one license match upstream Git blobs; separate pinned manifest recorded. Public fixtures must be newly procedural or separately authorized. No legacy photos, models or history admitted. SHA-256 acquisition checks and public repository security scan remain outstanding. Incremental review does not waive M1-001 acceptance.
+
+## Public tree screening
+Scanned all 13 tracked files in development/m1 at 9c9db044b50a0da79d190892c35c93f556ea6186. All readable; no matches for private key headers, common GitHub/AWS/OpenAI token patterns or quoted credential assignments. Tree contains documentation, manifests and license only; no photographs or legacy source. PASS for limited current-tree screening only. Full history and specialist scanner not run. Runtime asset digest verification remains outstanding.
+
+## Executed upstream integrity verification
+PASS: GitHub Actions run 45638877256, commit a4a97219b81efff7b5bbc4a773d34860aebe25d3, 2026-11-25. Log: PASS: 367 manifest entries verified. All entries downloaded from pinned upstream and checked for byte length and SHA-256; no asset bytes persisted. This supersedes earlier outstanding digest checks. Checkout action emitted Node 20 deprecation warning; job succeeded. Legacy source remains HOLD; fixture policy and remaining security acceptance still apply.
+
+## Initial gate closure
+PASS: security screening run 45639389830 at e17214592d84d587e5735b0e2cc02c52fd15d11a, 24 reachable commits screened for specified credential patterns. No matches. This is a limited pattern scan, not a specialist audit. Fixture policy established in FIXTURE_POLICY.md; no fixtures admitted. Initial admission baseline complete: original code Apache-2.0, verified upstream CC0 assets eligible subject to runtime integrity, all other components denied until separately cleared. No legacy source approved. Future component admission and final release audit remain mandatory.
+
+
+## M4 release-candidate source audit
+
+The candidate branch contains application source, tests, documentation and
+dependency manifests. It includes no models, photos, frozen meshes, exported
+people or third-party runtime binaries. Source assets are provisioned locally
+from separately tracked upstream manifests. The detector weights are required
+at runtime and remain excluded from distribution. The Windows and Linux
+locks describe dependencies installed from upstream package indexes.
+
+A review of 32 version pins against PyPI's per-version advisory metadata
+identified reported issues for Pillow 11.3.0, Protobuf 4.25.9 and usd-core
+25.5.1. The operational locks now use Pillow 13.0.0 and usd-core 25.11.
+MediaPipe 0.10.33 replaces the old runtime and drops its Protobuf and
+JAX dependency chain. The 25 distinct resulting version pins returned no
+non-withdrawn PyPI advisories at the check on 2026-11-25. This is a
+point-in-time metadata review and excludes native libraries or bundled
+components whose advisories are tracked separately. Historical candidate
+locks remain evidence for their earlier runtime probes.
+
+Local source-branch verification does not authorize publication of a binary
+distribution. The full redistribution package review and the local empirical
+tests remain separate from the development branch checks.

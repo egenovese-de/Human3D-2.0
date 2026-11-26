@@ -12,7 +12,7 @@ Tasks: H3D2-M1-001 through H3D2-M1-003.
 
 Validation objective: demonstrate foundation on actual inputs.
 
-Where to test: Local CLI / Windows and Linux.
+Where to test: Windows and Linux CLI; owner approved equivalent GitHub Actions evidence for D1-01 only on 2026-11-25.
 
 Test input: Actual candidate source inventory, license texts and authorized fixture manifest.
 
@@ -34,7 +34,7 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Recheck rejected items without copying them.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: PASS under owner-approved CI equivalence for D1-01 only. Evidence: foundation and security dispatcher run 45642499455 at 39ee9badb133bddfad7a3377892adba1668f49bb; hash-enforced runtime run 45641848574; asset integrity run 45638877256; clearance and fixture policy documents. No legacy source admitted; no public photo fixtures admitted. Local screenshots waived for this delivery only. Branch protection remains a manual administrative action; later empirical gates unchanged.
 
 ## D1-02 — Project and orchestration
 
@@ -68,9 +68,24 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Reopen last saved project; retry import or resume.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: empirical D1-02 NOT_RUN. M1-006 technical verification covers the in-memory coordinator and application snapshots with automated tests. Actual reconstruction cancellation and recovery remain D1-07 checks.
 
 ## D1-03 — Vision and mask recovery
+
+Technical smoke, Linux CPython 3.11.9 with locked dependencies and MediaPipe Lite v1.
+Synthetic fixtures v0.1. Nine imports reopened with matching original hashes.
+P01–P06 yielded one candidate each. N01 and N03 yielded zero, N02 yielded one
+false-positive candidate. Detection confidence probes at 0.50, 0.65, 0.75 and
+0.85 reproduced the same counts. Candidate output requires review before
+fitting. Full-body readiness requires in-frame nose, shoulders, hips, knees and
+ankles with visibility and presence at least 0.8. This provisional development
+rule kept the N02 false positive and P04 crop in review and passed P01–P03 and
+P05–P06. Detection candidates are preserved for correction. Real-photo
+empirical validation remains NOT_RUN.
+
+Run target analysis on a saved project with
+`human3d detect-target PROJECT --model POSE_LANDMARKER_LITE_TASK`.
+
 
 Tasks: H3D2-M1-007 through H3D2-M1-008.
 
@@ -108,9 +123,16 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 
 Failure recovery: Undo correction or retry/exclude affected photo.
 
-Current status: NOT_RUN; no empirical or technical PASS claimed.
+Current status: D1-03 empirical NOT_RUN. M1-008 technical smoke passed on Linux Qt offscreen with the synthetic frontal fixture: segmentation, brush gesture, undo and application to the current session. Corrections are session-local until persistent artifact storage is integrated.
 
 ## D1-04 — Freeze independence
+
+Development probe: `human3d freeze-neutral VERIFIED_ASSET_DIRECTORY ARTIFACT_DIRECTORY`.
+Repeated runs produced the same SHA-256 and a single immutable artifact with
+19,158 vertices, 18,486 faces, 21,334 UVs and 163 bones. All face indices were
+in range, body vertices had skin weights and nonempty weight sets summed to
+one within 1e-12. This probe uses the neutral upstream mesh; native morph
+controls and the integrated reconstruction flow remain pending.
 
 Tasks: H3D2-M1-009 through H3D2-M1-010.
 
@@ -765,3 +787,14 @@ Evidence: common evidence bundle plus screenshots of each named inspection and r
 Failure recovery: Quarantine offending files; fix candidate and rerun affected/full gate.
 
 Current status: NOT_RUN; no empirical or technical PASS claimed.
+
+## M1 desktop technical smoke
+
+The Linux desktop completed the synthetic P01 path from project import and
+neutral freeze to target mask review, explicit alignment approval, bounded fit,
+neutral/posed mesh orbit, and rigged USDA export. The fixed-camera 256-pixel
+silhouette comparison went from 0.3618 to 0.3722. OpenUSD reopened the export
+with a skeleton, skinning query and nonidentity joint rotations. This is a
+software smoke result. The fit is session-local and the pose is initialized
+in the image plane. Empirical testing is performed locally on the first
+testable application.

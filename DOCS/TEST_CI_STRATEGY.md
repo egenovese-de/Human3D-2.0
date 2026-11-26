@@ -34,3 +34,54 @@ Governance: one active task; proceed automatically after targeted checks except 
 | Milestone | all applicable | all applicable | required |
 
 PR checks are authoritative once PR exists; suppress equivalent push jobs, evaluate actual merge candidate where applicable. Unknown executable changes select conservatively. Required summary always runs and fails if a required job fails, is blocked or not run; not-applicable is explicit. One writer is a governance rule, not a CI concurrency guarantee.
+## M2 technical verification
+
+The local software smoke used P01 and its P05 low-light derivative from the
+synthetic bundle. It exercised per-photo detection, shared fitting, reopen,
+target switching without changing the fit digest, reference exclusion and
+reinclusion, a semantic edit, restoration, and rigged USDA export. Average
+silhouette IoU was 0.35490 at bootstrap and 0.35528 after fitting. The two
+inputs share a source, so this is a software smoke result. The local
+empirical test uses separate inputs under the empirical test plan.
+
+Blender 4.5.3 imported the resulting USDA through its Python runtime. The
+import had 13,380 vertices, 13,378 faces, UVs, 163 bones, normalized skin
+weights and a bound armature. Editing a limb bone changed the evaluated mesh.
+
+A separate procedural smoke with two distinct camera yaws exercised the
+shared objective independently of the brightness-variant photos. Both camera
+directions were recovered and average mask overlap increased from 0.96015
+to 0.96321. Required checks passed on Windows and Linux in run 45655613911.
+
+## M3 technical verification
+
+Spatial pose was exercised with the synthetic frontal fixture and two
+procedural articulation configurations. Native mesh and rig checks passed.
+The M3 appearance smoke used P01 and its low-light P05 derivative. At 512
+pixels, 41.2% of UV domain texels were observed. The coverage view identified
+nearby padding and unobserved texels separately. A procedural overlap test
+verified that an occluded triangle received no observed color. Blender 4.5.3
+imported the resulting USDZ with the packed 512 × 512 albedo, editable
+material, UVs, armature binding and 163 bones. Local empirical evaluation
+remains in the test plan.
+
+
+## M4 technical verification
+
+The synthetic frontal smoke fit a top, shorts and trousers, projected a
+separate garment UV map and packaged the independent garment with the body.
+Each tested shell passed the 1 mm sampled penetration tolerance after
+bounded correction. A neutral inner/outer pair passed the sampled layer
+check and coincident layers were rejected. Qt offscreen checks exercised
+the 1024 × 720 and 1440 × 900 layouts, fitting, removal and 3D outfit orbit.
+
+Blender 4.5.3 imported separate body and top meshes with packed materials
+and the same 163-bone rig. Editing an armature joint changed the evaluated
+garment. The scene was saved, reopened, re-exported and reimported, and
+removing the top preserved the body mesh. The smoke and regressions are
+technical checks. Empirical validation is performed locally.
+
+The 150% scaling probe verified the keyboard focus order in the garment
+workspace. The installed application passed 20 tests locally. Required
+Windows and Linux checks, including the source pattern scan, passed in
+run 45662318139 on the M4 implementation commit.

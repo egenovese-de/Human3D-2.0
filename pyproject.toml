@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools==84.1.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "human3d"
+version = "0.2.0"
+requires-python = ">=3.11,<3.12"
+license = {text = "Apache-2.0"}
+dependencies = [
+    "Pillow==13.0.0",
+    "PySide6==6.8.3",
+    "numpy==1.26.4",
+    "scipy==1.15.3",
+    "mediapipe==0.10.33",
+    "usd-core==25.11",
+]
+
+[project.scripts]
+human3d = "human3d.__main__:main"
+human3d-desktop = "human3d.desktop:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,17 +1,84 @@
-# Human3D 2.0 — Approved delivery baseline v0.2
-Product owner approved the plan and required corrections on 2026-11-25. The independent public repository has been created by the owner. Implementation remains paused pending explicit authorization. All 59 tasks TODO; 94 source mappings (54 engineering + 40 UX), 23 deliveries, four milestones, three verification levels. This supersedes v0.1.
+# Human3D 2.0
 
-BACKLOG is the sole task/status record. ARCHITECTURE, DEPENDENCIES, TEST_CI_STRATEGY, EMPIRICAL_TEST_PLAN, MILESTONE_ACCEPTANCE, DECISIONS and TRACEABILITY govern execution. Sources: integrated delivery analysis v0.1 and final readiness audit, reconstruction and UX audits. No runtime, license or photographic certification implied.
+Version 0.2.0 is the technical release baseline (M1–M5 and stabilization). See the [installation and verification guide](DOCS/STABILIZATION_INSTALL.md) and [changelog](CHANGELOG.md). The historical milestone instructions below are retained for reference.
 
-## Start checklist
-- [x] Plan corrections and foundational recommendations approved.
-- [x] Owner creates independent public repository and supplies URL/branch; no fork or private history.
-- [ ] M1-001: establish repository license, component clearance, attribution, secret/private-data exclusion and public fixture policy before copying anything.
-- [ ] M1-002: record supported M1 envelope and evaluation protocol; identify authorized private datasets and owner review availability.
-- [ ] M1-003: pin tested runtime, Windows/Blender versions and validation commands; establish one branch writer and required checks.
-- [ ] Resolve remaining deferred decisions by deadlines in DECISIONS.
+The M1 desktop build is on `development/m1`. It supports a single-target
+reconstruction flow with mask review, initial alignment, bounded body fitting,
+neutral and posed inspection, and rigged OpenUSD export.
 
-Only planning documentation has been published. No implementation or CI workflow has been initiated. First task after explicit authorization: H3D2-M1-001.
+## Run the M1 desktop build
+
+Use CPython 3.11.9 and the lock file for your platform. On Windows run the
+following from the repository root.
+
+```powershell
+python -m pip install --require-hashes --no-deps -r requirements-windows.lock
+python -m pip install --no-deps .
+human3d-desktop
+```
+
+On Linux use `requirements-linux.lock` and the system libraries in [RUNTIME](DOCS/RUNTIME.md).
+
+1. Create a project and import a full-body target photograph.
+2. Choose **Freeze rest body** and select the directory with the verified
+   MakeHuman assets. Place `base.obj`, `default.mhskel`, `default_weights.mhw`
+   and the eight `.target` files from the [MORPH-02 manifest](DOCS/manifests/makehuman-morph02.json)
+   in that directory. The [MakeHuman manifest](DOCS/manifests/makehuman-v1.3.0.json)
+   identifies the pinned upstream revision and exact asset paths. The app
+   checks the expected hashes.
+3. Select **Review target mask**, then choose the local
+   [Pose Landmarker Lite v1 bundle](https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task).
+   Review the foreground and adjust the alignment if needed.
+4. Select **Approve alignment and fit**, then close the review dialog.
+   Use **Inspect fitted body** or **Export USD**. Fit and correction state
+   live in the current session.
+
+The initial pose uses image-plane limb directions. The first local empirical
+test is tracked in the [test plan](DOCS/EMPIRICAL_TEST_PLAN.md).
+
+## Run the M2 desktop build
+
+Check out `development/m2` and use the same installation and verified local
+assets as M1. For the additional torso controls, add the six bust, shoulder
+and waist measurement targets listed in the pinned MakeHuman manifest and
+freeze the rest body again.
+
+Import reference photographs of one subject. Use a photo's context menu
+to include, exclude or retry detection. Select **Fit included photos** to
+calculate a shared body and report regional coverage and overlap by photo.
+Changing the target selects a different view of the same shared revision.
+**Inspect fitted body** compares bootstrap, fitted neutral and posed geometry.
+Use **Edit body control** and **Restore body revision** to manage revisions for
+the current reference set. **Export USD** writes the current target pose.
+
+## Run the M3 desktop build
+
+Check out `development/m3` and use the M2 installation and local assets.
+Run **Fit included photos** again for projects fitted by earlier builds.
+**Inspect fitted body** shows the target articulation and allows bounded
+per-limb corrections. Pose corrections apply to the active session and are
+included in export. The relative foot-height check does not estimate a floor.
+
+**Inspect appearance** shows the UV atlas, observed coverage, padding, and
+skin-color candidates from local image evidence. The texture prioritizes the
+target and balances exposure across visible reference samples. Unseen areas use
+neutral color where nearby padding is unavailable. Use **Export textured USDZ**
+to package the mesh, rig, pose, material and albedo together.
+
+## Run the M4 desktop build
+
+Check out `development/m4` and use the same desktop setup and local assets.
+Sync to the updated platform lock. On Linux the detector also needs `libgles2`.
+Fit the target or included photos, then choose **Assemble garments**. Fit a
+close-fitting top, shorts or trousers and inspect the photo coverage. Use
+**Apply edits** for ease and hem changes. Open the posed 3D preview or remove
+a garment from the assembly. A base top may be paired with an outer top if
+the sampled layer separation passes.
+
+**Export garment assembly** packages the body and separate rigged garment
+meshes with materials, textures and a sampled clearance manifest. Exports
+are blocked when sampled penetrations exceed tolerance. The assembly draft
+is local to the dialog. Save an export to keep the resulting meshes.
 
 ## Product vision
 

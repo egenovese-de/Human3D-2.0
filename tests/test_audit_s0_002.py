@@ -1,0 +1,210 @@
+"""S0-002 characterization probes: Uncorrected probes characterize baseline; AUD-01 checks optional-provider fallback."""
+import os
+os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+import sys
+import time
+import threading
+import tempfile
+import unittest
+import subprocess
+from pathlib import Path
+from hashlib import sha256
+from unittest.mock import Mock, patch
+from PIL import Image
+from human3d.session import Session
+from human3d.orchestration import Coordinator
+from human3d.vision import Landmark, SubjectEvidence, PoseLandmarker
+from human3d.anatomical_evidence import EvidenceAdapter
+from human3d.mask_review import MaskDraft
+
+class AuditProbes(unittest.TestCase):
+    def test_aud01_provider_failure_and_offline(self):
+        detector, provider = Mock(), Mock()
+        evidence = SubjectEvidence("photo", "fixture", (32,32), ((Landmark(.5,.5,1,1),)*33,))
+        detector.detect.return_value = evidence
+        provider.observe.return_value = None
+        adapter = EvidenceAdapter(detector, provider)
+        self.assertEqual(adapter.detect(Path("fixture.png"), "photo"), evidence)
+        provider.observe.side_effect = RuntimeError("offline")
+        with self.assertLogs("human3d.anatomical_evidence", level="WARNING"):
+            self.assertEqual(adapter.detect(Path("fixture.png"), "photo"), evidence)
+        self.assertEqual(detector.detect(Path("fixture.png"), "photo"), evidence)
+
+    def test_aud02_gui_status_and_action(self):
+        from PySide6.QtWidgets import QApplication, QPushButton
+        from human3d.desktop import PhotosWindow
+        app = QApplication.instance() or QApplication([])
+        with tempfile.TemporaryDirectory() as root:
+            window = PhotosWindow()
+            try:
+                window.attach(Path(root)/"project", True)
+                self.assertFalse(window.session.snapshot().reconstruct.enabled)
+                self.assertIn("Select a target photo", window.status.text())
+                button = next(b for b in window.findChildren(QPushButton) if b.text()=="Fit included photos")
+                self.assertFalse(button.isEnabled())
+                with patch.object(window, "run_shared_fit") as fit:
+                    button.click()
+                    fit.assert_not_called()
+                    photo = Path(root)/"fixture.png"
+                    Image.new("RGB",(32,32)).save(photo)
+                    window.ingest([photo])
+                    self.assertFalse(button.isEnabled())
+                    self.assertIn("Freeze a rest body first",window.status.text())
+                    from dataclasses import replace
+                    project = window.store.load()
+                    window.store.save(replace(project,frozen_body_digest="a"*64))
+                    window.refresh()
+                    self.assertTrue(window.session.snapshot().reconstruct.enabled)
+                    self.assertTrue(button.isEnabled())
+                    self.assertIn("Reconstruction ready",window.status.text())
+                    self.assertFalse(window.actions["Export USD"].isEnabled())
+                    button.click()
+                    fit.assert_called_once()
+            finally:
+                window.close()
+
+    def test_aud05_same_photo_mask_revision(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            session = Session(root/"project", True)
+            photo = root/"fixture.png"
+            Image.new("RGB",(32,32)).save(photo)
+            session.ingest([photo])
+            detector = Mock()
+            detector.detect.side_effect = lambda p,d: SubjectEvidence(d,"fixture",(32,32),((Landmark(.5,.5,1,1),)*33,))
+            evidence = session.detect_target(detector)
+            draft = MaskDraft(evidence,0)
+            draft.paint((8,8),(24,24),2,add=True)
+            session.apply_mask(draft)
+            before = session.shared_evidence().dependency_digest
+            valid = session.coordinator.submit("preview")
+            session.coordinator.start(valid.id)
+            self.assertTrue(session.coordinator.finish(valid.id,"valid",lambda _: True))
+            job = session.coordinator.submit("preview")
+            session.coordinator.start(job.id)
+            generation = session.coordinator.generation
+            draft.paint((2,2),(5,5),1,add=True)
+            session.apply_mask(draft)
+            self.assertNotEqual(before, session.shared_evidence().dependency_digest)
+            self.assertGreater(session.coordinator.generation, generation)
+            self.assertFalse(session.coordinator.finish(job.id,"old",lambda _: True))
+            self.assertNotIn("preview",session.snapshot().current_artifacts)
+            self.assertIn("preview",session.snapshot().stale_artifacts)
+            self.assertIn("subject_mask",session.snapshot().current_artifacts)
+            self.assertEqual(session.coordinator.snapshot()[1]["preview"][1],"valid")
+            generation = session.coordinator.generation
+            session.apply_mask(draft)
+            self.assertEqual(generation,session.coordinator.generation)
+
+    def test_aud06_retention(self):
+        import tracemalloc
+        c = Coordinator("fixture")
+        started = time.perf_counter()
+        tracemalloc.start()
+        try:
+            for i in range(1000):
+                j=c.submit("preview")
+                c.start(j.id)
+                c.finish(j.id,i,lambda _: True)
+            current, peak = tracemalloc.get_traced_memory()
+            jobs, artifacts=c.snapshot()
+            self.assertEqual(len(jobs),128)
+            self.assertEqual(len(artifacts),1)
+            print(f"AUD-06 jobs={len(jobs)} active={len(artifacts)} traced_current={current} traced_peak={peak} elapsed_s={time.perf_counter()-started:.6f}",flush=True)
+        finally:
+            tracemalloc.stop()
+
+    def test_aud07_real_child_logical_cancel(self):
+        c=Coordinator("fixture")
+        j=c.submit("detect")
+        c.start(j.id)
+        started=threading.Event()
+        results=[]
+        from human3d.vision import run_cancellable
+        real_run=run_cancellable
+        def child(command, **kwargs):
+            started.set()
+            return real_run([sys.executable,"-c","import time; time.sleep(10)"],**kwargs)
+        with tempfile.TemporaryDirectory() as root:
+            model=Path(root)/"model.task"
+            model.write_bytes(b"fixture")
+            with patch("human3d.vision.MODEL_SHA256",sha256(b"fixture").hexdigest()):
+                detector=PoseLandmarker(model)
+            def worker():
+                try:
+                    detector.detect(Path(root)/"photo.png","photo")
+                except Exception as e:
+                    results.append(type(e).__name__)
+                finally:
+                    results.append(c.finish(j.id,"old",lambda _: True))
+            with patch("human3d.vision.run_cancellable",side_effect=child):
+                t=threading.Thread(target=worker)
+                t.start()
+                try:
+                    self.assertTrue(started.wait(5))
+                    c.cancel(j.id)
+                    detector.close()
+                    t.join(3)
+                    self.assertFalse(t.is_alive())
+                finally:
+                    t.join(10)
+            self.assertFalse(t.is_alive())
+            self.assertEqual(results[-1],False)
+            self.assertEqual(c.snapshot()[0][0].state,"cancelled")
+            print("AUD-07 real synthetic child interrupted; stale publication rejected",flush=True)
+
+    def test_aud06_evicted_worker_cannot_publish(self):
+        c = Coordinator("fixture", history_limit=4)
+        old = c.submit("preview")
+        c.start(old.id)
+        live = c.submit("other")
+        c.start(live.id)
+        for i in range(20):
+            job = c.submit("preview")
+            c.start(job.id)
+            self.assertTrue(c.finish(job.id, i, lambda _: True))
+        self.assertTrue(c.cancellation_requested(old.id))
+        self.assertFalse(c.finish(old.id, "stale", lambda _: True,
+                                  publish=lambda: self.fail("late publication")))
+        c.fail(old.id, "late")
+        jobs, artifacts = c.snapshot()
+        self.assertEqual(len(jobs), 5)
+        self.assertEqual(artifacts["preview"][1], 19)
+        self.assertTrue(c.finish(live.id, "valid", lambda _: True))
+        self.assertEqual(len(c.snapshot()[0]), 4)
+
+    def test_aud06_disk_and_rss_profile(self):
+        import json
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            source = root / "fixture.png"
+            Image.new("RGB", (512,512), "white").save(source)
+            session = Session(root / "project", True)
+            started = time.perf_counter()
+            session.ingest([source])
+            initial = sum(p.stat().st_size for p in session.store.directory.rglob("*") if p.is_file())
+            for _ in range(100):
+                session.ingest([source])
+            final = sum(p.stat().st_size for p in session.store.directory.rglob("*") if p.is_file())
+            self.assertEqual(initial, final)
+            if sys.platform == "win32":
+                import ctypes
+                from ctypes import wintypes
+                class Counters(ctypes.Structure):
+                    _fields_ = [("cb", wintypes.DWORD), ("faults", wintypes.DWORD)] + [
+                        (name, ctypes.c_size_t) for name in ("peak", "working", "quota_peak_paged",
+                        "quota_paged", "quota_peak_nonpaged", "quota_nonpaged", "pagefile", "peak_pagefile")]
+                counters = Counters()
+                counters.cb = ctypes.sizeof(counters)
+                kernel = ctypes.windll.kernel32
+                kernel.GetCurrentProcess.restype = wintypes.HANDLE
+                query = ctypes.windll.psapi.GetProcessMemoryInfo
+                query.argtypes = [wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD]
+                self.assertTrue(query(kernel.GetCurrentProcess(), ctypes.byref(counters), counters.cb))
+                peak = counters.peak
+            else:
+                import resource
+                peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == "darwin" else 1024)
+            print("AUD-06 profile " + json.dumps({"peak_process_rss_bytes": peak,
+                "initial_disk_bytes": initial, "final_disk_bytes": final,
+                "duplicate_imports": 100, "elapsed_s": time.perf_counter()-started}), flush=True)

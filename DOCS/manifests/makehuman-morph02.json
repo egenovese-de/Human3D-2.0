@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "upstream": "https://github.com/makehumancommunity/makehuman",
+  "revision": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "LICENSE.ASSETS.md",
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "bytes": 6962
+    },
+    {
+      "path": "makehuman/data/modifiers/measurement_modifiers.json",
+      "sha256": "99dc2b46dbf1dc95a22c20ec3f88687130eb7b66d07f21e6e20e2c7b707e39db",
+      "bytes": 1506
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-hips-circ-decr.target",
+      "sha256": "8a98e80047ab89148d60067aad3b452ce715eadcaf7a1e28402140dd1ac8fb11",
+      "bytes": 25872
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-hips-circ-incr.target",
+      "sha256": "e4294db231dd3283680e6be4b9d3d8d81aa7c575a32f937f8d0751b1ec3d6512",
+      "bytes": 26447
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-thigh-circ-decr.target",
+      "sha256": "fe5303874b0ffe26a69cefd3e213b6478eec4648f60b0b110a1e176ccf24eaa9",
+      "bytes": 18564
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-thigh-circ-incr.target",
+      "sha256": "5dca89b139df6f9b7c7641485dee18e9f0da10087359b9df5ca6a1e752ea0bcc",
+      "bytes": 23303
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-calf-circ-decr.target",
+      "sha256": "2914fc47781e23987607c6546f4535ae5d8b04e2e2bec908ab588ee94e74aa15",
+      "bytes": 14968
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-calf-circ-incr.target",
+      "sha256": "c6106ec484a875a8763a7e9b12a4891da8efcd5152efbc1c7061f40bdc4353a6",
+      "bytes": 14846
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-upperarm-circ-decr.target",
+      "sha256": "42e5780765402bfedf65c59cf8f846ffe6fe06b120e11762376a4ab9ec57f383",
+      "bytes": 16653
+    },
+    {
+      "path": "makehuman/data/targets/measure/measure-upperarm-circ-incr.target",
+      "sha256": "37f960203ae6c006399d3d26ab81e6d1de81523e86f845549aa94ca345c5d980",
+      "bytes": 16797
+    }
+  ]
+}

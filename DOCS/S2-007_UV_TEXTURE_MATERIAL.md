@@ -1,0 +1,12 @@
+# S2-007 — UV, texture and material integration
+2026-11-26. Targeted stabilization.
+## Findings and changes
+6ebc1895d7b1e2ba6876886e42daa075c42852e6: validate raster shape, RGB uint8 and boolean masks, positive finite source dimensions, integer atlas size, nonempty triangle topology, finite normalized UV domain and finite posed vertices; validate body pose before baking. Garment-specific geometry remains S2-008.
+252b1668ca18d53c96697ba4377537f8a992e909: canonical UV domain check.
+fdd51aeb94c6b8b45a9fd997f904482e54f640e6: synthetic triangle bake checks exact observed RGB, observed fraction >.8, skin classification, malformed raster, zero source dimension, fractional atlas size and out-of-domain UV rejection.
+## Material integration review
+Static source review: appearance preparation preserves oriented source size and resizes masks nearest-neighbor; baking converts UV v to raster 1-v, uses indexed corners, depth buffer, foreground and hidden-region filters; appearance dialog applies brightness and roughness controls. USD exporter authors face-varying indexed st, UsdPrimvarReader_float2, sRGB UsdUVTexture, diffuseColor connection, metallic zero and roughness, material binding and resolved packaged texture check before atomic publication. No additional confirmed material wiring defect identified in this review. No material code changed.
+## CI evidence
+Run https://github.com/egenovese-de/Human3D-2.0/actions/runs/45819739944 exact head fdd51aeb94c6b8b45a9fd997f904482e54f640e6: all five jobs success. classify 139909883168, scan 139909883610, Windows 139910000922 (59 tests 9.026s, clean install 59 tests 5.148s), Ubuntu 139910001017 (59 tests 2.780s), summary 139911370850. New test passed all three. Canonical UV domain PASS both, min .009208 max .993515. Frozen digest unchanged 1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650. 26 pins, zero active advisories. Production-only run 45819073753 success.
+## Limits
+Static defect identification, no executed pre-fix reproduction. Synthetic constant-color single triangle does not certify multi-view seams, complex occlusion, photorealism or canonical full-body bake. Material review static, no new dedicated shader/Blender round-trip test; portability and Blender verification remain S2-009/S4-005. Additional body pose computation may increase bake time; profiling remains S3-004. No empirical tests. S2-008 not started.

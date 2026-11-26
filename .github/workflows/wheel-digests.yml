@@ -1,0 +1,30 @@
+name: Wheel digests
+on:
+  push:
+    branches: [development/m1]
+    paths: ['.github/workflows/wheel-digests.yml']
+permissions:
+  contents: read
+jobs:
+  digest:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux
+          - os: windows-2022
+            platform: windows
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - run: |
+          python -m pip download --only-binary=:all: --no-deps -r requirements-${{ matrix.platform }}.candidate.lock -d wheels
+      - run: |
+          python -c "import hashlib,pathlib; files=sorted(pathlib.Path('wheels').glob('*.whl')); assert len(files)==len([line for line in pathlib.Path('requirements-${{ matrix.platform }}.candidate.lock').read_text().splitlines() if '==' in line and not line.lstrip().startswith('#')]); print('\n'.join(p.name+' sha256:'+hashlib.file_digest(p.open('rb'),'sha256').hexdigest() for p in files))"

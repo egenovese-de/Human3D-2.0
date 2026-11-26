@@ -1,0 +1,67 @@
+# S0-002 — Findings reconciliation
+Date: 2026-11-26. Production baseline a7f297806f6b2b6b2d51caa61565fbc9b2cc273a; stabilization reviewed at 3a892fd92d37e48980ce142773723f8330ae8a6c; Lab 3828e922466bb53a8110114553b4aaa1c11fd758.
+Source: RC1 v2 AUDIT_SOURCE.md and WORK_EXECUTION_S.md. Static reproduction is distinguished from runtime reproduction. Local git clone --depth 1 --branch development/m5 https://github.com/egenovese-de/Human3D-2.0 /tmp/h3d-audit returned exit 128, Could not resolve host: github.com. No new runtime test result claimed. Existing pinned CI run 45769060348 passed; not proof of these specific reproductions.
+
+| ID | Evidence at reviewed SHA (paths relative to repository) | Reproduction / impact | Severity and disposition | Task |
+|---|---|---|---|---|
+| AUD-01 | src/human3d/desktop.py:218–229,375–389; anatomical_evidence.py:64–83; Lab tools/benchmark_native.py | Native local detector wired directly; adapter optional, provider exceptions propagate, mismatched binding rejected. Lab has simulated provider. No mandatory VLM in RC1. | P2 integration limitation; no new provider required; offline runtime and optional failure isolation unresolved. B3-003 blocked. | S2-003, S1-005 |
+| AUD-02 | src/human3d/session.py:47–56; desktop.py:29–68,139–168,397–416,418–433 | Static reproduction: refresh unconditionally displays Reconstruction unavailable; fit button directly invokes fit_shared independently of capability. Existing desktop test expects misleading label. | P2 confirmed misleading status/obsolete capability; P1 pipeline failure not established; full GUI execution pending. | S3-001 |
+| AUD-03 | .github/workflows/required-checks.yml:4–6,35,51–59 | Stabilization absent from push and PR target lists; manual dispatch not equivalent. | P2 confirmed release hygiene gap, mandatory correction; protection enforcement unresolved. | S4-002 |
+| AUD-04 | .github/workflows/locked-runtime.yml:4; required-checks.yml:51–54 | M1-only trigger; required checks already install platform locks. | P2 confirmed workflow scope debt; consolidate without duplicate jobs. | S4-002 |
+| AUD-05 | src/human3d/session.py:41–56,89–124,176–233 | Observation/mask changes do not affect coordinator generation; shared fit independently validates evidence digest before publication/read. Static counterexample: existing artifact generation remains current after same-photo mask revision. Downstream stale use not reproduced. | P2 confirmed dependency tracking gap; actual downstream impact unresolved. | S2-010 |
+| AUD-06 | src/human3d/orchestration.py:25–31,38–56,115–130 | Each submit adds job; no removal path. Active artifacts retained by kind. Repeated jobs grow history by construction; actual RAM/latency and reopen cleanup not measured. | P2 confirmed unbounded job retention; resource severity unresolved. | S3-004, S3-005 |
+| AUD-07 | src/human3d/desktop.py:38,71–75,139–155,223–229,375–389; session.py:186–190; vision.py:136; orchestration.py:74–89 | Direct Qt callback invokes blocking detector subprocess with 120s timeout; no worker or cancellation propagation on path. Coordinator prevents publication only. Static call-chain establishes GUI event loop blocked during inference; actual duration/termination/retry not measured. | P1 confirmed major responsiveness defect in supported desktop path; correct worker lifecycle and cancellation. | S3-002 |
+| AUD-08 | pyproject.toml:11–16; requirements-candidate.txt:1–6 | Pillow 13.0.0 vs 11.3.0; MediaPipe 0.10.33 vs 0.10.21; USD 25.11 vs 25.5.1. Production locks used in pinned CI. | P2 dependency documentation/release hygiene, divergence not itself runtime defect; clean install pending. | S1-001 |
+| AUD-09 | .github/workflows/foundation.yml:18–20 | Manual pip install . resolves transitive dependencies without hashed lock. | P2 confirmed nonreproducible smoke scope; align or document exploratory purpose. | S4-002, S1-001 |
+| AUD-10 | pyproject.toml:7 | Version 0.1.0.dev0 confirmed. | P3 expected pre-release state; assign gated 2.0.0rc1 later. | S5-001, S5-004 |
+
+## Correction and regression evidence
+All ten: correction commit NONE (S0-002 triage only). New targeted regression execution NOT RUN. Existing tests: test_vision provider binding/native retry; test_desktop import/select/reopen; test_session target invalidation and persisted observations; test_orchestration cancellation/publication races. Historical CI success does not validate full GUI, native termination, or resource stress. No empirical testing. No production changes.
+## Disposition
+Ten findings reconciled statically; one P1, eight P2, one P3; no confirmed P0 in this limited scope. Runtime reproduction and unresolved impact checks remain outstanding; S0-002 BLOCKED for full acceptance. Do not interpret this as RC1 readiness or as closure of any correction task.
+
+
+## Final runtime reconciliation — 2026-11-26
+This section supersedes the earlier NOT RUN/BLOCKED statements. Diagnostic commit 3605574180724486b3eae7183a00c3f17115165d, tests/test_audit_s0_002.py. Required checks run https://github.com/egenovese-de/Human3D-2.0/actions/runs/45782444153: all five jobs successful. Windows job 139780983945: 34 tests in 3.618s, OK. Linux job 139780983979: 34 tests in 1.843s, OK. All five named characterization probes passed on both platforms; PASS means baseline behavior reproduced, not corrected.
+
+| Finding | Runtime / configuration evidence | Correction commit | Regression evidence / remaining scope |
+|---|---|---|---|
+| AUD-01 P2 | test_aud01_provider_failure_and_offline: mocked provider None returns native evidence; RuntimeError propagates; detector independent | NONE | Both PASS; actual external VLM remains optional and unverified; S1-005/S2-003 |
+| AUD-02 P2 | test_aud02_gui_status_and_action: real offscreen Qt window, disabled capability, enabled fit button invokes mocked fitting | NONE | Both PASS; actual fitting/export not exercised by probe; S3-001 |
+| AUD-03 P2 | Automatic push run 45781938596 on stabilization completed successfully, repeated by 45782444153 | 69ff66994e2340514fb3e4174b7fca2d4c5e4721 | RESOLVED for trigger and CI execution; branch protection still unverified; remaining S4-002 scope open |
+| AUD-04 P2 | Static M1-only workflow trigger; both platform locked installs successful in required checks | NONE | S4-002 consolidation pending |
+| AUD-05 P2 | test_aud05_same_photo_mask_revision: real persisted mask change alters shared evidence digest, generation unchanged, synthetic preview job promoted as current | NONE | Both PASS; actual shared-fit stale publication not demonstrated; S2-010 |
+| AUD-06 P2 | test_aud06_retention: 1000 jobs retained, one active artifact; tracemalloc current 263608 bytes both platforms, peak Windows 271651 / Linux 271667 bytes | NONE | Both PASS; not process RSS or full app stress; S3-004/S3-005 |
+| AUD-07 P1 | test_aud07_real_child_logical_cancel: real synthetic sleeping child via substituted subprocess command, still running after cancellation and 0.2s join; publication rejected | NONE | Both PASS; GUI event-loop blocking established by static call chain, not timed in Qt; real MediaPipe termination not tested; S3-002 |
+| AUD-08 P2 | Static dependency version divergence; production hashed locks and pip check PASS both platforms | NONE | S1-001 reconciliation pending |
+| AUD-09 P2 | Static unlocked manual foundation workflow; required checks locked path passes | NONE | S4-002/S1-001 pending |
+| AUD-10 P3 | Static dev version, CLI smoke PASS | NONE | S5-001/S5-004 gated version pending |
+
+S0-002 DONE: all ten findings reconciled, applicable targeted characterization probes executed, priorities retained (1 P1, 8 P2 including resolved AUD-03, 1 P3). No production defect fixes except explicitly authorized CI trigger correction. Diagnostic tests assert current defective behavior and must be converted to corrected-behavior regression tests in corresponding correction tasks; do not treat their current PASS as release acceptance. No empirical tests. S0-003 not started.
+
+## S1-001 closure — AUD-08
+RESOLVED for dependency reconciliation. Production pins and hashed platform locks unchanged. Direct candidate pins aligned in 0b6a728523d5f0ec03789797dafa255e3c510cd6; Linux mirror 6917d9251f304f54c4f3c8cb6444c98cd6347841; Windows mirror 0c42625ff1fc0ca5cecb3e4c17ab3b30839ac45e. Runtime documentation 535418396dc4e3e675f4c77c6b24cdfe57fa292e. Regression tests c224cfc9abf5215eb9e746c191cc546aa7f72653 and 31f91a50032bf7c0da236222a641ff127451af64. Required checks run 45783389414: all five jobs success; Ubuntu job 139786480434, 37 tests in 2.417s; Windows job 139786480520, 37 tests in 7.440s. All three dependency contract tests passed on both platforms. AUD-09 remains open for S4-002 workflow consolidation; S1-002 Windows 11 local installation, S1-004 clearance and S5 build reproducibility not certified. No empirical tests.
+
+## S2-003 closure — AUD-01
+RESOLVED for mandatory RC1 scope. Optional provider failure isolation 39a9dd4; desktop target/reference injection d27f024; hidden-region texture propagation 1b8f066. Runs 45803684601, 45804240065 and 45809370038 all five jobs SUCCESS. Canonical region mapping PASS both platforms; torso counts differ by one vertex (cause unverified). See S2-003_PROVIDER_INTEGRATION.md. Live external VLM remains optional and unverified; B3-003 remains BLOCKED. No empirical testing.
+
+## S2-010 closure — AUD-05
+RESOLVED for reproduced same-session dependency invalidation defect. Correction bcb2adf and c55ac47; converted regression 6093fbe. Required checks run 45829440057 all five jobs SUCCESS; 61 tests PASS Ubuntu, Windows and clean Windows installation. Persisted mask revision advances generation, rejects obsolete preview promotion, retains prior preview as stale and new mask as current; identical correction does not advance generation. Conservative invalidation; exhaustive concurrent/cross-process and GUI/export coverage not established. See S2-010_OBSERVATION_INVALIDATION.md. No empirical testing.
+
+## S3-001 closure — AUD-02
+RESOLVED for reproduced capability/status mismatch and fit action gating. Corrections 7bef859 and 8efe5dd; regression 497fcdd. Required checks run 45832078193 all five jobs SUCCESS, 61 tests PASS Ubuntu, Windows and clean Windows installation. Readiness is conditional on registered prerequisites; offscreen Qt regression uses synthetic frozen digest and mocked fit callback. Full downstream GUI workflow not certified. See S3-001_GUI_CAPABILITY.md. No empirical tests.
+
+## S3-002 closure — AUD-07
+RESOLVED for reproduced logical-only native cancellation and main heavy-path GUI blocking defects. Required checks run 45835389917 at aa8c6b8 all five jobs SUCCESS; 64 tests PASS Ubuntu, Windows and clean Windows installation. Residual limitations: non-preemptible Python work, optional provider blocking, late cancellation/publication race not exhaustively tested, secondary synchronous preparation/preview paths, no full GUI or real inference cancellation certification. See S3-002_WORKER_LIFECYCLE.md. No empirical tests.
+
+## S3-004 closure — AUD-06
+
+RESOLVED for the unbounded terminal job history and the S3-004 resource profile. The terminal cap retains 128 of 1,000 completed jobs, peak Python allocations fell about 83.6% in the same probe, and 100 duplicate imports added zero bytes. [Required checks 45859948344](https://github.com/egenovese-de/Human3D-2.0/actions/runs/45859948344) certified canonical synthetic reconstruction, fitting, texture, garment and USDZ measurements on Ubuntu and Windows. All 68 regression tests passed on Ubuntu, Windows and clean Windows Server installation. [S3-004 resource profile](S3-004_RESOURCE_PROFILE.md) records stage times, peak process RSS and logical disk usage. Target switching, project reopening and cleanup remain S3-005. Empirical tests remain `NOT_RUN`.
+
+## Stabilization candidate dispositions
+
+- **AUD-03** — Stabilization push/PR workflow coverage is configured and push execution is verified on the candidate. Direct manual dispatch requires the definition on the default branch.
+- **AUD-04 and AUD-09** — The two superseded workflow definitions were removed from stabilization. Its required foundation matrix uses platform-specific binary, hash-pinned locks for the shared CI path. The default-branch integration is tracked under S4-002.
+- **AUD-10** — Independent wheel builds for the candidate report a reproducible SHA-256 per platform. RC version assignment remains gated by release acceptance.
+
+See the [candidate record](STABILIZATION_CANDIDATE.md) for test results and remaining gates.
