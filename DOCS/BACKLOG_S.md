@@ -30,7 +30,7 @@
 | S2-006 | Resolve confirmed neutral geometry, rig rebinding and pose integration defects | DONE |
 | S2-007 | Resolve confirmed UV, texture and material integration defects | DONE |
 | S2-008 | Resolve confirmed garment geometry, skinning and collision-contract defects | DONE |
-| S2-009 | Resolve confirmed USDZ portability, pose and Blender import defects | TODO |
+| S2-009 | Resolve confirmed USDZ portability, pose and Blender import defects | IN_PROGRESS |
 | S2-010 | Verify observation/mask revision invalidation and stale artifact promotion (AUD-05) | TODO |
 
 ## S3 — Desktop stability and resources
