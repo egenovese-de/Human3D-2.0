@@ -10,7 +10,7 @@ from .alignment import Alignment, refine_views
 from .face import has_head_control
 from .frozen_body import deform_vertices, morph_controls
 from .native_rig import pose_transforms, rebind_joints, skin_vertices, validate_rebind
-from .proportions import length_controls
+from .proportions import forearm_ratio_penalty, length_controls
 from .regional_morphs import regional_controls
 
 
@@ -169,12 +169,15 @@ def _mean(scores, weights=None):
     return sum(value * weights[key] for key, value in scores.items()) / sum(weights[key] for key in scores)
 
 
-def _optimize(body, score, controls, supported, steps, *, weights=None):
-    best = score(deform_vertices(body, controls))
-    def objective(scores, values):
-        return _mean(scores, weights) - .0005 * sum(value ** 2 for value in values.values())
+def _optimize(body, score, controls, supported, steps, *, weights=None, measurement_penalty=None):
+    initial = deform_vertices(body, controls)
+    best = score(initial)
 
-    best_objective = objective(best, controls)
+    def objective(scores, values, vertices):
+        measurement_cost = measurement_penalty(vertices) if measurement_penalty is not None else 0.
+        return _mean(scores, weights) - .0005 * sum(value ** 2 for value in values.values()) - measurement_cost
+
+    best_objective = objective(best, controls, initial)
     for step in steps:
         for name in supported:
             center = controls.get(name, 0)
@@ -184,7 +187,7 @@ def _optimize(body, score, controls, supported, steps, *, weights=None):
                 candidate = controls | {name: value}
                 vertices = deform_vertices(body, candidate)
                 result = score(vertices)
-                candidate_objective = objective(result, candidate)
+                candidate_objective = objective(result, candidate, vertices)
                 if candidate_objective > best_objective + 1e-6:
                     try:
                         validate_rebind(body, vertices)
@@ -269,13 +272,14 @@ def fit_shared(body, evidence):
     scorer = _scorer(body, masks, alignments, neutral)
     baseline_scores = scorer(neutral)
     weights = _confidence_weights(evidence, masks)
+    measurement_penalty = forearm_ratio_penalty(body, evidence, masks)
     supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
     coarse = _scorer(body, masks, alignments, neutral, edge=128, evidence=evidence)
     objective = _scorer(body, masks, alignments, neutral, evidence=evidence)
-    seed, _ = _optimize(body, coarse, {}, supported, (0.25,), weights=weights)
+    seed, _ = _optimize(body, coarse, {}, supported, (0.25,), weights=weights, measurement_penalty=measurement_penalty)
     if _mean(scorer(deform_vertices(body, seed)), weights) < _mean(baseline_scores, weights):
         seed = {}
-    controls, _ = _optimize(body, objective, seed, supported, (0.25, 0.125), weights=weights)
+    controls, _ = _optimize(body, objective, seed, supported, (0.25, 0.125), weights=weights, measurement_penalty=measurement_penalty)
     vertices = deform_vertices(body, controls)
     best = _scorer(body, masks, alignments, vertices)(vertices)
     if _mean(best) < _mean(baseline_scores):
@@ -287,7 +291,7 @@ def fit_shared(body, evidence):
     refined, _ = refine_views(adjusted, evidence)
     if masks.keys() <= refined.keys():
         second = _scorer(body, masks, refined, vertices, evidence=evidence)
-        candidate, _ = _optimize(body, second, controls, supported, (0.125,), weights=weights)
+        candidate, _ = _optimize(body, second, controls, supported, (0.125,), weights=weights, measurement_penalty=measurement_penalty)
         revised = deform_vertices(body, candidate)
         scores = _scorer(body, masks, refined, revised)(revised)
         if _mean(scores) > _mean(best) + 1e-6:

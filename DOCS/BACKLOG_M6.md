@@ -13,12 +13,12 @@
 | M6.1-007 | Replay detector stress suite and validate review behavior | DONE |
 | M6.2-001 | Implement typed evidence v2 validation, provenance and uncertainty | DONE |
 | M6.2-002 | Implement v1 compatibility, offline fallback and project migration | DONE |
-| M6.2-003 | Implement supported quantitative evidence consumers and known-effect tests | TODO |
-| M6.2-004 | Implement confidence-aware regional fusion and conflict handling | TODO |
-| M6.2-005 | Validate independent landmark semantics, visibility and coordinate mapping | TODO |
-| M6.2-006 | Implement canonical bind-frame and cross-rig correspondence diagnostics | TODO |
-| M6.2-007 | Validate signed rotations, twist, spine, pelvis, wrists and feet | TODO |
-| M6.2-008 | Validate registered geometry transfer and canonical compatibility | TODO |
+| M6.2-003 | Implement supported quantitative evidence consumers and known-effect tests | DONE |
+| M6.2-004 | Implement confidence-aware regional fusion and conflict handling | DONE |
+| M6.2-005 | Validate independent landmark semantics, visibility and coordinate mapping | BLOCKED |
+| M6.2-006 | Implement canonical bind-frame and cross-rig correspondence diagnostics | DONE |
+| M6.2-007 | Validate signed rotations, twist, spine, pelvis, wrists and feet | BLOCKED |
+| M6.2-008 | Validate registered geometry transfer and canonical compatibility | DONE |
 | M6.3-001 | Establish fixed-geometry pose and camera baseline | TODO |
 | M6.3-002 | Improve landmark and limb direction confidence handling | TODO |
 | M6.3-003 | Improve depth and full joint rotation estimation using validated mapping | TODO |

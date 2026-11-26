@@ -75,3 +75,46 @@ class AnatomicalEvidenceV2Tests(unittest.TestCase):
         self.assertEqual(apply_visibility(native, replace(evidence, observations=(cap, conflict))), native)
         high = replace(cap, interval=(.95, 1.))
         self.assertEqual(apply_visibility(native, replace(evidence, observations=(high,))), native)
+
+    def test_arm_ratio_penalty_has_known_geometry_effect_and_conservative_fusion(self):
+        from types import SimpleNamespace
+
+        from human3d.proportions import forearm_ratio_penalty
+
+        def view(records):
+            supplied = AnatomicalEvidence(PHOTO_DIGEST, "fixture", "model", 0, schema_version=2,
+                                          observations=records)
+            return SimpleNamespace(candidate=0, detection=SimpleNamespace(anatomical=supplied),
+                                   ref=SimpleNamespace(photo_id="fixture"), observed_regions=("left_arm",))
+
+        def model(*photos):
+            return forearm_ratio_penalty(body, SimpleNamespace(views=photos, unresolved=()), {"fixture"})
+
+        bones = ("upperarm01.L", "lowerarm01.L", "wrist.L")
+        body = {"rig": {"bones": {bone: {"head": bone} for bone in bones},
+                        "joint_vertices": {bone: [i] for i, bone in enumerate(bones)}}}
+        field = replace(self.observation(), region="left_arm", definition="arm.forearm_to_upperarm@v1",
+                        interval=None, value=.75, visibility=.95, uncertainty=.01)
+        in_range = [[0, 0, 0], [0, 0, 2], [0, 0, 3.5]]
+        out_of_range = [[0, 0, 0], [0, 0, 2], [0, 0, 3.]]
+        penalty = model(view((field,)))
+        self.assertEqual(penalty(in_range), 0.)
+        self.assertGreater(penalty(out_of_range), 0.)
+        self.assertEqual(model(view((field, field)))(out_of_range), penalty(out_of_range))
+        self.assertIsNone(model(view((replace(field, visibility=.7),))))
+        self.assertIsNone(model(view((field,)), view((replace(field, value=1.1, source_family="other"),))))
+
+        from unittest.mock import patch
+
+        from human3d.fitting import _optimize
+
+        def deform(_body, controls):
+            length = 3. + 2 * controls.get("forearm_length", 0.)
+            return [[0, 0, 0], [0, 0, 2], [0, 0, length]]
+
+        with patch("human3d.fitting.deform_vertices", side_effect=deform), patch("human3d.fitting.validate_rebind"):
+            score = lambda _vertices: {"fixture": .9}
+            kwargs = dict(controls={}, supported=("forearm_length",), steps=(.25,))
+            self.assertEqual(_optimize(body, score, **kwargs)[0], {})
+            self.assertEqual(_optimize(body, score, **kwargs, measurement_penalty=penalty)[0],
+                             {"forearm_length": .25})
