@@ -41,6 +41,7 @@ class DependencyContractTests(unittest.TestCase):
         linux = pins(ROOT/"requirements-linux.lock", True)
         windows = pins(ROOT/"requirements-windows.lock", True)
         self.assertEqual(linux.keys(), windows.keys())
+        self.assertEqual(len(linux), 24)
         self.assertEqual({k for k in linux if linux[k] != windows[k]}, {"fonttools"})
 
     def test_installed_production_versions(self):
