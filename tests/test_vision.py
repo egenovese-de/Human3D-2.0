@@ -60,10 +60,10 @@ class SubjectEvidenceTests(unittest.TestCase):
 
             with patch("human3d.vision.MODEL_SHA256", sha256(b"fixture").hexdigest()):
                 detector = PoseLandmarker(model, segmentation=True)
-            with patch("human3d.vision.subprocess.run", return_value=CompletedProcess([], -6, "", "")):
+            with patch("human3d.vision.run_cancellable", return_value=CompletedProcess([], -6, "", "")):
                 with self.assertRaisesRegex(RuntimeError, "detector failed"):
                     detector.detect(photo, "photo")
-            with patch("human3d.vision.subprocess.run", side_effect=recover):
+            with patch("human3d.vision.run_cancellable", side_effect=recover):
                 self.assertEqual(detector.detect(photo, "photo"), immutable)
 
     def test_external_visibility_is_photo_bound_and_can_only_reduce_observation(self):
