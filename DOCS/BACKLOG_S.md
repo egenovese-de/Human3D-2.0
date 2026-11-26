@@ -25,7 +25,7 @@
 | S2-001 | Resolve confirmed image ingestion, orientation and coordinate mapping defects | DONE |
 | S2-002 | Resolve confirmed subject detection, segmentation and native failure recovery defects | DONE |
 | S2-003 | Trace provider wiring and evidence consumers; correct mandatory integration defects (AUD-01) | DONE |
-| S2-004 | Resolve confirmed camera, geometry and coordinate-contract defects | TODO |
+| S2-004 | Resolve confirmed camera, geometry and coordinate-contract defects | IN_PROGRESS |
 | S2-005 | Verify frozen-body integrity and correct post-freeze dependency violations | TODO |
 | S2-006 | Resolve confirmed neutral geometry, rig rebinding and pose integration defects | TODO |
 | S2-007 | Resolve confirmed UV, texture and material integration defects | TODO |
