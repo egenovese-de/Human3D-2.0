@@ -47,6 +47,8 @@ def _wrist_roll(axis, from_vector, to_vector):
 
 def pose_transforms(rig, joints, alignment):
     bones = rig["bones"]
+    if any(not np.isfinite(value) for value in alignment.limb_angles.values()) or any(not np.isfinite(value) for value in alignment.limb_depth_ratios.values()) or any(not np.isfinite(value).all() for value in alignment.wrist_cross_axes.values()):
+        raise ValueError("invalid_pose_parameters")
     transforms = {}
     yaw = radians(alignment.camera.yaw_degrees)
     axis = np.asarray((-sin(yaw), 0.0, cos(yaw)))
@@ -162,7 +164,8 @@ def validate_rebind(body, vertices):
 
 def validate_pose(body, neutral, posed):
     vertices = np.asarray(posed, dtype=float)
-    if vertices.shape != np.shape(neutral) or not np.isfinite(vertices).all():
+    neutral = np.asarray(neutral, dtype=float)
+    if vertices.shape != neutral.shape or not np.isfinite(neutral).all() or not np.isfinite(vertices).all():
         raise ValueError("invalid_posed_vertices")
     faces = [face["corners"] for face in body["mesh"]["faces"] if face["group"] == "body"]
     triangles = np.asarray([[face[0][0], face[i][0], face[i + 1][0]]
@@ -172,6 +175,8 @@ def validate_pose(body, neutral, posed):
         a, b, c = np.asarray(points)[triangles].transpose((1, 0, 2))
         return np.linalg.norm(np.cross(b - a, c - a), axis=1)
 
+    if not len(triangles):
+        raise ValueError("missing_body_topology")
     if np.any((areas(neutral) > 1e-10) & (areas(vertices) <= 1e-10)):
         raise ValueError("pose_collapsed_body_face")
 
