@@ -1,9 +1,9 @@
 name: Required checks
 on:
   push:
-    branches: [main, development/m1, development/m2, development/m3, development/m4, development/m5, development/stabilization]
+    branches: [main, development/m1, development/m2, development/m3, development/m4, development/m5, development/stabilization, development/m6]
   pull_request:
-    branches: [main, development/m1, development/m2, development/m3, development/m4, development/m5, development/stabilization]
+    branches: [main, development/m1, development/m2, development/m3, development/m4, development/m5, development/stabilization, development/m6]
   workflow_dispatch:
 permissions:
   contents: read
