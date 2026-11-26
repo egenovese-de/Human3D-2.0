@@ -62,15 +62,24 @@ class AuditProbes(unittest.TestCase):
             draft.paint((8,8),(24,24),2,add=True)
             session.apply_mask(draft)
             before = session.shared_evidence().dependency_digest
+            valid = session.coordinator.submit("preview")
+            session.coordinator.start(valid.id)
+            self.assertTrue(session.coordinator.finish(valid.id,"valid",lambda _: True))
             job = session.coordinator.submit("preview")
             session.coordinator.start(job.id)
             generation = session.coordinator.generation
             draft.paint((2,2),(5,5),1,add=True)
             session.apply_mask(draft)
             self.assertNotEqual(before, session.shared_evidence().dependency_digest)
-            self.assertEqual(generation, session.coordinator.generation)
-            self.assertTrue(session.coordinator.finish(job.id,"old",lambda _: True))
-            self.assertIn("preview",session.snapshot().current_artifacts)
+            self.assertGreater(session.coordinator.generation, generation)
+            self.assertFalse(session.coordinator.finish(job.id,"old",lambda _: True))
+            self.assertNotIn("preview",session.snapshot().current_artifacts)
+            self.assertIn("preview",session.snapshot().stale_artifacts)
+            self.assertIn("subject_mask",session.snapshot().current_artifacts)
+            self.assertEqual(session.coordinator.snapshot()[1]["preview"][1],"valid")
+            generation = session.coordinator.generation
+            session.apply_mask(draft)
+            self.assertEqual(generation,session.coordinator.generation)
 
     def test_aud06_retention(self):
         import tracemalloc
