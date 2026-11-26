@@ -150,51 +150,53 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
     with TemporaryDirectory(dir=destination.parent) as temporary:
         directory = Path(temporary)
         output = directory / ("body.usdc" if texture is not None else destination.name)
-        stage = Usd.Stage.CreateNew(str(output))
-        root = UsdSkel.Root.Define(stage, "/Human")
-        stage.SetDefaultPrim(root.GetPrim())
-        if ground:
-            body_vertices = sorted({index for face in faces for index, _ in face})
-            floor = infer_support_plane(rig, posed_body, body_vertices)
-            if floor is not None:
-                root.AddTranslateOp().Set(Gf.Vec3d(0, -floor, 0))
-                root.GetPrim().SetCustomDataByKey("supportPlaneY", floor)
-        UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.y)
-        UsdGeom.SetStageMetersPerUnit(stage, 0.1)
-        skeleton = UsdSkel.Skeleton.Define(stage, "/Human/Rig")
-        skeleton.CreateJointsAttr(paths)
-        skeleton.CreateBindTransformsAttr(Vt.Matrix4dArray([rest[name] for name in ordered]))
-        skeleton.CreateRestTransformsAttr(local(rest))
-        animation = UsdSkel.Animation.Define(stage, "/Human/Pose")
-        animation.CreateJointsAttr(paths)
-        pose = local(posed)
-        if not animation.SetTransforms(pose):
-            raise ValueError("default_pose_authoring_failed")
-        # Blender imports a constant authored animation when it spans two samples.
-        stage.SetStartTimeCode(1)
-        stage.SetEndTimeCode(2)
-        for frame in (1, 2):
-            if not animation.SetTransforms(pose, Usd.TimeCode(frame)):
-                raise ValueError("pose_sample_authoring_failed")
-        UsdSkel.BindingAPI.Apply(skeleton.GetPrim()).CreateAnimationSourceRel().SetTargets([animation.GetPath()])
-        mesh = _bind_mesh(stage, "/Human/Body", vertices, faces, mesh_data["texcoords"],
-                          rig["skin"], joint_indices, skeleton.GetPath())
-        if garments:
-            UsdGeom.Scope.Define(stage, "/Human/Garments")
-            UsdGeom.Scope.Define(stage, "/Human/GarmentMaterials")
-        for item in garments:
-            garment = item.garment
-            path = f"/Human/Garments/{garment.name}"
-            shell = _bind_mesh(stage, path, garment.points, garment.faces, garment.uv,
-                               garment.skin, joint_indices, skeleton.GetPath())
-            material_path = f"/Human/GarmentMaterials/{garment.name}"
-            _texture_material(stage, shell, item.texture, directory, 0.8,
-                              material_path=material_path, file_name=f"{garment.name}.png")
-        if garments:
-            stage.GetRootLayer().customLayerData = {"human3d_manifest": json.dumps(manifest, sort_keys=True)}
-        if texture is not None:
-            _texture_material(stage, mesh, texture, directory, roughness)
-        stage.GetRootLayer().Save()
+        def author_stage():
+            stage = Usd.Stage.CreateNew(str(output))
+            root = UsdSkel.Root.Define(stage, "/Human")
+            stage.SetDefaultPrim(root.GetPrim())
+            if ground:
+                body_vertices = sorted({index for face in faces for index, _ in face})
+                floor = infer_support_plane(rig, posed_body, body_vertices)
+                if floor is not None:
+                    root.AddTranslateOp().Set(Gf.Vec3d(0, -floor, 0))
+                    root.GetPrim().SetCustomDataByKey("supportPlaneY", floor)
+            UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.y)
+            UsdGeom.SetStageMetersPerUnit(stage, 0.1)
+            skeleton = UsdSkel.Skeleton.Define(stage, "/Human/Rig")
+            skeleton.CreateJointsAttr(paths)
+            skeleton.CreateBindTransformsAttr(Vt.Matrix4dArray([rest[name] for name in ordered]))
+            skeleton.CreateRestTransformsAttr(local(rest))
+            animation = UsdSkel.Animation.Define(stage, "/Human/Pose")
+            animation.CreateJointsAttr(paths)
+            pose = local(posed)
+            if not animation.SetTransforms(pose):
+                raise ValueError("default_pose_authoring_failed")
+            # Blender imports a constant authored animation when it spans two samples.
+            stage.SetStartTimeCode(1)
+            stage.SetEndTimeCode(2)
+            for frame in (1, 2):
+                if not animation.SetTransforms(pose, Usd.TimeCode(frame)):
+                    raise ValueError("pose_sample_authoring_failed")
+            UsdSkel.BindingAPI.Apply(skeleton.GetPrim()).CreateAnimationSourceRel().SetTargets([animation.GetPath()])
+            mesh = _bind_mesh(stage, "/Human/Body", vertices, faces, mesh_data["texcoords"],
+                              rig["skin"], joint_indices, skeleton.GetPath())
+            if garments:
+                UsdGeom.Scope.Define(stage, "/Human/Garments")
+                UsdGeom.Scope.Define(stage, "/Human/GarmentMaterials")
+            for item in garments:
+                garment = item.garment
+                path = f"/Human/Garments/{garment.name}"
+                shell = _bind_mesh(stage, path, garment.points, garment.faces, garment.uv,
+                                   garment.skin, joint_indices, skeleton.GetPath())
+                material_path = f"/Human/GarmentMaterials/{garment.name}"
+                _texture_material(stage, shell, item.texture, directory, 0.8,
+                                  material_path=material_path, file_name=f"{garment.name}.png")
+            if garments:
+                stage.GetRootLayer().customLayerData = {"human3d_manifest": json.dumps(manifest, sort_keys=True)}
+            if texture is not None:
+                _texture_material(stage, mesh, texture, directory, roughness)
+            stage.GetRootLayer().Save()
+        author_stage()
         if texture is not None:
             package = directory / destination.name
             if not UsdUtils.CreateNewUsdzPackage(Sdf.AssetPath(str(output)), str(package)):
@@ -207,31 +209,33 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
                 if (archive.testzip() is not None or len(names) != len(set(names))
                         or not expected <= {Path(name).name for name in names}):
                     raise ValueError("invalid_texture_package")
-        reopened = Usd.Stage.Open(str(output))
-        if not reopened:
-            raise ValueError("exported_stage_validation_failed")
-        reopened_pose = UsdSkel.Animation.Get(reopened, "/Human/Pose")
-        for frame in (1, 2):
-            actual = reopened_pose.GetTransforms(Usd.TimeCode(frame))
-            if len(actual) != len(pose) or any(not Gf.IsClose(a, b, 1e-5) for a, b in zip(actual, pose)):
-                raise ValueError("exported_pose_validation_failed")
-        cache = UsdSkel.Cache()
-        cache.Populate(UsdSkel.Root.Get(reopened, "/Human"), Usd.PrimDefaultPredicate)
-        if not cache.GetSkelQuery(UsdSkel.Skeleton.Get(reopened, "/Human/Rig")):
-            raise ValueError("exported_skeleton_validation_failed")
-        if not cache.GetSkinningQuery(reopened.GetPrimAtPath("/Human/Body")):
-            raise ValueError("exported_skin_validation_failed")
-        if texture is not None:
-            material, _ = UsdShade.MaterialBindingAPI(reopened.GetPrimAtPath("/Human/Body")).ComputeBoundMaterial()
-            texture_shader = UsdShade.Shader.Get(reopened, "/Human/Appearance/Albedo")
-            if not material or not texture_shader.GetInput("file").Get().resolvedPath:
-                raise ValueError("packaged_texture_validation_failed")
-        for record in manifest["garments"]:
-            prim = reopened.GetPrimAtPath(record["prim"])
-            if not cache.GetSkinningQuery(prim):
-                raise ValueError("exported_garment_skin_validation_failed")
-            material, _ = UsdShade.MaterialBindingAPI(prim).ComputeBoundMaterial()
-            shader = UsdShade.Shader.Get(reopened, material.GetPath().AppendChild("Albedo")) if material else None
-            if not shader or not shader.GetInput("file").Get().resolvedPath:
-                raise ValueError("exported_garment_material_validation_failed")
+        def validate_stage():
+            reopened = Usd.Stage.Open(str(output))
+            if not reopened:
+                raise ValueError("exported_stage_validation_failed")
+            reopened_pose = UsdSkel.Animation.Get(reopened, "/Human/Pose")
+            for frame in (1, 2):
+                actual = reopened_pose.GetTransforms(Usd.TimeCode(frame))
+                if len(actual) != len(pose) or any(not Gf.IsClose(a, b, 1e-5) for a, b in zip(actual, pose)):
+                    raise ValueError("exported_pose_validation_failed")
+            cache = UsdSkel.Cache()
+            cache.Populate(UsdSkel.Root.Get(reopened, "/Human"), Usd.PrimDefaultPredicate)
+            if not cache.GetSkelQuery(UsdSkel.Skeleton.Get(reopened, "/Human/Rig")):
+                raise ValueError("exported_skeleton_validation_failed")
+            if not cache.GetSkinningQuery(reopened.GetPrimAtPath("/Human/Body")):
+                raise ValueError("exported_skin_validation_failed")
+            if texture is not None:
+                material, _ = UsdShade.MaterialBindingAPI(reopened.GetPrimAtPath("/Human/Body")).ComputeBoundMaterial()
+                texture_shader = UsdShade.Shader.Get(reopened, "/Human/Appearance/Albedo")
+                if not material or not texture_shader.GetInput("file").Get().resolvedPath:
+                    raise ValueError("packaged_texture_validation_failed")
+            for record in manifest["garments"]:
+                prim = reopened.GetPrimAtPath(record["prim"])
+                if not cache.GetSkinningQuery(prim):
+                    raise ValueError("exported_garment_skin_validation_failed")
+                material, _ = UsdShade.MaterialBindingAPI(prim).ComputeBoundMaterial()
+                shader = UsdShade.Shader.Get(reopened, material.GetPath().AppendChild("Albedo")) if material else None
+                if not shader or not shader.GetInput("file").Get().resolvedPath:
+                    raise ValueError("exported_garment_material_validation_failed")
+        validate_stage()
         os.replace(output, destination)
