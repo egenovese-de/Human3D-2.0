@@ -7,7 +7,7 @@ import json
 from pxr import Gf, Sdf, Tf, Usd, UsdGeom, UsdShade, UsdSkel, UsdUtils, Vt
 
 from .frozen_body import deform_vertices
-from .native_rig import infer_support_plane, pose_transforms, skin_vertices, validate_rebind
+from .native_rig import infer_support_plane, pose_transforms, skin_vertices, validate_rebind, validate_pose
 from .garments import measure_clearance, posed_garment, verify_layers
 
 
@@ -104,8 +104,8 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
     joints = validate_rebind(body, vertices)
     transforms = pose_transforms(rig, joints, alignment)
     manifest = {"schema_version": 1, "garments": []}
-    if garments or ground:
-        posed_body = skin_vertices(vertices, rig["skin"], transforms)
+    posed_body = skin_vertices(vertices, rig["skin"], transforms)
+    validate_pose(body, vertices, posed_body)
     if garments:
         layer = verify_layers([item.garment for item in garments], body, posed_body, transforms)
         if layer is not None and layer.violations:
