@@ -6,7 +6,7 @@
 |---|---|---|
 | S0-001 | Complete pinned source, test, workflow and Lab evidence audit; record coverage gaps | DONE |
 | S0-002 | Reconcile AUD-01–AUD-10, reproduce candidate defects and assign evidence-based priorities | DONE |
-| S0-003 | Establish pinned M5 baseline, regression evidence and rollback reference | TODO |
+| S0-003 | Establish pinned M5 baseline, regression evidence and rollback reference | DONE |
 
 ## S1 — Dependencies, installation and security
 
