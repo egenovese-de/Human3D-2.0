@@ -40,6 +40,8 @@ class Session:
 
     def _sync(self, project):
         dependencies = {f"photo:{p.id}": p.digest for p in project.photos.photos if p.included}
+        if project.frozen_body_digest:
+            dependencies["frozen_body"] = project.frozen_body_digest
         if project.photos.target:
             dependencies["target"] = project.photos.target
         self.coordinator.invalidate(dependencies)
