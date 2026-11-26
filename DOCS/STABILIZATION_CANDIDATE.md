@@ -55,7 +55,7 @@ Application and Lab commands are documented in the [pinned M5 benchmark](https:/
 | [Windows Server 2022 hosted](https://github.com/egenovese-de/Human3D-2.0/actions/runs/45862046396/job/140055508436) | 69/69 regression tests PASS (10.063 s) |
 | Clean Windows Server 2022 candidate install | Installed the verified wheel into a fresh environment, ran native smoke and passed 69/69 tests (5.534 s) |
 | Clean Linux candidate install | Installed the verified wheel in a fresh environment and passed the complete offscreen synthetic GUI probe |
-| Windows 11 client | BLOCKED, strict probe requires a Windows 11 client |
+| [Windows 11 x64 client](S1-002_WINDOWS_INSTALL.md) | Strict clean source install and native smoke PASS, 69/69 regression tests (7.594 s), build 26300 |
 
 Both hosted platforms built two independent byte-identical copies of `human3d-0.1.0.dev0-py3-none-any.whl` within their platform. SHA-256 values at `SOURCE_DATE_EPOCH=1795711666` are:
 
@@ -73,6 +73,6 @@ See the [installation and troubleshooting guide](STABILIZATION_INSTALL.md) for t
 | Field | Status |
 |---|---|
 | Current status | RC1 readiness BLOCKED. The development candidate is available to build from the pinned revision. |
-| Test results | Automated synthetic and regression results above. Windows 11 client and empirical tests `NOT_RUN`. The four-view silhouette IoU of 75.669% is below the proposed 85% target. |
+| Test results | Automated synthetic and regression results above. Windows 11 client clean install PASS. Empirical tests `NOT_RUN`. The four-view silhouette IoU of 75.669% is below the proposed 85% target. |
 | Application commit | `67455b36e4d586eae2d347c1f9e1a240a2e61ea0` |
-| Next task | Run the strict clean install on an actual Windows 11 x64 client and capture the JSON report. Review the empirical and quality gates before assigning `2.0.0rc1` or publishing release artifacts. |
+| Next task | Review the empirical and quality gates before assigning `2.0.0rc1` or publishing release artifacts. |
