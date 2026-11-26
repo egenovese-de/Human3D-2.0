@@ -203,6 +203,9 @@ class Session:
             with self._lock:
                 current = self.store.load()
                 self._sync(current)
+                cancel = getattr(detector, "cancel_event", None)
+                if cancel is not None and cancel.is_set() is True:
+                    self.coordinator.cancel(job.id)
 
                 def publish():
                     digest = self.observations.write_detection(evidence)
@@ -221,6 +224,9 @@ class Session:
                 if promoted:
                     self._sync(self.store.load(), retain_kind=kind)
         except Exception:
+            cancel = getattr(detector, "cancel_event", None)
+            if cancel is not None and cancel.is_set() is True:
+                self.coordinator.cancel(job.id)
             self.coordinator.fail(job.id, "subject_detection_failed")
             raise
         return evidence if promoted else None
