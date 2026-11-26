@@ -6,9 +6,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
-from PySide6.QtCore import QTimer, Qt
+from PySide6.QtCore import QCoreApplication, QEvent, QTimer, Qt
 from PySide6.QtTest import QTest
-from PySide6.QtWidgets import QApplication, QFileDialog, QMessageBox, QPushButton
+from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QMessageBox, QPushButton
 from pxr import Usd
 
 from human3d import __version__
@@ -83,6 +83,8 @@ def main():
                        "Assemble garments", "Open project"):
             click(window.actions[action])
             assert not errors, errors
+            QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
+            assert not window.findChildren(QDialog), action
             print(f"GUI PASS {action}", flush=True)
         saved = window.store.load()
         assert len(saved.photos.photos) == len(args.photos)
@@ -97,7 +99,7 @@ def main():
             stage = Usd.Stage.Open(str(export))
             assert stage and stage.GetDefaultPrim()
             if export.name == "outfit.usdz":
-                assert stage.GetPrimAtPath("/Human/Garments/top")
+                assert stage.GetPrimAtPath("/Human/Garments/top_base").GetTypeName() == "Mesh"
             del stage
         print("CANDIDATE_GUI " + json.dumps({
             "status": "PASS", "version": __version__, "photos": len(args.photos),

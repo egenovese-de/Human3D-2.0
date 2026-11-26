@@ -164,6 +164,7 @@ class GarmentDialog(QDialog):
         try:
             preview.exec()
         finally:
+            preview.deleteLater()
             QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
 
     def export_current(self):

@@ -17,6 +17,13 @@ from .anatomical_evidence import EvidenceAdapter
 from .frozen_body import load_project_body
 
 
+def run_modal(dialog):
+    try:
+        return dialog.exec()
+    finally:
+        dialog.deleteLater()
+
+
 class PhotosWindow(QWidget):
     def __init__(self, *, evidence_provider=None):
         super().__init__()
@@ -374,7 +381,7 @@ class PhotosWindow(QWidget):
                     if self.store.load() == project:
                         self.pose_correction = (project.id, project.revision, fit[1], alignment)
 
-                BodyPreview(*fit, parent=self, on_pose_applied=save_pose).exec()
+                run_modal(BodyPreview(*fit, parent=self, on_pose_applied=save_pose))
 
         self.guarded(inspect)
 
@@ -420,7 +427,7 @@ class PhotosWindow(QWidget):
                 self.run_worker(lambda: export_body(Path(destination), body, fit, target_alignment, texture=color, garments=garments, ground=True))
                 self.status.setText("Body and independent garments exported with their shared rig.")
 
-        GarmentDialog(body, fit, views, target, export, parent=self, worker=self.run_worker).exec()
+        run_modal(GarmentDialog(body, fit, views, target, export, parent=self, worker=self.run_worker))
 
     def inspect_appearance(self):
         from .appearance_dialog import AppearanceDialog
@@ -449,7 +456,7 @@ class PhotosWindow(QWidget):
 
             self.guarded(save)
 
-        AppearanceDialog(atlas, export, parent=self).exec()
+        run_modal(AppearanceDialog(atlas, export, parent=self))
 
     def export_fitted_body(self):
         self.guarded(self.choose_export_destination)
@@ -522,7 +529,8 @@ class PhotosWindow(QWidget):
             self.fitted_preview = None
 
         _, correction = self.session.read_observation(self.store.load().photos.target)
-        if MaskDialog(photo, evidence, apply, self, body=body, fit=fit, correction=correction).exec():
+        dialog = MaskDialog(photo, evidence, apply, self, body=body, fit=fit, correction=correction)
+        if run_modal(dialog):
             self.status.setText("Subject mask saved to the project.")
         elif self.fitted_preview is not None:
             self.status.setText("Fitted body ready for inspection or USD export.")
