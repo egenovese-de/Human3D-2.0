@@ -118,8 +118,8 @@ def export_body(destination: Path, body, fit, alignment, *, texture=None, roughn
     validate_pose(body, vertices, posed_body)
     if garments:
         layer = verify_layers([item.garment for item in garments], body, posed_body, transforms)
-        if layer is not None and layer.violations:
-            raise ValueError("The garment layers do not have sufficient sampled clearance.")
+        if layer is not None and layer.blocked:
+            raise ValueError(layer.describe())
         for item in garments:
             garment = item.garment
             posed_shell = posed_garment(garment, transforms)

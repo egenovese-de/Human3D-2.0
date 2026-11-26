@@ -262,6 +262,34 @@ def correct_clearance(garment, body, posed_body, transforms):
     return best, best_report
 
 
+
+@dataclass(frozen=True)
+class LayerClearanceReport:
+    sampled: ClearanceReport | None
+    pairs: tuple[tuple[str, str, GarmentContactReport], ...]
+
+    @property
+    def violations(self):
+        return self.sampled.violations if self.sampled is not None else 0
+
+    @property
+    def minimum(self):
+        return self.sampled.minimum if self.sampled is not None else None
+
+    @property
+    def blocked(self):
+        return bool(self.violations or
+                    any(report.intersections for _, _, report in self.pairs))
+
+    def describe(self):
+        messages = []
+        if self.sampled and self.sampled.violations:
+            messages.append(f"{self.sampled.violations} layer clearance samples failed.")
+        messages.extend(f"{base} and {cover}. {report.describe()}"
+                        for base, cover, report in self.pairs if report.intersections)
+        return " ".join(messages)
+
+
 def verify_layers(garments, body, posed_body, transforms):
     """Validate supported combinations and corresponding overlap clearance."""
     for garment in garments:
@@ -276,10 +304,19 @@ def verify_layers(garments, body, posed_body, transforms):
     lower = next((garment for garment in garments if garment.category in ("shorts", "trousers")), None)
     if outer is not None and inner is None:
         raise ValueError("outer_top_requires_base_top")
+    if len(garments) < 2:
+        return None
     normals = _normals(np.asarray(posed_body), _body_faces(body))
     gaps = []
+    layer_contacts = []
+    posed_shells = {g.name: posed_garment(g, transforms) for g in garments}
 
     def check_pair(base, cover, *, require_overlap=False):
+        base_faces, cover_faces = _triangulate(base.faces), _triangulate(cover.faces)
+        a, b = posed_shells[base.name], posed_shells[cover.name]
+        neutral = triangle_contacts(base.points[base_faces], cover.points[cover_faces])
+        posed = triangle_contacts(a[base_faces], b[cover_faces])
+        layer_contacts.append((base.name, cover.name, GarmentContactReport(neutral, posed)))
         positions = {source: index for index, source in enumerate(base.body_indices)}
         shared = [(index, source) for index, source in enumerate(cover.body_indices) if source in positions]
         if not shared:
@@ -292,7 +329,6 @@ def verify_layers(garments, body, posed_body, transforms):
 
             if not source_faces(base) & source_faces(cover):
                 return
-        a, b = posed_garment(base, transforms), posed_garment(cover, transforms)
         gaps.extend(float((b[index] - a[positions[source]]) @ normals[source]) for index, source in shared)
 
     if outer is not None:
@@ -301,6 +337,8 @@ def verify_layers(garments, body, posed_body, transforms):
         for top in (inner, outer):
             if top is not None:
                 check_pair(lower, top)
-    if not gaps:
+    if not layer_contacts:
         return None
-    return ClearanceReport(sum(gap < LAYER_CLEARANCE - TOLERANCE for gap in gaps), min(gaps))
+    sampled = ClearanceReport(sum(gap < LAYER_CLEARANCE - TOLERANCE for gap in gaps),
+                              min(gaps)) if gaps else None
+    return LayerClearanceReport(sampled, tuple(layer_contacts))

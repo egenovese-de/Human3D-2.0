@@ -39,3 +39,22 @@ class GarmentContract(unittest.TestCase):
         self.assertEqual(result.posed.crossing, 1)
         self.assertEqual(result.intersections, 1)
         self.assertIn("Posed: 1 crossing", result.describe())
+
+    def test_layer_intersections_and_separated_control(self):
+        points = np.array([[0., 0., 0.], [2., 0., 0.], [0., 2., 0.]])
+        face = ((0, 0), (1, 1), (2, 2))
+        body = {"mesh": {"vertices": points, "faces": [{"group": "body", "corners": face}]},
+                "rig": {"bones": {"root": {}}}}
+        base = Garment("top_base", "top", 0, points + [0, 0, .06], (face,),
+                       ((0, 0), (1, 0), (0, 1)), ({"root": 1.},) * 3, (0, 1, 2), .06)
+        outer = replace(base, name="top_outer", layer=1, points=points + [0, 0, .13])
+        transforms = {"root": (np.eye(3), np.zeros(3))}
+        clear = verify_layers([base, outer], body, points, transforms)
+        self.assertFalse(clear.blocked)
+
+        invalid = replace(outer, points=np.array([[.5, .5, -1], [.5, .5, 1], [.5, 1.5, 1]]))
+        colliding = verify_layers([base, invalid], body, points, transforms)
+        self.assertTrue(colliding.blocked)
+        self.assertEqual(colliding.pairs[0][2].neutral.crossing, 1)
+        self.assertEqual(colliding.pairs[0][2].posed.crossing, 1)
+        self.assertIn("top_base and top_outer", colliding.describe())

@@ -183,8 +183,8 @@ class GarmentDialog(QDialog):
         joints = validate_rebind(self.body, neutral)
         transforms = pose_transforms(rig, joints, view.alignment)
         layer = verify_layers(garments, self.body, skin_vertices(neutral, rig["skin"], transforms), transforms)
-        if layer is not None and layer.violations:
-            raise ValueError(f"{layer.violations} layer clearance samples failed. Adjust ease and retry.")
+        if layer is not None and layer.blocked:
+            raise ValueError(f"{layer.describe()} Adjust ease and retry.")
 
         assets = []
         for result in fitted:
