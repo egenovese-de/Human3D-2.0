@@ -1,0 +1,114 @@
+{
+  "product_sha": "be51758a8d359fbd13a296f3a4763f8c6b6815bd",
+  "lab_sha": "1a5899132c5c7a12be437ce3c601b216f2a66635",
+  "cases": [
+    {
+      "identity": "f_af01",
+      "garments": [
+        "top_base",
+        "top_outer"
+      ],
+      "benchmark_sha256": "63b1d40b06a2f317ab66eef65684bc4063f20ce22b97d83d7832599d2083493a",
+      "seconds": 1.011153285999967,
+      "sampled_violations": 0,
+      "blocked": true,
+      "contacts": [
+        {
+          "inner": "top_base",
+          "outer": "top_outer",
+          "neutral": {
+            "crossing": 26,
+            "coplanar_overlap": 0,
+            "touching": 4
+          },
+          "posed": {
+            "crossing": 26,
+            "coplanar_overlap": 0,
+            "touching": 4
+          }
+        }
+      ]
+    },
+    {
+      "identity": "f_af01",
+      "garments": [
+        "top_base",
+        "shorts_base"
+      ],
+      "benchmark_sha256": "63b1d40b06a2f317ab66eef65684bc4063f20ce22b97d83d7832599d2083493a",
+      "seconds": 0.6371329229999674,
+      "sampled_violations": 0,
+      "blocked": false,
+      "contacts": [
+        {
+          "inner": "shorts_base",
+          "outer": "top_base",
+          "neutral": {
+            "crossing": 0,
+            "coplanar_overlap": 0,
+            "touching": 148
+          },
+          "posed": {
+            "crossing": 0,
+            "coplanar_overlap": 0,
+            "touching": 148
+          }
+        }
+      ]
+    },
+    {
+      "identity": "m_la01",
+      "garments": [
+        "top_base",
+        "top_outer"
+      ],
+      "benchmark_sha256": "1ed4e44925005bb9b0450b6c5c4148b3880745800b79cca6cb93dd9b67191b8a",
+      "seconds": 0.9935013580000032,
+      "sampled_violations": 0,
+      "blocked": true,
+      "contacts": [
+        {
+          "inner": "top_base",
+          "outer": "top_outer",
+          "neutral": {
+            "crossing": 26,
+            "coplanar_overlap": 0,
+            "touching": 4
+          },
+          "posed": {
+            "crossing": 26,
+            "coplanar_overlap": 0,
+            "touching": 4
+          }
+        }
+      ]
+    },
+    {
+      "identity": "m_la01",
+      "garments": [
+        "top_base",
+        "shorts_base"
+      ],
+      "benchmark_sha256": "1ed4e44925005bb9b0450b6c5c4148b3880745800b79cca6cb93dd9b67191b8a",
+      "seconds": 0.6525934270000562,
+      "sampled_violations": 0,
+      "blocked": false,
+      "contacts": [
+        {
+          "inner": "shorts_base",
+          "outer": "top_base",
+          "neutral": {
+            "crossing": 0,
+            "coplanar_overlap": 0,
+            "touching": 148
+          },
+          "posed": {
+            "crossing": 0,
+            "coplanar_overlap": 0,
+            "touching": 148
+          }
+        }
+      ]
+    }
+  ]
+}

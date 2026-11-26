@@ -1,0 +1,54 @@
+{
+  "product_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "lab_sha": "1a5899132c5c7a12be437ce3c601b216f2a66635",
+  "cases": [
+    {
+      "identity": "f_af01",
+      "garments": [
+        "top_base",
+        "top_outer"
+      ],
+      "benchmark_sha256": "63b1d40b06a2f317ab66eef65684bc4063f20ce22b97d83d7832599d2083493a",
+      "seconds": 0.546649724999952,
+      "sampled_violations": 0,
+      "blocked": false,
+      "contacts": []
+    },
+    {
+      "identity": "f_af01",
+      "garments": [
+        "top_base",
+        "shorts_base"
+      ],
+      "benchmark_sha256": "63b1d40b06a2f317ab66eef65684bc4063f20ce22b97d83d7832599d2083493a",
+      "seconds": 0.5440498699999807,
+      "sampled_violations": null,
+      "blocked": false,
+      "contacts": []
+    },
+    {
+      "identity": "m_la01",
+      "garments": [
+        "top_base",
+        "top_outer"
+      ],
+      "benchmark_sha256": "1ed4e44925005bb9b0450b6c5c4148b3880745800b79cca6cb93dd9b67191b8a",
+      "seconds": 0.5467723390000856,
+      "sampled_violations": 0,
+      "blocked": false,
+      "contacts": []
+    },
+    {
+      "identity": "m_la01",
+      "garments": [
+        "top_base",
+        "shorts_base"
+      ],
+      "benchmark_sha256": "1ed4e44925005bb9b0450b6c5c4148b3880745800b79cca6cb93dd9b67191b8a",
+      "seconds": 0.5501862869999741,
+      "sampled_violations": null,
+      "blocked": false,
+      "contacts": []
+    }
+  ]
+}
