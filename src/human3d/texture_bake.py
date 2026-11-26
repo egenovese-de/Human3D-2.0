@@ -16,6 +16,7 @@ class Atlas:
     coverage: Image.Image
     skin_candidate: Image.Image
     observed_fraction: float
+    hair_candidate: Image.Image | None = None
 
 
 def _samples(triangle, width, height):
@@ -142,6 +143,7 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     color_sum = np.zeros((size, size, 3))
     weights = np.zeros((size, size))
     skin_sum = np.zeros_like(weights)
+    hair_sum = np.zeros_like(weights)
     target_view, _ = views[target]
     if not target_view.foreground.any():
         raise ValueError("appearance_target_has_no_foreground")
@@ -157,8 +159,20 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
         projected, depth, z_buffer, facing = _project_view(view, neutral, joints, rig, geometry, image_size, occluder=occluder)
         intensity = np.median(view.rgb[view.foreground].mean(axis=1))
         gain = 1.0 if key == target else np.clip(target_light / max(intensity, 1), 0.7, 1.4)
+        blocked = set()
+        if view.hidden_regions:
+            prefixes = {"left_arm": ("upperarm", "lowerarm", "wrist", "finger"),
+                        "right_arm": ("upperarm", "lowerarm", "wrist", "finger"),
+                        "left_leg": ("upperleg", "lowerleg", "foot", "toe"),
+                        "right_leg": ("upperleg", "lowerleg", "foot", "toe")}
+            blocked_bones = {bone for region in view.hidden_regions if region in prefixes
+                             for bone in rig["bones"] if bone.startswith(prefixes[region])
+                             and bone.endswith(".L" if region.startswith("left") else ".R")}
+            if blocked_bones:
+                blocked = {i for i, influences in enumerate(rig["skin"])
+                           if sum(influences.get(bone, 0) for bone in blocked_bones) > .7}
         for index, sample in enumerate(atlas_pixels):
-            if sample is None or facing[index] < 0.12:
+            if sample is None or facing[index] < 0.12 or (blocked and all(i in blocked for i in geometry[index])):
                 continue
             x, y, bary = sample
             points = np.rint(bary @ projected[geometry[index]]).astype(int)
@@ -177,6 +191,8 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
             view_colors[b, a] += weight[:, None] * view.rgb[v, u]
             view_weights[b, a] += weight
             skin_sum[b, a] += weight * view.skin_candidate[v, u]
+            if garment is None and view.hair_candidate is not None:
+                hair_sum[b, a] += weight * view.hair_candidate[v, u]
         if key == target:
             target_colors, target_weights = view_colors, view_weights
         else:
@@ -203,8 +219,9 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     coverage[observed] = 255
     skin = np.zeros_like(coverage)
     skin[observed & (skin_sum > 0.75 * weights)] = 255
+    hair = (observed & (hair_sum > .75 * weights)).astype(np.uint8) * 255
     return Atlas(Image.fromarray(color), Image.fromarray(coverage), Image.fromarray(skin),
-                 np.count_nonzero(observed) / max(1, np.count_nonzero(domain)))
+                 np.count_nonzero(observed) / max(1, np.count_nonzero(domain)), Image.fromarray(hair))
 
 def neutralize_covered_body_color(body, atlas, garments):
     """Neutralize baked clothing color under covered body UV islands."""

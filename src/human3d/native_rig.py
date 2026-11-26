@@ -190,4 +190,4 @@ def infer_support_plane(rig, posed, body_vertices):
     # A lower hand or knee indicates a different support configuration.
     if floor - float(points[body_vertices, 1].min()) > .005 * height:
         return None
-    return floor
+    return min(floor, float(points[body_vertices, 1].min()))

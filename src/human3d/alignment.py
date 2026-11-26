@@ -96,15 +96,28 @@ def initialize_alignment(body: dict, evidence: SubjectEvidence, candidate: int, 
     angles = {}
     depths = {}
     for name, (first, last) in LIMBS.items():
-        if name in rig["bones"] and pose[first].observed and pose[last].observed:
-            direction = observed[last] - observed[first]
-            if abs(direction) > 1:
-                angles[name] = atan2(direction.imag, direction.real)
-                if len(world) == 33:
-                    dx, dy, dz = (b - a for a, b in zip(world[first], world[last]))
-                    lateral = hypot(dx, dy)
-                    if lateral > 1e-4 and all(map(isfinite, (dx, dy, dz))):
-                        depths[name] = max(-2.0, min(2.0, -dz / lateral))
+        if name not in rig["bones"] or not pose[first].observed:
+            continue
+        if name.startswith("wrist."):
+            fingers = (17, 19, 21) if name.endswith(".L") else (18, 20, 22)
+            endpoints = [index for index in fingers if pose[index].observed]
+            if len(endpoints) < 2:
+                endpoints = [last] if pose[last].observed else []
+        else:
+            endpoints = [last] if pose[last].observed else []
+        if not endpoints:
+            continue
+        direction = sum(observed[index] for index in endpoints) / len(endpoints) - observed[first]
+        if abs(direction) <= 1:
+            continue
+        angles[name] = atan2(direction.imag, direction.real)
+        if len(world) != 33:
+            continue
+        dx, dy, dz = (sum(world[index][axis] for index in endpoints) / len(endpoints) - world[first][axis]
+                      for axis in range(3))
+        if all(map(isfinite, (dx, dy, dz))) and hypot(hypot(dx, dy), dz) > .01:
+            lateral = hypot(dx, dy)
+            depths[name] = max(-4.0, min(4.0, -dz / max(lateral, .005)))
     return Alignment(best[1], best[0], angles, depths)
 
 def refine_views(body, evidence):

@@ -5,6 +5,17 @@ from human3d.vision import Landmark, SubjectEvidence
 
 
 class SubjectEvidenceTests(unittest.TestCase):
+    def test_unsupported_torso_form_does_not_reject_cropped_limbs(self):
+        from human3d.vision import _unsupported_torso_form
+
+        pose = [Landmark(.5, .5, .3, .9)] * 33
+        self.assertTrue(_unsupported_torso_form(pose))
+        cropped = pose.copy()
+        cropped[27] = Landmark(.5, 1.05, .3, .9)
+        self.assertFalse(_unsupported_torso_form(cropped))
+        pose[15] = Landmark(.5, .5, .95, .95)
+        self.assertFalse(_unsupported_torso_form(pose))
+
     def test_native_worker_failure_does_not_poison_detector_retry(self):
         from hashlib import sha256
         from pathlib import Path

@@ -107,6 +107,14 @@ class SubjectEvidence:
         return None
 
 
+def _unsupported_torso_form(pose):
+    if len(pose) != 33:
+        return False
+    distal = [pose[index] for index in (13, 14, 15, 16, 25, 26, 27, 28)]
+    return all(.02 < point.x < .98 and .02 < point.y < .98 and point.visibility is not None
+               and point.visibility < .7 for point in distal)
+
+
 class PoseLandmarker:
     """Run native inference in a disposable process before publishing evidence."""
 
@@ -189,6 +197,14 @@ class _NativePoseLandmarker:
                 )
         world = tuple(tuple((point.x, point.y, point.z) for point in pose)
                       for pose in result.pose_world_landmarks)
+        if self._segmentation:
+            # An in-frame torso with no reliable distal evidence is typical of
+            # torso forms. Retain cropped candidates and surviving alternatives.
+            retained = tuple(index for index, pose in enumerate(candidates)
+                             if not _unsupported_torso_form(pose))
+            candidates = tuple(candidates[index] for index in retained)
+            masks = tuple(masks[index] for index in retained)
+            world = tuple(world[index] for index in retained) if len(world) == len(result.pose_landmarks) else ()
         return SubjectEvidence(photo_digest, MODEL_SHA256, original_size, candidates, masks, world)
 
     @staticmethod

@@ -14,6 +14,8 @@ class AppearanceView:
     foreground: np.ndarray
     skin_candidate: np.ndarray
     alignment: object
+    hair_candidate: np.ndarray | None = None
+    hidden_regions: frozenset[str] = frozenset()
 
 
 def prepare_view(originals: OriginalStore, view, alignment, *, limit=640):
@@ -47,4 +49,16 @@ def prepare_view(originals: OriginalStore, view, alignment, *, limit=640):
         reference = np.median(samples, axis=0)
         if np.max(np.linalg.norm(np.asarray(samples) - reference, axis=1)) <= 0.11:
             skin = foreground & (max_channel >= 36) & (np.linalg.norm(chroma - reference, axis=2) < 0.07)
-    return AppearanceView(rgb, foreground, skin, alignment)
+    hair = np.zeros_like(foreground)
+    if skin.any() and pose[2].observed and pose[5].observed:
+        eye_x = (pose[2].x + pose[5].x) * photo.width / 2
+        eye_y = (pose[2].y + pose[5].y) * photo.height / 2
+        eye_span = abs(pose[2].x - pose[5].x) * photo.width
+        y, x = np.ogrid[:photo.height, :photo.width]
+        scalp = (abs(x - eye_x) <= 1.25 * eye_span) & (y <= eye_y) & (y >= eye_y - 2 * eye_span)
+        skin_light = np.median(rgb[skin].mean(axis=1))
+        hair = foreground & ~skin & scalp & (rgb.mean(axis=2) < .70 * skin_light)
+    external = view.detection.anatomical
+    hidden = frozenset(item.region for item in external.regions if not item.visible and item.confidence >= .8
+                       and external.candidate == view.candidate) if external else frozenset()
+    return AppearanceView(rgb, foreground, skin, alignment, hair, hidden)

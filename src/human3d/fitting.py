@@ -4,6 +4,7 @@ from io import BytesIO
 
 import numpy as np
 from PIL import Image, ImageDraw
+from scipy.ndimage import distance_transform_edt
 
 from .alignment import Alignment, refine_views
 from .face import has_head_control
@@ -54,11 +55,14 @@ def _region_weights(view, size):
     return weights
 
 
-def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=None):
+def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=None, carve=False):
     mesh, rig = body["mesh"], body["rig"]
     faces = [tuple(index for index, _ in face["corners"])
              for face in mesh["faces"] if face["group"] == "body"]
     joints = rebind_joints(rig, reference_vertices)
+    # A canonical sample should lie inside the volume carved by each
+    # silhouette after applying that view's pose. Use face vertices only.
+    hull_samples = np.unique([index for face in faces for index in face])[::8]
     views = {}
     observed_views = {view.ref.photo_id: view for view in evidence.views} if evidence else {}
     for key, mask in masks.items():
@@ -70,11 +74,12 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
         if not observed.any() or observed.all():
             raise ValueError("insufficient_silhouette_at_fit_resolution")
         regional = _region_weights(observed_views[key], size) if key in observed_views else None
-        views[key] = (scale, size, observed, pose_transforms(rig, joints, alignment), alignment.camera, regional)
+        outside = distance_transform_edt(~observed) if (carve or regional is not None) and len(masks) >= 2 else None
+        views[key] = (scale, size, observed, pose_transforms(rig, joints, alignment), alignment.camera, regional, outside)
 
     def score(vertices):
         scores = {}
-        for key, (scale, size, observed, transforms, camera, regional) in views.items():
+        for key, (scale, size, observed, transforms, camera, regional, outside) in views.items():
             posed = skin_vertices(vertices, rig["skin"], transforms)
             points = [camera.project(vertex) * scale for vertex in posed]
             output = Image.new("1", size)
@@ -87,6 +92,13 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
                 scores[key] = np.count_nonzero(overlap) / np.count_nonzero(union)
             else:
                 scores[key] = regional[overlap].sum() / regional[union].sum()
+            if outside is not None and len(hull_samples):
+                sampled = np.asarray(points)[hull_samples]
+                x, y = np.rint(sampled.real).astype(int), np.rint(sampled.imag).astype(int)
+                inside_image = (x >= 0) & (x < size[0]) & (y >= 0) & (y < size[1])
+                if inside_image.any():
+                    distance = outside[y[inside_image], x[inside_image]]
+                    scores[key] -= .15 * np.clip(distance / (.03 * max(size)), 0, 1).mean()
         return scores
 
     return score

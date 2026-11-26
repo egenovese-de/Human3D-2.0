@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import numpy as np
 from PIL import Image, ImageDraw
-from scipy.ndimage import binary_dilation
+from scipy.ndimage import binary_dilation, label
 
 from .garments import correct_clearance, posed_garment, prototype
 from .native_rig import pose_transforms, skin_vertices, validate_rebind
@@ -42,6 +42,13 @@ def fit_garment(body, fit, view, image_size, category, *, ease_mm=0, hem=0, laye
     envelope = _project(initial, posed_garment(initial, transforms), camera, image_size, size)
     roi = binary_dilation(envelope, iterations=max(3, size[0] // 90))
     coverage = view.foreground & roi & ~view.skin_candidate
+    if view.hair_candidate is not None:
+        coverage &= ~view.hair_candidate
+    # Disconnected color islands in the expanded search band cannot anchor a
+    # supported shell. Keep components that actually meet its projection.
+    components, _ = label(coverage)
+    anchored = np.unique(components[envelope & coverage])
+    coverage &= np.isin(components, anchored)
     if np.count_nonzero(coverage) < 25:
         raise ValueError("Garment coverage is too small. Review the subject mask and alignment.")
 
