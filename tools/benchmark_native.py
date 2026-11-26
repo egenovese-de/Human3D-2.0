@@ -127,6 +127,9 @@ def main():
         export_body(args.output / "native.usdc", body, shared.fit, alignment, ground=args.ground)
         atlas = bake_atlas(body, shared.fit.controls, views, target)
         report["observed_uv_fraction"] = atlas.observed_fraction
+        atlas.skin_candidate.save(args.output / "body-skin-uv.png")
+        atlas.hair_candidate.save(args.output / "hair-candidate-uv.png")
+        report["hair_candidate_texels"] = int(np.count_nonzero(np.asarray(atlas.hair_candidate)))
         export_body(args.output / "native.usdz", body, shared.fit, alignment, texture=atlas.color, ground=args.ground)
         if args.garment:
             view, size = views[target]
@@ -135,6 +138,7 @@ def main():
                 regional = replace(view, foreground=np.asarray(garment.coverage) > 0)
                 baked = bake_atlas(body, shared.fit.controls, {target: (regional, size)},
                                    target, size=256, garment=garment.garment)
+                garment.coverage.save(args.output / "garment-coverage.png")
                 shell = GarmentAsset(garment.garment, baked.color, baked.observed_fraction)
                 body_color = neutralize_covered_body_color(body, atlas.color, [garment.garment])
                 export_body(args.output / "garment.usdz", body, shared.fit, alignment,

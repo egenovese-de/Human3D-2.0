@@ -76,6 +76,7 @@ def main():
     for name in ("product", "assets", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--regional", action="store_true")
+    parser.add_argument("--carve", action="store_true")
     args = parser.parse_args()
     product_sha = revision(args.product)
     lab_sha = revision(Path(__file__).parents[1])
@@ -110,7 +111,7 @@ def main():
     noisy = {key: Alignment(Camera(camera.yaw_degrees + 12, camera.similarity * .94,
                                    camera.origin + (6 - 4j), 1), 0, {})
              for key, camera in cameras.items() if key in masks}
-    score = _scorer(body, masks, alignments, neutral)
+    score = _scorer(body, masks, alignments, neutral, carve=args.carve)
     available = tuple(morph_controls(body))
     if args.regional:
         available += regional_controls(body)
@@ -119,7 +120,7 @@ def main():
     configurations = {"baseline": (neutral, noisy), "camera_only": (neutral, alignments),
                       "geometry_only": (fitted, noisy), "camera_and_geometry": (fitted, alignments)}
     report = {"product_sha": product_sha, "lab_sha": lab_sha, "frozen_sha256": frozen,
-              "truth_controls": truth_controls, "fitted_controls": controls,
+              "visual_hull_objective": args.carve, "truth_controls": truth_controls, "fitted_controls": controls,
               "vertex_rmse_mm": float(100 * np.sqrt(np.mean(np.sum(
                   (np.asarray(fitted) - np.asarray(truth)) ** 2, axis=1)))),
               "held_out_view": "held_out", "training_views": list(masks), "views": {}}
