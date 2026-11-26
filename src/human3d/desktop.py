@@ -12,12 +12,14 @@ from .ingestion import folder_inputs
 from .thumbnails import thumbnail
 from .mask_dialog import MaskDialog
 from .vision import PoseLandmarker
+from .anatomical_evidence import EvidenceAdapter
 from .frozen_body import load_project_body
 
 
 class PhotosWindow(QWidget):
-    def __init__(self):
+    def __init__(self, *, evidence_provider=None):
         super().__init__()
+        self._evidence_provider = evidence_provider
         self.store = None
         self.session = None
         self.fitted_preview = None
@@ -220,8 +222,12 @@ class PhotosWindow(QWidget):
                                                 filter="MediaPipe model (*.task)")
         return Path(model) if model else None
 
-    def detect_references(self, ids, model):
+    def _create_detector(self, model):
         detector = PoseLandmarker(model, segmentation=True)
+        return EvidenceAdapter(detector, self._evidence_provider) if self._evidence_provider is not None else detector
+
+    def detect_references(self, ids, model):
+        detector = self._create_detector(model)
         try:
             for photo_id in ids:
                 self.session.detect_photo(photo_id, detector)
@@ -382,7 +388,7 @@ class PhotosWindow(QWidget):
 
     def analyze_mask(self, model):
         self.fitted_preview = None
-        detector = PoseLandmarker(model, segmentation=True)
+        detector = self._create_detector(model)
         try:
             evidence = self.session.detect_target(detector)
         finally:
