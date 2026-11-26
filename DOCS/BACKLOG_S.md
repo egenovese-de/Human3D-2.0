@@ -22,7 +22,7 @@
 
 | ID | Task | Status |
 |---|---|---|
-| S2-001 | Resolve confirmed image ingestion, orientation and coordinate mapping defects | IN_PROGRESS |
+| S2-001 | Resolve confirmed image ingestion, orientation and coordinate mapping defects | DONE |
 | S2-002 | Resolve confirmed subject detection, segmentation and native failure recovery defects | TODO |
 | S2-003 | Trace provider wiring and evidence consumers; correct mandatory integration defects (AUD-01) | TODO |
 | S2-004 | Resolve confirmed camera, geometry and coordinate-contract defects | TODO |
