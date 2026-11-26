@@ -1,4 +1,4 @@
-"""S0-002 characterization probes: PASS means observed baseline behavior, not fixed."""
+"""S0-002 characterization probes: Uncorrected probes characterize baseline; AUD-01 checks optional-provider fallback."""
 import os
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 import sys
@@ -26,8 +26,8 @@ class AuditProbes(unittest.TestCase):
         adapter = EvidenceAdapter(detector, provider)
         self.assertEqual(adapter.detect(Path("fixture.png"), "photo"), evidence)
         provider.observe.side_effect = RuntimeError("offline")
-        with self.assertRaisesRegex(RuntimeError, "offline"):
-            adapter.detect(Path("fixture.png"), "photo")
+        with self.assertLogs("human3d.anatomical_evidence", level="WARNING"):
+            self.assertEqual(adapter.detect(Path("fixture.png"), "photo"), evidence)
         self.assertEqual(detector.detect(Path("fixture.png"), "photo"), evidence)
 
     def test_aud02_gui_status_and_action(self):
