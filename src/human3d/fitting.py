@@ -55,6 +55,10 @@ def _region_weights(view, size):
     return weights
 
 
+def _resize_projection(point, scale):
+    return complex(point.real * scale[0], point.imag * scale[1])
+
+
 def _voxel_lookup(views, reference_vertices):
     """Precompute calibrated projections for a shared neutral voxel grid."""
     points = np.asarray(reference_vertices)
@@ -65,7 +69,7 @@ def _voxel_lookup(views, reference_vertices):
     lookups = {}
     expected = np.ones(len(samples), dtype=bool)
     for key, (scale, size, observed, _, camera, _, _) in views.items():
-        projected = np.asarray([camera.project(point) * scale for point in samples])
+        projected = np.asarray([_resize_projection(camera.project(point), scale) for point in samples])
         x, y = np.rint(projected.real).astype(int), np.rint(projected.imag).astype(int)
         valid = (x >= 0) & (x < size[0]) & (y >= 0) & (y < size[1])
         ids = np.flatnonzero(valid)
@@ -92,6 +96,7 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
         with Image.open(BytesIO(mask.png)) as source:
             scale = min(1.0, edge / max(source.size))
             size = tuple(max(1, round(value * scale)) for value in source.size)
+            scale = (size[0] / source.width, size[1] / source.height)
             observed = np.asarray(source.resize(size, Image.Resampling.NEAREST)) > 0
         if not observed.any() or observed.all():
             raise ValueError("insufficient_silhouette_at_fit_resolution")
@@ -107,7 +112,7 @@ def _scorer(body, masks, alignments, reference_vertices, *, edge=256, evidence=N
         volume = np.ones_like(target_volume) if calibrated else None
         for key, (scale, size, observed, transforms, camera, regional, outside) in views.items():
             posed = skin_vertices(vertices, rig["skin"], transforms)
-            points = [camera.project(vertex) * scale for vertex in posed]
+            points = [_resize_projection(camera.project(vertex), scale) for vertex in posed]
             output = Image.new("1", size)
             draw = ImageDraw.Draw(output)
             for face in faces:
@@ -213,13 +218,14 @@ def _refine_silhouette_cameras(body, vertices, masks, alignments):
         with Image.open(BytesIO(mask.png)) as source:
             scale = min(1.0, 256 / max(source.size))
             size = tuple(max(1, round(value * scale)) for value in source.size)
+            scale = (size[0] / source.width, size[1] / source.height)
             observed = np.asarray(source.resize(size, Image.Resampling.NEAREST)) > 0
         y, x = np.nonzero(observed)
         if not len(y):
             continue
         center = complex(x.mean(), y.mean())
         step = max(1.0, (y.max() - y.min()) * .015)
-        projected = np.asarray([camera.project(point) * scale for point in posed])
+        projected = np.asarray([_resize_projection(camera.project(point), scale) for point in posed])
 
         def score(factor, shift):
             points = center + factor * (projected - center) + shift
@@ -246,7 +252,8 @@ def _refine_silhouette_cameras(body, vertices, masks, alignments):
                             best = (result, candidate_factor, candidate_shift)
         result, factor, shift = best
         if result > initial + .002:
-            offset = (center * (1 - factor) + shift) / scale
+            delta = center * (1 - factor) + shift
+            offset = complex(delta.real / scale[0], delta.imag / scale[1])
             refined[key] = replace(alignment, camera=replace(camera, similarity=camera.similarity * factor,
                                                              origin=camera.origin * factor + offset))
     return refined
