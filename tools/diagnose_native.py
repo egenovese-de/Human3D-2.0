@@ -9,7 +9,7 @@ from PIL import Image
 from pxr import Usd
 
 from benchmark_geometry import compare, silhouette
-from human3d.alignment import Camera
+from human3d.alignment import Camera, LIMBS, TORSO
 from human3d.frozen_body import deform_vertices, load_project_body
 from human3d.native_rig import pose_transforms, posed_segments, skin_vertices, validate_pose, validate_rebind
 from human3d.session import Session
@@ -55,6 +55,22 @@ def main():
                                   camera.origin * scale, camera.horizontal_sign)
         predicted = silhouette(posed, faces, projected_camera, size)
         overlap = compare(observed, predicted)
+        mask_height = observed.getbbox()[3] - observed.getbbox()[1]
+        overlap["contour_over_subject_height"] = overlap["symmetric_contour_px"] / mask_height
+        pose = (view.detection.visible_pose(view.candidate)
+                if hasattr(view.detection, "visible_pose") else view.detection.candidates[view.candidate])
+        width, height = view.detection.image_size
+        landmark_bones = {first: bone for bone, (first, _) in LIMBS.items()} | TORSO
+        landmark_bones.update({15: "wrist.L", 16: "wrist.R", 27: "foot.L", 28: "foot.R"})
+        errors = []
+        for index, bone in landmark_bones.items():
+            point = pose[index]
+            if point.observed and bone in segments:
+                predicted_point = projected_camera.project(segments[bone][0])
+                observed_point = complex(point.x * width, point.y * height) * scale
+                errors.append(abs(predicted_point - observed_point))
+        overlap["normalized_landmark_rmse"] = float(np.sqrt(np.mean(np.square(errors))) / mask_height) if errors else None
+        overlap["measured_landmarks"] = len(errors)
         a, b = np.asarray(observed), np.asarray(predicted)
         Image.fromarray(np.stack((a, b, np.zeros_like(a)), axis=2).astype(np.uint8) * 255).save(
             output / (Path(name).stem + "_overlay.png"))

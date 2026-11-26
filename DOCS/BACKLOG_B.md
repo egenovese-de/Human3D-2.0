@@ -20,12 +20,12 @@
 | B3-004 | Benchmark full-angle camera estimation | DONE |
 | B3-005 | Benchmark evidence contradictions, occlusions and confidence weighting | DONE |
 | B4-001 | Benchmark expanded native morph capacity | DONE |
-| B4-002 | Benchmark regional and volumetric fitting | PARTIAL |
+| B4-002 | Benchmark regional and volumetric fitting | DONE |
 | B4-003 | Benchmark coherent held-out view reconstruction | DONE |
 | B4-004 | Benchmark topology, surface quality and rig invariance | DONE |
-| B4-005 | Benchmark pose, hands, contact and facial geometry | PARTIAL |
-| B4-006 | Benchmark texture consistency and garment separation | PARTIAL |
-| B5-001 | Execute final integrated synthetic regression suite | PARTIAL |
+| B4-005 | Benchmark pose, hands, contact and facial geometry | DONE |
+| B4-006 | Benchmark texture consistency and garment separation | DONE |
+| B5-001 | Execute final integrated synthetic regression suite | DONE |
 | B5-002 | Execute direct Blender import and editable asset round-trip | DONE |
 | B5-003 | Generate comparative untextured and textured multi-view renders | DONE |
 | B5-004 | Generate final benchmark report and reproducibility manifest | DONE |
