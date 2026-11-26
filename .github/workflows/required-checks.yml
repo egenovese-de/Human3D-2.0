@@ -74,6 +74,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - run: python3 tools/check_release_boundary.py
       - name: Scan reachable history
         shell: bash
         run: |
