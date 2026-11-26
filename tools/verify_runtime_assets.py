@@ -45,6 +45,22 @@ def main():
             from human3d.frozen_body import load_frozen_body
             body = load_frozen_body(root/"frozen"/(digest+".json"))
             print("Canonical frozen structure: PASS",flush=True)
+            from human3d.frozen_body import deform_vertices, morph_controls
+            from human3d.native_rig import validate_rebind
+            from copy import deepcopy
+            original = deepcopy(body)
+            frozen_path = root/"frozen"/(digest+".json")
+            original_bytes = frozen_path.read_bytes()
+            controls = {name: .125 for name in morph_controls(body)}
+            vertices = deform_vertices(body, controls)
+            assert len(vertices) == len(body["mesh"]["vertices"])
+            assert vertices != tuple(map(tuple, body["mesh"]["vertices"]))
+            validate_rebind(body, vertices)
+            assert body == original
+            assert freeze_neutral(assets,root/"frozen",with_morphs=True) == digest
+            assert frozen_path.read_bytes() == original_bytes
+            assert load_frozen_body(frozen_path) == original
+            print("Canonical post-freeze deformation/rebind and repeat freeze immutability: PASS",flush=True)
             assert len(body["morph_targets"]) == 14
             assert body["source_asset_digests"] == expected
             from human3d.texture_bake import _hidden_vertices
