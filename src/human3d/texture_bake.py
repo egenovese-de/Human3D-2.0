@@ -119,6 +119,25 @@ def _blend_observed_seams(color, observed, geometry, uv_indices, uv):
     return np.rint(blended / counts[:, :, None]).astype(np.uint8)
 
 
+def _hidden_vertices(rig, regions):
+    """Exclude strongly region-bound vertices from hidden-region color sampling."""
+    prefixes = {"left_arm": ("upperarm", "lowerarm", "wrist", "finger"),
+                "right_arm": ("upperarm", "lowerarm", "wrist", "finger"),
+                "left_leg": ("upperleg", "lowerleg", "foot", "toe"),
+                "right_leg": ("upperleg", "lowerleg", "foot", "toe"),
+                "face": ("head", "jaw", "eye", "tongue"),
+                "torso": ("spine", "pelvis", "chest", "breast", "clavicle")}
+    blocked_bones = set()
+    for region in regions:
+        if region not in prefixes:
+            continue
+        side = ".L" if region.startswith("left") else ".R" if region.startswith("right") else None
+        blocked_bones.update(bone for bone in rig["bones"]
+                             if bone.startswith(prefixes[region]) and (side is None or bone.endswith(side)))
+    return {i for i, influences in enumerate(rig["skin"])
+            if sum(influences.get(bone, 0) for bone in blocked_bones) > .7}
+
+
 def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     if target not in views or not 64 <= size <= 2048:
         raise ValueError("invalid_appearance_target_or_size")
@@ -162,18 +181,7 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
         projected, depth, z_buffer, facing = _project_view(view, neutral, joints, rig, geometry, image_size, occluder=occluder)
         intensity = np.median(view.rgb[view.foreground].mean(axis=1))
         gain = 1.0 if key == target else np.clip(target_light / max(intensity, 1), 0.7, 1.4)
-        blocked = set()
-        if view.hidden_regions:
-            prefixes = {"left_arm": ("upperarm", "lowerarm", "wrist", "finger"),
-                        "right_arm": ("upperarm", "lowerarm", "wrist", "finger"),
-                        "left_leg": ("upperleg", "lowerleg", "foot", "toe"),
-                        "right_leg": ("upperleg", "lowerleg", "foot", "toe")}
-            blocked_bones = {bone for region in view.hidden_regions if region in prefixes
-                             for bone in rig["bones"] if bone.startswith(prefixes[region])
-                             and bone.endswith(".L" if region.startswith("left") else ".R")}
-            if blocked_bones:
-                blocked = {i for i, influences in enumerate(rig["skin"])
-                           if sum(influences.get(bone, 0) for bone in blocked_bones) > .7}
+        blocked = _hidden_vertices(rig, view.hidden_regions)
         for index, sample in enumerate(atlas_pixels):
             if sample is None or facing[index] < 0.12 or (blocked and all(i in blocked for i in geometry[index])):
                 continue
