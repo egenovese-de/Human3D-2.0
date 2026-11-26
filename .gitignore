@@ -9,3 +9,26 @@ dist/
 /private/
 /local-data/
 /artifacts/
+
+# Local private inputs and generated assets (not a security boundary)
+.env.*
+*.task
+*.onnx
+*.safetensors
+*.pt
+*.pth
+*.usdz
+*.usdc
+*.blend
+*.blend1
+*.obj
+*.mhskel
+*.mhw
+*.target
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.heic
+*.zip
+*.whl
