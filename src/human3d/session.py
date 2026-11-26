@@ -61,9 +61,11 @@ class Session:
             generation, jobs, artifacts = self.coordinator.snapshot_with_generation()
             current = tuple(sorted(kind for kind, (revision, _) in artifacts.items() if revision == generation))
             stale = tuple(sorted(kind for kind, (revision, _) in artifacts.items() if revision != generation))
+            reason = "no_target_photo" if not project.photos.target else (
+                "no_frozen_body" if not project.frozen_body_digest else "")
             return SessionSnapshot(project, jobs, Capability(True),
                                    Capability(bool(project.photos.photos), "" if project.photos.photos else "no_photos"),
-                                   Capability(False, "engine_unavailable"), current, stale)
+                                   Capability(not reason, reason), current, stale)
 
     def ingest(self, paths):
         with self._lock:
