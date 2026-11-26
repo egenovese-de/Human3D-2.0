@@ -50,3 +50,6 @@ RESOLVED for reproduced same-session dependency invalidation defect. Correction 
 
 ## S3-001 closure — AUD-02
 RESOLVED for reproduced capability/status mismatch and fit action gating. Corrections 7bef859 and 8efe5dd; regression 497fcdd. Required checks run 45832078193 all five jobs SUCCESS, 61 tests PASS Ubuntu, Windows and clean Windows installation. Readiness is conditional on registered prerequisites; offscreen Qt regression uses synthetic frozen digest and mocked fit callback. Full downstream GUI workflow not certified. See S3-001_GUI_CAPABILITY.md. No empirical tests.
+
+## S3-002 closure — AUD-07
+RESOLVED for reproduced logical-only native cancellation and main heavy-path GUI blocking defects. Required checks run 45835389917 at aa8c6b8 all five jobs SUCCESS; 64 tests PASS Ubuntu, Windows and clean Windows installation. Residual limitations: non-preemptible Python work, optional provider blocking, late cancellation/publication race not exhaustively tested, secondary synchronous preparation/preview paths, no full GUI or real inference cancellation certification. See S3-002_WORKER_LIFECYCLE.md. No empirical tests.
