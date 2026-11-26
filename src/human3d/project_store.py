@@ -36,6 +36,16 @@ def writer_lock(directory: Path):
                 fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
+def sync_directory(directory: Path):
+    """Persist directory entries on POSIX; Windows has no portable directory fsync."""
+    if os.name != "nt":
+        fd = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+
 class RevisionConflict(RuntimeError):
     pass
 
@@ -47,12 +57,23 @@ class ProjectStore:
 
     def load(self) -> Project:
         data = json.loads(self.snapshot.read_text(encoding="utf-8"))
-        if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+        if not isinstance(data, dict):
+            raise ValueError("invalid project snapshot")
+        if type(data.get("schema_version")) is not int or data["schema_version"] != 1:
             raise ValueError("unsupported project schema")
         return Project(data["id"], data["revision"], PhotoSet(
             tuple(Photo(**p) for p in data["photos"]), data["target"]), data.get("frozen_body_digest"),
             tuple(ObservationRef(**ref) for ref in data.get("observations", ())),
             data.get("shared_fit_digest"), tuple(data.get("shared_fit_history", ())))
+
+    def recover_interrupted_writes(self) -> Project:
+        """Discard only abandoned snapshot staging files under the writer lock."""
+        with writer_lock(self.directory):
+            project = self.load()
+            for path in self.directory.glob(".project-write-*"):
+                if path.is_file() and not path.is_symlink():
+                    path.unlink()
+            return project
 
     def create(self) -> Project:
         with writer_lock(self.directory):
@@ -98,12 +119,13 @@ class ProjectStore:
         temp = None
         try:
             with NamedTemporaryFile(mode="w", encoding="utf-8",
-                                    dir=self.directory, delete=False) as handle:
+                                    dir=self.directory, prefix=".project-write-", delete=False) as handle:
                 temp = Path(handle.name)
                 json.dump(data, handle, sort_keys=True, allow_nan=False)
                 handle.flush()
                 os.fsync(handle.fileno())
             os.replace(temp, self.snapshot)
+            sync_directory(self.directory)
         finally:
             if temp is not None:
                 temp.unlink(missing_ok=True)
