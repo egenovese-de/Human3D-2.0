@@ -36,7 +36,10 @@ with tempfile.TemporaryDirectory() as d:
     stage = Usd.Stage.CreateNew(str(p/'probe.usdc'))
     UsdGeom.Xform.Define(stage, '/Probe')
     stage.GetRootLayer().Save()
-    assert Usd.Stage.Open(str(p/'probe.usdc')).GetPrimAtPath('/Probe')
+    del stage
+    reopened = Usd.Stage.Open(str(p/'probe.usdc'))
+    assert reopened.GetPrimAtPath('/Probe')
+    del reopened
 window.close()
 print('Native runtime smoke PASS', flush=True)
 """
@@ -73,7 +76,7 @@ def main():
             run("application install",py,"-m","pip","install","--no-deps",ROOT)
             run("pip check",py,"-m","pip","check")
             run("installed CLI",venv/"Scripts"/"human3d.exe","--version",cwd=tmp)
-            env = dict(os.environ, QT_QPA_PLATFORM="offscreen")
+            env = dict(os.environ, QT_QPA_PLATFORM="offscreen", PYTHONNOUSERSITE="1")
             env.pop("PYTHONPATH",None)
             run("installed native smoke",py,"-I","-c",SMOKE,cwd=tmp,env=env)
             run("regression suite",py,"-m","unittest","discover","-s",ROOT/"tests","-v",cwd=tmp,env=env)
