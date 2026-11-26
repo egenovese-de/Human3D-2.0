@@ -1,4 +1,4 @@
-"""Minimal desktop workflow; reconstruction is not yet available."""
+"""Desktop workflow for project reconstruction."""
 from pathlib import Path
 from PIL import Image, ImageOps
 from PIL.ImageQt import ImageQt
@@ -20,6 +20,7 @@ class PhotosWindow(QWidget):
     def __init__(self, *, evidence_provider=None):
         super().__init__()
         self._evidence_provider = evidence_provider
+        self.actions = {}
         self.store = None
         self.session = None
         self.fitted_preview = None
@@ -37,6 +38,7 @@ class PhotosWindow(QWidget):
                                 ("Inspect fitted body", self.inspect_fitted_body),
                                 ("Export USD", self.export_fitted_body)):
             button = QPushButton(label)
+            self.actions[label] = button
             button.clicked.connect(callback)
             toolbar.addWidget(button)
         self.photos = QListWidget()
@@ -47,9 +49,10 @@ class PhotosWindow(QWidget):
         self.photos.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.photos.customContextMenuRequested.connect(self.photo_actions)
         layout.addWidget(self.photos)
-        self.status = QLabel("Create or open a project. Reconstruction unavailable.")
+        self.status = QLabel("Create or open a project.")
         layout.addWidget(self.status)
         shared = QPushButton("Fit included photos")
+        self.actions["Fit included photos"] = shared
         shared.clicked.connect(self.fit_included)
         layout.addWidget(shared)
         revisions = QHBoxLayout()
@@ -69,12 +72,54 @@ class PhotosWindow(QWidget):
         garment.clicked.connect(lambda: self.guarded(self.assemble_garments))
         revisions.addWidget(garment)
         layout.addLayout(revisions)
+        self.actions.update({"Edit body control": edit, "Refine head width": refine_head,
+                             "Restore body revision": restore, "Inspect appearance": appearance,
+                             "Assemble garments": garment})
+        self.update_actions()
+
+    def update_actions(self):
+        snapshot = self.session.snapshot() if self.session else None
+        project = snapshot.project if snapshot else None
+        ready = bool(snapshot and snapshot.reconstruct.enabled)
+        shared = None
+        fitted = False
+        appearance = False
+        restore = False
+        if ready:
+            try:
+                shared = self.session.current_shared_fit()
+                cached = self.fitted_preview
+                fitted = bool((cached and cached[:2] == (project.id, project.revision))
+                              or (shared and project.photos.target in shared.alignments))
+                ref = project.observation(project.photos.target)
+                appearance = bool(fitted and ref and ref.correction)
+                restore = bool(self.session.restorable_fits())
+            except (OSError, ValueError, RuntimeError, KeyError):
+                pass
+        states = {"Add photos": bool(project), "Add folder": bool(project),
+                  "Review target mask": bool(project and project.photos.target),
+                  "Freeze rest body": bool(project), "Fit included photos": ready,
+                  "Inspect fitted body": fitted, "Export USD": fitted,
+                  "Edit body control": bool(shared), "Refine head width": bool(shared),
+                  "Restore body revision": restore, "Inspect appearance": appearance,
+                  "Assemble garments": appearance}
+        for name, enabled in states.items():
+            self.actions[name].setEnabled(enabled)
+        return snapshot
+
+    def readiness_text(self, snapshot):
+        if snapshot.reconstruct.enabled:
+            return "Reconstruction ready"
+        return {"no_target_photo": "Select a target photo",
+                "no_frozen_body": "Freeze a rest body first"}[snapshot.reconstruct.reason]
 
     def guarded(self, operation):
         try:
             operation()
         except (OSError, ValueError, RuntimeError, KeyError, ImportError) as error:
             QMessageBox.warning(self, "Operation failed", str(error))
+        finally:
+            self.update_actions()
 
     def new_project(self):
         directory = QFileDialog.getExistingDirectory(self, "Select project directory")
@@ -112,7 +157,7 @@ class PhotosWindow(QWidget):
         self.refresh()
         counts = ", ".join(f"{status}: {sum(r.status == status for r in results)}"
                            for status in ("accepted", "duplicate", "rejected"))
-        self.status.setText(counts + " | Reconstruction unavailable")
+        self.status.setText(counts + " | " + self.readiness_text(self.session.snapshot()))
         return results
 
     def _corrected_fit(self, project, body, fit, alignment):
@@ -139,7 +184,7 @@ class PhotosWindow(QWidget):
         return None
 
     def fit_included(self):
-        if self.session is None:
+        if self.session is None or not self.session.snapshot().reconstruct.enabled:
             return
         self.guarded(self.run_shared_fit)
 
@@ -376,6 +421,7 @@ class PhotosWindow(QWidget):
         from .bootstrap import freeze_project
 
         freeze_project(self.store, assets)
+        self.update_actions()
         self.status.setText("Rest body attached. Review the target mask to inspect alignment.")
 
     def review_target_mask(self):
@@ -436,7 +482,8 @@ class PhotosWindow(QWidget):
             if photo.id == project.photos.target:
                 item.setText(photo.name + " [Target]")
                 self.photos.setCurrentItem(item)
-        self.status.setText(f"{len(project.photos.photos)} photos | Reconstruction unavailable")
+        self.update_actions()
+        self.status.setText(f"{len(project.photos.photos)} photos | {self.readiness_text(snapshot)}")
 
     def select_target(self, item):
         def select():
