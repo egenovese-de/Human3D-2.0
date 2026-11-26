@@ -38,13 +38,21 @@ class Session:
         self.coordinator = Coordinator(project.id)
         self._sync(project)
 
-    def _sync(self, project):
+    def _sync(self, project, *, retain_kind=None):
         dependencies = {f"photo:{p.id}": p.digest for p in project.photos.photos if p.included}
+        included = {p.id for p in project.photos.photos if p.included}
+        for ref in project.observations:
+            if ref.photo_id in included:
+                dependencies[f"detection:{ref.photo_id}"] = ref.detection
+                if ref.correction:
+                    dependencies[f"correction:{ref.photo_id}"] = ref.correction
+        if project.shared_fit_digest:
+            dependencies["shared_fit"] = project.shared_fit_digest
         if project.frozen_body_digest:
             dependencies["frozen_body"] = project.frozen_body_digest
         if project.photos.target:
             dependencies["target"] = project.photos.target
-        self.coordinator.invalidate(dependencies)
+        self.coordinator.invalidate(dependencies, retain_kind=retain_kind)
 
     def snapshot(self):
         with self._lock:
@@ -109,7 +117,7 @@ class Session:
                 raise ValueError("shared_fit_dependencies_changed")
             digest = self.observations.write_fit(bootstrap, result)
             if digest != previous:
-                self.store.save(current.with_shared_fit(digest))
+                self._sync(self.store.save(current.with_shared_fit(digest)))
         return result
 
     def current_shared_fit(self):
@@ -143,7 +151,7 @@ class Session:
             project = self.store.load()
             if digest not in self.restorable_fits():
                 raise ValueError("shared_fit_revision_unavailable")
-            self.store.save(project.with_shared_fit(digest))
+            self._sync(self.store.save(project.with_shared_fit(digest)))
 
     def edit_shared_control(self, name: str, value: float):
         from .fitting import edit_fit
@@ -159,7 +167,7 @@ class Session:
             revised = edit_fit(body, self.shared_evidence(), fit, name, value)
             digest = self.observations.write_fit(bootstrap, revised)
             if digest != project.shared_fit_digest:
-                self.store.save(project.with_shared_fit(digest))
+                self._sync(self.store.save(project.with_shared_fit(digest)))
             return revised
 
     def read_observation(self, photo_id: str):
@@ -208,6 +216,8 @@ class Session:
                     ),
                     publish=publish,
                 )
+                if promoted:
+                    self._sync(self.store.load(), retain_kind=kind)
         except Exception:
             self.coordinator.fail(job.id, "subject_detection_failed")
             raise
@@ -232,4 +242,5 @@ class Session:
             self.coordinator.start(job.id)
             if not self.coordinator.finish(job.id, mask, lambda result: result == mask, publish=publish):
                 raise ValueError("mask_promotion_rejected")
+            self._sync(self.store.load(), retain_kind="subject_mask")
             return mask
