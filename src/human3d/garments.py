@@ -101,8 +101,37 @@ def prototype(body, neutral, category, *, layer=0, ease_mm=0.0, hem=0.0):
                    tuple(rig["skin"][i] for i in used), used, clearance)
 
 
+def validate_garment(garment, body=None):
+    points = np.asarray(garment.points, dtype=float)
+    uv = np.asarray(garment.uv, dtype=float)
+    if (points.ndim != 2 or points.shape[1] != 3 or not len(points)
+            or not np.isfinite(points).all() or len(garment.skin) != len(points)
+            or len(garment.body_indices) != len(points)
+            or len(set(garment.body_indices)) != len(points)
+            or uv.ndim != 2 or uv.shape[1] != 2 or not np.isfinite(uv).all()
+            or np.any((uv < 0) | (uv > 1)) or not garment.faces):
+        raise ValueError("invalid_garment_geometry")
+    if any(type(i) is not int or i < 0 or (body is not None and i >= len(body["mesh"]["vertices"]))
+           for i in garment.body_indices):
+        raise ValueError("invalid_garment_correspondence")
+    for face in garment.faces:
+        if len(face) < 3 or any(not 0 <= i < len(points) or not 0 <= t < len(uv) for i, t in face):
+            raise ValueError("invalid_garment_face")
+    for weights in garment.skin:
+        if (not weights or any(not np.isfinite(w) or w < 0 for w in weights.values())
+                or abs(sum(weights.values()) - 1) > 1e-4
+                or (body is not None and any(n not in body["rig"]["bones"] for n in weights))):
+            raise ValueError("invalid_garment_skin")
+
+
 def posed_garment(garment, transforms):
-    return skin_vertices(garment.points, garment.skin, transforms)
+    validate_garment(garment)
+    if any(name not in transforms for weights in garment.skin for name in weights):
+        raise ValueError("invalid_garment_skin")
+    posed = skin_vertices(garment.points, garment.skin, transforms)
+    if not np.isfinite(posed).all():
+        raise ValueError("invalid_garment_pose")
+    return posed
 
 
 def _triangulate(faces):
@@ -111,6 +140,8 @@ def _triangulate(faces):
 
 
 def _signed_gaps(surface, triangles, samples, *, with_normals=False):
+    if not np.isfinite(surface).all() or not np.isfinite(samples).all() or not len(samples) or not len(triangles):
+        raise ValueError("invalid_collision_geometry")
     corners = surface[triangles]
     a, b, c = corners.transpose(1, 0, 2)
     normals = np.cross(b - a, c - a)
@@ -145,8 +176,11 @@ def _signed_gaps(surface, triangles, samples, *, with_normals=False):
 
 def measure_clearance(garment, body, posed_body, posed_shell):
     """Sample signed surface gaps at garment vertices and face centroids."""
+    validate_garment(garment, body)
     body_points = np.asarray(posed_body, dtype=float)
     shell = np.asarray(posed_shell, dtype=float)
+    if body_points.shape != np.shape(body["mesh"]["vertices"]) or shell.shape != np.shape(garment.points) or not np.isfinite(shell).all():
+        raise ValueError("invalid_collision_geometry")
     faces = _body_faces(body)
     triangles = _triangulate(faces)
     centers = shell[_triangulate(garment.faces)].mean(axis=1)
@@ -196,7 +230,11 @@ def correct_clearance(garment, body, posed_body, transforms):
 
 def verify_layers(garments, body, posed_body, transforms):
     """Validate supported combinations and corresponding overlap clearance."""
+    for garment in garments:
+        validate_garment(garment, body)
     names = {garment.name for garment in garments}
+    if len({(g.category, g.layer) for g in garments}) != len(garments) or any(g.category not in CATEGORIES or g.layer not in (0, 1) or (g.layer and g.category != "top") for g in garments):
+        raise ValueError("unsupported_layer_combination")
     if len(names) != len(garments) or sum(garment.category in ("shorts", "trousers") for garment in garments) > 1:
         raise ValueError("unsupported_layer_combination")
     inner = next((garment for garment in garments if garment.category == "top" and garment.layer == 0), None)
