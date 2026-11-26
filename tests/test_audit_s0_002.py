@@ -39,10 +39,25 @@ class AuditProbes(unittest.TestCase):
             try:
                 window.attach(Path(root)/"project", True)
                 self.assertFalse(window.session.snapshot().reconstruct.enabled)
-                self.assertIn("Reconstruction unavailable", window.status.text())
+                self.assertIn("Select a target photo", window.status.text())
                 button = next(b for b in window.findChildren(QPushButton) if b.text()=="Fit included photos")
-                self.assertTrue(button.isEnabled())
+                self.assertFalse(button.isEnabled())
                 with patch.object(window, "run_shared_fit") as fit:
+                    button.click()
+                    fit.assert_not_called()
+                    photo = Path(root)/"fixture.png"
+                    Image.new("RGB",(32,32)).save(photo)
+                    window.ingest([photo])
+                    self.assertFalse(button.isEnabled())
+                    self.assertIn("Freeze a rest body first",window.status.text())
+                    from dataclasses import replace
+                    project = window.store.load()
+                    window.store.save(replace(project,frozen_body_digest="a"*64))
+                    window.refresh()
+                    self.assertTrue(window.session.snapshot().reconstruct.enabled)
+                    self.assertTrue(button.isEnabled())
+                    self.assertIn("Reconstruction ready",window.status.text())
+                    self.assertFalse(window.actions["Export USD"].isEnabled())
                     button.click()
                     fit.assert_called_once()
             finally:
