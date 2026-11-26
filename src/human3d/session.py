@@ -34,7 +34,7 @@ class Session:
         self._lock = RLock()
         self.store = ProjectStore(directory)
         self.observations = ObservationStore(self.store.directory)
-        project = self.store.create() if create else self.store.load()
+        project = self.store.create() if create else self.store.recover_interrupted_writes()
         self.coordinator = Coordinator(project.id)
         self._sync(project)
 
