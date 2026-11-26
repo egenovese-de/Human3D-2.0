@@ -19,3 +19,22 @@ Source: RC1 v2 AUDIT_SOURCE.md and WORK_EXECUTION_S.md. Static reproduction is d
 All ten: correction commit NONE (S0-002 triage only). New targeted regression execution NOT RUN. Existing tests: test_vision provider binding/native retry; test_desktop import/select/reopen; test_session target invalidation and persisted observations; test_orchestration cancellation/publication races. Historical CI success does not validate full GUI, native termination, or resource stress. No empirical testing. No production changes.
 ## Disposition
 Ten findings reconciled statically; one P1, eight P2, one P3; no confirmed P0 in this limited scope. Runtime reproduction and unresolved impact checks remain outstanding; S0-002 BLOCKED for full acceptance. Do not interpret this as RC1 readiness or as closure of any correction task.
+
+
+## Final runtime reconciliation — 2026-11-26
+This section supersedes the earlier NOT RUN/BLOCKED statements. Diagnostic commit 3605574180724486b3eae7183a00c3f17115165d, tests/test_audit_s0_002.py. Required checks run https://github.com/egenovese-de/Human3D-2.0/actions/runs/45782444153: all five jobs successful. Windows job 139780983945: 34 tests in 3.618s, OK. Linux job 139780983979: 34 tests in 1.843s, OK. All five named characterization probes passed on both platforms; PASS means baseline behavior reproduced, not corrected.
+
+| Finding | Runtime / configuration evidence | Correction commit | Regression evidence / remaining scope |
+|---|---|---|---|
+| AUD-01 P2 | test_aud01_provider_failure_and_offline: mocked provider None returns native evidence; RuntimeError propagates; detector independent | NONE | Both PASS; actual external VLM remains optional and unverified; S1-005/S2-003 |
+| AUD-02 P2 | test_aud02_gui_status_and_action: real offscreen Qt window, disabled capability, enabled fit button invokes mocked fitting | NONE | Both PASS; actual fitting/export not exercised by probe; S3-001 |
+| AUD-03 P2 | Automatic push run 45781938596 on stabilization completed successfully, repeated by 45782444153 | 69ff66994e2340514fb3e4174b7fca2d4c5e4721 | RESOLVED for trigger and CI execution; branch protection still unverified; remaining S4-002 scope open |
+| AUD-04 P2 | Static M1-only workflow trigger; both platform locked installs successful in required checks | NONE | S4-002 consolidation pending |
+| AUD-05 P2 | test_aud05_same_photo_mask_revision: real persisted mask change alters shared evidence digest, generation unchanged, synthetic preview job promoted as current | NONE | Both PASS; actual shared-fit stale publication not demonstrated; S2-010 |
+| AUD-06 P2 | test_aud06_retention: 1000 jobs retained, one active artifact; tracemalloc current 263608 bytes both platforms, peak Windows 271651 / Linux 271667 bytes | NONE | Both PASS; not process RSS or full app stress; S3-004/S3-005 |
+| AUD-07 P1 | test_aud07_real_child_logical_cancel: real synthetic sleeping child via substituted subprocess command, still running after cancellation and 0.2s join; publication rejected | NONE | Both PASS; GUI event-loop blocking established by static call chain, not timed in Qt; real MediaPipe termination not tested; S3-002 |
+| AUD-08 P2 | Static dependency version divergence; production hashed locks and pip check PASS both platforms | NONE | S1-001 reconciliation pending |
+| AUD-09 P2 | Static unlocked manual foundation workflow; required checks locked path passes | NONE | S4-002/S1-001 pending |
+| AUD-10 P3 | Static dev version, CLI smoke PASS | NONE | S5-001/S5-004 gated version pending |
+
+S0-002 DONE: all ten findings reconciled, applicable targeted characterization probes executed, priorities retained (1 P1, 8 P2 including resolved AUD-03, 1 P3). No production defect fixes except explicitly authorized CI trigger correction. Diagnostic tests assert current defective behavior and must be converted to corrected-behavior regression tests in corresponding correction tasks; do not treat their current PASS as release acceptance. No empirical tests. S0-003 not started.
