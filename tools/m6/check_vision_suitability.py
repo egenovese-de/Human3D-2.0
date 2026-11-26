@@ -38,6 +38,7 @@ def cases(root, detector, work):
                            review_reason=result.review_reason)
                 if len(result.candidates) == 1:
                     row.update(asdict(result.suitability(0)))
+                    row["lateral_geometry_only"] = result.lateral_geometry_only(0)
                     if result.masks and result.masks[0] is not None:
                         mask = np.asarray(Image.open(BytesIO(result.masks[0])).convert("1"))
                         target = np.asarray(label.convert("1"))
