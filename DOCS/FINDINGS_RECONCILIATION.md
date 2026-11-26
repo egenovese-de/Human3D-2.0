@@ -44,3 +44,6 @@ RESOLVED for dependency reconciliation. Production pins and hashed platform lock
 
 ## S2-003 closure — AUD-01
 RESOLVED for mandatory RC1 scope. Optional provider failure isolation 39a9dd4; desktop target/reference injection d27f024; hidden-region texture propagation 1b8f066. Runs 45803684601, 45804240065 and 45809370038 all five jobs SUCCESS. Canonical region mapping PASS both platforms; torso counts differ by one vertex (cause unverified). See S2-003_PROVIDER_INTEGRATION.md. Live external VLM remains optional and unverified; B3-003 remains BLOCKED. No empirical testing.
+
+## S2-010 closure — AUD-05
+RESOLVED for reproduced same-session dependency invalidation defect. Correction bcb2adf and c55ac47; converted regression 6093fbe. Required checks run 45829440057 all five jobs SUCCESS; 61 tests PASS Ubuntu, Windows and clean Windows installation. Persisted mask revision advances generation, rejects obsolete preview promotion, retains prior preview as stale and new mask as current; identical correction does not advance generation. Conservative invalidation; exhaustive concurrent/cross-process and GUI/export coverage not established. See S2-010_OBSERVATION_INVALIDATION.md. No empirical testing.
