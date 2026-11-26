@@ -58,3 +58,13 @@ class GarmentContract(unittest.TestCase):
         self.assertEqual(colliding.pairs[0][2].neutral.crossing, 1)
         self.assertEqual(colliding.pairs[0][2].posed.crossing, 1)
         self.assertIn("top_base and top_outer", colliding.describe())
+
+    def test_lower_body_shell_drops_detached_components_across_uv_seams(self):
+        from human3d.garments import _largest_shell_component
+
+        lower_a = ((0, 0), (1, 1), (2, 2))
+        lower_b = ((2, 7), (1, 8), (3, 9))
+        hand = ((4, 4), (5, 5), (6, 6))
+        point_contact = ((3, 3), (7, 10), (8, 11))
+        self.assertEqual(_largest_shell_component([hand, lower_a, point_contact, lower_b]),
+                         [lower_a, lower_b])

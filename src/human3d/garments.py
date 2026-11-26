@@ -51,6 +51,38 @@ def _normals(points, faces):
     return normals / np.maximum(np.linalg.norm(normals, axis=1)[:, None], 1e-10)
 
 
+def _largest_shell_component(faces):
+    """Keep faces connected by source edges, including across UV seams."""
+    neighbors = [[] for _ in faces]
+    edge_faces = {}
+    for index, face in enumerate(faces):
+        vertices = tuple(vertex for vertex, _ in face)
+        for a, b in zip(vertices, vertices[1:] + vertices[:1]):
+            edge = (min(a, b), max(a, b))
+            adjacent = edge_faces.setdefault(edge, index)
+            if adjacent != index:
+                neighbors[index].append(adjacent)
+                neighbors[adjacent].append(index)
+
+    remaining = set(range(len(faces)))
+    largest = set()
+    for seed in range(len(faces)):
+        if seed not in remaining:
+            continue
+        remaining.remove(seed)
+        component = {seed}
+        pending = [seed]
+        while pending:
+            for neighbor in neighbors[pending.pop()]:
+                if neighbor in remaining:
+                    remaining.remove(neighbor)
+                    component.add(neighbor)
+                    pending.append(neighbor)
+        if len(component) > len(largest):
+            largest = component
+    return [face for index, face in enumerate(faces) if index in largest]
+
+
 def prototype(body, neutral, category, *, layer=0, ease_mm=0.0, hem=0.0):
     """Cut a separate shell from the neutral body surface without altering the body."""
     if (category not in CATEGORIES or layer not in (0, 1) or (layer and category != "top")
@@ -84,6 +116,10 @@ def prototype(body, neutral, category, *, layer=0, ease_mm=0.0, hem=0.0):
             selected.append(face)
     if not selected:
         raise ValueError("garment_region_empty")
+    if category != "top":
+        # Lower-body height bands can also intersect low hands in the
+        # neutral rig. Detached hand islands are not trouser geometry.
+        selected = _largest_shell_component(selected)
 
     used = tuple(sorted({i for face in selected for i, _ in face}))
     texels = tuple(sorted({t for face in selected for _, t in face}))

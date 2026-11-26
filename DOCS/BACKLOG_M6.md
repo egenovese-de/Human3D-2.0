@@ -19,11 +19,11 @@
 | M6.2-006 | Implement canonical bind-frame and cross-rig correspondence diagnostics | DONE |
 | M6.2-007 | Validate signed rotations, twist, spine, pelvis, wrists and feet | BLOCKED |
 | M6.2-008 | Validate registered geometry transfer and canonical compatibility | DONE |
-| M6.3-001 | Establish fixed-geometry pose and camera baseline | TODO |
+| M6.3-001 | Establish fixed-geometry pose and camera baseline | DONE |
 | M6.3-002 | Improve landmark and limb direction confidence handling | TODO |
-| M6.3-003 | Improve depth and full joint rotation estimation using validated mapping | TODO |
-| M6.3-004 | Improve axial twist, wrist and foot orientation and contact handling | TODO |
-| M6.3-005 | Evaluate camera confidence and pose compensation under calibrated views | TODO |
+| M6.3-003 | Improve depth and full joint rotation estimation using validated mapping | BLOCKED |
+| M6.3-004 | Improve axial twist, wrist and foot orientation and contact handling | BLOCKED |
+| M6.3-005 | Evaluate camera confidence and pose compensation under calibrated views | DONE |
 | M6.3-006 | Compare pose-first, camera-first and alternating schedules | TODO |
 | M6.3-007 | Integrate validated pose and camera improvements with regression tests | TODO |
 | M6.4-001 | Rebaseline registered geometry and regional anatomical residuals | TODO |
