@@ -136,13 +136,18 @@ class PoseLandmarker:
                 result = subprocess.run(command, capture_output=True, text=True, timeout=120)
             except subprocess.TimeoutExpired as error:
                 raise RuntimeError("Subject detection timed out. Retry this photo.") from error
+            except OSError as error:
+                raise RuntimeError("Subject detector could not start. Retry this photo.") from error
             if result.returncode:
                 if result.stdout.strip() == "photo_digest_mismatch":
                     raise ValueError("photo_digest_mismatch")
                 raise RuntimeError(f"Subject detector failed (exit {result.returncode}). Retry this photo.")
-            return ObservationStore(Path(directory)).read_detection(
-                ObservationRef("", photo_digest, result.stdout.strip())
-            )
+            try:
+                return ObservationStore(Path(directory)).read_detection(
+                    ObservationRef("", photo_digest, result.stdout.strip())
+                )
+            except (OSError, ValueError, KeyError, TypeError) as error:
+                raise RuntimeError("Subject detector returned invalid evidence. Retry this photo.") from error
 
     def close(self):
         pass
@@ -216,6 +221,8 @@ class _NativePoseLandmarker:
         if probabilities.shape != image_size[::-1]:
             return None
         width, height = content_size or image_size
+        if not (0 < width <= image_size[0] and 0 < height <= image_size[1]):
+            return None
         probabilities = probabilities[:height, :width]
         if not np.isfinite(probabilities).all() or probabilities.min() < 0 or probabilities.max() > 1:
             return None
