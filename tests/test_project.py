@@ -115,3 +115,42 @@ except RevisionConflict:
                              b"first original")
             self.assertEqual(originals.verify(reopened.photos.photos[1].digest).read_bytes(),
                              b"second original")
+
+    def test_interrupted_snapshot_recovery(self):
+        from human3d.session import Session
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            store = ProjectStore(root)
+            saved = store.create()
+            script = """
+import os, sys
+from pathlib import Path
+from human3d.project_store import ProjectStore
+import human3d.project_store as module
+store = ProjectStore(Path(sys.argv[1]))
+module.os.replace = lambda *args: os._exit(17)
+store.save(store.load())
+"""
+            result = subprocess.run([sys.executable, "-c", script, str(root)], timeout=30)
+            self.assertEqual(result.returncode, 17)
+            self.assertEqual(store.load(), saved)
+            self.assertEqual(len(list(root.glob(".project-write-*"))), 1)
+            unrelated = root / "keep.tmp"
+            unrelated.write_bytes(b"keep")
+            reopened = Session(root)
+            self.assertEqual(reopened.store.load(), saved)
+            self.assertEqual(list(root.glob(".project-write-*")), [])
+            self.assertEqual(unrelated.read_bytes(), b"keep")
+            self.assertEqual(store.save(saved).revision, 1)
+
+    def test_invalid_snapshot_preserves_staging(self):
+        with tempfile.TemporaryDirectory() as root:
+            store = ProjectStore(Path(root))
+            store.create()
+            staging = Path(root) / ".project-write-fixture"
+            staging.write_bytes(store.snapshot.read_bytes())
+            store.snapshot.write_text("[]", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "invalid project snapshot"):
+                store.recover_interrupted_writes()
+            self.assertTrue(staging.exists())
+            self.assertEqual(store.snapshot.read_text(encoding="utf-8"), "[]")
