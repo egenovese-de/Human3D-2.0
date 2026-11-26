@@ -1,0 +1,188 @@
+[
+  {
+    "identity": "f_af01",
+    "attempts": [
+      {
+        "radial_expansion": 1,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 21,
+            "clearance_mm": -26.646566821947598
+          },
+          {
+            "violations": 6,
+            "clearance_mm": -9.011566045581562
+          }
+        ],
+        "layer_clearance_mm": -61.83340478081799,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.12,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 2,
+            "clearance_mm": -2.1067103481444662
+          },
+          {
+            "violations": 6,
+            "clearance_mm": -7.82811537575607
+          }
+        ],
+        "layer_clearance_mm": -70.14361546402081,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.24,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 0,
+            "clearance_mm": -0.8467577689062804
+          },
+          {
+            "violations": 5,
+            "clearance_mm": -2.971627410519901
+          }
+        ],
+        "layer_clearance_mm": -78.45382614722357,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.08,
+        "layer_projection_repair": true,
+        "layers": [
+          {
+            "violations": 11,
+            "clearance_mm": -9.781931867281243
+          },
+          {
+            "violations": 4,
+            "clearance_mm": -21.50138605615597
+          }
+        ],
+        "layer_clearance_mm": -67.37354523628656,
+        "repair_peak_rest_delta_mm": 74.44373167689736,
+        "post_repair_layer_min_mm": 6.999999999999987,
+        "post_repair_body_min_mm": -0.9568509868026077,
+        "error": "independent_base has 11 sampled penetrations."
+      },
+      {
+        "radial_expansion": 1.25,
+        "layer_projection_repair": true,
+        "layers": [
+          {
+            "violations": 0,
+            "clearance_mm": -0.9447501249772268
+          },
+          {
+            "violations": 5,
+            "clearance_mm": -2.9688629560430613
+          }
+        ],
+        "layer_clearance_mm": -79.14634370415716,
+        "repair_peak_rest_delta_mm": 86.22764015462249,
+        "post_repair_layer_min_mm": 6.999999999999994,
+        "post_repair_body_min_mm": -0.9158609223206527,
+        "exported": true
+      }
+    ],
+    "transfer_distance_mean_m": 0.023459171933723582,
+    "transfer_distance_p95_m": 0.05528746995579809
+  },
+  {
+    "identity": "m_la01",
+    "attempts": [
+      {
+        "radial_expansion": 1,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 5,
+            "clearance_mm": -6.038001149315657
+          },
+          {
+            "violations": 0,
+            "clearance_mm": -0.43391965641704605
+          }
+        ],
+        "layer_clearance_mm": -6.2636325048021,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.12,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 4,
+            "clearance_mm": -5.20391638696379
+          },
+          {
+            "violations": 3,
+            "clearance_mm": -1.0995760107879455
+          }
+        ],
+        "layer_clearance_mm": -2.6828375315459683,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.24,
+        "layer_projection_repair": false,
+        "layers": [
+          {
+            "violations": 4,
+            "clearance_mm": -15.553356708586453
+          },
+          {
+            "violations": 3,
+            "clearance_mm": -9.347257955975847
+          }
+        ],
+        "layer_clearance_mm": -9.821842370073137,
+        "error": "The garment layers do not have sufficient sampled clearance."
+      },
+      {
+        "radial_expansion": 1.08,
+        "layer_projection_repair": true,
+        "layers": [
+          {
+            "violations": 4,
+            "clearance_mm": -3.862689080811594
+          },
+          {
+            "violations": 0,
+            "clearance_mm": -0.9136891753031331
+          }
+        ],
+        "layer_clearance_mm": -3.8764358559646723,
+        "repair_peak_rest_delta_mm": 10.87903452123649,
+        "post_repair_layer_min_mm": 6.999999999999989,
+        "post_repair_body_min_mm": -0.9711075420833614,
+        "error": "independent_base has 4 sampled penetrations."
+      },
+      {
+        "radial_expansion": 1.25,
+        "layer_projection_repair": true,
+        "layers": [
+          {
+            "violations": 4,
+            "clearance_mm": -16.895044981890432
+          },
+          {
+            "violations": 3,
+            "clearance_mm": -7.676141627639796
+          }
+        ],
+        "layer_clearance_mm": -10.386487355830978,
+        "repair_peak_rest_delta_mm": 20.61305124428235,
+        "post_repair_layer_min_mm": 6.999999999999994,
+        "post_repair_body_min_mm": 0.1276066663732766,
+        "error": "independent_base has 4 sampled penetrations."
+      }
+    ],
+    "transfer_distance_mean_m": 0.03541772487326632,
+    "transfer_distance_p95_m": 0.07375356610250995
+  }
+]

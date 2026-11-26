@@ -1,0 +1,685 @@
+[
+  {
+    "identity": "f_af01",
+    "condition": "bare",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 1.0,
+        "observed_count": 33,
+        "yaw_deg": -2.272136205900536,
+        "mask_to_clothed_iou": 0.969566939529971,
+        "mask_to_body_iou": 0.969566939529971
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 1.0,
+        "observed_count": 20,
+        "yaw_deg": -84.97892642970278,
+        "mask_to_clothed_iou": 0.9780274040241945,
+        "mask_to_body_iou": 0.9780274040241945
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "thigh": -0.25,
+      "upperarm": 0.25,
+      "waist": -0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "thigh_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": -0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.7365107913669064,
+      "90": 0.806550424128181
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 24.811000190010912,
+      "sampled_chamfer_mm2": 2848.2717997849218,
+      "p95_mm": 146.10604992113937,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.131567361806878,
+        "torso_and_arms": 44.17323673232141,
+        "lower_body": 11.767083791223808
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "condition": "layered",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.8838987099856666,
+        "observed_count": 33,
+        "yaw_deg": -1.4244720858001225,
+        "mask_to_clothed_iou": 0.9675347424967885,
+        "mask_to_body_iou": 0.8627243928194298
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.8293675641828429,
+        "observed_count": 20,
+        "yaw_deg": -81.27263525696766,
+        "mask_to_clothed_iou": 0.973869551903644,
+        "mask_to_body_iou": 0.8095676172953082
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "shoulder": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "thigh_length": -0.25,
+      "abdomen_depth": 0.25,
+      "glute_depth": 0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.7213251009261458,
+      "90": 0.7439024390243902
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 25.510378379591376,
+      "sampled_chamfer_mm2": 2808.734169948952,
+      "p95_mm": 141.4328755602674,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.99392255046466,
+        "torso_and_arms": 45.97992125920358,
+        "lower_body": 12.176246951065107
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "condition": "loose",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.8194905869324474,
+        "observed_count": 32,
+        "yaw_deg": -2.2705476968922547,
+        "mask_to_clothed_iou": 0.9751387226634751,
+        "mask_to_body_iou": 0.8026947414357408
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.7333210298052967,
+        "observed_count": 25,
+        "yaw_deg": -67.43584877219422,
+        "mask_to_clothed_iou": 0.9802052120221556,
+        "mask_to_body_iou": 0.7210698689956332
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "thigh_length": -0.25,
+      "abdomen_depth": 0.25,
+      "glute_depth": 0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.6833314775637457,
+      "90": 0.7015424642259803
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 25.842547051152742,
+      "sampled_chamfer_mm2": 2796.2110522521602,
+      "p95_mm": 140.39268187656936,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.299726562895556,
+        "torso_and_arms": 46.211047917017915,
+        "lower_body": 12.805273179171982
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "condition": "shorts",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.9547155205779899,
+        "observed_count": 33,
+        "yaw_deg": -7.924818827181319,
+        "mask_to_clothed_iou": 0.9720730397422127,
+        "mask_to_body_iou": 0.9307682571826351
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.9450588655012486,
+        "observed_count": 20,
+        "yaw_deg": -83.64694866179886,
+        "mask_to_clothed_iou": 0.9708749129728476,
+        "mask_to_body_iou": 0.9210556911986978
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "thigh": 0.25,
+      "upperarm": 0.25,
+      "waist": -0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "thigh_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.7438994023904383,
+      "90": 0.8164053624176324
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 25.24509278240442,
+      "sampled_chamfer_mm2": 2778.639674664189,
+      "p95_mm": 139.69973539776325,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.047308420670266,
+        "torso_and_arms": 44.42265994827883,
+        "lower_body": 13.209461397181606
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "condition": "top",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.925868001251173,
+        "observed_count": 33,
+        "yaw_deg": -0.16126710744502665,
+        "mask_to_clothed_iou": 0.9695118225698051,
+        "mask_to_body_iou": 0.9024569572942834
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.9238549174610555,
+        "observed_count": 24,
+        "yaw_deg": -78.68037981226381,
+        "mask_to_clothed_iou": 0.9775319343065694,
+        "mask_to_body_iou": 0.9039141846399635
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "calf_length": -0.25,
+      "abdomen_depth": 0.25,
+      "glute_depth": -0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.7405950331940004,
+      "90": 0.7937527691626052
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 25.23151120913802,
+      "sampled_chamfer_mm2": 2807.8194827127127,
+      "p95_mm": 141.21822647273729,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.12049405204772,
+        "torso_and_arms": 45.71690200897232,
+        "lower_body": 11.696786367207608
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "condition": "trousers",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.8746527982979729,
+        "observed_count": 33,
+        "yaw_deg": -3.090114351489735,
+        "mask_to_clothed_iou": 0.9721626167140289,
+        "mask_to_body_iou": 0.8595089520032658
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.8706178790534619,
+        "observed_count": 21,
+        "yaw_deg": -84.10295737289782,
+        "mask_to_clothed_iou": 0.9752581755593803,
+        "mask_to_body_iou": 0.8549989203195854
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "calf": 0.25,
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "thigh": 0.25,
+      "upperarm": 0.25,
+      "waist": -0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "thigh_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25,
+      "shin_depth": -0.25
+    },
+    "training_iou": {
+      "0": 0.7261356932153392,
+      "90": 0.8181222707423581
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 25.09583963539071,
+      "sampled_chamfer_mm2": 2750.263858288242,
+      "p95_mm": 137.81302516105637,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.226534122896359,
+        "torso_and_arms": 44.44354835797577,
+        "lower_body": 13.179851035351074
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "bare",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 1.0,
+        "observed_count": 33,
+        "yaw_deg": -5.222689176735537,
+        "mask_to_clothed_iou": 0.9705882352941176,
+        "mask_to_body_iou": 0.9705882352941176
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 1.0,
+        "observed_count": 20,
+        "yaw_deg": -89.62886903232899,
+        "mask_to_clothed_iou": 0.9767103347889374,
+        "mask_to_body_iou": 0.9767103347889374
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": 0.25,
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "thigh": -0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6511044176706827,
+      "90": 0.7967126393349707
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 33.099775886465316,
+      "sampled_chamfer_mm2": 3651.7658963041044,
+      "p95_mm": 166.84152976068717,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.534299410976796,
+        "torso_and_arms": 57.677072354983885,
+        "lower_body": 18.995335700927278
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "layered",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.9092794705911403,
+        "observed_count": 33,
+        "yaw_deg": -2.8294272727717913,
+        "mask_to_clothed_iou": 0.967874198060875,
+        "mask_to_body_iou": 0.8850824986693763
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.8592039378766019,
+        "observed_count": 22,
+        "yaw_deg": -80.7581362193258,
+        "mask_to_clothed_iou": 0.9784094698232745,
+        "mask_to_body_iou": 0.843032478917926
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": 0.25,
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "thigh": -0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": 0.25,
+      "glute_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6387255831594918,
+      "90": 0.7463546965072906
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 33.49942949005335,
+      "sampled_chamfer_mm2": 3679.001340320671,
+      "p95_mm": 168.65354841946305,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.774013441628487,
+        "torso_and_arms": 58.38261915964447,
+        "lower_body": 19.001254390333386
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "loose",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.8656730452771639,
+        "observed_count": 33,
+        "yaw_deg": -2.8903085129917487,
+        "mask_to_clothed_iou": 0.9758038399259773,
+        "mask_to_body_iou": 0.8488447619931335
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.7728244274809161,
+        "observed_count": 24,
+        "yaw_deg": -86.8475526926248,
+        "mask_to_clothed_iou": 0.9803419447164269,
+        "mask_to_body_iou": 0.7609697152783023
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": 0.25,
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "thigh": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": 0.25,
+      "glute_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6225900327391779,
+      "90": 0.7021607337167729
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 34.190822591724995,
+      "sampled_chamfer_mm2": 3607.2073697949845,
+      "p95_mm": 160.12900459386427,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.817020420122269,
+        "torso_and_arms": 58.742905162435996,
+        "lower_body": 20.780953842883648
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "shorts",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.9654955427372837,
+        "observed_count": 33,
+        "yaw_deg": -3.8228297803373237,
+        "mask_to_clothed_iou": 0.9710092872902663,
+        "mask_to_body_iou": 0.9401336073997945
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.9541941564561734,
+        "observed_count": 21,
+        "yaw_deg": -88.96552741248615,
+        "mask_to_clothed_iou": 0.9770136249884142,
+        "mask_to_body_iou": 0.9366347672581994
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "thigh": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6636758035890357,
+      "90": 0.7997062603267854
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 34.075608028149745,
+      "sampled_chamfer_mm2": 3664.878008897221,
+      "p95_mm": 165.04840658437948,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.766331850086805,
+        "torso_and_arms": 58.035949928978745,
+        "lower_body": 20.880038442346315
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "top",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.9555740087191198,
+        "observed_count": 33,
+        "yaw_deg": -4.259414728680028,
+        "mask_to_clothed_iou": 0.9721571821235875,
+        "mask_to_body_iou": 0.9315354812398042
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.9431712316005217,
+        "observed_count": 24,
+        "yaw_deg": -86.38516674027188,
+        "mask_to_clothed_iou": 0.9784502521779,
+        "mask_to_body_iou": 0.9249839316867138
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "thigh": -0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6472784437021025,
+      "90": 0.7794815626140927
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 33.04355070378246,
+      "sampled_chamfer_mm2": 3649.6500544348974,
+      "p95_mm": 166.8353845855804,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.760235996299901,
+        "torso_and_arms": 57.73324740625096,
+        "lower_body": 19.044893077850134
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "condition": "trousers",
+    "views": [
+      {
+        "yaw": 0,
+        "candidates": 1,
+        "review_reason": null,
+        "composite_to_body_iou": 0.8943942485184105,
+        "observed_count": 33,
+        "yaw_deg": -4.019390740543583,
+        "mask_to_clothed_iou": 0.973608993902439,
+        "mask_to_body_iou": 0.8765715378364166
+      },
+      {
+        "yaw": 90,
+        "candidates": 1,
+        "review_reason": "insufficient_full_body_evidence",
+        "composite_to_body_iou": 0.8874474053295933,
+        "observed_count": 21,
+        "yaw_deg": -90.11099082169696,
+        "mask_to_clothed_iou": 0.9764634882317441,
+        "mask_to_body_iou": 0.8728688879273042
+      }
+    ],
+    "used_fit_views": [
+      0,
+      90
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": 0.25,
+      "hips": 0.25,
+      "shoulder": 0.25,
+      "thigh": 0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.25,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25,
+      "shin_depth": 0.25
+    },
+    "training_iou": {
+      "0": 0.6601529311809685,
+      "90": 0.8087451119800925
+    },
+    "body_surface": {
+      "symmetric_mean_mm": 33.71537376698133,
+      "sampled_chamfer_mm2": 3587.0316868555637,
+      "p95_mm": 158.59609982760344,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.675899821536559,
+        "torso_and_arms": 58.056115994519324,
+        "lower_body": 20.723997371964433
+      }
+    }
+  }
+]

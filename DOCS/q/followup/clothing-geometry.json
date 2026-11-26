@@ -1,0 +1,216 @@
+[
+  {
+    "identity": "f_af01",
+    "treatment": "bare",
+    "independent_layers": []
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "top",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 139,
+        "intersecting_garment_triangles": 58,
+        "sample_vertex_signed_min_mm": -26.6815647482872,
+        "sample_vertex_signed_negative": 18,
+        "sample_vertex_signed_p05_mm": 3.5214198360336013,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "shorts",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 3168,
+        "vertices": 1728,
+        "body_surface_intersecting_triangle_pairs": 233,
+        "intersecting_garment_triangles": 128,
+        "sample_vertex_signed_min_mm": -48.65263565443456,
+        "sample_vertex_signed_negative": 83,
+        "sample_vertex_signed_p05_mm": 0.2097526400575589,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "trousers",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 3168,
+        "vertices": 1728,
+        "body_surface_intersecting_triangle_pairs": 183,
+        "intersecting_garment_triangles": 92,
+        "sample_vertex_signed_min_mm": -48.818240116816014,
+        "sample_vertex_signed_negative": 39,
+        "sample_vertex_signed_p05_mm": 8.671729786328797,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "loose",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 98,
+        "intersecting_garment_triangles": 35,
+        "sample_vertex_signed_min_mm": -13.156832777895033,
+        "sample_vertex_signed_negative": 10,
+        "sample_vertex_signed_p05_mm": 35.1562054711394,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "layered",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 139,
+        "intersecting_garment_triangles": 58,
+        "sample_vertex_signed_min_mm": -26.6815647482872,
+        "sample_vertex_signed_negative": 18,
+        "sample_vertex_signed_p05_mm": 3.5214198360336013,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      },
+      {
+        "layer": "layer_1",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 104,
+        "intersecting_garment_triangles": 42,
+        "sample_vertex_signed_min_mm": -16.411012271419168,
+        "sample_vertex_signed_negative": 14,
+        "sample_vertex_signed_p05_mm": 20.792823372175917,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "bare",
+    "independent_layers": []
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "top",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 134,
+        "intersecting_garment_triangles": 64,
+        "sample_vertex_signed_min_mm": -33.084397204220295,
+        "sample_vertex_signed_negative": 24,
+        "sample_vertex_signed_p05_mm": 3.3410497999284416,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "shorts",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 3168,
+        "vertices": 1728,
+        "body_surface_intersecting_triangle_pairs": 158,
+        "intersecting_garment_triangles": 95,
+        "sample_vertex_signed_min_mm": -43.89004735276103,
+        "sample_vertex_signed_negative": 59,
+        "sample_vertex_signed_p05_mm": 3.9565103673908215,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "trousers",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 3168,
+        "vertices": 1728,
+        "body_surface_intersecting_triangle_pairs": 127,
+        "intersecting_garment_triangles": 60,
+        "sample_vertex_signed_min_mm": -39.328842773102224,
+        "sample_vertex_signed_negative": 24,
+        "sample_vertex_signed_p05_mm": 8.729831437813118,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "loose",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 99,
+        "intersecting_garment_triangles": 37,
+        "sample_vertex_signed_min_mm": -36.31694964133203,
+        "sample_vertex_signed_negative": 8,
+        "sample_vertex_signed_p05_mm": 30.286229855846614,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "layered",
+    "independent_layers": [
+      {
+        "layer": "layer_0",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 134,
+        "intersecting_garment_triangles": 64,
+        "sample_vertex_signed_min_mm": -33.084397204220295,
+        "sample_vertex_signed_negative": 24,
+        "sample_vertex_signed_p05_mm": 3.3410497999284416,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      },
+      {
+        "layer": "layer_1",
+        "faces": 1056,
+        "vertices": 576,
+        "body_surface_intersecting_triangle_pairs": 124,
+        "intersecting_garment_triangles": 52,
+        "sample_vertex_signed_min_mm": -26.369980012532324,
+        "sample_vertex_signed_negative": 20,
+        "sample_vertex_signed_p05_mm": 17.467183381086215,
+        "volume": null,
+        "volume_exclusion": "open hem boundaries"
+      }
+    ]
+  }
+]

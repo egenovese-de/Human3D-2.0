@@ -10,7 +10,7 @@
 | Q1-003 | Measure circumference, proportion and volumetric reconstruction errors | DONE |
 | Q1-004 | Measure morph sensitivity, saturation and deformation capacity | DONE |
 | Q1-005 | Evaluate extreme anatomy and out-of-distribution body proportions | DONE |
-| Q1-006 | Evaluate anatomical asymmetry, spinal curvature and pelvic orientation | BLOCKED |
+| Q1-006 | Evaluate anatomical asymmetry, spinal curvature and pelvic orientation | DONE |
 | Q1-007 | Separate geometry representation limits from optimization and convergence limits | DONE |
 | Q2-001 | Execute fully automatic native pipeline baseline | DONE |
 | Q2-002 | Measure reconstruction improvement using ground-truth segmentation | DONE |
@@ -29,17 +29,22 @@
 | Q4-002 | Evaluate illumination, exposure and background complexity | DONE |
 | Q4-003 | Evaluate focal length, perspective, camera elevation and orientation | DONE |
 | Q4-004 | Evaluate cropping, occlusion and incomplete anatomical visibility | DONE |
-| Q4-005 | Evaluate clothing-induced segmentation and anatomical reconstruction errors | BLOCKED |
+| Q4-005 | Evaluate clothing-induced segmentation and anatomical reconstruction errors | DONE |
 | Q4-006 | Evaluate photorealistic synthetic photographs and compound failure scenarios | DONE |
 | Q5-001 | Measure facial landmark and regional facial geometry accuracy | BLOCKED |
-| Q5-002 | Evaluate facial profile, cranial proportions and facial deformation limits | BLOCKED |
-| Q5-003 | Measure skeletal joint positions, rotations and pose reconstruction errors | BLOCKED |
-| Q5-004 | Evaluate hand orientation, limb torsion, contact and extreme articulation | BLOCKED |
-| Q5-005 | Measure texture projection, observed coverage and color reconstruction accuracy | BLOCKED |
-| Q5-006 | Evaluate UV seams, occlusion contamination and unobserved appearance | BLOCKED |
+| Q5-002 | Evaluate facial profile, cranial proportions and facial deformation limits | DONE |
+| Q5-003 | Measure skeletal joint positions, rotations and pose reconstruction errors | DONE |
+| Q5-004 | Evaluate hand orientation, limb torsion, contact and extreme articulation | DONE |
+| Q5-005 | Measure texture projection, observed coverage and color reconstruction accuracy | DONE |
+| Q5-006 | Evaluate UV seams, occlusion contamination and unobserved appearance | DONE |
 | Q5-007 | Measure garment geometry, fit, boundaries and body intersections | BLOCKED |
-| Q5-008 | Evaluate garment deformation, layer separation and editable export quality | BLOCKED |
+| Q5-008 | Evaluate garment deformation, layer separation and editable export quality | DONE |
 | Q6-001 | Consolidate experimental measurements and statistical uncertainty | DONE |
 | Q6-002 | Identify component-level error contributions and verified root causes | DONE |
 | Q6-003 | Produce comparative renders, failure atlas and reconstruction quality report | DONE |
 | Q6-004 | Produce prioritized evidence-based M6 recommendations and final reproducibility manifest | DONE |
+| Q7-001 | Isolate anatomical representation capacity, rest-pose registration and optimizer convergence | DONE |
+| Q7-002 | Evaluate fit acceptance and bootstrap fallback criteria on independent held-out subjects | BLOCKED |
+| Q7-003 | Evaluate joint camera, pose and shape estimation interactions | BLOCKED |
+| Q7-004 | Evaluate reference consistency, view utility and separate geometry/appearance selection | BLOCKED |
+| Q7-005 | Investigate lateral-view review behavior and photographic degradation thresholds | DONE |

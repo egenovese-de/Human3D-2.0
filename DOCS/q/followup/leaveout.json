@@ -1,0 +1,141 @@
+[
+  {
+    "identity": "f_af01",
+    "omitted_yaw": 90,
+    "fit_yaws": [
+      0,
+      180,
+      270
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": -0.375,
+      "hips": -0.25,
+      "shoulder": -0.375,
+      "upperarm": 0.25,
+      "waist": -0.125,
+      "forearm_length": -0.375,
+      "thigh_length": 0.375,
+      "calf_length": 0.375,
+      "abdomen_depth": -0.25,
+      "glute_depth": 0.25,
+      "shin_depth": -0.375,
+      "upperarm_length": 0.125
+    },
+    "withheld_view_proxy_iou_change": 0.024824416892643697,
+    "elapsed_seconds": 36.20236735699996,
+    "bootstrap_held_out_iou": {
+      "22.5": 0.7356486796785304,
+      "112.5": 0.7691726742190182
+    },
+    "fit_held_out_iou": {
+      "22.5": 0.7145603618886062,
+      "112.5": 0.7394861392832995
+    }
+  },
+  {
+    "identity": "f_ca01",
+    "omitted_yaw": 90,
+    "fit_yaws": [
+      270,
+      180,
+      0
+    ],
+    "controls": {
+      "bust": 0.25,
+      "calf": -0.375,
+      "shoulder": -0.25,
+      "thigh": 0.125,
+      "upperarm": 0.25,
+      "upperarm_length": 0.25,
+      "forearm_length": -0.25,
+      "thigh_length": 0.375,
+      "abdomen_depth": -0.375,
+      "glute_depth": 0.125,
+      "shin_depth": -0.375,
+      "hips": -0.125,
+      "calf_length": 0.125,
+      "forearm_depth": 0.125
+    },
+    "withheld_view_proxy_iou_change": 0.014847820118881527,
+    "elapsed_seconds": 40.99250501300003,
+    "bootstrap_held_out_iou": {
+      "22.5": 0.7332482450542438,
+      "112.5": 0.7690969806595241
+    },
+    "fit_held_out_iou": {
+      "22.5": 0.716246354434723,
+      "112.5": 0.7491059147180192
+    }
+  },
+  {
+    "identity": "m_as01",
+    "omitted_yaw": 90,
+    "fit_yaws": [
+      270,
+      180,
+      0
+    ],
+    "controls": {
+      "bust": 0.375,
+      "hips": -0.375,
+      "upperarm": 0.375,
+      "waist": 0.25,
+      "upperarm_length": 0.25,
+      "forearm_length": -0.25,
+      "thigh_length": 0.375,
+      "calf_length": 0.375,
+      "abdomen_depth": -0.375,
+      "glute_depth": 0.25,
+      "shin_depth": -0.25,
+      "calf": -0.125,
+      "forearm_depth": -0.125
+    },
+    "withheld_view_proxy_iou_change": 0.027422204914870463,
+    "elapsed_seconds": 40.621586332000106,
+    "bootstrap_held_out_iou": {
+      "22.5": 0.6415949026830604,
+      "112.5": 0.7771410579345088
+    },
+    "fit_held_out_iou": {
+      "22.5": 0.636073306146514,
+      "112.5": 0.7569624953583364
+    }
+  },
+  {
+    "identity": "m_la01",
+    "omitted_yaw": 90,
+    "fit_yaws": [
+      270,
+      180,
+      0
+    ],
+    "controls": {
+      "bust": 0.375,
+      "calf": -0.25,
+      "hips": -0.25,
+      "shoulder": 0.25,
+      "thigh": 0.125,
+      "upperarm": 0.375,
+      "waist": 0.375,
+      "upperarm_length": -0.25,
+      "thigh_length": 0.25,
+      "calf_length": 0.375,
+      "abdomen_depth": -0.375,
+      "glute_depth": 0.375,
+      "forearm_depth": 0.125,
+      "shin_depth": -0.375,
+      "forearm_length": -0.125
+    },
+    "withheld_view_proxy_iou_change": 0.02389486650721706,
+    "elapsed_seconds": 38.11190328900011,
+    "bootstrap_held_out_iou": {
+      "22.5": 0.6379832692742482,
+      "112.5": 0.7762871230363491
+    },
+    "fit_held_out_iou": {
+      "22.5": 0.6392149834214536,
+      "112.5": 0.7561634582911179
+    }
+  }
+]

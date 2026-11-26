@@ -1,0 +1,54 @@
+[
+  {
+    "fixture": "f_af01",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "00514d7d1fb0d60c501788de3e4e19bec7a67f6f8f66f133a926235dedf2ebf2",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "independent_base": {
+        "vertices": 576,
+        "faces": 528,
+        "uv_layers": 1,
+        "mapped_groups": 27,
+        "weighted_vertices": 576,
+        "max_weight_sum_error": 4.0978193283081055e-08,
+        "armature_bound": true
+      },
+      "independent_outer": {
+        "vertices": 576,
+        "faces": 528,
+        "uv_layers": 1,
+        "mapped_groups": 27,
+        "weighted_vertices": 576,
+        "max_weight_sum_error": 4.0978193283081055e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "independent_base": 0.06806388067652618,
+      "independent_outer": 0.09721648799611507
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "independent_base": 0.009999990414939883,
+      "independent_outer": 0.009999990414939883
+    },
+    "persisted_edited_mesh_digest": {
+      "independent_base": "d7995f67e6519e550a2b6160bafaf5261740680732c6e7bedfa4e80863ae2d47",
+      "independent_outer": "004ba3bab929f88322b517a4afa6d9535a22755eadd46e57161e4c137a1ea868"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  }
+]

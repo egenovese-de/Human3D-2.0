@@ -1,0 +1,380 @@
+[
+  {
+    "identity": "f_af01",
+    "treatment": "neutral",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 0.0,
+    "baseline_symmetric_mm": 8.51439816932661,
+    "best_symmetric_mm": 7.924498185108809,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 139.3878995152857,
+        "depth_mm": 187.25820835024362,
+        "frontal_envelope_mm": 133.08272653881448
+      },
+      "midface": {
+        "width_mm": 148.41458805076297,
+        "depth_mm": 188.91026063431462,
+        "frontal_envelope_mm": 142.89888093153482
+      },
+      "jaw_band": {
+        "width_mm": 109.84417411959132,
+        "depth_mm": 153.35321399218256,
+        "frontal_envelope_mm": 145.79244070550183
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "open_jaw",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 40.90794543850867,
+    "baseline_symmetric_mm": 8.000823716851322,
+    "best_symmetric_mm": 7.46225605672038,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 139.71831727899757,
+        "depth_mm": 185.82749615518244,
+        "frontal_envelope_mm": 132.12008569715394
+      },
+      "midface": {
+        "width_mm": 148.3331045570534,
+        "depth_mm": 190.83687357177635,
+        "frontal_envelope_mm": 143.62324417311285
+      },
+      "jaw_band": {
+        "width_mm": 115.92374273892888,
+        "depth_mm": 149.59387115874284,
+        "frontal_envelope_mm": 141.72796257557607
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "smile",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 12.58570617804183,
+    "baseline_symmetric_mm": 8.404559052578389,
+    "best_symmetric_mm": 7.830144959545631,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 140.12706145710789,
+        "depth_mm": 186.03397811343376,
+        "frontal_envelope_mm": 132.03610383428747
+      },
+      "midface": {
+        "width_mm": 150.57033302302642,
+        "depth_mm": 188.85958060609232,
+        "frontal_envelope_mm": 142.02699657146007
+      },
+      "jaw_band": {
+        "width_mm": 107.82775368414138,
+        "depth_mm": 153.4138068114765,
+        "frontal_envelope_mm": 146.28326705133642
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "left_cheek",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 6.914477565225066,
+    "baseline_symmetric_mm": 8.43691688228172,
+    "best_symmetric_mm": 7.865254584707472,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 139.03518536917687,
+        "depth_mm": 186.4672608541777,
+        "frontal_envelope_mm": 132.59075487546627
+      },
+      "midface": {
+        "width_mm": 149.61693023010108,
+        "depth_mm": 189.9124260538749,
+        "frontal_envelope_mm": 142.77433366125442
+      },
+      "jaw_band": {
+        "width_mm": 110.37196132302574,
+        "depth_mm": 152.89680457416196,
+        "frontal_envelope_mm": 144.9944591771553
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "cranial_width1.08_depth1.1",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 13.385741729666057,
+    "baseline_symmetric_mm": 7.781229586889586,
+    "best_symmetric_mm": 7.465380777565424,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 150.86753024682181,
+        "depth_mm": 204.8189481696326,
+        "frontal_envelope_mm": 146.2089953434452
+      },
+      "midface": {
+        "width_mm": 152.00507193727742,
+        "depth_mm": 194.7990920817997,
+        "frontal_envelope_mm": 143.8655039425072
+      },
+      "jaw_band": {
+        "width_mm": 110.40940776914337,
+        "depth_mm": 154.8257182768067,
+        "frontal_envelope_mm": 147.00064527021408
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "cranial_width0.94_depth0.91",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 12.047167556699447,
+    "baseline_symmetric_mm": 9.307461230238793,
+    "best_symmetric_mm": 8.559489332043174,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 133.17377885899646,
+        "depth_mm": 171.39399699113483,
+        "frontal_envelope_mm": 123.68156802207044
+      },
+      "midface": {
+        "width_mm": 146.10040763535554,
+        "depth_mm": 187.07571738682634,
+        "frontal_envelope_mm": 140.87263029113004
+      },
+      "jaw_band": {
+        "width_mm": 109.25006395111984,
+        "depth_mm": 151.58244772107565,
+        "frontal_envelope_mm": 144.18836002209108
+      }
+    }
+  },
+  {
+    "identity": "f_af01",
+    "treatment": "nose_projection",
+    "expression_source_sha256": "dea0083c7b1df26cc2ebc3eb52d32fc7bd845ad54a749d18ccb0659edaf2dae1",
+    "max_controlled_vertex_change_mm": 17.50429817631072,
+    "baseline_symmetric_mm": 8.285792982102281,
+    "best_symmetric_mm": 7.676068533986417,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 138.67794327504424,
+        "depth_mm": 185.9584582677709,
+        "frontal_envelope_mm": 133.7701900646158
+      },
+      "midface": {
+        "width_mm": 148.75897816598862,
+        "depth_mm": 205.93645240339515,
+        "frontal_envelope_mm": 156.9587934392925
+      },
+      "jaw_band": {
+        "width_mm": 111.05953242154595,
+        "depth_mm": 160.238600661786,
+        "frontal_envelope_mm": 152.7149011816144
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "neutral",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 0.0,
+    "baseline_symmetric_mm": 7.1953823346988575,
+    "best_symmetric_mm": 6.887492873779924,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 150.76017084739058,
+        "depth_mm": 198.64913033315116,
+        "frontal_envelope_mm": 149.35625717357644
+      },
+      "midface": {
+        "width_mm": 167.292383379471,
+        "depth_mm": 209.29661549723363,
+        "frontal_envelope_mm": 161.4993840247186
+      },
+      "jaw_band": {
+        "width_mm": 143.1640976241344,
+        "depth_mm": 182.58741793733668,
+        "frontal_envelope_mm": 158.6860018371457
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "open_jaw",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 40.90794543850867,
+    "baseline_symmetric_mm": 7.442802814971055,
+    "best_symmetric_mm": 7.089987962562641,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 149.8986649250622,
+        "depth_mm": 199.57069579688337,
+        "frontal_envelope_mm": 148.90503962265174
+      },
+      "midface": {
+        "width_mm": 168.420805276727,
+        "depth_mm": 210.20741663651597,
+        "frontal_envelope_mm": 162.35557612858273
+      },
+      "jaw_band": {
+        "width_mm": 151.16307760366047,
+        "depth_mm": 184.14300772670973,
+        "frontal_envelope_mm": 156.59167406689977
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "smile",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 12.58570617804183,
+    "baseline_symmetric_mm": 7.2155922341318455,
+    "best_symmetric_mm": 6.907674152217063,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 150.90863623619467,
+        "depth_mm": 199.16594791511935,
+        "frontal_envelope_mm": 150.90265199623852
+      },
+      "midface": {
+        "width_mm": 170.28844518248187,
+        "depth_mm": 209.55063736162475,
+        "frontal_envelope_mm": 161.8881889209754
+      },
+      "jaw_band": {
+        "width_mm": 148.89449561774032,
+        "depth_mm": 184.35383670882004,
+        "frontal_envelope_mm": 158.86787529379555
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "left_cheek",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 9.159148432032321,
+    "baseline_symmetric_mm": 7.21561182416618,
+    "best_symmetric_mm": 6.8637361757273,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 150.91658553457071,
+        "depth_mm": 198.34546286050374,
+        "frontal_envelope_mm": 148.93150260622065
+      },
+      "midface": {
+        "width_mm": 169.03885359605258,
+        "depth_mm": 208.92008224644854,
+        "frontal_envelope_mm": 161.71228133712438
+      },
+      "jaw_band": {
+        "width_mm": 142.3848137518538,
+        "depth_mm": 182.27420846911298,
+        "frontal_envelope_mm": 157.494540477507
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "cranial_width1.08_depth1.1",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 14.920074698088424,
+    "baseline_symmetric_mm": 6.997358383951816,
+    "best_symmetric_mm": 6.996685749299397,
+    "best_head_width": 0,
+    "best_jaw_width": -0.25,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 159.24609828139486,
+        "depth_mm": 220.02043976973098,
+        "frontal_envelope_mm": 164.9271766965637
+      },
+      "midface": {
+        "width_mm": 170.9180544398523,
+        "depth_mm": 215.42198140678164,
+        "frontal_envelope_mm": 164.8277581238892
+      },
+      "jaw_band": {
+        "width_mm": 146.16727717627646,
+        "depth_mm": 182.6890454590487,
+        "frontal_envelope_mm": 157.62415586724546
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "cranial_width0.94_depth0.91",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 13.408777497124605,
+    "baseline_symmetric_mm": 8.303289278583168,
+    "best_symmetric_mm": 7.705204400556816,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.25,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 141.81028141569564,
+        "depth_mm": 184.48907127618438,
+        "frontal_envelope_mm": 138.76837860329738
+      },
+      "midface": {
+        "width_mm": 165.07612833068413,
+        "depth_mm": 200.85152174890513,
+        "frontal_envelope_mm": 156.99068429774655
+      },
+      "jaw_band": {
+        "width_mm": 143.3314083804814,
+        "depth_mm": 182.02157204314338,
+        "frontal_envelope_mm": 157.02969340977728
+      }
+    }
+  },
+  {
+    "identity": "m_la01",
+    "treatment": "nose_projection",
+    "expression_source_sha256": "1c07088c5eafe66f7de139e3b5b2721b79e418d1d777bd793d8754096680b14a",
+    "max_controlled_vertex_change_mm": 17.292072164637517,
+    "baseline_symmetric_mm": 7.160858424421235,
+    "best_symmetric_mm": 6.806055021302862,
+    "best_head_width": -0.5,
+    "best_jaw_width": -0.5,
+    "reference_profile": {
+      "cranial": {
+        "width_mm": 150.03629990882987,
+        "depth_mm": 200.3759005588653,
+        "frontal_envelope_mm": 150.78650000603847
+      },
+      "midface": {
+        "width_mm": 168.07429046003068,
+        "depth_mm": 217.7238439799498,
+        "frontal_envelope_mm": 170.10981269382518
+      },
+      "jaw_band": {
+        "width_mm": 146.20115114616246,
+        "depth_mm": 189.3536957760496,
+        "frontal_envelope_mm": 164.79193537223915
+      }
+    }
+  }
+]

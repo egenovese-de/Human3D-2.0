@@ -1,0 +1,290 @@
+[
+  {
+    "fixture": "ai-native-workshop",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "538b2dc3886f989c8b8cad4d65bccf94faeb8c87c3299b510e83423f8c5cfd77",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2066,
+        "faces": 1956,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2066,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.06733815295768847
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "090cb8c5ebfd852a16eadc32b256e8ad6de94ddf24ce4609f07e9de0a759975e"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  },
+  {
+    "fixture": "ai-native-woodland",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "73d2b03ac01a37b23aa09289a59cca469e4c14a01f4a8c17d4e10433a260a3dd",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2037,
+        "faces": 1922,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2037,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.06439067332802376
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 54,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "df6d967175acadd8b54424d7472de508838c97a95b867362f562b2117c87ebbc"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  },
+  {
+    "fixture": "MBLab_human_female_f_af01_bend32-1",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "ff6b26048c532b680faa378ed073d1b9604c19c3be3255d483aae60667bd9f16",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2039,
+        "faces": 1924,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2039,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      },
+      "top_outer": {
+        "vertices": 2039,
+        "faces": 1924,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2039,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.05476006308894314,
+      "top_outer": 0.05986299102426593
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165,
+      "top_outer": 0.009999990414939883
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "e1e16620ebab001b20ae69ad655f347f4045f9a8ae44022d746d1c71957341da",
+      "top_outer": "e99ff9cbac1e650874060e201c51ce6d2a2d0f9625b3b495f1d4514568ca7cb0"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  },
+  {
+    "fixture": "MBLab_human_female_f_ca01_bend32-1",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "cca60c77683ce4c5c4e956c58dcdfa0b47bd22a2278e939d84891c91e4c102f9",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2041,
+        "faces": 1926,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2041,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      },
+      "top_outer": {
+        "vertices": 2041,
+        "faces": 1926,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2041,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.05460348018665967,
+      "top_outer": 0.059619325462573404
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165,
+      "top_outer": 0.009999990414939883
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "e1465115c2200e094380f64c461af5374a8da25f75c10a01fe9db276ee33626e",
+      "top_outer": "52d61d46e3011c26439f05c88ddeeee062d6421e46a3352dfe4d42cf27126756"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  },
+  {
+    "fixture": "MBLab_human_male_m_as01_bend32-1",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "b52db5f2fbf9c325a3ebc01885a3c0068f0a6a933e2c981c76809b2deaf21466",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2043,
+        "faces": 1928,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2043,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      },
+      "top_outer": {
+        "vertices": 2043,
+        "faces": 1928,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2043,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.052810800106367364,
+      "top_outer": 0.0578046029728667
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165,
+      "top_outer": 0.009999990414939883
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "6e140fe41629df8736d50e4122fa620453d4b5027ab5b26ce7fdf0d5d8abbd30",
+      "top_outer": "c0e83188aed4fad115cb03db0aa182107febad0972bf56773a25945634a89406"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  },
+  {
+    "fixture": "MBLab_human_male_m_la01_bend32-1",
+    "blender": "4.5.17 LTS",
+    "usd_operator": "WM_OT_usd_import",
+    "source_sha256": "a8d8d743dcb7956fadd77b00ae5e1070d49ecc1244f3646cec43a9d91422e65d",
+    "mesh_info": {
+      "Body": {
+        "vertices": 13380,
+        "faces": 13378,
+        "uv_layers": 1,
+        "mapped_groups": 125,
+        "weighted_vertices": 13380,
+        "max_weight_sum_error": 4.470348358154297e-08,
+        "armature_bound": true
+      },
+      "top_base": {
+        "vertices": 2043,
+        "faces": 1928,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2043,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      },
+      "top_outer": {
+        "vertices": 2043,
+        "faces": 1928,
+        "uv_layers": 1,
+        "mapped_groups": 38,
+        "weighted_vertices": 2043,
+        "max_weight_sum_error": 4.377216100692749e-08,
+        "armature_bound": true
+      }
+    },
+    "bones": 163,
+    "garment_pose_motion_scene_units": {
+      "top_base": 0.05371079986728027,
+      "top_outer": 0.05864108279860377
+    },
+    "pose_roundtrip_max_matrix_difference": 0.0,
+    "imported_nonidentity_pose_matrix_elements": 108,
+    "garment_edit_delta_scene_units": {
+      "top_base": 0.010000005330656165,
+      "top_outer": 0.009999990414939883
+    },
+    "persisted_edited_mesh_digest": {
+      "top_base": "6e140fe41629df8736d50e4122fa620453d4b5027ab5b26ce7fdf0d5d8abbd30",
+      "top_outer": "c0e83188aed4fad115cb03db0aa182107febad0972bf56773a25945634a89406"
+    },
+    "vertex_edits_persisted": true,
+    "body_preserved_after_garment_removal": true
+  }
+]

@@ -1,0 +1,2438 @@
+[
+  {
+    "fixture": "f_af01_morph_neutral",
+    "mesh_sha256": "ddd0d7dea073e5218f5f69ff45040ca6a5e38f1ab42fe3f4c4282b837b243237",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9936440677966102,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.033019673538561195,
+            "front_projected_area_m2": 0.03944109135840819,
+            "visible_fraction_of_front_projected": 0.8371896517392373,
+            "triangle_area_m2": 0.17316313386674792
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11796151533811965,
+            "front_projected_area_m2": 0.11997408513124677,
+            "visible_fraction_of_front_projected": 0.9832249623664523,
+            "triangle_area_m2": 0.34398879151843625
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06321589368883836,
+            "front_projected_area_m2": 0.06688538354887587,
+            "visible_fraction_of_front_projected": 0.9451376419579613,
+            "triangle_area_m2": 0.21031840951091196
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06079061039123604,
+            "front_projected_area_m2": 0.0644117554409813,
+            "visible_fraction_of_front_projected": 0.9437813016435609,
+            "triangle_area_m2": 0.20711091770435772
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10105767214525613,
+            "front_projected_area_m2": 0.10292648412609504,
+            "visible_fraction_of_front_projected": 0.981843235036092,
+            "triangle_area_m2": 0.37414081193986154
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.10105274112170685,
+            "front_projected_area_m2": 0.1029215448738931,
+            "visible_fraction_of_front_projected": 0.9818424436353337,
+            "triangle_area_m2": 0.37507152631949336
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9883474576271186,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03410058791550047,
+            "front_projected_area_m2": 0.041408604652789366,
+            "visible_fraction_of_front_projected": 0.8235145376530669,
+            "triangle_area_m2": 0.17316313386674792
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.1118543621414965,
+            "front_projected_area_m2": 0.11443493268362602,
+            "visible_fraction_of_front_projected": 0.9774494511281452,
+            "triangle_area_m2": 0.34398879151843625
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0671565133451301,
+            "front_projected_area_m2": 0.06971322531998278,
+            "visible_fraction_of_front_projected": 0.9633252949764209,
+            "triangle_area_m2": 0.21031840951091196
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.05246496741982114,
+            "front_projected_area_m2": 0.05602432709262444,
+            "visible_fraction_of_front_projected": 0.9364676051009296,
+            "triangle_area_m2": 0.20711091770435772
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.11031800729777744,
+            "front_projected_area_m2": 0.11141457170330658,
+            "visible_fraction_of_front_projected": 0.9901578008265448,
+            "triangle_area_m2": 0.37414081193986154
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09842698068444482,
+            "front_projected_area_m2": 0.10072774224220736,
+            "visible_fraction_of_front_projected": 0.9771586108598543,
+            "triangle_area_m2": 0.37507152631949336
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9883040935672515,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04028047915766797,
+            "front_projected_area_m2": 0.04957551493375134,
+            "visible_fraction_of_front_projected": 0.8125075294022766,
+            "triangle_area_m2": 0.17316313386674792
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.029271455525181563,
+            "front_projected_area_m2": 0.07335276776844424,
+            "visible_fraction_of_front_projected": 0.3990504573403964,
+            "triangle_area_m2": 0.34398879151843625
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.047247716088031674,
+            "front_projected_area_m2": 0.055526322633202486,
+            "visible_fraction_of_front_projected": 0.8509066303587599,
+            "triangle_area_m2": 0.21031840951091196
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.022357674005728884,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.20711091770435772
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13870723328653775,
+            "front_projected_area_m2": 0.14183165953769986,
+            "visible_fraction_of_front_projected": 0.9779708827962236,
+            "triangle_area_m2": 0.37414081193986154
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.09170397226478383,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.37507152631949336
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9899117276166457,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03895095247677087,
+            "front_projected_area_m2": 0.04859784259862131,
+            "visible_fraction_of_front_projected": 0.8014955066724687,
+            "triangle_area_m2": 0.17316313386674792
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.07220649356068436,
+            "front_projected_area_m2": 0.08838211730516869,
+            "visible_fraction_of_front_projected": 0.8169808074564155,
+            "triangle_area_m2": 0.34398879151843625
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04827600433824564,
+            "front_projected_area_m2": 0.058892644569483094,
+            "visible_fraction_of_front_projected": 0.8197289269509427,
+            "triangle_area_m2": 0.21031840951091196
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.023592544539017712,
+            "front_projected_area_m2": 0.02603721827911606,
+            "visible_fraction_of_front_projected": 0.9061084900125767,
+            "triangle_area_m2": 0.20711091770435772
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14054798183540326,
+            "front_projected_area_m2": 0.1435060706220374,
+            "visible_fraction_of_front_projected": 0.979387012871218,
+            "triangle_area_m2": 0.37414081193986154
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.07711829457355644,
+            "front_projected_area_m2": 0.08922268818521653,
+            "visible_fraction_of_front_projected": 0.8643350266858952,
+            "triangle_area_m2": 0.37507152631949336
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_neutral",
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9893617021276596,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03297556619518832,
+            "front_projected_area_m2": 0.03939338849727324,
+            "visible_fraction_of_front_projected": 0.8370837709853483,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11572688489697927,
+            "front_projected_area_m2": 0.11767381939342747,
+            "visible_fraction_of_front_projected": 0.9834548202269285,
+            "triangle_area_m2": 0.34050566821631206
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06130061585435226,
+            "front_projected_area_m2": 0.064921824754432,
+            "visible_fraction_of_front_projected": 0.944222009874537,
+            "triangle_area_m2": 0.2064956623893923
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06137339939423029,
+            "front_projected_area_m2": 0.06499454622556776,
+            "visible_fraction_of_front_projected": 0.9442853740563085,
+            "triangle_area_m2": 0.20668253429569183
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10113572124788026,
+            "front_projected_area_m2": 0.10300452508362777,
+            "visible_fraction_of_front_projected": 0.9818570705099581,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.10113163886243799,
+            "front_projected_area_m2": 0.1030004423064371,
+            "visible_fraction_of_front_projected": 0.9818563551558428,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9893842887473461,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03408647736392815,
+            "front_projected_area_m2": 0.04139454320205306,
+            "visible_fraction_of_front_projected": 0.8234534005496055,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11146422865392352,
+            "front_projected_area_m2": 0.1140204843167362,
+            "visible_fraction_of_front_projected": 0.9775807331627212,
+            "triangle_area_m2": 0.34050566821631206
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06606908883926631,
+            "front_projected_area_m2": 0.0686274606632861,
+            "visible_fraction_of_front_projected": 0.9627208729669864,
+            "triangle_area_m2": 0.2064956623893923
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.052888764349010804,
+            "front_projected_area_m2": 0.05644812202232219,
+            "visible_fraction_of_front_projected": 0.9369446219680462,
+            "triangle_area_m2": 0.20668253429569183
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.11048056537914148,
+            "front_projected_area_m2": 0.11157719145529878,
+            "visible_fraction_of_front_projected": 0.9901715927614414,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09843224094341459,
+            "front_projected_area_m2": 0.10073300238461386,
+            "visible_fraction_of_front_projected": 0.9771598047637395,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9881889763779528,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.040363911415994186,
+            "front_projected_area_m2": 0.049660334020908733,
+            "visible_fraction_of_front_projected": 0.812799837371202,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.02669845816913359,
+            "front_projected_area_m2": 0.07268728750963195,
+            "visible_fraction_of_front_projected": 0.3673057433267918,
+            "triangle_area_m2": 0.34050566821631206
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04801944686211401,
+            "front_projected_area_m2": 0.05546245835047109,
+            "visible_fraction_of_front_projected": 0.8658009091244355,
+            "triangle_area_m2": 0.2064956623893923
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.022357673507373024,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.20668253429569183
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1386865569022674,
+            "front_projected_area_m2": 0.1419923050165613,
+            "visible_fraction_of_front_projected": 0.9767188220945611,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.09167912370571174,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9923371647509579,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.039023651056633066,
+            "front_projected_area_m2": 0.04866741496129845,
+            "visible_fraction_of_front_projected": 0.8018435145500465,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.06844451833358167,
+            "front_projected_area_m2": 0.08552188672694183,
+            "visible_fraction_of_front_projected": 0.8003158133322578,
+            "triangle_area_m2": 0.34050566821631206
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.046755330502637305,
+            "front_projected_area_m2": 0.057813512092366334,
+            "visible_fraction_of_front_projected": 0.8087266939939263,
+            "triangle_area_m2": 0.2064956623893923
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.023545680839441675,
+            "front_projected_area_m2": 0.025990348698667436,
+            "visible_fraction_of_front_projected": 0.9059393974444405,
+            "triangle_area_m2": 0.20668253429569183
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14064360515199195,
+            "front_projected_area_m2": 0.14360170928168253,
+            "visible_fraction_of_front_projected": 0.9794006342648185,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.07673189953714923,
+            "front_projected_area_m2": 0.08883628447125524,
+            "visible_fraction_of_front_projected": 0.8637450338434334,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_pelvis_spine_extend",
+    "mesh_sha256": "c04098334d62b19e83d699905aa6026c73e376a46dfb460e0feabc357cb5aa46",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9849624060150376,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03317884245968558,
+            "front_projected_area_m2": 0.04033793173141451,
+            "visible_fraction_of_front_projected": 0.8225221531089669,
+            "triangle_area_m2": 0.1734008421964354
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.1044687090818029,
+            "front_projected_area_m2": 0.10835570083743679,
+            "visible_fraction_of_front_projected": 0.9641274826742579,
+            "triangle_area_m2": 0.3327845638485446
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06082466183612947,
+            "front_projected_area_m2": 0.06401617549102713,
+            "visible_fraction_of_front_projected": 0.9501451995465584,
+            "triangle_area_m2": 0.20527243000469536
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06838341721979838,
+            "front_projected_area_m2": 0.07026554674157987,
+            "visible_fraction_of_front_projected": 0.9732140485762742,
+            "triangle_area_m2": 0.20593017494324883
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10003341372844105,
+            "front_projected_area_m2": 0.1018035223282168,
+            "visible_fraction_of_front_projected": 0.9826125014214254,
+            "triangle_area_m2": 0.37352853049009505
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.1029253426426918,
+            "front_projected_area_m2": 0.10415936009141545,
+            "visible_fraction_of_front_projected": 0.9881526014787283,
+            "triangle_area_m2": 0.3738899896790442
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9891774891774892,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03302827028632252,
+            "front_projected_area_m2": 0.04155317589208311,
+            "visible_fraction_of_front_projected": 0.794843464482704,
+            "triangle_area_m2": 0.1734008421964354
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.09914593407840364,
+            "front_projected_area_m2": 0.1034584433085199,
+            "visible_fraction_of_front_projected": 0.9583165076507475,
+            "triangle_area_m2": 0.3327845638485446
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07057667312695232,
+            "front_projected_area_m2": 0.07238465924873246,
+            "visible_fraction_of_front_projected": 0.9750225235492588,
+            "triangle_area_m2": 0.20527243000469536
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.059820480355516056,
+            "front_projected_area_m2": 0.06158692517773875,
+            "visible_fraction_of_front_projected": 0.9713178598034442,
+            "triangle_area_m2": 0.20593017494324883
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10592413831294907,
+            "front_projected_area_m2": 0.10715431875835868,
+            "visible_fraction_of_front_projected": 0.9885195439655236,
+            "triangle_area_m2": 0.37352853049009505
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09939626216733712,
+            "front_projected_area_m2": 0.1014199919126757,
+            "visible_fraction_of_front_projected": 0.9800460470645566,
+            "triangle_area_m2": 0.3738899896790442
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.988313856427379,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03823758673427401,
+            "front_projected_area_m2": 0.05012547534884219,
+            "visible_fraction_of_front_projected": 0.7628373889357486,
+            "triangle_area_m2": 0.1734008421964354
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.030051555244308935,
+            "front_projected_area_m2": 0.06559773083377107,
+            "visible_fraction_of_front_projected": 0.45811882304986334,
+            "triangle_area_m2": 0.3327845638485446
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06847631072060165,
+            "front_projected_area_m2": 0.07358182619800396,
+            "visible_fraction_of_front_projected": 0.9306144500455357,
+            "triangle_area_m2": 0.20527243000469536
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0016145833696282997,
+            "front_projected_area_m2": 0.010689593766936484,
+            "visible_fraction_of_front_projected": 0.15104253770824266,
+            "triangle_area_m2": 0.20593017494324883
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12211355782193965,
+            "front_projected_area_m2": 0.13879514062386858,
+            "visible_fraction_of_front_projected": 0.8798114780751899,
+            "triangle_area_m2": 0.37352853049009505
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.044442502257921304,
+            "front_projected_area_m2": 0.08677183847008035,
+            "visible_fraction_of_front_projected": 0.5121765660554195,
+            "triangle_area_m2": 0.3738899896790442
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9944055944055944,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03766127270927779,
+            "front_projected_area_m2": 0.04946952283545371,
+            "visible_fraction_of_front_projected": 0.7613025262957821,
+            "triangle_area_m2": 0.1734008421964354
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.05502219049560313,
+            "front_projected_area_m2": 0.07841014546248157,
+            "visible_fraction_of_front_projected": 0.7017228468467855,
+            "triangle_area_m2": 0.3327845638485446
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.060304524673096535,
+            "front_projected_area_m2": 0.06823257043720451,
+            "visible_fraction_of_front_projected": 0.88380848452127,
+            "triangle_area_m2": 0.20527243000469536
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.018868582332947095,
+            "front_projected_area_m2": 0.02116878810135676,
+            "visible_fraction_of_front_projected": 0.8913397518367034,
+            "triangle_area_m2": 0.20593017494324883
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1377289108917219,
+            "front_projected_area_m2": 0.14201044894331938,
+            "visible_fraction_of_front_projected": 0.9698505421012621,
+            "triangle_area_m2": 0.37352853049009505
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.053533619284290006,
+            "front_projected_area_m2": 0.0813848039026383,
+            "visible_fraction_of_front_projected": 0.6577839684707353,
+            "triangle_area_m2": 0.3738899896790442
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_pelvis_spine_flex",
+    "mesh_sha256": "84a3ff38e41a485ac3b261ef682d6718c968d1ba95f0137037307a25072a344c",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9925053533190579,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.031061435895732258,
+            "front_projected_area_m2": 0.038443936060807885,
+            "visible_fraction_of_front_projected": 0.8079671094708275,
+            "triangle_area_m2": 0.17298781760218562
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.12485853203104501,
+            "front_projected_area_m2": 0.12571099911452988,
+            "visible_fraction_of_front_projected": 0.9932188345531466,
+            "triangle_area_m2": 0.35635739691208856
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0555176127480457,
+            "front_projected_area_m2": 0.05928855405071172,
+            "visible_fraction_of_front_projected": 0.9363968077305345,
+            "triangle_area_m2": 0.20628854689720857
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.05490450946766914,
+            "front_projected_area_m2": 0.05790385880575396,
+            "visible_fraction_of_front_projected": 0.948201218365316,
+            "triangle_area_m2": 0.20653608160159115
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10357277325176648,
+            "front_projected_area_m2": 0.10438928705636284,
+            "visible_fraction_of_front_projected": 0.9921781839150265,
+            "triangle_area_m2": 0.37467774297771583
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0994538281211604,
+            "front_projected_area_m2": 0.10063648030968425,
+            "visible_fraction_of_front_projected": 0.98824827552708,
+            "triangle_area_m2": 0.3744164794772257
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9922222222222222,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.029145461263318163,
+            "front_projected_area_m2": 0.03871933736589747,
+            "visible_fraction_of_front_projected": 0.7527365715971261,
+            "triangle_area_m2": 0.17298781760218562
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11616523521208702,
+            "front_projected_area_m2": 0.11823848552772784,
+            "visible_fraction_of_front_projected": 0.9824655203727671,
+            "triangle_area_m2": 0.35635739691208856
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.05336470038577371,
+            "front_projected_area_m2": 0.05633795506253544,
+            "visible_fraction_of_front_projected": 0.9472246610040888,
+            "triangle_area_m2": 0.20628854689720857
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.04730635347138081,
+            "front_projected_area_m2": 0.051420320524523465,
+            "visible_fraction_of_front_projected": 0.9199933603840409,
+            "triangle_area_m2": 0.20653608160159115
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.11458392856686876,
+            "front_projected_area_m2": 0.11570080953697699,
+            "visible_fraction_of_front_projected": 0.9903468180164178,
+            "triangle_area_m2": 0.37467774297771583
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09736004720334168,
+            "front_projected_area_m2": 0.09964348478301885,
+            "visible_fraction_of_front_projected": 0.9770839249083919,
+            "triangle_area_m2": 0.3744164794772257
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9887640449438202,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.033431600991166086,
+            "front_projected_area_m2": 0.04648935119423485,
+            "visible_fraction_of_front_projected": 0.7191238451895613,
+            "triangle_area_m2": 0.17298781760218562
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.05824144210214949,
+            "front_projected_area_m2": 0.08472367518135862,
+            "visible_fraction_of_front_projected": 0.6874281831787686,
+            "triangle_area_m2": 0.35635739691208856
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.03382670960661758,
+            "front_projected_area_m2": 0.03752098139312205,
+            "visible_fraction_of_front_projected": 0.9015411737822597,
+            "triangle_area_m2": 0.20628854689720857
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.010699253640522273,
+            "front_projected_area_m2": 0.03670696797104948,
+            "visible_fraction_of_front_projected": 0.291477455968597,
+            "triangle_area_m2": 0.20653608160159115
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13541057683984972,
+            "front_projected_area_m2": 0.13784530712684862,
+            "visible_fraction_of_front_projected": 0.9823372275941291,
+            "triangle_area_m2": 0.37467774297771583
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.04263974076597251,
+            "front_projected_area_m2": 0.09552695965777329,
+            "visible_fraction_of_front_projected": 0.44636342367358905,
+            "triangle_area_m2": 0.3744164794772257
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9893992932862191,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.035450284382965325,
+            "front_projected_area_m2": 0.04665113777969343,
+            "visible_fraction_of_front_projected": 0.7599018174085418,
+            "triangle_area_m2": 0.17298781760218562
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.08405749428111524,
+            "front_projected_area_m2": 0.09684219672255212,
+            "visible_fraction_of_front_projected": 0.8679841755545427,
+            "triangle_area_m2": 0.35635739691208856
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04856681323735565,
+            "front_projected_area_m2": 0.052406464428500915,
+            "visible_fraction_of_front_projected": 0.9267332526050528,
+            "triangle_area_m2": 0.20628854689720857
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.036029156524228015,
+            "front_projected_area_m2": 0.03712288365846793,
+            "visible_fraction_of_front_projected": 0.9705376569260554,
+            "triangle_area_m2": 0.20653608160159115
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13436214752761158,
+            "front_projected_area_m2": 0.1366389478660297,
+            "visible_fraction_of_front_projected": 0.9833371057522307,
+            "triangle_area_m2": 0.37467774297771583
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.08965150690037402,
+            "front_projected_area_m2": 0.09389092799111447,
+            "visible_fraction_of_front_projected": 0.9548473832195837,
+            "triangle_area_m2": 0.3744164794772257
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_raised_foot",
+    "mesh_sha256": "386dac88931f02b4a25788519d2bc77b28d6f38bf629a305eea826190a49920a",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9879385964912281,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03313103873049869,
+            "front_projected_area_m2": 0.040272681819100695,
+            "visible_fraction_of_front_projected": 0.8226678044268004,
+            "triangle_area_m2": 0.172899118337688
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11780033555881489,
+            "front_projected_area_m2": 0.11962232754989055,
+            "visible_fraction_of_front_projected": 0.9847687966921078,
+            "triangle_area_m2": 0.33664977040288563
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06122108004459564,
+            "front_projected_area_m2": 0.06484228894467538,
+            "visible_fraction_of_front_projected": 0.9441535923697971,
+            "triangle_area_m2": 0.2063519023654436
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06073075266914261,
+            "front_projected_area_m2": 0.06445824064085325,
+            "visible_fraction_of_front_projected": 0.9421720491491637,
+            "triangle_area_m2": 0.21126074109218065
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.08971315276851607,
+            "front_projected_area_m2": 0.09127581090166992,
+            "visible_fraction_of_front_projected": 0.9828798219624992,
+            "triangle_area_m2": 0.3776863644504649
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.10113163886243799,
+            "front_projected_area_m2": 0.1030004423064371,
+            "visible_fraction_of_front_projected": 0.9818563551558428,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.987220447284345,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.033442535774637065,
+            "front_projected_area_m2": 0.04054718806658757,
+            "visible_fraction_of_front_projected": 0.8247806412547506,
+            "triangle_area_m2": 0.172899118337688
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11344168460025605,
+            "front_projected_area_m2": 0.11605545156004214,
+            "visible_fraction_of_front_projected": 0.9774782922762242,
+            "triangle_area_m2": 0.33664977040288563
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0659540791511226,
+            "front_projected_area_m2": 0.06851245097514239,
+            "visible_fraction_of_front_projected": 0.9626582936735395,
+            "triangle_area_m2": 0.2063519023654436
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.05534372056369716,
+            "front_projected_area_m2": 0.05907650572374878,
+            "visible_fraction_of_front_projected": 0.9368143881510744,
+            "triangle_area_m2": 0.21126074109218065
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10568207502891615,
+            "front_projected_area_m2": 0.10741903174042958,
+            "visible_fraction_of_front_projected": 0.9838300840794147,
+            "triangle_area_m2": 0.3776863644504649
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09843224094341459,
+            "front_projected_area_m2": 0.10073300238461386,
+            "visible_fraction_of_front_projected": 0.9771598047637395,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9895209580838323,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.039902042776350066,
+            "front_projected_area_m2": 0.04906724463544161,
+            "visible_fraction_of_front_projected": 0.8132114014718598,
+            "triangle_area_m2": 0.172899118337688
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.030498915071627594,
+            "front_projected_area_m2": 0.07337288493230598,
+            "visible_fraction_of_front_projected": 0.41567010892056344,
+            "triangle_area_m2": 0.33664977040288563
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0479117780269735,
+            "front_projected_area_m2": 0.05535471263537872,
+            "visible_fraction_of_front_projected": 0.8655410848678449,
+            "triangle_area_m2": 0.2063519023654436
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.00980920531717008,
+            "front_projected_area_m2": 0.03042255104140255,
+            "visible_fraction_of_front_projected": 0.3224320440393237,
+            "triangle_area_m2": 0.21126074109218065
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1362476856052548,
+            "front_projected_area_m2": 0.1399078399094597,
+            "visible_fraction_of_front_projected": 0.9738388191356999,
+            "triangle_area_m2": 0.3776863644504649
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.07172271053324443,
+            "front_projected_area_m2": 0.09167912370571174,
+            "visible_fraction_of_front_projected": 0.7823232556571219,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9897660818713451,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03966451834013497,
+            "front_projected_area_m2": 0.049173842958579336,
+            "visible_fraction_of_front_projected": 0.8066182334690749,
+            "triangle_area_m2": 0.172899118337688
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.06566858185416807,
+            "front_projected_area_m2": 0.08569836502696572,
+            "visible_fraction_of_front_projected": 0.7662757840654824,
+            "triangle_area_m2": 0.33664977040288563
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.046686435357434955,
+            "front_projected_area_m2": 0.05774461694716399,
+            "visible_fraction_of_front_projected": 0.8084984856710157,
+            "triangle_area_m2": 0.2063519023654436
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.012808051258635888,
+            "front_projected_area_m2": 0.028257983742027655,
+            "visible_fraction_of_front_projected": 0.45325425110166917,
+            "triangle_area_m2": 0.21126074109218065
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13317368323498147,
+            "front_projected_area_m2": 0.13661373151912648,
+            "visible_fraction_of_front_projected": 0.9748191616911994,
+            "triangle_area_m2": 0.3776863644504649
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.04490742166237891,
+            "front_projected_area_m2": 0.08883628447125524,
+            "visible_fraction_of_front_projected": 0.5055076529783233,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_seated",
+    "mesh_sha256": "7baaf6e16c21f989301e472f6d3bc5d3c0d80c69109c568a37dd66e69d4d7ffe",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9895424836601308,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03240142456193916,
+            "front_projected_area_m2": 0.03908624417678689,
+            "visible_fraction_of_front_projected": 0.8289725770372737,
+            "triangle_area_m2": 0.17310080421717158
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11418486950614817,
+            "front_projected_area_m2": 0.11648493443511343,
+            "visible_fraction_of_front_projected": 0.980254399934899,
+            "triangle_area_m2": 0.33010086337017036
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.05889181010386127,
+            "front_projected_area_m2": 0.06245529776992261,
+            "visible_fraction_of_front_projected": 0.942943388418565,
+            "triangle_area_m2": 0.20649570652764182
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.058953151455444205,
+            "front_projected_area_m2": 0.06250471761879059,
+            "visible_fraction_of_front_projected": 0.9431792303261493,
+            "triangle_area_m2": 0.20668189987055138
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.061149209456410274,
+            "front_projected_area_m2": 0.06961362957429289,
+            "visible_fraction_of_front_projected": 0.8784085793307296,
+            "triangle_area_m2": 0.3880662589808795
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.061153936188776695,
+            "front_projected_area_m2": 0.06963395636791507,
+            "visible_fraction_of_front_projected": 0.8782200434751446,
+            "triangle_area_m2": 0.3880725045620448
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9899117276166457,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.033283150763329626,
+            "front_projected_area_m2": 0.040962400297949814,
+            "visible_fraction_of_front_projected": 0.8125293078832458,
+            "triangle_area_m2": 0.17310080421717158
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.1097178831102903,
+            "front_projected_area_m2": 0.1127858748859331,
+            "visible_fraction_of_front_projected": 0.9727980850550157,
+            "triangle_area_m2": 0.33010086337017036
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06219471354899578,
+            "front_projected_area_m2": 0.06519868344555457,
+            "visible_fraction_of_front_projected": 0.9539259117238569,
+            "triangle_area_m2": 0.20649570652764182
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.05180148350860315,
+            "front_projected_area_m2": 0.055500154393830395,
+            "visible_fraction_of_front_projected": 0.9333574667381753,
+            "triangle_area_m2": 0.20668189987055138
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.08580863815453106,
+            "front_projected_area_m2": 0.09034959999613308,
+            "visible_fraction_of_front_projected": 0.9497401002129907,
+            "triangle_area_m2": 0.3880662589808795
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.05749621613199518,
+            "front_projected_area_m2": 0.06943022093341213,
+            "visible_fraction_of_front_projected": 0.8281151256473404,
+            "triangle_area_m2": 0.3880725045620448
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9979423868312757,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.040363916357192456,
+            "front_projected_area_m2": 0.049660340563640874,
+            "visible_fraction_of_front_projected": 0.8127998297850004,
+            "triangle_area_m2": 0.17310080421717158
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.02903590031934066,
+            "front_projected_area_m2": 0.06704810928059433,
+            "visible_fraction_of_front_projected": 0.43306068777907347,
+            "triangle_area_m2": 0.33010086337017036
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04801943232284395,
+            "front_projected_area_m2": 0.055462449266565475,
+            "visible_fraction_of_front_projected": 0.8658007887832603,
+            "triangle_area_m2": 0.20649570652764182
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.02235767728375056,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.20668189987055138
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12963108210340699,
+            "front_projected_area_m2": 0.13454970073792494,
+            "visible_fraction_of_front_projected": 0.9634438530331747,
+            "triangle_area_m2": 0.3880662589808795
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.09760115085935261,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.3880725045620448
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9913669064748202,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.039253338740839035,
+            "front_projected_area_m2": 0.04893416782802709,
+            "visible_fraction_of_front_projected": 0.8021662671119677,
+            "triangle_area_m2": 0.17310080421717158
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.060068037595280246,
+            "front_projected_area_m2": 0.07616040471629038,
+            "visible_fraction_of_front_projected": 0.7887042856329775,
+            "triangle_area_m2": 0.33010086337017036
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04959483961667421,
+            "front_projected_area_m2": 0.060110041091441024,
+            "visible_fraction_of_front_projected": 0.8250674715265823,
+            "triangle_area_m2": 0.20649570652764182
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.02154780767018836,
+            "front_projected_area_m2": 0.024047729764280282,
+            "visible_fraction_of_front_projected": 0.8960433222347156,
+            "triangle_area_m2": 0.20668189987055138
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12132277018269372,
+            "front_projected_area_m2": 0.12733358395535987,
+            "visible_fraction_of_front_projected": 0.9527947491466713,
+            "triangle_area_m2": 0.3880662589808795
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.05990738321755222,
+            "front_projected_area_m2": 0.09745077146781825,
+            "visible_fraction_of_front_projected": 0.6147450893945544,
+            "triangle_area_m2": 0.3880725045620448
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "f_af01_wrist_torsion",
+    "mesh_sha256": "6fb5be5752d4cd390c3961a1b3088723545a895ba61417fd1bc8d4760fdfab9d",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9883966244725738,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03297556619518832,
+            "front_projected_area_m2": 0.03939338849727324,
+            "visible_fraction_of_front_projected": 0.8370837709853483,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.1133130840085871,
+            "front_projected_area_m2": 0.11481933492928842,
+            "visible_fraction_of_front_projected": 0.9868815568246503,
+            "triangle_area_m2": 0.33033224150621554
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06316520562342232,
+            "front_projected_area_m2": 0.06433015289370843,
+            "visible_fraction_of_front_projected": 0.9818911160958853,
+            "triangle_area_m2": 0.21644699965811437
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06483980672503674,
+            "front_projected_area_m2": 0.06540049922801522,
+            "visible_fraction_of_front_projected": 0.9914267855811978,
+            "triangle_area_m2": 0.20620624981511465
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.10113572124788026,
+            "front_projected_area_m2": 0.10300452508362777,
+            "visible_fraction_of_front_projected": 0.9818570705099581,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.10113163886243799,
+            "front_projected_area_m2": 0.1030004423064371,
+            "visible_fraction_of_front_projected": 0.9818563551558428,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9884575026232949,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03408647736392815,
+            "front_projected_area_m2": 0.04139454320205306,
+            "visible_fraction_of_front_projected": 0.8234534005496055,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.10737021946499975,
+            "front_projected_area_m2": 0.1096401676246036,
+            "visible_fraction_of_front_projected": 0.9792963818937608,
+            "triangle_area_m2": 0.33033224150621554
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0682354831217959,
+            "front_projected_area_m2": 0.06981599254537596,
+            "visible_fraction_of_front_projected": 0.9773617853738479,
+            "triangle_area_m2": 0.21644699965811437
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.05828348152335992,
+            "front_projected_area_m2": 0.05918647553782542,
+            "visible_fraction_of_front_projected": 0.9847432372639184,
+            "triangle_area_m2": 0.20620624981511465
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.11048056537914148,
+            "front_projected_area_m2": 0.11157719145529878,
+            "visible_fraction_of_front_projected": 0.9901715927614414,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09843224094341459,
+            "front_projected_area_m2": 0.10073300238461386,
+            "visible_fraction_of_front_projected": 0.9771598047637395,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9849906191369606,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.040363911415994186,
+            "front_projected_area_m2": 0.049660334020908733,
+            "visible_fraction_of_front_projected": 0.812799837371202,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.018343338943700646,
+            "front_projected_area_m2": 0.06565623843079012,
+            "visible_fraction_of_front_projected": 0.27938455479804586,
+            "triangle_area_m2": 0.33033224150621554
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06616393050575217,
+            "front_projected_area_m2": 0.08034081166547263,
+            "visible_fraction_of_front_projected": 0.823540727734356,
+            "triangle_area_m2": 0.21644699965811437
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0009355723298247958,
+            "front_projected_area_m2": 0.024121429720842347,
+            "visible_fraction_of_front_projected": 0.03878594016408595,
+            "triangle_area_m2": 0.20620624981511465
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13951683042637358,
+            "front_projected_area_m2": 0.1419923050165613,
+            "visible_fraction_of_front_projected": 0.9825661356092572,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.09167912370571174,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.99125,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.039023651056633066,
+            "front_projected_area_m2": 0.04866741496129845,
+            "visible_fraction_of_front_projected": 0.8018435145500465,
+            "triangle_area_m2": 0.1731008060672483
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.06136832608279573,
+            "front_projected_area_m2": 0.07920598488616098,
+            "visible_fraction_of_front_projected": 0.7747940533912623,
+            "triangle_area_m2": 0.33033224150621554
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06572786947581863,
+            "front_projected_area_m2": 0.07955300636124552,
+            "visible_fraction_of_front_projected": 0.8262147778218745,
+            "triangle_area_m2": 0.21644699965811437
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.019423833709089372,
+            "front_projected_area_m2": 0.023474214636773297,
+            "visible_fraction_of_front_projected": 0.8274540388099356,
+            "triangle_area_m2": 0.20620624981511465
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14064360515199195,
+            "front_projected_area_m2": 0.14360170928168253,
+            "visible_fraction_of_front_projected": 0.9794006342648185,
+            "triangle_area_m2": 0.3743257974933451
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.07673189953714923,
+            "front_projected_area_m2": 0.08883628447125524,
+            "visible_fraction_of_front_projected": 0.8637450338434334,
+            "triangle_area_m2": 0.37432581769660517
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_morph_neutral",
+    "mesh_sha256": "4be7b7d4a96890a53e753b8afe7f476db88dbe9cdfd590fa294051d54d916784",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9931212381771282,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04659998485644476,
+            "front_projected_area_m2": 0.0539861550478522,
+            "visible_fraction_of_front_projected": 0.8631839925465984,
+            "triangle_area_m2": 0.21497250690294062
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.12688618775980157,
+            "front_projected_area_m2": 0.12695634003462541,
+            "visible_fraction_of_front_projected": 0.9994474299211468,
+            "triangle_area_m2": 0.3814683475716936
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08187583793435002,
+            "front_projected_area_m2": 0.08639102055682377,
+            "visible_fraction_of_front_projected": 0.947735510086909,
+            "triangle_area_m2": 0.28309760768060915
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07883630995482718,
+            "front_projected_area_m2": 0.08334161263993865,
+            "visible_fraction_of_front_projected": 0.9459417385577147,
+            "triangle_area_m2": 0.2791834967269714
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12868212370797533,
+            "front_projected_area_m2": 0.1307147577220417,
+            "visible_fraction_of_front_projected": 0.9844498505793152,
+            "triangle_area_m2": 0.46411064783672945
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12865736142454562,
+            "front_projected_area_m2": 0.1306899952547579,
+            "visible_fraction_of_front_projected": 0.9844469056238772,
+            "triangle_area_m2": 0.46369171207831006
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9921602787456446,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.046961398930500796,
+            "front_projected_area_m2": 0.05567920957609104,
+            "visible_fraction_of_front_projected": 0.8434279022284519,
+            "triangle_area_m2": 0.21497250690294062
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11820920404059114,
+            "front_projected_area_m2": 0.1189683456792481,
+            "visible_fraction_of_front_projected": 0.9936189611251408,
+            "triangle_area_m2": 0.3814683475716936
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0889931484581799,
+            "front_projected_area_m2": 0.09186967065746088,
+            "visible_fraction_of_front_projected": 0.9686890986035405,
+            "triangle_area_m2": 0.28309760768060915
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06784862120448187,
+            "front_projected_area_m2": 0.0721350220141859,
+            "visible_fraction_of_front_projected": 0.9405780896710467,
+            "triangle_area_m2": 0.2791834967269714
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14105011702010228,
+            "front_projected_area_m2": 0.14260561347451367,
+            "visible_fraction_of_front_projected": 0.9890923196043094,
+            "triangle_area_m2": 0.46411064783672945
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12024760975647163,
+            "front_projected_area_m2": 0.12288157479638866,
+            "visible_fraction_of_front_projected": 0.9785650123358084,
+            "triangle_area_m2": 0.46369171207831006
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.995253164556962,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.049988004135331,
+            "front_projected_area_m2": 0.061487133043435595,
+            "visible_fraction_of_front_projected": 0.8129831667386181,
+            "triangle_area_m2": 0.21497250690294062
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.034574870663033025,
+            "front_projected_area_m2": 0.07935022692675156,
+            "visible_fraction_of_front_projected": 0.43572491222928944,
+            "triangle_area_m2": 0.3814683475716936
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06695942464245315,
+            "front_projected_area_m2": 0.0828038586893978,
+            "visible_fraction_of_front_projected": 0.8086510182287753,
+            "triangle_area_m2": 0.28309760768060915
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.03173587583284154,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.2791834967269714
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.17153736670569875,
+            "front_projected_area_m2": 0.17789944494647028,
+            "visible_fraction_of_front_projected": 0.9642377847627019,
+            "triangle_area_m2": 0.46411064783672945
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.11116980343450311,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.46369171207831006
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9908722109533469,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.046197047132503645,
+            "front_projected_area_m2": 0.05854478048918198,
+            "visible_fraction_of_front_projected": 0.7890890826901303,
+            "triangle_area_m2": 0.21497250690294062
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.08619574041846172,
+            "front_projected_area_m2": 0.10322694663568874,
+            "visible_fraction_of_front_projected": 0.8350120121509164,
+            "triangle_area_m2": 0.3814683475716936
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07619929525346006,
+            "front_projected_area_m2": 0.08531697618373074,
+            "visible_fraction_of_front_projected": 0.8931316915096043,
+            "triangle_area_m2": 0.28309760768060915
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.026831322249575004,
+            "front_projected_area_m2": 0.0330541648349569,
+            "visible_fraction_of_front_projected": 0.8117380179940036,
+            "triangle_area_m2": 0.2791834967269714
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1687756964193055,
+            "front_projected_area_m2": 0.1724783777126134,
+            "visible_fraction_of_front_projected": 0.9785324900291132,
+            "triangle_area_m2": 0.46411064783672945
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.09287120120258681,
+            "front_projected_area_m2": 0.11243815959508933,
+            "visible_fraction_of_front_projected": 0.8259758211716843,
+            "triangle_area_m2": 0.46369171207831006
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_neutral",
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9913569576490925,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04666778186948965,
+            "front_projected_area_m2": 0.054051424737048465,
+            "visible_fraction_of_front_projected": 0.8633959622067493,
+            "triangle_area_m2": 0.21480935352454558
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.1237747639449839,
+            "front_projected_area_m2": 0.1238449157763209,
+            "visible_fraction_of_front_projected": 0.9994335509786797,
+            "triangle_area_m2": 0.37488535697329
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07942759454007506,
+            "front_projected_area_m2": 0.08394088247874087,
+            "visible_fraction_of_front_projected": 0.9462325412196034,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07998863975220646,
+            "front_projected_area_m2": 0.08449394842447144,
+            "visible_fraction_of_front_projected": 0.9466789189489441,
+            "triangle_area_m2": 0.2809528899053828
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12882458133912372,
+            "front_projected_area_m2": 0.13085721574823028,
+            "visible_fraction_of_front_projected": 0.9844667762684378,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12882458431552427,
+            "front_projected_area_m2": 0.13085721756292085,
+            "visible_fraction_of_front_projected": 0.9844667853615394,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9921190893169878,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.047041354435119836,
+            "front_projected_area_m2": 0.05575925543993815,
+            "visible_fraction_of_front_projected": 0.8436510506455933,
+            "triangle_area_m2": 0.21480935352454558
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11799125682649468,
+            "front_projected_area_m2": 0.11875059562251093,
+            "visible_fraction_of_front_projected": 0.993605600106377,
+            "triangle_area_m2": 0.37488535697329
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08713533475406766,
+            "front_projected_area_m2": 0.09001240532950143,
+            "visible_fraction_of_front_projected": 0.9680369548519241,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06853355133380246,
+            "front_projected_area_m2": 0.07281994646034926,
+            "visible_fraction_of_front_projected": 0.9411370739076174,
+            "triangle_area_m2": 0.2809528899053828
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14127866725828023,
+            "front_projected_area_m2": 0.1428336428662348,
+            "visible_fraction_of_front_projected": 0.9891133798960038,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12035688961090546,
+            "front_projected_area_m2": 0.1229908535488416,
+            "visible_fraction_of_front_projected": 0.9785840665225553,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9952305246422893,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04998087582686128,
+            "front_projected_area_m2": 0.06147688144267044,
+            "visible_fraction_of_front_projected": 0.8130027850139141,
+            "triangle_area_m2": 0.21480935352454558
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.03306653797850698,
+            "front_projected_area_m2": 0.08021640400206745,
+            "visible_fraction_of_front_projected": 0.41221665804982655,
+            "triangle_area_m2": 0.37488535697329
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06715410330912795,
+            "front_projected_area_m2": 0.08242899891822326,
+            "visible_fraction_of_front_projected": 0.814690269085406,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.0317358832329856,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.2809528899053828
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.17161869121924783,
+            "front_projected_area_m2": 0.17799491093638076,
+            "visible_fraction_of_front_projected": 0.9641775167414088,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.11116982037896908,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9906832298136646,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04615422712596521,
+            "front_projected_area_m2": 0.0585174992130576,
+            "visible_fraction_of_front_projected": 0.7887252146220621,
+            "triangle_area_m2": 0.21480935352454558
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.08149052158225406,
+            "front_projected_area_m2": 0.09930490020772217,
+            "visible_fraction_of_front_projected": 0.8206092691477995,
+            "triangle_area_m2": 0.37488535697329
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07419092111950458,
+            "front_projected_area_m2": 0.08462424580099351,
+            "visible_fraction_of_front_projected": 0.8767099832591189,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.02683132765220108,
+            "front_projected_area_m2": 0.03305418161861399,
+            "visible_fraction_of_front_projected": 0.8117377692718734,
+            "triangle_area_m2": 0.2809528899053828
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.16875751912659304,
+            "front_projected_area_m2": 0.1724624324224926,
+            "visible_fraction_of_front_projected": 0.9785175632521326,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0928712050675918,
+            "front_projected_area_m2": 0.11243817540261,
+            "visible_fraction_of_front_projected": 0.8259757394234273,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_pelvis_spine_extend",
+    "mesh_sha256": "2d5d7774ad3c57cc01cecf3cabe1e884a36355b0b7a566bd34fdf7c346fcd826",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9895652173913043,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04810680081133398,
+            "front_projected_area_m2": 0.05636460999689015,
+            "visible_fraction_of_front_projected": 0.8534930129737119,
+            "triangle_area_m2": 0.21481413673798536
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.10947304629394562,
+            "front_projected_area_m2": 0.10958337862636904,
+            "visible_fraction_of_front_projected": 0.9989931654434602,
+            "triangle_area_m2": 0.3631195767835341
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0767147884926429,
+            "front_projected_area_m2": 0.08062115331419842,
+            "visible_fraction_of_front_projected": 0.9515466517040317,
+            "triangle_area_m2": 0.2791151752616434
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.08762001988648424,
+            "front_projected_area_m2": 0.08964811257488288,
+            "visible_fraction_of_front_projected": 0.9773771847488192,
+            "triangle_area_m2": 0.27606701670349315
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12575305456253394,
+            "front_projected_area_m2": 0.1277398463977066,
+            "visible_fraction_of_front_projected": 0.9844465772333327,
+            "triangle_area_m2": 0.4616174372026545
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.13217878518984136,
+            "front_projected_area_m2": 0.1336609542668938,
+            "visible_fraction_of_front_projected": 0.9889109793867484,
+            "triangle_area_m2": 0.4632395584045564
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9938162544169611,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04720621672805061,
+            "front_projected_area_m2": 0.05802295603688105,
+            "visible_fraction_of_front_projected": 0.8135782792252947,
+            "triangle_area_m2": 0.21481413673798536
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.10166375929074534,
+            "front_projected_area_m2": 0.10188864494794536,
+            "visible_fraction_of_front_projected": 0.9977928290506276,
+            "triangle_area_m2": 0.3631195767835341
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.09133738380194154,
+            "front_projected_area_m2": 0.09331405786947132,
+            "visible_fraction_of_front_projected": 0.9788169744981535,
+            "triangle_area_m2": 0.2791151752616434
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07344821525818535,
+            "front_projected_area_m2": 0.07568977787413438,
+            "visible_fraction_of_front_projected": 0.9703848699400789,
+            "triangle_area_m2": 0.27606701670349315
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13548134409615992,
+            "front_projected_area_m2": 0.1371642091228143,
+            "visible_fraction_of_front_projected": 0.9877310193568967,
+            "triangle_area_m2": 0.4616174372026545
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12264968081232099,
+            "front_projected_area_m2": 0.12514599803913778,
+            "visible_fraction_of_front_projected": 0.9800527602485849,
+            "triangle_area_m2": 0.4632395584045564
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9944444444444445,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04891292866387153,
+            "front_projected_area_m2": 0.06298791183170001,
+            "visible_fraction_of_front_projected": 0.7765446931240393,
+            "triangle_area_m2": 0.21481413673798536
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.029286315664601374,
+            "front_projected_area_m2": 0.06766344121887556,
+            "visible_fraction_of_front_projected": 0.4328233258173631,
+            "triangle_area_m2": 0.3631195767835341
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.09520047548736828,
+            "front_projected_area_m2": 0.10560160345561552,
+            "visible_fraction_of_front_projected": 0.9015059655545964,
+            "triangle_area_m2": 0.2791151752616434
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0010104016068220117,
+            "front_projected_area_m2": 0.013888181232224989,
+            "visible_fraction_of_front_projected": 0.07275262253041163,
+            "triangle_area_m2": 0.27606701670349315
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.15065254015902027,
+            "front_projected_area_m2": 0.17593872122243387,
+            "visible_fraction_of_front_projected": 0.8562784764620116,
+            "triangle_area_m2": 0.4616174372026545
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.04056025332177673,
+            "front_projected_area_m2": 0.10273022746100224,
+            "visible_fraction_of_front_projected": 0.39482296811981593,
+            "triangle_area_m2": 0.4632395584045564
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.995575221238938,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04603507302464949,
+            "front_projected_area_m2": 0.060038497146512076,
+            "visible_fraction_of_front_projected": 0.7667592496912439,
+            "triangle_area_m2": 0.21481413673798536
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.06471300242110344,
+            "front_projected_area_m2": 0.08963248706787434,
+            "visible_fraction_of_front_projected": 0.7219815553271373,
+            "triangle_area_m2": 0.3631195767835341
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08808684227811556,
+            "front_projected_area_m2": 0.0982704442350785,
+            "visible_fraction_of_front_projected": 0.8963716706866396,
+            "triangle_area_m2": 0.2791151752616434
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.02347627816662286,
+            "front_projected_area_m2": 0.02593396546240486,
+            "visible_fraction_of_front_projected": 0.9052328769641965,
+            "triangle_area_m2": 0.27606701670349315
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1662465057740437,
+            "front_projected_area_m2": 0.17227317252407465,
+            "visible_fraction_of_front_projected": 0.9650168005747457,
+            "triangle_area_m2": 0.4616174372026545
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.06800825017371162,
+            "front_projected_area_m2": 0.10233992689445864,
+            "visible_fraction_of_front_projected": 0.6645329172830788,
+            "triangle_area_m2": 0.4632395584045564
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_pelvis_spine_flex",
+    "mesh_sha256": "03006c8c65a7ee08efc5b5dab64207821299808f841a475c4f657c88589656e1",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9880444064901793,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04162792686100845,
+            "front_projected_area_m2": 0.05002591585204336,
+            "visible_fraction_of_front_projected": 0.832127231495915,
+            "triangle_area_m2": 0.21491321418087567
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.14017977799832487,
+            "front_projected_area_m2": 0.1402464203577373,
+            "visible_fraction_of_front_projected": 0.9995248195337718,
+            "triangle_area_m2": 0.405637615893723
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07498371318965916,
+            "front_projected_area_m2": 0.07913556303791669,
+            "visible_fraction_of_front_projected": 0.9475349679856548,
+            "triangle_area_m2": 0.27677019192197944
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07723599131064872,
+            "front_projected_area_m2": 0.08029055443244015,
+            "visible_fraction_of_front_projected": 0.9619561336525373,
+            "triangle_area_m2": 0.2807251292611913
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13198016032713045,
+            "front_projected_area_m2": 0.13310384761345334,
+            "visible_fraction_of_front_projected": 0.991557815146064,
+            "triangle_area_m2": 0.4656769637971343
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12460355401873388,
+            "front_projected_area_m2": 0.12597199264156453,
+            "visible_fraction_of_front_projected": 0.9891369613662908,
+            "triangle_area_m2": 0.4641919783779903
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9930191972076788,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.03810767716604057,
+            "front_projected_area_m2": 0.0488565992533469,
+            "visible_fraction_of_front_projected": 0.7799903748607722,
+            "triangle_area_m2": 0.21491321418087567
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.13075536798295825,
+            "front_projected_area_m2": 0.1322154333381472,
+            "visible_fraction_of_front_projected": 0.9889569219089971,
+            "triangle_area_m2": 0.405637615893723
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07272246262217814,
+            "front_projected_area_m2": 0.07648353465499041,
+            "visible_fraction_of_front_projected": 0.950825075622118,
+            "triangle_area_m2": 0.27677019192197944
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07077147989119754,
+            "front_projected_area_m2": 0.07257149811274767,
+            "visible_fraction_of_front_projected": 0.9751966230770983,
+            "triangle_area_m2": 0.2807251292611913
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14732975907529064,
+            "front_projected_area_m2": 0.14863864799526652,
+            "visible_fraction_of_front_projected": 0.9911941548336906,
+            "triangle_area_m2": 0.4656769637971343
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.11783035627597513,
+            "front_projected_area_m2": 0.12037094892413189,
+            "visible_fraction_of_front_projected": 0.9788936394465241,
+            "triangle_area_m2": 0.4641919783779903
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9959731543624161,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.036375524149211656,
+            "front_projected_area_m2": 0.05447008753172511,
+            "visible_fraction_of_front_projected": 0.6678073378902759,
+            "triangle_area_m2": 0.21491321418087567
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.07160294854419808,
+            "front_projected_area_m2": 0.0997385808500386,
+            "visible_fraction_of_front_projected": 0.7179062298054582,
+            "triangle_area_m2": 0.405637615893723
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.04793451491886476,
+            "front_projected_area_m2": 0.053635919233294096,
+            "visible_fraction_of_front_projected": 0.8937017506937732,
+            "triangle_area_m2": 0.27677019192197944
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.00719039326730663,
+            "front_projected_area_m2": 0.050632517944146256,
+            "visible_fraction_of_front_projected": 0.14201137054330373,
+            "triangle_area_m2": 0.2807251292611913
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.16856156189952706,
+            "front_projected_area_m2": 0.17127641607044058,
+            "visible_fraction_of_front_projected": 0.9841492820015747,
+            "triangle_area_m2": 0.4656769637971343
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0436682742484128,
+            "front_projected_area_m2": 0.11728366697804538,
+            "visible_fraction_of_front_projected": 0.3723303966662909,
+            "triangle_area_m2": 0.4641919783779903
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9884615384615385,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.039821062849349075,
+            "front_projected_area_m2": 0.05465607286507358,
+            "visible_fraction_of_front_projected": 0.7285752664237902,
+            "triangle_area_m2": 0.21491321418087567
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.10509294915969317,
+            "front_projected_area_m2": 0.11935666377171615,
+            "visible_fraction_of_front_projected": 0.8804950292569836,
+            "triangle_area_m2": 0.405637615893723
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06441706768464986,
+            "front_projected_area_m2": 0.06959142530791015,
+            "visible_fraction_of_front_projected": 0.9256466209685154,
+            "triangle_area_m2": 0.27677019192197944
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0433383378586282,
+            "front_projected_area_m2": 0.046737914674500766,
+            "visible_fraction_of_front_projected": 0.9272629761180315,
+            "triangle_area_m2": 0.2807251292611913
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1617476355355154,
+            "front_projected_area_m2": 0.1640887530785348,
+            "visible_fraction_of_front_projected": 0.9857326142158025,
+            "triangle_area_m2": 0.4656769637971343
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.10841130341512965,
+            "front_projected_area_m2": 0.11825171109940702,
+            "visible_fraction_of_front_projected": 0.9167842258451115,
+            "triangle_area_m2": 0.4641919783779903
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_raised_foot",
+    "mesh_sha256": "c0eb1d22ead9503ed460a08d58aa99b4e8fc9570921b693b2bd33218caa21106",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9902912621359223,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.046811653362002645,
+            "front_projected_area_m2": 0.055003725972690765,
+            "visible_fraction_of_front_projected": 0.8510633149696901,
+            "triangle_area_m2": 0.21501523097956304
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.12635634531755796,
+            "front_projected_area_m2": 0.12644921953369498,
+            "visible_fraction_of_front_projected": 0.9992655216340638,
+            "triangle_area_m2": 0.3736921331878048
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07942759454007506,
+            "front_projected_area_m2": 0.08394088247874087,
+            "visible_fraction_of_front_projected": 0.9462325412196034,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07803255935880182,
+            "front_projected_area_m2": 0.08225603930191738,
+            "visible_fraction_of_front_projected": 0.9486544698850202,
+            "triangle_area_m2": 0.28118377204158096
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.11386289297959719,
+            "front_projected_area_m2": 0.11554322994129948,
+            "visible_fraction_of_front_projected": 0.9854570712402971,
+            "triangle_area_m2": 0.46490926512598596
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12882458431552427,
+            "front_projected_area_m2": 0.13085721756292085,
+            "visible_fraction_of_front_projected": 0.9844667853615394,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.9894459102902374,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.046377903726101254,
+            "front_projected_area_m2": 0.05480510903708908,
+            "visible_fraction_of_front_projected": 0.8462332169563834,
+            "triangle_area_m2": 0.21501523097956304
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.12052935848248006,
+            "front_projected_area_m2": 0.12135072804759972,
+            "visible_fraction_of_front_projected": 0.9932314409782735,
+            "triangle_area_m2": 0.3736921331878048
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08713533475406766,
+            "front_projected_area_m2": 0.09001240532950143,
+            "visible_fraction_of_front_projected": 0.9680369548519241,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07123949140362412,
+            "front_projected_area_m2": 0.07534024522673832,
+            "visible_fraction_of_front_projected": 0.9455702087141755,
+            "triangle_area_m2": 0.28118377204158096
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.13397208755399995,
+            "front_projected_area_m2": 0.13545829690145952,
+            "visible_fraction_of_front_projected": 0.9890282885474285,
+            "triangle_area_m2": 0.46490926512598596
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12035688961090546,
+            "front_projected_area_m2": 0.1229908535488416,
+            "visible_fraction_of_front_projected": 0.9785840665225553,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9940476190476191,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04963929226110688,
+            "front_projected_area_m2": 0.060931200341156656,
+            "visible_fraction_of_front_projected": 0.8146777346117284,
+            "triangle_area_m2": 0.21501523097956304
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.03911486187195237,
+            "front_projected_area_m2": 0.08122068618298522,
+            "visible_fraction_of_front_projected": 0.4815874343123498,
+            "triangle_area_m2": 0.3736921331878048
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06715410330912795,
+            "front_projected_area_m2": 0.08242899891822326,
+            "visible_fraction_of_front_projected": 0.814690269085406,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.013886769963292876,
+            "front_projected_area_m2": 0.04256961129595972,
+            "visible_fraction_of_front_projected": 0.32621321972490896,
+            "triangle_area_m2": 0.28118377204158096
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.16585096240203634,
+            "front_projected_area_m2": 0.17276118381052075,
+            "visible_fraction_of_front_projected": 0.9600013078397094,
+            "triangle_area_m2": 0.46490926512598596
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0896799830614717,
+            "front_projected_area_m2": 0.11116982037896908,
+            "visible_fraction_of_front_projected": 0.8066936040353376,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.994026284348865,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04729355451216146,
+            "front_projected_area_m2": 0.05940610366818315,
+            "visible_fraction_of_front_projected": 0.7961059822459127,
+            "triangle_area_m2": 0.21501523097956304
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.07782200263301033,
+            "front_projected_area_m2": 0.0997476812449567,
+            "visible_fraction_of_front_projected": 0.7801885884635043,
+            "triangle_area_m2": 0.3736921331878048
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07419092111950458,
+            "front_projected_area_m2": 0.08462424580099351,
+            "visible_fraction_of_front_projected": 0.8767099832591189,
+            "triangle_area_m2": 0.28032762328070776
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.007927657889777777,
+            "front_projected_area_m2": 0.03761122062135403,
+            "visible_fraction_of_front_projected": 0.21077906430074206,
+            "triangle_area_m2": 0.28118377204158096
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.15877792279721628,
+            "front_projected_area_m2": 0.16232962340913693,
+            "visible_fraction_of_front_projected": 0.9781204407591774,
+            "triangle_area_m2": 0.46490926512598596
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.061104959319458474,
+            "front_projected_area_m2": 0.11243817540261,
+            "visible_fraction_of_front_projected": 0.5434538500883576,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_seated",
+    "mesh_sha256": "e4c47b5118965feff36c6bb3f012daa675ad8244184b6e9d8ab1b0a479fc9894",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9925373134328358,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.0449802838061168,
+            "front_projected_area_m2": 0.05265632279820608,
+            "visible_fraction_of_front_projected": 0.8542237933798371,
+            "triangle_area_m2": 0.21480942197540603
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.12397734161411476,
+            "front_projected_area_m2": 0.12504544486641275,
+            "visible_fraction_of_front_projected": 0.9914582794004287,
+            "triangle_area_m2": 0.37321479968676413
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07879153716102222,
+            "front_projected_area_m2": 0.08285386684671565,
+            "visible_fraction_of_front_projected": 0.9509699445505787,
+            "triangle_area_m2": 0.28036269452908247
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07934023018854386,
+            "front_projected_area_m2": 0.08339373142979938,
+            "visible_fraction_of_front_projected": 0.9513932141929907,
+            "triangle_area_m2": 0.28098929742283385
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.07519532819368109,
+            "front_projected_area_m2": 0.08684384584643925,
+            "visible_fraction_of_front_projected": 0.8658682427151426,
+            "triangle_area_m2": 0.47223665650970487
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.07519614421007849,
+            "front_projected_area_m2": 0.08685708625124473,
+            "visible_fraction_of_front_projected": 0.8657456455834179,
+            "triangle_area_m2": 0.47221786861541737
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.988517745302714,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04519776079029293,
+            "front_projected_area_m2": 0.05412208663578013,
+            "visible_fraction_of_front_projected": 0.8351075060068486,
+            "triangle_area_m2": 0.21480942197540603
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11791532597603828,
+            "front_projected_area_m2": 0.12078771951967068,
+            "visible_fraction_of_front_projected": 0.976219490234149,
+            "triangle_area_m2": 0.37321479968676413
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0829242974402811,
+            "front_projected_area_m2": 0.086368447566087,
+            "visible_fraction_of_front_projected": 0.9601225884815109,
+            "triangle_area_m2": 0.28036269452908247
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.06992289003952382,
+            "front_projected_area_m2": 0.0734955298585303,
+            "visible_fraction_of_front_projected": 0.9513896991302278,
+            "triangle_area_m2": 0.28098929742283385
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1090956073103733,
+            "front_projected_area_m2": 0.11359080698630684,
+            "visible_fraction_of_front_projected": 0.9604263778452121,
+            "triangle_area_m2": 0.47223665650970487
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.06400005626058394,
+            "front_projected_area_m2": 0.08349276535637595,
+            "visible_fraction_of_front_projected": 0.7665341540360965,
+            "triangle_area_m2": 0.47221786861541737
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9967637540453075,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.049980902560953624,
+            "front_projected_area_m2": 0.061476917567338696,
+            "visible_fraction_of_front_projected": 0.8130027421463849,
+            "triangle_area_m2": 0.21480942197540603
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.038843562832745954,
+            "front_projected_area_m2": 0.0746985152657319,
+            "visible_fraction_of_front_projected": 0.5200044832827556,
+            "triangle_area_m2": 0.37321479968676413
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.06718805866632846,
+            "front_projected_area_m2": 0.08246296216497924,
+            "visible_fraction_of_front_projected": 0.8147664951922161,
+            "triangle_area_m2": 0.28036269452908247
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.03173586113633156,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.28098929742283385
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.15885933862963858,
+            "front_projected_area_m2": 0.1661586740042564,
+            "visible_fraction_of_front_projected": 0.9560700913246886,
+            "triangle_area_m2": 0.47223665650970487
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.11786768136539619,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.47221786861541737
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.986159169550173,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04683558565564537,
+            "front_projected_area_m2": 0.059125917032729576,
+            "visible_fraction_of_front_projected": 0.792132925899808,
+            "triangle_area_m2": 0.21480942197540603
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.0723563768143331,
+            "front_projected_area_m2": 0.088537088576936,
+            "visible_fraction_of_front_projected": 0.8172436882364574,
+            "triangle_area_m2": 0.37321479968676413
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.07655538851198998,
+            "front_projected_area_m2": 0.08780009542909667,
+            "visible_fraction_of_front_projected": 0.8719283064311998,
+            "triangle_area_m2": 0.28036269452908247
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.02424208221790034,
+            "front_projected_area_m2": 0.03010245703201291,
+            "visible_fraction_of_front_projected": 0.805319053927051,
+            "triangle_area_m2": 0.28098929742283385
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.1481990872865663,
+            "front_projected_area_m2": 0.1552999253086433,
+            "visible_fraction_of_front_projected": 0.9542766166309173,
+            "triangle_area_m2": 0.47223665650970487
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.06951856425934784,
+            "front_projected_area_m2": 0.12008576464965671,
+            "visible_fraction_of_front_projected": 0.5789076204174928,
+            "triangle_area_m2": 0.47221786861541737
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "m_la01_wrist_torsion",
+    "mesh_sha256": "8a88e1b3fd980eae48660e0eeea94a9f2fb8e78f54d433bf2283df0a19af0093",
+    "views": [
+      {
+        "yaw": 0,
+        "sampled_mask_iou": 0.9906143344709898,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04666777596975234,
+            "front_projected_area_m2": 0.054051418837311155,
+            "visible_fraction_of_front_projected": 0.8633959472963556,
+            "triangle_area_m2": 0.2148093450569374
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11969003096897717,
+            "front_projected_area_m2": 0.11976018280031414,
+            "visible_fraction_of_front_projected": 0.9994142307593673,
+            "triangle_area_m2": 0.36335640262644486
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08400258290503217,
+            "front_projected_area_m2": 0.08428468351684382,
+            "visible_fraction_of_front_projected": 0.9966530026567013,
+            "triangle_area_m2": 0.28586284060805667
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.08628058526693465,
+            "front_projected_area_m2": 0.08635109811469997,
+            "visible_fraction_of_front_projected": 0.9991834168956176,
+            "triangle_area_m2": 0.27809890206125437
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.12882458133912372,
+            "front_projected_area_m2": 0.13085721574823028,
+            "visible_fraction_of_front_projected": 0.9844667762684378,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12882458431552427,
+            "front_projected_area_m2": 0.13085721756292085,
+            "visible_fraction_of_front_projected": 0.9844667853615394,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 22.5,
+        "sampled_mask_iou": 0.99137187230371,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.047041348060871006,
+            "front_projected_area_m2": 0.05575924906568931,
+            "visible_fraction_of_front_projected": 0.843651032772198,
+            "triangle_area_m2": 0.2148093450569374
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.11110065136366062,
+            "front_projected_area_m2": 0.11185999015967688,
+            "visible_fraction_of_front_projected": 0.9932117033540561,
+            "triangle_area_m2": 0.36335640262644486
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.0938897104949557,
+            "front_projected_area_m2": 0.09602564316608649,
+            "visible_fraction_of_front_projected": 0.9777566429059323,
+            "triangle_area_m2": 0.28586284060805667
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.07534814239468873,
+            "front_projected_area_m2": 0.07600464532439247,
+            "visible_fraction_of_front_projected": 0.9913623315140576,
+            "triangle_area_m2": 0.27809890206125437
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.14127866725828023,
+            "front_projected_area_m2": 0.1428336428662348,
+            "visible_fraction_of_front_projected": 0.9891133798960038,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.12035688961090546,
+            "front_projected_area_m2": 0.1229908535488416,
+            "visible_fraction_of_front_projected": 0.9785840665225553,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 90,
+        "sampled_mask_iou": 0.9924698795180723,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04998087341337466,
+            "front_projected_area_m2": 0.06147687902918382,
+            "visible_fraction_of_front_projected": 0.8130027776726945,
+            "triangle_area_m2": 0.2148093450569374
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.025471328518615752,
+            "front_projected_area_m2": 0.0705167522009677,
+            "visible_fraction_of_front_projected": 0.36120960939925717,
+            "triangle_area_m2": 0.36335640262644486
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.08853485818067311,
+            "front_projected_area_m2": 0.11292847700064672,
+            "visible_fraction_of_front_projected": 0.7839905445653543,
+            "triangle_area_m2": 0.28586284060805667
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.03197009760212008,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.27809890206125437
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.17459705531674644,
+            "front_projected_area_m2": 0.17799491093638076,
+            "visible_fraction_of_front_projected": 0.9809103777082212,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0,
+            "front_projected_area_m2": 0.11116982037896908,
+            "visible_fraction_of_front_projected": 0.0,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      },
+      {
+        "yaw": 112.5,
+        "sampled_mask_iou": 0.9917440660474717,
+        "regions": {
+          "face": {
+            "visible_projected_area_m2": 0.04615422712596521,
+            "front_projected_area_m2": 0.058517499241020926,
+            "visible_fraction_of_front_projected": 0.7887252142451598,
+            "triangle_area_m2": 0.2148093450569374
+          },
+          "torso": {
+            "visible_projected_area_m2": 0.07292839359296607,
+            "front_projected_area_m2": 0.09155230688272331,
+            "visible_fraction_of_front_projected": 0.7965762532492588,
+            "triangle_area_m2": 0.36335640262644486
+          },
+          "left_arm": {
+            "visible_projected_area_m2": 0.09165448661331654,
+            "front_projected_area_m2": 0.10795026409894237,
+            "visible_fraction_of_front_projected": 0.8490436533745777,
+            "triangle_area_m2": 0.28586284060805667
+          },
+          "right_arm": {
+            "visible_projected_area_m2": 0.01849974356396212,
+            "front_projected_area_m2": 0.02927545732774433,
+            "visible_fraction_of_front_projected": 0.6319198828169945,
+            "triangle_area_m2": 0.27809890206125437
+          },
+          "left_leg": {
+            "visible_projected_area_m2": 0.16875751912659304,
+            "front_projected_area_m2": 0.1724624324224926,
+            "visible_fraction_of_front_projected": 0.9785175632521326,
+            "triangle_area_m2": 0.4641809926759624
+          },
+          "right_leg": {
+            "visible_projected_area_m2": 0.0928712050675918,
+            "front_projected_area_m2": 0.11243817540261,
+            "visible_fraction_of_front_projected": 0.8259757394234273,
+            "triangle_area_m2": 0.46417132446158305
+          }
+        }
+      }
+    ]
+  }
+]

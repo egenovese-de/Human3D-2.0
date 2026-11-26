@@ -1,0 +1,90 @@
+[
+  {
+    "fixture": "MBLab_human_female_f_af01_bend32-1",
+    "attempts": [
+      {
+        "inner_ease_mm": 0,
+        "outer_ease_mm": 10,
+        "layers": [
+          {
+            "layer": 0,
+            "violations": 0,
+            "sampled_clearance_mm": 2.369581818045873
+          },
+          {
+            "layer": 1,
+            "violations": 0,
+            "sampled_clearance_mm": 2.335896615895057
+          }
+        ],
+        "exported": true
+      }
+    ]
+  },
+  {
+    "fixture": "MBLab_human_female_f_ca01_bend32-1",
+    "attempts": [
+      {
+        "inner_ease_mm": 0,
+        "outer_ease_mm": 10,
+        "layers": [
+          {
+            "layer": 0,
+            "violations": 0,
+            "sampled_clearance_mm": 2.369581818045873
+          },
+          {
+            "layer": 1,
+            "violations": 0,
+            "sampled_clearance_mm": 2.335896615895057
+          }
+        ],
+        "exported": true
+      }
+    ]
+  },
+  {
+    "fixture": "MBLab_human_male_m_as01_bend32-1",
+    "attempts": [
+      {
+        "inner_ease_mm": 0,
+        "outer_ease_mm": 10,
+        "layers": [
+          {
+            "layer": 0,
+            "violations": 0,
+            "sampled_clearance_mm": 2.369581818045873
+          },
+          {
+            "layer": 1,
+            "violations": 0,
+            "sampled_clearance_mm": 2.335896615895057
+          }
+        ],
+        "exported": true
+      }
+    ]
+  },
+  {
+    "fixture": "MBLab_human_male_m_la01_bend32-1",
+    "attempts": [
+      {
+        "inner_ease_mm": 0,
+        "outer_ease_mm": 10,
+        "layers": [
+          {
+            "layer": 0,
+            "violations": 0,
+            "sampled_clearance_mm": 2.369581818045873
+          },
+          {
+            "layer": 1,
+            "violations": 0,
+            "sampled_clearance_mm": 2.335896615895057
+          }
+        ],
+        "exported": true
+      }
+    ]
+  }
+]

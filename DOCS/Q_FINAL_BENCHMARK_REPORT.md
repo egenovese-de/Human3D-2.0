@@ -43,3 +43,7 @@ Initial release detector launch failed on a missing system GLES shared object. P
 - **Q5-008** USD package structure and shell motion were inspected. Layered independent cloth and a USD-capable Blender executable were unavailable.
 
 Machine-readable [measurements](q/measurements.json) and [dataset hashes](q/manifest.json).
+
+## Follow-up after the historical pilot
+
+The historical counts and blocker descriptions above describe the original pilot. The current record is [Q follow-up completion](Q_FOLLOWUP_COMPLETION.md), with [task reconciliation](Q_BLOCKER_RECONCILIATION.md) and [current backlog](BACKLOG_Q.md). The independent geometry and pose estimates are paired by subject and explicitly distinguish interaction cells, references and independent identities.

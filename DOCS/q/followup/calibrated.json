@@ -1,0 +1,153 @@
+[
+  {
+    "identity": "f_af01",
+    "fixture_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+    "training_iou": {
+      "0": 0.7416050823285363,
+      "90": 0.8066285169289461,
+      "180": 0.7416050823285363,
+      "270": 0.8053771115869617
+    },
+    "controls": {
+      "bust": -0.125,
+      "hips": -0.375,
+      "shoulder": 0.375,
+      "upperarm": 0.125,
+      "waist": -0.25,
+      "upperarm_length": -0.375,
+      "forearm_length": -0.375,
+      "thigh_length": -0.125,
+      "abdomen_depth": -0.375,
+      "glute_depth": -0.25,
+      "shin_depth": -0.375,
+      "calf": -0.125,
+      "thigh": -0.125
+    },
+    "held_out_iou": {
+      "22.5": 0.7470715076636167,
+      "112.5": 0.7819891907068155
+    },
+    "fit_seconds": 42.86622797499996,
+    "symmetric_mean_mm": 24.43831836192007,
+    "sampled_chamfer_mm2": 2795.9515694232705,
+    "p95_mm": 141.99607040398033,
+    "truth_to_prediction_region_mean_mm": {
+      "head": 10.337428913251216,
+      "torso_and_arms": 44.06287338680788,
+      "lower_body": 11.72862792365879
+    }
+  },
+  {
+    "identity": "f_ca01",
+    "fixture_sha256": "f31fdf0277097373219b89f1c4fd3b051a3dfe5ae78ffe5b9e676ddbc9f6dd40",
+    "training_iou": {
+      "0": 0.7437019358260408,
+      "90": 0.8058794946550049,
+      "180": 0.7437019358260408,
+      "270": 0.8060208788540908
+    },
+    "controls": {
+      "calf": -0.125,
+      "hips": -0.25,
+      "shoulder": 0.375,
+      "thigh": -0.375,
+      "waist": -0.25,
+      "upperarm_length": -0.375,
+      "forearm_length": -0.375,
+      "thigh_length": -0.125,
+      "abdomen_depth": -0.375,
+      "glute_depth": -0.125,
+      "shin_depth": -0.375,
+      "bust": -0.125
+    },
+    "held_out_iou": {
+      "22.5": 0.7441160856485578,
+      "112.5": 0.7786210810043978
+    },
+    "fit_seconds": 44.58670016499991,
+    "symmetric_mean_mm": 24.8503300097881,
+    "sampled_chamfer_mm2": 2893.435792066891,
+    "p95_mm": 150.2814352798125,
+    "truth_to_prediction_region_mean_mm": {
+      "head": 10.072624368554496,
+      "torso_and_arms": 44.830420035386034,
+      "lower_body": 11.84144094378891
+    }
+  },
+  {
+    "identity": "m_as01",
+    "fixture_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+    "training_iou": {
+      "0": 0.6555269922879178,
+      "90": 0.7964159199833298,
+      "180": 0.6555269922879178,
+      "270": 0.7882182119892138
+    },
+    "controls": {
+      "bust": 0.375,
+      "hips": -0.375,
+      "shoulder": 0.375,
+      "thigh": 0.125,
+      "waist": 0.375,
+      "upperarm_length": -0.25,
+      "forearm_length": -0.375,
+      "thigh_length": -0.125,
+      "abdomen_depth": -0.375,
+      "glute_depth": 0.125,
+      "forearm_depth": -0.125,
+      "calf": 0.125,
+      "upperarm": 0.125,
+      "shin_depth": -0.125
+    },
+    "held_out_iou": {
+      "22.5": 0.6597364861479886,
+      "112.5": 0.7842926644341948
+    },
+    "fit_seconds": 50.57752677799999,
+    "symmetric_mean_mm": 30.639875421900886,
+    "sampled_chamfer_mm2": 3110.44640007776,
+    "p95_mm": 156.82306638044776,
+    "truth_to_prediction_region_mean_mm": {
+      "head": 9.630688223207347,
+      "torso_and_arms": 52.561418780669285,
+      "lower_body": 18.322593277815574
+    }
+  },
+  {
+    "identity": "m_la01",
+    "fixture_sha256": "dc1854813d4b44714340ea13a725cafd8c552e18ed386db4e6e7bb6880e4f66d",
+    "training_iou": {
+      "0": 0.6546674801708359,
+      "90": 0.8003057519587234,
+      "180": 0.6546674801708359,
+      "270": 0.7901234567901234
+    },
+    "controls": {
+      "bust": 0.375,
+      "calf": 0.25,
+      "hips": -0.375,
+      "shoulder": 0.375,
+      "thigh": -0.25,
+      "upperarm": 0.25,
+      "waist": 0.25,
+      "upperarm_length": -0.375,
+      "forearm_length": -0.375,
+      "abdomen_depth": -0.375,
+      "thigh_length": -0.125,
+      "glute_depth": 0.125
+    },
+    "held_out_iou": {
+      "22.5": 0.6541428897511984,
+      "112.5": 0.7904987574409063
+    },
+    "fit_seconds": 47.09196088700003,
+    "symmetric_mean_mm": 32.94166694465091,
+    "sampled_chamfer_mm2": 3640.693552083095,
+    "p95_mm": 169.81556459432878,
+    "truth_to_prediction_region_mean_mm": {
+      "head": 10.101433609323317,
+      "torso_and_arms": 57.721489926274565,
+      "lower_body": 18.873552398873645
+    }
+  }
+]

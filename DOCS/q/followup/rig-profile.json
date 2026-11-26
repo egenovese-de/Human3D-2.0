@@ -1,0 +1,2982 @@
+[
+  {
+    "fixture": "f_af01_morph_neutral",
+    "identity": "f_af01",
+    "condition": "neutral",
+    "morphology_asymmetry": true,
+    "mesh_sha256": "a1957371d2762cd814de8ff8920d2068272b300221829833180cab30b306c58e",
+    "input_yaw": 90.0,
+    "image_sha256": "7d1332c6083e0b69cf21e506364b4fd00b674180cdaf8cebbb829d3ec56a4151",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9772975597911862,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 4.7028838601193e-06,
+          "native_sole_floor_mm": -3.930003941420736
+        },
+        "R": {
+          "reference_sole_floor_mm": -1.91464577525835e-06,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 6.61752963537765e-06,
+      "native_interfoot_clearance_mm": 3.930003941420917,
+      "release_support_plane_mm": -3.930003941420736
+    },
+    "surface": {
+      "symmetric_mean_mm": 32.57886652882647,
+      "sampled_chamfer_mm2": 5358.399806709718,
+      "p95_mm": 187.70991255961033,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.166230625115302,
+        "torso_and_arms": 66.36362355164009,
+        "lower_body": 14.481965274486873
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.6928551414962174,
+      "22.5": 0.7150793196265964,
+      "90": 0.7537479446755005,
+      "112.5": 0.7479446561058752
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 19.942355077827166,
+        "direction_error_deg": 54.601466033359415,
+        "global_rotation_change_error_deg": 36.04867473335865,
+        "parent_relative_rotation_change_error_deg": 36.048674733358716,
+        "native_length_change_mm": 1.942890293094024e-13,
+        "reference_length_change_mm": 5.797063576440276
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 28.293789463904243,
+        "direction_error_deg": 21.641120911376476,
+        "global_rotation_change_error_deg": 7.234905932316056e-15,
+        "parent_relative_rotation_change_error_deg": 1.514626825016298e-11,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 1.2550816941292453e-05
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 223.5820784597853,
+        "direction_error_deg": 64.22805355267458,
+        "global_rotation_change_error_deg": 36.04867473335865,
+        "parent_relative_rotation_change_error_deg": 1.6121399617300003e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 10.320538693506936
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 76.89522040977316,
+        "direction_error_deg": 38.357285413533816,
+        "global_rotation_change_error_deg": 2.9630053192717264e-15,
+        "parent_relative_rotation_change_error_deg": 7.962941498805326e-12,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 3.0829383490527107e-07
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 17.602645292550907,
+        "direction_error_deg": 3.469763747759109,
+        "global_rotation_change_error_deg": 3.987742716097269,
+        "parent_relative_rotation_change_error_deg": 3.987742716845925,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.012078916475533052
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 17.752592699361585,
+        "direction_error_deg": 7.733016504812284,
+        "global_rotation_change_error_deg": 2.026119686874032e-13,
+        "parent_relative_rotation_change_error_deg": 2.7173732069611445e-09,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.6584395917426655
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 42.412047165405085,
+        "direction_error_deg": 12.896105349321807,
+        "global_rotation_change_error_deg": 15.275237290850047,
+        "parent_relative_rotation_change_error_deg": 19.199835374332228,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.00011802643823388692
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 26.48566662579864,
+        "direction_error_deg": 4.679984109961332,
+        "global_rotation_change_error_deg": 2.0281096505587346e-13,
+        "parent_relative_rotation_change_error_deg": 4.434876059127896e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.6252032430552057
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 447.5311703162268,
+        "direction_error_deg": 102.01507244343625,
+        "global_rotation_change_error_deg": 36.048674733358645,
+        "parent_relative_rotation_change_error_deg": 7.914618581589962e-12,
+        "native_length_change_mm": 2.0816681711721685e-14,
+        "reference_length_change_mm": 0.8333791902423587
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 217.93961723539158,
+        "direction_error_deg": 66.9512183673637,
+        "global_rotation_change_error_deg": 5.969822369816902e-15,
+        "parent_relative_rotation_change_error_deg": 3.857862801606044e-11,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 56.565918298221725,
+        "direction_error_deg": 33.94379007001509,
+        "global_rotation_change_error_deg": 40.26543235463149,
+        "parent_relative_rotation_change_error_deg": 42.41411627800953,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 2.9616677860166973e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 36.599273403042524,
+        "direction_error_deg": 3.6650860265175336,
+        "global_rotation_change_error_deg": 1.9213998229466453e-13,
+        "parent_relative_rotation_change_error_deg": 7.249838837643745e-11,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.017403524642856105
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05529965061588,
+        "direction_error_deg": 102.0637806574201,
+        "global_rotation_change_error_deg": 4.325084327906206e-15,
+        "parent_relative_rotation_change_error_deg": 4.7414415851274184e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.10089218277328782
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 306.4769987157836,
+        "direction_error_deg": 0.8154153519903539,
+        "global_rotation_change_error_deg": 3.920333861538071e-15,
+        "parent_relative_rotation_change_error_deg": 3.2081481308111077e-12,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.24209766065484695
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 31.79019674534931,
+        "direction_error_deg": 10.305343351044803,
+        "global_rotation_change_error_deg": 1.3573995098468399e-16,
+        "parent_relative_rotation_change_error_deg": 8.13921602578496e-12,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.18023798305072392
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 33.0978070837766,
+        "direction_error_deg": 5.374553817313634,
+        "global_rotation_change_error_deg": 4.769023395500867e-16,
+        "parent_relative_rotation_change_error_deg": 1.0154696318149569e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.1818169760652022
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_neutral",
+    "identity": "f_af01",
+    "condition": "neutral",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "ee01f54fa501207e093952f377ad812258751e6889ae2a45a1485f6408ea4693",
+    "input_yaw": 90.0,
+    "image_sha256": "6d4951ab2809cf15caaf55f980fa2557f54b757ef56d4c68422b35647ea28fed",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9770455386893743,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 3.8415204350883414e-07,
+          "native_sole_floor_mm": -5.0170408851761925
+        },
+        "R": {
+          "reference_sole_floor_mm": 4.049863555621869e-06,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 3.6657115121130346e-06,
+      "native_interfoot_clearance_mm": 5.017040885176373,
+      "release_support_plane_mm": -5.0170408851761925
+    },
+    "surface": {
+      "symmetric_mean_mm": 32.57016720975848,
+      "sampled_chamfer_mm2": 5187.505539247063,
+      "p95_mm": 186.18592646399352,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.969973362146519,
+        "torso_and_arms": 66.3974682099543,
+        "lower_body": 14.99447084772542
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.6895738588512716,
+      "22.5": 0.7179604960955444,
+      "90": 0.7530114582313192,
+      "112.5": 0.722723324647558
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 28.29379775477841,
+        "direction_error_deg": 54.47458891567255,
+        "global_rotation_change_error_deg": 33.00193006728889,
+        "parent_relative_rotation_change_error_deg": 33.001930067296556,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 28.293771603796763,
+        "direction_error_deg": 21.64111951262074,
+        "global_rotation_change_error_deg": 3.974068505741538e-15,
+        "parent_relative_rotation_change_error_deg": 1.5782999172269644e-11,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 208.29848812907616,
+        "direction_error_deg": 58.10590847615317,
+        "global_rotation_change_error_deg": 33.0019300672889,
+        "parent_relative_rotation_change_error_deg": 3.206964866150091e-11,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 76.89523597788443,
+        "direction_error_deg": 38.357285833457915,
+        "global_rotation_change_error_deg": 2.6672161721219083e-15,
+        "parent_relative_rotation_change_error_deg": 3.931752789209421e-12,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 17.75274900914376,
+        "direction_error_deg": 3.169645519283266,
+        "global_rotation_change_error_deg": 4.412469748229015,
+        "parent_relative_rotation_change_error_deg": 4.4124697484728665,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 17.75271671186142,
+        "direction_error_deg": 7.427183387532871,
+        "global_rotation_change_error_deg": 2.351457569480388e-14,
+        "parent_relative_rotation_change_error_deg": 2.8688034192326446e-09,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 42.96266422553245,
+        "direction_error_deg": 13.077459231062665,
+        "global_rotation_change_error_deg": 15.202526962330476,
+        "parent_relative_rotation_change_error_deg": 19.29395215241341,
+        "native_length_change_mm": 1.942890293094024e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 28.80920906898534,
+        "direction_error_deg": 4.96549385992284,
+        "global_rotation_change_error_deg": 2.123067750419207e-14,
+        "parent_relative_rotation_change_error_deg": 1.8307730368248403e-10,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 423.9209940169874,
+        "direction_error_deg": 94.59816010841983,
+        "global_rotation_change_error_deg": 33.0019300672889,
+        "parent_relative_rotation_change_error_deg": 6.671764624896543e-12,
+        "native_length_change_mm": 4.163336342344337e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 217.93965934080566,
+        "direction_error_deg": 66.9512183673637,
+        "global_rotation_change_error_deg": 6.2266392184962046e-15,
+        "parent_relative_rotation_change_error_deg": 6.472069608271542e-11,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 60.781308321236665,
+        "direction_error_deg": 32.86826158290479,
+        "global_rotation_change_error_deg": 39.165527936797986,
+        "parent_relative_rotation_change_error_deg": 40.822727149990925,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 36.599142445464,
+        "direction_error_deg": 3.672771820119605,
+        "global_rotation_change_error_deg": 2.9372689440520945e-14,
+        "parent_relative_rotation_change_error_deg": 2.7373677710895413e-10,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 102.0553820809238,
+        "global_rotation_change_error_deg": 7.238163453603695e-14,
+        "parent_relative_rotation_change_error_deg": 1.5505951803723808e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 306.45821771228276,
+        "direction_error_deg": 0.42798373737668277,
+        "global_rotation_change_error_deg": 2.443885123698011e-13,
+        "parent_relative_rotation_change_error_deg": 9.035279301612324e-12,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 33.38950949751266,
+        "direction_error_deg": 7.988178721252971,
+        "global_rotation_change_error_deg": 6.555083656614896e-15,
+        "parent_relative_rotation_change_error_deg": 1.2224379252361923e-11,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 33.04463320907079,
+        "direction_error_deg": 5.397062060607251,
+        "global_rotation_change_error_deg": 1.2478236296234891e-14,
+        "parent_relative_rotation_change_error_deg": 1.205082393991389e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_pelvis_spine_extend",
+    "identity": "f_af01",
+    "condition": "pelvis_spine_extend",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "c04098334d62b19e83d699905aa6026c73e376a46dfb460e0feabc357cb5aa46",
+    "input_yaw": 90.0,
+    "image_sha256": "80210da72b31656b5e8599893f029223f59082a4cb680c7817559a34c02e44e8",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31,
+      32
+    ],
+    "mask_iou": 0.9730670762928827,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": -22.88999781012535,
+          "native_sole_floor_mm": 17.144275819275013
+        },
+        "R": {
+          "reference_sole_floor_mm": 70.02230733633041,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 92.91230514645576,
+      "native_interfoot_clearance_mm": 17.14427581927483,
+      "release_support_plane_mm": 1.8072905309552797e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 79.44675937493149,
+      "sampled_chamfer_mm2": 11597.029179517354,
+      "p95_mm": 228.9231614530306,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 201.98493395412567,
+        "torso_and_arms": 73.51655862924063,
+        "lower_body": 72.45541596326828
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.3328931149850326,
+      "22.5": 0.33594510845506864,
+      "90": 0.5831935336281836,
+      "112.5": 0.39104528430371127
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 184.0146506681679,
+        "direction_error_deg": 21.639751856773984,
+        "global_rotation_change_error_deg": 17.01361543754421,
+        "parent_relative_rotation_change_error_deg": 21.935416622291143,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0010217579681781608
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 226.52466291682856,
+        "direction_error_deg": 56.55952209680229,
+        "global_rotation_change_error_deg": 43.56163473850643,
+        "parent_relative_rotation_change_error_deg": 1.5893176527482831e-06,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.0005295602481525385
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 245.0593710264914,
+        "direction_error_deg": 31.52300082218597,
+        "global_rotation_change_error_deg": 39.00766155241404,
+        "parent_relative_rotation_change_error_deg": 55.73458454542903,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0010483323117094212
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 228.82132517913521,
+        "direction_error_deg": 53.99093314280046,
+        "global_rotation_change_error_deg": 43.56163617943274,
+        "parent_relative_rotation_change_error_deg": 1.5695700102920953e-06,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.00039254968814406155
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 44.04754259126744,
+        "direction_error_deg": 12.809919899407985,
+        "global_rotation_change_error_deg": 19.337462602923384,
+        "parent_relative_rotation_change_error_deg": 10.63039227642248,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00013451021063648483
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 35.90355814512434,
+        "direction_error_deg": 17.96358103389163,
+        "global_rotation_change_error_deg": 16.131651734649125,
+        "parent_relative_rotation_change_error_deg": 1.1727102811417594e-06,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0004151850700462312
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 135.16373817491774,
+        "direction_error_deg": 9.244578690554189,
+        "global_rotation_change_error_deg": 16.581114239603295,
+        "parent_relative_rotation_change_error_deg": 23.20175849667987,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 4.6755291860378634e-05
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 101.16472604765985,
+        "direction_error_deg": 16.690232965224553,
+        "global_rotation_change_error_deg": 16.13165011757464,
+        "parent_relative_rotation_change_error_deg": 1.9385581851157612e-06,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0004542800895457333
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 344.15510995652323,
+        "direction_error_deg": 15.779596143832014,
+        "global_rotation_change_error_deg": 58.52364628478016,
+        "parent_relative_rotation_change_error_deg": 60.885581079415765,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 0.0001718366754513423
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 336.67701857498054,
+        "direction_error_deg": 93.30673196566927,
+        "global_rotation_change_error_deg": 43.56163537327717,
+        "parent_relative_rotation_change_error_deg": 1.2488380251033043e-06,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 0.00010109008434511235
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 159.41299382127863,
+        "direction_error_deg": 33.23097348485432,
+        "global_rotation_change_error_deg": 35.626893526780826,
+        "parent_relative_rotation_change_error_deg": 39.28780743443295,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 5.6388913316496314e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 204.78777057575587,
+        "direction_error_deg": 6.221270763963627,
+        "global_rotation_change_error_deg": 16.13165061051154,
+        "parent_relative_rotation_change_error_deg": 5.114512272160775e-07,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 6.97435920404832e-05
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 90.84055440414387,
+        "global_rotation_change_error_deg": 16.131652583869805,
+        "parent_relative_rotation_change_error_deg": 16.131652583009565,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 7.916332617208255e-05
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 313.9661107838304,
+        "direction_error_deg": 14.522264863001885,
+        "global_rotation_change_error_deg": 15.752851305276232,
+        "parent_relative_rotation_change_error_deg": 11.000000963054159,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 3.493865836923238e-05
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 74.83772891160704,
+        "direction_error_deg": 28.308534638373096,
+        "global_rotation_change_error_deg": 24.692319351398716,
+        "parent_relative_rotation_change_error_deg": 10.626400104912658,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 8.187500782907975e-05
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 305.48842825847163,
+        "direction_error_deg": 41.55575984090072,
+        "global_rotation_change_error_deg": 40.59236261436578,
+        "parent_relative_rotation_change_error_deg": 11.65798362263297,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0005552893008464732
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_pelvis_spine_flex",
+    "identity": "f_af01",
+    "condition": "pelvis_spine_flex",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "84a3ff38e41a485ac3b261ef682d6718c968d1ba95f0137037307a25072a344c",
+    "input_yaw": 90.0,
+    "image_sha256": "9ba6715d66a94b85cc088e448ed81aa7a69b1b412ed0d6887e2c17ee489ee9ae",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31,
+      32
+    ],
+    "mask_iou": 0.9471280007775295,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 40.72577878832817,
+          "native_sole_floor_mm": 73.0192062371651
+        },
+        "R": {
+          "reference_sole_floor_mm": -50.06018653512001,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 90.78596532344818,
+      "native_interfoot_clearance_mm": 73.01920623716491,
+      "release_support_plane_mm": 1.8072905309552797e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 85.09427241720795,
+      "sampled_chamfer_mm2": 12762.013310731278,
+      "p95_mm": 233.93694790673905,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 183.1052655382209,
+        "torso_and_arms": 60.872141048479364,
+        "lower_body": 86.07720174258752
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.44392186975092385,
+      "22.5": 0.383399209486166,
+      "90": 0.38847244094488187,
+      "112.5": 0.44460975051499196
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 212.78534536710933,
+        "direction_error_deg": 45.23815187152939,
+        "global_rotation_change_error_deg": 23.693819500870585,
+        "parent_relative_rotation_change_error_deg": 15.315416955580204,
+        "native_length_change_mm": 4.163336342344337e-14,
+        "reference_length_change_mm": 0.0006582751789219188
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 186.53764508273537,
+        "direction_error_deg": 8.635900322545071,
+        "global_rotation_change_error_deg": 36.034652135796044,
+        "parent_relative_rotation_change_error_deg": 1.3579978038983184e-06,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.0010332883525476788
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 212.2887520519211,
+        "direction_error_deg": 34.15981179483319,
+        "global_rotation_change_error_deg": 43.92574121363488,
+        "parent_relative_rotation_change_error_deg": 54.969101981804286,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0003852554915362294
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 220.82880143262494,
+        "direction_error_deg": 29.523173627484482,
+        "global_rotation_change_error_deg": 36.034652227249104,
+        "parent_relative_rotation_change_error_deg": 3.632661068198148e-07,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.0005235306649309379
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.49734516099645,
+        "direction_error_deg": 14.807201020451016,
+        "global_rotation_change_error_deg": 18.717439794902106,
+        "parent_relative_rotation_change_error_deg": 30.063583261837348,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00026089254967498476
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 28.96827949741027,
+        "direction_error_deg": 14.829472934877305,
+        "global_rotation_change_error_deg": 17.418925593458866,
+        "parent_relative_rotation_change_error_deg": 5.853956219646534e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 1.030080332142802e-05
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 154.73722112083507,
+        "direction_error_deg": 22.3706593099173,
+        "global_rotation_change_error_deg": 22.113868718204312,
+        "parent_relative_rotation_change_error_deg": 22.143281274095,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.00036387899721157524
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 121.56051088028617,
+        "direction_error_deg": 15.748448012359745,
+        "global_rotation_change_error_deg": 17.41892547188385,
+        "parent_relative_rotation_change_error_deg": 4.1778108142832474e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 5.469270863978082e-05
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 148.65711087550685,
+        "direction_error_deg": 53.22132134114683,
+        "global_rotation_change_error_deg": 43.92574237716352,
+        "parent_relative_rotation_change_error_deg": 2.171591747635069e-06,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 8.09667720577667e-05
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 325.40563764735634,
+        "direction_error_deg": 44.20741731091441,
+        "global_rotation_change_error_deg": 36.03465309575639,
+        "parent_relative_rotation_change_error_deg": 1.5969025830194221e-06,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 6.838028894506909e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 254.5850767751585,
+        "direction_error_deg": 37.443139149291895,
+        "global_rotation_change_error_deg": 44.78029650130934,
+        "parent_relative_rotation_change_error_deg": 42.07830994918501,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.00014247949242651714
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 223.69126994222432,
+        "direction_error_deg": 10.485757926565125,
+        "global_rotation_change_error_deg": 17.41892614663572,
+        "parent_relative_rotation_change_error_deg": 7.317452885586776e-07,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.00020141789439098723
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 115.44430354563144,
+        "global_rotation_change_error_deg": 17.41892611117412,
+        "parent_relative_rotation_change_error_deg": 17.41892611015811,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 1.0886838736068327e-05
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 312.2753969747675,
+        "direction_error_deg": 14.038786822383338,
+        "global_rotation_change_error_deg": 15.496339547605672,
+        "parent_relative_rotation_change_error_deg": 12.999998963040529,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 1.096159371605232e-05
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 70.95068484239718,
+        "direction_error_deg": 18.64929729161658,
+        "global_rotation_change_error_deg": 25.465347116946432,
+        "parent_relative_rotation_change_error_deg": 12.201456660602917,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.00018041321256379028
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 278.8293465897982,
+        "direction_error_deg": 40.094443477409214,
+        "global_rotation_change_error_deg": 42.28774648240331,
+        "parent_relative_rotation_change_error_deg": 13.885988889986079,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0006186437666866329
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_raised_foot",
+    "identity": "f_af01",
+    "condition": "raised_foot",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "386dac88931f02b4a25788519d2bc77b28d6f38bf629a305eea826190a49920a",
+    "input_yaw": 90.0,
+    "image_sha256": "71e96eae9da074b8affcfdd41b0aa2207c2a62aee1018b54556975235400e684",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31,
+      32
+    ],
+    "mask_iou": 0.9641210108836008,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 88.26865255832672,
+          "native_sole_floor_mm": 5.343308895548627
+        },
+        "R": {
+          "reference_sole_floor_mm": 4.049863555621869e-06,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 88.26864850846317,
+      "native_interfoot_clearance_mm": 5.3433088955484465,
+      "release_support_plane_mm": 1.8072905309552797e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 32.44405131702153,
+      "sampled_chamfer_mm2": 4365.086633644281,
+      "p95_mm": 111.07897098170999,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.277879764538575,
+        "torso_and_arms": 57.25008285207344,
+        "lower_body": 27.820230431751234
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.7052595235355047,
+      "22.5": 0.6885283104504709,
+      "90": 0.709661874548229,
+      "112.5": 0.6549123664548565
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 28.29379775477841,
+        "direction_error_deg": 57.322491392473104,
+        "global_rotation_change_error_deg": 35.93079348802135,
+        "parent_relative_rotation_change_error_deg": 35.930793488028904,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 28.293771603796763,
+        "direction_error_deg": 15.50086011555067,
+        "global_rotation_change_error_deg": 16.388115760660863,
+        "parent_relative_rotation_change_error_deg": 16.388115760022174,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.00035313156981908733
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 219.57629810641694,
+        "direction_error_deg": 81.99519358292729,
+        "global_rotation_change_error_deg": 59.05562009011904,
+        "parent_relative_rotation_change_error_deg": 34.89124931179456,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 61.5669550739937,
+        "direction_error_deg": 23.716044823004864,
+        "global_rotation_change_error_deg": 16.38811676296104,
+        "parent_relative_rotation_change_error_deg": 1.414739446212882e-06,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.00014964397548888897
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 17.75274900914376,
+        "direction_error_deg": 25.807825066615482,
+        "global_rotation_change_error_deg": 21.797337740588873,
+        "parent_relative_rotation_change_error_deg": 21.79733773789552,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0009962436631205662
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 17.75271671186142,
+        "direction_error_deg": 7.427183387532871,
+        "global_rotation_change_error_deg": 2.351457569480388e-14,
+        "parent_relative_rotation_change_error_deg": 2.8688034192326446e-09,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 163.19507021943582,
+        "direction_error_deg": 27.01324270177178,
+        "global_rotation_change_error_deg": 28.159695683589902,
+        "parent_relative_rotation_change_error_deg": 44.750152561496705,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.0021538128169296122
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 28.80920906898534,
+        "direction_error_deg": 4.96549385992284,
+        "global_rotation_change_error_deg": 2.123067750419207e-14,
+        "parent_relative_rotation_change_error_deg": 1.8307730368248403e-10,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 527.7660169574408,
+        "direction_error_deg": 56.279161335114324,
+        "global_rotation_change_error_deg": 35.96680261723698,
+        "parent_relative_rotation_change_error_deg": 75.34678722915389,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 110.55381483418742,
+        "direction_error_deg": 50.925359622584,
+        "global_rotation_change_error_deg": 16.388116551931255,
+        "parent_relative_rotation_change_error_deg": 2.150555671058199e-06,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 2.6535304335773002e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 134.28749138277146,
+        "direction_error_deg": 39.04534213819303,
+        "global_rotation_change_error_deg": 49.411450717055516,
+        "parent_relative_rotation_change_error_deg": 47.22057314181006,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0004961116043256109
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 36.599142445464,
+        "direction_error_deg": 3.672771820119605,
+        "global_rotation_change_error_deg": 2.9372689440520945e-14,
+        "parent_relative_rotation_change_error_deg": 2.7373677710895413e-10,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 102.0553820809238,
+        "global_rotation_change_error_deg": 7.238163453603695e-14,
+        "parent_relative_rotation_change_error_deg": 1.5505951803723808e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 306.45821771228276,
+        "direction_error_deg": 0.42798373737668277,
+        "global_rotation_change_error_deg": 2.443885123698011e-13,
+        "parent_relative_rotation_change_error_deg": 9.035279301612324e-12,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 33.38950949751266,
+        "direction_error_deg": 7.988178721252971,
+        "global_rotation_change_error_deg": 6.555083656614896e-15,
+        "parent_relative_rotation_change_error_deg": 1.2224379252361923e-11,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 33.04463320907079,
+        "direction_error_deg": 11.353719882641606,
+        "global_rotation_change_error_deg": 11.657982004238185,
+        "parent_relative_rotation_change_error_deg": 11.65798200400686,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 6.722323347974068e-05
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_seated",
+    "identity": "f_af01",
+    "condition": "seated",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "7baaf6e16c21f989301e472f6d3bc5d3c0d80c69109c568a37dd66e69d4d7ffe",
+    "input_yaw": 90.0,
+    "image_sha256": "e7851254022a624e703578fe74650b5fee019150f16ad3650cbb75c05c51f750",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      23,
+      24,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9779243846739406,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 331.9673240184784,
+          "native_sole_floor_mm": -130.83553875679155
+        },
+        "R": {
+          "reference_sole_floor_mm": 331.9673538208008,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 2.9802322387695312e-05,
+      "native_interfoot_clearance_mm": 130.83553875679172,
+      "release_support_plane_mm": -130.83553875679158
+    },
+    "surface": {
+      "symmetric_mean_mm": 114.63637812312753,
+      "sampled_chamfer_mm2": 25742.454311076115,
+      "p95_mm": 349.41708347532057,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 49.857637490434435,
+        "torso_and_arms": 62.80910853313153,
+        "lower_body": 186.76444544009885
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.5244928253339931,
+      "22.5": 0.3953453971697648,
+      "90": 0.25057836899942165,
+      "112.5": 0.2685717243878449
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 71.64394972493905,
+        "direction_error_deg": 21.30396002149748,
+        "global_rotation_change_error_deg": 10.000000925222112,
+        "parent_relative_rotation_change_error_deg": 1.304587365329832e-06,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 4.2084502716033256e-05
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 71.64393954540797,
+        "direction_error_deg": 21.30397457369211,
+        "global_rotation_change_error_deg": 9.999998365503115,
+        "parent_relative_rotation_change_error_deg": 4.104930453534279e-07,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 4.408361836683028e-05
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 95.8648621251497,
+        "direction_error_deg": 34.721753024623865,
+        "global_rotation_change_error_deg": 10.000000271570753,
+        "parent_relative_rotation_change_error_deg": 1.0700766576596043e-06,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 6.162831037159755e-05
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 95.86484179865678,
+        "direction_error_deg": 34.721753024623865,
+        "global_rotation_change_error_deg": 9.999998727913672,
+        "parent_relative_rotation_change_error_deg": 8.708718874601182e-07,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.00011458885695869725
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 17.75274900914376,
+        "direction_error_deg": 84.4842667224875,
+        "global_rotation_change_error_deg": 80.2543821563789,
+        "parent_relative_rotation_change_error_deg": 80.25438215595487,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.008007466316406475
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 17.75271671186142,
+        "direction_error_deg": 84.48427390620151,
+        "global_rotation_change_error_deg": 80.25438229135383,
+        "parent_relative_rotation_change_error_deg": 80.25438229094334,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.007967242816042663
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 554.0823057160327,
+        "direction_error_deg": 15.615613430175731,
+        "global_rotation_change_error_deg": 12.83003898458382,
+        "parent_relative_rotation_change_error_deg": 90.00000216645245,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0009762314241434922
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 554.082280984299,
+        "direction_error_deg": 15.61561444633738,
+        "global_rotation_change_error_deg": 12.830042568059698,
+        "parent_relative_rotation_change_error_deg": 90.00000314764411,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0010067540721636625
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 235.4191965844706,
+        "direction_error_deg": 63.97109075351381,
+        "global_rotation_change_error_deg": 9.9999994382332,
+        "parent_relative_rotation_change_error_deg": 1.5208464862909575e-06,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 5.207839694210126e-06
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 235.41916678614336,
+        "direction_error_deg": 63.97108855700499,
+        "global_rotation_change_error_deg": 9.999998696236098,
+        "parent_relative_rotation_change_error_deg": 3.0265384010665673e-07,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 4.8869834290421466e-06
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 484.8224894917408,
+        "direction_error_deg": 74.8027295626023,
+        "global_rotation_change_error_deg": 75.98061581844127,
+        "parent_relative_rotation_change_error_deg": 66.29279479247339,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00016675853883874048
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 484.8224908817746,
+        "direction_error_deg": 8.540688950635031,
+        "global_rotation_change_error_deg": 12.830043249213197,
+        "parent_relative_rotation_change_error_deg": 1.2835918418090963e-06,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0001446248247827242
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 102.0553820809238,
+        "global_rotation_change_error_deg": 7.238163453603695e-14,
+        "parent_relative_rotation_change_error_deg": 1.5505951803723808e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 306.45821771228276,
+        "direction_error_deg": 10.428063573937123,
+        "global_rotation_change_error_deg": 10.000000246906325,
+        "parent_relative_rotation_change_error_deg": 10.000000246216734,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 8.741924079069818e-05
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 47.94907396205326,
+        "direction_error_deg": 2.011888932957493,
+        "global_rotation_change_error_deg": 10.00000018367636,
+        "parent_relative_rotation_change_error_deg": 6.32426077611116e-08,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0001412895697244787
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 67.36427926214441,
+        "direction_error_deg": 4.603019521565938,
+        "global_rotation_change_error_deg": 9.999999578864085,
+        "parent_relative_rotation_change_error_deg": 3.9126391856845635e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 1.4763131300776777e-05
+      }
+    }
+  },
+  {
+    "fixture": "f_af01_wrist_torsion",
+    "identity": "f_af01",
+    "condition": "wrist_torsion",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "6fb5be5752d4cd390c3961a1b3088723545a895ba61417fd1bc8d4760fdfab9d",
+    "input_yaw": 90.0,
+    "image_sha256": "bb30ff4a2b28bcebd9ea4d4e55c811b9e8b34fd29c69430a53bfe81c40390a07",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9688821042743072,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 3.8415204350883414e-07,
+          "native_sole_floor_mm": -3.258014232367388
+        },
+        "R": {
+          "reference_sole_floor_mm": 4.049863555621869e-06,
+          "native_sole_floor_mm": 1.8072905309552797e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 3.6657115121130346e-06,
+      "native_interfoot_clearance_mm": 3.258014232367569,
+      "release_support_plane_mm": -3.258014232367388
+    },
+    "surface": {
+      "symmetric_mean_mm": 24.053026370305986,
+      "sampled_chamfer_mm2": 1610.7694640752798,
+      "p95_mm": 90.90815122283001,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.104344736921133,
+        "torso_and_arms": 32.14907629764964,
+        "lower_body": 21.18134394104117
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.6952492603137386,
+      "22.5": 0.7234930801784285,
+      "90": 0.7186647262142987,
+      "112.5": 0.6986201406395117
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 28.293797754778414,
+        "direction_error_deg": 24.246484451844903,
+        "global_rotation_change_error_deg": 21.220681315761862,
+        "parent_relative_rotation_change_error_deg": 21.220681315697938,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0009570451290907833
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 28.293771603796763,
+        "direction_error_deg": 21.64111951262074,
+        "global_rotation_change_error_deg": 3.974068505741538e-15,
+        "parent_relative_rotation_change_error_deg": 1.5782999172269644e-11,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 92.66387142958781,
+        "direction_error_deg": 25.094105101970282,
+        "global_rotation_change_error_deg": 54.66132269690497,
+        "parent_relative_rotation_change_error_deg": 51.26283370282895,
+        "native_length_change_mm": 1.942890293094024e-13,
+        "reference_length_change_mm": 0.0006372245029695467
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 76.89523597788443,
+        "direction_error_deg": 19.957079208410658,
+        "global_rotation_change_error_deg": 36.800321938135774,
+        "parent_relative_rotation_change_error_deg": 36.800321937353885,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 5.545096354309109e-05
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 17.75274900914376,
+        "direction_error_deg": 4.731170366547615,
+        "global_rotation_change_error_deg": 7.17562888923405,
+        "parent_relative_rotation_change_error_deg": 7.175628888120577,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 17.75271671186142,
+        "direction_error_deg": 7.427183387532871,
+        "global_rotation_change_error_deg": 2.351457569480388e-14,
+        "parent_relative_rotation_change_error_deg": 2.8688034192326446e-09,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 54.52901725198951,
+        "direction_error_deg": 13.573332785235817,
+        "global_rotation_change_error_deg": 14.976454984683098,
+        "parent_relative_rotation_change_error_deg": 19.56612164457846,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 28.80920906898534,
+        "direction_error_deg": 4.96549385992284,
+        "global_rotation_change_error_deg": 2.123067750419207e-14,
+        "parent_relative_rotation_change_error_deg": 1.8307730368248403e-10,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 176.53735698815578,
+        "direction_error_deg": 3.7039646001143596,
+        "global_rotation_change_error_deg": 128.3415038754821,
+        "parent_relative_rotation_change_error_deg": 102.80690120209479,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.00010505535001648081
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 154.4847109214405,
+        "direction_error_deg": 56.78380242442526,
+        "global_rotation_change_error_deg": 84.29718445635935,
+        "parent_relative_rotation_change_error_deg": 49.99999979939254,
+        "native_length_change_mm": 2.0122792321330962e-13,
+        "reference_length_change_mm": 4.7429329907977547e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 86.98041002260564,
+        "direction_error_deg": 33.66251773640021,
+        "global_rotation_change_error_deg": 39.88940059515177,
+        "parent_relative_rotation_change_error_deg": 42.91087804072206,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 36.599142445464,
+        "direction_error_deg": 3.672771820119605,
+        "global_rotation_change_error_deg": 2.9372689440520945e-14,
+        "parent_relative_rotation_change_error_deg": 2.7373677710895413e-10,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 90.05519725016903,
+        "direction_error_deg": 102.0553820809238,
+        "global_rotation_change_error_deg": 7.238163453603695e-14,
+        "parent_relative_rotation_change_error_deg": 1.5505951803723808e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 306.45821771228276,
+        "direction_error_deg": 0.42798373737668277,
+        "global_rotation_change_error_deg": 2.443885123698011e-13,
+        "parent_relative_rotation_change_error_deg": 9.035279301612324e-12,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 33.38950949751266,
+        "direction_error_deg": 7.988178721252971,
+        "global_rotation_change_error_deg": 6.555083656614896e-15,
+        "parent_relative_rotation_change_error_deg": 1.2224379252361923e-11,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 33.04463320907079,
+        "direction_error_deg": 5.397062060607251,
+        "global_rotation_change_error_deg": 1.2478236296234891e-14,
+        "parent_relative_rotation_change_error_deg": 1.205082393991389e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_morph_neutral",
+    "identity": "m_la01",
+    "condition": "neutral",
+    "morphology_asymmetry": true,
+    "mesh_sha256": "0f4d006dfed91600aaf1a25f99dc8b0c376d7eb5cc23ad65f387a35f88c1033a",
+    "input_yaw": 90.0,
+    "image_sha256": "3e4c134aeea6effa1aca8fbfddd05d333be0710b0a5bcb6969895fbe23e2f883",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9762361057876581,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 0.0,
+          "native_sole_floor_mm": -0.751020828929014
+        },
+        "R": {
+          "reference_sole_floor_mm": 2.882196703524187e-06,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 2.882196703524187e-06,
+      "native_interfoot_clearance_mm": 0.7510208289292093,
+      "release_support_plane_mm": -0.751020828929014
+    },
+    "surface": {
+      "symmetric_mean_mm": 41.57583958000531,
+      "sampled_chamfer_mm2": 6894.623400655262,
+      "p95_mm": 199.56939414136983,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.68796944593665,
+        "torso_and_arms": 87.98008240444973,
+        "lower_body": 21.44653016508547
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.6339473802160369,
+      "22.5": 0.654019707155355,
+      "90": 0.7091901592761535,
+      "112.5": 0.719415496148618
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 25.60562230645462,
+        "direction_error_deg": 55.80236035653079,
+        "global_rotation_change_error_deg": 37.532147046734124,
+        "parent_relative_rotation_change_error_deg": 37.532147046724276,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 10.88803746049316
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 27.288331060185477,
+        "direction_error_deg": 19.199419255281903,
+        "global_rotation_change_error_deg": 1.0090227860703818e-14,
+        "parent_relative_rotation_change_error_deg": 6.680704119753477e-12,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 5.038800759971096e-05
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 256.27655100000743,
+        "direction_error_deg": 57.30846811884399,
+        "global_rotation_change_error_deg": 37.53214704673414,
+        "parent_relative_rotation_change_error_deg": 2.500226853913541e-11,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 10.382313178795787
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 89.66073144822975,
+        "direction_error_deg": 38.1701929630954,
+        "global_rotation_change_error_deg": 6.991190862852129e-15,
+        "parent_relative_rotation_change_error_deg": 1.891513413356701e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 2.5538976988759288e-05
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.45680485629937,
+        "direction_error_deg": 5.3233119329063925,
+        "global_rotation_change_error_deg": 7.965787738508904,
+        "parent_relative_rotation_change_error_deg": 7.965787738499194,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.007547963079113096
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 42.522422921883226,
+        "direction_error_deg": 10.475508457358716,
+        "global_rotation_change_error_deg": 1.3886715696367399e-14,
+        "parent_relative_rotation_change_error_deg": 1.482887574940338e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.2740337898799461
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 56.79828273512603,
+        "direction_error_deg": 13.764986872537905,
+        "global_rotation_change_error_deg": 18.047085808912136,
+        "parent_relative_rotation_change_error_deg": 20.972110966964614,
+        "native_length_change_mm": 1.3877787807814457e-13,
+        "reference_length_change_mm": 2.971582596655864e-05
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 57.113022055843395,
+        "direction_error_deg": 4.830942203841001,
+        "global_rotation_change_error_deg": 1.5510919462760284e-15,
+        "parent_relative_rotation_change_error_deg": 7.761398243225763e-12,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.11933124772356418
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 481.0418882174185,
+        "direction_error_deg": 92.09331397420988,
+        "global_rotation_change_error_deg": 37.53214704673414,
+        "parent_relative_rotation_change_error_deg": 3.64189575195162e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 1.4589063252924208
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 244.4975479391124,
+        "direction_error_deg": 62.396759657245845,
+        "global_rotation_change_error_deg": 1.0586377132018875e-14,
+        "parent_relative_rotation_change_error_deg": 2.601595720006187e-11,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 2.865317150213542e-07
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 83.44423138075405,
+        "direction_error_deg": 36.74531489273125,
+        "global_rotation_change_error_deg": 43.542308133218626,
+        "parent_relative_rotation_change_error_deg": 47.0491624125063,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 2.4673262599694823e-06
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 63.334873977508046,
+        "direction_error_deg": 3.52190097707398,
+        "global_rotation_change_error_deg": 4.191739941913556e-15,
+        "parent_relative_rotation_change_error_deg": 7.627016133847375e-12,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.021074659723147038
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70938739010273,
+        "direction_error_deg": 101.91375753704264,
+        "global_rotation_change_error_deg": 2.0004010662069254e-15,
+        "parent_relative_rotation_change_error_deg": 3.9815531489703937e-13,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.3093149199009937
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 279.1776140455562,
+        "direction_error_deg": 1.9512052781755165,
+        "global_rotation_change_error_deg": 4.064781451682282e-15,
+        "parent_relative_rotation_change_error_deg": 3.1445003365810055e-12,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 0.07850508720767813
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 49.145668364072804,
+        "direction_error_deg": 3.6151163171557688,
+        "global_rotation_change_error_deg": 3.359629009921251e-15,
+        "parent_relative_rotation_change_error_deg": 1.6114949819946933e-12,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.7400016722914349
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 37.189770631804514,
+        "direction_error_deg": 6.33620073900453,
+        "global_rotation_change_error_deg": 2.6664477614174507e-15,
+        "parent_relative_rotation_change_error_deg": 1.3206040578419167e-12,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.2843100617623828
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_neutral",
+    "identity": "m_la01",
+    "condition": "neutral",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "d22e35c1932970cf00455f28b9f1c2ae069dab80ea3d2532dfba43e3ffa235f8",
+    "input_yaw": 90.0,
+    "image_sha256": "73008dd501ea65f44dc70e29a9b2717e1b7663a9619530498cc99239cab1bc97",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9786549707602339,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": -2.0391028865418548e-06,
+          "native_sole_floor_mm": -0.22248048966020795
+        },
+        "R": {
+          "reference_sole_floor_mm": -5.609681608120809e-07,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 1.4781347257297739e-06,
+      "native_interfoot_clearance_mm": 0.22248048966040324,
+      "release_support_plane_mm": -0.22248048966020792
+    },
+    "surface": {
+      "symmetric_mean_mm": 41.34480375648647,
+      "sampled_chamfer_mm2": 6760.423144089874,
+      "p95_mm": 194.90398662136457,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.642239452475515,
+        "torso_and_arms": 86.62942300816161,
+        "lower_body": 21.891174573367106
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.630294845824893,
+      "22.5": 0.6519314096063428,
+      "90": 0.7051224275199038,
+      "112.5": 0.7239601237538673
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 27.288260377213533,
+        "direction_error_deg": 56.12068068916011,
+        "global_rotation_change_error_deg": 36.969055830165544,
+        "parent_relative_rotation_change_error_deg": 36.969055830179954,
+        "native_length_change_mm": 1.249000902703301e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 27.288344383505226,
+        "direction_error_deg": 19.199426140566715,
+        "global_rotation_change_error_deg": 1.1387167730973975e-14,
+        "parent_relative_rotation_change_error_deg": 1.2700156712725544e-11,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 241.78617954768137,
+        "direction_error_deg": 56.85742444249695,
+        "global_rotation_change_error_deg": 36.969055830165544,
+        "parent_relative_rotation_change_error_deg": 4.390315005829784e-12,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 89.66073309176846,
+        "direction_error_deg": 38.1701953460975,
+        "global_rotation_change_error_deg": 2.7087009828291607e-15,
+        "parent_relative_rotation_change_error_deg": 7.132054301097799e-12,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.52231088668236,
+        "direction_error_deg": 5.8652119943711805,
+        "global_rotation_change_error_deg": 7.4672204679058956,
+        "parent_relative_rotation_change_error_deg": 7.467220467952439,
+        "native_length_change_mm": 4.163336342344337e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 42.52236913893739,
+        "direction_error_deg": 10.479643268935325,
+        "global_rotation_change_error_deg": 1.3344114013492701e-15,
+        "parent_relative_rotation_change_error_deg": 5.4478393969460316e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 53.89643707085806,
+        "direction_error_deg": 14.216399726617418,
+        "global_rotation_change_error_deg": 18.412362115420887,
+        "parent_relative_rotation_change_error_deg": 20.306925871777725,
+        "native_length_change_mm": 1.3877787807814457e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 59.971399711195986,
+        "direction_error_deg": 4.452574331215735,
+        "global_rotation_change_error_deg": 4.787480641541222e-15,
+        "parent_relative_rotation_change_error_deg": 1.0361641489386818e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 479.01695278184326,
+        "direction_error_deg": 89.57003347034825,
+        "global_rotation_change_error_deg": 36.96905583016554,
+        "parent_relative_rotation_change_error_deg": 1.5436889107392088e-11,
+        "native_length_change_mm": 1.0408340855860843e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 244.49764684685363,
+        "direction_error_deg": 62.396757713630315,
+        "global_rotation_change_error_deg": 3.2654475273566205e-15,
+        "parent_relative_rotation_change_error_deg": 2.189177890588301e-11,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 90.66660595957467,
+        "direction_error_deg": 37.25283627555268,
+        "global_rotation_change_error_deg": 44.03732288397822,
+        "parent_relative_rotation_change_error_deg": 47.873640445208316,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 63.36798818594785,
+        "direction_error_deg": 3.5298768423265283,
+        "global_rotation_change_error_deg": 3.43992421890177e-15,
+        "parent_relative_rotation_change_error_deg": 8.068533083728528e-12,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 101.90668323927048,
+        "global_rotation_change_error_deg": 5.81356644853849e-15,
+        "parent_relative_rotation_change_error_deg": 5.8010879236801626e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 279.22267092540824,
+        "direction_error_deg": 3.164912654247426,
+        "global_rotation_change_error_deg": 7.609935782617097e-15,
+        "parent_relative_rotation_change_error_deg": 2.8365834460968263e-12,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 51.90952778190613,
+        "direction_error_deg": 4.819597050692503,
+        "global_rotation_change_error_deg": 3.1175131742872057e-15,
+        "parent_relative_rotation_change_error_deg": 3.89531063317391e-12,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 37.20326436011832,
+        "direction_error_deg": 6.363656937050998,
+        "global_rotation_change_error_deg": 3.970819373244154e-15,
+        "parent_relative_rotation_change_error_deg": 6.367573259838574e-12,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.0
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_pelvis_spine_extend",
+    "identity": "m_la01",
+    "condition": "pelvis_spine_extend",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "2d5d7774ad3c57cc01cecf3cabe1e884a36355b0b7a566bd34fdf7c346fcd826",
+    "input_yaw": 90.0,
+    "image_sha256": "a3902171f06a886072a8c34963e6707f2ebb836adf9ef4a9d8d55f6138fea5c9",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9694552859324622,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": -26.57666616141796,
+          "native_sole_floor_mm": 5.335275682888818
+        },
+        "R": {
+          "reference_sole_floor_mm": 66.7131245136261,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 93.28979067504406,
+      "native_interfoot_clearance_mm": 5.335275682888622,
+      "release_support_plane_mm": 1.9528206965675195e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 81.79466588928021,
+      "sampled_chamfer_mm2": 12632.684779064153,
+      "p95_mm": 253.84862610399406,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 214.1468242464323,
+        "torso_and_arms": 87.40183638435808,
+        "lower_body": 74.66891548800258
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.34845001483239396,
+      "22.5": 0.35281743050338094,
+      "90": 0.6220143981699522,
+      "112.5": 0.47702702702702704
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 209.6862871028927,
+        "direction_error_deg": 20.214928447661737,
+        "global_rotation_change_error_deg": 12.559431388087608,
+        "parent_relative_rotation_change_error_deg": 28.19735978987042,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0003978191711606627
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 220.68749001343457,
+        "direction_error_deg": 51.92023657958598,
+        "global_rotation_change_error_deg": 42.82026585945244,
+        "parent_relative_rotation_change_error_deg": 7.442680786590106e-07,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 0.00025902413203215957
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 264.6893497958514,
+        "direction_error_deg": 34.83616962516437,
+        "global_rotation_change_error_deg": 33.78991715631401,
+        "parent_relative_rotation_change_error_deg": 44.63823073967307,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.0005321438388827815
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 254.58103028869462,
+        "direction_error_deg": 54.31821809721514,
+        "global_rotation_change_error_deg": 42.820265292384846,
+        "parent_relative_rotation_change_error_deg": 1.6460756841889158e-06,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00018067676149646772
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 35.52242729589765,
+        "direction_error_deg": 10.101267754490175,
+        "global_rotation_change_error_deg": 15.272391225176468,
+        "parent_relative_rotation_change_error_deg": 5.132169969478991,
+        "native_length_change_mm": 1.249000902703301e-13,
+        "reference_length_change_mm": 1.8368624232767417e-05
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 70.51097488884412,
+        "direction_error_deg": 18.72400272049521,
+        "global_rotation_change_error_deg": 16.131651741428,
+        "parent_relative_rotation_change_error_deg": 6.470708108423053e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00012380847064230593
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 121.73205305140154,
+        "direction_error_deg": 10.485746353506896,
+        "global_rotation_change_error_deg": 15.307846975032398,
+        "parent_relative_rotation_change_error_deg": 21.52502539776618,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 1.8207642504819432e-05
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 106.17518709214626,
+        "direction_error_deg": 12.312414311230038,
+        "global_rotation_change_error_deg": 16.131651509893974,
+        "parent_relative_rotation_change_error_deg": 3.292777097439865e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.00010647876813596469
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 411.13757030361654,
+        "direction_error_deg": 6.279451580431345,
+        "global_rotation_change_error_deg": 70.92794527279048,
+        "parent_relative_rotation_change_error_deg": 71.68706612829261,
+        "native_length_change_mm": 2.0816681711721685e-14,
+        "reference_length_change_mm": 4.435336633384912e-05
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 370.923424103795,
+        "direction_error_deg": 88.75505782357061,
+        "global_rotation_change_error_deg": 42.820264731762165,
+        "parent_relative_rotation_change_error_deg": 6.550984130671199e-07,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 2.6358842851459396e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 171.83639469291853,
+        "direction_error_deg": 35.84409243126122,
+        "global_rotation_change_error_deg": 38.215719046293145,
+        "parent_relative_rotation_change_error_deg": 42.75784156121735,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 4.681618603896709e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 175.0313396330174,
+        "direction_error_deg": 6.221870077637249,
+        "global_rotation_change_error_deg": 16.131651409324085,
+        "parent_relative_rotation_change_error_deg": 6.674856975019036e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 5.3439321551218555e-05
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 90.62795109507707,
+        "global_rotation_change_error_deg": 16.13165196347629,
+        "parent_relative_rotation_change_error_deg": 16.13165196330031,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00015306994111119465
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 292.9202440165352,
+        "direction_error_deg": 14.062192881003238,
+        "global_rotation_change_error_deg": 15.752852316310118,
+        "parent_relative_rotation_change_error_deg": 11.000000738681297,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 3.532819135843024e-05
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 93.75018838764629,
+        "direction_error_deg": 20.582035116676405,
+        "global_rotation_change_error_deg": 24.20515728652316,
+        "parent_relative_rotation_change_error_deg": 10.626398958282966,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 1.5364816835505835e-05
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 318.5637552494095,
+        "direction_error_deg": 42.05030768956258,
+        "global_rotation_change_error_deg": 40.429817320309574,
+        "parent_relative_rotation_change_error_deg": 11.65798620314468,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.00025284753768506363
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_pelvis_spine_flex",
+    "identity": "m_la01",
+    "condition": "pelvis_spine_flex",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "03006c8c65a7ee08efc5b5dab64207821299808f841a475c4f657c88589656e1",
+    "input_yaw": 90.0,
+    "image_sha256": "b68a87ba0b6d705781917d914d50fb27496af1aad83082c8607e008c51a4c95b",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      23,
+      24,
+      25,
+      27,
+      29,
+      30,
+      31,
+      32
+    ],
+    "mask_iou": 0.9595802246454046,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 45.895710587501526,
+          "native_sole_floor_mm": 73.44071215662431
+        },
+        "R": {
+          "reference_sole_floor_mm": -41.11995920538902,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 87.01566979289055,
+      "native_interfoot_clearance_mm": 73.44071215662412,
+      "release_support_plane_mm": 1.9528206965675195e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 105.90639751921528,
+      "sampled_chamfer_mm2": 19505.561819656752,
+      "p95_mm": 278.4057196576252,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 196.80911283717927,
+        "torso_and_arms": 86.85010819927048,
+        "lower_body": 108.88212192232432
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.4058768070395977,
+      "22.5": 0.4310603298083546,
+      "90": 0.33303406653698436,
+      "112.5": 0.41542164297715817
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 234.75892102703605,
+        "direction_error_deg": 76.55391750130124,
+        "global_rotation_change_error_deg": 58.78961902765099,
+        "parent_relative_rotation_change_error_deg": 39.34053167457782,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00031168961839300735
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 228.53120674620243,
+        "direction_error_deg": 13.174177573197719,
+        "global_rotation_change_error_deg": 36.08226761842728,
+        "parent_relative_rotation_change_error_deg": 1.0054483441939023e-06,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 0.00035581261631500993
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 310.3102685406769,
+        "direction_error_deg": 68.26249072232969,
+        "global_rotation_change_error_deg": 58.789618928898115,
+        "parent_relative_rotation_change_error_deg": 3.6765231755476997e-07,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.00020870968336916818
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 212.68136452985397,
+        "direction_error_deg": 28.700783668190024,
+        "global_rotation_change_error_deg": 36.0822660971591,
+        "parent_relative_rotation_change_error_deg": 2.0397049675018933e-06,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00029405829732320754
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 77.36774556045202,
+        "direction_error_deg": 19.597001445711015,
+        "global_rotation_change_error_deg": 24.05719930600878,
+        "parent_relative_rotation_change_error_deg": 32.3657239276276,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.00021858292537091373
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 20.717103133464988,
+        "direction_error_deg": 18.993656756814346,
+        "global_rotation_change_error_deg": 17.4189251681731,
+        "parent_relative_rotation_change_error_deg": 8.194167382203007e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 7.660165945999609e-06
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 175.94157131828462,
+        "direction_error_deg": 22.061476675870903,
+        "global_rotation_change_error_deg": 25.14011566566335,
+        "parent_relative_rotation_change_error_deg": 18.86233086949286,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.00017498292970152818
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 156.7928207036579,
+        "direction_error_deg": 20.124923522934147,
+        "global_rotation_change_error_deg": 17.418925154347587,
+        "parent_relative_rotation_change_error_deg": 2.924252272945295e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 7.948751423736411e-05
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 541.3945492119423,
+        "direction_error_deg": 103.17817810844474,
+        "global_rotation_change_error_deg": 58.78961947832067,
+        "parent_relative_rotation_change_error_deg": 1.0477043855567595e-06,
+        "native_length_change_mm": 3.469446951953614e-14,
+        "reference_length_change_mm": 4.777836625641241e-05
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 337.86529567737324,
+        "direction_error_deg": 39.63293226508396,
+        "global_rotation_change_error_deg": 36.082266064473295,
+        "parent_relative_rotation_change_error_deg": 9.055698717902807e-07,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 3.975418336882308e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 301.2479093784594,
+        "direction_error_deg": 33.66604531758532,
+        "global_rotation_change_error_deg": 41.195230429389625,
+        "parent_relative_rotation_change_error_deg": 41.57245099342797,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 5.9475111835460837e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 299.7905351091414,
+        "direction_error_deg": 10.486473820707598,
+        "global_rotation_change_error_deg": 17.41892588164553,
+        "parent_relative_rotation_change_error_deg": 1.390208901890453e-06,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 8.663634565309053e-05
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 115.37854727654717,
+        "global_rotation_change_error_deg": 17.418925867118496,
+        "parent_relative_rotation_change_error_deg": 17.418925866962887,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 5.481380044303208e-05
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 286.0804015336725,
+        "direction_error_deg": 15.278293774100115,
+        "global_rotation_change_error_deg": 15.496342284915155,
+        "parent_relative_rotation_change_error_deg": 12.999998460825086,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 6.44375008490572e-05
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 76.36162923086255,
+        "direction_error_deg": 25.669166156993693,
+        "global_rotation_change_error_deg": 25.03800495470066,
+        "parent_relative_rotation_change_error_deg": 12.20145751785443,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.00014909771145488193
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 298.2032358750823,
+        "direction_error_deg": 40.274202586913965,
+        "global_rotation_change_error_deg": 42.562533588539075,
+        "parent_relative_rotation_change_error_deg": 13.885990290391842,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.00023379817515323253
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_raised_foot",
+    "identity": "m_la01",
+    "condition": "raised_foot",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "c0eb1d22ead9503ed460a08d58aa99b4e8fc9570921b693b2bd33218caa21106",
+    "input_yaw": 90.0,
+    "image_sha256": "0ec5bd1e040ec62e74b30e8cac70ad36aab882271a48be5acf085876f6b16079",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31,
+      32
+    ],
+    "mask_iou": 0.9681631455399061,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 107.69415646791458,
+          "native_sole_floor_mm": 20.902844358553967
+        },
+        "R": {
+          "reference_sole_floor_mm": -5.609681608120809e-07,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 107.69415702888274,
+      "native_interfoot_clearance_mm": 20.90284435855377,
+      "release_support_plane_mm": 1.9528206965675195e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 39.88632665291348,
+      "sampled_chamfer_mm2": 5456.804939899644,
+      "p95_mm": 130.2738085905571,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 9.506760279627649,
+        "torso_and_arms": 70.05011796635878,
+        "lower_body": 35.09407210489277
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.64280798348245,
+      "22.5": 0.6652400446594715,
+      "90": 0.6989008196200521,
+      "112.5": 0.6749207488486153
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 27.288260377213533,
+        "direction_error_deg": 47.93852868168096,
+        "global_rotation_change_error_deg": 28.739901570905378,
+        "parent_relative_rotation_change_error_deg": 28.739901570919486,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 27.288344383505226,
+        "direction_error_deg": 16.95918567218641,
+        "global_rotation_change_error_deg": 16.388117538967606,
+        "parent_relative_rotation_change_error_deg": 16.38811753885653,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 0.0001543236237133705
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 207.9452208271913,
+        "direction_error_deg": 79.88311090939536,
+        "global_rotation_change_error_deg": 52.755152891309535,
+        "parent_relative_rotation_change_error_deg": 29.705768793631425,
+        "native_length_change_mm": 1.5265566588595902e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 50.366227489342094,
+        "direction_error_deg": 23.263407719118316,
+        "global_rotation_change_error_deg": 16.388117349419772,
+        "parent_relative_rotation_change_error_deg": 8.53873397660346e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.00010355509366677396
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.52231088668236,
+        "direction_error_deg": 25.23262911218981,
+        "global_rotation_change_error_deg": 19.404254096505067,
+        "parent_relative_rotation_change_error_deg": 19.40425409598156,
+        "native_length_change_mm": 0.0,
+        "reference_length_change_mm": 0.0005003755494947804
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 42.52236913893739,
+        "direction_error_deg": 10.479643268935325,
+        "global_rotation_change_error_deg": 1.3344114013492701e-15,
+        "parent_relative_rotation_change_error_deg": 5.4478393969460316e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 193.1494882237687,
+        "direction_error_deg": 28.324989396520113,
+        "global_rotation_change_error_deg": 32.08223719978141,
+        "parent_relative_rotation_change_error_deg": 49.71761272280705,
+        "native_length_change_mm": 1.3877787807814457e-13,
+        "reference_length_change_mm": 0.0005701253106837889
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 59.971399711195986,
+        "direction_error_deg": 4.452574331215735,
+        "global_rotation_change_error_deg": 4.787480641541222e-15,
+        "parent_relative_rotation_change_error_deg": 1.0361641489386818e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 530.6242099283099,
+        "direction_error_deg": 49.782581031912606,
+        "global_rotation_change_error_deg": 26.826207806903888,
+        "parent_relative_rotation_change_error_deg": 69.85784288224232,
+        "native_length_change_mm": 1.8041124150158794e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 115.66329411060151,
+        "direction_error_deg": 46.59351365668307,
+        "global_rotation_change_error_deg": 16.388117488051904,
+        "parent_relative_rotation_change_error_deg": 2.022111375773511e-06,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 4.1150621056529335e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 116.25087083024002,
+        "direction_error_deg": 42.74264244229064,
+        "global_rotation_change_error_deg": 50.975691020521346,
+        "parent_relative_rotation_change_error_deg": 50.553333791955744,
+        "native_length_change_mm": 4.163336342344337e-14,
+        "reference_length_change_mm": 1.3237124479870133e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 63.36798818594785,
+        "direction_error_deg": 3.5298768423265283,
+        "global_rotation_change_error_deg": 3.43992421890177e-15,
+        "parent_relative_rotation_change_error_deg": 8.068533083728528e-12,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 101.90668323927048,
+        "global_rotation_change_error_deg": 5.81356644853849e-15,
+        "parent_relative_rotation_change_error_deg": 5.8010879236801626e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 279.22267092540824,
+        "direction_error_deg": 3.164912654247426,
+        "global_rotation_change_error_deg": 7.609935782617097e-15,
+        "parent_relative_rotation_change_error_deg": 2.8365834460968263e-12,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 51.90952778190613,
+        "direction_error_deg": 4.819597050692503,
+        "global_rotation_change_error_deg": 3.1175131742872057e-15,
+        "parent_relative_rotation_change_error_deg": 3.89531063317391e-12,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 37.20326436011832,
+        "direction_error_deg": 12.316489469350659,
+        "global_rotation_change_error_deg": 11.65798219183125,
+        "parent_relative_rotation_change_error_deg": 11.657982191786889,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 1.2648396496839354e-06
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_seated",
+    "identity": "m_la01",
+    "condition": "seated",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "e4c47b5118965feff36c6bb3f012daa675ad8244184b6e9d8ab1b0a479fc9894",
+    "input_yaw": 90.0,
+    "image_sha256": "c88967a982e0e9833130e567ebf48dad63ade363f8c3f2584ecd792110ba38a6",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      23,
+      24,
+      27,
+      29
+    ],
+    "mask_iou": 0.9784015128894197,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": 409.04897451400757,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        },
+        "R": {
+          "reference_sole_floor_mm": 409.04903411865234,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 5.9604644775390625e-05,
+      "native_interfoot_clearance_mm": 0.0,
+      "release_support_plane_mm": 1.9528206965675195e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 136.33857142487955,
+      "sampled_chamfer_mm2": 35017.349482381775,
+      "p95_mm": 402.0338379490563,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 50.24289581771966,
+        "torso_and_arms": 79.8185323882281,
+        "lower_body": 228.80496938310233
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.4710929428147882,
+      "22.5": 0.37274334827486943,
+      "90": 0.2609812798238101,
+      "112.5": 0.280705574912892
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 93.5512938404085,
+        "direction_error_deg": 20.256537960009723,
+        "global_rotation_change_error_deg": 10.000000404560279,
+        "parent_relative_rotation_change_error_deg": 9.798754417268956e-07,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 1.657405374055898e-05
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 93.55136761434606,
+        "direction_error_deg": 20.25648290845895,
+        "global_rotation_change_error_deg": 9.999999411714285,
+        "parent_relative_rotation_change_error_deg": 1.3089492820066066e-06,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 1.9289097485941653e-05
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 109.89216600374358,
+        "direction_error_deg": 34.56511197326491,
+        "global_rotation_change_error_deg": 10.000000596996676,
+        "parent_relative_rotation_change_error_deg": 6.595977609044838e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 3.0258002103877857e-05
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 109.89220410726345,
+        "direction_error_deg": 34.565113364746644,
+        "global_rotation_change_error_deg": 9.999999841581586,
+        "parent_relative_rotation_change_error_deg": 4.887643527044285e-07,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 2.969804985264446e-05
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.52231088668236,
+        "direction_error_deg": 88.77866771232587,
+        "global_rotation_change_error_deg": 80.2543826131151,
+        "parent_relative_rotation_change_error_deg": 80.25438261294434,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0025229548441529914
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 42.52236913893739,
+        "direction_error_deg": 88.77866779907636,
+        "global_rotation_change_error_deg": 80.2543827211362,
+        "parent_relative_rotation_change_error_deg": 80.25438272096574,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0024659606859822603
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 647.5284080741901,
+        "direction_error_deg": 13.67013051315938,
+        "global_rotation_change_error_deg": 16.441399580027138,
+        "parent_relative_rotation_change_error_deg": 90.00000255123106,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.00028397674112223825
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 647.5284468275314,
+        "direction_error_deg": 13.670131507492414,
+        "global_rotation_change_error_deg": 16.44140070125128,
+        "parent_relative_rotation_change_error_deg": 90.00000249642206,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.00028803137924748867
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 260.52178273341565,
+        "direction_error_deg": 59.777588923776904,
+        "global_rotation_change_error_deg": 10.000000380581467,
+        "parent_relative_rotation_change_error_deg": 1.3934802351018886e-06,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 4.142165131726383e-06
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 260.52183361230675,
+        "direction_error_deg": 59.777588923776904,
+        "global_rotation_change_error_deg": 9.99999980296581,
+        "parent_relative_rotation_change_error_deg": 1.3164019320781443e-06,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 4.142165131726383e-06
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 588.1376896868167,
+        "direction_error_deg": 8.820488046633676,
+        "global_rotation_change_error_deg": 16.441398614667225,
+        "parent_relative_rotation_change_error_deg": 2.017028855042729e-06,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 9.807586029420001e-05
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 588.1377344837931,
+        "direction_error_deg": 8.820488046633676,
+        "global_rotation_change_error_deg": 16.44139947681708,
+        "parent_relative_rotation_change_error_deg": 1.926454813650439e-06,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 9.6453608933178e-05
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 101.90668323927048,
+        "global_rotation_change_error_deg": 5.81356644853849e-15,
+        "parent_relative_rotation_change_error_deg": 5.8010879236801626e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 279.22267092540824,
+        "direction_error_deg": 13.164947802508333,
+        "global_rotation_change_error_deg": 10.00000011104327,
+        "parent_relative_rotation_change_error_deg": 10.000000110915247,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 2.5334759984341204e-06
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 63.922319981139815,
+        "direction_error_deg": 14.819627777868241,
+        "global_rotation_change_error_deg": 10.000000564085369,
+        "parent_relative_rotation_change_error_deg": 4.5303414851921514e-07,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 4.468111569622124e-05
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 64.18828656670475,
+        "direction_error_deg": 3.6363845979461455,
+        "global_rotation_change_error_deg": 10.000000965772292,
+        "parent_relative_rotation_change_error_deg": 8.727552935173839e-07,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 1.9472444073853623e-05
+      }
+    }
+  },
+  {
+    "fixture": "m_la01_wrist_torsion",
+    "identity": "m_la01",
+    "condition": "wrist_torsion",
+    "morphology_asymmetry": false,
+    "mesh_sha256": "8a88e1b3fd980eae48660e0eeea94a9f2fb8e78f54d433bf2283df0a19af0093",
+    "input_yaw": 90.0,
+    "image_sha256": "05823bceaa771242d70013d846fb3e7f8cc6756e1a1c2c153771c9133135cd0f",
+    "candidates": 1,
+    "review_reason": "insufficient_full_body_evidence",
+    "observed_landmarks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      24,
+      25,
+      27,
+      29,
+      31
+    ],
+    "mask_iou": 0.9680782359996309,
+    "ground_diagnostics": {
+      "sole": {
+        "L": {
+          "reference_sole_floor_mm": -2.0391028865418548e-06,
+          "native_sole_floor_mm": 3.5098936873644413
+        },
+        "R": {
+          "reference_sole_floor_mm": -5.609681608120809e-07,
+          "native_sole_floor_mm": 1.9528206965675195e-13
+        }
+      },
+      "reference_interfoot_clearance_mm": 1.4781347257297739e-06,
+      "native_interfoot_clearance_mm": 3.509893687364246,
+      "release_support_plane_mm": 1.9528206965675195e-13
+    },
+    "surface": {
+      "symmetric_mean_mm": 31.315926479845217,
+      "sampled_chamfer_mm2": 2147.255130854254,
+      "p95_mm": 100.51736415376338,
+      "truth_to_prediction_region_mean_mm": {
+        "head": 10.02238045432924,
+        "torso_and_arms": 43.974232177393226,
+        "lower_body": 27.8967820821669
+      }
+    },
+    "fixed_camera_iou": {
+      "0": 0.6325255500513233,
+      "22.5": 0.6155703617582614,
+      "90": 0.6995328781890047,
+      "112.5": 0.7430235945237401
+    },
+    "bones": {
+      "upperarm_L": {
+        "native": "upperarm01.L",
+        "head_error_mm": 27.288260377213533,
+        "direction_error_deg": 22.14535277649322,
+        "global_rotation_change_error_deg": 22.558507777803936,
+        "parent_relative_rotation_change_error_deg": 22.558507777828954,
+        "native_length_change_mm": 6.938893903907228e-14,
+        "reference_length_change_mm": 0.00038257184420409374
+      },
+      "upperarm_R": {
+        "native": "upperarm01.R",
+        "head_error_mm": 27.288344383505226,
+        "direction_error_deg": 19.199426140566715,
+        "global_rotation_change_error_deg": 1.1387167730973975e-14,
+        "parent_relative_rotation_change_error_deg": 1.2700156712725544e-11,
+        "native_length_change_mm": 9.71445146547012e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "lowerarm_L": {
+        "native": "lowerarm01.L",
+        "head_error_mm": 99.11348251835197,
+        "direction_error_deg": 20.962996129009564,
+        "global_rotation_change_error_deg": 54.917987954328495,
+        "parent_relative_rotation_change_error_deg": 46.22276956715025,
+        "native_length_change_mm": 1.3877787807814457e-13,
+        "reference_length_change_mm": 0.0002970198432206139
+      },
+      "lowerarm_R": {
+        "native": "lowerarm01.R",
+        "head_error_mm": 89.66073309176846,
+        "direction_error_deg": 19.78125890722535,
+        "global_rotation_change_error_deg": 36.800322144631345,
+        "parent_relative_rotation_change_error_deg": 36.80032214449459,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 4.409315251807655e-05
+      },
+      "thigh_L": {
+        "native": "upperleg01.L",
+        "head_error_mm": 42.52231088668236,
+        "direction_error_deg": 2.857052731053474,
+        "global_rotation_change_error_deg": 10.334792710796933,
+        "parent_relative_rotation_change_error_deg": 10.33479271083489,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "thigh_R": {
+        "native": "upperleg01.R",
+        "head_error_mm": 42.52236913893739,
+        "direction_error_deg": 10.479643268935325,
+        "global_rotation_change_error_deg": 1.3344114013492701e-15,
+        "parent_relative_rotation_change_error_deg": 5.4478393969460316e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_L": {
+        "native": "lowerleg01.L",
+        "head_error_mm": 73.97960281453196,
+        "direction_error_deg": 10.997367157844009,
+        "global_rotation_change_error_deg": 14.922924490085666,
+        "parent_relative_rotation_change_error_deg": 20.077695309819973,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "calf_R": {
+        "native": "lowerleg01.R",
+        "head_error_mm": 59.971399711195986,
+        "direction_error_deg": 4.452574331215735,
+        "global_rotation_change_error_deg": 4.787480641541222e-15,
+        "parent_relative_rotation_change_error_deg": 1.0361641489386818e-11,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "hand_L": {
+        "native": "wrist.L",
+        "head_error_mm": 181.58763763294746,
+        "direction_error_deg": 20.864380586461667,
+        "global_rotation_change_error_deg": 118.85061184125608,
+        "parent_relative_rotation_change_error_deg": 94.775733079431,
+        "native_length_change_mm": 7.632783294297951e-14,
+        "reference_length_change_mm": 4.070021265845103e-05
+      },
+      "hand_R": {
+        "native": "wrist.R",
+        "head_error_mm": 172.4213875954974,
+        "direction_error_deg": 52.106198583877394,
+        "global_rotation_change_error_deg": 84.86941558754702,
+        "parent_relative_rotation_change_error_deg": 49.99999693592762,
+        "native_length_change_mm": 1.1102230246251565e-13,
+        "reference_length_change_mm": 1.9012932755968492e-05
+      },
+      "foot_L": {
+        "native": "foot.L",
+        "head_error_mm": 72.91643227978616,
+        "direction_error_deg": 35.0034199857833,
+        "global_rotation_change_error_deg": 40.60074051462017,
+        "parent_relative_rotation_change_error_deg": 43.89770523077703,
+        "native_length_change_mm": 5.551115123125783e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "foot_R": {
+        "native": "foot.R",
+        "head_error_mm": 63.36798818594785,
+        "direction_error_deg": 3.5298768423265283,
+        "global_rotation_change_error_deg": 3.43992421890177e-15,
+        "parent_relative_rotation_change_error_deg": 8.068533083728528e-12,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "pelvis": {
+        "native": "pelvis.L",
+        "head_error_mm": 86.70935437181576,
+        "direction_error_deg": 101.90668323927048,
+        "global_rotation_change_error_deg": 5.81356644853849e-15,
+        "parent_relative_rotation_change_error_deg": 5.8010879236801626e-11,
+        "native_length_change_mm": 1.3877787807814457e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "spine01": {
+        "native": "spine01",
+        "head_error_mm": 279.22267092540824,
+        "direction_error_deg": 3.164912654247426,
+        "global_rotation_change_error_deg": 7.609935782617097e-15,
+        "parent_relative_rotation_change_error_deg": 2.8365834460968263e-12,
+        "native_length_change_mm": 1.6653345369377348e-13,
+        "reference_length_change_mm": 0.0
+      },
+      "spine02": {
+        "native": "spine02",
+        "head_error_mm": 51.90952778190613,
+        "direction_error_deg": 4.819597050692503,
+        "global_rotation_change_error_deg": 3.1175131742872057e-15,
+        "parent_relative_rotation_change_error_deg": 3.89531063317391e-12,
+        "native_length_change_mm": 2.7755575615628914e-14,
+        "reference_length_change_mm": 0.0
+      },
+      "head": {
+        "native": "head",
+        "head_error_mm": 37.20326436011832,
+        "direction_error_deg": 6.363656937050998,
+        "global_rotation_change_error_deg": 3.970819373244154e-15,
+        "parent_relative_rotation_change_error_deg": 6.367573259838574e-12,
+        "native_length_change_mm": 8.326672684688674e-14,
+        "reference_length_change_mm": 0.0
+      }
+    }
+  }
+]
