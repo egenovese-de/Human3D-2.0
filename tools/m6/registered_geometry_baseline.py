@@ -43,7 +43,7 @@ def examine(folder, project):
             depths[name] = float(-y / max(np.hypot(x, z), 1e-8))
     alignment = Alignment(camera_for(0, height), 0., angles, depths)
     transforms = pose_transforms(rig, rebind_joints(rig, base), alignment)
-    truth_samples = sample_surface(truth["vertices"], truth["faces"], 12000, 2474)
+    truth_samples = sample_surface(np.asarray(truth["vertices"]), truth["faces"], 12000, 2474)
     tree = cKDTree(truth_samples)
     bands = {"head": (.86 * height, height + 1e-8), "torso_and_arms": (.54 * height, .86 * height),
              "lower_body": (-1e-8, .54 * height)}
