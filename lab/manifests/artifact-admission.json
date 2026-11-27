@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "fixture": "lab/fixtures/smoke.usda",
+  "fixture_blob": "5883d79d2f0712768c2bbfefb0be4d9b6a2a3281",
+  "config_blob": "a0db1a0eb731874f956ba96275d3a989ddd6323f",
+  "revision": "856d51c1b7ef4c50056ff030e1470e27f61d97ad",
+  "license": "Apache-2.0 repository original procedural fixture",
+  "seed": 42,
+  "disposition": "procedural only; no personal or third-party data; provisional admission pending LR-008 license audit",
+  "retention_days": 7
+}
