@@ -1,0 +1,559 @@
+{
+  "schema_version": 1,
+  "run_id": 46009817216,
+  "job_id": 140542173252,
+  "lab_revision": "eabbb35f6a22377ffb6d22a5a37c3c52811a4507",
+  "source_revision": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+  "artifact_id": 15203846653,
+  "zip_sha256_verified": "c5a6085d3071ba060fda81d6ecc6451167f373f65892bc58d86dc2d1c0ea4e07",
+  "regional_metrics_sha256": "0d9c0178782002edf0f2572cce559782abb4be79625887dd30485c17acebab84",
+  "staged_file_count": 72,
+  "runtime_checks": [
+    {
+      "name": "source_revision",
+      "status": "PASS",
+      "required": true,
+      "detail": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94"
+    },
+    {
+      "name": "source_clean",
+      "status": "PASS",
+      "required": true,
+      "detail": ""
+    },
+    {
+      "name": "python",
+      "status": "PASS",
+      "required": true,
+      "detail": "3.11.9"
+    },
+    {
+      "name": "pip_check",
+      "status": "PASS",
+      "required": true,
+      "detail": "No broken requirements found."
+    },
+    {
+      "name": "dependency:numpy",
+      "status": "PASS",
+      "required": true,
+      "detail": "1.26.4"
+    },
+    {
+      "name": "dependency:scipy",
+      "status": "PASS",
+      "required": true,
+      "detail": "1.15.3"
+    },
+    {
+      "name": "dependency:pillow",
+      "status": "PASS",
+      "required": true,
+      "detail": "13.0.0"
+    },
+    {
+      "name": "dependency:mediapipe",
+      "status": "PASS",
+      "required": true,
+      "detail": "0.10.33"
+    },
+    {
+      "name": "dependency:usd-core",
+      "status": "PASS",
+      "required": true,
+      "detail": "25.11"
+    },
+    {
+      "name": "dependency:pyside6",
+      "status": "PASS",
+      "required": true,
+      "detail": "6.8.3"
+    },
+    {
+      "name": "dependency_lock",
+      "status": "PASS",
+      "required": true,
+      "detail": "6d2cd321e409f261616e691c157abc499e08cf531b9679cec66a3c25cb4088f4"
+    },
+    {
+      "name": "blender_archive",
+      "status": "PASS",
+      "required": true,
+      "detail": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
+    },
+    {
+      "name": "blender_version",
+      "status": "PASS",
+      "required": true,
+      "detail": [
+        "Blender",
+        "4.5.3"
+      ]
+    },
+    {
+      "name": "blender_headless",
+      "status": "PASS",
+      "required": true,
+      "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)\n\nBlender quit"
+    },
+    {
+      "name": "numerical_import",
+      "status": "PASS",
+      "required": true,
+      "detail": "NUMERIC_OK"
+    },
+    {
+      "name": "openusd",
+      "status": "PASS",
+      "required": true,
+      "detail": "USD_OK"
+    },
+    {
+      "name": "qt_offscreen",
+      "status": "PASS",
+      "required": true,
+      "detail": "QT_OK"
+    },
+    {
+      "name": "human3d",
+      "status": "PASS",
+      "required": true,
+      "detail": "D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-source\\src\\human3d\\__init__.py"
+    },
+    {
+      "name": "assets:foundation",
+      "status": "PASS",
+      "required": true,
+      "detail": 357
+    },
+    {
+      "name": "assets:morph02",
+      "status": "FAIL",
+      "required": false,
+      "detail": "[WinError 3] The system cannot find the path specified: 'D:\\\\a\\\\Human3D-2.0\\\\Human3D-2.0\\\\.lab-runtime\\\\assets\\\\morph02\\\\LICENSE.ASSETS.md'"
+    },
+    {
+      "name": "assets:pose_lite",
+      "status": "PASS",
+      "required": true,
+      "detail": 1
+    },
+    {
+      "name": "assets:anatomical_torso",
+      "status": "PASS",
+      "required": true,
+      "detail": 6
+    },
+    {
+      "name": "assets:p1_anatomy",
+      "status": "PASS",
+      "required": true,
+      "detail": 26
+    },
+    {
+      "name": "mediapipe_init",
+      "status": "PASS",
+      "required": true,
+      "detail": "POSE_OK"
+    },
+    {
+      "name": "output_and_disk",
+      "status": "PASS",
+      "required": true,
+      "detail": 233517252608
+    }
+  ],
+  "fixtures": [
+    {
+      "subject": "warp01",
+      "vertices": 19158,
+      "faces": 26756,
+      "section_perimeters_mm": {
+        "thorax": 819.5325224857268,
+        "abdomen": 702.6257606884733,
+        "pelvis": 982.995055476533,
+        "thigh": 510.59960048007673,
+        "lower_leg": 352.28588329225335,
+        "head": 541.923855373939
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 0,
+        "volume_l": 58.17517818308594
+      }
+    },
+    {
+      "subject": "warp02",
+      "vertices": 19158,
+      "faces": 26756,
+      "section_perimeters_mm": {
+        "thorax": 806.6861612304273,
+        "abdomen": 644.8499249746699,
+        "pelvis": 856.0458522841287,
+        "thigh": 495.4285220441717,
+        "lower_leg": 347.1762789928514,
+        "head": 545.6385118920019
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 0,
+        "volume_l": 52.233831566462875
+      }
+    },
+    {
+      "subject": "warp03",
+      "vertices": 19158,
+      "faces": 26756,
+      "section_perimeters_mm": {
+        "thorax": 823.9562835924621,
+        "abdomen": 720.7898533552758,
+        "pelvis": 1006.2963056569181,
+        "thigh": 515.172676327371,
+        "lower_leg": 352.9817649118184,
+        "head": 540.3344614326448
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 0,
+        "volume_l": 59.85029313554795
+      }
+    },
+    {
+      "subject": "warp04",
+      "vertices": 19158,
+      "faces": 26756,
+      "section_perimeters_mm": {
+        "thorax": 803.7177775551098,
+        "abdomen": 630.5011913791524,
+        "pelvis": 821.5561376006058,
+        "thigh": 491.65441219633976,
+        "lower_leg": 345.2885461593141,
+        "head": 545.7437943254826
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 0,
+        "volume_l": 50.668212571451875
+      }
+    },
+    {
+      "subject": "proxy01",
+      "vertices": 43376,
+      "faces": 86748,
+      "section_perimeters_mm": {
+        "thorax": 1002.3812336376081,
+        "abdomen": 599.686253811537,
+        "pelvis": 833.1509695290912,
+        "thigh": 555.0689297557032,
+        "lower_leg": 422.6001501427818,
+        "head": 536.470314095782
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 14,
+        "volume_l": 69.19168546711987
+      }
+    },
+    {
+      "subject": "proxy02",
+      "vertices": 44584,
+      "faces": 89164,
+      "section_perimeters_mm": {
+        "thorax": 1002.3812336376081,
+        "abdomen": 762.2937897560158,
+        "pelvis": 833.1509695290912,
+        "thigh": 555.0689297557032,
+        "lower_leg": 484.47345487102797,
+        "head": 536.470314095782
+      },
+      "pose": "fixed native-frame proxy",
+      "registration": "fixed authored frame; no subject-specific transform",
+      "topology": {
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "collapsed_triangles": 10,
+        "volume_l": 73.88304124379863
+      }
+    }
+  ],
+  "native_validation": {
+    "PASS": 48
+  },
+  "refinement_seconds_minmax": [
+    0.011151900000015758,
+    0.019661999999982527
+  ],
+  "regional_results": [
+    {
+      "family": "warp",
+      "method": "neutral",
+      "phase": "initial",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 14.544067303331346,
+        "p95_mm": 56.16110963354923
+      },
+      "candidate_to_target": {
+        "mean_mm": 14.03721454807001,
+        "p95_mm": 29.98906851071891
+      },
+      "paired_heldout": {
+        "mean_mm": 22.35799907435337,
+        "p95_mm": 66.61985964326664
+      }
+    },
+    {
+      "family": "warp",
+      "method": "neutral",
+      "phase": "refined",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 9.877576927424268,
+        "p95_mm": 32.917404032322224
+      },
+      "candidate_to_target": {
+        "mean_mm": 12.682904847245513,
+        "p95_mm": 26.071705040072395
+      },
+      "paired_heldout": {
+        "mean_mm": 15.898099721017987,
+        "p95_mm": 37.89848877968843
+      }
+    },
+    {
+      "family": "warp",
+      "method": "parametric",
+      "phase": "initial",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 11.971465691539045,
+        "p95_mm": 44.159797570076435
+      },
+      "candidate_to_target": {
+        "mean_mm": 13.91237709342408,
+        "p95_mm": 29.703510774639746
+      },
+      "paired_heldout": {
+        "mean_mm": 20.49286255081234,
+        "p95_mm": 57.10858816849911
+      }
+    },
+    {
+      "family": "warp",
+      "method": "parametric",
+      "phase": "refined",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 8.291996804528127,
+        "p95_mm": 24.605761597063577
+      },
+      "candidate_to_target": {
+        "mean_mm": 13.103615479658792,
+        "p95_mm": 25.858779270976342
+      },
+      "paired_heldout": {
+        "mean_mm": 14.880139740357784,
+        "p95_mm": 31.395613834707415
+      }
+    },
+    {
+      "family": "warp",
+      "method": "prototype",
+      "phase": "initial",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 23.94386313800527,
+        "p95_mm": 62.09662036193219
+      },
+      "candidate_to_target": {
+        "mean_mm": 23.355775029664205,
+        "p95_mm": 52.297919245509014
+      },
+      "paired_heldout": {
+        "mean_mm": 49.03167311145017,
+        "p95_mm": 80.20499322356706
+      }
+    },
+    {
+      "family": "warp",
+      "method": "prototype",
+      "phase": "refined",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 19.913736485105407,
+        "p95_mm": 49.56717923346251
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.80405826631834,
+        "p95_mm": 47.56349142026866
+      },
+      "paired_heldout": {
+        "mean_mm": 42.56658908310459,
+        "p95_mm": 69.36166185621616
+      }
+    },
+    {
+      "family": "warp",
+      "method": "hybrid",
+      "phase": "initial",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 17.079410167621347,
+        "p95_mm": 51.167791483281356
+      },
+      "candidate_to_target": {
+        "mean_mm": 17.70803321844382,
+        "p95_mm": 35.17060668289298
+      },
+      "paired_heldout": {
+        "mean_mm": 33.45992278410405,
+        "p95_mm": 64.05862172871693
+      }
+    },
+    {
+      "family": "warp",
+      "method": "hybrid",
+      "phase": "refined",
+      "subjects": 4,
+      "target_to_candidate": {
+        "mean_mm": 13.143144899778784,
+        "p95_mm": 33.951325210840366
+      },
+      "candidate_to_target": {
+        "mean_mm": 16.464821308459943,
+        "p95_mm": 30.91554367876605
+      },
+      "paired_heldout": {
+        "mean_mm": 27.562830962355175,
+        "p95_mm": 46.88222631393511
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "neutral",
+      "phase": "initial",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 26.27777572684754,
+        "p95_mm": 84.81807117766212
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.583027305482382,
+        "p95_mm": 54.62260339581067
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "neutral",
+      "phase": "refined",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 25.943143320561454,
+        "p95_mm": 78.36239376779754
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.563629426471522,
+        "p95_mm": 51.4205591207114
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "parametric",
+      "phase": "initial",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 25.108827103510592,
+        "p95_mm": 77.1542967645346
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.380681375775527,
+        "p95_mm": 52.89364324645779
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "parametric",
+      "phase": "refined",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 25.53247820253027,
+        "p95_mm": 77.04167573680027
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.477422088842076,
+        "p95_mm": 50.281079107232515
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "prototype",
+      "phase": "initial",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 29.560286584303995,
+        "p95_mm": 105.31987101529924
+      },
+      "candidate_to_target": {
+        "mean_mm": 23.564029239991314,
+        "p95_mm": 56.031476983359696
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "prototype",
+      "phase": "refined",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 27.924882951845674,
+        "p95_mm": 99.32261458303456
+      },
+      "candidate_to_target": {
+        "mean_mm": 21.98579320003492,
+        "p95_mm": 53.136728453379455
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "hybrid",
+      "phase": "initial",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 25.65416527094924,
+        "p95_mm": 91.56933385832522
+      },
+      "candidate_to_target": {
+        "mean_mm": 20.620793315636398,
+        "p95_mm": 48.24080299523219
+      }
+    },
+    {
+      "family": "proxy",
+      "method": "hybrid",
+      "phase": "refined",
+      "subjects": 2,
+      "target_to_candidate": {
+        "mean_mm": 24.707251003156795,
+        "p95_mm": 86.71512713062847
+      },
+      "candidate_to_target": {
+        "mean_mm": 19.799286592708064,
+        "p95_mm": 46.80083262299307
+      }
+    }
+  ]
+}
