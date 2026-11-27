@@ -19,7 +19,8 @@ def verify(root):
 def stage(config,run,runtime,out):
     config=config.resolve()
     admitted=ROOT/"lab/experiments/lr-004-smoke.json"
-    if config!=admitted.resolve():
+    native=config==(ROOT/"lab/experiments/lr-009-native.json").resolve()
+    if not native and config!=admitted.resolve():
         raise ValueError("experiment not admitted for publication")
     c=json.loads(config.read_text())
     report=json.loads((run/"run_manifest.json").read_text())
@@ -29,7 +30,12 @@ def stage(config,run,runtime,out):
     fixture=ROOT/"lab/fixtures/smoke.usda"
     def blob(p):
         return subprocess.check_output(["git","-C",str(ROOT),"hash-object","--",str(p)],text=True).strip()
-    if blob(fixture)!=policy["fixture_blob"] or blob(config)!=policy["config_blob"]:
+    if native:
+        policy=json.loads((ROOT/"lab/manifests/native-artifact-admission.json").read_text())
+        for name,expected in policy["blobs"].items():
+            if blob(ROOT/name)!=expected: raise ValueError("native admission mismatch")
+        if c["source_revision"]!=policy["source_revision"]: raise ValueError("native source mismatch")
+    elif blob(fixture)!=policy["fixture_blob"] or blob(config)!=policy["config_blob"]:
         raise ValueError("unapproved fixture or configuration")
     if len(report["stages"])!=len(c["stages"]):
         raise ValueError("stage count mismatch")
@@ -54,10 +60,13 @@ def stage(config,run,runtime,out):
     copy(run/"run_manifest.json","run_manifest.json")
     copy(config,"experiment.json")
     copy(ROOT/"LICENSE","LICENSE")
-    copy(fixture,"inputs/smoke.usda")
-    copy(ROOT/"lab/manifests/artifact-admission.json","admission.json")
+    if native:
+        copy(ROOT/"lab/manifests/native-artifact-admission.json","admission.json")
+    else:
+        copy(fixture,"inputs/smoke.usda")
+        copy(ROOT/"lab/manifests/artifact-admission.json","admission.json")
     files={p.relative_to(out).as_posix():{"sha256":digest(p),"bytes":p.stat().st_size} for p in out.rglob("*") if p.is_file()}
-    manifest={"schema_version":1,"scope":"original procedural fixture only","retention_days":7,
+    manifest={"schema_version":1,"scope":"CC0 synthetic human and original procedural outputs" if native else "original procedural fixture only","retention_days":7,
               "source_revision":c["source_revision"],"lab_revision":subprocess.check_output(["git","-C",str(ROOT),"rev-parse","HEAD"],text=True).strip(),
               "run_id":os.environ.get("GITHUB_RUN_ID"),"run_attempt":os.environ.get("GITHUB_RUN_ATTEMPT"),
               "config_sha256":digest(config),"files":files}
