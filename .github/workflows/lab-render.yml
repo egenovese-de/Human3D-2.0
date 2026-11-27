@@ -1,12 +1,5 @@
 name: Lab - Blender USD render (isolated)
 on:
-  push:
-    branches: ['lab/render']
-    paths:
-      - '.github/workflows/lab-render.yml'
-      - 'tools/lab_render_usd.py'
-      - 'lab/fixtures/**'
-      - 'lab/input/**'
   workflow_dispatch:
 
 permissions:
@@ -50,14 +43,9 @@ jobs:
           New-Item -ItemType Directory -Force -Path lab-output | Out-Null
           $candidates = @(Get-ChildItem 'lab/input' -File -ErrorAction SilentlyContinue |
               Where-Object { $_.Extension.ToLowerInvariant() -in '.usd','.usda','.usdc','.usdz' })
-          if ($candidates.Count -gt 1) { throw 'Exactly one asset permitted in lab/input' }
-          if ($candidates.Count -eq 1) {
-            $inputFile = $candidates[0].FullName
-            $label = 'Actual supplied USD asset: visual render only; photographic quality unverified'
-          } else {
-            $inputFile = (Resolve-Path 'lab/fixtures/smoke.usda').Path
-            $label = 'SMOKE ONLY: procedural cube; NOT a Human3D reconstructed person'
-          }
+          if ($candidates.Count -ne 0) { throw 'Unadmitted input; use centralized artifact gate' }
+          $inputFile = (Resolve-Path 'lab/fixtures/smoke.usda').Path
+          $label = 'SMOKE ONLY: procedural cube; NOT a Human3D reconstructed person'
           "LAB_ASSET=$inputFile" >> $env:GITHUB_ENV
           "LAB_LABEL=$label" >> $env:GITHUB_ENV
           Write-Host $label
@@ -73,11 +61,3 @@ jobs:
           if ($pngs.Count -ne 8) { throw "Expected 8 PNG renders, got $($pngs.Count)" }
           if (!(Test-Path 'lab-output/render_report.json')) { throw 'Missing render report' }
 
-      - name: Upload render artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lab-render-${{ github.run_id }}
-          path: lab-output/
-          if-no-files-found: warn
-          retention-days: 7
