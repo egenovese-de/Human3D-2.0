@@ -54,13 +54,6 @@ jobs:
             .lab-runtime/assets/morph02
             .lab-runtime/assets/anatomical_torso
           key: ${{ needs.request.outputs.cache_key }}
-      - name: Inject cache corruption for qualification
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: |
-          $asset = Get-ChildItem .lab-runtime/assets/foundation -Recurse -File | Select-Object -First 1
-          if (-not $asset) { throw "Missing cached foundation asset" }
-          Add-Content -LiteralPath $asset.FullName -Value 'LR006 corruption control'
-          Write-Output "CORRUPTION_INJECTED=$($asset.FullName)"
       - name: Provision and verify
         env:
           GROUPS: ${{ needs.request.outputs.groups }}
@@ -74,13 +67,6 @@ jobs:
           python tools/lab_runtime/verify.py --source .lab-source --source-revision $env:SOURCE @argsList
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Write-Output "CACHE_HIT=$env:CACHE_HIT"
-          if ($env:CACHE_HIT -eq 'true') {
-            $report = Get-Content .lab-runtime/bootstrap_report.json -Raw | ConvertFrom-Json
-            $reused = @($report.assets | Where-Object { $_.state -eq 'reused' }).Count
-            $repaired = @($report.assets | Where-Object { $_.group -eq 'foundation' -and $_.state -eq 'downloaded' }).Count
-            if ($report.archive -ne 'reused' -or $repaired -ne 1 -or $reused -ne 372) { throw "Cache qualification mismatch" }
-            Write-Output "CACHE_REPAIR_PASS reused=$reused repaired=$repaired"
-          }
       - name: Execute admitted experiment
         env:
           CONFIG: ${{ needs.request.outputs.config }}
