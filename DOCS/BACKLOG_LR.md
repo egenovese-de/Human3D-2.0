@@ -7,6 +7,6 @@
 | LR-005 | Integrate existing Q and M6 scripts | DONE |
 | LR-006 | Implement GitHub Actions experiment workflow and caching | DONE |
 | LR-007 | Implement experiment artifact management | DONE |
-| LR-008 | Verify licensing and distribution boundaries | TODO |
+| LR-008 | Verify licensing and distribution boundaries | IN PROGRESS |
 | LR-009 | Execute native reconstruction and Blender qualification tests | TODO |
 | LR-010 | Publish runtime documentation and handoff | TODO |
