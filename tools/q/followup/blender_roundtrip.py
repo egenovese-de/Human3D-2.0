@@ -32,7 +32,12 @@ def armature_info(obj, rig):
                 armature_bound=any(m.type == "ARMATURE" and m.object == rig for m in obj.modifiers))
 
 
-def inspect(source, directory):
+def material_bindings(objects):
+    return {obj.name: sorted(slot.material.name for slot in obj.material_slots if slot.material is not None)
+            for obj in objects}
+
+
+def inspect(source, directory, *, strict=False):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     op = bpy.ops.wm.usd_import.get_rna_type().identifier
     if not bpy.app.build_options.usd or bpy.ops.wm.usd_import(filepath=str(source.resolve())) != {"FINISHED"}:
@@ -43,6 +48,10 @@ def inspect(source, directory):
     if not garments:
         raise RuntimeError("Imported scene contains no separate garment meshes")
     meshes = {obj.name: armature_info(obj, rig) for obj in [body, *garments]}
+    bindings = material_bindings([body, *garments])
+    layers_independent = all(names for names in bindings.values()) and len({
+        name for names in bindings.values() for name in names
+    }) == sum(map(len, bindings.values()))
     before = mesh_digest(body)
     originals = {obj.name: positions(obj) for obj in garments}
     pose = {bone.name: [tuple(row) for row in bone.matrix_basis] for bone in rig.pose.bones}
@@ -75,11 +84,20 @@ def inspect(source, directory):
     bpy.ops.wm.open_mainfile(filepath=str(scene_file.resolve()))
     persisted = {name: mesh_digest(bpy.data.objects[name]) for name in garment_names}
     edits_preserved = persisted == edited
+    persisted_bindings = material_bindings([bpy.data.objects[name] for name in bindings])
     for name in garment_names:
         bpy.data.objects.remove(bpy.data.objects[name], do_unlink=True)
     body_preserved = mesh_digest(bpy.data.objects["Body"]) == before
+    materials_preserved = persisted_bindings == bindings and material_bindings([bpy.data.objects["Body"]]) == {
+        "Body": bindings["Body"]
+    }
+    if strict and not (layers_independent and materials_preserved and edits_preserved and body_preserved
+                       and restored_pose <= 1e-5 and all(amount > 1e-6 for amount in movement.values())
+                       and all(info["armature_bound"] and info["max_weight_sum_error"] <= 1e-4 for info in meshes.values())):
+        raise ValueError("strict editable USDZ regression failed")
     return dict(blender=bpy.app.version_string, usd_operator=op, source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
-                mesh_info=meshes, bones=len(pose), garment_pose_motion_scene_units=movement,
+                mesh_info=meshes, material_bindings=bindings, independent_material_bindings=layers_independent,
+                material_bindings_persisted=materials_preserved, bones=len(pose), garment_pose_motion_scene_units=movement,
                 pose_roundtrip_max_matrix_difference=restored_pose,
                 imported_nonidentity_pose_matrix_elements=sum(abs(float(row[i]) - (i == j)) > 1e-5
                                                    for matrix in pose.values() for j, row in enumerate(matrix)
@@ -93,12 +111,13 @@ if __name__ == "__main__":
     parser.add_argument("work", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("source", nargs="+", type=Path)
+    parser.add_argument("--strict", action="store_true")
     args = parser.parse_args()
     args.work.mkdir(parents=True, exist_ok=True)
     rows = []
     for source in args.source:
         try:
-            rows.append({"fixture": source.parent.name, **inspect(source, args.work)})
+            rows.append({"fixture": source.parent.name, **inspect(source, args.work, strict=args.strict)})
         except (ValueError, RuntimeError, KeyError) as error:
             rows.append({"fixture": source.parent.name, "error": str(error)})
     args.output.write_text(json.dumps(rows, indent=2, allow_nan=False) + "\n")

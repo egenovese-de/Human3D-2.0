@@ -38,6 +38,19 @@
           "armature_bound": true
         }
       },
+      "material_bindings": {
+        "Body": [
+          "Appearance"
+        ],
+        "top_base": [
+          "top_base"
+        ],
+        "top_outer": [
+          "top_outer"
+        ]
+      },
+      "independent_material_bindings": true,
+      "material_bindings_persisted": true,
       "bones": 163,
       "garment_pose_motion_scene_units": {
         "top_base": 0.05476006308894314,
@@ -90,6 +103,19 @@
           "armature_bound": true
         }
       },
+      "material_bindings": {
+        "Body": [
+          "Appearance"
+        ],
+        "top_base": [
+          "top_base"
+        ],
+        "top_outer": [
+          "top_outer"
+        ]
+      },
+      "independent_material_bindings": true,
+      "material_bindings_persisted": true,
       "bones": 163,
       "garment_pose_motion_scene_units": {
         "top_base": 0.05460348018665967,
@@ -142,6 +168,19 @@
           "armature_bound": true
         }
       },
+      "material_bindings": {
+        "Body": [
+          "Appearance"
+        ],
+        "top_base": [
+          "top_base"
+        ],
+        "top_outer": [
+          "top_outer"
+        ]
+      },
+      "independent_material_bindings": true,
+      "material_bindings_persisted": true,
       "bones": 163,
       "garment_pose_motion_scene_units": {
         "top_base": 0.052810800106367364,
@@ -194,6 +233,19 @@
           "armature_bound": true
         }
       },
+      "material_bindings": {
+        "Body": [
+          "Appearance"
+        ],
+        "top_base": [
+          "top_base"
+        ],
+        "top_outer": [
+          "top_outer"
+        ]
+      },
+      "independent_material_bindings": true,
+      "material_bindings_persisted": true,
       "bones": 163,
       "garment_pose_motion_scene_units": {
         "top_base": 0.05371079986728027,
