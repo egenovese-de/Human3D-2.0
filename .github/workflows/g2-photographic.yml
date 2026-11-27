@@ -1,0 +1,61 @@
+name: G2 photographic evidence
+on:
+  push:
+    branches: [lab/g2-photographic-evidence]
+    paths: ['.github/workflows/g2-photographic.yml', 'tools/g2/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: g2-photographic-evidence
+  cancel-in-progress: false
+jobs:
+  controlled-photographs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .g2-product
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: makehumancommunity/makehuman
+          ref: 1f508f6083b2f823dab15de924b3bde72e08d77c
+          path: .g2-upstream
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - name: Install system libraries
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libgles2 libglib2.0-0t64 libxkbcommon0
+      - name: Reuse permanent Lab Runtime
+        run: |
+          python tools/lab_runtime/bootstrap.py --group anatomical_torso --group p1_anatomy
+          python tools/lab_runtime/verify.py --source .g2-product --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso --group p1_anatomy
+      - name: Reproduce a matched photographic comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          export U="$PWD/.g2-upstream/makehuman" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+          export PYTHONPATH="$PWD/.g2-product/src:$PWD/tools/g1:$PWD/tools/g2:$U:$U/lib:$U/apps:$U/core:$U/shared"
+          PY=.lab-runtime/venv/bin/python
+          BLENDER=.lab-runtime/blender/blender
+          mkdir -p g2-out
+          g++ -O3 -shared -fPIC tools/g2/raster.cpp -o g2-out/raster.so
+          "$PY" tools/g1/g1_benchmark.py --output g2-out/references > g2-out/g1-replay.log 2>&1
+          "$BLENDER" -b -t 2 --factory-startup --python-exit-code 1 --python tools/g2/blender_evidence.py -- fixtures g2-out/references/A_high_mass.npz g2-out/rgb/A_high_mass
+          "$PY" tools/g2/photographic.py --references g2-out/references --rgb g2-out/rgb --output g2-out/experiment --model .lab-runtime/assets/pose_lite/pose_landmarker_lite.task --raster g2-out/raster.so --cases A_high_mass 2>&1 | tee g2-out/photographic.log
+          "$BLENDER" -b -t 2 --factory-startup --python-exit-code 1 --python tools/g2/surface.py -- g2-out/experiment/measurements/surface.json g2-out/experiment/meshes/A_high_mass.npz
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: g2-controlled-photographs
+          path: |
+            g2-out/experiment/measurements/*.json
+            g2-out/photographic.log
+          if-no-files-found: error
+          retention-days: 7
