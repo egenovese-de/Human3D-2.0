@@ -15,7 +15,7 @@ from scipy.spatial import ConvexHull
 from bootstrap import ROOT, digest
 from human3d.alignment import Alignment, Camera
 from human3d.bootstrap import MORPH_ASSETS, TORSO_ASSETS, _mesh, _morph_targets, _rig
-from human3d.fitting import fit_body
+from human3d.fitting import _optimize, _scorer, length_controls, morph_controls, regional_controls
 from human3d.frozen_body import deform_vertices, load_frozen_body
 from human3d.native_rig import pose_transforms, skin_vertices, validate_pose, validate_rebind
 from human3d.usd_export import export_body
@@ -218,8 +218,30 @@ def posed(body, points, plan):
     return result
 
 
+def m6_calibrated(body, base, images, cameras):
+    """Exercise the native M6 shared silhouette objective with known cameras."""
+    masks = {}
+    alignments = {}
+    for name, image, camera in zip(VIEWS, images, cameras):
+        buffer = BytesIO()
+        image.save(buffer, format="PNG")
+        masks[name] = SimpleNamespace(png=buffer.getvalue())
+        alignments[name] = Alignment(camera, 0, {})
+    score = _scorer(body, masks, alignments, base)
+    coarse = _scorer(body, masks, alignments, base, edge=128)
+    available = (*morph_controls(body), *length_controls(body), *regional_controls(body))
+    seed, _ = _optimize(body, coarse, {}, available, (.25,))
+    baseline = np.mean(tuple(score(base).values()))
+    if np.mean(tuple(score(deform_vertices(body, seed)).values())) < baseline:
+        seed = {}
+    controls, scores = _optimize(body, score, seed, available, (.25, .125))
+    if np.mean(tuple(scores.values())) < baseline:
+        return {}
+    return controls
+
+
 def asset_check(out, name, body, points, cameras, ids):
-    from pxr import Usd, UsdGeom, UsdSkel
+    from pxr import Gf, Usd, UsdGeom, UsdSkel
 
     rebound = validate_rebind(body, points)
     frozen = {"schema_version": 1, "kind": "frozen_body", "mesh": body["mesh"] | {"vertices": points.tolist()},
@@ -256,8 +278,17 @@ def asset_check(out, name, body, points, cameras, ids):
             raise ValueError(f"USDZ roundtrip failed: {name}")
         if not np.allclose(weights.sum(axis=1), 1, atol=1e-6) or original_hash != digest(path):
             raise ValueError(f"USDZ skin or canonical independence failed: {name}")
+        original_export = digest(export_path)
+        stage.SetEditTarget(stage.GetSessionLayer())
+        editable = mesh.GetPointsAttr().Get()
+        initial = editable[0]
+        editable[0] = initial + Gf.Vec3f(.01, 0, 0)
+        if not mesh.GetPointsAttr().Set(editable) or mesh.GetPointsAttr().Get()[0] == initial:
+            raise ValueError(f"USDZ session-layer editing failed: {name}")
+        if not cache.GetSkinningQuery(mesh.GetPrim()) or original_export != digest(export_path):
+            raise ValueError(f"Editing changed USDZ archive or invalidated skinning: {name}")
         ranges.append(error)
-        files.append({"name": f"{name}/{export_path.name}", "sha256": digest(export_path)})
+        files.append({"name": f"{name}/{export_path.name}", "sha256": original_export, "session_editable": True})
     if np.max(np.linalg.norm(posed(restored, points, cameras[0]) - posed(restored, points, cameras[1]), axis=1)) < .01:
         raise ValueError(f"Downstream poses have no distinct effect: {name}")
     return {"frozen_sha256": original_hash, "frozen": f"{name}/{path.name}", "export_max_mm": max(ranges), "exports": files}
@@ -353,10 +384,10 @@ def run(runtime, out):
         mask_observations = {k: (v, .025) for k, v in zip(KEYS[:4], front_features + side_features)}
         oracle_ids = ids[::3]
         dd = fields[:, oracle_ids].reshape(len(fields), -1).T
-        buf = BytesIO()
-        target_mask[0].save(buf, format="PNG")
-        native_fit = fit_body(body, SimpleNamespace(png=buf.getvalue()), Alignment(front, 0, {}))
-        native_points = np.asarray(deform_vertices(body, native_fit.controls))
+        begin_native = perf_counter()
+        native_controls = m6_calibrated(body, base, target_mask, (front, side))
+        native_seconds = perf_counter() - begin_native
+        native_points = np.asarray(deform_vertices(body, native_controls))
         macro_fields = fields[:4]
         initial = fit_features(base, macro_fields, (model[0], model[1][:, :4]), mask_observations)
         regional = fit_features(initial, fields[4:], (features(initial, faces, ids)[0], model[1][:, 4:]), mask_observations)
@@ -390,7 +421,8 @@ def run(runtime, out):
                        "volume_delta_l": None if volume is None or truth_volume is None else volume-truth_volume,
                        "proportion_delta": dict(zip(KEYS, features(points, faces, ids)[0] - actual)),
                        "silhouette_iou": iou, "posed": poses, "rebind_scale": scale, "asset": asset,
-                       "check_seconds": perf_counter() - begin, "m6_controls": native_fit.controls if mode == "A" else None})
+                       "check_seconds": perf_counter() - begin, "m6_controls": native_controls if mode == "A" else None,
+                       "m6_fit_seconds": native_seconds if mode == "A" else None})
     out.joinpath("metrics.json").write_text(json.dumps({"source_revision": SOURCE, "asset_revision": revision,
          "image_and_prompt_hashes": metadata, "origin": "ChatGPT interactive visual observation, manually recorded; no isolated API inference",
          "schema_valid_records": 24, "normalized_mode_records": len(observations), "reference_count_controls": count_controls,
