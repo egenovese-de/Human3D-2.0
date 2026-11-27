@@ -8,5 +8,5 @@
 | LR-006 | Implement GitHub Actions experiment workflow and caching | DONE |
 | LR-007 | Implement experiment artifact management | DONE |
 | LR-008 | Verify licensing and distribution boundaries | DONE |
-| LR-009 | Execute native reconstruction and Blender qualification tests | TODO |
+| LR-009 | Execute native reconstruction and Blender qualification tests | IN PROGRESS |
 | LR-010 | Publish runtime documentation and handoff | TODO |
