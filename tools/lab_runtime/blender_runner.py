@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Blender-side controlled USD inspection and round-trip."""
 import argparse
 import json
