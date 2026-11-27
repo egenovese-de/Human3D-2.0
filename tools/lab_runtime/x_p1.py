@@ -133,6 +133,30 @@ def main(runtime,out):
         integrity.append({"mesh":p.name,"finite":finite,"vertices":len(v),"triangles":len(tri),"collapsed_stable_faces":int(np.sum(a[stable]<=1e-10)),"area_ratio_min":float(ratio.min()),"area_ratio_max":float(ratio.max()),"sha256":digest(p)})
         if not finite or len(v)!=len(base): raise ValueError("invalid mesh")
     report["integrity"]=integrity
+    from human3d.bootstrap import _rig
+    from human3d.native_rig import validate_rebind, pose_transforms, skin_vertices, validate_pose
+    from human3d.alignment import Camera, Alignment
+    rig=_rig(json.loads(read("data/rigs/default.mhskel")),json.loads(read("data/rigs/default_weights.mhw")),mesh["vertices"])
+    body={"mesh":mesh,"rig":rig,"morph_targets":{}}
+    checks=[]
+    # Preserve source UV mapping; OBJ pilot files themselves omit UV and rig.
+    uv_count=len(mesh["texcoords"])
+    for f in mesh["faces"]:
+        for i,u in f["corners"]:
+            if not 0<=i<len(base) or not 0<=u<uv_count: raise ValueError("invalid UV or vertex index")
+    for p in sorted(out.glob("*expanded*.obj")):
+        v=np.asarray([[float(x) for x in line.split()[1:]] for line in p.read_text().splitlines() if line.startswith("v ")])
+        row={"mesh":p.name,"uv_source_count":uv_count,"bones":len(rig["bones"])}
+        try:
+            joints=validate_rebind(body,v)
+            t=pose_transforms(rig,joints,Alignment(Camera(0,1,0j,1),0,{"lowerarm01.L":.15}))
+            posed=np.asarray(skin_vertices(v,rig["skin"],t))
+            validate_pose(body,v,posed)
+            row.update(status="PASS",pose_delta=float(np.max(np.abs(posed-v))))
+        except Exception as exc:
+            row.update(status="FAIL",reason=str(exc))
+        checks.append(row)
+    report["rig_uv"]=checks
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":
