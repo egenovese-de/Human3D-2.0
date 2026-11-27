@@ -20,29 +20,29 @@
 | M6.2-007 | Validate signed rotations, twist, spine, pelvis, wrists and feet | BLOCKED |
 | M6.2-008 | Validate registered geometry transfer and canonical compatibility | DONE |
 | M6.3-001 | Establish fixed-geometry pose and camera baseline | DONE |
-| M6.3-002 | Improve landmark and limb direction confidence handling | TODO |
+| M6.3-002 | Improve landmark and limb direction confidence handling | BLOCKED |
 | M6.3-003 | Improve depth and full joint rotation estimation using validated mapping | BLOCKED |
 | M6.3-004 | Improve axial twist, wrist and foot orientation and contact handling | BLOCKED |
 | M6.3-005 | Evaluate camera confidence and pose compensation under calibrated views | DONE |
-| M6.3-006 | Compare pose-first, camera-first and alternating schedules | TODO |
-| M6.3-007 | Integrate validated pose and camera improvements with regression tests | TODO |
+| M6.3-006 | Compare pose-first, camera-first and alternating schedules | DONE |
+| M6.3-007 | Integrate validated pose and camera improvements with regression tests | BLOCKED |
 | M6.4-001 | Rebaseline registered geometry and regional anatomical residuals | DONE |
 | M6.4-002 | Evaluate alternative compatible anatomical bases and morph capacity | DONE |
-| M6.4-003 | Implement evidence-supported bounded regional geometry improvements | TODO |
+| M6.4-003 | Implement evidence-supported bounded regional geometry improvements | BLOCKED |
 | M6.4-004 | Compare optimization objectives and convergence at equal budgets | DONE |
 | M6.4-005 | Validate neutral shape independence from target pose | DONE |
 | M6.4-006 | Develop fit acceptance and bootstrap fallback candidates | DONE |
 | M6.4-007 | Validate acceptance on independent beneficial and harmful fits | BLOCKED |
-| M6.4-008 | Integrate only validated geometry and acceptance defaults | TODO |
-| M6.5-001 | Validate independent facial landmarks and profile correspondence | TODO |
-| M6.5-002 | Evaluate and implement justified canonical facial controls | TODO |
+| M6.4-008 | Integrate only validated geometry and acceptance defaults | BLOCKED |
+| M6.5-001 | Validate independent facial landmarks and profile correspondence | BLOCKED |
+| M6.5-002 | Evaluate and implement justified canonical facial controls | BLOCKED |
 | M6.5-003 | Implement texture alignment and visibility guard diagnostics | DONE |
 | M6.5-004 | Validate texture color, seam, occlusion and coverage tradeoffs | DONE |
 | M6.5-005 | Evaluate identity consistency and reference utility criteria | DONE |
 | M6.5-006 | Implement validated separate geometry and appearance reference policies | BLOCKED |
-| M6.5-007 | Validate reference changes, invalidation and target switching | TODO |
-| M6.6-001 | Execute paired end-to-end v0.2.0 versus M6 synthetic benchmark | TODO |
-| M6.6-002 | Execute independent held-out and adverse-input regression suite | TODO |
+| M6.5-007 | Validate reference changes, invalidation and target switching | DONE |
+| M6.6-001 | Execute paired end-to-end v0.2.0 versus M6 synthetic benchmark | DONE |
+| M6.6-002 | Execute independent held-out and adverse-input regression suite | BLOCKED |
 | M6.6-003 | Validate project migration, recovery, cancellation and stale-result guards | DONE |
 | M6.6-004 | Execute direct Blender editable USDZ round-trip suite | BLOCKED |
 | M6.6-005 | Profile runtime, memory and artifact retention | DONE |
