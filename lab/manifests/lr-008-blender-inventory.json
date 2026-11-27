@@ -1,0 +1,276 @@
+{
+  "run_id": 45993233249,
+  "job_id": 140486079169,
+  "scanned": 144,
+  "files": [
+    {
+      "path": "tools/check_usd_pose.py",
+      "imports": [
+        "bpy"
+      ],
+      "header": [
+        "\"\"\"Verify a directly imported target pose and a saved Blender round-trip.\"\"\"",
+        "import json",
+        "from pathlib import Path"
+      ]
+    },
+    {
+      "path": "tools/lab_render_usd.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "# SPDX-License-Identifier: GPL-3.0-or-later",
+        "\"\"\"Headless Blender USD preview renderer for the isolated lab/render branch.",
+        ""
+      ]
+    },
+    {
+      "path": "tools/lab_runtime/blender_runner.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "# SPDX-License-Identifier: GPL-3.0-or-later",
+        "\"\"\"Blender-side controlled USD inspection and round-trip.\"\"\"",
+        "import argparse"
+      ]
+    },
+    {
+      "path": "tools/m6/calibrated_anatomy_controls.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Check authored joint frames and projection with an analytic reference and Blender.\"\"\"",
+        "import argparse",
+        "from hashlib import sha256"
+      ]
+    },
+    {
+      "path": "tools/m6/render_garment_contacts.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Render two views of the same posed Q body and garment, showing Blender triangle contacts.\"\"\"",
+        "import json",
+        "from pathlib import Path"
+      ]
+    },
+    {
+      "path": "tools/m6/render_independent_cesium_fixture.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render held-out clothed controls from Khronos Cesium Man (CC-BY-4.0).\"\"\"",
+        "from hashlib import sha256",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/comparison.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render native and calibrated neutral comparison panels using identical Blender framing.\"\"\"",
+        "import json",
+        "import math"
+      ]
+    },
+    {
+      "path": "tools/q/depth.py",
+      "imports": [
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Rasterize first-visible geometry with Blender BVH in the recorded metric cameras.\"\"\"",
+        "import hashlib",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/extra_views.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render interleaved calibrated Blender cameras for a focused sixteen-view repeat.\"\"\"",
+        "import hashlib",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/finalization/face_anchors.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Ray-cast manually chosen image points onto independent facial surfaces.\"\"\"",
+        "import argparse",
+        "from hashlib import sha256"
+      ]
+    },
+    {
+      "path": "tools/q/finalization/garment_pose.py",
+      "imports": [
+        "mathutils",
+        "mathutils.geometry"
+      ],
+      "header": [
+        "\"\"\"Measure collision at fixed garment parameters and validate virtual cap candidates.\"\"\"",
+        "import argparse",
+        "from collections import Counter, defaultdict"
+      ]
+    },
+    {
+      "path": "tools/q/followup/blender_layers_atlas.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render separate armature-bound layers from a directly imported USDZ.\"\"\"",
+        "import argparse",
+        "from pathlib import Path"
+      ]
+    },
+    {
+      "path": "tools/q/followup/blender_roundtrip.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Inspect, deform, save, reopen, edit and remove garment objects with Blender USD.\"\"\"",
+        "import argparse",
+        "import hashlib"
+      ]
+    },
+    {
+      "path": "tools/q/followup/clothing_fixtures.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Independent low-polygon garment controls and calibrated body/clothing masks.\"\"\"",
+        "import argparse",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/followup/garment_collision.py",
+      "imports": [
+        "bpy",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Cross-check production signed samples with independent triangle intersections.\"\"\"",
+        "import argparse",
+        "from collections import Counter"
+      ]
+    },
+    {
+      "path": "tools/q/followup/rig_fixtures.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Generate independent MB-Lab skinning fixtures and calibrated views (local only).\"\"\"",
+        "import argparse",
+        "import hashlib"
+      ]
+    },
+    {
+      "path": "tools/q/followup/texture_control.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Use independently ray-rendered analytic colors to test the native UV baker.\"\"\"",
+        "import argparse",
+        "from dataclasses import asdict, replace"
+      ]
+    },
+    {
+      "path": "tools/q/followup/visibility_truth.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Compute regional surface visibility using independent rays against calibrated fixtures.\"\"\"",
+        "import argparse",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/render.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render independent metric fixtures with Blender 4.3.2.\"\"\"",
+        "import hashlib",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/render_diagnostics.py",
+      "imports": [
+        "bpy",
+        "mathutils",
+        "mathutils.kdtree"
+      ],
+      "header": [
+        "\"\"\"Render native topology, sampled error color and released UV texture in Blender.\"\"\"",
+        "import json",
+        "import math"
+      ]
+    },
+    {
+      "path": "tools/q/stress_cameras.py",
+      "imports": [
+        "bpy",
+        "mathutils"
+      ],
+      "header": [
+        "\"\"\"Render camera-only perturbations and a compound case with exact masks.\"\"\"",
+        "import hashlib",
+        "import json"
+      ]
+    },
+    {
+      "path": "tools/q/volume.py",
+      "imports": [
+        "mathutils",
+        "mathutils.bvhtree"
+      ],
+      "header": [
+        "\"\"\"Approximate common-frame body occupancy with axis-wise Blender BVH parity.\"\"\"",
+        "from collections import Counter",
+        "import json"
+      ]
+    }
+  ]
+}
