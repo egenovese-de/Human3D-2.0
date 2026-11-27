@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Generate independent MB-Lab skinning fixtures and calibrated views (local only)."""
 import argparse
 import hashlib
