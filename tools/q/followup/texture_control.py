@@ -1,5 +1,6 @@
 """Use independently ray-rendered analytic colors to test the native UV baker."""
 import argparse
+from dataclasses import asdict, replace
 import json
 from pathlib import Path
 
@@ -80,7 +81,7 @@ def seam_stats(geometry, charts, uv, atlas):
                 observed_seam_rgb_mae=float(np.mean(deltas)) if deltas else None)
 
 
-def run(project, work, output):
+def run(project, work, output, *, m6_diagnostics=False):
     work.mkdir(parents=True, exist_ok=True)
     body = load_project_body(Session(project).store)
     points = np.asarray(deform_vertices(body, {}))
@@ -124,6 +125,13 @@ def run(project, work, output):
             "front_side_clean": [zero, same_dim], "front_side_dimmed": [zero, dim],
             "unmasked_occluder": [contaminant], "masked_occluder": [masked],
             "horizontal_shift_three_px": [shifted]}
+    if m6_diagnostics:
+        refs["horizontal_shift_one_px"] = [replace(zero, rgb=shift(zero.rgb, (0, 1, 0), order=0).astype(np.uint8))]
+        for pixels in (1, 3):
+            moved = replace(zero.alignment.camera, origin=zero.alignment.camera.origin + pixels)
+            refs[f"projected_camera_shift_{pixels}_px"] = [
+                replace(zero, alignment=replace(zero.alignment, camera=moved))
+            ]
     rows = []
     for name, inputs in refs.items():
         views = {i: (value, (IMAGE, IMAGE)) for i, value in enumerate(inputs)}
@@ -142,6 +150,8 @@ def run(project, work, output):
                          coverage_fraction=atlas.observed_fraction, padded_samples=int((coverage==96).sum()),
                          default_unobserved_samples=int((coverage==0).sum()),
                          **seam_stats(geometry, charts, ideal_uv, atlas)))
+        if m6_diagnostics:
+            rows[-1]["alignment_diagnostics"] = {key: asdict(value) for key, value in atlas.view_diagnostics.items()}
     output.write_text(json.dumps(rows, indent=2, allow_nan=False) + "\n")
 
 
@@ -149,4 +159,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     for name in ("project", "work", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--m6-diagnostics", action="store_true")
     run(**vars(parser.parse_args()))
