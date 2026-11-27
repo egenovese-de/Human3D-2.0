@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "decision": "historical replay deferred by Project Lead",
+  "required_platform": "windows-2022",
+  "test_H": "PARTIAL/DEFERRED",
+  "accepted_controls": {
+    "run_id": 45983389038,
+    "job_id": 140452693297
+  },
+  "integrity": {
+    "run_id": 45984529068,
+    "job_id": 140456628914
+  },
+  "deferred": [
+    "positive historical input verification",
+    "Q holdout replay",
+    "M6 source rig replay",
+    "M6 native project replay"
+  ],
+  "criteria": [
+    "original Q representative control PASS",
+    "original M6 function control PASS",
+    "negative historical integrity checks PASS",
+    "controlled adapters present; actual historical execution deferred"
+  ],
+  "native_inventory": "locally supplied hashes establish consistency only, not original historical identity",
+  "adapter_execution": "not qualified on original inputs"
+}
