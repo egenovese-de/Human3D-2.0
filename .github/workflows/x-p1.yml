@@ -44,6 +44,7 @@ jobs:
           .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p1_render.py -- lab-output/x-p1 lab-output/x-p1-renders
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Publish numerical evidence only
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: x-p1-metrics

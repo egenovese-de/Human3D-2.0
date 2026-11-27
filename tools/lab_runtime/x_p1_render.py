@@ -11,12 +11,19 @@ for name in names:
     bpy.ops.wm.obj_import(filepath=str(root/(name+".obj")),forward_axis='NEGATIVE_Z',up_axis='Y')
     obj=next(o for o in bpy.context.scene.objects if o.type=="MESH")
     scene=bpy.context.scene
-    scene.render.engine='BLENDER_WORKBENCH'
-    scene.display.shading.light='STUDIO'
-    scene.display.shading.color_type='SINGLE'
-    scene.display.shading.single_color=(.72,.72,.72)
-    scene.display.shading.show_shadows=True
-    scene.display.shading.show_cavity=True
+    scene.render.engine='CYCLES'
+    scene.cycles.device='CPU'
+    scene.cycles.samples=8
+    scene.world=bpy.data.worlds.new("Studio")
+    scene.world.use_nodes=True
+    scene.world.node_tree.nodes.get("Background").inputs[0].default_value=(.25,.25,.25,1)
+    scene.world.node_tree.nodes.get("Background").inputs[1].default_value=.6
+    mat=bpy.data.materials.new("Clay");mat.diffuse_color=(.72,.72,.72,1)
+    obj.data.materials.clear();obj.data.materials.append(mat)
+    for pos,power in [((10,-15,18),2500),((-12,-8,8),1800),((0,12,15),2200)]:
+        bpy.ops.object.light_add(type='AREA',location=pos)
+        lamp=bpy.context.object;lamp.data.energy=power;lamp.data.shape='DISK';lamp.data.size=12
+        lamp.rotation_euler=(-lamp.location).to_track_quat('-Z','Y').to_euler()
     scene.render.resolution_x=768;scene.render.resolution_y=768;scene.render.resolution_percentage=100
     scene.render.image_settings.file_format='PNG'
     # Common world frame in MakeHuman decimetres, not per-mesh auto framing.
