@@ -28,7 +28,7 @@
 | M6.3-007 | Integrate validated pose and camera improvements with regression tests | BLOCKED |
 | M6.4-001 | Rebaseline registered geometry and regional anatomical residuals | DONE |
 | M6.4-002 | Evaluate alternative compatible anatomical bases and morph capacity | DONE |
-| M6.4-003 | Implement evidence-supported bounded regional geometry improvements | BLOCKED |
+| M6.4-003 | Implement evidence-supported bounded regional geometry improvements | DONE |
 | M6.4-004 | Compare optimization objectives and convergence at equal budgets | DONE |
 | M6.4-005 | Validate neutral shape independence from target pose | DONE |
 | M6.4-006 | Develop fit acceptance and bootstrap fallback candidates | DONE |

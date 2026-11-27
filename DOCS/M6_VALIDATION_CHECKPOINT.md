@@ -32,3 +32,5 @@ Excluding a reference in each of four copied projects changed the shared evidenc
 - A v0.3.0 candidate requires the unresolved technical gates. The smoke-test wheel is the application-only build of the code revision stated above.
 
 The [final Lab evidence tree](https://github.com/egenovese-de/Human3D-2.0/tree/cbc0802bca35d0cd1927c1984402492726ca14ac/DOCS/m6) contains the paired metrics and fixture hashes. The native-layer render was produced by direct Blender USDZ import at the same candidate. Its PNG SHA-256 is `9a9b26ffea3678dfbd83e96820f6f4cc4caf85bd3a6258a31503ea9ff1cbed50`.
+
+The later [completion benchmark](M6_FINAL_BENCHMARK.md) supersedes this checkpoint for the latest tested code revision. Historical Q and M6 checkpoint results remain traceable.

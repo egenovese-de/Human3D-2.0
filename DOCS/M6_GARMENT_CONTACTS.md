@@ -10,3 +10,5 @@ The synthetic controls cover separation, crossing, point and edge contact, copla
 The paired layer check found 52 intersections per base/outer assembly across the two Q target poses, despite zero sampled violations. Both base/shorts pair checks had zero layer intersections. Body-versus-garment checks are separate. The two assemblies of each type measured about 0.52–0.60 s on the release and 0.64–1.08 s on the candidate in the initial paired run. The geometric pass rejects the colliding pair and preserves the sampled report. See the [paired release and candidate records](https://github.com/egenovese-de/Human3D-2.0/tree/8db69e7450c850a004d09bffd53c3d3714996d71/DOCS/m6).
 
 The pinned Linux runtime probe also completed the integrated synthetic top and USDZ export. This single top smoke check covers the normal export entry point. It does not qualify Blender import/editability or Windows installation.
+
+The later [blocker resolution report](M6_BLOCKER_RESOLUTION.md) documents the bounded rest-space repair, the strict post-repair self-contact checks and the three rejected historical controls.
