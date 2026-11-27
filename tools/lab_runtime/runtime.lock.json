@@ -11,14 +11,14 @@
       "runner": "ubuntu-24.04",
       "dependency_lock": "requirements-linux.lock",
       "blender_archive": "blender-4.5.3-linux-x64.tar.xz",
-      "sha256": null
+      "sha256": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845"
     },
     "windows": {
       "architecture": "x86_64",
       "runner": "windows-2022",
       "dependency_lock": "requirements-windows.lock",
       "blender_archive": "blender-4.5.3-windows-x64.zip",
-      "sha256": null
+      "sha256": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
     }
   },
   "blender": {
@@ -26,7 +26,11 @@
     "base_url": "https://download.blender.org/release/Blender4.5/",
     "checksum_url": "https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256",
     "license": "https://www.blender.org/about/license/",
-    "require_pinned_sha256": true
+    "require_pinned_sha256": true,
+    "checksum_evidence": {
+      "run_id": 45976254082,
+      "job_id": 140428598653
+    }
   },
   "dependencies": {
     "numpy": "1.26.4",
@@ -65,7 +69,6 @@
     "historical_runtime_overrides": "explicit versioned lock required"
   },
   "unresolved": [
-    "Official Blender archive hashes",
     "MediaPipe model manifest",
     "Additional anatomical asset group",
     "Historical fixture inventory"
