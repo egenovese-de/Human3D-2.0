@@ -8,6 +8,7 @@ import numpy as np
 
 from audit_bind_frames import revision
 from human3d.anatomical_evidence import AnatomicalEvidence, QuantitativeObservation
+from human3d.fitting import _optimize
 from human3d.frozen_body import deform_vertices, load_project_body
 from human3d.session import Session
 from human3d.torso_evidence import _torso_section, torso_ratio_penalty
@@ -36,14 +37,21 @@ def run(candidate, project, output):
     view = SimpleNamespace(ref=SimpleNamespace(photo_id="fixture"), candidate=0, observed_regions=("torso",),
                            detection=SimpleNamespace(anatomical=supplied))
     penalty = torso_ratio_penalty(body, SimpleNamespace(views=(view,), unresolved=()), {"fixture"})
+    controls, _ = _optimize(body, lambda _: {"fixture": 1.}, {}, ("bust", "waist"), (.25, .125),
+                             measurement_penalty=penalty)
+    fitted = deform_vertices(body, controls)
     record = dict(candidate_sha=revision(candidate), lab_sha=revision(Path(__file__).parents[2]),
                   frozen_sha256=session.store.load().frozen_body_digest,
                   scope="Canonical known-effect control; no independent source-family validation",
                   base_ratio=ratio(neutral), injected_ratio=target_ratio,
-                  baseline_penalty=penalty(neutral), intended_positive_bust_penalty=penalty(known),
+                  baseline_penalty=penalty(neutral), fitted_penalty=penalty(fitted),
+                  fitted_ratio=ratio(fitted), fitted_controls=controls,
+                  intended_positive_bust_penalty=penalty(known),
                   opposite_bust_penalty=penalty(deform_vertices(body, {"bust": -.5})))
     if not record["intended_positive_bust_penalty"] < record["baseline_penalty"] < record["opposite_bust_penalty"]:
         raise ValueError("torso consumer did not respond in the expected direction")
+    if abs(record["fitted_ratio"] - target_ratio) >= abs(record["base_ratio"] - target_ratio):
+        raise ValueError("bounded optimizer did not approach the observed torso ratio")
     output.write_text(json.dumps(record, indent=2, allow_nan=False) + "\n")
 
 
