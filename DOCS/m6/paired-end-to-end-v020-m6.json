@@ -1,0 +1,720 @@
+{
+  "scorer_lab_sha": "bd5640ae1fc7b3a2e5f1a095bfd59e5914ec57b0",
+  "pose_model_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+  "linux_lock_sha256": "b2dc51f79acb77b17fb9a637d9ac87b01f72c00eed4e20f4913f6268d8f9cbbe",
+  "scope": "Four Q development identities, single view per case, fixed held-out cameras",
+  "parallel_fixture_runs": true,
+  "openblas_threads_per_process": 1,
+  "seed": 2473,
+  "surface_samples": 12000,
+  "cases": [
+    {
+      "case": "MBLab_human_female_f_af01_bend0",
+      "input_image_sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+      "fixture_mesh_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+      "held_out_equal": true,
+      "surface_equal": true,
+      "observed_uv_equal": true,
+      "release": {
+        "case": "MBLab_human_female_f_af01_bend0",
+        "fixture_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+        "project_fit_digest": "c4bcc0674c0b8ef1304482380c8580384efef4d34660bcd3b931855746002a05",
+        "held_out_iou": {
+          "22.5": 0.5669392583449057,
+          "112.5": 0.6737434714779895
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 35.00669913919021,
+          "sampled_chamfer_mm2": 3125.8689261658383,
+          "p95_mm": 116.61057758592557,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.3769682985800022,
+        "native_usdz_bytes": 1080490,
+        "native_usdz_sha256": "5f64133458eb0c7f8c102fee7d034bf575af9844330e6ded943ada01297b3740",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.009467989179440937,
+          "observed_uv_fraction": 0.00799347471451876
+        },
+        "benchmark": {
+          "product_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 1.18487893300005
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 33.69606200599992,
+          "fit": {
+            "controls": {
+              "calf": 0.125,
+              "hips": 0.125,
+              "thigh": -0.125,
+              "upperarm": 0.125,
+              "waist": -0.125,
+              "shin_depth": 0.125
+            },
+            "bootstrap_iou": 0.6121477287350405,
+            "fitted_iou": 0.6738397718434016,
+            "per_view_iou": {
+              "78ab9615-e6a6-4155-8d68-1328bbd8f9f4": 0.6738397718434016
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "78ab9615-e6a6-4155-8d68-1328bbd8f9f4": 0.6394653087205602
+            },
+            "fitted": {
+              "78ab9615-e6a6-4155-8d68-1328bbd8f9f4": 0.6398881403330368
+            }
+          },
+          "cameras": {
+            "78ab9615-e6a6-4155-8d68-1328bbd8f9f4": {
+              "yaw": -20.229720327762124,
+              "torso_rms_px": 2.189908761381935
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "78ab9615-e6a6-4155-8d68-1328bbd8f9f4"
+          },
+          "observed_uv_fraction": 0.3769682985800022,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.009467989179440937,
+            "observed_uv_fraction": 0.00799347471451876
+          }
+        }
+      },
+      "candidate": {
+        "case": "MBLab_human_female_f_af01_bend0",
+        "fixture_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+        "project_fit_digest": "f334c14df542d3a0e951e4937ceb5f03bd230385e478f55c934066437c16929d",
+        "held_out_iou": {
+          "22.5": 0.5669392583449057,
+          "112.5": 0.6737434714779895
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 35.00669913919021,
+          "sampled_chamfer_mm2": 3125.8689261658383,
+          "p95_mm": 116.61057758592557,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.3769682985800022,
+        "native_usdz_bytes": 1080490,
+        "native_usdz_sha256": "3527d4c7b7bc116281798736cacd41e119161ad85ac5a22ff4060256ee96cfac",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.009482953262587492,
+          "observed_uv_fraction": 0.008119976800066285
+        },
+        "benchmark": {
+          "product_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "8eea75f34e8a4c7204470260620ffa0477bfbac26335c6c5059f2e9d8492b974",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 1.2003109199999926
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 33.17285948000006,
+          "fit": {
+            "controls": {
+              "calf": 0.125,
+              "hips": 0.125,
+              "thigh": -0.125,
+              "upperarm": 0.125,
+              "waist": -0.125,
+              "shin_depth": 0.125
+            },
+            "bootstrap_iou": 0.6121477287350405,
+            "fitted_iou": 0.6738397718434016,
+            "per_view_iou": {
+              "80d63b6f-4c90-46dc-a67e-d5a02a845316": 0.6738397718434016
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "80d63b6f-4c90-46dc-a67e-d5a02a845316": 0.6394653087205602
+            },
+            "fitted": {
+              "80d63b6f-4c90-46dc-a67e-d5a02a845316": 0.6398881403330368
+            }
+          },
+          "cameras": {
+            "80d63b6f-4c90-46dc-a67e-d5a02a845316": {
+              "yaw": -20.229720327762124,
+              "torso_rms_px": 2.189908761381935
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "80d63b6f-4c90-46dc-a67e-d5a02a845316"
+          },
+          "observed_uv_fraction": 0.3769682985800022,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.009482953262587492,
+            "observed_uv_fraction": 0.008119976800066285
+          }
+        }
+      }
+    },
+    {
+      "case": "MBLab_human_female_f_ca01_bend32",
+      "input_image_sha256": "e2783db3d7f4bc999af1e3557b9117af8a5c75979d254594acc4a7c89b3cccfe",
+      "fixture_mesh_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+      "held_out_equal": true,
+      "surface_equal": true,
+      "observed_uv_equal": true,
+      "release": {
+        "case": "MBLab_human_female_f_ca01_bend32",
+        "fixture_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+        "project_fit_digest": "fce61b559b61c26ea5e3bd4312fe44dc69b34649f7f9486c5c8fc992d7cfcd65",
+        "held_out_iou": {
+          "22.5": 0.5652557319223986,
+          "112.5": 0.6551863312256155
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 34.503350733917195,
+          "sampled_chamfer_mm2": 2789.042307530843,
+          "p95_mm": 115.60299729394006,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.36332674676910615,
+        "native_usdz_bytes": 1076507,
+        "native_usdz_sha256": "1a77f47a3d13221bd16506b878c7a9efeefa3bfdd9f812ff0568067da6b66b9a",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.010430839002267574,
+          "observed_uv_fraction": 0.009843659525188187
+        },
+        "benchmark": {
+          "product_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "e2783db3d7f4bc999af1e3557b9117af8a5c75979d254594acc4a7c89b3cccfe",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 1.139520865999998
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 41.50433838599997,
+          "fit": {
+            "controls": {
+              "bust": 0.125,
+              "calf": 0.125,
+              "shoulder": -0.125,
+              "upperarm": 0.125,
+              "waist": 0.125,
+              "upperarm_length": 0.125,
+              "forearm_length": -0.125,
+              "thigh_length": 0.125,
+              "calf_length": -0.125,
+              "shin_depth": 0.125
+            },
+            "bootstrap_iou": 0.5904207119741101,
+            "fitted_iou": 0.6221047331319235,
+            "per_view_iou": {
+              "32f89d03-5ed0-47df-8982-98498693504b": 0.6221047331319235
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "32f89d03-5ed0-47df-8982-98498693504b": 0.6209075970168121
+            },
+            "fitted": {
+              "32f89d03-5ed0-47df-8982-98498693504b": 0.6200428049855219
+            }
+          },
+          "cameras": {
+            "32f89d03-5ed0-47df-8982-98498693504b": {
+              "yaw": -16.23842683643653,
+              "torso_rms_px": 2.078724775432453
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "32f89d03-5ed0-47df-8982-98498693504b"
+          },
+          "observed_uv_fraction": 0.36332674676910615,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.010430839002267574,
+            "observed_uv_fraction": 0.009843659525188187
+          }
+        }
+      },
+      "candidate": {
+        "case": "MBLab_human_female_f_ca01_bend32",
+        "fixture_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+        "project_fit_digest": "c05d359916cd2c747ed2e7bae32930434a7ddb297fd2f0f810d0605c37f42a57",
+        "held_out_iou": {
+          "22.5": 0.5652557319223986,
+          "112.5": 0.6551863312256155
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 34.503350733917195,
+          "sampled_chamfer_mm2": 2789.042307530843,
+          "p95_mm": 115.60299729394006,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.36332674676910615,
+        "native_usdz_bytes": 1076507,
+        "native_usdz_sha256": "5dbccdb0b21dd75ee707d972911f07f655940940c9784e1e478e8ddeb8612166",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.010456922027733576,
+          "observed_uv_fraction": 0.010001680954782316
+        },
+        "benchmark": {
+          "product_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "e2783db3d7f4bc999af1e3557b9117af8a5c75979d254594acc4a7c89b3cccfe",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 0.8243880119999858
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 40.75592665700003,
+          "fit": {
+            "controls": {
+              "bust": 0.125,
+              "calf": 0.125,
+              "shoulder": -0.125,
+              "upperarm": 0.125,
+              "waist": 0.125,
+              "upperarm_length": 0.125,
+              "forearm_length": -0.125,
+              "thigh_length": 0.125,
+              "calf_length": -0.125,
+              "shin_depth": 0.125
+            },
+            "bootstrap_iou": 0.5904207119741101,
+            "fitted_iou": 0.6221047331319235,
+            "per_view_iou": {
+              "509f8be5-b6e3-4684-9532-068f7c19c291": 0.6221047331319235
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "509f8be5-b6e3-4684-9532-068f7c19c291": 0.6209075970168121
+            },
+            "fitted": {
+              "509f8be5-b6e3-4684-9532-068f7c19c291": 0.6200428049855219
+            }
+          },
+          "cameras": {
+            "509f8be5-b6e3-4684-9532-068f7c19c291": {
+              "yaw": -16.23842683643653,
+              "torso_rms_px": 2.078724775432453
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "509f8be5-b6e3-4684-9532-068f7c19c291"
+          },
+          "observed_uv_fraction": 0.36332674676910615,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.010456922027733576,
+            "observed_uv_fraction": 0.010001680954782316
+          }
+        }
+      }
+    },
+    {
+      "case": "MBLab_human_male_m_as01_bend0",
+      "input_image_sha256": "d7c8c3cb6ed12df81a6bce4e2b389d4588a54bf863196c5dce6180c9bec3b308",
+      "fixture_mesh_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+      "held_out_equal": true,
+      "surface_equal": true,
+      "observed_uv_equal": true,
+      "release": {
+        "case": "MBLab_human_male_m_as01_bend0",
+        "fixture_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+        "project_fit_digest": "14c51e8a223c76f6d542c18ec6660ed9d55ee61b2c3b45462dfa7298fd44147b",
+        "held_out_iou": {
+          "22.5": 0.5693575895395111,
+          "112.5": 0.6838471023427867
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 37.25196929727408,
+          "sampled_chamfer_mm2": 3019.8165998338873,
+          "p95_mm": 110.12502934698827,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.37748376882386875,
+        "native_usdz_bytes": 1080778,
+        "native_usdz_sha256": "3fb7aeed0cf4c8fd80fc9c661734791734b14dc6c4fc08c9b2aaabda655f3766",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.004243281471004243,
+          "observed_uv_fraction": 0.005042155728219541
+        },
+        "benchmark": {
+          "product_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "d7c8c3cb6ed12df81a6bce4e2b389d4588a54bf863196c5dce6180c9bec3b308",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 1.2057779770000252
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 39.51417005499991,
+          "fit": {
+            "controls": {},
+            "bootstrap_iou": 0.6093977795222608,
+            "fitted_iou": 0.6310897076940307,
+            "per_view_iou": {
+              "b91f75f8-758c-4b6a-8997-029878a834de": 0.6310897076940307
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "b91f75f8-758c-4b6a-8997-029878a834de": 0.6310897076940307
+            },
+            "fitted": {
+              "b91f75f8-758c-4b6a-8997-029878a834de": 0.6310897076940307
+            }
+          },
+          "cameras": {
+            "b91f75f8-758c-4b6a-8997-029878a834de": {
+              "yaw": -19.906780542932808,
+              "torso_rms_px": 2.511459422085771
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "b91f75f8-758c-4b6a-8997-029878a834de"
+          },
+          "observed_uv_fraction": 0.37748376882386875,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.004243281471004243,
+            "observed_uv_fraction": 0.005042155728219541
+          }
+        }
+      },
+      "candidate": {
+        "case": "MBLab_human_male_m_as01_bend0",
+        "fixture_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+        "project_fit_digest": "ca4da2f01bced113235584e4fc1b3e140d2cb9c8025719fbfb0743d52275da1e",
+        "held_out_iou": {
+          "22.5": 0.5693575895395111,
+          "112.5": 0.6838471023427867
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 37.25196929727408,
+          "sampled_chamfer_mm2": 3019.8165998338873,
+          "p95_mm": 110.12502934698827,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.37748376882386875,
+        "native_usdz_bytes": 1080778,
+        "native_usdz_sha256": "c1e41f85550eea4ddd0a1f927da23be7e13a6b14842cf271e9c3969659e020fb",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.00425273390036452,
+          "observed_uv_fraction": 0.005123036869068615
+        },
+        "benchmark": {
+          "product_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "d7c8c3cb6ed12df81a6bce4e2b389d4588a54bf863196c5dce6180c9bec3b308",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 0.7647437570000193
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 39.793866241000046,
+          "fit": {
+            "controls": {},
+            "bootstrap_iou": 0.6093977795222608,
+            "fitted_iou": 0.6310897076940307,
+            "per_view_iou": {
+              "279e69dc-a8d0-44ed-a43c-8fdc32d61212": 0.6310897076940307
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "279e69dc-a8d0-44ed-a43c-8fdc32d61212": 0.6310897076940307
+            },
+            "fitted": {
+              "279e69dc-a8d0-44ed-a43c-8fdc32d61212": 0.6310897076940307
+            }
+          },
+          "cameras": {
+            "279e69dc-a8d0-44ed-a43c-8fdc32d61212": {
+              "yaw": -19.906780542932808,
+              "torso_rms_px": 2.511459422085771
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "279e69dc-a8d0-44ed-a43c-8fdc32d61212"
+          },
+          "observed_uv_fraction": 0.37748376882386875,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.00425273390036452,
+            "observed_uv_fraction": 0.005123036869068615
+          }
+        }
+      }
+    },
+    {
+      "case": "MBLab_human_male_m_la01_bend32",
+      "input_image_sha256": "6b6282b380c022c2db965b732797962fdc504e3e4dadb516c8daefb70e0c346c",
+      "fixture_mesh_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+      "held_out_equal": true,
+      "surface_equal": true,
+      "observed_uv_equal": true,
+      "release": {
+        "case": "MBLab_human_male_m_la01_bend32",
+        "fixture_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+        "project_fit_digest": "bbc63bd05dfd952e5f8041152e56d069840782857a1d4f68d074b38771456a9c",
+        "held_out_iou": {
+          "22.5": 0.5828260869565217,
+          "112.5": 0.6922111985403124
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 39.66359144437733,
+          "sampled_chamfer_mm2": 3429.705704149833,
+          "p95_mm": 117.77651363236906,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.3733109144687588,
+        "native_usdz_bytes": 1081630,
+        "native_usdz_sha256": "219945039e3b54938b8b052f95b0fbe2c169c92d0973bfd23dfc37f16a3e3743",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.006157635467980296,
+          "observed_uv_fraction": 0.0037512969909809244
+        },
+        "benchmark": {
+          "product_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "6b6282b380c022c2db965b732797962fdc504e3e4dadb516c8daefb70e0c346c",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 1.1548233470000469
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 41.763711234000084,
+          "fit": {
+            "controls": {},
+            "bootstrap_iou": 0.5813078409437608,
+            "fitted_iou": 0.6212412675913739,
+            "per_view_iou": {
+              "e5192e56-f6f0-4f4f-aedc-be185d96e2e4": 0.6212412675913739
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "e5192e56-f6f0-4f4f-aedc-be185d96e2e4": 0.6212412675913739
+            },
+            "fitted": {
+              "e5192e56-f6f0-4f4f-aedc-be185d96e2e4": 0.6212412675913739
+            }
+          },
+          "cameras": {
+            "e5192e56-f6f0-4f4f-aedc-be185d96e2e4": {
+              "yaw": -18.728202548381432,
+              "torso_rms_px": 2.5185876620605936
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "e5192e56-f6f0-4f4f-aedc-be185d96e2e4"
+          },
+          "observed_uv_fraction": 0.3733109144687588,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.006157635467980296,
+            "observed_uv_fraction": 0.0037512969909809244
+          }
+        }
+      },
+      "candidate": {
+        "case": "MBLab_human_male_m_la01_bend32",
+        "fixture_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+        "project_fit_digest": "1411505c0c7c1a865d13ef49c219945d65b485bee4f80487399d91dc248493ae",
+        "held_out_iou": {
+          "22.5": 0.5828260869565217,
+          "112.5": 0.6922111985403124
+        },
+        "posed_surface_mm": {
+          "symmetric_mean_mm": 39.66359144437733,
+          "sampled_chamfer_mm2": 3429.705704149833,
+          "p95_mm": 117.77651363236906,
+          "truth_to_prediction_region_mean_mm": {}
+        },
+        "observed_uv_fraction": 0.3733109144687588,
+        "native_usdz_bytes": 1081630,
+        "native_usdz_sha256": "36949e7d7bfbf4af5b8edc332b430bf3f2d979c0dc200d0f15147d1e151d3c93",
+        "garment": {
+          "result": "PASS",
+          "category": "top",
+          "candidate_overlap": 0.006169575180680416,
+          "observed_uv_fraction": 0.0038093694277840815
+        },
+        "benchmark": {
+          "product_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+          "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+          "python": "3.11.9",
+          "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+          "detections": {
+            "rgb-yaw-0.png": {
+              "sha256": "6b6282b380c022c2db965b732797962fdc504e3e4dadb516c8daefb70e0c346c",
+              "image_size": [
+                384,
+                384
+              ],
+              "candidates": 1,
+              "reason": null,
+              "masks": 1,
+              "seconds": 0.9619096539998964
+            }
+          },
+          "evidence_mode": "detector",
+          "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+          "fit_seconds": 41.96424769200007,
+          "fit": {
+            "controls": {},
+            "bootstrap_iou": 0.5813078409437608,
+            "fitted_iou": 0.6212412675913739,
+            "per_view_iou": {
+              "3915bf86-52d5-46b1-85e8-a2a448359c5f": 0.6212412675913739
+            },
+            "saturated": []
+          },
+          "fixed_camera_pose": {
+            "bootstrap": {
+              "3915bf86-52d5-46b1-85e8-a2a448359c5f": 0.6212412675913739
+            },
+            "fitted": {
+              "3915bf86-52d5-46b1-85e8-a2a448359c5f": 0.6212412675913739
+            }
+          },
+          "cameras": {
+            "3915bf86-52d5-46b1-85e8-a2a448359c5f": {
+              "yaw": -18.728202548381432,
+              "torso_rms_px": 2.5185876620605936
+            }
+          },
+          "photo_ids": {
+            "rgb-yaw-0.png": "3915bf86-52d5-46b1-85e8-a2a448359c5f"
+          },
+          "observed_uv_fraction": 0.3733109144687588,
+          "hair_candidate_texels": 0,
+          "garment": {
+            "result": "PASS",
+            "category": "top",
+            "candidate_overlap": 0.006169575180680416,
+            "observed_uv_fraction": 0.0038093694277840815
+          }
+        }
+      }
+    }
+  ]
+}
