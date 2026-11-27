@@ -1,0 +1,43 @@
+name: X P1 macro capacity pilot
+on:
+  push:
+    branches: [lab/render]
+    paths: ['tools/lab_runtime/x_p1.py', '.github/workflows/x-p1.yml']
+permissions:
+  contents: read
+concurrency:
+  group: lab-experiments-lab/render
+  cancel-in-progress: false
+jobs:
+  p1:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .lab-source
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - name: Provision locked Lab
+        run: |
+          python tools/lab_runtime/bootstrap.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Execute P1 pilot
+        run: |
+          $env:PYTHONPATH = (Resolve-Path .lab-source/src).Path
+          .lab-runtime/venv/Scripts/python.exe tools/lab_runtime/x_p1.py --runtime .lab-runtime --output lab-output/x-p1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Publish numerical evidence only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: x-p1-metrics
+          path: lab-output/x-p1/metrics.json
+          if-no-files-found: error
