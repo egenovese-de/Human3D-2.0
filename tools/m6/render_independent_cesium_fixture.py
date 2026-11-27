@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render held-out clothed controls from Khronos Cesium Man (CC-BY-4.0)."""
 from hashlib import sha256
 import json
