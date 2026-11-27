@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Use independently ray-rendered analytic colors to test the native UV baker."""
 import argparse
 from dataclasses import asdict, replace
