@@ -76,6 +76,9 @@ jobs:
         env:
           CONFIG: ${{ needs.request.outputs.config }}
         run: python tools/lab_runtime/runner.py --config $env:CONFIG --source .lab-source --output lab-output/experiment
+      - name: Offline evidence replay
+        if: needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
+        run: python tools/lab_runtime/evidence_control.py lab-output/experiment
       - name: Stage admitted artifact
         if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json' || needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         env:
