@@ -78,6 +78,19 @@ jobs:
         env:
           CONFIG: ${{ needs.request.outputs.config }}
         run: python tools/lab_runtime/artifacts.py --config $env:CONFIG --run lab-output/experiment --runtime .lab-runtime --output lab-output/publish
+      - name: Negative artifact controls
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        run: |
+          Copy-Item lab-output/publish lab-output/tampered -Recurse
+          Add-Content lab-output/tampered/0/numerical.json 'corruption'
+          python tools/lab_runtime/artifacts.py --verify lab-output/tampered
+          if ($LASTEXITCODE -eq 0) { throw "Corruption accepted" }
+          Write-Output "REJECT_CORRUPTION_PASS"
+          python tools/lab_runtime/artifacts.py --config lab/experiments/lr-005-q-boundaries.json --run lab-output/experiment --runtime .lab-runtime --output lab-output/denied
+          if ($LASTEXITCODE -eq 0 -or (Test-Path lab-output/denied)) { throw "Unadmitted experiment accepted" }
+          Write-Output "REJECT_UNADMITTED_PASS"
+          python tools/lab_runtime/artifacts.py --verify lab-output/publish
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Upload admitted artifact
         if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
