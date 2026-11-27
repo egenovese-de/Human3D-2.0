@@ -6,6 +6,8 @@ on:
       - lab/experiments/request.json
       - .github/workflows/lab-experiments.yml
       - tools/lab_runtime/request.py
+      - tools/lab_runtime/artifacts.py
+      - lab/manifests/artifact-admission.json
 permissions:
   contents: read
 concurrency:
@@ -71,6 +73,19 @@ jobs:
         env:
           CONFIG: ${{ needs.request.outputs.config }}
         run: python tools/lab_runtime/runner.py --config $env:CONFIG --source .lab-source --output lab-output/experiment
+      - name: Stage admitted artifact
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        env:
+          CONFIG: ${{ needs.request.outputs.config }}
+        run: python tools/lab_runtime/artifacts.py --config $env:CONFIG --run lab-output/experiment --runtime .lab-runtime --output lab-output/publish
+      - name: Upload admitted artifact
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lab-experiment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: lab-output/publish/
+          retention-days: 7
+          if-no-files-found: error
       - name: Diagnostics
         if: always()
         run: |
