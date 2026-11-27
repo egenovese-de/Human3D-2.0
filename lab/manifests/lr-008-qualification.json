@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "Windows lab execution and admitted original procedural artifacts only",
+  "source_gate": {
+    "run_id": 45993553831,
+    "job_id": 140487169769,
+    "script_count": 22,
+    "result": "BLENDER_LICENSE_GATE_PASS 22"
+  },
+  "wheel_inventory": {
+    "run_id": 45992550967,
+    "job_id": 140483940813,
+    "locked": 24,
+    "matched": 24,
+    "installed": 26,
+    "evidence": "lab/manifests/lr-008-wheel-inventory.json"
+  },
+  "cache_cleanup": {
+    "run_id": 45993646704,
+    "job_id": 140487490174,
+    "head_sha": "ff5ffb2ec050935cc408839939ba4221d3abf74d",
+    "deleted_ids": [
+      11199501887,
+      11198140476
+    ],
+    "remaining_matching": 0,
+    "ref": "refs/heads/lab/render",
+    "workflow_removed_commit": "de01f34633ba1b32ab5631f5b4c7776dd59279c3"
+  },
+  "root_license": "Apache-2.0",
+  "blender_scripts": "GPL-3.0-or-later",
+  "limitations": [
+    "Git provenance screening is not proof of copyright ownership",
+    "wheel metadata not full redistribution clearance",
+    "Linux qualification deferred",
+    "historical assets and model weights not approved for publication",
+    "cache deletion scoped to matching legacy keys"
+  ]
+}
