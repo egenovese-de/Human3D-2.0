@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Compute regional surface visibility using independent rays against calibrated fixtures."""
 import argparse
 import json
