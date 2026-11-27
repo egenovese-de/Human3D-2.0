@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "blobs": {
+    "tools/lab_runtime/native_control.py": "68ad517abe00fe394a91762db3eafa7231e71f4a",
+    "tools/lab_runtime/blender_runner.py": "6497de34ba4a635510699d645a1c482d0c802186",
+    "lab/experiments/lr-009-native.json": "27afca0f2011070f98110641cea72d5e3df9dbec",
+    "DOCS/manifests/makehuman-v1.3.0.json": "44f6940648b4f50e1b88484aba1aea974bf00584",
+    "DOCS/manifests/makehuman-morph02.json": "b25e4dd88149cd009992ecb5f6ef3a4857155f4b",
+    "lab/manifests/makehuman-anatomical-torso.json": "faea82e19154ca1ac494d9ee52c7799877c92291"
+  },
+  "license": "CC0-1.0 MakeHuman assets; original procedural texture and outputs",
+  "disposition": "Project Lead authorized controlled CC0 synthetic output publication; no model weights or personal images",
+  "retention_days": 7
+}
