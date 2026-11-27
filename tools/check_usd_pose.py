@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Verify a directly imported target pose and a saved Blender round-trip."""
 import json
 from pathlib import Path
