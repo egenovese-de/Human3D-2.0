@@ -1,0 +1,277 @@
+{
+  "candidate_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+  "lab_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+  "cases": [
+    {
+      "identity": "f_af01",
+      "fixture_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a",
+      "truth_sections_mm": {
+        "hip": 1002.8470901033817,
+        "waist": 742.0848578606201,
+        "chest": 906.6942063334126
+      },
+      "conditions": [
+        {
+          "condition": "registered_bootstrap",
+          "sections_mm": {
+            "hip": 987.8185588044837,
+            "waist": 760.2270662595886,
+            "chest": 781.565995723289
+          },
+          "section_error_mm": {
+            "hip": -15.028531298897974,
+            "waist": 18.142208398968478,
+            "chest": -125.12821061012357
+          },
+          "held_out_iou": {
+            "22.5": 0.6444504455846611,
+            "112.5": 0.7322818791946308
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.6899276290000671,
+          "symmetric_mean_mm": 21.07531017887808,
+          "sampled_chamfer_mm2": 729.0728991402556,
+          "p95_mm": 58.84008543270442,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.286278255986259,
+            "torso_and_arms": 17.973281350370296,
+            "lower_body": 26.277368913838885
+          }
+        },
+        {
+          "condition": "registered_native_four",
+          "sections_mm": {
+            "hip": 963.9697274831591,
+            "waist": 717.7807874688929,
+            "chest": 842.2730067797261
+          },
+          "section_error_mm": {
+            "hip": -38.877362620222584,
+            "waist": -24.304070391727237,
+            "chest": -64.4211995536865
+          },
+          "held_out_iou": {
+            "22.5": 0.653491507144783,
+            "112.5": 0.7025641025641025
+          },
+          "saturated_controls": [
+            "abdomen_depth",
+            "calf_length",
+            "forearm_length",
+            "shoulder",
+            "thigh_length"
+          ],
+          "evaluation_seconds": 0.8150536510000848,
+          "symmetric_mean_mm": 21.008561874388157,
+          "sampled_chamfer_mm2": 745.5636678884641,
+          "p95_mm": 60.51488679690272,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.323817956664557,
+            "torso_and_arms": 16.437804354241084,
+            "lower_body": 27.442930644237368
+          }
+        }
+      ]
+    },
+    {
+      "identity": "f_ca01",
+      "fixture_sha256": "f31fdf0277097373219b89f1c4fd3b051a3dfe5ae78ffe5b9e676ddbc9f6dd40",
+      "truth_sections_mm": {
+        "hip": 1006.3093252548989,
+        "waist": 753.0995826603445,
+        "chest": 898.0168955780323
+      },
+      "conditions": [
+        {
+          "condition": "registered_bootstrap",
+          "sections_mm": {
+            "hip": 979.0706912054103,
+            "waist": 753.4943400083065,
+            "chest": 774.6445376807545
+          },
+          "section_error_mm": {
+            "hip": -27.23863404948861,
+            "waist": 0.3947573479620132,
+            "chest": -123.37235789727777
+          },
+          "held_out_iou": {
+            "22.5": 0.6674617262036832,
+            "112.5": 0.7420721705850192
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.5773486929999763,
+          "symmetric_mean_mm": 20.152918985645048,
+          "sampled_chamfer_mm2": 668.0492982948064,
+          "p95_mm": 56.77029531108524,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.108930068579518,
+            "torso_and_arms": 16.505010695407165,
+            "lower_body": 25.963783189934112
+          }
+        },
+        {
+          "condition": "registered_native_four",
+          "sections_mm": {
+            "hip": 960.8473299989056,
+            "waist": 723.6968505308865,
+            "chest": 860.6644449295146
+          },
+          "section_error_mm": {
+            "hip": -45.461995255993315,
+            "waist": -29.402732129457945,
+            "chest": -37.352450648517674
+          },
+          "held_out_iou": {
+            "22.5": 0.6723427629772041,
+            "112.5": 0.7173229925787257
+          },
+          "saturated_controls": [
+            "abdomen_depth",
+            "bust",
+            "forearm_length",
+            "thigh_length"
+          ],
+          "evaluation_seconds": 0.8819846520000283,
+          "symmetric_mean_mm": 20.531223963071163,
+          "sampled_chamfer_mm2": 691.9719573704954,
+          "p95_mm": 57.445903155099955,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.140515129622298,
+            "torso_and_arms": 16.308109671305697,
+            "lower_body": 26.340089704958032
+          }
+        }
+      ]
+    },
+    {
+      "identity": "m_as01",
+      "fixture_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19",
+      "truth_sections_mm": {
+        "hip": 958.2639857872166,
+        "waist": 793.8726419225243,
+        "chest": 895.6410749053317
+      },
+      "conditions": [
+        {
+          "condition": "registered_bootstrap",
+          "sections_mm": {
+            "hip": 1019.2960949731806,
+            "waist": 785.1060902172857,
+            "chest": 807.0724917219512
+          },
+          "section_error_mm": {
+            "hip": 61.03210918596403,
+            "waist": -8.766551705238612,
+            "chest": -88.5685831833805
+          },
+          "held_out_iou": {
+            "22.5": 0.652496391059784,
+            "112.5": 0.7188638018936635
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.5918749310000067,
+          "symmetric_mean_mm": 25.686927743679988,
+          "sampled_chamfer_mm2": 1043.8500081341122,
+          "p95_mm": 66.62970623353264,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 9.497520433331964,
+            "torso_and_arms": 21.69845250501126,
+            "lower_body": 34.641115501736024
+          }
+        },
+        {
+          "condition": "registered_native_four",
+          "sections_mm": {
+            "hip": 1019.2960949731806,
+            "waist": 785.1060902172857,
+            "chest": 807.0724917219512
+          },
+          "section_error_mm": {
+            "hip": 61.03210918596403,
+            "waist": -8.766551705238612,
+            "chest": -88.5685831833805
+          },
+          "held_out_iou": {
+            "22.5": 0.652496391059784,
+            "112.5": 0.7188638018936635
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.686842372000001,
+          "symmetric_mean_mm": 25.686927743679988,
+          "sampled_chamfer_mm2": 1043.8500081341122,
+          "p95_mm": 66.62970623353264,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 9.497520433331964,
+            "torso_and_arms": 21.69845250501126,
+            "lower_body": 34.641115501736024
+          }
+        }
+      ]
+    },
+    {
+      "identity": "m_la01",
+      "fixture_sha256": "dc1854813d4b44714340ea13a725cafd8c552e18ed386db4e6e7bb6880e4f66d",
+      "truth_sections_mm": {
+        "hip": 1025.8421937211347,
+        "waist": 837.6302790246327,
+        "chest": 934.8108915447739
+      },
+      "conditions": [
+        {
+          "condition": "registered_bootstrap",
+          "sections_mm": {
+            "hip": 1066.2766786478874,
+            "waist": 821.2685361679171,
+            "chest": 844.2827558062137
+          },
+          "section_error_mm": {
+            "hip": 40.4344849267527,
+            "waist": -16.361742856715637,
+            "chest": -90.5281357385602
+          },
+          "held_out_iou": {
+            "22.5": 0.6496581699642323,
+            "112.5": 0.7187206540352428
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.61968303499998,
+          "symmetric_mean_mm": 26.70400147731085,
+          "sampled_chamfer_mm2": 1112.5806124261944,
+          "p95_mm": 68.6865029206363,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.075292109734667,
+            "torso_and_arms": 22.53233693216443,
+            "lower_body": 35.964734858713804
+          }
+        },
+        {
+          "condition": "registered_native_four",
+          "sections_mm": {
+            "hip": 1066.2766786478874,
+            "waist": 821.2685361679171,
+            "chest": 844.2827558062137
+          },
+          "section_error_mm": {
+            "hip": 40.4344849267527,
+            "waist": -16.361742856715637,
+            "chest": -90.5281357385602
+          },
+          "held_out_iou": {
+            "22.5": 0.6496581699642323,
+            "112.5": 0.7187206540352428
+          },
+          "saturated_controls": [],
+          "evaluation_seconds": 0.6114904910000405,
+          "symmetric_mean_mm": 26.70400147731085,
+          "sampled_chamfer_mm2": 1112.5806124261944,
+          "p95_mm": 68.6865029206363,
+          "truth_to_prediction_region_mean_mm": {
+            "head": 10.075292109734667,
+            "torso_and_arms": 22.53233693216443,
+            "lower_body": 35.964734858713804
+          }
+        }
+      ]
+    }
+  ]
+}

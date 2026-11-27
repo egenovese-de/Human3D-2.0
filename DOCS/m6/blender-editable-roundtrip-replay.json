@@ -1,0 +1,527 @@
+{
+  "candidate_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+  "candidate_export_script_sha": "5221d4dbe9298f1a498a98b32d3b65c474361c60",
+  "baseline_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "candidate_native_exports": [
+    {
+      "fixture": "MBLab_human_female_f_af01_bend32-1",
+      "attempts": [
+        {
+          "inner_ease_mm": 0,
+          "outer_ease_mm": 10,
+          "layers": [
+            {
+              "layer": 0,
+              "violations": 0,
+              "sampled_clearance_mm": 3.7321438776644458
+            },
+            {
+              "layer": 1,
+              "violations": 0,
+              "sampled_clearance_mm": 10.567339567715099
+            }
+          ],
+          "error": "top_base and top_outer. Neutral: 12 crossing, 0 overlapping, 0 touching pairs. Posed: 0 crossing, 0 overlapping, 0 touching pairs."
+        },
+        {
+          "inner_ease_mm": 0,
+          "outer_ease_mm": 5,
+          "layers": [
+            {
+              "layer": 0,
+              "violations": 0,
+              "sampled_clearance_mm": 3.7321438776644458
+            },
+            {
+              "layer": 1,
+              "violations": 0,
+              "sampled_clearance_mm": 8.360808318398433
+            }
+          ],
+          "exported": true
+        }
+      ]
+    },
+    {
+      "fixture": "MBLab_human_female_f_ca01_bend32-1",
+      "attempts": [
+        {
+          "inner_ease_mm": 0,
+          "outer_ease_mm": 10,
+          "layers": [
+            {
+              "layer": 0,
+              "violations": 0,
+              "sampled_clearance_mm": 3.845947484741432
+            },
+            {
+              "layer": 1,
+              "violations": 0,
+              "sampled_clearance_mm": 10.70985225142802
+            }
+          ],
+          "exported": true
+        }
+      ]
+    },
+    {
+      "fixture": "MBLab_human_male_m_as01_bend32-1",
+      "attempts": [
+        {
+          "inner_ease_mm": 0,
+          "outer_ease_mm": 10,
+          "layers": [
+            {
+              "layer": 0,
+              "violations": 0,
+              "sampled_clearance_mm": 4.112138730931315
+            },
+            {
+              "layer": 1,
+              "violations": 0,
+              "sampled_clearance_mm": 10.70985225142802
+            }
+          ],
+          "exported": true
+        }
+      ]
+    },
+    {
+      "fixture": "MBLab_human_male_m_la01_bend32-1",
+      "attempts": [
+        {
+          "inner_ease_mm": 0,
+          "outer_ease_mm": 10,
+          "layers": [
+            {
+              "layer": 0,
+              "violations": 0,
+              "sampled_clearance_mm": 4.094500255890946
+            },
+            {
+              "layer": 1,
+              "violations": 0,
+              "sampled_clearance_mm": 10.70985225142802
+            }
+          ],
+          "exported": true
+        }
+      ]
+    }
+  ],
+  "blender_4_5_17_roundtrips": [
+    {
+      "fixture": "MBLab_human_female_f_af01_bend32-1",
+      "blender": "4.5.17 LTS",
+      "usd_operator": "WM_OT_usd_import",
+      "source_sha256": "cdf4144ef2632f1a37978906daafb6fbfd536052ba3534c79dcc6c1800c426da",
+      "mesh_info": {
+        "Body": {
+          "vertices": 13380,
+          "faces": 13378,
+          "uv_layers": 1,
+          "mapped_groups": 125,
+          "weighted_vertices": 13380,
+          "max_weight_sum_error": 4.470348358154297e-08,
+          "armature_bound": true
+        },
+        "top_base": {
+          "vertices": 1970,
+          "faces": 1872,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1970,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        },
+        "top_outer": {
+          "vertices": 1970,
+          "faces": 1872,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1970,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        }
+      },
+      "bones": 163,
+      "garment_pose_motion_scene_units": {
+        "top_base": 0.05476006308894314,
+        "top_outer": 0.05804049341123657
+      },
+      "pose_roundtrip_max_matrix_difference": 0.0,
+      "imported_nonidentity_pose_matrix_elements": 108,
+      "garment_edit_delta_scene_units": {
+        "top_base": 0.010000005330656165,
+        "top_outer": 0.009999990414939883
+      },
+      "persisted_edited_mesh_digest": {
+        "top_base": "0fccff4fd4ac6b8a9b6c080b891136d623d69fc899649601d665688b6d5261cd",
+        "top_outer": "4a60747aaaf68d3e153b0dcb497c3daadd7c35f787393f111e5d29ebe0d733e0"
+      },
+      "vertex_edits_persisted": true,
+      "body_preserved_after_garment_removal": true
+    },
+    {
+      "fixture": "MBLab_human_female_f_ca01_bend32-1",
+      "blender": "4.5.17 LTS",
+      "usd_operator": "WM_OT_usd_import",
+      "source_sha256": "6c8e1838bdd4854ec76ab7006027601fdb596adf52270345ab873978bf87dc8f",
+      "mesh_info": {
+        "Body": {
+          "vertices": 13380,
+          "faces": 13378,
+          "uv_layers": 1,
+          "mapped_groups": 125,
+          "weighted_vertices": 13380,
+          "max_weight_sum_error": 4.470348358154297e-08,
+          "armature_bound": true
+        },
+        "top_base": {
+          "vertices": 1972,
+          "faces": 1874,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1972,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        },
+        "top_outer": {
+          "vertices": 1972,
+          "faces": 1874,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1972,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        }
+      },
+      "bones": 163,
+      "garment_pose_motion_scene_units": {
+        "top_base": 0.05460348018665967,
+        "top_outer": 0.059619325462573404
+      },
+      "pose_roundtrip_max_matrix_difference": 0.0,
+      "imported_nonidentity_pose_matrix_elements": 108,
+      "garment_edit_delta_scene_units": {
+        "top_base": 0.010000005330656165,
+        "top_outer": 0.009999990414939883
+      },
+      "persisted_edited_mesh_digest": {
+        "top_base": "421a8b71a82528f01e638662fc94c4a44f8d755d55dbd55389f8c6b7f7071e29",
+        "top_outer": "15118fc3b1591e3773da09c6cc1136ff9119d651bbd8bc78c48b56b4b6a550e9"
+      },
+      "vertex_edits_persisted": true,
+      "body_preserved_after_garment_removal": true
+    },
+    {
+      "fixture": "MBLab_human_male_m_as01_bend32-1",
+      "blender": "4.5.17 LTS",
+      "usd_operator": "WM_OT_usd_import",
+      "source_sha256": "8d574259f124699beb80edaa7580ec95ece8e760e77ea1d6e51d43a91a0001bc",
+      "mesh_info": {
+        "Body": {
+          "vertices": 13380,
+          "faces": 13378,
+          "uv_layers": 1,
+          "mapped_groups": 125,
+          "weighted_vertices": 13380,
+          "max_weight_sum_error": 4.470348358154297e-08,
+          "armature_bound": true
+        },
+        "top_base": {
+          "vertices": 1974,
+          "faces": 1876,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1974,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        },
+        "top_outer": {
+          "vertices": 1974,
+          "faces": 1876,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1974,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        }
+      },
+      "bones": 163,
+      "garment_pose_motion_scene_units": {
+        "top_base": 0.052810800106367364,
+        "top_outer": 0.0578046029728667
+      },
+      "pose_roundtrip_max_matrix_difference": 0.0,
+      "imported_nonidentity_pose_matrix_elements": 108,
+      "garment_edit_delta_scene_units": {
+        "top_base": 0.010000005330656165,
+        "top_outer": 0.009999990414939883
+      },
+      "persisted_edited_mesh_digest": {
+        "top_base": "d98df899f01045383822f3950590c5ed41623127cc38a45e8d585d5e18db45a1",
+        "top_outer": "d3c1417bfbac4c579a0e26b7967e814c05b86a96d8239a3c9483de54af9bc94a"
+      },
+      "vertex_edits_persisted": true,
+      "body_preserved_after_garment_removal": true
+    },
+    {
+      "fixture": "MBLab_human_male_m_la01_bend32-1",
+      "blender": "4.5.17 LTS",
+      "usd_operator": "WM_OT_usd_import",
+      "source_sha256": "7cf1debb1e30f5d0b26f318f85dd4391543c99f9b4e167c17ab2ed337cf1bec6",
+      "mesh_info": {
+        "Body": {
+          "vertices": 13380,
+          "faces": 13378,
+          "uv_layers": 1,
+          "mapped_groups": 125,
+          "weighted_vertices": 13380,
+          "max_weight_sum_error": 4.470348358154297e-08,
+          "armature_bound": true
+        },
+        "top_base": {
+          "vertices": 1974,
+          "faces": 1876,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1974,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        },
+        "top_outer": {
+          "vertices": 1974,
+          "faces": 1876,
+          "uv_layers": 1,
+          "mapped_groups": 38,
+          "weighted_vertices": 1974,
+          "max_weight_sum_error": 4.0978193283081055e-08,
+          "armature_bound": true
+        }
+      },
+      "bones": 163,
+      "garment_pose_motion_scene_units": {
+        "top_base": 0.05371079986728027,
+        "top_outer": 0.05864108279860377
+      },
+      "pose_roundtrip_max_matrix_difference": 0.0,
+      "imported_nonidentity_pose_matrix_elements": 108,
+      "garment_edit_delta_scene_units": {
+        "top_base": 0.010000005330656165,
+        "top_outer": 0.009999990414939883
+      },
+      "persisted_edited_mesh_digest": {
+        "top_base": "d98df899f01045383822f3950590c5ed41623127cc38a45e8d585d5e18db45a1",
+        "top_outer": "d3c1417bfbac4c579a0e26b7967e814c05b86a96d8239a3c9483de54af9bc94a"
+      },
+      "vertex_edits_persisted": true,
+      "body_preserved_after_garment_removal": true
+    }
+  ],
+  "additional_synthetic_exports": [
+    {
+      "fixture": "workshop",
+      "reason": "top_base intersects the body. Neutral: 9 crossing, 0 overlapping, 0 touching pairs. Posed: 115 crossing, 0 overlapping, 0 touching pairs.",
+      "input_benchmark_sha256": "52260ae156204628a9680ffa3327f449b51a3ce92c27663541abf7c1726757e4"
+    },
+    {
+      "fixture": "woodland",
+      "reason": "top_base intersects the body. Neutral: 0 crossing, 0 overlapping, 0 touching pairs. Posed: 14 crossing, 0 overlapping, 0 touching pairs.",
+      "input_benchmark_sha256": "ae8c1d5cce4cc5cb408814aa8cd7c75f881a08a34ab060cc478ad2ca7d52a0a0"
+    }
+  ],
+  "independent_ring_pair_trials": [
+    {
+      "identity": "f_af01",
+      "attempts": [
+        {
+          "radial_expansion": 1,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 21,
+              "clearance_mm": -26.646566821947598
+            },
+            {
+              "violations": 6,
+              "clearance_mm": -9.011566045581562
+            }
+          ],
+          "layer_clearance_mm": -61.83340478081799,
+          "error": "27 layer clearance samples failed. independent_base and independent_outer. Neutral: 186 crossing, 0 overlapping, 0 touching pairs. Posed: 190 crossing, 0 overlapping, 0 touching pairs."
+        },
+        {
+          "radial_expansion": 1.12,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 2,
+              "clearance_mm": -2.1067103481444662
+            },
+            {
+              "violations": 6,
+              "clearance_mm": -7.82811537575607
+            }
+          ],
+          "layer_clearance_mm": -70.14361546402081,
+          "error": "10 layer clearance samples failed. independent_base and independent_outer. Neutral: 190 crossing, 0 overlapping, 0 touching pairs. Posed: 198 crossing, 0 overlapping, 0 touching pairs."
+        },
+        {
+          "radial_expansion": 1.24,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 0,
+              "clearance_mm": -0.8467577689062804
+            },
+            {
+              "violations": 5,
+              "clearance_mm": -2.971627410519901
+            }
+          ],
+          "layer_clearance_mm": -78.45382614722357,
+          "error": "11 layer clearance samples failed. independent_base and independent_outer. Neutral: 190 crossing, 0 overlapping, 0 touching pairs. Posed: 202 crossing, 0 overlapping, 0 touching pairs."
+        },
+        {
+          "radial_expansion": 1.08,
+          "layer_projection_repair": true,
+          "layers": [
+            {
+              "violations": 11,
+              "clearance_mm": -9.781931867281243
+            },
+            {
+              "violations": 4,
+              "clearance_mm": -21.50138605615597
+            }
+          ],
+          "layer_clearance_mm": -67.37354523628656,
+          "repair_peak_rest_delta_mm": 74.44373167689736,
+          "post_repair_layer_min_mm": 6.999999999999987,
+          "post_repair_body_min_mm": -0.9568509868026077,
+          "error": "independent_base and independent_outer. Neutral: 202 crossing, 0 overlapping, 0 touching pairs. Posed: 186 crossing, 0 overlapping, 0 touching pairs."
+        },
+        {
+          "radial_expansion": 1.25,
+          "layer_projection_repair": true,
+          "layers": [
+            {
+              "violations": 0,
+              "clearance_mm": -0.9447501249772268
+            },
+            {
+              "violations": 5,
+              "clearance_mm": -2.9688629560430613
+            }
+          ],
+          "layer_clearance_mm": -79.14634370415716,
+          "repair_peak_rest_delta_mm": 86.22764015462249,
+          "post_repair_layer_min_mm": 6.999999999999994,
+          "post_repair_body_min_mm": -0.9158609223206527,
+          "error": "independent_base and independent_outer. Neutral: 186 crossing, 0 overlapping, 0 touching pairs. Posed: 190 crossing, 0 overlapping, 0 touching pairs."
+        }
+      ],
+      "transfer_distance_mean_m": 0.023459171933723582,
+      "transfer_distance_p95_m": 0.05528746995579809
+    },
+    {
+      "identity": "m_la01",
+      "attempts": [
+        {
+          "radial_expansion": 1,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 5,
+              "clearance_mm": -6.038001149315657
+            },
+            {
+              "violations": 0,
+              "clearance_mm": -0.43391965641704605
+            }
+          ],
+          "layer_clearance_mm": -6.2636325048021,
+          "error": "23 layer clearance samples failed."
+        },
+        {
+          "radial_expansion": 1.12,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 4,
+              "clearance_mm": -5.20391638696379
+            },
+            {
+              "violations": 3,
+              "clearance_mm": -1.0995760107879455
+            }
+          ],
+          "layer_clearance_mm": -2.6828375315459683,
+          "error": "8 layer clearance samples failed."
+        },
+        {
+          "radial_expansion": 1.24,
+          "layer_projection_repair": false,
+          "layers": [
+            {
+              "violations": 4,
+              "clearance_mm": -15.553356708586453
+            },
+            {
+              "violations": 3,
+              "clearance_mm": -9.347257955975847
+            }
+          ],
+          "layer_clearance_mm": -9.821842370073137,
+          "error": "6 layer clearance samples failed."
+        },
+        {
+          "radial_expansion": 1.08,
+          "layer_projection_repair": true,
+          "layers": [
+            {
+              "violations": 4,
+              "clearance_mm": -3.862689080811594
+            },
+            {
+              "violations": 0,
+              "clearance_mm": -0.9136891753031331
+            }
+          ],
+          "layer_clearance_mm": -3.8764358559646723,
+          "repair_peak_rest_delta_mm": 10.87903452123649,
+          "post_repair_layer_min_mm": 6.999999999999989,
+          "post_repair_body_min_mm": -0.9711075420833614,
+          "error": "independent_base has 4 sampled penetrations."
+        },
+        {
+          "radial_expansion": 1.25,
+          "layer_projection_repair": true,
+          "layers": [
+            {
+              "violations": 4,
+              "clearance_mm": -16.895044981890432
+            },
+            {
+              "violations": 3,
+              "clearance_mm": -7.676141627639796
+            }
+          ],
+          "layer_clearance_mm": -10.386487355830978,
+          "repair_peak_rest_delta_mm": 20.61305124428235,
+          "post_repair_layer_min_mm": 6.999999999999994,
+          "post_repair_body_min_mm": 0.1276066663732766,
+          "error": "independent_base and independent_outer. Neutral: 4 crossing, 0 overlapping, 0 touching pairs. Posed: 0 crossing, 0 overlapping, 0 touching pairs."
+        }
+      ],
+      "transfer_distance_mean_m": 0.03541772487326632,
+      "transfer_distance_p95_m": 0.07375356610250995
+    }
+  ],
+  "verification_gate": {
+    "historical_transferred_controls": 7,
+    "successfully_replayed": 4,
+    "rejected_before_import": 3
+  }
+}
