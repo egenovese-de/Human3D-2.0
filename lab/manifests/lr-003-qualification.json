@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "lab_revision": "100d26a0848d8eb25caf5d0f8c5b332ffa72418a",
+  "run_id": 45977663444,
+  "status": "PASS",
+  "reports": [
+    {
+      "job_id": 140433358591,
+      "report": {
+        "schema_version": 1,
+        "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+        "platform": "windows",
+        "checks": [
+          {
+            "name": "source_revision",
+            "status": "PASS",
+            "required": true,
+            "detail": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db"
+          },
+          {
+            "name": "source_clean",
+            "status": "PASS",
+            "required": true,
+            "detail": ""
+          },
+          {
+            "name": "python",
+            "status": "PASS",
+            "required": true,
+            "detail": "3.11.9"
+          },
+          {
+            "name": "pip_check",
+            "status": "PASS",
+            "required": true,
+            "detail": "No broken requirements found."
+          },
+          {
+            "name": "dependency:numpy",
+            "status": "PASS",
+            "required": true,
+            "detail": "1.26.4"
+          },
+          {
+            "name": "dependency:scipy",
+            "status": "PASS",
+            "required": true,
+            "detail": "1.15.3"
+          },
+          {
+            "name": "dependency:pillow",
+            "status": "PASS",
+            "required": true,
+            "detail": "13.0.0"
+          },
+          {
+            "name": "dependency:mediapipe",
+            "status": "PASS",
+            "required": true,
+            "detail": "0.10.33"
+          },
+          {
+            "name": "dependency:usd-core",
+            "status": "PASS",
+            "required": true,
+            "detail": "25.11"
+          },
+          {
+            "name": "dependency:pyside6",
+            "status": "PASS",
+            "required": true,
+            "detail": "6.8.3"
+          },
+          {
+            "name": "dependency_lock",
+            "status": "PASS",
+            "required": true,
+            "detail": "6d2cd321e409f261616e691c157abc499e08cf531b9679cec66a3c25cb4088f4"
+          },
+          {
+            "name": "blender_archive",
+            "status": "PASS",
+            "required": true,
+            "detail": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
+          },
+          {
+            "name": "blender_version",
+            "status": "PASS",
+            "required": true,
+            "detail": [
+              "Blender",
+              "4.5.3"
+            ]
+          },
+          {
+            "name": "blender_headless",
+            "status": "PASS",
+            "required": true,
+            "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)\n\nBlender quit"
+          },
+          {
+            "name": "numerical_import",
+            "status": "PASS",
+            "required": true,
+            "detail": "NUMERIC_OK"
+          },
+          {
+            "name": "openusd",
+            "status": "PASS",
+            "required": true,
+            "detail": "USD_OK"
+          },
+          {
+            "name": "qt_offscreen",
+            "status": "PASS",
+            "required": true,
+            "detail": "QT_OK"
+          },
+          {
+            "name": "human3d",
+            "status": "PASS",
+            "required": true,
+            "detail": "D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-source\\src\\human3d\\__init__.py"
+          },
+          {
+            "name": "assets:foundation",
+            "status": "PASS",
+            "required": true,
+            "detail": 357
+          },
+          {
+            "name": "assets:morph02",
+            "status": "PASS",
+            "required": true,
+            "detail": 10
+          },
+          {
+            "name": "assets:pose_lite",
+            "status": "PASS",
+            "required": true,
+            "detail": 1
+          },
+          {
+            "name": "assets:anatomical_torso",
+            "status": "PASS",
+            "required": true,
+            "detail": 6
+          },
+          {
+            "name": "mediapipe_init",
+            "status": "PASS",
+            "required": true,
+            "detail": "POSE_OK"
+          },
+          {
+            "name": "output_and_disk",
+            "status": "PASS",
+            "required": true,
+            "detail": 155313127424
+          }
+        ],
+        "status": "PASS"
+      }
+    },
+    {
+      "job_id": 140433359021,
+      "report": {
+        "schema_version": 1,
+        "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+        "platform": "linux",
+        "checks": [
+          {
+            "name": "source_revision",
+            "status": "PASS",
+            "required": true,
+            "detail": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db"
+          },
+          {
+            "name": "source_clean",
+            "status": "PASS",
+            "required": true,
+            "detail": ""
+          },
+          {
+            "name": "python",
+            "status": "PASS",
+            "required": true,
+            "detail": "3.11.9"
+          },
+          {
+            "name": "pip_check",
+            "status": "PASS",
+            "required": true,
+            "detail": "No broken requirements found."
+          },
+          {
+            "name": "dependency:numpy",
+            "status": "PASS",
+            "required": true,
+            "detail": "1.26.4"
+          },
+          {
+            "name": "dependency:scipy",
+            "status": "PASS",
+            "required": true,
+            "detail": "1.15.3"
+          },
+          {
+            "name": "dependency:pillow",
+            "status": "PASS",
+            "required": true,
+            "detail": "13.0.0"
+          },
+          {
+            "name": "dependency:mediapipe",
+            "status": "PASS",
+            "required": true,
+            "detail": "0.10.33"
+          },
+          {
+            "name": "dependency:usd-core",
+            "status": "PASS",
+            "required": true,
+            "detail": "25.11"
+          },
+          {
+            "name": "dependency:pyside6",
+            "status": "PASS",
+            "required": true,
+            "detail": "6.8.3"
+          },
+          {
+            "name": "dependency_lock",
+            "status": "PASS",
+            "required": true,
+            "detail": "b2dc51f79acb77b17fb9a637d9ac87b01f72c00eed4e20f4913f6268d8f9cbbe"
+          },
+          {
+            "name": "blender_archive",
+            "status": "PASS",
+            "required": true,
+            "detail": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845"
+          },
+          {
+            "name": "blender_version",
+            "status": "PASS",
+            "required": true,
+            "detail": [
+              "Blender",
+              "4.5.3"
+            ]
+          },
+          {
+            "name": "blender_headless",
+            "status": "PASS",
+            "required": true,
+            "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:38:15)\n\nBlender quit"
+          },
+          {
+            "name": "numerical_import",
+            "status": "PASS",
+            "required": true,
+            "detail": "NUMERIC_OK"
+          },
+          {
+            "name": "openusd",
+            "status": "PASS",
+            "required": true,
+            "detail": "USD_OK"
+          },
+          {
+            "name": "qt_offscreen",
+            "status": "PASS",
+            "required": true,
+            "detail": "QT_OK"
+          },
+          {
+            "name": "human3d",
+            "status": "PASS",
+            "required": true,
+            "detail": "/home/runner/work/Human3D-2.0/Human3D-2.0/.lab-source/src/human3d/__init__.py"
+          },
+          {
+            "name": "assets:foundation",
+            "status": "PASS",
+            "required": true,
+            "detail": 357
+          },
+          {
+            "name": "assets:morph02",
+            "status": "PASS",
+            "required": true,
+            "detail": 10
+          },
+          {
+            "name": "assets:pose_lite",
+            "status": "PASS",
+            "required": true,
+            "detail": 1
+          },
+          {
+            "name": "assets:anatomical_torso",
+            "status": "PASS",
+            "required": true,
+            "detail": 6
+          },
+          {
+            "name": "mediapipe_init",
+            "status": "PASS",
+            "required": true,
+            "detail": "POSE_OK"
+          },
+          {
+            "name": "output_and_disk",
+            "status": "PASS",
+            "required": true,
+            "detail": 90130731008
+          }
+        ],
+        "status": "PASS"
+      }
+    }
+  ],
+  "limitations": [
+    "USD operator availability only, not human import",
+    "Numerical probe not executed through shared runner",
+    "Archive and asset hashes verified, not every installed binary"
+  ]
+}
