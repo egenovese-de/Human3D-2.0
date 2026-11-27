@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "historical_inventory",
+  "groups": [
+    {
+      "id": "q-mblab",
+      "revision": "063bff04e60f3e7c651fda628c30f5d83f3f3078",
+      "upstream": "https://github.com/animate1978/MB-Lab",
+      "asset_sha256": "ae2a03430be1ef0f74a9bfa01136579e88beb521c9db7d496b5921bec6d1cd4e",
+      "license": "AGPL-3.0 database; separate render terms",
+      "cache_allowed": false,
+      "redistribute": false,
+      "references": [
+        "DOCS/q/manifest.json",
+        "DOCS/q/followup/fixture-index.json",
+        "DOCS/Q_DATASET_MANIFEST.md",
+        "DOCS/Q_REPRODUCIBILITY_MANIFEST.md"
+      ]
+    },
+    {
+      "id": "m6-cesium",
+      "revision": "e124e8d8d7330a5372bc2b4d00d39a4a9d7997ea",
+      "upstream": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+      "asset_sha256": "b7001eaeea8254bd44773bcd247e78696d94169388fbb2a1800fc69434e777d9",
+      "license": "CC-BY-4.0; Cesium (2017); trademark texture omitted in historical experiment",
+      "cache_allowed": false,
+      "references": [
+        "DOCS/m6/completion/independent-cesium-adverse.json",
+        "tools/m6/render_independent_cesium_fixture.py"
+      ]
+    },
+    {
+      "id": "m6-native-and-q-replays",
+      "references": [
+        "DOCS/m6/completion/paired-runtime.json",
+        "DOCS/m6/completion/paired-q-final.json",
+        "DOCS/m6/paired-end-to-end-v020-m6.json"
+      ],
+      "cache_allowed": false
+    },
+    {
+      "id": "procedural-smoke",
+      "references": [
+        "lab/fixtures/smoke.usda"
+      ],
+      "classification": "not human reconstruction",
+      "cache_allowed": false
+    }
+  ],
+  "policy": "DOCS/FIXTURE_POLICY.md"
+}
