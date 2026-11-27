@@ -1,0 +1,279 @@
+{
+  "candidate_sha": "d1c970cd7c4d194d4421257b19eb754711c91f12",
+  "lab_sha": "21414ee901a450f47a2dd63f0e032a12d996a616",
+  "python": "3.11.9",
+  "linux_lock_sha256": "b2dc51f79acb77b17fb9a637d9ac87b01f72c00eed4e20f4913f6268d8f9cbbe",
+  "cases": [
+    {
+      "condition": "clean_front",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3772,
+      "visible_rgb_mae": 1.7973665606221279,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 221,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.4445812807881773,
+      "padded_samples": 1823,
+      "default_unobserved_samples": 3083,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 204,
+      "observed_seam_rgb_mae": 0.6633986928104576,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        }
+      }
+    },
+    {
+      "condition": "clean_front_rear",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3776,
+      "visible_rgb_mae": 1.8311264124293785,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 3045,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.7898029556650247,
+      "padded_samples": 1840,
+      "default_unobserved_samples": 238,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 403,
+      "observed_seam_rgb_mae": 0.9247311827956991,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        },
+        "1": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.3494581280788177
+        }
+      }
+    },
+    {
+      "condition": "front_side_clean",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 4084,
+      "visible_rgb_mae": 1.6398955272608553,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 1027,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.5686453201970444,
+      "padded_samples": 1697,
+      "default_unobserved_samples": 2091,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 372,
+      "observed_seam_rgb_mae": 1.058243727598566,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        },
+        "1": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.44748768472906403
+        }
+      }
+    },
+    {
+      "condition": "front_side_dimmed",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 4084,
+      "visible_rgb_mae": 1.6479758406790728,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 1027,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.5686453201970444,
+      "padded_samples": 1697,
+      "default_unobserved_samples": 2091,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 372,
+      "observed_seam_rgb_mae": 1.0618279569892473,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        },
+        "1": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.44748768472906403
+        }
+      }
+    },
+    {
+      "condition": "unmasked_occluder",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3772,
+      "visible_rgb_mae": 9.431689642983386,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 221,
+      "occluder_color_observed_samples": 341,
+      "coverage_fraction": 0.4445812807881773,
+      "padded_samples": 1823,
+      "default_unobserved_samples": 3083,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 204,
+      "observed_seam_rgb_mae": 0.6633986928104576,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        }
+      }
+    },
+    {
+      "condition": "masked_occluder",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3456,
+      "visible_rgb_mae": 1.8148148148148149,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 221,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.3954926108374384,
+      "padded_samples": 1913,
+      "default_unobserved_samples": 3309,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 204,
+      "observed_seam_rgb_mae": 0.6633986928104576,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 0.8489968321013728,
+          "projected_outside_fraction": 0.15100316789862725,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 4.092329219213245,
+          "observed_uv_fraction": 0.3954926108374384
+        }
+      }
+    },
+    {
+      "condition": "horizontal_shift_three_px",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3772,
+      "visible_rgb_mae": 32.655797101449274,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 221,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.4445812807881773,
+      "padded_samples": 1823,
+      "default_unobserved_samples": 3083,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 204,
+      "observed_seam_rgb_mae": 5.459150326797386,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        }
+      }
+    },
+    {
+      "condition": "horizontal_shift_one_px",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3772,
+      "visible_rgb_mae": 13.135648639095086,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 221,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.4445812807881773,
+      "padded_samples": 1823,
+      "default_unobserved_samples": 3083,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 204,
+      "observed_seam_rgb_mae": 5.467320261437908,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 1.0,
+          "projected_outside_fraction": 0.0,
+          "unprojected_foreground_fraction": 0.0,
+          "contour_p95_source_px": 0.0,
+          "observed_uv_fraction": 0.4445812807881773
+        }
+      }
+    },
+    {
+      "condition": "projected_camera_shift_1_px",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 3473,
+      "visible_rgb_mae": 4.668682215183799,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 199,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.41177339901477833,
+      "padded_samples": 1761,
+      "default_unobserved_samples": 3466,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 154,
+      "observed_seam_rgb_mae": 0.8290043290043291,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 0.8973203105434511,
+          "projected_outside_fraction": 0.054118268215417105,
+          "unprojected_foreground_fraction": 0.054118268215417105,
+          "contour_p95_source_px": 1.0,
+          "observed_uv_fraction": 0.41177339901477833
+        }
+      }
+    },
+    {
+      "condition": "projected_camera_shift_3_px",
+      "tested_triangle_interiors": 8899,
+      "front_visible_samples": 4461,
+      "visible_observed_samples": 2965,
+      "visible_rgb_mae": 11.565373805508713,
+      "front_hidden_samples": 4438,
+      "front_hidden_observed": 187,
+      "occluder_color_observed_samples": 0,
+      "coverage_fraction": 0.3614039408866995,
+      "padded_samples": 1703,
+      "default_unobserved_samples": 4044,
+      "candidate_seam_edges": 1133,
+      "paired_observed_seam_samples": 108,
+      "observed_seam_rgb_mae": 1.1388888888888888,
+      "alignment_diagnostics": {
+        "0": {
+          "silhouette_iou": 0.7245618028681994,
+          "projected_outside_fraction": 0.15971488912354806,
+          "unprojected_foreground_fraction": 0.15971488912354806,
+          "contour_p95_source_px": 3.0,
+          "observed_uv_fraction": 0.3614039408866995
+        }
+      }
+    }
+  ]
+}

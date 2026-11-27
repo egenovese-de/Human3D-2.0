@@ -1,0 +1,88 @@
+{
+  "candidate_sha": "397329e3781fe609f92579b81c79bb60a7d4873b",
+  "lab_sha": "bb794806079e8fd4c5af3bbc43cc546f5e8a30f1",
+  "python": "3.11.9",
+  "linux_lock_sha256": "b2dc51f79acb77b17fb9a637d9ac87b01f72c00eed4e20f4913f6268d8f9cbbe",
+  "cases": [
+    {
+      "identity": "f_af01",
+      "conditions": [
+        {
+          "condition": "bootstrap",
+          "asset_sha256": null,
+          "symmetric_mean_mm": 25.53506399871237
+        },
+        {
+          "condition": "caucasian-female-young.target",
+          "asset_sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "symmetric_mean_mm": 26.74049095853683
+        },
+        {
+          "condition": "caucasian-male-young.target",
+          "asset_sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "symmetric_mean_mm": 26.51508219879857
+        }
+      ]
+    },
+    {
+      "identity": "f_ca01",
+      "conditions": [
+        {
+          "condition": "bootstrap",
+          "asset_sha256": null,
+          "symmetric_mean_mm": 25.82399182156635
+        },
+        {
+          "condition": "caucasian-female-young.target",
+          "asset_sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "symmetric_mean_mm": 27.482954687386094
+        },
+        {
+          "condition": "caucasian-male-young.target",
+          "asset_sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "symmetric_mean_mm": 26.971580682587497
+        }
+      ]
+    },
+    {
+      "identity": "m_as01",
+      "conditions": [
+        {
+          "condition": "bootstrap",
+          "asset_sha256": null,
+          "symmetric_mean_mm": 32.66402705272256
+        },
+        {
+          "condition": "caucasian-female-young.target",
+          "asset_sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "symmetric_mean_mm": 33.4095688812727
+        },
+        {
+          "condition": "caucasian-male-young.target",
+          "asset_sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "symmetric_mean_mm": 27.828533933690885
+        }
+      ]
+    },
+    {
+      "identity": "m_la01",
+      "conditions": [
+        {
+          "condition": "bootstrap",
+          "asset_sha256": null,
+          "symmetric_mean_mm": 35.00465746817982
+        },
+        {
+          "condition": "caucasian-female-young.target",
+          "asset_sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "symmetric_mean_mm": 36.16623110409537
+        },
+        {
+          "condition": "caucasian-male-young.target",
+          "asset_sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "symmetric_mean_mm": 29.909014173799466
+        }
+      ]
+    }
+  ]
+}
