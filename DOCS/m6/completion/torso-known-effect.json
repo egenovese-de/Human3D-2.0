@@ -1,0 +1,17 @@
+{
+  "candidate_sha": "b2a84312ccf2d2119f9b7667f6368684f02455e0",
+  "lab_sha": "6ce6e4156ae7e41cf73ce95cf820037721bb1721",
+  "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+  "scope": "Canonical known-effect control; no independent source-family validation",
+  "base_ratio": 1.0259041324794376,
+  "injected_ratio": 1.146799548063771,
+  "baseline_penalty": 0.005944770779216669,
+  "fitted_penalty": 0.0001673617364092772,
+  "fitted_ratio": 1.1521467827919565,
+  "fitted_controls": {
+    "bust": 0.375,
+    "waist": -0.25
+  },
+  "intended_positive_bust_penalty": 0.0,
+  "opposite_bust_penalty": 0.009959737834317412
+}
