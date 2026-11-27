@@ -51,7 +51,6 @@ jobs:
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: |
-            .lab-runtime/cache
             .lab-runtime/assets/foundation
             .lab-runtime/assets/morph02
             .lab-runtime/assets/anatomical_torso
