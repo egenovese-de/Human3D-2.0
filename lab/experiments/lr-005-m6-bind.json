@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "lr-005-m6-bind",
+  "source_revision": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+  "stages": [
+    {
+      "operation": "m6_bind_control",
+      "timeout": 120,
+      "expected": [
+        "metrics.json"
+      ]
+    }
+  ]
+}
