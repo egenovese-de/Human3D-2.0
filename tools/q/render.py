@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render independent metric fixtures with Blender 4.3.2."""
 import hashlib
 import json
