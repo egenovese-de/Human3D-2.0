@@ -50,6 +50,18 @@
       "manifest": "DOCS/manifests/makehuman-morph02.json",
       "required": false,
       "cache_allowed": true
+    },
+    "pose_lite": {
+      "required": true,
+      "cache_allowed": false,
+      "manifest": "lab/manifests/pose-lite-v1.json"
+    },
+    "historical_q": {
+      "required": false,
+      "cache_allowed": false,
+      "manifest": "DOCS/q/manifest.json",
+      "kind": "historical_inventory",
+      "additional_manifest": "DOCS/q/followup/fixture-index.json"
     }
   },
   "environment": {
@@ -69,8 +81,21 @@
     "historical_runtime_overrides": "explicit versioned lock required"
   },
   "unresolved": [
-    "MediaPipe model manifest",
     "Additional anatomical asset group",
-    "Historical fixture inventory"
+    "Final manifest validation",
+    "M6 fixture inventory"
+  ],
+  "historical_blender": [
+    {
+      "version": "4.3.2",
+      "kind": "host",
+      "reference": "DOCS/Q_REPRODUCIBILITY_MANIFEST.md"
+    },
+    {
+      "version": "4.5.17",
+      "kind": "bpy-wheel",
+      "sha256": "967ad057646e98666f85057ee7259cbcf8c0d47f9648ab45bd72ac8453aad93a",
+      "reference": "DOCS/Q_REPRODUCIBILITY_MANIFEST.md"
+    }
   ]
 }
