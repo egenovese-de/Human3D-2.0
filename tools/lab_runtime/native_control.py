@@ -50,8 +50,30 @@ def main(runtime, out):
     d=ImageDraw.Draw(texture)
     for y in range(0,128,16):
         for x in range(0,128,16): d.rectangle((x,y,x+15,y+15),fill=(150,170,190) if (x+y)//16%2 else (80,100,120))
-    export_body(out/"human.usdz",body,fit,posed_alignment,texture=texture,ground=True)
-    metrics={"scope":"known geometry oracle silhouette; calibrated camera; native fit and export","bootstrap_iou":fit.bootstrap_iou,"fitted_iou":fit.fitted_iou,"controls":fit.controls,"vertices":len(vertices),"bones":len(rig["bones"]),"morph_max_delta":float(np.max(np.abs(truth-rest))),"pose_max_delta":float(np.max(np.abs(posed-vertices))),"asset_hashes":ASSETS|MORPH_ASSETS}
+    # Lab-only aliases: native morph_controls strips the last stem segment.
+    from dataclasses import replace
+    manifest=json.loads((Path(__file__).resolve().parents[2]/"lab/manifests/makehuman-anatomical-torso.json").read_text())
+    extra={Path(i["path"]).name:i["sha256"] for i in manifest["files"]}
+    targets=_morph_targets({n:read(n,h) for n,h in extra.items()},len(rest))
+    body["morph_targets"].update({n.rsplit("-",1)[0]+"-lab-"+n.rsplit("-",1)[1]:v for n,v in targets.items()})
+    checks={}
+    controls={}
+    for name in ("torso-scale-depth","torso-scale-horiz","torso-vshape"):
+        for value in (-.25,.25):
+            v=np.asarray(deform_vertices(body,{name:value}))
+            assert np.isfinite(v).all() and np.array_equal(v,np.asarray(deform_vertices(body,{name:value})))
+            delta=float(np.max(np.abs(v-rest)))
+            assert delta>0
+            checks[name+str(value)]=delta
+        controls[name]=.25
+    fit_expanded=replace(fit,controls=fit.controls|controls)
+    expanded=np.asarray(deform_vertices(body,fit_expanded.controls))
+    t=pose_transforms(rig,validate_rebind(body,expanded),posed_alignment)
+    ep=np.asarray(skin_vertices(expanded,rig["skin"],t))
+    validate_pose(body,expanded,ep)
+    assert np.isfinite(ep).all() and np.max(np.abs(ep-expanded))>0
+    export_body(out/"human.usdz",body,fit_expanded,posed_alignment,texture=texture,ground=True)
+    metrics={"scope":"known geometry oracle silhouette; calibrated camera; native fit and export","bootstrap_iou":fit.bootstrap_iou,"fitted_iou":fit.fitted_iou,"controls":fit.controls,"vertices":len(vertices),"bones":len(rig["bones"]),"morph_max_delta":float(np.max(np.abs(truth-rest))),"pose_max_delta":float(np.max(np.abs(posed-vertices))),"asset_hashes":ASSETS|MORPH_ASSETS|extra,"expanded_morph_deltas":checks,"expanded_controls":controls,"expanded_pose_delta":float(np.max(np.abs(ep-expanded)))}
     (out/"metrics.json").write_text(json.dumps(metrics,indent=2))
     print("NATIVE_CONTROL="+json.dumps(metrics))
 if __name__=="__main__":
