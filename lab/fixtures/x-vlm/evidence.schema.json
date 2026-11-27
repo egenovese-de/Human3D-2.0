@@ -1,0 +1,391 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P3 structured visual observation replay v1",
+  "$defs": {
+    "unified": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "enum": [
+              "subject01",
+              "subject02",
+              "subject03",
+              "subject04"
+            ]
+          },
+          "view": {
+            "enum": [
+              "front",
+              "side",
+              "threequarter"
+            ]
+          },
+          "A": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "enum": [
+                      "tapered",
+                      "moderate",
+                      "straight"
+                    ]
+                  },
+                  "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "B": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "enum": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ]
+                  },
+                  "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "C": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0.4,
+                    "maximum": 1.4
+                  },
+                  "lo": {
+                    "type": "number",
+                    "minimum": 0.4,
+                    "maximum": 1.4
+                  },
+                  "hi": {
+                    "type": "number",
+                    "minimum": 0.4,
+                    "maximum": 1.4
+                  }
+                },
+                "required": [
+                  "value",
+                  "lo",
+                  "hi"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "D": {
+            "type": "object",
+            "properties": {
+              "ratio": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "number",
+                        "minimum": 0.4,
+                        "maximum": 1.4
+                      },
+                      "lo": {
+                        "type": "number",
+                        "minimum": 0.4,
+                        "maximum": 1.4
+                      },
+                      "hi": {
+                        "type": "number",
+                        "minimum": 0.4,
+                        "maximum": 1.4
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "lo",
+                      "hi"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "ordinal": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5
+                        ]
+                      },
+                      "confidence": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "confidence"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "ratio",
+              "ordinal"
+            ],
+            "additionalProperties": false
+          },
+          "E": {
+            "type": "object",
+            "properties": {
+              "upper": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      },
+                      "lo": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      },
+                      "hi": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "lo",
+                      "hi"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "hip": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      },
+                      "lo": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      },
+                      "hi": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 0.5
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "lo",
+                      "hi"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "upper",
+              "hip"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "subject",
+          "view",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "specialized": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "enum": [
+              "subject01",
+              "subject02",
+              "subject03",
+              "subject04"
+            ]
+          },
+          "view": {
+            "enum": [
+              "front",
+              "side",
+              "threequarter"
+            ]
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  },
+                  "lo": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  },
+                  "hi": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  }
+                },
+                "required": [
+                  "value",
+                  "lo",
+                  "hi"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hip": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  },
+                  "lo": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  },
+                  "hi": {
+                    "type": "number",
+                    "minimum": 0.05,
+                    "maximum": 0.5
+                  }
+                },
+                "required": [
+                  "value",
+                  "lo",
+                  "hi"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "subject",
+          "view",
+          "upper",
+          "hip"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 12,
+      "maxItems": 12
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/unified"
+    },
+    {
+      "$ref": "#/$defs/specialized"
+    }
+  ],
+  "$comment": "Replay additionally enforces ordered intervals, unique subject/view pairs and null for direct axes in three-quarter views."
+}

@@ -1,0 +1,14 @@
+[
+{"subject":"subject01","view":"front","A":{"value":"moderate","confidence":0.61},"B":{"value":3,"confidence":0.58},"C":{"value":0.82,"lo":0.74,"hi":0.91},"D":{"ratio":{"value":0.82,"lo":0.74,"hi":0.90},"ordinal":{"value":3,"confidence":0.58}},"E":{"upper":{"value":0.184,"lo":0.164,"hi":0.204},"hip":{"value":0.226,"lo":0.209,"hi":0.243}}},
+{"subject":"subject02","view":"front","A":{"value":"moderate","confidence":0.54},"B":{"value":3,"confidence":0.52},"C":{"value":0.81,"lo":0.71,"hi":0.90},"D":{"ratio":null,"ordinal":{"value":3,"confidence":0.52}},"E":{"upper":{"value":0.151,"lo":0.135,"hi":0.168},"hip":{"value":0.188,"lo":0.171,"hi":0.207}}},
+{"subject":"subject03","view":"front","A":{"value":"tapered","confidence":0.59},"B":{"value":2,"confidence":0.55},"C":{"value":0.78,"lo":0.69,"hi":0.88},"D":{"ratio":{"value":0.78,"lo":0.68,"hi":0.89},"ordinal":{"value":2,"confidence":0.55}},"E":{"upper":{"value":0.191,"lo":0.169,"hi":0.215},"hip":{"value":0.245,"lo":0.226,"hi":0.266}}},
+{"subject":"subject04","view":"front","A":{"value":"moderate","confidence":0.60},"B":{"value":3,"confidence":0.55},"C":{"value":0.84,"lo":0.75,"hi":0.94},"D":{"ratio":{"value":0.84,"lo":0.74,"hi":0.94},"ordinal":{"value":3,"confidence":0.55}},"E":{"upper":{"value":0.155,"lo":0.138,"hi":0.174},"hip":{"value":0.185,"lo":0.167,"hi":0.205}}},
+{"subject":"subject01","view":"side","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":{"value":0.140,"lo":0.123,"hi":0.158}}},
+{"subject":"subject02","view":"side","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":{"value":0.145,"lo":0.128,"hi":0.164}}},
+{"subject":"subject03","view":"side","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":{"value":0.139,"lo":0.122,"hi":0.158}}},
+{"subject":"subject04","view":"side","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":{"value":0.151,"lo":0.132,"hi":0.170}}},
+{"subject":"subject01","view":"threequarter","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":null}},
+{"subject":"subject02","view":"threequarter","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":null}},
+{"subject":"subject03","view":"threequarter","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":null}},
+{"subject":"subject04","view":"threequarter","A":null,"B":null,"C":null,"D":{"ratio":null,"ordinal":null},"E":{"upper":null,"hip":null}}
+]
