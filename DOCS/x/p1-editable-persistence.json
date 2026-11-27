@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "application_revision": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+  "lab_revision": "9f3062612c46aadb8cce557874eab386837ad18b",
+  "run_id": 46005412637,
+  "job_id": 140527220405,
+  "conclusion": "success",
+  "pose_movement_unit": "Blender scene units",
+  "sha256_scope": "edited mesh coordinates and polygon connectivity",
+  "subjects": [
+    {
+      "subject": "dev01",
+      "status": "PASS",
+      "weight_error": 4.470348358154297e-8,
+      "pose_movement": 0.7978011340636492,
+      "sha256": "d43f341866c8ebe481efcba2a4920a37f97c993071612df56b1b84956343655a"
+    },
+    {
+      "subject": "dev02",
+      "status": "PASS",
+      "weight_error": 4.470348358154297e-8,
+      "pose_movement": 0.8686065404437116,
+      "sha256": "247918b09dee9a904a2332cdc4ae14f940e9df5526c565b743670ca0fdba272a"
+    },
+    {
+      "subject": "hold01",
+      "status": "PASS",
+      "weight_error": 4.470348358154297e-8,
+      "pose_movement": 0.7724676119857227,
+      "sha256": "f9bef6d62063eaa710ced8a7db7db2d85d06736dcc3a03f5ea9485f2c3cefec7"
+    },
+    {
+      "subject": "hold02",
+      "status": "PASS",
+      "weight_error": 4.470348358154297e-8,
+      "pose_movement": 0.8079588419952792,
+      "sha256": "cd18dbf936336041b79a0145ec3739ce74b34f4da0526c71c69527521f8e30cf"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 15201016950,
+      "name": "x-p1-persisted-assets",
+      "github_reported_digest": "sha256:ffde72a9a9c45db993d33588274d3d842cbcdfd0f2f5b1f37814d2cf55120bf9",
+      "expires_at": "2027-02-25T13:14:36Z",
+      "url": "https://github.com/egenovese-de/Human3D-2.0/actions/runs/46005412637/artifacts/15201016950"
+    },
+    {
+      "id": 15200792094,
+      "name": "x-p1-editable-metrics",
+      "github_reported_digest": "sha256:198b030602f01d17907fb99930b7280b2e3df65653c0d271c61a183454617e55",
+      "expires_at": "2026-12-04T13:17:02Z",
+      "url": "https://github.com/egenovese-de/Human3D-2.0/actions/runs/46005412637/artifacts/15200792094"
+    },
+    {
+      "id": 15200682225,
+      "name": "x-p1-renders",
+      "github_reported_digest": "sha256:17c0a1fe11194a4151e59e83c245de80f83ddcafc25cf6920f54ded39cad800e",
+      "expires_at": "2027-02-25T13:14:36Z",
+      "url": "https://github.com/egenovese-de/Human3D-2.0/actions/runs/46005412637/artifacts/15200682225"
+    },
+    {
+      "id": 15200657240,
+      "name": "x-p1-metrics",
+      "github_reported_digest": "sha256:6dfb077e216f06858bae20cbfb55acd83ba8abce6e327ff07797674e24635308",
+      "expires_at": "2027-02-25T13:14:36Z",
+      "url": "https://github.com/egenovese-de/Human3D-2.0/actions/runs/46005412637/artifacts/15200657240"
+    }
+  ]
+}
