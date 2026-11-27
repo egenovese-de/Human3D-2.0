@@ -12,7 +12,7 @@ from bootstrap import ROOT, LOCK, safe, digest
 from historical_inputs import verify_holdout, verify_rig
 
 HISTORICAL={"q_evidence_boundaries":"tools/q/finalization/evidence_boundaries.py","m6_bind_control":"tools/lab_runtime/m6_bind_control.py"}
-OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}, "q_validate_holdout":{"expected"}, "m6_audit_source_rig":{"expected"}, "m6_audit_native":{"expected"}}
+OPERATIONS={"native_control":{"expected"}, "blender_generated":{"input","expected"}, "numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}, "q_validate_holdout":{"expected"}, "m6_audit_source_rig":{"expected"}, "m6_audit_native":{"expected"}}
 
 def main():
     p=argparse.ArgumentParser()
@@ -42,6 +42,9 @@ def main():
         if op=="blender_roundtrip":
             if not safe(ROOT,s["input"]).is_file():
                 raise ValueError("missing input")
+        if op=="blender_generated":
+            if s["input"]!="0/human.usdz" or c["stages"][0]["operation"]!="native_control" or s is c["stages"][0]:
+                raise ValueError("invalid generated input")
     source=subprocess.check_output(["git","-C",str(a.source),"rev-parse","HEAD"],text=True).strip()
     if source!=c["source_revision"]:
         raise ValueError("source revision mismatch")
@@ -60,6 +63,8 @@ def main():
             stage.mkdir()
             if s["operation"]=="numerical":
                 cmd=[py,ROOT/"tools/lab_runtime/numerical_probe.py","--seed",s["seed"],"--output",stage/"numerical.json"]
+            elif s["operation"]=="native_control":
+                cmd=[py,ROOT/"tools/lab_runtime/native_control.py","--runtime",root,"--output",stage]
             elif s["operation"]=="q_validate_holdout":
                 if a.historical_workspace is None:
                     raise ValueError("historical workspace required")
@@ -80,7 +85,7 @@ def main():
             elif s["operation"] in HISTORICAL:
                 cmd=[py,ROOT/HISTORICAL[s["operation"]],stage/"metrics.json"]
             else:
-                cmd=[blender,"--background","--factory-startup","--python-exit-code","1","--python",ROOT/"tools/lab_runtime/blender_runner.py","--","--input",safe(ROOT,s["input"]),"--output",stage]
+                cmd=[blender,"--background","--factory-startup","--python-exit-code","1","--python",ROOT/"tools/lab_runtime/blender_runner.py","--","--input",safe(out if s["operation"]=="blender_generated" else ROOT,s["input"]),"--output",stage]
             if s["operation"]=="blender_roundtrip" and "framing" in s:
                 cmd.extend(["--framing",safe(out,s["framing"])])
             entry={"operation":s["operation"],"status":"FAIL"}
