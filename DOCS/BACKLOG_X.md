@@ -9,19 +9,19 @@
 | X-005 | Review historical Q and M6 evidence | DONE |
 | X-006 | Audit rigging and articulation interfaces | DONE |
 | X-007 | Audit persistence and downstream interfaces | DONE |
-| X-008 | Define anatomy-first architecture | IN PROGRESS |
+| X-008 | Define anatomy-first architecture | DONE |
 | X-009 | Investigate expanded MakeHuman anatomical capacity | DONE |
 | X-010 | Compare base initialization strategies | DONE |
 | X-011 | Define canonical pose candidates | DONE |
 | X-012 | Execute canonical pose benchmark | DONE |
-| X-013 | Define candidate VLM evidence schemas | IN PROGRESS |
-| X-014 | Generate independent synthetic datasets | BLOCKED |
-| X-015 | Execute GPT-based VLM simulation | OPEN |
-| X-016 | Evaluate evidence configurations A–E | OPEN |
-| X-017 | Evaluate multi-image anatomical convergence | OPEN |
-| X-018 | Compare anatomy-first and current reconstruction | BLOCKED |
-| X-019 | Validate downstream compatibility | BLOCKED |
-| X-020 | Finalize VLM distillation specification | OPEN |
-| X-021 | Finalize implementation impact assessment | IN PROGRESS |
-| X-022 | Complete research documentation | OPEN |
-| X-023 | Deliver final executive recommendation | OPEN |
+| X-013 | Define candidate VLM evidence schemas | DONE |
+| X-014 | Generate independent synthetic datasets | IN PROGRESS |
+| X-015 | Execute GPT-based VLM simulation | DONE |
+| X-016 | Evaluate evidence configurations A–E | DONE |
+| X-017 | Evaluate multi-image anatomical convergence | IN PROGRESS |
+| X-018 | Compare anatomy-first and current reconstruction | DONE |
+| X-019 | Validate downstream compatibility | IN PROGRESS |
+| X-020 | Finalize VLM distillation specification | DONE |
+| X-021 | Finalize implementation impact assessment | DONE |
+| X-022 | Complete research documentation | DONE |
+| X-023 | Deliver final executive recommendation | DONE |
