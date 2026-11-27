@@ -53,6 +53,7 @@ def stage(config,run,runtime,out):
         copy(runtime/name,name)
     copy(run/"run_manifest.json","run_manifest.json")
     copy(config,"experiment.json")
+    copy(ROOT/"LICENSE","LICENSE")
     copy(fixture,"inputs/smoke.usda")
     copy(ROOT/"lab/manifests/artifact-admission.json","admission.json")
     files={p.relative_to(out).as_posix():{"sha256":digest(p),"bytes":p.stat().st_size} for p in out.rglob("*") if p.is_file()}
