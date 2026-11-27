@@ -30,12 +30,14 @@ jobs:
           python-version: '3.11.9'
       - name: Linux libraries
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libglib2.0-0t64 libgles2
+        run: sudo apt-get -o Acquire::Retries=3 update && sudo apt-get -o Acquire::Retries=3 install -y libegl1 libgl1 libglib2.0-0t64 libgles2
       - run: python tools/lab_runtime/bootstrap.py
       - run: python tools/lab_runtime/runner.py --config lab/experiments/lr-004-smoke.json --source .lab-source --output lab-output/run-a
       - run: python tools/lab_runtime/runner.py --config lab/experiments/lr-004-smoke.json --source .lab-source --output lab-output/run-b
       - name: Assert deterministic numerical output
         run: python -c "from pathlib import Path; import hashlib; a=Path('lab-output/run-a/0/numerical.json').read_bytes(); b=Path('lab-output/run-b/0/numerical.json').read_bytes(); assert a==b; print('D PASS',hashlib.sha256(a).hexdigest(),a.decode()); print(Path('lab-output/run-a/1/blender_metrics.json').read_text())"
+      - name: Assert shared framing and PNG integrity
+        run: python -c "import json,struct; from pathlib import Path; from hashlib import sha256; exec('for run in (\"run-a\",\"run-b\"):\n p=Path(\"lab-output\")/run\n a,b=[json.loads((p/str(i)/\"render_report.json\").read_text()) for i in (1,2)]\n assert a[\"center\"]==b[\"center\"] and a[\"span\"]==b[\"span\"]\n for i in (1,2):\n  files=list((p/str(i)).glob(\"*.png\")); assert len(files)==12\n  for f in files:\n   data=f.read_bytes(); assert data[:8]==bytes.fromhex(\"89504e470d0a1a0a\") and struct.unpack(\">II\",data[16:24])==(384,480)\n print(\"FRAMING PASS\",run,a[\"center\"],a[\"span\"],\"24 PNG PASS\")')"
       - name: Diagnostics
         if: always()
         run: python -c "from pathlib import Path; [(print(p),print(p.read_text(errors='replace'))) for p in Path('lab-output').rglob('execution.log')]"
