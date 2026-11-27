@@ -1,7 +1,7 @@
 | ID | Task | Status |
 |---|---|---|
 | LR-001 | Consolidate runtime and asset manifests | DONE |
-| LR-002 | Implement cross-platform runtime bootstrap | TODO |
+| LR-002 | Implement cross-platform runtime bootstrap | IN PROGRESS |
 | LR-003 | Implement runtime verification | TODO |
 | LR-004 | Implement shared Python and Blender runners | TODO |
 | LR-005 | Integrate existing Q and M6 scripts | TODO |
