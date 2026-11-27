@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "test_H": "PARTIAL",
+  "integrity": {
+    "run_id": 45984529068,
+    "job_id": 140456628914,
+    "status": "PASS",
+    "checks": [
+      "holdout missing",
+      "holdout corrupt",
+      "rig_fixtures missing",
+      "rig_fixtures corrupt"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": 15093082462,
+      "sha256": "a0a95e32deafb02e175e3cc6e5902388ffdc0d7baedbd61542f78ce6d8ba220d",
+      "png": 8,
+      "json": 1
+    },
+    {
+      "id": 15050376124,
+      "sha256": "b6c31bff42734025a7c4a204c4addad99f6cf2c757c6f78f588f4cf70e8eaea3",
+      "png": 8,
+      "json": 1
+    },
+    {
+      "id": 15049661545,
+      "sha256": "2682a6fe47c85b7762f45bd74a6de383333630ba52a3595142a2b8f604842550",
+      "png": 0,
+      "json": 1
+    }
+  ],
+  "all_zip_crc_pass": true,
+  "original_datasets_recovered": false,
+  "limitations": [
+    "Source rig adapter not executed on original inputs",
+    "Native persisted project adapter not qualified; verified project inventory needed",
+    "No replacement datasets used"
+  ]
+}
