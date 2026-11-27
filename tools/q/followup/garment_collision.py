@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Cross-check production signed samples with independent triangle intersections."""
 import argparse
 from collections import Counter
