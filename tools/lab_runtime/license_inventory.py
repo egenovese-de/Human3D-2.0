@@ -17,3 +17,8 @@ for name in paths:
     if imports:
         rows.append({"path":name,"imports":sorted(set(imports)),"header":source.splitlines()[:3]})
 print("BLENDER_SOURCE_INVENTORY="+json.dumps({"scanned":len(paths),"files":rows}))
+
+assert len(rows)==22, "Blender inventory changed; review required"
+assert all("# SPDX-License-Identifier: GPL-3.0-or-later" in row["header"] for row in rows)
+assert Path("LICENSES/GPL-3.0-or-later.txt").stat().st_size > 30000
+print("BLENDER_LICENSE_GATE_PASS",len(rows))
