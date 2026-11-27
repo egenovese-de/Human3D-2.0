@@ -26,8 +26,35 @@
         "textured_front.png",
         "textured_back.png",
         "textured_side.png",
-        "textured_three_quarter.png"
+        "textured_three_quarter.png",
+        "wireframe_front.png",
+        "wireframe_back.png",
+        "wireframe_side.png",
+        "wireframe_three_quarter.png"
       ]
+    },
+    {
+      "operation": "blender_roundtrip",
+      "input": "lab/fixtures/smoke.usda",
+      "timeout": 600,
+      "expected": [
+        "scene.blend",
+        "blender_metrics.json",
+        "render_report.json",
+        "clay_front.png",
+        "clay_back.png",
+        "clay_side.png",
+        "clay_three_quarter.png",
+        "textured_front.png",
+        "textured_back.png",
+        "textured_side.png",
+        "textured_three_quarter.png",
+        "wireframe_front.png",
+        "wireframe_back.png",
+        "wireframe_side.png",
+        "wireframe_three_quarter.png"
+      ],
+      "framing": "1/render_report.json"
     }
   ]
 }
