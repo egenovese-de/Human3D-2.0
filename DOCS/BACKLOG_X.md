@@ -12,8 +12,8 @@
 | X-008 | Define anatomy-first architecture | IN PROGRESS |
 | X-009 | Investigate expanded MakeHuman anatomical capacity | DONE |
 | X-010 | Compare base initialization strategies | DONE |
-| X-011 | Define canonical pose candidates | IN PROGRESS |
-| X-012 | Execute canonical pose benchmark | BLOCKED |
+| X-011 | Define canonical pose candidates | DONE |
+| X-012 | Execute canonical pose benchmark | DONE |
 | X-013 | Define candidate VLM evidence schemas | IN PROGRESS |
 | X-014 | Generate independent synthetic datasets | BLOCKED |
 | X-015 | Execute GPT-based VLM simulation | OPEN |
