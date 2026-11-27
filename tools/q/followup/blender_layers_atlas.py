@@ -7,15 +7,15 @@ from mathutils import Vector
 from PIL import Image, ImageDraw, ImageFont
 
 
-def run(source, work, atlas):
+def run(source, work, atlas, *, native=False):
     work.mkdir(parents=True,exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     if bpy.ops.wm.usd_import(filepath=str(source.resolve()))!={"FINISHED"}:
         raise RuntimeError("direct USDZ import failed")
     scene=bpy.context.scene
     body=scene.objects["Body"]
-    inner=scene.objects["independent_base"]
-    outer=scene.objects["independent_outer"]
+    inner=scene.objects["top_base" if native else "independent_base"]
+    outer=scene.objects["top_outer" if native else "independent_outer"]
     rig=next(o for o in scene.objects if o.type=="ARMATURE")
     scene.render.engine="BLENDER_WORKBENCH"
     scene.render.resolution_x=scene.render.resolution_y=380
@@ -54,7 +54,8 @@ def run(source, work, atlas):
     draw=ImageDraw.Draw(img)
     font=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",18)
     bold=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",24)
-    draw.text((25,14),"Direct USDZ import · independent registered garment control",fill="#181b2b",font=bold)
+    title = "Human3D M6 · direct USDZ import" if native else "Direct USDZ import · independent registered garment control"
+    draw.text((25,14),title,fill="#181b2b",font=bold)
     for i,(label,*_) in enumerate(cases):
         p=Image.open(work/f"{i}.png").convert("RGB").resize((286,286),Image.Resampling.LANCZOS)
         x=25+i*300
@@ -67,4 +68,5 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser()
     for name in ("source","work","atlas"):
         parser.add_argument(name,type=Path)
+    parser.add_argument("--native", action="store_true")
     run(**vars(parser.parse_args()))
