@@ -12,7 +12,9 @@ from lab_render_usd import scene_bounds, lighting, render_views
 
 def inspect():
     meshes=[o for o in bpy.context.scene.objects if o.type=="MESH"]
-    return {"meshes":len(meshes),"vertices":sum(len(o.data.vertices) for o in meshes),"faces":sum(len(o.data.polygons) for o in meshes),"armatures":sum(o.type=="ARMATURE" for o in bpy.context.scene.objects),"skinned_meshes":sum(any(m.type=="ARMATURE" for m in o.modifiers) for o in meshes)}
+    rigs=[o for o in bpy.context.scene.objects if o.type=="ARMATURE"]
+    weighted=sum(bool(v.groups) for o in meshes for v in o.data.vertices)
+    return {"bones":sum(len(o.data.bones) for o in rigs),"weighted_vertices":weighted,"meshes":len(meshes),"vertices":sum(len(o.data.vertices) for o in meshes),"faces":sum(len(o.data.polygons) for o in meshes),"armatures":sum(o.type=="ARMATURE" for o in bpy.context.scene.objects),"skinned_meshes":sum(any(m.type=="ARMATURE" for m in o.modifiers) for o in meshes)}
 
 def main():
     p=argparse.ArgumentParser()
@@ -29,10 +31,13 @@ def main():
     before=inspect()
     if not before["meshes"] or not before["vertices"]:
         raise RuntimeError("empty geometry")
+    bpy.ops.file.pack_all()
     path=str((a.output/"scene.blend").resolve())
     bpy.ops.wm.save_as_mainfile(filepath=path)
     bpy.ops.wm.open_mainfile(filepath=path)
     after=inspect()
+    if a.input.name=="human.usdz" and not all(after[k]>0 for k in ("bones","weighted_vertices","armatures","skinned_meshes")):
+        raise RuntimeError("human skinning missing")
     if before!=after:
         raise RuntimeError("round-trip mismatch")
     scene=bpy.context.scene
