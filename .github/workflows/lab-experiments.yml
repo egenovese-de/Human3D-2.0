@@ -77,15 +77,15 @@ jobs:
           CONFIG: ${{ needs.request.outputs.config }}
         run: python tools/lab_runtime/runner.py --config $env:CONFIG --source .lab-source --output lab-output/experiment
       - name: Stage admitted artifact
-        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json' || needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         env:
           CONFIG: ${{ needs.request.outputs.config }}
         run: python tools/lab_runtime/artifacts.py --config $env:CONFIG --run lab-output/experiment --runtime .lab-runtime --output lab-output/publish
       - name: Negative artifact controls
-        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json' || needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         run: |
           Copy-Item lab-output/publish lab-output/tampered -Recurse
-          Add-Content lab-output/tampered/0/numerical.json 'corruption'
+          Add-Content lab-output/tampered/0/execution.log 'corruption'
           python tools/lab_runtime/artifacts.py --verify lab-output/tampered
           if ($LASTEXITCODE -eq 0) { throw "Corruption accepted" }
           Write-Output "REJECT_CORRUPTION_PASS"
@@ -95,13 +95,18 @@ jobs:
           python tools/lab_runtime/artifacts.py --verify lab-output/publish
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Upload admitted artifact
-        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json'
+        if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json' || needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: lab-experiment-${{ github.run_id }}-${{ github.run_attempt }}
           path: lab-output/publish/
           retention-days: 7
           if-no-files-found: error
+      - name: Native metrics
+        if: needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
+        run: |
+          Get-Content lab-output/experiment/0/metrics.json -Raw
+          Get-Content lab-output/experiment/1/blender_metrics.json -Raw
       - name: Diagnostics
         if: always()
         run: |
