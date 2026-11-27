@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "checked_revision": "ddc6b462bacce54041d6a6b5e99f1cec964177ae",
+  "checks": [
+    {
+      "group": "foundation",
+      "entries": 357
+    },
+    {
+      "group": "morph02",
+      "entries": 10
+    },
+    {
+      "group": "pose_lite",
+      "entries": 1
+    },
+    {
+      "group": "historical_q",
+      "entries": null
+    },
+    {
+      "group": "anatomical_torso",
+      "entries": 6
+    },
+    {
+      "group": "historical_fixtures",
+      "entries": null
+    },
+    {
+      "platform": "linux",
+      "dependencies": 6
+    },
+    {
+      "platform": "windows",
+      "dependencies": 6
+    }
+  ],
+  "checksum_runs": [
+    45976254082,
+    45976696739
+  ],
+  "scope": "Manifest structure, references, hash syntax and dependency versions; actual additional target and model downloads in CI; not full runtime qualification"
+}
