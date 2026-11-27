@@ -77,6 +77,48 @@ def main(runtime,out):
             obj(name+"_"+method+"_refined",final)
             refinement.append({"subject":name,"method":method,"delta":result.x.tolist(),"solver_success":bool(result.success),**metrics(final,truth)})
     report={"refinement_scope":"bounded macro basis oracle residual; not regional or image fitting","refinement":refinement,"scope":"same-family oracle macro endpoint interpolation; not full MakeHuman modifier semantics; no independent geometry","source_revision":"e0ae4eae57347466b5757bbcdaaa7194bdd31c94","asset_revision":manifest["revision"],"subjects":subjects,"rows":rows,"vertices":len(base),"body_vertices":len(ids),"asset_hashes":{k:v["sha256"] for k,v in entries.items() if k.endswith("base.obj") or any(k.endswith(f"{p}-{s}-{a}.target") for p in ("african","asian","caucasian") for s in ("female","male") for a in ("young","old"))}}
+    # Expanded adult basis: universal weight/muscle endpoints relative to
+    # average, plus admitted torso pairs. Same-family additive oracle only.
+    def dense(rel,group="foundation"):
+        if group=="foundation": raw=read(rel)
+        else:
+            manifest2=json.loads((ROOT/"lab/manifests/makehuman-anatomical-torso.json").read_text())
+            e=next(x for x in manifest2["files"] if x["path"]==rel)
+            p=runtime/"assets"/group/(manifest2.get("source_prefix","")+rel)
+            if digest(p)!=e["sha256"]: raise ValueError(rel)
+            raw=p.read_text()
+        v=np.zeros_like(base)
+        seen=set()
+        for line in raw.splitlines():
+            line=line.partition("#")[0].strip()
+            if not line: continue
+            i,x,y,z=line.split(); i=int(i)
+            if not 0<=i<len(base) or i in seen: raise ValueError("invalid target index")
+            seen.add(i); v[i]=[float(x),float(y),float(z)]
+        if not np.isfinite(v).all(): raise ValueError("nonfinite target")
+        return v
+    expanded=[]
+    for name,weights in subjects:
+        form="female" if sum(weights[:2])>sum(weights[2:]) else "male"
+        prefix="data/targets/macrodetails/universal-"+form+"-young-"
+        avg=dense(prefix+"averagemuscle-averageweight.target")
+        fields=[dense(prefix+"averagemuscle-maxweight.target")-avg,dense(prefix+"maxmuscle-averageweight.target")-avg]
+        tm=json.loads((ROOT/"lab/manifests/makehuman-anatomical-torso.json").read_text())
+        for stem in ("torso-scale-depth","torso-scale-horiz","torso-vshape"):
+            rel=next(x["path"] for x in tm["files"] if x["path"].endswith(stem+"-incr.target"))
+            fields.append(dense(rel,"anatomical_torso"))
+        fields=np.asarray(fields)
+        coeff=np.array([.65,.35,.30,.20,.15]) if name in ("dev01","hold02") else np.array([.25,.70,.15,.35,.25])
+        macro=base+np.tensordot(weights,basis,axes=1)
+        truth=macro+avg+np.tensordot(coeff,fields,axes=1)
+        coarse=np.round(coeff*4)/4
+        candidates={"macro_only":macro+avg,"weight_muscle":macro+avg+np.tensordot(coarse[:2],fields[:2],axes=1),"expanded":macro+avg+np.tensordot(coarse,fields,axes=1)}
+        obj(name+"_expanded_truth",truth)
+        for method,v in candidates.items():
+            obj(name+"_"+method+"_expanded",v)
+            expanded.append({"subject":name,"method":method,"coefficients":coeff.tolist(),**metrics(v,truth)})
+    report["expanded_scope"]="same-family additive adult weight/muscle and torso oracle; not upstream modifier equivalence"
+    report["expanded"]=expanded
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":

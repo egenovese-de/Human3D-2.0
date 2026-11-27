@@ -30,9 +30,9 @@ jobs:
           key: x-p1-foundation-${{ hashFiles('DOCS/manifests/makehuman-v1.3.0.json') }}
       - name: Provision locked Lab
         run: |
-          python tools/lab_runtime/bootstrap.py
+          python tools/lab_runtime/bootstrap.py --group anatomical_torso
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Execute P1 pilot
         run: |
