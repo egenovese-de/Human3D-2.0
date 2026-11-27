@@ -13,4 +13,4 @@ m=m.T@m+np.eye(8)
 b=rng.integers(-10,11,size=8).astype(float)
 x=solve(m,b)
 assert np.linalg.norm(m@x-b)<1e-10
-a.output.write_text(json.dumps({"seed":a.seed,"solution":np.round(x,12).tolist(),"residual_pass":True},sort_keys=True)+"\n")
+a.output.write_bytes((json.dumps({"seed":a.seed,"solution":np.round(x,12).tolist(),"residual_pass":True},sort_keys=True)+"\n").encode("utf-8"))
