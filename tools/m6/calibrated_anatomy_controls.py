@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Check authored joint frames and projection with an analytic reference and Blender."""
 import argparse
 from hashlib import sha256
