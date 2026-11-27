@@ -1,0 +1,49 @@
+{
+  "run_id": 45994031746,
+  "job_id": 140489990323,
+  "head_sha": "0b44f55ca15afda62a9e2a23ccbcdc1fb87e4883",
+  "qualification": "stage execution pass; detailed metrics and visual inspection pending",
+  "run": {
+    "schema_version": 1,
+    "id": "lr-009-native",
+    "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+    "config_sha256": "1817a0e902c70aa4da60c96d189168cc821c007e9914bed3b7a9492e942f9716",
+    "status": "PASS",
+    "stages": [
+      {
+        "operation": "native_control",
+        "status": "PASS",
+        "exit_code": 0,
+        "outputs": {
+          "metrics.json": "152629578921f19182b499a1cc9eb25414d499bd98fc3ac01ada6f5b87481633",
+          "oracle_mask.png": "516ee56c24012be6e1b6f51860890e4b61328784c1f2c963ec7c1f7a6d68017b",
+          "human.usdz": "81ba64def1b32d14951ecfc3bc70822626bc760fc3aa9a357cb2066165164cdf"
+        },
+        "seconds": 7.969000000000051
+      },
+      {
+        "operation": "blender_generated",
+        "status": "PASS",
+        "exit_code": 0,
+        "outputs": {
+          "scene.blend": "5bc71188ee0877c583de84bb205d5439f625a89da9b3cfc0186aac90724593b5",
+          "blender_metrics.json": "968fd5c52a1c34767321bc818229ffc2ebce28193bbd5a59afe229069d4c47d0",
+          "render_report.json": "2291fcb7d967e656ca525dbbbb04ecaa85b492439cb9d88cdec6d45f459e3224",
+          "clay_front.png": "12c8bf47687ea84978f8f22b90275c4678c8fec25798ddd669f1b4386d972b0b",
+          "clay_back.png": "3c91534787ef213f34406de27a7ce9136dbc3efe78ea0f0c146e23175fb1938f",
+          "clay_side.png": "aa50079f71112170a30400546dc76ec619ef3569bbfe98a1f704287a47189fad",
+          "clay_three_quarter.png": "fa609e230e3ad42df2fc86858f9aea1079f1b16089346f4c0adb643ebc7ce660",
+          "textured_front.png": "f4916a4c181d6c75f78cdda85f2109e472ec5a86f741fcbcdfc78ea12fcaa3b4",
+          "textured_back.png": "247333157b3befde1ab890cf8102d5924a999c7922a19809c3ca07d8ad9a95fc",
+          "textured_side.png": "b51b80fda58c687f7d8c0eaf9b30ea42f69006a35d14fe61cef6043a34c3cf6c",
+          "textured_three_quarter.png": "d26cfee5db662153f3f0cccae04e61e23c489892081628ab70dcfcf1194b5247",
+          "wireframe_front.png": "b0ca36d36719bc6acd6455880e6bd6905c39639a5ac7fce3d3c016cd176ab344",
+          "wireframe_back.png": "ee92850b4b43af9685244dac7706cc6efb7f6798ed3416a702eb2c42f7d07c6d",
+          "wireframe_side.png": "abea8bcabe1229a7273d5d6cf80eab785c06ae8efe79b944e0f2218a452cd827",
+          "wireframe_three_quarter.png": "b82f0a77860b50ebc808b77b90a3d4cc01b68eec10fb1bd26ef6da558660e603"
+        },
+        "seconds": 28.04599999999982
+      }
+    ]
+  }
+}
