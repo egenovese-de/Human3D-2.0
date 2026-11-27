@@ -1,0 +1,60 @@
+name: G3 camera and observation registration
+on:
+  push:
+    branches: [lab/g3-camera-registration]
+    paths: ['.github/workflows/g3-registration.yml', 'tools/g3/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lab-registration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .g3-product
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: makehumancommunity/makehuman
+          ref: 1f508f6083b2f823dab15de924b3bde72e08d77c
+          path: .g3-upstream
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - name: Prepare system libraries
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libgles2 libglib2.0-0t64 libxkbcommon0
+      - name: Verify permanent Lab Runtime
+        run: |
+          python tools/lab_runtime/bootstrap.py --group anatomical_torso --group p1_anatomy
+          python tools/lab_runtime/verify.py --source .g3-product --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso --group p1_anatomy
+      - name: Test frame contracts and reproduce two registration conditions
+        shell: bash
+        run: |
+          set -euo pipefail
+          export U="$PWD/.g3-upstream/makehuman" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+          export PYTHONPATH="$PWD/.g3-product/src:$PWD/tools/g1:$PWD/tools/g2:$PWD/tools/g3:$U:$U/lib:$U/apps:$U/core:$U/shared"
+          PY=.lab-runtime/venv/bin/python
+          BLENDER=.lab-runtime/blender/blender
+          mkdir -p g3-out
+          g++ -O3 -shared -fPIC tools/g2/raster.cpp -o g3-out/raster.so
+          "$PY" -m unittest discover -s tools/g3 -v
+          "$PY" tools/g1/g1_benchmark.py --output g3-out/references > g3-out/g1-replay.log 2>&1
+          "$BLENDER" -b -t 2 --factory-startup --python-exit-code 1 --python tools/g2/blender_evidence.py -- fixtures g3-out/references/A_high_mass.npz g3-out/rgb
+          "$PY" tools/g3/ci_fixture.py g3-out/references/A_high_mass.npz g3-out/rgb/0.png g3-out/input
+          "$PY" tools/g3/benchmark.py --g2 g3-out/input --model .lab-runtime/assets/pose_lite/pose_landmarker_lite.task --raster g3-out/raster.so --output g3-out/results --cases A_high_mass --quick 2>&1 | tee g3-out/registration.log
+          "$PY" -c 'import json; d=json.load(open("g3-out/results/A_high_mass/registration.json")); assert d["canonical_unchanged"]; f=d["views"]["near_articulated"]["fits"]; assert f["oracle_camera_all_anchors"]["anchor_mean_px"] < 2; assert f["oracle_camera_all_anchors"]["mask_iou"] > 0.95'
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: g3-registration-controls
+          path: |
+            g3-out/results/**/*.json
+            g3-out/registration.log
+          if-no-files-found: error
+          retention-days: 7
