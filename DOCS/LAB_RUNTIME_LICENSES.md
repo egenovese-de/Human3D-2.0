@@ -20,3 +20,7 @@ Date: 2026-11-27. Scope: lab/render only. Engineering compliance review, not leg
 
 ## Qualification gates
 OPEN: rights-holder decision and complete Blender-side script inventory; exact-version wheel notice and module review; old cache removal/expiry verification; final CI regression. Model redistribution and historical replay remain explicitly denied/deferred. Do not start LR-009 until lead approval.
+
+## Continuation evidence
+Lead authorized GPL-3.0-or-later for original Blender API scripts only. AST run 45993233249 scanned 144 tracked Python files, found 22; path histories show only egenovese-de commits, no explicit third-party copyright/copy markers found in the 20 newly marked scripts. This is provenance screening, not proof of copyright title. All 22 now carry SPDX headers; full GPL text in LICENSES/GPL-3.0-or-later.txt from SPDX license-list-data. Root Apache license unchanged. Historical pinned revisions unchanged.
+Windows run 45992550967: 24/24 locked package versions matched, 26 distributions including pip/setuptools; inventory lab/manifests/lr-008-wheel-inventory.json. usd-core declares LicenseRef-TOST-1.0. No wheel redistribution approved. Linux execution deferred. New cache namespace cc0-only-v2 prevents old cache reuse; connector cache listing/deletion unavailable, old cache deletion unverified. Owner must inspect Actions > Caches and remove old lab-windows keys. CI regression passed before final SPDX changes; final source gate pending. No LR-009 work.
