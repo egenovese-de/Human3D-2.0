@@ -1,0 +1,61 @@
+name: G1 MakeHuman geometry qualification
+on:
+  push:
+    branches: [lab/g1-makehuman]
+    paths: ['.github/workflows/g1-makehuman.yml']
+permissions:
+  contents: read
+concurrency:
+  group: g1-makehuman
+  cancel-in-progress: false
+jobs:
+  same-family:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .g1-product
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: makehumancommunity/makehuman
+          ref: 1f508f6083b2f823dab15de924b3bde72e08d77c
+          path: .g1-upstream
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - name: Provision permanent Lab Runtime
+        run: python tools/lab_runtime/bootstrap.py --group anatomical_torso --group p1_anatomy
+      - name: Validate permanent Lab Runtime
+        run: python tools/lab_runtime/verify.py --source .g1-product --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso --group p1_anatomy
+      - name: Execute the geometry-only benchmark
+        shell: bash
+        run: |
+          export U="$PWD/.g1-upstream/makehuman" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+          export PYTHONPATH="$PWD/.g1-product/src:$U:$U/lib:$U/apps:$U/core:$U/shared"
+          mkdir -p g1-out
+          .lab-runtime/venv/bin/python tools/g1/g1_benchmark.py --output g1-out 2>&1 | tee g1-out/execution.log
+      - name: Render and admit generated evidence
+        shell: bash
+        run: |
+          mkdir -p g1-admitted
+          for f in g1-out/A_*.npz; do
+            .lab-runtime/blender/blender --background --factory-startup --python-exit-code 1 --python tools/g1/g1_render.py -- "$f" g1-admitted
+          done
+          cp g1-out/{capacity,configurations,equivalence,runtime,sensitivity,G1_MODIFIER_INVENTORY}.json g1-admitted/
+          cp g1-out/execution.log .g1-upstream/LICENSE.ASSETS.md g1-admitted/
+          (cd g1-admitted && find . -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS.tmp)
+          sed -i '/SHA256SUMS.tmp$/d' g1-admitted/SHA256SUMS.tmp
+          mv g1-admitted/SHA256SUMS.tmp g1-admitted/SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: g1-makehuman-same-family
+          path: g1-admitted/
+          if-no-files-found: error
+          retention-days: 7
