@@ -26,7 +26,7 @@ def main():
         raise ValueError("stages required")
     for s in c["stages"]:
         op=s.get("operation")
-        if op not in OPERATIONS or set(s)!=(OPERATIONS[op]|{"operation","timeout"}):
+        if op not in OPERATIONS or set(s)-({"framing"} if op=="blender_roundtrip" else set())!=(OPERATIONS[op]|{"operation","timeout"}):
             raise ValueError("invalid operation or arguments")
         if type(s["timeout"]) is not int or not 1<=s["timeout"]<=1800:
             raise ValueError("invalid timeout")
@@ -50,7 +50,7 @@ def main():
     blender=root/"blender"/("blender.exe" if windows else "blender")
     env=dict(os.environ,**json.loads(LOCK.read_text())["environment"])
     env.update(PYTHONPATH=str(a.source.resolve()/"src"),OPENBLAS_NUM_THREADS="1",OMP_NUM_THREADS="1",MKL_NUM_THREADS="1",PYTHONHASHSEED="0")
-    report={"schema_version":1,"id":c["id"],"source_revision":source,"config_sha256":digest(a.config),"status":"FAIL","stages":[]}
+    report={"schema_version":1,"id":c["id"],"source_revision":source,"config_sha256":__import__("hashlib").sha256(json.dumps(c,sort_keys=True,separators=(",",":")).encode()).hexdigest(),"status":"FAIL","stages":[]}
     try:
         for i,s in enumerate(c["stages"]):
             stage=out/str(i)
@@ -59,6 +59,8 @@ def main():
                 cmd=[py,ROOT/"tools/lab_runtime/numerical_probe.py","--seed",s["seed"],"--output",stage/"numerical.json"]
             else:
                 cmd=[blender,"--background","--factory-startup","--python-exit-code","1","--python",ROOT/"tools/lab_runtime/blender_runner.py","--","--input",safe(ROOT,s["input"]),"--output",stage]
+            if s["operation"]=="blender_roundtrip" and "framing" in s:
+                cmd.extend(["--framing",safe(out,s["framing"])])
             entry={"operation":s["operation"],"status":"FAIL"}
             report["stages"].append(entry)
             start=time.monotonic()
