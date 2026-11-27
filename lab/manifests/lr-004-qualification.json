@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "qualified_revision": "3aedf506f9f68843ad436984556b441342bb0f2f",
+  "workflow_policy_revision": "5eef6d857e75649c5e20fa9fafeaa24936792ca8",
+  "policy": "lab/manifests/platform-qualification-policy.json",
+  "run_id": 45981727501,
+  "windows_job_id": 140447030606,
+  "linux": {
+    "status": "DEFERRED",
+    "job_id": 140447030088,
+    "reason": "HTTP 403 during bootstrap"
+  },
+  "historical_D": {
+    "run_id": 45978889019,
+    "windows_job": 140437460398,
+    "linux_job": 140437460768,
+    "sha256": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+  },
+  "assertion_logs": [
+    "2026-11-27T10:27:35.2751281Z D PASS a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de {\"residual_pass\": true, \"seed\": 42, \"solution\": [-0.399414571168, -1.242316740979, 0.593886886364, 0.122876678929, -0.796739432738, 0.367382768452, -0.004669407457, -1.066364292997]}\r",
+    "2026-11-27T10:27:35.6796820Z FRAMING PASS run-a [0.0, 0.0, 0.0] 1.2000000476837158 24 PNG PASS\r",
+    "2026-11-27T10:27:35.6797448Z FRAMING PASS run-b [0.0, 0.0, 0.0] 1.2000000476837158 24 PNG PASS\r"
+  ],
+  "manifests": [
+    {
+      "schema_version": 1,
+      "id": "lr-004-smoke",
+      "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+      "config_sha256": "7a315e01aa03305079cf8dede61b385012e643238491f4188979f8649188fb71",
+      "status": "PASS",
+      "stages": [
+        {
+          "operation": "numerical",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "numerical.json": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+          },
+          "seconds": 0.29700000000002547
+        },
+        {
+          "operation": "blender_roundtrip",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "scene.blend": "2109ade50143d281a3c59d7246a5bc127004ee12e95908217e1367d478b3e1b4",
+            "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+            "render_report.json": "22648ef844b539001f8bab89d6ab262ece23ad2388b8ca51cb04427ecefc13ab",
+            "clay_front.png": "7d81c1236311f783140465ea77aa830cc5b891451ced0d552ece3123ebc46eca",
+            "clay_back.png": "715b3720940eaf4f50b04d8566e94960213d5272d5aa4347e5027a07bde1ad03",
+            "clay_side.png": "7f85ab1d2a1b86b819333c0f68b9c7029f71571365a9de15186e6db2e318b992",
+            "clay_three_quarter.png": "818b5c0f1cf441c89a8f580ff8dbefeef158af1196ea588711ba442648b5b49f",
+            "textured_front.png": "ea2bd5fe3965e06e67d0396e05ab3c50b64ac74a89177551159d8d7d1c22dc5e",
+            "textured_back.png": "f2da651f86035b8cf40ebaccdd186f6bd946eb5a47e0cd6b2f50e4aad70d8d06",
+            "textured_side.png": "134680bdb1f8b54aa63042695dd2c32ba977619e549b39c4e8175bf0ecf731b7",
+            "textured_three_quarter.png": "e0650e33766164c64eb4f8108cf13e9ab93d40f4104b065b7ea65e14bd787157",
+            "wireframe_front.png": "5436ac9b0392ab8778d48687284785bfc68242b95ab7db871beb64e131ad17ab",
+            "wireframe_back.png": "e479e7ad11143443c2ca4c6abab306546f4121b03b296e677670c39fc87718d6",
+            "wireframe_side.png": "4b441fc82c00d67a44e2bfb216af56868a7a05c1e28bde0957f44f591d0a8fe4",
+            "wireframe_three_quarter.png": "aa9d3464149bfedcbabe8060bb1b408ad48140e510f60585b73a02dac078dbb5"
+          },
+          "seconds": 29.890999999999963
+        },
+        {
+          "operation": "blender_roundtrip",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "scene.blend": "0211a71b9990661675f871ea5f7705647f56f2904b9da824db80e4c2fb01dbdd",
+            "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+            "render_report.json": "068cd495ec20c3b69d1b1745a19d0a3fd5234dc4945c96c3c7ed9cfc27f77a5e",
+            "clay_front.png": "ffd8a8e4458637e0dfdd7b3223613e9965b447e6ea1b9ca18832925324cccef7",
+            "clay_back.png": "8eed45728f9192cb0eb9d81d7e00681d50f4c19645b7d92340d4775615148a27",
+            "clay_side.png": "42f0f871a0ca0221a3e39ce4e8ed83d5f7dbb01e8c757dda88fb7528ed1880c7",
+            "clay_three_quarter.png": "5248ccee068f4cf78b9eb041fc6e88894bd2c8ac44f0aa758ca2716b542835d5",
+            "textured_front.png": "656d1cc3e8b22800467dd70f1d53695788cd41030dd55dd377ae000825a73f8c",
+            "textured_back.png": "35fcbb4197bffa30ee9590d73b94700008986d234070173e44bbee7d970ccc4a",
+            "textured_side.png": "0ec0d210d989ca28d647cb36c807a5e8558a48eb07e29907dcaac1f92eeb99b0",
+            "textured_three_quarter.png": "687b90c0a651c9f5b705295f945a889e3ef5c5c31aedcd112cbf29e0a8283650",
+            "wireframe_front.png": "9862bc2f6077bf5222582a46e47d4862887b778e748cf4ceb5c9fd2d79ea5a78",
+            "wireframe_back.png": "7e73fb3e14e60642acb7f70b42aca88ba15ba0ada63b0fcbedce5a71256ff546",
+            "wireframe_side.png": "ce11af380daec8b932c1aaf3e3b687839b719f2e7e4f55ad6aafd49a46aba967",
+            "wireframe_three_quarter.png": "81584bb226e4f26168db5c91e53ede833147f788f251afa778b27b1458148295"
+          },
+          "seconds": 28.218999999999994
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "id": "lr-004-smoke",
+      "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+      "config_sha256": "7a315e01aa03305079cf8dede61b385012e643238491f4188979f8649188fb71",
+      "status": "PASS",
+      "stages": [
+        {
+          "operation": "numerical",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "numerical.json": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+          },
+          "seconds": 0.25
+        },
+        {
+          "operation": "blender_roundtrip",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "scene.blend": "c331f54d957d8ed401b1b34edf5c6eece61feef840ed72b97e082ecbdd160e75",
+            "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+            "render_report.json": "22648ef844b539001f8bab89d6ab262ece23ad2388b8ca51cb04427ecefc13ab",
+            "clay_front.png": "c68e88d0bf94de54d9d9b9fa8a9c25ca2d7ced745a985bfda8009692bdc8d0f2",
+            "clay_back.png": "96a08c6285f769c41eb14cadae0f481b3030b142e5065e7b080cab9de74de517",
+            "clay_side.png": "c2e87e06ae269c30e89ba11fc5f997a3cc7550bb50e4b740ba804a30233e6abe",
+            "clay_three_quarter.png": "92b4572318d0a63401d33bff5fb770155d3aa306f353145446183e9af5ac6dbd",
+            "textured_front.png": "c91b5d955a01e8b60238a31c6beec6dca2d95d63e964f9ab21dfc04988f5501f",
+            "textured_back.png": "066bd19f355e4daa8a8818e68f08359f4381b1fca194c8827256be2bc4ee2cac",
+            "textured_side.png": "97bb6cacd3c6a9b598b1df41f77f3ce76daec011b3198a3e1b210e9f3e560a15",
+            "textured_three_quarter.png": "e850f934fb557f343266267f16e174f9372dfd9fb9315ac8185661c15069eb34",
+            "wireframe_front.png": "6d623693e809665811e85e1bf4fc6acc6751104aeabce627c9aa1cbb6708e80a",
+            "wireframe_back.png": "b569fa77e7c609d7dd75cffd7bbbfd124ddb239d9cc3db2d706bd7346ec4925c",
+            "wireframe_side.png": "ec8a80d4c8e63149397a1444212c442fa37ffe9a0381e9a6f6aeac57f1cc76ab",
+            "wireframe_three_quarter.png": "db44d414d79e7344b5a21f681ef9372896d9bef55fb74833ebcd2040d5c2ddc5"
+          },
+          "seconds": 28.234000000000037
+        },
+        {
+          "operation": "blender_roundtrip",
+          "status": "PASS",
+          "exit_code": 0,
+          "outputs": {
+            "scene.blend": "b3dd9e590b0af64840479c92e67ad5035f8209bc1bea4b0869b32b3f64613f23",
+            "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+            "render_report.json": "f7fb2dd7e6cd8823499627c9d077a3f3d585fb744395b655b7acf7a39cee1522",
+            "clay_front.png": "1001143a3d2d2121c14a50a0784ff16c93fe636e3d68e12ccf7c914d1a4764e7",
+            "clay_back.png": "5c0b7c689a1de72c184ec0570c2873a870269d5030933245d4d047464d8decc7",
+            "clay_side.png": "578a0c3a01de123606f5eca3da1fc67ad0befff30c3f241b39a5c8a097562310",
+            "clay_three_quarter.png": "1d6ca6d6edcc846c7b14254086b682fd3f63eb3a555c54dd1ae9ffa3409cdf91",
+            "textured_front.png": "d202de78e3a764010c29fec343cc8aa78f603843d4cc70d1a263e2c3903437f1",
+            "textured_back.png": "757be5a855be6aedca7288d186cfd4b5977ab5433822c04a444951df81d0c252",
+            "textured_side.png": "7a3ed3cfaab2f9d8e161df035d5d3ee500a8bd59961fabe4b5032811f9df0245",
+            "textured_three_quarter.png": "76a757d03aeb9082d153621825d91230844b65263af8e5e4f320f68f81640f50",
+            "wireframe_front.png": "0ce8600bc202258c6093a7b74fe39dc80d94f3d43d82aeb4c7079f16f417d3e0",
+            "wireframe_back.png": "ba401865bb702e9f968afc2e8e4a8b7cde9fbec937a7318449ae52a5a6ced510",
+            "wireframe_side.png": "b686707a667729716650ee1cca90db0627fcd477ddc5e60a099c749d53d9a23b",
+            "wireframe_three_quarter.png": "201b8f4e3780c5b769e7599e72b79d69ac22e47e4181e3d960bf093f4874e44e"
+          },
+          "seconds": 28.25
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Procedural USD fixture, not human geometry; no rig or skin qualification",
+    "PNG signature and dimensions verified, not visual quality or full decoding",
+    "Binary render and blend hashes not deterministic",
+    "Windows-only workflow edit not yet independently run",
+    "Full artifact management and failure qualification remain later tasks"
+  ]
+}
