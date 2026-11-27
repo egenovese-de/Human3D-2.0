@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "unqualified",
+  "status": "manifest_validated_runtime_unqualified",
   "python": {
     "version": "3.11.9",
     "license": "https://docs.python.org/3/license.html"
@@ -91,9 +91,7 @@
     "source_revision_format": "full commit SHA",
     "historical_runtime_overrides": "explicit versioned lock required"
   },
-  "unresolved": [
-    "Final manifest validation"
-  ],
+  "unresolved": [],
   "historical_blender": [
     {
       "version": "4.3.2",
