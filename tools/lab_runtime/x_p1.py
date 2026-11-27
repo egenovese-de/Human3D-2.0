@@ -271,7 +271,38 @@ def main(runtime,out):
             independent.append({"subject":name,"method":method,"mean_mm":float(dist.mean()),"p95_mm":float(np.percentile(dist,95)),"train_vertices":len(train),"test_vertices":len(test)})
     report["independent_deformation_scope"]="procedural spatial warp, shared MakeHuman topology, oracle 3D observations; not independent human scan or image reconstruction"
     report["independent_deformation"]=independent
+    from x_p1_regions import benchmark
+    regional_fields = []
+    for stem in ("torso-scale-depth", "torso-scale-horiz", "torso-vshape"):
+        rel = next(e["path"] for e in tm["files"] if e["path"].endswith(stem + "-incr.target"))
+        regional_fields.append(dense(rel, "anatomical_torso"))
+    regional_manifest = json.loads((ROOT / "lab/manifests/makehuman-p1-anatomy.json").read_text())
+    for entry in regional_manifest["files"]:
+        rel = entry["path"]
+        if "-incr.target" in rel:
+            path = runtime / "assets/p1_anatomy" / rel
+            if digest(path) != entry["sha256"]:
+                raise ValueError(f"Invalid regional target: {rel}")
+            field = np.zeros_like(base)
+            for line in path.read_text().splitlines():
+                line = line.partition("#")[0].strip()
+                if line:
+                    i, *delta = line.split()
+                    index = int(i)
+                    if not 0 <= index < len(base):
+                        raise ValueError(f"Invalid target index: {rel}")
+                    field[index] = [float(value) for value in delta]
+            if "/l-" in rel:
+                from scipy.spatial import cKDTree
+                reflection = np.array([-1, 1, 1])
+                mirrored = cKDTree(base).query(base * reflection)[1]
+                field += field[mirrored] * reflection
+            regional_fields.append(field)
+    report["regional_experiment"] = benchmark(base, tri, basis, np.asarray(regional_fields), body, out / "regional")
+    regional = report["regional_experiment"]
+    (out / "regional" / "metrics.json").write_text(json.dumps(regional, indent=2, allow_nan=False))
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
-    print("X_P1="+json.dumps(report))
+    print("X_P1="+json.dumps({k: v for k, v in report.items() if k != "regional_experiment"}))
+    print("X_P1_REGIONAL_COMPLETE", len(regional["rows"]))
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--runtime",type=Path,required=True);p.add_argument("--output",type=Path,required=True);a=p.parse_args();main(a.runtime,a.output)

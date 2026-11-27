@@ -67,8 +67,17 @@ def stage(root, runtime, out):
     require_inventory(root / "x-p1-renders", renders)
     require_inventory(root / "x-p1-editable", editable)
 
+    regional_names = {
+        f"{kind}{i:02}_{suffix}.obj"
+        for kind, count in (("warp", 4), ("proxy", 2))
+        for i in range(1, count + 1)
+        for suffix in ("truth", "neutral", "parametric", "prototype", "hybrid")
+    } | {"metrics.json"}
+    require_inventory(pilot / "regional", regional_names)
+
     out.mkdir(parents=True, exist_ok=False)
     publish = {"x-p1/metrics.json", "x-p1-editable/editable.json"}
+    publish.update(f"x-p1/regional/{f}" for f in regional_names)
     publish.update(f"x-p1/assets/{f}" for f in assets)
     publish.update(f"x-p1-renders/{f}" for f in renders)
     for name in sorted(publish):

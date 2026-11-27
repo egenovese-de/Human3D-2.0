@@ -1,8 +1,8 @@
-name: X P1 macro capacity pilot
+name: X P1 anatomical initialization
 on:
   push:
     branches: [lab/render]
-    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', 'tools/lab_runtime/x_p1_editable.py', 'tools/lab_runtime/x_p1_admission.py', 'lab/manifests/makehuman-p1-anatomy.json', '.github/workflows/x-p1.yml']
+    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', 'tools/lab_runtime/x_p1_editable.py', 'tools/lab_runtime/x_p1_admission.py', 'tools/lab_runtime/x_p1_regions.py', 'tools/lab_runtime/runtime.lock.json', 'lab/manifests/makehuman-p1-anatomy.json', '.github/workflows/x-p1.yml']
 permissions:
   contents: read
 concurrency:
