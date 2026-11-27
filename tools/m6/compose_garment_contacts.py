@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import sys
 
-root, output = map(Path, sys.argv[1:])
+root, output, *metadata = map(Path, sys.argv[1:])
 canvas = Image.new("RGB", (1640, 980), "#101a28")
 draw = ImageDraw.Draw(canvas)
 font = Path("/usr/share/fonts/truetype/dejavu")
@@ -13,9 +13,15 @@ def text(x, y, string, size, color, bold=False):
     draw.text((x, y), string, fill=color, font=ImageFont.truetype(str(font / face), size))
 
 text(32, 30, "HUMAN3D 2.0  /  M6 COLLISION VALIDATION", 24, "#8fbbd5", True)
-text(32, 70, "Posed shorts with hidden intersections", 48, "#f4f8fb", True)
+title = "Posed shorts with hidden intersections"
+if metadata:
+    contents = json.loads(metadata[0].read_text())
+    title = contents["title"]
+text(32, 70, title, 48, "#f4f8fb", True)
 panels = [("sampled", "v0.2.0   Sampled clearance", "0 penetration samples"),
           ("triangles", "M6   Triangle intersection", "34 body–garment triangle pairs")]
+if metadata:
+    panels = contents["panels"]
 for i, (file, label, count) in enumerate(panels):
     x, y = 32 + i * 798, 194
     canvas.paste(Image.open(root / (file + ".png")).convert("RGB"), (x, y))

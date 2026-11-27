@@ -11,13 +11,25 @@ from scipy.spatial.distance import cdist
 
 from human3d.frozen_body import deform_vertices, load_project_body
 from human3d.garments import (Garment, GarmentAsset, _normals, _body_faces,
-    correct_clearance, measure_clearance, posed_garment, verify_layers)
+    correct_clearance, measure_clearance, posed_garment, verify_layers, repair_garment_contacts, _triangulate)
 from human3d.native_rig import pose_transforms, rebind_joints, skin_vertices
 from human3d.session import Session
 from human3d.usd_export import export_body
+from human3d.triangle_collision import triangle_contact_pairs
 
 
-def run(previous, clothing, output, report):
+def layer_locations(inner, outer, transforms):
+    a, b = _triangulate(inner.faces), _triangulate(outer.faces)
+    states = {"neutral": (inner.points, outer.points),
+              "posed": (posed_garment(inner, transforms), posed_garment(outer, transforms))}
+    return {state: [{"inner": i, "outer": j, "kind": kind,
+                     "outer_center_dm": other[b[j]].mean(0).tolist(),
+                     "outer_dominant_bones": sorted({max(outer.skin[k], key=outer.skin[k].get) for k in b[j]})}
+                    for i, j, kind in triangle_contact_pairs(first[a], other[b]) if kind != "touching"]
+            for state, (first, other) in states.items()}
+
+
+def run(previous, clothing, output, report, *, exact_repair=False):
     result=[]
     for identity in ("f_af01","m_la01"):
         project=next((previous/"holdout-native").glob(f"*_{identity}_bend32-1"))/"project"
@@ -95,6 +107,17 @@ def run(previous, clothing, output, report):
                     attempt["repair_peak_rest_delta_mm"]=float(100*np.linalg.norm(outer.points-original,axis=1).max())
                     attempt["post_repair_layer_min_mm"]=100*verify_layers([inner,outer],body,posed,transforms).minimum
                     attempt["post_repair_body_min_mm"]=100*measure_clearance(outer,body,posed,posed_garment(outer,transforms)).minimum
+                if exact_repair:
+                    inner,outer=(asset.garment for asset in assets)
+                    before = layer_locations(inner, outer, transforms)
+                    repaired_inner = repair_garment_contacts(inner, body, vertex, posed, transforms)
+                    repaired_outer = repair_garment_contacts(outer, body, vertex, posed, transforms, inner=repaired_inner)
+                    attempt["exact_repair"] = {
+                        "before": before, "after": layer_locations(repaired_inner, repaired_outer, transforms),
+                        "peak_outer_displacement_mm": float(np.linalg.norm(repaired_outer.points - outer.points, axis=1).max() * 100),
+                    }
+                    assets[0] = replace(assets[0], garment=repaired_inner)
+                    assets[1] = replace(assets[1], garment=repaired_outer)
                 export_body(folder/"independent.usdz",body,fit.fit,alignment,texture=Image.new("RGB",(128,128),(164,111,81)),garments=assets)
             except ValueError as error:
                 attempt["error"]=str(error)
@@ -109,4 +132,5 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser()
     for name in ("previous","clothing","output","report"):
         parser.add_argument(name,type=Path)
+    parser.add_argument("--exact-repair", action="store_true")
     run(**vars(parser.parse_args()))

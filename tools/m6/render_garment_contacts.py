@@ -1,4 +1,4 @@
-"""Render two views of the same posed Q body and shorts, showing Blender triangle contacts."""
+"""Render two views of the same posed Q body and garment, showing Blender triangle contacts."""
 import json
 from pathlib import Path
 import sys
@@ -39,11 +39,15 @@ def mesh(name, vertices, faces, color):
     return obj
 
 body = mesh("Canonical posed body", fixture["body"], fixture["body_triangles"], (.52, .59, .66))
-garment = mesh("Native posed shorts", fixture["garment"], fixture["garment_triangles"], (.13, .40, .58))
+garment = mesh("Native posed garment", fixture["garment"], fixture["garment_triangles"], (.13, .40, .58))
 trees = [BVHTree.FromPolygons(fixture[item], fixture[item + "_triangles"], all_triangles=True)
          for item in ("body", "garment")]
 pairs = trees[0].overlap(trees[1])
-assert len(pairs) == 34, pairs
+expected = fixture.get("expected_blender_pairs", 34)
+if expected is not None:
+    assert len(pairs) == expected, pairs
+if not pairs:
+    raise ValueError("No contacts to visualize")
 
 highlight = bpy.data.materials.new("Triangles participating in intersection")
 highlight.diffuse_color = (.95, .20, .065, 1)
