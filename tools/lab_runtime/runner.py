@@ -9,9 +9,10 @@ import subprocess
 import sys
 import time
 from bootstrap import ROOT, LOCK, safe, digest
+from historical_inputs import verify_holdout
 
 HISTORICAL={"q_evidence_boundaries":"tools/q/finalization/evidence_boundaries.py","m6_bind_control":"tools/lab_runtime/m6_bind_control.py"}
-OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}}
+OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}, "q_validate_holdout":{"expected"}}
 
 def main():
     p=argparse.ArgumentParser()
@@ -19,6 +20,7 @@ def main():
     p.add_argument("--source",required=True,type=Path)
     p.add_argument("--runtime",type=Path,default=ROOT/".lab-runtime")
     p.add_argument("--output",required=True,type=Path)
+    p.add_argument("--historical-workspace",type=Path)
     a=p.parse_args()
     c=json.loads(a.config.read_text())
     if set(c)!={"schema_version","id","source_revision","stages"} or c["schema_version"]!=1 or not re.fullmatch(r"[a-zA-Z0-9_-]+",c["id"]) or not re.fullmatch(r"[0-9a-f]{40}",c["source_revision"]):
@@ -58,6 +60,12 @@ def main():
             stage.mkdir()
             if s["operation"]=="numerical":
                 cmd=[py,ROOT/"tools/lab_runtime/numerical_probe.py","--seed",s["seed"],"--output",stage/"numerical.json"]
+            elif s["operation"]=="q_validate_holdout":
+                if a.historical_workspace is None:
+                    raise ValueError("historical workspace required")
+                provenance=verify_holdout(a.historical_workspace.resolve())
+                (stage/"input_manifest.json").write_text(json.dumps(provenance,indent=2))
+                cmd=[py,ROOT/"tools/q/validate.py",a.historical_workspace.resolve()/"holdout",stage/"metrics.json"]
             elif s["operation"] in HISTORICAL:
                 cmd=[py,ROOT/HISTORICAL[s["operation"]],stage/"metrics.json"]
             else:
