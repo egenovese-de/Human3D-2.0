@@ -185,6 +185,33 @@ def main(runtime,out):
             row["repair_mean_displacement_mm"]=float(np.linalg.norm((repaired-v)[np.unique(tri)],axis=1).mean()*100)
         diagnostics.append(row)
     report["distortion_diagnostics"]=diagnostics
+    repairs=[]
+    for row in diagnostics:
+        if not row["outlier_count"]: continue
+        p=out/row["mesh"]
+        v=np.asarray([[float(x) for x in line.split()[1:]] for line in p.read_text().splitlines() if line.startswith("v ")])
+        seed=set(i for item in row["outliers"] for i in item["vertices"])
+        result={"mesh":p.name,"status":"FAIL"}
+        for rings in range(5):
+            ids=np.array(sorted(seed))
+            for alpha in np.linspace(.05,1,20):
+                fixed=v.copy();fixed[ids]+=alpha*(base[ids]-v[ids])
+                try:
+                    joints=validate_rebind(body,fixed)
+                    t=pose_transforms(rig,joints,Alignment(Camera(0,200/np.ptp(base[:,1]),0j,1),0,{"lowerarm01.L":.15}))
+                    posed=np.asarray(skin_vertices(fixed,rig["skin"],t))
+                    validate_pose(body,fixed,posed)
+                    if np.max(np.abs(posed-fixed))<=1e-6: raise ValueError("pose_no_effect")
+                except ValueError: continue
+                shift=np.linalg.norm(fixed-v,axis=1)*100
+                result.update(status="PASS",rings=rings,alpha=float(alpha),changed_vertices=int(np.count_nonzero(shift>1e-8)),mean_shift_mm=float(shift[np.unique(tri)].mean()),max_shift_mm=float(shift.max()),pose_delta=float(np.max(np.abs(posed-fixed))))
+                obj(p.stem+"_local_repair",fixed)
+                break
+            if result["status"]=="PASS": break
+            previous=seed.copy()
+            seed.update(int(i) for face in tri if any(int(j) in previous for j in face) for i in face)
+        repairs.append(result)
+    report["local_repairs"]=repairs
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":
