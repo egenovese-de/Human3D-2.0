@@ -62,6 +62,17 @@
       "manifest": "DOCS/q/manifest.json",
       "kind": "historical_inventory",
       "additional_manifest": "DOCS/q/followup/fixture-index.json"
+    },
+    "anatomical_torso": {
+      "manifest": "lab/manifests/makehuman-anatomical-torso.json",
+      "required": false,
+      "cache_allowed": true
+    },
+    "historical_fixtures": {
+      "manifest": "lab/manifests/historical-fixtures.json",
+      "required": false,
+      "cache_allowed": false,
+      "kind": "historical_inventory"
     }
   },
   "environment": {
@@ -81,9 +92,7 @@
     "historical_runtime_overrides": "explicit versioned lock required"
   },
   "unresolved": [
-    "Additional anatomical asset group",
-    "Final manifest validation",
-    "M6 fixture inventory"
+    "Final manifest validation"
   ],
   "historical_blender": [
     {
