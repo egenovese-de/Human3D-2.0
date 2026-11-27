@@ -2,7 +2,7 @@
   "schema_version": 1,
   "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
   "blobs": {
-    "tools/lab_runtime/native_control.py": "68ad517abe00fe394a91762db3eafa7231e71f4a",
+    "tools/lab_runtime/native_control.py": "61f9720cc1fc36a0c14830720c2fa2a0fdf48072",
     "tools/lab_runtime/blender_runner.py": "6497de34ba4a635510699d645a1c482d0c802186",
     "lab/experiments/lr-009-native.json": "27afca0f2011070f98110641cea72d5e3df9dbec",
     "DOCS/manifests/makehuman-v1.3.0.json": "44f6940648b4f50e1b88484aba1aea974bf00584",
