@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Inspect, deform, save, reopen, edit and remove garment objects with Blender USD."""
 import argparse
 import hashlib
