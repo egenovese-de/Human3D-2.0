@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render interleaved calibrated Blender cameras for a focused sixteen-view repeat."""
 import hashlib
 import json
