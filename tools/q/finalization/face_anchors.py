@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Ray-cast manually chosen image points onto independent facial surfaces."""
 import argparse
 from hashlib import sha256
