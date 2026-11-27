@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Measure collision at fixed garment parameters and validate virtual cap candidates."""
 import argparse
 from collections import Counter, defaultdict
