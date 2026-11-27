@@ -1,0 +1,28 @@
+name: Lab bootstrap qualification
+on:
+  push:
+    branches: [lab/render]
+    paths:
+      - tools/lab_runtime/bootstrap.py
+      - .github/workflows/lab-bootstrap-qualification.yml
+permissions:
+  contents: read
+jobs:
+  bootstrap:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - name: Clean bootstrap
+        run: python tools/lab_runtime/bootstrap.py --group morph02 --group anatomical_torso
+      - name: Repeat bootstrap
+        run: python tools/lab_runtime/bootstrap.py --group morph02 --group anatomical_torso
+      - name: Assert reuse
+        run: python -c "import json; r=json.load(open('.lab-runtime/bootstrap_report.json')); assert r['status']=='success' and r['venv']==r['archive']==r['blender']=='reused' and len(r['assets'])==374 and all(a['state']=='reused' for a in r['assets']); print('REUSE PASS',len(r['assets']))"
