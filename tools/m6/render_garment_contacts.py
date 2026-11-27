@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render two views of the same posed Q body and garment, showing Blender triangle contacts."""
 import json
 from pathlib import Path
