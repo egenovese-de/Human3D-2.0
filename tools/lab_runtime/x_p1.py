@@ -119,6 +119,20 @@ def main(runtime,out):
             expanded.append({"subject":name,"method":method,"coefficients":coeff.tolist(),**metrics(v,truth)})
     report["expanded_scope"]="same-family additive adult weight/muscle and torso oracle; not upstream modifier equivalence"
     report["expanded"]=expanded
+    # Validate all generated body meshes against the neutral connectivity.
+    tri=np.asarray([[f[0],f[k],f[k+1]] for f in body_faces for k in range(1,len(f)-1)])
+    def area(v):
+        a,b,c=v[tri[:,0]],v[tri[:,1]],v[tri[:,2]]
+        return np.linalg.norm(np.cross(b-a,c-a),axis=1)/2
+    reference=area(base); stable=reference>1e-10
+    integrity=[]
+    for p in sorted(out.glob("*.obj")):
+        v=np.asarray([[float(x) for x in line.split()[1:]] for line in p.read_text().splitlines() if line.startswith("v ")])
+        a=area(v); ratio=a[stable]/reference[stable]
+        finite=bool(np.isfinite(v).all())
+        integrity.append({"mesh":p.name,"finite":finite,"vertices":len(v),"triangles":len(tri),"collapsed_stable_faces":int(np.sum(a[stable]<=1e-10)),"area_ratio_min":float(ratio.min()),"area_ratio_max":float(ratio.max()),"sha256":digest(p)})
+        if not finite or len(v)!=len(base): raise ValueError("invalid mesh")
+    report["integrity"]=integrity
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":

@@ -2,7 +2,7 @@ name: X P1 macro capacity pilot
 on:
   push:
     branches: [lab/render]
-    paths: ['tools/lab_runtime/x_p1.py', '.github/workflows/x-p1.yml']
+    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', '.github/workflows/x-p1.yml']
 permissions:
   contents: read
 concurrency:
@@ -39,9 +39,19 @@ jobs:
           $env:PYTHONPATH = (Resolve-Path .lab-source/src).Path
           .lab-runtime/venv/Scripts/python.exe tools/lab_runtime/x_p1.py --runtime .lab-runtime --output lab-output/x-p1
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Render native geometry in Blender
+        run: |
+          .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p1_render.py -- lab-output/x-p1 lab-output/x-p1-renders
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Publish numerical evidence only
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: x-p1-metrics
           path: lab-output/x-p1/metrics.json
+          if-no-files-found: error
+      - name: Publish CC0-derived comparison renders
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: x-p1-renders
+          path: lab-output/x-p1-renders/
           if-no-files-found: error
