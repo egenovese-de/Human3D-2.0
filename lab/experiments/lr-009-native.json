@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "lr-009-native",
+  "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "stages": [
+    {
+      "operation": "native_control",
+      "timeout": 1200,
+      "expected": [
+        "metrics.json",
+        "oracle_mask.png",
+        "human.usdz"
+      ]
+    },
+    {
+      "operation": "blender_generated",
+      "input": "0/human.usdz",
+      "timeout": 600,
+      "expected": [
+        "scene.blend",
+        "blender_metrics.json",
+        "render_report.json",
+        "clay_front.png",
+        "clay_back.png",
+        "clay_side.png",
+        "clay_three_quarter.png",
+        "textured_front.png",
+        "textured_back.png",
+        "textured_side.png",
+        "textured_three_quarter.png",
+        "wireframe_front.png",
+        "wireframe_back.png",
+        "wireframe_side.png",
+        "wireframe_three_quarter.png"
+      ]
+    }
+  ]
+}
