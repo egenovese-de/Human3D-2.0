@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "upstream": "https://github.com/makehumancommunity/makehuman",
+  "revision": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "license": "CC0-1.0",
+  "license_path": "LICENSE.ASSETS.md",
+  "evidence": {
+    "run_id": 45976696739,
+    "job_id": 140430086590
+  },
+  "files": [
+    {
+      "path": "makehuman/data/targets/torso/torso-scale-depth-decr.target",
+      "bytes": 42626,
+      "sha256": "1f14e272b398ea5845957dc92a8ccbcde103b2a2fd6fca4acd14a824a9f76b2d"
+    },
+    {
+      "path": "makehuman/data/targets/torso/torso-scale-depth-incr.target",
+      "bytes": 40255,
+      "sha256": "095c3fd83173dc91c20d7ed06655ff67fe823795fb7f2df2c5560845f661a0dc"
+    },
+    {
+      "path": "makehuman/data/targets/torso/torso-scale-horiz-decr.target",
+      "bytes": 116893,
+      "sha256": "8377c248eec6838292f55287b6a399398f7cb88e6d7d0af6781d8e30298e0d6f"
+    },
+    {
+      "path": "makehuman/data/targets/torso/torso-scale-horiz-incr.target",
+      "bytes": 107221,
+      "sha256": "73f278c2be9c6eebead7ac4cd206879810a9e0202519493af0ed8b2e3842fbb5"
+    },
+    {
+      "path": "makehuman/data/targets/torso/torso-vshape-decr.target",
+      "bytes": 96183,
+      "sha256": "f9da55d42731ef5fcfeaa9a473d84044cd7d19076c67dab5139cf001e85b09b2"
+    },
+    {
+      "path": "makehuman/data/targets/torso/torso-vshape-incr.target",
+      "bytes": 95207,
+      "sha256": "9d0ac9eec39a14d51d7db50e48292b3db67aed9b91e654b379f4dbe348644684"
+    }
+  ]
+}
