@@ -12,7 +12,7 @@ from bootstrap import ROOT, LOCK, safe, digest
 from historical_inputs import verify_holdout, verify_rig
 
 HISTORICAL={"q_evidence_boundaries":"tools/q/finalization/evidence_boundaries.py","m6_bind_control":"tools/lab_runtime/m6_bind_control.py"}
-OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}, "q_validate_holdout":{"expected"}, "m6_audit_source_rig":{"expected"}}
+OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}, "q_validate_holdout":{"expected"}, "m6_audit_source_rig":{"expected"}, "m6_audit_native":{"expected"}}
 
 def main():
     p=argparse.ArgumentParser()
@@ -73,6 +73,10 @@ def main():
                 provenance=verify_rig(workspace)
                 (stage/"input_manifest.json").write_text(json.dumps(provenance,indent=2))
                 cmd=[py,ROOT/"tools/lab_runtime/m6_source_replay.py",workspace/"rig-fixtures",stage/"metrics.json"]
+            elif s["operation"]=="m6_audit_native":
+                if a.historical_workspace is None:
+                    raise ValueError("historical workspace required")
+                cmd=[py,ROOT/"tools/lab_runtime/m6_native_replay.py",a.historical_workspace.resolve(),stage/"metrics.json"]
             elif s["operation"] in HISTORICAL:
                 cmd=[py,ROOT/HISTORICAL[s["operation"]],stage/"metrics.json"]
             else:
