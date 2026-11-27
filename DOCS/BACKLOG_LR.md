@@ -5,7 +5,7 @@
 | LR-003 | Implement runtime verification | DONE |
 | LR-004 | Implement shared Python and Blender runners | DONE |
 | LR-005 | Integrate existing Q and M6 scripts | DONE |
-| LR-006 | Implement GitHub Actions experiment workflow and caching | TODO |
+| LR-006 | Implement GitHub Actions experiment workflow and caching | IN PROGRESS |
 | LR-007 | Implement experiment artifact management | TODO |
 | LR-008 | Verify licensing and distribution boundaries | TODO |
 | LR-009 | Execute native reconstruction and Blender qualification tests | TODO |
