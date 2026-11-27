@@ -59,7 +59,24 @@ def main(runtime,out):
         for method,v in candidates.items():
             obj(name+"_"+method,v)
             rows.append({"subject":name,"method":method,**metrics(v,truth)})
-    report={"scope":"same-family oracle macro endpoint interpolation; not full MakeHuman modifier semantics; no independent geometry","source_revision":"e0ae4eae57347466b5757bbcdaaa7194bdd31c94","asset_revision":manifest["revision"],"subjects":subjects,"rows":rows,"vertices":len(base),"body_vertices":len(ids),"asset_hashes":{k:v["sha256"] for k,v in entries.items() if k.endswith("base.obj") or any(k.endswith(f"{p}-{s}-{a}.target") for p in ("african","asian","caucasian") for s in ("female","male") for a in ("young","old"))}}
+    # Regional refinement on held-out oracle residuals: identical basis and
+    # bounded coefficient updates for every initialization. Not image fitting.
+    from scipy.optimize import lsq_linear
+    design=basis[:,ids,:].reshape(4,-1).T
+    refinement=[]
+    for name,weights in subjects:
+        weights=np.asarray(weights)
+        truth=base+np.tensordot(weights,basis,axes=1)
+        proto=np.eye(4)[np.argmax(weights)]
+        coarse=np.round(weights*4)/4; coarse/=coarse.sum()
+        for method,start in {"neutral":np.zeros(4),"parametric":coarse,"prototype":proto,"hybrid":(proto+coarse)/2}.items():
+            initial=base+np.tensordot(start,basis,axes=1)
+            residual=(truth-initial)[ids].reshape(-1)
+            result=lsq_linear(design,residual,bounds=(-.125,.125))
+            final=base+np.tensordot(start+result.x,basis,axes=1)
+            obj(name+"_"+method+"_refined",final)
+            refinement.append({"subject":name,"method":method,"delta":result.x.tolist(),"solver_success":bool(result.success),**metrics(final,truth)})
+    report={"refinement_scope":"bounded macro basis oracle residual; not regional or image fitting","refinement":refinement,"scope":"same-family oracle macro endpoint interpolation; not full MakeHuman modifier semantics; no independent geometry","source_revision":"e0ae4eae57347466b5757bbcdaaa7194bdd31c94","asset_revision":manifest["revision"],"subjects":subjects,"rows":rows,"vertices":len(base),"body_vertices":len(ids),"asset_hashes":{k:v["sha256"] for k,v in entries.items() if k.endswith("base.obj") or any(k.endswith(f"{p}-{s}-{a}.target") for p in ("african","asian","caucasian") for s in ("female","male") for a in ("young","old"))}}
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":

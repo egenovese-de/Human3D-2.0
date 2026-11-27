@@ -1,0 +1,176 @@
+{
+  "scope": "same-family oracle macro endpoint interpolation; not full MakeHuman modifier semantics; no independent geometry",
+  "source_revision": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+  "asset_revision": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "subjects": [
+    [
+      "dev01",
+      [
+        0.8,
+        0.1,
+        0.1,
+        0
+      ]
+    ],
+    [
+      "dev02",
+      [
+        0.1,
+        0,
+        0.8,
+        0.1
+      ]
+    ],
+    [
+      "hold01",
+      [
+        0.15,
+        0.65,
+        0.05,
+        0.15
+      ]
+    ],
+    [
+      "hold02",
+      [
+        0.05,
+        0.15,
+        0.25,
+        0.55
+      ]
+    ]
+  ],
+  "rows": [
+    {
+      "subject": "dev01",
+      "method": "neutral",
+      "mean_mm": 57.894307252979225,
+      "p95_mm": 84.20812404724116,
+      "finite": true
+    },
+    {
+      "subject": "dev01",
+      "method": "parametric",
+      "mean_mm": 12.461510305021932,
+      "p95_mm": 20.101348766245053,
+      "finite": true
+    },
+    {
+      "subject": "dev01",
+      "method": "prototype",
+      "mean_mm": 12.461510305021932,
+      "p95_mm": 20.101348766245053,
+      "finite": true
+    },
+    {
+      "subject": "dev01",
+      "method": "hybrid",
+      "mean_mm": 12.461510305021932,
+      "p95_mm": 20.101348766245053,
+      "finite": true
+    },
+    {
+      "subject": "dev02",
+      "method": "neutral",
+      "mean_mm": 51.090842064576094,
+      "p95_mm": 69.25891591220102,
+      "finite": true
+    },
+    {
+      "subject": "dev02",
+      "method": "parametric",
+      "mean_mm": 13.6205353059075,
+      "p95_mm": 17.543141426526415,
+      "finite": true
+    },
+    {
+      "subject": "dev02",
+      "method": "prototype",
+      "mean_mm": 13.6205353059075,
+      "p95_mm": 17.543141426526415,
+      "finite": true
+    },
+    {
+      "subject": "dev02",
+      "method": "hybrid",
+      "mean_mm": 13.6205353059075,
+      "p95_mm": 17.543141426526415,
+      "finite": true
+    },
+    {
+      "subject": "hold01",
+      "method": "neutral",
+      "mean_mm": 51.63313303652558,
+      "p95_mm": 67.40289371054892,
+      "finite": true
+    },
+    {
+      "subject": "hold01",
+      "method": "parametric",
+      "mean_mm": 3.059982374732282,
+      "p95_mm": 6.379342747406544,
+      "finite": true
+    },
+    {
+      "subject": "hold01",
+      "method": "prototype",
+      "mean_mm": 21.509147887249508,
+      "p95_mm": 30.70611074426823,
+      "finite": true
+    },
+    {
+      "subject": "hold01",
+      "method": "hybrid",
+      "mean_mm": 10.254422694444479,
+      "p95_mm": 15.349941779590319,
+      "finite": true
+    },
+    {
+      "subject": "hold02",
+      "method": "neutral",
+      "mean_mm": 32.58913416257872,
+      "p95_mm": 47.71353056450569,
+      "finite": true
+    },
+    {
+      "subject": "hold02",
+      "method": "parametric",
+      "mean_mm": 5.735106408046423,
+      "p95_mm": 7.728232441285395,
+      "finite": true
+    },
+    {
+      "subject": "hold02",
+      "method": "prototype",
+      "mean_mm": 18.75196450338575,
+      "p95_mm": 32.116958130689554,
+      "finite": true
+    },
+    {
+      "subject": "hold02",
+      "method": "hybrid",
+      "mean_mm": 6.824524174037148,
+      "p95_mm": 13.330611336735881,
+      "finite": true
+    }
+  ],
+  "vertices": 19158,
+  "body_vertices": 13380,
+  "asset_hashes": {
+    "data/3dobjs/base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "data/targets/macrodetails/african-female-old.target": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+    "data/targets/macrodetails/african-female-young.target": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+    "data/targets/macrodetails/african-male-old.target": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c",
+    "data/targets/macrodetails/african-male-young.target": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+    "data/targets/macrodetails/asian-female-old.target": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+    "data/targets/macrodetails/asian-female-young.target": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+    "data/targets/macrodetails/asian-male-old.target": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3",
+    "data/targets/macrodetails/asian-male-young.target": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+    "data/targets/macrodetails/caucasian-female-old.target": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+    "data/targets/macrodetails/caucasian-female-young.target": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+    "data/targets/macrodetails/caucasian-male-old.target": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d",
+    "data/targets/macrodetails/caucasian-male-young.target": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5"
+  },
+  "run_id": 45998369687,
+  "lab_revision": "ef8d4b3ce92552fee627aea0e37336e7c7ede51f"
+}
