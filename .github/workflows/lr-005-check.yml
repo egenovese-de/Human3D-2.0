@@ -1,0 +1,38 @@
+name: LR-005 historical integration
+on:
+  push:
+    branches: [lab/render]
+    paths:
+      - .github/workflows/lr-005-check.yml
+      - tools/lab_runtime/m6_bind_control.py
+      - tools/lab_runtime/runner.py
+      - lab/experiments/lr-005-*.json
+permissions:
+  contents: read
+jobs:
+  historical:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 480195f05fb2d1ed6c71dceabf4ba54b8bed69db
+          path: .lab-source-q
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .lab-source-m6
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - run: python tools/lab_runtime/bootstrap.py
+      - run: python tools/lab_runtime/runner.py --config lab/experiments/lr-005-q-boundaries.json --source .lab-source-q --output lab-output/q
+      - run: python tools/lab_runtime/runner.py --config lab/experiments/lr-005-m6-bind.json --source .lab-source-m6 --output lab-output/m6
+      - name: Assert nonempty historical controls
+        run: python -c "import json; from pathlib import Path; q=json.loads(Path('lab-output/q/0/metrics.json').read_text()); m=json.loads(Path('lab-output/m6/0/metrics.json').read_text()); assert len(q['binding'])==9 and len(q['visibility'])==6 and len(q['yaw'])==12 and len(m['cases'])==2; print('Q PASS',json.dumps(q)); print('M6 PASS',json.dumps(m))"
+      - name: Diagnostics
+        if: always()
+        run: python -c "from pathlib import Path; [(print(p),print(p.read_text(errors='replace'))) for p in Path('lab-output').rglob('execution.log')]"
