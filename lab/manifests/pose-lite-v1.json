@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "kind": "download",
+  "files": [
+    {
+      "path": "pose_landmarker_lite.task",
+      "url": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    }
+  ],
+  "provenance": "src/human3d/vision.py MODEL_SHA256; DOCS/Q_REPRODUCIBILITY_MANIFEST.md",
+  "license_review": "pending; no redistribution or shared cache until reviewed"
+}
