@@ -20,6 +20,7 @@ def main():
     p.add_argument('references',type=Path)
     p.add_argument('model',type=Path)
     p.add_argument('out',type=Path)
+    p.add_argument('--cases',nargs='*')
     a = p.parse_args()
     a.out.mkdir(exist_ok=True,parents=True)
     data = Path(os.environ['U'])/'data'
@@ -34,6 +35,8 @@ def main():
         detector = PoseLandmarker(a.model,segmentation=True)
         for case_path in sorted(a.inputs.glob('[AB]_*')):
             case = case_path.name
+            if a.cases and case not in a.cases:
+                continue
             blender_inputs = [case_path/(str(angle)+'.png') for angle in (0,90,180,45)]
             paths = [root/(case+'-'+file.name) for file in blender_inputs]
             for source,target in zip(blender_inputs,paths):
@@ -64,6 +67,12 @@ def main():
                 ref = dict(np.load(a.references/(case+'.npz')))
                 np.savez_compressed(a.out/(case+'.npz'),reference=ref['reference'],
                                     reference_faces=ref['reference_faces'],faces=ref['faces'],M6_product=vertices)
+                if len(photos)>1:
+                    previous = s.store.load().shared_fit_digest
+                    s.select_target(photos[-1].id)
+                    restored = s.current_shared_fit()
+                    row['target_switch_preserved_fit'] = bool(restored and
+                        s.store.load().shared_fit_digest == previous and restored.fit.controls == result.fit.controls)
                 row.update(status='PASS',controls=result.fit.controls,scores=result.scores,
                            aligned_views=len(result.alignments),fit_digest=s.store.load().shared_fit_digest)
             except (ValueError,RuntimeError) as exc:

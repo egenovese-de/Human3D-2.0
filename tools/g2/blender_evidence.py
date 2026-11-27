@@ -11,7 +11,7 @@ from projection import Camera
 
 ANGLES = [0, 90, 180, 45]
 DISPLAY = {"reference": (0.49, .52, .55), "E0": (.46, .55, .68),
-           "E1": (.38, .53, .63), "E4": (.39, .63, .57),
+           "M6_product": (.46, .55, .68), "E1": (.38, .53, .63), "best": (.39, .63, .57),
            "E9": (.63, .52, .39), "E10": (.56, .53, .65)}
 
 
@@ -90,19 +90,35 @@ def main():
                        args.output/'perspective.png')
             return
         scene, camera = configure(400)
+        scene.render.fps = 24
         objects = {}
         for variant, color in DISPLAY.items():
             if variant not in arrays.files:
                 continue
-            objects[variant] = mesh(variant, arrays[variant], triangles if variant=='reference' else arrays['faces'], color)
+            obj = mesh(variant, arrays[variant], triangles if variant=='reference' else arrays['faces'], color)
+            objects[variant] = obj
+            if 'uv_loops' in arrays.files and len(arrays['uv_loops']) == len(obj.data.loops):
+                uv = obj.data.uv_layers.new(name='MakeHuman UV')
+                uv.data.foreach_set('uv', arrays['uv_loops'].astype(np.float32).ravel())
         for variant, active in objects.items():
             for obj in objects.values():
                 obj.hide_render = obj != active
             for angle in ANGLES:
                 render(scene, camera, Camera(angle), args.output/f'{variant}-{angle}.png')
-            if variant in ('reference','E0','E1','E4','E9','E10'):
+            if variant in ('reference','E0','M6_product','E1','best','E9','E10'):
                 render(scene,camera,Camera(45,span=85,center_y=32),args.output/f'{variant}-detail.png')
         if args.input.stem.startswith('A_'):
+            if 'surface_residual_mm' in arrays.files and 'best' in objects:
+                obj = objects['best']
+                heat = obj.data.color_attributes.new(name='Residual mm',type='FLOAT_COLOR',domain='POINT')
+                u = np.clip(arrays['surface_residual_mm']/30,0,1)
+                colors = np.column_stack([.15+.82*u,.7-.52*u,.67-.50*u,np.ones_like(u)])
+                heat.data.foreach_set('color',colors.astype(np.float32).ravel())
+                for other in objects.values():
+                    other.hide_render = other != obj
+                scene.display.shading.color_type = 'VERTEX'
+                render(scene,camera,Camera(45),args.output/'best-residual.png')
+                scene.display.shading.color_type = 'OBJECT'
             for i,obj in enumerate(objects.values()):
                 obj.hide_render = False
                 obj.location.x = i*2

@@ -80,11 +80,13 @@ def hull_test(ref, ref_faces, raster, step, out):
         cases[str(count)] = volume_metrics(result,truth,step)
         cases[str(count)].update(seconds=time.perf_counter()-start,angles=np.asarray(angles).tolist(),
                                  grid_points=len(cloud),cloud_bytes=cloud.nbytes)
-        if count in (2,8,30):
+        if count == 4:
+            four_view_hull = result.copy()
+        if count in (2,4,8,30):
             np.savez_compressed(out/(f'hull-{step}-{count}.npz'),hull=result,oracle_occupancy=truth,
                                 axis_x=axes[0],axis_y=axes[1],axis_z=axes[2])
     # Points outside a calibrated 3D silhouette intersection provide an optional fit penalty.
-    hull_distance = distance_transform_edt(~accepted.reshape(truth.shape))*step
+    hull_distance = distance_transform_edt(~four_view_hull)*step
     return cases, (axes,hull_distance)
 
 

@@ -1,0 +1,2032 @@
+{
+  "schema_version": 1,
+  "scope": "local finite difference at G1 neutral; no physical or latent identifiability guarantee",
+  "classification_method": "RMS contour pixel response per unit, bins 0.5/2/5 plus correlated latent macro downgrade; lab triage only",
+  "fields": [
+    {
+      "registry_key": "macrodetails/Gender",
+      "region": "macrodetails",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "90",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 12.822048818682347,
+          "profiles": 26.03621737857892,
+          "depth": 4.588241100311279
+        },
+        "90": {
+          "contour": 13.948048593277075,
+          "profiles": 12.925451933774216,
+          "depth": 6.350159168243408
+        },
+        "180": {
+          "contour": 12.822048818682347,
+          "profiles": 26.03621737857892,
+          "depth": 3.9702305793762207
+        },
+        "45": {
+          "contour": 14.241901386186381,
+          "profiles": 18.475555576116076,
+          "depth": 4.313260555267334
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "macrodetails-height/Height",
+        "torso/torso-scale-vert-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "macrodetails/Age",
+      "region": "macrodetails",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 8.220616418884124,
+          "profiles": 15.811388300841884,
+          "depth": 2.016169548034668
+        },
+        "90": {
+          "contour": 14.780240076222377,
+          "profiles": 9.557518184453205,
+          "depth": 19.4597110748291
+        },
+        "180": {
+          "contour": 8.220616418884124,
+          "profiles": 15.811388300841884,
+          "depth": 2.2423648834228516
+        },
+        "45": {
+          "contour": 11.548576211765797,
+          "profiles": 13.693063937629141,
+          "depth": 2.101405143737793
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.5,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "macrodetails-universal/Weight",
+      "region": "macrodetails-universal",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 4.241597984223974,
+          "profiles": 7.7521709118255275,
+          "depth": 1.5707570314407349
+        },
+        "90": {
+          "contour": 5.727471227953331,
+          "profiles": 4.246038878042233,
+          "depth": 10.529831886291504
+        },
+        "180": {
+          "contour": 4.241597984223974,
+          "profiles": 7.7521709118255275,
+          "depth": 0.9558886885643005
+        },
+        "45": {
+          "contour": 3.5043174205066925,
+          "profiles": 6.104065480039952,
+          "depth": 1.7896127700805664
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "macrodetails-universal/Muscle",
+      "region": "macrodetails-universal",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 2.922309311489606,
+          "profiles": 5.696658939845624,
+          "depth": 1.4842513799667358
+        },
+        "90": {
+          "contour": 3.9503553484626375,
+          "profiles": 4.246038878042233,
+          "depth": 1.2878961563110352
+        },
+        "180": {
+          "contour": 2.922309311489606,
+          "profiles": 5.696658939845624,
+          "depth": 1.4401129484176636
+        },
+        "45": {
+          "contour": 2.7996329940683125,
+          "profiles": 5.370861555295746,
+          "depth": 1.448340892791748
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "macrodetails-height/Height",
+      "region": "macrodetails-height",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "180",
+        "45",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 69.92138514080533,
+          "profiles": 218.7486263693135,
+          "depth": 33.79939270019531
+        },
+        "90": {
+          "contour": 53.994609465483194,
+          "profiles": 76.381507024833,
+          "depth": 100.41218566894531
+        },
+        "180": {
+          "contour": 69.92138514080533,
+          "profiles": 218.7486263693135,
+          "depth": 26.28975486755371
+        },
+        "45": {
+          "contour": 62.544446256862656,
+          "profiles": 155.51171734235726,
+          "depth": 29.820926666259766
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "macrodetails/Gender",
+        "torso/torso-scale-vert-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "macrodetails-proportions/BodyProportions",
+      "region": "macrodetails-proportions",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 4.852665881849312,
+          "profiles": 9.620191106369814,
+          "depth": 0.826646089553833
+        },
+        "90": {
+          "contour": 3.5931129107097615,
+          "profiles": 2.685430777647873,
+          "depth": 2.5112836360931396
+        },
+        "180": {
+          "contour": 4.852665881849312,
+          "profiles": 9.620191106369814,
+          "depth": 1.0925524234771729
+        },
+        "45": {
+          "contour": 5.048495183878856,
+          "profiles": 7.674257668936503,
+          "depth": 1.0353686809539795
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "torso/torso-vshape-decr|incr",
+        "torso/torso-scale-horiz-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "breast/BreastSize",
+      "region": "breast",
+      "local_classification": "not identifiable from tested evidence",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "90",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.7253735065460205
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 1.0963225241337864,
+          "depth": 0.0
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "45": {
+          "contour": 0.2081081090926677,
+          "profiles": 0.0,
+          "depth": 0.5401768684387207
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "breast/BreastFirmness",
+      "region": "breast",
+      "local_classification": "not identifiable from tested evidence",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "90",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.039400387555360794
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "45": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.009963932447135448
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        0.04,
+        0.96
+      ]
+    },
+    {
+      "registry_key": "torso/torso-scale-depth-decr|incr",
+      "region": "torso",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.0314438343048096
+        },
+        "90": {
+          "contour": 3.8372506296410904,
+          "profiles": 3.466876226407682,
+          "depth": 1.8411418199539185
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.200020432472229
+        },
+        "45": {
+          "contour": 1.251111190954114,
+          "profiles": 1.0963225241337864,
+          "depth": 0.9594376087188721
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "torso/torso-scale-horiz-decr|incr",
+      "region": "torso",
+      "local_classification": "strongly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 4.931489425229818,
+          "profiles": 7.354355067681901,
+          "depth": 0.3721555173397064
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.7172714471817017
+        },
+        "180": {
+          "contour": 4.931489425229818,
+          "profiles": 7.354355067681901,
+          "depth": 0.36572158336639404
+        },
+        "45": {
+          "contour": 5.134388307276926,
+          "profiles": 6.485931520784636,
+          "depth": 0.9561222195625305
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "torso/torso-vshape-decr|incr",
+        "macrodetails-proportions/BodyProportions",
+        "measure/measure-shoulder-dist-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "torso/torso-scale-vert-decr|incr",
+      "region": "torso",
+      "local_classification": "strongly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "90",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 6.920904079998464,
+          "profiles": 15.543054347892452,
+          "depth": 2.283808708190918
+        },
+        "90": {
+          "contour": 7.541402087578059,
+          "profiles": 8.204126541423669,
+          "depth": 10.823184967041016
+        },
+        "180": {
+          "contour": 6.920904079998464,
+          "profiles": 15.543054347892452,
+          "depth": 1.0837870836257935
+        },
+        "45": {
+          "contour": 8.009350327115705,
+          "profiles": 9.805806756909202,
+          "depth": 2.0178864002227783
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "macrodetails/Gender",
+        "macrodetails-height/Height"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "torso/torso-vshape-decr|incr",
+      "region": "torso",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 4.093477276006773,
+          "profiles": 6.392603899459485,
+          "depth": 0.1826734095811844
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.2849549055099487
+        },
+        "180": {
+          "contour": 4.093477276006773,
+          "profiles": 6.392603899459485,
+          "depth": 0.20091937482357025
+        },
+        "45": {
+          "contour": 4.495798892462975,
+          "profiles": 5.023980952928127,
+          "depth": 0.6017753481864929
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "torso/torso-scale-horiz-decr|incr",
+        "macrodetails-proportions/BodyProportions",
+        "measure/measure-shoulder-dist-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "buttocks/buttocks-volume-decr|incr",
+      "region": "buttocks",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.29430931031867036,
+          "profiles": 0.0,
+          "depth": 0.0008357582846656442
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 1.5504341823651058,
+          "depth": 0.21231769025325775
+        },
+        "180": {
+          "contour": 0.29430931031867036,
+          "profiles": 0.0,
+          "depth": 0.6756319999694824
+        },
+        "45": {
+          "contour": 0.5162270136916454,
+          "profiles": 1.898886313281875,
+          "depth": 0.05378120765089989
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "hip/hip-scale-horiz-decr|incr",
+      "region": "hip",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "180",
+        "45",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 3.2402227643491237,
+          "profiles": 6.104065480039953,
+          "depth": 0.4184321463108063
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.8192789554595947
+        },
+        "180": {
+          "contour": 3.2402227643491237,
+          "profiles": 6.104065480039953,
+          "depth": 0.4667243957519531
+        },
+        "45": {
+          "contour": 2.523137477848967,
+          "profiles": 3.79777262656375,
+          "depth": 1.045700192451477
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-bust-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.2033278767600624,
+          "profiles": 2.192645048267573,
+          "depth": 0.7239625453948975
+        },
+        "90": {
+          "contour": 3.46967938277942,
+          "profiles": 3.1008683647302115,
+          "depth": 0.6028485894203186
+        },
+        "180": {
+          "contour": 1.2033278767600624,
+          "profiles": 2.192645048267573,
+          "depth": 1.3180921077728271
+        },
+        "45": {
+          "contour": 0.6950073776699228,
+          "profiles": 1.5504341823651058,
+          "depth": 0.9924290180206299
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-waist-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.44874276925048556,
+          "profiles": 0.0,
+          "depth": 0.9674126505851746
+        },
+        "90": {
+          "contour": 2.3123257757473303,
+          "profiles": 2.6854307776478734,
+          "depth": 0.4566197991371155
+        },
+        "180": {
+          "contour": 0.44874276925048556,
+          "profiles": 0.0,
+          "depth": 0.8220845460891724
+        },
+        "45": {
+          "contour": 2.025729229622545,
+          "profiles": 2.4514516892273006,
+          "depth": 0.8315747976303101
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-shoulder-dist-decr|incr",
+      "region": "measure",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 3.167755394170427,
+          "profiles": 5.801193511153214,
+          "depth": 0.12692111730575562
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.9089435935020447
+        },
+        "180": {
+          "contour": 3.167755394170427,
+          "profiles": 5.801193511153214,
+          "depth": 0.13318952918052673
+        },
+        "45": {
+          "contour": 3.4340380560059427,
+          "profiles": 4.246038878042234,
+          "depth": 0.3453403115272522
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [
+        "torso/torso-vshape-decr|incr",
+        "torso/torso-scale-horiz-decr|incr"
+      ],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-hips-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.738108568652065,
+          "profiles": 1.898886313281875,
+          "depth": 0.6304730772972107
+        },
+        "90": {
+          "contour": 1.929393229396833,
+          "profiles": 2.4514516892273006,
+          "depth": 1.0001689195632935
+        },
+        "180": {
+          "contour": 1.738108568652065,
+          "profiles": 1.898886313281875,
+          "depth": 0.6249532699584961
+        },
+        "45": {
+          "contour": 1.7585404499658082,
+          "profiles": 3.79777262656375,
+          "depth": 0.8489769101142883
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-thigh-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.5091405218085254,
+          "profiles": 2.6854307776478734,
+          "depth": 0.5137811303138733
+        },
+        "90": {
+          "contour": 2.4462155280549505,
+          "profiles": 1.898886313281875,
+          "depth": 0.4788782596588135
+        },
+        "180": {
+          "contour": 1.5091405218085254,
+          "profiles": 2.6854307776478734,
+          "depth": 0.5010493993759155
+        },
+        "45": {
+          "contour": 1.1856630128230965,
+          "profiles": 2.192645048267573,
+          "depth": 0.5287211537361145
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-calf-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.5329892427436382,
+          "profiles": 4.651302547095317,
+          "depth": 0.34486591815948486
+        },
+        "90": {
+          "contour": 2.3753811231673576,
+          "profiles": 1.5504341823651058,
+          "depth": 0.3519354462623596
+        },
+        "180": {
+          "contour": 1.5329892427436382,
+          "profiles": 4.651302547095317,
+          "depth": 0.3909321129322052
+        },
+        "45": {
+          "contour": 1.4827782537276046,
+          "profiles": 3.2889675724013596,
+          "depth": 0.2925027906894684
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "measure/measure-upperarm-circ-decr|incr",
+      "region": "measure",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "0",
+        "180",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.749605909696986,
+          "profiles": 2.6854307776478734,
+          "depth": 0.008053499273955822
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.4448168277740479
+        },
+        "180": {
+          "contour": 0.749605909696986,
+          "profiles": 2.6854307776478734,
+          "depth": 0.03272135555744171
+        },
+        "45": {
+          "contour": 1.2160021554217617,
+          "profiles": 2.4514516892273006,
+          "depth": 0.19950886070728302
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "neck/neck-scale-vert-decr|incr",
+      "region": "neck",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 2.174549246652362,
+          "profiles": 0.0,
+          "depth": 0.5519893169403076
+        },
+        "90": {
+          "contour": 3.0965959151301465,
+          "profiles": 1.898886313281875,
+          "depth": 0.3573296070098877
+        },
+        "180": {
+          "contour": 2.174549246652362,
+          "profiles": 0.0,
+          "depth": 0.344290167093277
+        },
+        "45": {
+          "contour": 2.4813100560297205,
+          "profiles": 1.898886313281875,
+          "depth": 0.43996065855026245
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "head/head-scale-horiz-decr|incr",
+      "region": "head",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "180",
+        "45",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.5380326488648313,
+          "profiles": 0.0,
+          "depth": 0.044440027326345444
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.445622056722641
+        },
+        "180": {
+          "contour": 1.5380326488648313,
+          "profiles": 0.0,
+          "depth": 0.018336383625864983
+        },
+        "45": {
+          "contour": 1.0470487206677848,
+          "profiles": 0.0,
+          "depth": 0.3156217634677887
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "stomach/stomach-tone-decr|incr",
+      "region": "stomach",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "0",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.5145193338394165
+        },
+        "90": {
+          "contour": 1.4313271669624321,
+          "profiles": 1.0963225241337864,
+          "depth": 0.001821121433749795
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "45": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.5664387941360474
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "hip/hip-scale-depth-decr|incr",
+      "region": "hip",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "90",
+        "45",
+        "0",
+        "180"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.7481982707977295
+        },
+        "90": {
+          "contour": 4.7648695243385495,
+          "profiles": 4.778759092226607,
+          "depth": 0.32942289113998413
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 1.4854247570037842
+        },
+        "45": {
+          "contour": 2.1646888596217844,
+          "profiles": 3.79777262656375,
+          "depth": 1.6828571557998657
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "pelvis/pelvis-tone-decr|incr",
+      "region": "pelvis",
+      "local_classification": "weakly observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "180",
+        "45",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.0470487206677848,
+          "profiles": 0.0,
+          "depth": 0.0020641707815229893
+        },
+        "90": {
+          "contour": 0.2659590191932924,
+          "profiles": 1.5504341823651058,
+          "depth": 0.11364838480949402
+        },
+        "180": {
+          "contour": 1.0470487206677848,
+          "profiles": 0.0,
+          "depth": 0.4580736756324768
+        },
+        "45": {
+          "contour": 1.0470487206677848,
+          "profiles": 0.0,
+          "depth": 0.06900378316640854
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "breast/breast-point-decr|incr",
+      "region": "breast",
+      "local_classification": "not identifiable from tested evidence",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "0",
+        "90",
+        "180",
+        "45"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.16253027319908142
+        },
+        "90": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "180": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.0
+        },
+        "45": {
+          "contour": 0.0,
+          "profiles": 0.0,
+          "depth": 0.26724687218666077
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    },
+    {
+      "registry_key": "armslegs/l-upperarm-scale-horiz-decr|incr",
+      "region": "armslegs",
+      "local_classification": "conditionally observable",
+      "evidence": [
+        "contour",
+        "profile",
+        "calibrated depth control"
+      ],
+      "view_order_yaw_degrees": [
+        "45",
+        "180",
+        "0",
+        "90"
+      ],
+      "sensitivity": {
+        "0": {
+          "contour": 1.7524174162385215,
+          "profiles": 3.79777262656375,
+          "depth": 0.0
+        },
+        "90": {
+          "contour": 1.4730482751388911,
+          "profiles": 5.481612620668932,
+          "depth": 0.29137659072875977
+        },
+        "180": {
+          "contour": 2.5588636339769044,
+          "profiles": 3.79777262656375,
+          "depth": 0.0
+        },
+        "45": {
+          "contour": 3.529947761638727,
+          "profiles": 3.6360904617671226,
+          "depth": 0.02678859233856201
+        }
+      },
+      "observable_effect": "measured influence on visible envelope and section profiles",
+      "confounding_parameters": [],
+      "camera_dependence": "requires calibrated scale and pose; metric height needs an independent scale",
+      "pose_dependence": "rig-dependent projected effects",
+      "clothing_dependence": "skin or tight clothing for equality constraints",
+      "minimum_visibility": "corresponding region visible in at least one complementary view",
+      "uncertainty": "per-image | residual pixels; numerical sensitivity at native neutral only",
+      "experimental_recoverability": "joint geometric fit measured; unique latent value recovery unqualified",
+      "experimental_bounds": [
+        -0.64,
+        0.64
+      ]
+    }
+  ],
+  "ranks": {
+    "front": {
+      "singular": [
+        1766.1378469497695,
+        233.62128558460358,
+        185.76324368535776,
+        149.73060326464946,
+        131.4549901235933,
+        100.34874814538733,
+        63.98079228839858,
+        57.21608327132155,
+        53.51786809669236,
+        49.69136731713678,
+        44.33254366807222,
+        42.96945435846458,
+        36.616171579883485,
+        35.544265080919196,
+        34.69821263985554,
+        32.90514194666279,
+        30.637348354225313,
+        24.70556925035436,
+        17.809642547584755,
+        16.924562329235037,
+        9.813531694515945,
+        7.0828181349486865,
+        1.0861190760421563e-14,
+        6.519584701853931e-15,
+        2.4817161989365594e-15,
+        6.389565746367716e-32,
+        5.612387247491113e-34,
+        0.0
+      ],
+      "relative_rank_1pct": 19,
+      "strongest_aliases": [
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.8586606574913469
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.8255401514335866
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.8220388109906901
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.8205747217817879
+        ],
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.7976363059230509
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.7426083202530906
+        ],
+        [
+          "macrodetails-height/Height",
+          "torso/torso-scale-vert-decr|incr",
+          0.7297093813249782
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6940964004174625
+        ]
+      ]
+    },
+    "side": {
+      "singular": [
+        1071.8360101745297,
+        292.62420394690304,
+        205.3128705833785,
+        138.92103257579888,
+        108.71480547861388,
+        85.53738943744764,
+        73.93962357500894,
+        69.31237932582295,
+        59.65871440451764,
+        48.6539591945902,
+        45.40232801489479,
+        38.024022360483706,
+        34.73765003696287,
+        26.994686891726968,
+        25.263629627496712,
+        22.592472188415595,
+        15.963135618643493,
+        5.016151780589128,
+        9.023324887145037e-15,
+        4.709959906713143e-15,
+        4.196759623400455e-15,
+        2.8286978138096144e-15,
+        2.0514761071997886e-15,
+        9.182465166557513e-16,
+        5.304630444165301e-16,
+        1.552530336947576e-31,
+        5.585127651911225e-32,
+        0.0
+      ],
+      "relative_rank_1pct": 17,
+      "strongest_aliases": [
+        [
+          "torso/torso-scale-depth-decr|incr",
+          "measure/measure-bust-circ-decr|incr",
+          0.722016395329597
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.6404908296591724
+        ],
+        [
+          "macrodetails-height/Height",
+          "torso/torso-scale-vert-decr|incr",
+          0.6300610117851854
+        ],
+        [
+          "measure/measure-hips-circ-decr|incr",
+          "stomach/stomach-tone-decr|incr",
+          -0.6193477587923818
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.61767931879839
+        ],
+        [
+          "torso/torso-scale-depth-decr|incr",
+          "measure/measure-waist-circ-decr|incr",
+          0.5728360318101086
+        ],
+        [
+          "measure/measure-waist-circ-decr|incr",
+          "stomach/stomach-tone-decr|incr",
+          -0.5219301750346533
+        ],
+        [
+          "macrodetails-universal/Muscle",
+          "measure/measure-calf-circ-decr|incr",
+          -0.5097442373380832
+        ]
+      ]
+    },
+    "oblique": {
+      "singular": [
+        1589.3608976511184,
+        293.80301206327954,
+        220.4324042408327,
+        204.63583721061235,
+        134.19840711171415,
+        117.2771257953156,
+        69.70770587962782,
+        63.74133764772417,
+        62.91287213634159,
+        55.432754738368814,
+        48.48701274670073,
+        46.250531947660114,
+        43.050729794896675,
+        32.88796489979842,
+        30.003851926528252,
+        27.451864978140318,
+        26.013714739991897,
+        22.76106382596974,
+        22.58643845432247,
+        19.754725319984686,
+        17.738350703432527,
+        14.26034640896368,
+        8.969608975035964,
+        4.717001367834844,
+        1.6833742755353946,
+        2.9618086279565427e-15,
+        8.373939282595934e-17,
+        0.0
+      ],
+      "relative_rank_1pct": 21,
+      "strongest_aliases": [
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.8759460891314194
+        ],
+        [
+          "hip/hip-scale-horiz-decr|incr",
+          "hip/hip-scale-depth-decr|incr",
+          0.8470706038427105
+        ],
+        [
+          "torso/torso-scale-depth-decr|incr",
+          "pelvis/pelvis-tone-decr|incr",
+          -0.8367753905897569
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.8361525061748082
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.791275992638122
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.7767462615199404
+        ],
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.7524115025793295
+        ],
+        [
+          "measure/measure-hips-circ-decr|incr",
+          "hip/hip-scale-depth-decr|incr",
+          0.7213691837473295
+        ]
+      ]
+    },
+    "front_side": {
+      "singular": [
+        2065.2448304764966,
+        355.1385298375019,
+        284.05244743682965,
+        188.45579538888728,
+        176.06273532831352,
+        147.48488348095034,
+        97.80385200527697,
+        92.61968858308646,
+        89.2538358361083,
+        73.89958977857233,
+        69.07521962703369,
+        63.30232164373092,
+        56.890572000223244,
+        54.63178374996399,
+        49.974071736962976,
+        48.486865310705845,
+        45.38690334930162,
+        39.635692420691086,
+        37.336564747172986,
+        34.50131879044724,
+        27.490118054244544,
+        22.01569321438078,
+        18.882920130233316,
+        18.04740307378026,
+        7.179690179075799,
+        8.831010841535816e-15,
+        4.443940565884915e-16,
+        0.0
+      ],
+      "relative_rank_1pct": 22,
+      "strongest_aliases": [
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.8267692830169201
+        ],
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.7983413923409086
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.7494241548221078
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.7453985197360161
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.7126433081630262
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.6904380551024915
+        ],
+        [
+          "macrodetails-height/Height",
+          "torso/torso-scale-vert-decr|incr",
+          0.6860502619139162
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6766432718665853
+        ]
+      ]
+    },
+    "front_side_rear": {
+      "singular": [
+        2717.3621892136343,
+        412.8274199758979,
+        348.2259392777397,
+        248.67535437527135,
+        215.7663784321577,
+        180.74612902817594,
+        114.56289746463382,
+        106.43416587650745,
+        95.84458735317784,
+        89.79544481562347,
+        84.65592599880404,
+        79.9444666225022,
+        76.5896474696899,
+        70.65470619313407,
+        65.34850762200175,
+        59.48749454063944,
+        53.43363870158478,
+        52.23234100544509,
+        48.24379040921299,
+        47.97951690975602,
+        31.090069209999527,
+        28.061324650456243,
+        25.50838545819368,
+        20.44374277896004,
+        10.104793948852079,
+        1.270141147528755e-14,
+        4.994661402617219e-15,
+        0.0
+      ],
+      "relative_rank_1pct": 22,
+      "strongest_aliases": [
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.8263008274195639
+        ],
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.7980720431280892
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.7959582224376915
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.7766014105258289
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.7608564625208757
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.7095831652401942
+        ],
+        [
+          "macrodetails-height/Height",
+          "torso/torso-scale-vert-decr|incr",
+          0.701946177368123
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6761527366993628
+        ]
+      ]
+    },
+    "four": {
+      "singular": [
+        3147.28588050959,
+        505.2818469566654,
+        415.01842936831713,
+        321.53411235048515,
+        246.76570758890307,
+        220.94559386650727,
+        132.85278175569476,
+        116.23065891995957,
+        110.20918695108315,
+        108.59000773598183,
+        103.06382246512871,
+        98.57347213486914,
+        92.84725073311617,
+        84.13681924218045,
+        73.56268412820685,
+        67.02071136058915,
+        64.65564734299045,
+        59.931817751520704,
+        58.719516827569834,
+        53.25508766400364,
+        40.42465252165129,
+        38.81152136992827,
+        34.63645449411413,
+        22.11712700360577,
+        15.427160425399796,
+        5.140977521728333,
+        6.642205906648477e-15,
+        0.0
+      ],
+      "relative_rank_1pct": 23,
+      "strongest_aliases": [
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.8080500045055511
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.8080108677045592
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.7989603961710792
+        ],
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.7818018771147346
+        ],
+        [
+          "macrodetails/Gender",
+          "macrodetails-height/Height",
+          0.778959514328692
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.7120281125886463
+        ],
+        [
+          "macrodetails-height/Height",
+          "torso/torso-scale-vert-decr|incr",
+          0.6954218813786047
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6701912938151093
+        ]
+      ]
+    },
+    "four_with_profiles": {
+      "singular": [
+        6530.26973266166,
+        854.2598579239776,
+        687.4789260448838,
+        460.21492038102014,
+        353.0651723527721,
+        312.9614911468209,
+        197.802671896702,
+        187.35556589272173,
+        166.30533892313764,
+        153.06928904189658,
+        148.14092968777757,
+        139.6127456776511,
+        131.3776245138018,
+        119.31456487873801,
+        110.5800827729401,
+        100.64451398086587,
+        93.0551090786441,
+        85.16120240791219,
+        74.25641706928559,
+        73.24584044046203,
+        59.983890177899994,
+        56.00047966513514,
+        44.314055000959804,
+        35.22341009289075,
+        28.304833324497388,
+        18.30316560884586,
+        9.396143220783437e-15,
+        0.0
+      ],
+      "relative_rank_1pct": 20,
+      "strongest_aliases": [
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.8191449361800456
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.7990274581532766
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.7436855277646232
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.7398625507903284
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.6915617558981146
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6813846133454231
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6334886215177282
+        ],
+        [
+          "torso/torso-scale-depth-decr|incr",
+          "measure/measure-bust-circ-decr|incr",
+          0.5856853904893505
+        ]
+      ]
+    },
+    "four_with_oracle_depth": {
+      "singular": [
+        6535.698057303843,
+        854.5657084476424,
+        689.1402723800132,
+        460.37136435928346,
+        353.60025649802617,
+        313.18074853117594,
+        198.02773632599656,
+        187.50604478583307,
+        166.7023998231184,
+        153.1649352252125,
+        148.24230509459917,
+        139.66993058677446,
+        131.50528586733128,
+        119.34672759455805,
+        110.63610912534901,
+        100.755197989333,
+        93.10653048133258,
+        85.19379787468569,
+        74.3081617994203,
+        73.254673070922,
+        59.998885293737,
+        56.08608669316075,
+        44.34060817116082,
+        35.26195500286928,
+        28.349216630113986,
+        18.484992553889054,
+        0.8882155629841241,
+        0.11704117497999945
+      ],
+      "relative_rank_1pct": 20,
+      "strongest_aliases": [
+        [
+          "torso/torso-vshape-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.8191599033530171
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "torso/torso-vshape-decr|incr",
+          0.7990317022937414
+        ],
+        [
+          "macrodetails/Gender",
+          "torso/torso-scale-vert-decr|incr",
+          0.7429672233105736
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-vshape-decr|incr",
+          0.73983945869577
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "torso/torso-scale-horiz-decr|incr",
+          0.6915069897863774
+        ],
+        [
+          "torso/torso-scale-horiz-decr|incr",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6813845565611577
+        ],
+        [
+          "macrodetails-proportions/BodyProportions",
+          "measure/measure-shoulder-dist-decr|incr",
+          0.6334977034394252
+        ],
+        [
+          "torso/torso-scale-depth-decr|incr",
+          "measure/measure-bust-circ-decr|incr",
+          0.5855236689868749
+        ]
+      ]
+    }
+  }
+}

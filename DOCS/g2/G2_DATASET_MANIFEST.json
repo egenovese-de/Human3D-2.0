@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "source_revisions": {
+    "main": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+    "m6": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+    "lab_render": "66d84ba5775b0ab22f6e587e83efa0999180255c",
+    "g1": "8743a0fe45cc8a68781cf19cbc0a7cc59cb964c5",
+    "makehuman": "1f508f6083b2f823dab15de924b3bde72e08d77c"
+  },
+  "G1_artifact": {
+    "run": 46062204700,
+    "id": 15229301952,
+    "sha256": "2e3b031ae0040e21bda1ce68affd668f55c47dcae86add8205e315595029b162",
+    "native_parity_pairs": 21,
+    "oracle_fits": 36
+  },
+  "families": {
+    "A": {
+      "source": "MakeHuman v1.3.0 core",
+      "core_asset_license": "CC0",
+      "cases": [
+        "A_adult_asymmetric",
+        "A_high_mass",
+        "A_muscular",
+        "A_slim",
+        "A_heldout_1",
+        "A_heldout_2"
+      ],
+      "original_G1_cases": [
+        "A_adult_asymmetric",
+        "A_high_mass",
+        "A_muscular",
+        "A_slim"
+      ],
+      "held_out": [
+        "A_heldout_1",
+        "A_heldout_2"
+      ],
+      "pose": "native rest unless explicitly varied",
+      "notes": "Reference parameters isolated to generation; photo fitter receives RGB-derived products or named oracle channels."
+    },
+    "B": {
+      "source": "MB-Lab authored historical reference family",
+      "release": "numeric results only",
+      "fixed_alignment": "G1 axis conversion and seed stature/floor normalization once per subject",
+      "cases": [
+        {
+          "id": "B_female",
+          "preset": "f_ca01",
+          "source_mesh_sha256": "f31fdf0277097373219b89f1c4fd3b051a3dfe5ae78ffe5b9e676ddbc9f6dd40"
+        },
+        {
+          "id": "B_male",
+          "preset": "m_la01",
+          "source_mesh_sha256": "dc1854813d4b44714340ea13a725cafd8c552e18ed386db4e6e7bb6880e4f66d"
+        },
+        {
+          "id": "B_female_expanded",
+          "preset": "f_af01",
+          "source_mesh_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a"
+        },
+        {
+          "id": "B_male_expanded",
+          "preset": "m_as01",
+          "source_mesh_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19"
+        }
+      ]
+    },
+    "C": {
+      "admitted": [],
+      "candidate_sources": [
+        "https://is.mpg.de/code/faust-dataset",
+        "https://github.com/ytrock/THuman2.0-Dataset"
+      ],
+      "blocker": "End-to-end consent, photo use rights, raw aligned pairs and scale unavailable for this benchmark"
+    }
+  },
+  "images": {
+    "A_adult_asymmetric": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "A_heldout_1": [
+      "0",
+      "90",
+      "180",
+      "45",
+      "background",
+      "occluded",
+      "cropped",
+      "dark",
+      "low_resolution",
+      "perspective"
+    ],
+    "A_heldout_2": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "A_high_mass": [
+      "0",
+      "90",
+      "180",
+      "45",
+      "background",
+      "occluded",
+      "cropped",
+      "dark",
+      "low_resolution",
+      "perspective"
+    ],
+    "A_muscular": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "A_slim": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "B_female": [
+      "0",
+      "90",
+      "180",
+      "45",
+      "background",
+      "occluded",
+      "cropped",
+      "dark",
+      "low_resolution"
+    ],
+    "B_female_expanded": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "B_male": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ],
+    "B_male_expanded": [
+      "0",
+      "90",
+      "180",
+      "45"
+    ]
+  },
+  "cameras": {
+    "world": "X lateral, Y vertical, Z anterior, centimetres",
+    "input_px": 384,
+    "fitting_px": 144,
+    "yaw_degrees": [
+      0,
+      90,
+      180,
+      45
+    ],
+    "held_out_yaw_degrees": 135
+  },
+  "oracle_channels": [
+    "Blender coverage alpha",
+    "calibrated analytic body silhouette",
+    "occlusion annotation",
+    "metric Z depth",
+    "visible face normals",
+    "visible triangle index",
+    "MakeHuman rig region IDs",
+    "projected semantic joint proxies",
+    "G1 physical section extents",
+    "camera intrinsics/extrinsics"
+  ],
+  "seed": 782
+}

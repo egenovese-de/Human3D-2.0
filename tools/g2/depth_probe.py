@@ -24,7 +24,7 @@ def fit_affine(x,y):
 
 
 def angular_error(depth, truth_normals, interior, span):
-    dy,dx = np.gradient(depth)
+    dy,dx = np.gradient(np.where(np.isfinite(depth),depth,0.))
     unit = span/depth.shape[0]
     normals = np.stack([dx/unit,-dy/unit,np.ones_like(dx)],axis=-1)
     normals /= np.linalg.norm(normals,axis=-1,keepdims=True)
@@ -72,7 +72,7 @@ def objective(kind):
     return penalty
 
 
-def main(experiment, refs, model, raster_file):
+def main(experiment, refs, model, raster_file, subjects=()):
     if sha256(model.read_bytes()).hexdigest()!=MODEL_SHA:
         raise ValueError('depth weight digest mismatch')
     options = ort.SessionOptions()
@@ -86,10 +86,11 @@ def main(experiment, refs, model, raster_file):
     default = np.asarray(config['g1_initial'])
     native = lambda values:e.extended(dict(zip(names,values)))*10
     raster = Raster(raster_file)
-    metrics = {}
     out = experiment/'depth'
     out.mkdir(exist_ok=True)
-    for subject in ('A_adult_asymmetric','A_high_mass','A_heldout_1','B_female'):
+    document = out/'depth.json'
+    metrics = json.loads(document.read_text())['subjects'] if document.exists() else {}
+    for subject in subjects or ('A_adult_asymmetric','A_high_mass','A_heldout_1','B_female'):
         sub = experiment/'maps'/subject
         if not all((sub/str(angle)/'oracle.npz').exists() for angle in ANGLES):
             continue
@@ -134,4 +135,4 @@ def main(experiment, refs, model, raster_file):
 
 if __name__ == '__main__':
     cv2.setNumThreads(1)
-    main(*map(Path,sys.argv[1:]))
+    main(*map(Path,sys.argv[1:5]), subjects=sys.argv[5:])

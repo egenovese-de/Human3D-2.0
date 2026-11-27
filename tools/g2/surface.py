@@ -55,7 +55,7 @@ def main(paths, output):
                         band[str(i)] = stats(d)
                 fits[name] = dict(symmetric_mm=stats(np.r_[da,db]), height_bands_mm=band,
                                   candidate_to_reference_mm=stats(da),reference_to_candidate_mm=stats(db))
-                if name in ('E0','E1','E4','E4_full','E9','E10') and file.stem.startswith('A_'):
+                if name in ('E0','E1','E4','E4_full','rgb_gap','E9','E10') and file.stem.startswith('A_'):
                     np.save(output.parent/f'{file.stem}-{name}-vertex-residual.npy',distances(v,target))
             rows[file.stem] = fits
             print(file.stem,{k:round(v['symmetric_mm']['mean'],4) for k,v in fits.items()},flush=True)

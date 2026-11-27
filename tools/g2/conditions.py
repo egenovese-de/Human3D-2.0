@@ -45,7 +45,7 @@ def main(reference, config, out, library):
     native = lambda values:e.extended(dict(zip(names,values)))*10
     posed = lambda values:arm_pose(e,native(values))
     regions = triangle_regions(e,faces)
-    masks,results = {},{}
+    masks,results,results_by_view = {},{},{}
     for camera in [Camera(angle) for angle in ANGLES]:
         name = str(camera.yaw)
         true,_,ids = raster.draw(camera,ref,faces,384,True)
@@ -53,11 +53,11 @@ def main(reference, config, out, library):
                         loose=raster.draw(camera,garment(ref,5.5),faces,384),
                         posed=raster.draw(camera,arm_pose(e,ref),faces,384))
         masks[name] = variants
-        results[name] = {k:mask_metrics(pred,true) for k,pred in variants.items() if k!='body'}
+        results_by_view[name] = {k:mask_metrics(pred,true) for k,pred in variants.items() if k!='body'}
         labels = np.zeros_like(ids)
         labels[true] = regions[ids[true]]
-        results[name]['regional_projection'] = {str(r):int((labels==r).sum()) for r in range(1,17)}
-        results[name]['torso_profile_width_delta_px'] = {
+        results_by_view[name]['regional_projection'] = {str(r):int((labels==r).sum()) for r in range(1,17)}
+        results_by_view[name]['torso_profile_width_delta_px'] = {
             k:float(np.mean(np.abs(profile(p,np.arange(93,180))[:,2]-profile(true,np.arange(93,180))[:,2])))
             for k,p in variants.items() if k!='body'}
         comparison = np.zeros((*true.shape,3),np.uint8)
@@ -84,7 +84,7 @@ def main(reference, config, out, library):
         meshes[key] = native(results[key]['values'])
         print(key,results[key]['seconds'],flush=True)
     np.savez_compressed(out/'conditions.npz',**meshes)
-    dump(out/'conditions.json',results)
+    dump(out/'conditions.json',dict(fits=results,views=results_by_view))
 
 
 if __name__=='__main__':
