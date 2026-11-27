@@ -9,3 +9,8 @@ dist/
 /private/
 /local-data/
 /artifacts/
+
+/.lab-runtime/
+/.lab-source/
+/lab-output/
+/lab/input/
