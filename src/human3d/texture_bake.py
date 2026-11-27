@@ -1,13 +1,22 @@
 """Bake visible posed-mesh color into native UV space."""
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from math import cos, radians, sin
 
 import numpy as np
 from PIL import Image
-from scipy.ndimage import distance_transform_edt
+from scipy.ndimage import binary_erosion, distance_transform_edt
 
 from .frozen_body import deform_vertices
 from .native_rig import pose_transforms, skin_vertices, validate_rebind, validate_pose
+
+
+@dataclass(frozen=True)
+class ProjectionDiagnostics:
+    silhouette_iou: float
+    projected_outside_fraction: float
+    unprojected_foreground_fraction: float
+    contour_p95_source_px: float | None
+    observed_uv_fraction: float
 
 
 @dataclass(frozen=True)
@@ -17,6 +26,7 @@ class Atlas:
     skin_candidate: Image.Image
     observed_fraction: float
     hair_candidate: Image.Image | None = None
+    view_diagnostics: dict[str, ProjectionDiagnostics] = field(default_factory=dict)
 
 
 def _samples(triangle, width, height):
@@ -153,6 +163,28 @@ def _validate_view(view, image_size):
         raise ValueError("invalid_appearance_view")
 
 
+def _projection_diagnostics(projected, foreground, image_size, uv_fraction):
+    intersection = np.count_nonzero(projected & foreground)
+    projected_count = np.count_nonzero(projected)
+    foreground_count = np.count_nonzero(foreground)
+    projected_edge = projected & ~binary_erosion(projected)
+    mask_edge = foreground & ~binary_erosion(foreground)
+    contour = None
+    if projected_edge.any() and mask_edge.any():
+        height, width = foreground.shape
+        sampling = (image_size[1] / height, image_size[0] / width)
+        forward = distance_transform_edt(~mask_edge, sampling=sampling)[projected_edge]
+        reverse = distance_transform_edt(~projected_edge, sampling=sampling)[mask_edge]
+        contour = float(np.percentile(np.concatenate((forward, reverse)), 95))
+    return ProjectionDiagnostics(
+        intersection / max(1, projected_count + foreground_count - intersection),
+        (projected_count - intersection) / max(1, projected_count),
+        (foreground_count - intersection) / max(1, foreground_count),
+        contour,
+        uv_fraction,
+    )
+
+
 def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     if target not in views or type(size) is not int or not 64 <= size <= 2048:
         raise ValueError("invalid_appearance_target_or_size")
@@ -188,6 +220,8 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     target_view, _ = views[target]
     if not target_view.foreground.any():
         raise ValueError("appearance_target_has_no_foreground")
+    diagnostics = {}
+    domain_count = max(1, np.count_nonzero(domain))
     target_light = np.median(target_view.rgb[target_view.foreground].mean(axis=1))
     for key in (target, *sorted(key for key in views if key != target)):
         view, image_size = views[key]
@@ -236,6 +270,11 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
             skin_sum[b, a] += weight * view.skin_candidate[v, u]
             if garment is None and view.hair_candidate is not None:
                 hair_sum[b, a] += weight * view.hair_candidate[v, u]
+        if garment is None:
+            diagnostics[key] = _projection_diagnostics(
+                np.isfinite(z_buffer), view.foreground, image_size,
+                np.count_nonzero(view_weights) / domain_count,
+            )
         if key == target:
             target_colors, target_weights = view_colors, view_weights
         else:
@@ -264,7 +303,7 @@ def bake_atlas(body, controls, views, target, *, size=512, garment=None):
     skin[observed & (skin_sum > 0.75 * weights)] = 255
     hair = (observed & (hair_sum > .75 * weights)).astype(np.uint8) * 255
     return Atlas(Image.fromarray(color), Image.fromarray(coverage), Image.fromarray(skin),
-                 np.count_nonzero(observed) / max(1, np.count_nonzero(domain)), Image.fromarray(hair))
+                 np.count_nonzero(observed) / domain_count, Image.fromarray(hair), diagnostics)
 
 def neutralize_covered_body_color(body, atlas, garments):
     """Neutralize baked clothing color under covered body UV islands."""
