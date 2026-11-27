@@ -1,0 +1,128 @@
+{
+  "run_id": 45996285366,
+  "job_id": 140496500512,
+  "lab_revision": "2fbb075909cf52428d7c8d1daaa342b35535fb38",
+  "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "native": {
+    "scope": "known geometry oracle silhouette; calibrated camera; native fit and export",
+    "bootstrap_iou": 0.9866962305986696,
+    "fitted_iou": 0.9970409823938452,
+    "controls": {
+      "hips": 0.375
+    },
+    "vertices": 19158,
+    "bones": 163,
+    "morph_max_delta": 0.1815,
+    "pose_max_delta": 1.3641312197621476,
+    "asset_hashes": {
+      "base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "default.mhskel": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24",
+      "default_weights.mhw": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625",
+      "measure-hips-circ-decr.target": "8a98e80047ab89148d60067aad3b452ce715eadcaf7a1e28402140dd1ac8fb11",
+      "measure-hips-circ-incr.target": "e4294db231dd3283680e6be4b9d3d8d81aa7c575a32f937f8d0751b1ec3d6512",
+      "measure-thigh-circ-decr.target": "fe5303874b0ffe26a69cefd3e213b6478eec4648f60b0b110a1e176ccf24eaa9",
+      "measure-thigh-circ-incr.target": "5dca89b139df6f9b7c7641485dee18e9f0da10087359b9df5ca6a1e752ea0bcc",
+      "measure-calf-circ-decr.target": "2914fc47781e23987607c6546f4535ae5d8b04e2e2bec908ab588ee94e74aa15",
+      "measure-calf-circ-incr.target": "c6106ec484a875a8763a7e9b12a4891da8efcd5152efbc1c7061f40bdc4353a6",
+      "measure-upperarm-circ-decr.target": "42e5780765402bfedf65c59cf8f846ffe6fe06b120e11762376a4ab9ec57f383",
+      "measure-upperarm-circ-incr.target": "37f960203ae6c006399d3d26ab81e6d1de81523e86f845549aa94ca345c5d980",
+      "torso-scale-depth-decr.target": "1f14e272b398ea5845957dc92a8ccbcde103b2a2fd6fca4acd14a824a9f76b2d",
+      "torso-scale-depth-incr.target": "095c3fd83173dc91c20d7ed06655ff67fe823795fb7f2df2c5560845f661a0dc",
+      "torso-scale-horiz-decr.target": "8377c248eec6838292f55287b6a399398f7cb88e6d7d0af6781d8e30298e0d6f",
+      "torso-scale-horiz-incr.target": "73f278c2be9c6eebead7ac4cd206879810a9e0202519493af0ed8b2e3842fbb5",
+      "torso-vshape-decr.target": "f9da55d42731ef5fcfeaa9a473d84044cd7d19076c67dab5139cf001e85b09b2",
+      "torso-vshape-incr.target": "9d0ac9eec39a14d51d7db50e48292b3db67aed9b91e654b379f4dbe348644684"
+    },
+    "expanded_morph_deltas": {
+      "torso-scale-depth-0.25": 0.048249999999999904,
+      "torso-scale-depth0.25": 0.08775,
+      "torso-scale-horiz-0.25": 0.08450000000000024,
+      "torso-scale-horiz0.25": 0.08550000000000013,
+      "torso-vshape-0.25": 0.06675000000000009,
+      "torso-vshape0.25": 0.06675000000000031
+    },
+    "expanded_controls": {
+      "torso-scale-depth": 0.25,
+      "torso-scale-horiz": 0.25,
+      "torso-vshape": 0.25
+    },
+    "expanded_pose_delta": 1.364131219762148
+  },
+  "negative": {
+    "status": "PASS",
+    "checks": {
+      "checksum": "PASS",
+      "missing_asset": "PASS",
+      "invalid_config": {
+        "status": "PASS",
+        "exit_code": 1
+      },
+      "python_failure": {
+        "status": "PASS",
+        "exit_code": 1
+      },
+      "blender_failure": {
+        "status": "PASS",
+        "exit_code": 1
+      },
+      "timeout": "PASS"
+    },
+    "scope": "actual isolated child failures and acquisition errors; timeout subprocess primitive"
+  },
+  "evidence": {
+    "status": "PASS",
+    "scope": "offline replay; no actual VLM inference",
+    "records": [
+      {
+        "image_sha256": "516ee56c24012be6e1b6f51860890e4b61328784c1f2c963ec7c1f7a6d68017b",
+        "schema_version": 1,
+        "prompt_version": "control-v1",
+        "model": null,
+        "origin": "oracle",
+        "raw_response": "{\"hips\":0.5}"
+      },
+      {
+        "image_sha256": "516ee56c24012be6e1b6f51860890e4b61328784c1f2c963ec7c1f7a6d68017b",
+        "schema_version": 1,
+        "prompt_version": "control-v1",
+        "model": null,
+        "origin": "simulated_vlm",
+        "raw_response": "{\"hips\":0.4}"
+      }
+    ],
+    "normalized": [
+      {
+        "origin": "oracle",
+        "controls": {
+          "hips": 0.5
+        },
+        "actual_inference": false
+      },
+      {
+        "origin": "simulated_vlm",
+        "controls": {
+          "hips": 0.4
+        },
+        "actual_inference": false
+      }
+    ],
+    "negative_controls": 3
+  },
+  "artifact": {
+    "id": 15195673563,
+    "sha256": "cd126ed17e1e1fde2694b32eaceb5729caa13c7e862412fed5bd592100d6473c",
+    "verified_files": 26
+  },
+  "roundtrip": {
+    "bones": 163,
+    "weighted_vertices": 13380
+  },
+  "qualification": {
+    "E": "PASS",
+    "F": "PASS",
+    "G": "PASS counts; weight equivalence not measured",
+    "I": "PASS offline synthetic replay only",
+    "J": "PASS isolated controls; runner timeout propagation not tested",
+    "L": "PASS lab aliases and known deformation"
+  }
+}
