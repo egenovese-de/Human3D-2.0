@@ -235,7 +235,7 @@ def main(runtime,out):
         raw=json.dumps(frozen,sort_keys=True,separators=(",",":"),allow_nan=False).encode()
         fp=persist/(hashlib.sha256(raw).hexdigest()+".json");fp.write_bytes(raw)
         restored=load_frozen_body(fp)
-        if restored!=frozen: raise ValueError("frozen roundtrip mismatch")
+        if json.dumps(restored,sort_keys=True,separators=(",",":"),allow_nan=False).encode()!=raw: raise ValueError("frozen roundtrip mismatch")
         dst=persist/(name+".usdz")
         alignment=Alignment(Camera(0,200/np.ptp(base[:,1]),0j,1),0,{})
         export_body(dst,restored,SimpleNamespace(controls={}),alignment,texture=Image.new("RGB",(32,32),(180,180,180)))
