@@ -1,0 +1,270 @@
+{
+  "candidate_sha": "1c46f93500486c9b356fa6bbfb14e6f61a942b77",
+  "lab_sha": "c1a3533ef04a168ac75c2755c7d72f8e2545a23c",
+  "cases": [
+    {
+      "identity": "f_af01",
+      "fixture_sha256": "d46525b3b3d595682d8c97da55a54db1ecaf53b9478baf1908453e8e3493274c",
+      "compared": {
+        "native": {
+          "training_iou": 0.6286692759295499,
+          "direction_error_deg": 6.403902092881647,
+          "held_out_iou": {
+            "22.5": 0.5435091277890467,
+            "112.5": 0.6506794564348521
+          },
+          "held_out_mean_iou": 0.5970942921119494
+        },
+        "pose_first": {
+          "state": [
+            5,
+            -2,
+            0,
+            0
+          ],
+          "training_iou": 0.6383292383292384,
+          "evaluations": 17,
+          "seconds": 1.1779490510000414,
+          "direction_error_deg": 10.302062046950303,
+          "held_out_iou": {
+            "22.5": 0.5505148333163421,
+            "112.5": 0.6579440503279347
+          },
+          "held_out_mean_iou": 0.6042294418221383
+        },
+        "camera_first": {
+          "state": [
+            5,
+            -2,
+            0,
+            0
+          ],
+          "training_iou": 0.6383292383292384,
+          "evaluations": 17,
+          "seconds": 1.2098205910001525,
+          "direction_error_deg": 10.302062046950303,
+          "held_out_iou": {
+            "22.5": 0.5505148333163421,
+            "112.5": 0.6579440503279347
+          },
+          "held_out_mean_iou": 0.6042294418221383
+        },
+        "alternating": {
+          "state": [
+            5,
+            -2,
+            0,
+            0
+          ],
+          "training_iou": 0.6383292383292384,
+          "evaluations": 17,
+          "seconds": 1.2306821610000043,
+          "direction_error_deg": 10.302062046950303,
+          "held_out_iou": {
+            "22.5": 0.5505148333163421,
+            "112.5": 0.6579440503279347
+          },
+          "held_out_mean_iou": 0.6042294418221383
+        }
+      }
+    },
+    {
+      "identity": "f_ca01",
+      "fixture_sha256": "4939ddf973d6f0e50844f85085115ed4939725d42f89c55bdafe40033ce8d4ba",
+      "compared": {
+        "native": {
+          "training_iou": 0.6190706679574056,
+          "direction_error_deg": 5.608791779083154,
+          "held_out_iou": {
+            "22.5": 0.5625552723300213,
+            "112.5": 0.6511596548004315
+          },
+          "held_out_mean_iou": 0.6068574635652264
+        },
+        "pose_first": {
+          "state": [
+            5,
+            0,
+            0,
+            1
+          ],
+          "training_iou": 0.6251774727875059,
+          "evaluations": 17,
+          "seconds": 1.2310997080001016,
+          "direction_error_deg": 9.576256126673796,
+          "held_out_iou": {
+            "22.5": 0.5688997963552818,
+            "112.5": 0.6582227038742888
+          },
+          "held_out_mean_iou": 0.6135612501147854
+        },
+        "camera_first": {
+          "state": [
+            5,
+            0,
+            0,
+            0
+          ],
+          "training_iou": 0.6236036911121904,
+          "evaluations": 17,
+          "seconds": 1.243815831999882,
+          "direction_error_deg": 9.576256126673796,
+          "held_out_iou": {
+            "22.5": 0.5688997963552818,
+            "112.5": 0.6582227038742888
+          },
+          "held_out_mean_iou": 0.6135612501147854
+        },
+        "alternating": {
+          "state": [
+            5,
+            0,
+            0,
+            1
+          ],
+          "training_iou": 0.6251774727875059,
+          "evaluations": 17,
+          "seconds": 1.2368033160000778,
+          "direction_error_deg": 9.576256126673796,
+          "held_out_iou": {
+            "22.5": 0.5688997963552818,
+            "112.5": 0.6582227038742888
+          },
+          "held_out_mean_iou": 0.6135612501147854
+        }
+      }
+    },
+    {
+      "identity": "m_as01",
+      "fixture_sha256": "3b5b3d8b9244e8373974cb6d032fefe4d48cded1b05dca7e09caaf7c64109dec",
+      "compared": {
+        "native": {
+          "training_iou": 0.6224013576580398,
+          "direction_error_deg": 7.238601133769741,
+          "held_out_iou": {
+            "22.5": 0.5724995255266654,
+            "112.5": 0.6920432527032939
+          },
+          "held_out_mean_iou": 0.6322713891149796
+        },
+        "pose_first": {
+          "state": [
+            5,
+            2,
+            0,
+            0
+          ],
+          "training_iou": 0.6272340425531915,
+          "evaluations": 17,
+          "seconds": 1.3055879480000385,
+          "direction_error_deg": 10.44078976064384,
+          "held_out_iou": {
+            "22.5": 0.5730422401518747,
+            "112.5": 0.6973593426582199
+          },
+          "held_out_mean_iou": 0.6352007914050473
+        },
+        "camera_first": {
+          "state": [
+            5,
+            2,
+            0,
+            0
+          ],
+          "training_iou": 0.6272340425531915,
+          "evaluations": 17,
+          "seconds": 1.2422042180000972,
+          "direction_error_deg": 10.44078976064384,
+          "held_out_iou": {
+            "22.5": 0.5730422401518747,
+            "112.5": 0.6973593426582199
+          },
+          "held_out_mean_iou": 0.6352007914050473
+        },
+        "alternating": {
+          "state": [
+            5,
+            2,
+            0,
+            0
+          ],
+          "training_iou": 0.6272340425531915,
+          "evaluations": 17,
+          "seconds": 1.236319056999946,
+          "direction_error_deg": 10.44078976064384,
+          "held_out_iou": {
+            "22.5": 0.5730422401518747,
+            "112.5": 0.6973593426582199
+          },
+          "held_out_mean_iou": 0.6352007914050473
+        }
+      }
+    },
+    {
+      "identity": "m_la01",
+      "fixture_sha256": "5382a64159003e75490022bdef232623d9a20b971d45212b86a508a6f6bb8e56",
+      "compared": {
+        "native": {
+          "training_iou": 0.6238712210443659,
+          "direction_error_deg": 8.87462358199148,
+          "held_out_iou": {
+            "22.5": 0.5828260869565217,
+            "112.5": 0.6922111985403124
+          },
+          "held_out_mean_iou": 0.6375186427484171
+        },
+        "pose_first": {
+          "state": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "training_iou": 0.6238712210443659,
+          "evaluations": 17,
+          "seconds": 1.2480555269999059,
+          "direction_error_deg": 8.87462358199148,
+          "held_out_iou": {
+            "22.5": 0.5828260869565217,
+            "112.5": 0.6922111985403124
+          },
+          "held_out_mean_iou": 0.6375186427484171
+        },
+        "camera_first": {
+          "state": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "training_iou": 0.6238712210443659,
+          "evaluations": 17,
+          "seconds": 1.2736996430001,
+          "direction_error_deg": 8.87462358199148,
+          "held_out_iou": {
+            "22.5": 0.5828260869565217,
+            "112.5": 0.6922111985403124
+          },
+          "held_out_mean_iou": 0.6375186427484171
+        },
+        "alternating": {
+          "state": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "training_iou": 0.6238712210443659,
+          "evaluations": 17,
+          "seconds": 1.3050564919999488,
+          "direction_error_deg": 8.87462358199148,
+          "held_out_iou": {
+            "22.5": 0.5828260869565217,
+            "112.5": 0.6922111985403124
+          },
+          "held_out_mean_iou": 0.6375186427484171
+        }
+      }
+    }
+  ]
+}
