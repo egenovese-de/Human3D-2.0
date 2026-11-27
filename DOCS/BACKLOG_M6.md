@@ -27,17 +27,17 @@
 | M6.3-006 | Compare pose-first, camera-first and alternating schedules | TODO |
 | M6.3-007 | Integrate validated pose and camera improvements with regression tests | TODO |
 | M6.4-001 | Rebaseline registered geometry and regional anatomical residuals | TODO |
-| M6.4-002 | Evaluate alternative compatible anatomical bases and morph capacity | TODO |
+| M6.4-002 | Evaluate alternative compatible anatomical bases and morph capacity | DONE |
 | M6.4-003 | Implement evidence-supported bounded regional geometry improvements | TODO |
 | M6.4-004 | Compare optimization objectives and convergence at equal budgets | TODO |
-| M6.4-005 | Validate neutral shape independence from target pose | TODO |
+| M6.4-005 | Validate neutral shape independence from target pose | DONE |
 | M6.4-006 | Develop fit acceptance and bootstrap fallback candidates | TODO |
 | M6.4-007 | Validate acceptance on independent beneficial and harmful fits | TODO |
 | M6.4-008 | Integrate only validated geometry and acceptance defaults | TODO |
 | M6.5-001 | Validate independent facial landmarks and profile correspondence | TODO |
 | M6.5-002 | Evaluate and implement justified canonical facial controls | TODO |
-| M6.5-003 | Implement texture alignment and visibility guard diagnostics | TODO |
-| M6.5-004 | Validate texture color, seam, occlusion and coverage tradeoffs | TODO |
+| M6.5-003 | Implement texture alignment and visibility guard diagnostics | DONE |
+| M6.5-004 | Validate texture color, seam, occlusion and coverage tradeoffs | DONE |
 | M6.5-005 | Evaluate identity consistency and reference utility criteria | TODO |
 | M6.5-006 | Implement validated separate geometry and appearance reference policies | TODO |
 | M6.5-007 | Validate reference changes, invalidation and target switching | TODO |

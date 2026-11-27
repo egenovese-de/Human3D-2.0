@@ -116,10 +116,9 @@ def prototype(body, neutral, category, *, layer=0, ease_mm=0.0, hem=0.0):
             selected.append(face)
     if not selected:
         raise ValueError("garment_region_empty")
-    if category != "top":
-        # Lower-body height bands can also intersect low hands in the
-        # neutral rig. Detached hand islands are not trouser geometry.
-        selected = _largest_shell_component(selected)
+    # A geometric cut can capture isolated body patches at the same
+    # height, including low hands or fragments near the neckline.
+    selected = _largest_shell_component(selected)
 
     used = tuple(sorted({i for face in selected for i, _ in face}))
     texels = tuple(sorted({t for face in selected for _, t in face}))

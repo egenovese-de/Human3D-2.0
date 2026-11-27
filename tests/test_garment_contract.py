@@ -68,3 +68,26 @@ class GarmentContract(unittest.TestCase):
         point_contact = ((3, 3), (7, 10), (8, 11))
         self.assertEqual(_largest_shell_component([hand, lower_a, point_contact, lower_b]),
                          [lower_a, lower_b])
+
+    def test_top_prototype_excludes_disconnected_neckline_faces(self):
+        from human3d.garments import prototype
+
+        points = np.array([
+            [-.6, 3., 0.], [.6, 3., 0.], [-.6, 4., 0.], [.6, 4., 0.],
+            [-.1, 4.4, .2], [.1, 4.4, .2], [0., 4.6, .2],
+            [0., 1., 0.], [0., 0., 0.], [-.6, 4., 0.], [.6, 4., 0.], [0., 5.5, 0.],
+        ])
+        anchors = {"upperleg01.L": 7, "upperleg01.R": 7, "lowerleg01.L": 8, "lowerleg01.R": 8,
+                   "upperarm01.L": 9, "upperarm01.R": 10, "head": 11, "foot.L": 8, "foot.R": 8}
+        faces = [{"group": "body", "corners": tuple((index, index) for index in triangle)}
+                 for triangle in ((4, 5, 6), (0, 1, 2), (2, 1, 3))]
+        body = {
+            "mesh": {"faces": faces, "texcoords": ((0., 0.),) * len(points)},
+            "rig": {"joint_vertices": {name: [index] for name, index in anchors.items()},
+                    "bones": {name: {"head": name} for name in anchors},
+                    "skin": ({"head": 1.},) * len(points)},
+        }
+        for layer in (0, 1):
+            shell = prototype(body, points, "top", layer=layer)
+            self.assertEqual(shell.body_indices, (0, 1, 2, 3))
+            self.assertEqual(len(shell.faces), 2)
