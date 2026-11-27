@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "pending_negative_controls",
+  "status": "PASS",
   "run_id": 45990286545,
   "job_id": 140476171565,
   "lab_revision": "94f3deac0810062807771bad51666529c4a1af4c",
@@ -22,7 +22,29 @@
   "negative_control_revision": "2d5af9b7fa3a40179649b5da6f2a1e7dbf0af2e3",
   "limitations": [
     "native human and USDZ outputs not exercised",
-    "license audit deferred LR-008",
-    "negative CI controls pending"
-  ]
+    "license audit deferred LR-008"
+  ],
+  "test_K": "PASS",
+  "final_regression": {
+    "run_id": 45990773975,
+    "job_id": 140477847208,
+    "head_sha": "2d5af9b7fa3a40179649b5da6f2a1e7dbf0af2e3",
+    "artifact_id": 15193881066,
+    "bytes": 4071435,
+    "github_sha256": "fa881a15a309d27e6384f6e14ce32fa99fcaabdb940768b462a48cbb000c0680",
+    "independently_computed_sha256": "fa881a15a309d27e6384f6e14ce32fa99fcaabdb940768b462a48cbb000c0680",
+    "crc": "PASS",
+    "inventory": "PASS",
+    "file_sha256_and_size": {
+      "passed": 40,
+      "total": 40
+    },
+    "zip_entries": 41,
+    "negative_controls": {
+      "corruption": "REJECT_CORRUPTION_PASS",
+      "unadmitted": "REJECT_UNADMITTED_PASS",
+      "original": "ARTIFACT_VERIFY_PASS 40"
+    },
+    "expires_at": "2026-12-04T11:30:16Z"
+  }
 }
