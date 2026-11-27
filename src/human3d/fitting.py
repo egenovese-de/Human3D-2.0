@@ -11,6 +11,7 @@ from .face import has_head_control
 from .frozen_body import deform_vertices, morph_controls
 from .native_rig import pose_transforms, rebind_joints, skin_vertices, validate_rebind
 from .proportions import forearm_ratio_penalty, length_controls
+from .torso_evidence import torso_ratio_penalty
 from .regional_morphs import regional_controls
 
 
@@ -272,7 +273,12 @@ def fit_shared(body, evidence):
     scorer = _scorer(body, masks, alignments, neutral)
     baseline_scores = scorer(neutral)
     weights = _confidence_weights(evidence, masks)
-    measurement_penalty = forearm_ratio_penalty(body, evidence, masks)
+    penalties = tuple(penalty for penalty in (forearm_ratio_penalty(body, evidence, masks),
+                                               torso_ratio_penalty(body, evidence, masks)) if penalty)
+    def combined_penalty(vertices):
+        return sum(penalty(vertices) for penalty in penalties) / len(penalties)
+
+    measurement_penalty = combined_penalty if penalties else None
     supported = (*morph_controls(body), *length_controls(body), *regional_controls(body))
     coarse = _scorer(body, masks, alignments, neutral, edge=128, evidence=evidence)
     objective = _scorer(body, masks, alignments, neutral, evidence=evidence)

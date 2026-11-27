@@ -75,33 +75,37 @@ def _triangles(values, epsilon):
     return triangles, normals / area_twice[:, None]
 
 
-def triangle_contacts(first, second, *, epsilon=1e-7):
-    """Classify triangle pairs between surfaces. Epsilon uses the input length unit.
-
-    Boundary-only intersections are counted as touching. Transverse interior
-    intersections and positive-area coplanar overlap have distinct counts.
-    Callers provide triangulation and keep adjacency semantics for each mesh.
-    """
+def triangle_contact_pairs(first, second, *, epsilon=1e-7, self_query=False):
+    """Yield indexed contacts, counting each pair once in a self-contact query."""
     if not np.isfinite(epsilon) or epsilon <= 0:
         raise ValueError("invalid_collision_epsilon")
     first, normals_a = _triangles(first, epsilon)
     second, normals_b = _triangles(second, epsilon)
     if not len(first) or not len(second):
-        return TriangleContacts()
+        return
     low_a, high_a = first.min(axis=1), first.max(axis=1)
     low_b, high_b = second.min(axis=1), second.max(axis=1)
     center_a, center_b = (low_a + high_a) / 2, (low_b + high_b) / 2
     radius_a = np.linalg.norm(high_a - center_a, axis=1)
     radius_b = np.linalg.norm(high_b - center_b, axis=1)
     tree = cKDTree(center_b)
-    counts = dict(crossing=0, coplanar_overlap=0, touching=0)
     neighborhoods = tree.query_ball_point(center_a, radius_a + radius_b.max() + np.sqrt(3) * epsilon)
     for i, nearby in enumerate(neighborhoods):
         candidates = np.asarray(nearby, dtype=int)
         within = ((high_b[candidates] >= low_a[i] - epsilon) &
                   (low_b[candidates] <= high_a[i] + epsilon)).all(axis=1)
-        for j in candidates[within]:
+        candidates = candidates[within]
+        if self_query:
+            candidates = candidates[candidates > i]
+        for j in candidates:
             contact = _classify(first[i], second[j], normals_a[i], normals_b[j], epsilon)
             if contact:
-                counts[contact] += 1
+                yield i, int(j), contact
+
+
+def triangle_contacts(first, second, *, epsilon=1e-7):
+    """Count transverse crossings, coplanar area overlap, and boundary contact."""
+    counts = dict(crossing=0, coplanar_overlap=0, touching=0)
+    for _, _, kind in triangle_contact_pairs(first, second, epsilon=epsilon):
+        counts[kind] += 1
     return TriangleContacts(**counts)

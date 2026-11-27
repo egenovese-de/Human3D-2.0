@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy.ndimage import binary_dilation, label
 
-from .garments import GarmentContactReport, correct_clearance, measure_garment_contacts, posed_garment, prototype
+from .garments import GarmentContactReport, correct_clearance, measure_clearance, measure_garment_contacts, posed_garment, prototype, repair_garment_contacts
 from .native_rig import pose_transforms, skin_vertices, validate_rebind
 from .frozen_body import deform_vertices
 
@@ -71,14 +71,24 @@ def fit_garment(body, fit, view, image_size, category, *, ease_mm=0, hem=0, laye
                           for ease, length in sorted(options))
     ranked = sorted(candidates, key=evaluate, reverse=True)
     image = Image.fromarray(coverage).convert("L")
-    fallback = None
+    blocked = []
     for candidate in ranked:
         shell, report = correct_clearance(candidate, body, posed, transforms)
         contacts = measure_garment_contacts(shell, body, neutral, posed, posed_garment(shell, transforms))
         result = GarmentFit(shell, image, evaluate(shell), report, contacts)
         if not result.blocked:
             return result
-        ranking = (contacts.intersections, report.violations)
-        if fallback is None or ranking < (fallback.contacts.intersections, fallback.report.violations):
-            fallback = result
-    return fallback
+        blocked.append(result)
+    blocked.sort(key=lambda candidate: (candidate.contacts.intersections, candidate.report.violations))
+    for candidate in blocked[:3]:
+        if not candidate.contacts.intersections:
+            continue
+        repaired = repair_garment_contacts(candidate.garment, body, neutral, posed, transforms)
+        if repaired is not candidate.garment:
+            posed_shell = posed_garment(repaired, transforms)
+            report = measure_clearance(repaired, body, posed, posed_shell)
+            contacts = measure_garment_contacts(repaired, body, neutral, posed, posed_shell)
+            overlap = evaluate(repaired)
+            if overlap >= candidate.overlap - .02:
+                return GarmentFit(repaired, image, overlap, report, contacts)
+    return blocked[0]

@@ -257,6 +257,42 @@ def measure_garment_contacts(garment, body, neutral_body, posed_body, posed_shel
     return GarmentContactReport(rest, target)
 
 
+def repair_garment_contacts(garment, body, neutral_body, posed_body, transforms, *, inner=None):
+    """Attempt exact localized body and optional inner-layer contact repair."""
+    from .garment_repair import repair_shell
+
+    validate_garment(garment, body)
+    faces = _triangulate(garment.faces)
+    body_faces = _triangulate(_body_faces(body))
+    rest = np.broadcast_to(np.eye(3), (len(garment.points), 3, 3))
+    zero = np.zeros_like(garment.points)
+    rotations = np.asarray([
+        sum((weight * transforms[name][0] for name, weight in weights.items()), np.zeros((3, 3)))
+        for weights in garment.skin
+    ])
+    translation = np.asarray([
+        sum((weight * transforms[name][1] for name, weight in weights.items()), np.zeros(3))
+        for weights in garment.skin
+    ])
+    obstacles = [(np.asarray(neutral_body)[body_faces], rest, zero),
+                 (np.asarray(posed_body)[body_faces], rotations, translation)]
+    if inner is not None:
+        inner_faces = _triangulate(inner.faces)
+        obstacles.extend(((inner.points[inner_faces], rest, zero),
+                          (posed_garment(inner, transforms)[inner_faces], rotations, translation)))
+    points = repair_shell(garment.points, faces, obstacles)
+    if points is garment.points:
+        return garment
+    candidate = replace(garment, points=points)
+    if measure_clearance(candidate, body, posed_body, posed_garment(candidate, transforms)).violations:
+        return garment
+    if inner is not None:
+        report = verify_layers([inner, candidate], body, posed_body, transforms)
+        if report and report.blocked:
+            return garment
+    return candidate
+
+
 def correct_clearance(garment, body, posed_body, transforms):
     """Relax penetrations locally in rest space with a bounded displacement."""
     surface = np.asarray(posed_body, dtype=float)
