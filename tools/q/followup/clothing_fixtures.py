@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Independent low-polygon garment controls and calibrated body/clothing masks."""
 import argparse
 import json
