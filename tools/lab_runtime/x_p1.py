@@ -25,8 +25,13 @@ def main(runtime,out):
                 rel=f"data/targets/macrodetails/{prefix}-{form}-{age}.target"
                 d=np.zeros_like(base)
                 for line in read(rel).splitlines():
-                    if not line.strip(): continue
-                    i,x,y,z=line.split(); d[int(i)]=[float(x),float(y),float(z)]
+                    line=line.partition('#')[0].strip()
+                    if not line: continue
+                    i,x,y,z=line.split()
+                    i=int(i)
+                    if not 0<=i<len(base): raise ValueError('target index out of range')
+                    d[i]=[float(x),float(y),float(z)]
+                if not np.isfinite(d).all(): raise ValueError('nonfinite target')
                 ds.append(d)
             basis.append(np.mean(ds,axis=0))
     basis=np.asarray(basis)
