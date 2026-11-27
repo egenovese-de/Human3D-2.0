@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Rasterize first-visible geometry with Blender BVH in the recorded metric cameras."""
 import hashlib
 import json
