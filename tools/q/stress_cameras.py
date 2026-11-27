@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render camera-only perturbations and a compound case with exact masks."""
 import hashlib
 import json
