@@ -27,7 +27,9 @@ def stage(config,run,runtime,out):
         raise ValueError("run not qualified")
     policy=json.loads((ROOT/"lab/manifests/artifact-admission.json").read_text())
     fixture=ROOT/"lab/fixtures/smoke.usda"
-    if digest(fixture)!=policy["fixture_sha256"] or digest(config)!=policy["config_sha256"]:
+    def blob(p):
+        return subprocess.check_output(["git","-C",str(ROOT),"hash-object","--",str(p)],text=True).strip()
+    if blob(fixture)!=policy["fixture_blob"] or blob(config)!=policy["config_blob"]:
         raise ValueError("unapproved fixture or configuration")
     if len(report["stages"])!=len(c["stages"]):
         raise ValueError("stage count mismatch")
