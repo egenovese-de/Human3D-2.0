@@ -149,14 +149,42 @@ def main(runtime,out):
         row={"mesh":p.name,"uv_source_count":uv_count,"bones":len(rig["bones"])}
         try:
             joints=validate_rebind(body,v)
-            t=pose_transforms(rig,joints,Alignment(Camera(0,1,0j,1),0,{"lowerarm01.L":.15}))
+            t=pose_transforms(rig,joints,Alignment(Camera(0,200/np.ptp(base[:,1]),0j,1),0,{"lowerarm01.L":.15}))
             posed=np.asarray(skin_vertices(v,rig["skin"],t))
             validate_pose(body,v,posed)
+            if np.max(np.abs(posed-v))<=1e-6: raise ValueError("pose_no_effect")
             row.update(status="PASS",pose_delta=float(np.max(np.abs(posed-v))))
         except Exception as exc:
             row.update(status="FAIL",reason=str(exc))
         checks.append(row)
     report["rig_uv"]=checks
+    diagnostics=[]
+    stable_native=reference>5e-7
+    for p in sorted(out.glob("*expanded*.obj")):
+        v=np.asarray([[float(x) for x in line.split()[1:]] for line in p.read_text().splitlines() if line.startswith("v ")])
+        a=area(v)
+        ratio=np.divide(a,reference,out=np.ones_like(a),where=stable_native)
+        bad=np.flatnonzero(stable_native & ((ratio<.03)|(ratio>30)))
+        row={"mesh":p.name,"outlier_count":len(bad),"outliers":[]}
+        for i in bad:
+            ids=tri[i]
+            influences={}
+            for j in ids:
+                for bone,w in rig["skin"][j].items(): influences[bone]=influences.get(bone,0)+w/3
+            row["outliers"].append({"triangle":int(i),"vertices":ids.tolist(),"center":base[ids].mean(axis=0).tolist(),"ratio":float(ratio[i]),"dominant_bone":max(influences,key=influences.get) if influences else None})
+        if len(bad):
+            # Diagnostic only: minimal global retreat towards neutral, no gate relaxation.
+            lo,hi=0.,1.
+            for _ in range(24):
+                mid=(lo+hi)/2
+                try: validate_rebind(body,base+mid*(v-base));lo=mid
+                except ValueError: hi=mid
+            repaired=base+lo*(v-base)
+            validate_rebind(body,repaired)
+            row["retained_deformation_fraction"]=lo
+            row["repair_mean_displacement_mm"]=float(np.linalg.norm((repaired-v)[np.unique(tri)],axis=1).mean()*100)
+        diagnostics.append(row)
+    report["distortion_diagnostics"]=diagnostics
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":
