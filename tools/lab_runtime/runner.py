@@ -10,7 +10,8 @@ import sys
 import time
 from bootstrap import ROOT, LOCK, safe, digest
 
-OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}}
+HISTORICAL={"q_evidence_boundaries":"tools/q/finalization/evidence_boundaries.py","m6_bind_control":"tools/lab_runtime/m6_bind_control.py"}
+OPERATIONS={"numerical": {"seed","expected"}, "blender_roundtrip":{"input","expected"}, **{op:{"expected"} for op in HISTORICAL}}
 
 def main():
     p=argparse.ArgumentParser()
@@ -57,12 +58,18 @@ def main():
             stage.mkdir()
             if s["operation"]=="numerical":
                 cmd=[py,ROOT/"tools/lab_runtime/numerical_probe.py","--seed",s["seed"],"--output",stage/"numerical.json"]
+            elif s["operation"] in HISTORICAL:
+                cmd=[py,ROOT/HISTORICAL[s["operation"]],stage/"metrics.json"]
             else:
                 cmd=[blender,"--background","--factory-startup","--python-exit-code","1","--python",ROOT/"tools/lab_runtime/blender_runner.py","--","--input",safe(ROOT,s["input"]),"--output",stage]
             if s["operation"]=="blender_roundtrip" and "framing" in s:
                 cmd.extend(["--framing",safe(out,s["framing"])])
             entry={"operation":s["operation"],"status":"FAIL"}
             report["stages"].append(entry)
+            if s["operation"] in HISTORICAL:
+                entry["script_sha256"]=digest(ROOT/HISTORICAL[s["operation"]])
+                if s["operation"]=="m6_bind_control":
+                    entry["original_script_sha256"]=digest(ROOT/"tools/m6/audit_bind_frames.py")
             start=time.monotonic()
             try:
                 with (stage/"execution.log").open("wb") as log:
