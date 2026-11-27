@@ -1,0 +1,137 @@
+{
+  "openblas_threads": 1,
+  "repetitions_per_side": 1,
+  "python": "3.11.9",
+  "linux_lock_sha256": "b2dc51f79acb77b17fb9a637d9ac87b01f72c00eed4e20f4913f6268d8f9cbbe",
+  "assessment": "same synthetic raster, assets, fit, bake and export, sequential runs",
+  "cases": {
+    "release": {
+      "code_sha": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+      "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+      "stages": [
+        {
+          "stage": "freeze",
+          "seconds": 0.45540082299999085,
+          "peak_process_rss_bytes": 256081920,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "synthetic_view",
+          "seconds": 0.07571357900019393,
+          "peak_process_rss_bytes": 256081920,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "fit_body",
+          "seconds": 6.374392347000139,
+          "peak_process_rss_bytes": 256081920,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "deform_rebind_pose",
+          "seconds": 0.1876097159999972,
+          "peak_process_rss_bytes": 256081920,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "body_atlas_256",
+          "seconds": 3.5596830780000346,
+          "peak_process_rss_bytes": 256081920,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "garment_top",
+          "seconds": 1.0652419159998772,
+          "peak_process_rss_bytes": 261738496,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "garment_atlas_256",
+          "seconds": 2.0330771970000114,
+          "peak_process_rss_bytes": 261738496,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "usdz",
+          "seconds": 1.162438535000092,
+          "peak_process_rss_bytes": 261738496,
+          "disk_bytes": 10014418
+        }
+      ],
+      "summary": {
+        "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+        "python": "3.11.9",
+        "wall_seconds": 14.91955453100013,
+        "initial_peak_process_rss_bytes": 197939200,
+        "peak_process_rss_bytes": 261738496,
+        "initial_disk_bytes": 4432193,
+        "final_disk_bytes": 10014418,
+        "package_bytes": 1150032
+      }
+    },
+    "development": {
+      "code_sha": "b2a84312ccf2d2119f9b7667f6368684f02455e0",
+      "frozen_sha256": "1915bb8ea49b8a79471fa03817b16962cf0ae649137d1138482566f9df5cd650",
+      "stages": [
+        {
+          "stage": "freeze",
+          "seconds": 0.4499324749999687,
+          "peak_process_rss_bytes": 256634880,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "synthetic_view",
+          "seconds": 0.07447174799995082,
+          "peak_process_rss_bytes": 256634880,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "fit_body",
+          "seconds": 5.982151773000169,
+          "peak_process_rss_bytes": 256634880,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "deform_rebind_pose",
+          "seconds": 0.12754488500013395,
+          "peak_process_rss_bytes": 256634880,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "body_atlas_256",
+          "seconds": 3.1425501020000866,
+          "peak_process_rss_bytes": 256634880,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "garment_top",
+          "seconds": 1.7806771670000217,
+          "peak_process_rss_bytes": 261140480,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "garment_atlas_256",
+          "seconds": 1.8884778159999769,
+          "peak_process_rss_bytes": 261140480,
+          "disk_bytes": 8864386
+        },
+        {
+          "stage": "usdz",
+          "seconds": 1.4692461690001437,
+          "peak_process_rss_bytes": 261140480,
+          "disk_bytes": 10010206
+        }
+      ],
+      "summary": {
+        "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+        "python": "3.11.9",
+        "wall_seconds": 14.918650241000023,
+        "initial_peak_process_rss_bytes": 198062080,
+        "peak_process_rss_bytes": 261140480,
+        "initial_disk_bytes": 4432193,
+        "final_disk_bytes": 10010206,
+        "package_bytes": 1145820
+      }
+    }
+  }
+}
