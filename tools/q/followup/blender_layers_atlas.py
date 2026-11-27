@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render separate armature-bound layers from a directly imported USDZ."""
 import argparse
 from pathlib import Path
