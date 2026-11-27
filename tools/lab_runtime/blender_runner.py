@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import sys
 import bpy
+import math
+from mathutils import Vector
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from lab_render_usd import scene_bounds, lighting, render_views
 
@@ -15,6 +17,7 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument("--input",required=True,type=Path)
     p.add_argument("--output",required=True,type=Path)
+    p.add_argument("--framing",type=Path)
     a=p.parse_args(sys.argv[sys.argv.index("--")+1:])
     if a.input.suffix.lower() not in (".usd",".usda",".usdc",".usdz"):
         raise ValueError("USD input required")
@@ -34,6 +37,11 @@ def main():
     scene=bpy.context.scene
     meshes=[o for o in scene.objects if o.type=="MESH"]
     center,span,mins,maxs=scene_bounds(meshes)
+    if a.framing:
+        frame=json.loads(a.framing.read_text())
+        center,span=Vector(frame["center"]),float(frame["span"])
+        if len(center)!=3 or not all(math.isfinite(v) for v in center) or not math.isfinite(span) or span<=0:
+            raise ValueError("invalid shared framing")
     scene.render.engine="CYCLES"
     scene.cycles.samples=8
     scene.render.resolution_x=384
@@ -49,7 +57,18 @@ def main():
     clay.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value=(0.69,0.73,0.77,1)
     scene.view_layers[0].material_override=clay
     render_views(scene,center,span,a.output,"clay")
-    (a.output/"render_report.json").write_text(json.dumps({"center":list(center),"span":span,"bounds_min":mins,"bounds_max":maxs,"resolution":[384,480],"samples":8,"views":["front","back","side","three_quarter"],"textured_mode":"imported materials; texture presence not guaranteed"},indent=2))
+    scene.view_layers[0].material_override=None
+    wire=bpy.data.materials.new("LAB_Wire")
+    wire.use_nodes=True
+    wire.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value=(0.08,0.08,0.08,1)
+    for obj in meshes:
+        obj.data.materials.clear()
+        obj.data.materials.append(wire)
+        mod=obj.modifiers.new("LAB_Wireframe","WIREFRAME")
+        mod.thickness=span*0.002
+        mod.use_replace=True
+    render_views(scene,center,span,a.output,"wireframe")
+    (a.output/"render_report.json").write_text(json.dumps({"center":list(center),"span":span,"bounds_min":mins,"bounds_max":maxs,"resolution":[384,480],"samples":8,"framing_source":str(a.framing) if a.framing else "asset_bounds","modes":["textured","clay","wireframe"],"views":["front","back","side","three_quarter"],"textured_mode":"imported materials; texture presence not guaranteed"},indent=2))
     (a.output/"blender_metrics.json").write_text(json.dumps({"before":before,"after":after,"version":bpy.app.version_string},indent=2))
 if __name__=="__main__":
     main()
