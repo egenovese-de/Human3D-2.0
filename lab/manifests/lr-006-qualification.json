@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "pending_final_regression",
+  "status": "PASS",
   "platform": "windows-2022",
   "runs": [
     {
@@ -479,6 +479,245 @@
         "2026-11-27T11:17:18.3350493Z CORRUPTION_INJECTED=D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-runtime\\assets\\foundation\\makehuman\\data\\3dobjs\\base.obj\r",
         "2026-11-27T11:18:07.8987205Z CACHE_HIT=true\r",
         "2026-11-27T11:18:07.9737019Z CACHE_REPAIR_PASS reused=372 repaired=1\r"
+      ]
+    },
+    {
+      "run_id": 45989551698,
+      "job_id": 140473731190,
+      "head_sha": "9fd53d3a8f1d1ef2780f33238303512821eb15cb",
+      "records": [
+        {
+          "status": "success",
+          "venv": "created",
+          "archive": "reused",
+          "blender": "extracted",
+          "assets": 374,
+          "reused": 373
+        },
+        {
+          "schema_version": 1,
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "platform": "windows",
+          "checks": [
+            {
+              "name": "source_revision",
+              "status": "PASS",
+              "required": true,
+              "detail": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db"
+            },
+            {
+              "name": "source_clean",
+              "status": "PASS",
+              "required": true,
+              "detail": ""
+            },
+            {
+              "name": "python",
+              "status": "PASS",
+              "required": true,
+              "detail": "3.11.9"
+            },
+            {
+              "name": "pip_check",
+              "status": "PASS",
+              "required": true,
+              "detail": "No broken requirements found."
+            },
+            {
+              "name": "dependency:numpy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.26.4"
+            },
+            {
+              "name": "dependency:scipy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.15.3"
+            },
+            {
+              "name": "dependency:pillow",
+              "status": "PASS",
+              "required": true,
+              "detail": "13.0.0"
+            },
+            {
+              "name": "dependency:mediapipe",
+              "status": "PASS",
+              "required": true,
+              "detail": "0.10.33"
+            },
+            {
+              "name": "dependency:usd-core",
+              "status": "PASS",
+              "required": true,
+              "detail": "25.11"
+            },
+            {
+              "name": "dependency:pyside6",
+              "status": "PASS",
+              "required": true,
+              "detail": "6.8.3"
+            },
+            {
+              "name": "dependency_lock",
+              "status": "PASS",
+              "required": true,
+              "detail": "6d2cd321e409f261616e691c157abc499e08cf531b9679cec66a3c25cb4088f4"
+            },
+            {
+              "name": "blender_archive",
+              "status": "PASS",
+              "required": true,
+              "detail": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
+            },
+            {
+              "name": "blender_version",
+              "status": "PASS",
+              "required": true,
+              "detail": [
+                "Blender",
+                "4.5.3"
+              ]
+            },
+            {
+              "name": "blender_headless",
+              "status": "PASS",
+              "required": true,
+              "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)\n\nBlender quit"
+            },
+            {
+              "name": "numerical_import",
+              "status": "PASS",
+              "required": true,
+              "detail": "NUMERIC_OK"
+            },
+            {
+              "name": "openusd",
+              "status": "PASS",
+              "required": true,
+              "detail": "USD_OK"
+            },
+            {
+              "name": "qt_offscreen",
+              "status": "PASS",
+              "required": true,
+              "detail": "QT_OK"
+            },
+            {
+              "name": "human3d",
+              "status": "PASS",
+              "required": true,
+              "detail": "D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-source\\src\\human3d\\__init__.py"
+            },
+            {
+              "name": "assets:foundation",
+              "status": "PASS",
+              "required": true,
+              "detail": 357
+            },
+            {
+              "name": "assets:morph02",
+              "status": "PASS",
+              "required": true,
+              "detail": 10
+            },
+            {
+              "name": "assets:pose_lite",
+              "status": "PASS",
+              "required": true,
+              "detail": 1
+            },
+            {
+              "name": "assets:anatomical_torso",
+              "status": "PASS",
+              "required": true,
+              "detail": 6
+            },
+            {
+              "name": "mediapipe_init",
+              "status": "PASS",
+              "required": true,
+              "detail": "POSE_OK"
+            },
+            {
+              "name": "output_and_disk",
+              "status": "PASS",
+              "required": true,
+              "detail": 155298721792
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "schema_version": 1,
+          "id": "lr-004-smoke",
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "config_sha256": "7a315e01aa03305079cf8dede61b385012e643238491f4188979f8649188fb71",
+          "status": "PASS",
+          "stages": [
+            {
+              "operation": "numerical",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "numerical.json": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+              },
+              "seconds": 0.26599999999999113
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "ef8bebf34fbd7cd936c6986a645f4081619ce4aab9ca1da8272364c07cf62426",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "22648ef844b539001f8bab89d6ab262ece23ad2388b8ca51cb04427ecefc13ab",
+                "clay_front.png": "9b224ed370b976fdc4743351bd345a98641e4b05e2d1670968b5fb180e24546f",
+                "clay_back.png": "3eb1cea8bad308b2c93569041d68c9b0f9007af249076bffd93f900c5ebea1f5",
+                "clay_side.png": "78c5cbc7a683fbc205f287ebd17fe02eb6e0c70ba578895bb53836d8b8f1a512",
+                "clay_three_quarter.png": "e607ada94f4201612fc10e54e824e2e7ef2344949582fd1d03a6047d6bff1c8f",
+                "textured_front.png": "8773e4fcec986e8ba78f4a12464dd203300b3ea526bc0ff034a64b81c44dfa29",
+                "textured_back.png": "0fd6544f5c0185b5c8344a18a40dd994ce1103d92abf4ba486c4b50edf7a4258",
+                "textured_side.png": "c0db4bc6f440fd1342ed9a140e77e0e23a6436a91b113e2674268a21d498ac88",
+                "textured_three_quarter.png": "d2b66b4fc1f778293e58f745cd04ea75a370e248c7152fcc7b6c3d2f55db35b6",
+                "wireframe_front.png": "4256ba88a911a15b2e4dea559fec90a034c6e33c8ac3d1715999d542e4277a29",
+                "wireframe_back.png": "d5d2d418df4a164dce27f1913acfcea0f37bd04d3d755ab1becd23a41732e9f6",
+                "wireframe_side.png": "3065e369408aadd76d0205a9cf7ef39baaae9ccbfeb7b845394f1aed3ff89739",
+                "wireframe_three_quarter.png": "a8fb5787801b13ad45028215ac4edbc6565bb2fd7f4d163b736607354c2cd817"
+              },
+              "seconds": 28.98400000000001
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "e99ed829a5b08918aced65d5b9cad62c34d1b8740b6416c09878f50587e4c8b5",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "fea4b7fbd89a5d777740579d5b71d53848354a9420d7f592905d8f505954c518",
+                "clay_front.png": "72e8a28acc2d63b948659c8b5424707edda96bb0fb377ec7d1bc399481ff8050",
+                "clay_back.png": "0e5596f6728d009d42cd6781c8af5e44dcd1674c5866d2c951a7f3ffbda82a3a",
+                "clay_side.png": "7ea350fb3d2d748da8d58f0209614041397fb5134565085d19028da0a6010f30",
+                "clay_three_quarter.png": "2eddd0f96837e7d3b67277b896116a27c1abf759081fd69b342b262431c371d0",
+                "textured_front.png": "72d5e1f8a0e737fe30d8af75dabfa35ef921a655d7ae68d3551b14f68852b15b",
+                "textured_back.png": "1be1ddef4ca22afa4b46570ace784606ed0e67e4f432002c231f2f0081475d5b",
+                "textured_side.png": "eee53e0abfdbbec1f4e0d5195298016a475eab609f6f618096b812d536c03b42",
+                "textured_three_quarter.png": "80120f774573fa79d82ce46d685b90f3da4ae6facc11accf3fb9ef0ffbc7d816",
+                "wireframe_front.png": "f9ff9fe69245abe93aaa9e6628f370e178b845a2f2daa61c61c996c0aeaf2cd1",
+                "wireframe_back.png": "e1812775355ed47bc7f5f279b7d6dc3d23d56e34decc5bed32e123d3d9460d12",
+                "wireframe_side.png": "62748d0651e76c130d4bfe725129bea0fd9655f51610fac23aade9f2b88ab958",
+                "wireframe_three_quarter.png": "cf309c51165971619897b68edba45eabbfc82f24ce76aa61bef50dcade8aba8d"
+              },
+              "seconds": 28.187999999999988
+            }
+          ]
+        }
+      ],
+      "cache_evidence": [
+        "2026-11-27T11:20:09.3015009Z Cache hit for: lab-windows-2022-x64-59ab7cc3be2c569ef55eb8f732c07d4480ba601f189f77de1ecaf1f130561b6e\r",
+        "2026-11-27T11:20:12.5482976Z Cache restored successfully\r",
+        "2026-11-27T11:21:06.2596549Z CACHE_HIT=true\r"
       ]
     }
   ],
