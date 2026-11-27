@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "source_revision": "08e4d263ee15a21467dae7a286c855f8a271b36e",
+  "run_id": 45977094751,
+  "previous_failed_run": 45976907493,
+  "root_cause": "Blender version line includes LTS suffix",
+  "tests": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS"
+  },
+  "jobs": [
+    {
+      "id": 140431430863,
+      "name": "bootstrap (windows-2022)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Clean bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Repeat bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Assert reuse",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ],
+      "evidence": [
+        "2026-11-27T09:51:41.1043956Z Blender version output: 'Blender 4.5.3 LTS'",
+        "2026-11-27T09:53:04.7723772Z {\"status\": \"success\", \"venv\": \"created\", \"archive\": \"downloaded\", \"blender\": \"extracted\", \"assets\": 374, \"reused\": 0}",
+        "2026-11-27T09:53:05.9786382Z Blender version output: 'Blender 4.5.3 LTS'",
+        "2026-11-27T09:53:06.1792130Z {\"status\": \"success\", \"venv\": \"reused\", \"archive\": \"reused\", \"blender\": \"reused\", \"assets\": 374, \"reused\": 374}",
+        "2026-11-27T09:53:06.4814035Z REUSE PASS 374"
+      ]
+    },
+    {
+      "id": 140431431231,
+      "name": "bootstrap (ubuntu-24.04)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Clean bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Repeat bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Assert reuse",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ],
+      "evidence": [
+        "2026-11-27T09:51:42.0932486Z Blender version output: 'Blender 4.5.3 LTS'",
+        "2026-11-27T09:52:56.7077626Z {\"status\": \"success\", \"venv\": \"created\", \"archive\": \"downloaded\", \"blender\": \"extracted\", \"assets\": 374, \"reused\": 0}",
+        "2026-11-27T09:52:57.4574020Z Blender version output: 'Blender 4.5.3 LTS'",
+        "2026-11-27T09:52:57.5636445Z {\"status\": \"success\", \"venv\": \"reused\", \"archive\": \"reused\", \"blender\": \"reused\", \"assets\": 374, \"reused\": 374}",
+        "2026-11-27T09:52:57.5959664Z REUSE PASS 374"
+      ]
+    }
+  ],
+  "limitations": [
+    "Requires preinstalled CPython 3.11.9",
+    "Local reuse only; shared CI caching deferred",
+    "Full runtime verification deferred to LR-003"
+  ]
+}
