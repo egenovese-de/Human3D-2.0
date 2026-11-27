@@ -56,3 +56,9 @@ jobs:
           name: x-p1-renders
           path: lab-output/x-p1-renders/
           if-no-files-found: error
+      - name: Publish persisted CC0-derived assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: x-p1-persisted-assets
+          path: lab-output/x-p1/assets/
+          if-no-files-found: error

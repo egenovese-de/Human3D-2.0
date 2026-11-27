@@ -212,6 +212,65 @@ def main(runtime,out):
             seed.update(int(i) for face in tri if any(int(j) in previous for j in face) for i in face)
         repairs.append(result)
     report["local_repairs"]=repairs
+    # Persist the validated anatomy, with original topology, UV and rebound joints.
+    from copy import deepcopy
+    from types import SimpleNamespace
+    from human3d.frozen_body import load_frozen_body
+    from human3d.usd_export import export_body
+    from pxr import Usd, UsdGeom, UsdSkel
+    from PIL import Image
+    persist=out/"assets";persist.mkdir()
+    persistence=[]
+    body_ids=np.unique(tri)
+    for name,_ in subjects:
+        path=out/(name+"_expanded_expanded.obj")
+        repaired=out/(path.stem+"_local_repair.obj")
+        if repaired.exists(): path=repaired
+        v=np.asarray([[float(x) for x in line.split()[1:]] for line in path.read_text().splitlines() if line.startswith("v ")])
+        joints=validate_rebind(body,v)
+        frozen=deepcopy(body)
+        frozen.update(schema_version=1,kind="frozen_body")
+        frozen["mesh"]["vertices"]=v.tolist()
+        frozen["rig"]["joints"]={k:a.tolist() for k,a in joints.items()}
+        raw=json.dumps(frozen,sort_keys=True,separators=(",",":"),allow_nan=False).encode()
+        fp=persist/(hashlib.sha256(raw).hexdigest()+".json");fp.write_bytes(raw)
+        restored=load_frozen_body(fp)
+        if restored!=frozen: raise ValueError("frozen roundtrip mismatch")
+        dst=persist/(name+".usdz")
+        alignment=Alignment(Camera(0,200/np.ptp(base[:,1]),0j,1),0,{})
+        export_body(dst,restored,SimpleNamespace(controls={}),alignment,texture=Image.new("RGB",(32,32),(180,180,180)))
+        stage=Usd.Stage.Open(str(dst))
+        m=UsdGeom.Mesh.Get(stage,"/Human/Body")
+        uv=UsdGeom.PrimvarsAPI(m).GetPrimvar("st")
+        sk=UsdSkel.Skeleton.Get(stage,"/Human/Rig")
+        binding=UsdSkel.BindingAPI(m.GetPrim())
+        weights=np.asarray(binding.GetJointWeightsPrimvar().Get()).reshape(len(body_ids),-1)
+        err=float(np.max(np.abs(np.asarray(m.GetPointsAttr().Get())-v[body_ids])))
+        if err>1e-5 or len(sk.GetJointsAttr().Get())!=len(rig["bones"]) or len(uv.GetIndices())!=sum(len(f) for f in body_faces) or not np.allclose(weights.sum(axis=1),1,atol=1e-6): raise ValueError("USD persistence mismatch")
+        persistence.append({"subject":name,"status":"PASS","frozen_sha256":digest(fp),"usdz_sha256":digest(dst),"vertices":len(body_ids),"bones":len(sk.GetJointsAttr().Get()),"uv_corners":len(uv.GetIndices()),"point_max_error_mm":err*100})
+    report["persistence"]=persistence
+    # Independent deformation generator, not independent topology or human scan.
+    # Smooth spatial warps are not synthesized from any MakeHuman target basis.
+    independent=[]
+    y=base[:,1];x=base[:,0];z=base[:,2]
+    for name,amp in (("warp01",.12),("warp02",-.10),("warp03",.18),("warp04",-.16)):
+        truth=base.copy()
+        truth[:,0]+=amp*x*np.exp(-((y-1.2)/2.3)**2)
+        truth[:,2]+=amp*2*np.exp(-((y-.2)/1.8)**2-(x/2.2)**2)
+        truth[:,1]+=amp*.6*np.tanh(y/3)
+        validate_rebind(body,truth)
+        obj(name+"_truth",truth)
+        # Identical oracle surface observations, disjoint sampled and evaluation vertices.
+        train=body_ids[::3];test=np.setdiff1d(body_ids,train)
+        D=basis[:,train,:].reshape(4,-1).T
+        result=lsq_linear(D,(truth-base)[train].reshape(-1),bounds=(0,1))
+        pred=base+np.tensordot(result.x,basis,axes=1)
+        for method,v in (("neutral",base),("parametric",pred)):
+            obj(name+"_"+method,v)
+            dist=np.linalg.norm(v[test]-truth[test],axis=1)*100
+            independent.append({"subject":name,"method":method,"mean_mm":float(dist.mean()),"p95_mm":float(np.percentile(dist,95)),"train_vertices":len(train),"test_vertices":len(test)})
+    report["independent_deformation_scope"]="procedural spatial warp, shared MakeHuman topology, oracle 3D observations; not independent human scan or image reconstruction"
+    report["independent_deformation"]=independent
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps(report))
 if __name__=="__main__":
