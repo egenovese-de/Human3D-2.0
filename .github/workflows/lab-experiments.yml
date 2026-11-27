@@ -54,7 +54,7 @@ jobs:
             .lab-runtime/assets/foundation
             .lab-runtime/assets/morph02
             .lab-runtime/assets/anatomical_torso
-          key: ${{ needs.request.outputs.cache_key }}
+          key: cc0-only-v2-${{ needs.request.outputs.cache_key }}
       - name: Provision and verify
         env:
           GROUPS: ${{ needs.request.outputs.groups }}
@@ -68,6 +68,10 @@ jobs:
           python tools/lab_runtime/verify.py --source .lab-source --source-revision $env:SOURCE @argsList
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Write-Output "CACHE_HIT=$env:CACHE_HIT"
+      - name: Inventory installed package licenses
+        run: |
+          .lab-runtime/venv/Scripts/python.exe -c "import importlib.metadata as m,json; print('LICENSE_INVENTORY='+json.dumps([{'name':d.metadata['Name'],'version':d.version,'license':d.metadata.get('License-Expression') or d.metadata.get('License'),'classifiers':d.metadata.get_all('Classifier',[]),'notices':[str(f) for f in (d.files or []) if any(k in str(f).lower() for k in ('license','notice','copying'))]} for d in m.distributions()]))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Execute admitted experiment
         env:
           CONFIG: ${{ needs.request.outputs.config }}
