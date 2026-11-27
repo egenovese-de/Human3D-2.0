@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "pending_negative_controls",
+  "run_id": 45990286545,
+  "job_id": 140476171565,
+  "lab_revision": "94f3deac0810062807771bad51666529c4a1af4c",
+  "artifact_id": 15193068240,
+  "bytes": 4071750,
+  "github_sha256": "89d7dba8b153dba871abb89bd431ddd789a0386b2ff07ac404848b0384905831",
+  "independently_computed_sha256": "89d7dba8b153dba871abb89bd431ddd789a0386b2ff07ac404848b0384905831",
+  "download": "GitHub connector ZIP mounted in analysis container",
+  "crc": "PASS",
+  "inventory": "PASS",
+  "file_sha256_and_size": {
+    "passed": 40,
+    "total": 40
+  },
+  "zip_entries": 41,
+  "retention_days": 7,
+  "expires_at": "2026-12-04T11:27:19Z",
+  "scope": "procedural cube only",
+  "negative_control_revision": "2d5af9b7fa3a40179649b5da6f2a1e7dbf0af2e3",
+  "limitations": [
+    "native human and USDZ outputs not exercised",
+    "license audit deferred LR-008",
+    "negative CI controls pending"
+  ]
+}
