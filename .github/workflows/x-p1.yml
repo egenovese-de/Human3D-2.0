@@ -2,7 +2,7 @@ name: X P1 macro capacity pilot
 on:
   push:
     branches: [lab/render]
-    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', '.github/workflows/x-p1.yml']
+    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', 'tools/lab_runtime/x_p1_editable.py', '.github/workflows/x-p1.yml']
 permissions:
   contents: read
 concurrency:
@@ -43,6 +43,10 @@ jobs:
         run: |
           .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p1_render.py -- lab-output/x-p1 lab-output/x-p1-renders
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify editable body persistence
+        run: |
+          .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p1_editable.py -- lab-output/x-p1/assets lab-output/x-p1-editable
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Publish numerical evidence only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -62,3 +66,10 @@ jobs:
           name: x-p1-persisted-assets
           path: lab-output/x-p1/assets/
           if-no-files-found: error
+      - name: Publish editable persistence measurements
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: x-p1-editable-metrics
+          path: lab-output/x-p1-editable/editable.json
+          if-no-files-found: error
+          retention-days: 7
