@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "upstream": "https://github.com/makehumancommunity/makehuman",
+  "revision": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "license": "CC0-1.0",
+  "license_path": "LICENSE.ASSETS.md",
+  "files": [
+    {
+      "path": "makehuman/data/targets/armslegs/l-upperarm-scale-horiz-decr.target",
+      "bytes": 44043,
+      "sha256": "55910a23ec39a334c20a4d624b676e62aaf7b900c146ef306b75b1e58eec98b8"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/l-upperarm-scale-horiz-incr.target",
+      "bytes": 41574,
+      "sha256": "923b08690dc1ad59f019600623a4a06e8b4830d7e871d75477017cae0f589187"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/l-upperleg-scale-horiz-decr.target",
+      "bytes": 9541,
+      "sha256": "e6f86444cf78f3e0cd63bdd05e6073c8412e29b4579089efb7381b3196b7e690"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/l-upperleg-scale-horiz-incr.target",
+      "bytes": 12354,
+      "sha256": "6c92349bc515e50e94adfbfe12f522dcb5c35d84e9cb4763f573b1543609d4f6"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/l-lowerleg-scale-horiz-decr.target",
+      "bytes": 7995,
+      "sha256": "c1bf1697bfa0bd34ad928b7a221bd343db64ddbb837cd960f51e122d0eb088b4"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/l-lowerleg-scale-horiz-incr.target",
+      "bytes": 10386,
+      "sha256": "8c7aab0753b1a96ec9501abff886c0076b55568ac963a24206967e7df4410730"
+    },
+    {
+      "path": "makehuman/data/targets/hip/hip-scale-horiz-decr.target",
+      "bytes": 32914,
+      "sha256": "b841b486b0f404249d47e0076c31f95c33e358f1cc45e47b499484c84b901330"
+    },
+    {
+      "path": "makehuman/data/targets/hip/hip-scale-horiz-incr.target",
+      "bytes": 32914,
+      "sha256": "2863ee4478f548cd2cdd932037fcd21e6b364b9a2d86911d3b603be18f598da7"
+    },
+    {
+      "path": "makehuman/data/targets/breast/breast-dist-decr.target",
+      "bytes": 8270,
+      "sha256": "a052af5c0b7bac35b0ce429ebbf240da036d93941370d8b576e19ec837d110a3"
+    },
+    {
+      "path": "makehuman/data/targets/breast/breast-dist-incr.target",
+      "bytes": 10604,
+      "sha256": "52f631c09ff5ebaa7d350cc966d2cc531017d9d554bd42a98bc3b0aee98af55f"
+    },
+    {
+      "path": "makehuman/data/targets/stomach/stomach-tone-decr.target",
+      "bytes": 9440,
+      "sha256": "74806fe39dad66fd525662833026d0de327a4b8eee1d7bbbd65f3ff3958a8439"
+    },
+    {
+      "path": "makehuman/data/targets/stomach/stomach-tone-incr.target",
+      "bytes": 3949,
+      "sha256": "0fc4629f4f38b7c83dadc3a1a650f0db6e8c50f974ff57eb920d4881cadcf0d9"
+    },
+    {
+      "path": "makehuman/data/targets/buttocks/buttocks-volume-decr.target",
+      "bytes": 7599,
+      "sha256": "cbead3b5ea8fb4726e77b2ef16d8c4fa3df54ed3787338bc9bc8271cd400dcc9"
+    },
+    {
+      "path": "makehuman/data/targets/buttocks/buttocks-volume-incr.target",
+      "bytes": 22351,
+      "sha256": "1ba81c82932e21420ff20bc8f35489061f2f3d79d4b3130b61fe872602156b01"
+    },
+    {
+      "path": "makehuman/data/targets/head/head-fat-decr.target",
+      "bytes": 14347,
+      "sha256": "00473b6069f9cf6c05a2f1fd0c0bae20bb4ec45e9552bb5695f1d1533f3cc119"
+    },
+    {
+      "path": "makehuman/data/targets/head/head-fat-incr.target",
+      "bytes": 14473,
+      "sha256": "075d18cdfea9e781ae0152132bfea97ea9b901ffdece8d5e6866cb1744f10056"
+    },
+    {
+      "path": "makehuman/data/targets/nose/nose-flaring-decr.target",
+      "bytes": 3350,
+      "sha256": "394229c051ec21a8d233341d7ff1b2dc94da7929ace1d0bb2de2bcbdd08d6c0f"
+    },
+    {
+      "path": "makehuman/data/targets/nose/nose-flaring-incr.target",
+      "bytes": 3072,
+      "sha256": "697eccedc27b77abbbdc8de87af193e2a5818b9a535e7f0ec8016ce848892fad"
+    },
+    {
+      "path": "makehuman/data/targets/pelvis/pelvis-tone-decr.target",
+      "bytes": 6978,
+      "sha256": "6ff89c892eecbe297616b3c728a5965007c3f2fc3272d8208791cf13ead3bf8e"
+    },
+    {
+      "path": "makehuman/data/targets/pelvis/pelvis-tone-incr.target",
+      "bytes": 18926,
+      "sha256": "cdf7cb0e84292141e8c2862f467310529fb6e8a015761bb02ee3f7e9195ea1d1"
+    }
+  ]
+}

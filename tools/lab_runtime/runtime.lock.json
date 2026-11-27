@@ -73,6 +73,11 @@
       "required": false,
       "cache_allowed": false,
       "kind": "historical_inventory"
+    },
+    "p1_anatomy": {
+      "manifest": "lab/manifests/makehuman-p1-anatomy.json",
+      "required": false,
+      "cache_allowed": false
     }
   },
   "environment": {

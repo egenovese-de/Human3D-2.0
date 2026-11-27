@@ -2,7 +2,7 @@ name: X P1 macro capacity pilot
 on:
   push:
     branches: [lab/render]
-    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', 'tools/lab_runtime/x_p1_editable.py', '.github/workflows/x-p1.yml']
+    paths: ['tools/lab_runtime/x_p1.py', 'tools/lab_runtime/x_p1_render.py', 'tools/lab_runtime/x_p1_editable.py', 'tools/lab_runtime/x_p1_admission.py', 'lab/manifests/makehuman-p1-anatomy.json', '.github/workflows/x-p1.yml']
 permissions:
   contents: read
 concurrency:
@@ -30,9 +30,9 @@ jobs:
           key: x-p1-foundation-${{ hashFiles('DOCS/manifests/makehuman-v1.3.0.json') }}
       - name: Provision locked Lab
         run: |
-          python tools/lab_runtime/bootstrap.py --group anatomical_torso
+          python tools/lab_runtime/bootstrap.py --group anatomical_torso --group p1_anatomy
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso
+          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso --group p1_anatomy
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Execute P1 pilot
         run: |
@@ -47,29 +47,14 @@ jobs:
         run: |
           .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p1_editable.py -- lab-output/x-p1/assets lab-output/x-p1-editable
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Publish numerical evidence only
-        if: always()
+      - name: Admit P1 evidence
+        run: |
+          python tools/lab_runtime/x_p1_admission.py --root lab-output --runtime .lab-runtime --output lab-output/p1-admitted
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Publish admitted P1 evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: x-p1-metrics
-          path: lab-output/x-p1/metrics.json
-          if-no-files-found: error
-      - name: Publish CC0-derived comparison renders
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: x-p1-renders
-          path: lab-output/x-p1-renders/
-          if-no-files-found: error
-      - name: Publish persisted CC0-derived assets
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: x-p1-persisted-assets
-          path: lab-output/x-p1/assets/
-          if-no-files-found: error
-      - name: Publish editable persistence measurements
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: x-p1-editable-metrics
-          path: lab-output/x-p1-editable/editable.json
+          name: x-p1-admitted
+          path: lab-output/p1-admitted/
           if-no-files-found: error
           retention-days: 7
