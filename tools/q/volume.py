@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Approximate common-frame body occupancy with axis-wise Blender BVH parity."""
 from collections import Counter
 import json
