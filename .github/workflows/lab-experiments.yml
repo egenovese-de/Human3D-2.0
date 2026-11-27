@@ -79,6 +79,9 @@ jobs:
       - name: Offline evidence replay
         if: needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         run: python tools/lab_runtime/evidence_control.py lab-output/experiment
+      - name: Negative runtime controls
+        if: needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
+        run: python tools/lab_runtime/negative_control.py
       - name: Stage admitted artifact
         if: needs.request.outputs.config == 'lab/experiments/lr-004-smoke.json' || needs.request.outputs.config == 'lab/experiments/lr-009-native.json'
         env:
@@ -113,5 +116,6 @@ jobs:
       - name: Diagnostics
         if: always()
         run: |
+          if (Test-Path lab-output/experiment) { Get-ChildItem lab-output/experiment -Recurse -Filter execution.log | ForEach-Object { Get-Content $_.FullName -Tail 80 } }
           if (Test-Path .lab-runtime/runtime_report.json) { Get-Content .lab-runtime/runtime_report.json -Raw }
           if (Test-Path lab-output/experiment/run_manifest.json) { Get-Content lab-output/experiment/run_manifest.json -Raw }
