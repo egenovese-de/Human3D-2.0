@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "status": "pending_final_regression",
+  "platform": "windows-2022",
+  "runs": [
+    {
+      "run_id": 45986563960,
+      "job_id": 140463731825,
+      "records": [
+        {
+          "status": "success",
+          "venv": "created",
+          "archive": "downloaded",
+          "blender": "extracted",
+          "assets": 374,
+          "reused": 0
+        },
+        {
+          "schema_version": 1,
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "platform": "windows",
+          "checks": [
+            {
+              "name": "source_revision",
+              "status": "PASS",
+              "required": true,
+              "detail": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db"
+            },
+            {
+              "name": "source_clean",
+              "status": "PASS",
+              "required": true,
+              "detail": ""
+            },
+            {
+              "name": "python",
+              "status": "PASS",
+              "required": true,
+              "detail": "3.11.9"
+            },
+            {
+              "name": "pip_check",
+              "status": "PASS",
+              "required": true,
+              "detail": "No broken requirements found."
+            },
+            {
+              "name": "dependency:numpy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.26.4"
+            },
+            {
+              "name": "dependency:scipy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.15.3"
+            },
+            {
+              "name": "dependency:pillow",
+              "status": "PASS",
+              "required": true,
+              "detail": "13.0.0"
+            },
+            {
+              "name": "dependency:mediapipe",
+              "status": "PASS",
+              "required": true,
+              "detail": "0.10.33"
+            },
+            {
+              "name": "dependency:usd-core",
+              "status": "PASS",
+              "required": true,
+              "detail": "25.11"
+            },
+            {
+              "name": "dependency:pyside6",
+              "status": "PASS",
+              "required": true,
+              "detail": "6.8.3"
+            },
+            {
+              "name": "dependency_lock",
+              "status": "PASS",
+              "required": true,
+              "detail": "6d2cd321e409f261616e691c157abc499e08cf531b9679cec66a3c25cb4088f4"
+            },
+            {
+              "name": "blender_archive",
+              "status": "PASS",
+              "required": true,
+              "detail": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
+            },
+            {
+              "name": "blender_version",
+              "status": "PASS",
+              "required": true,
+              "detail": [
+                "Blender",
+                "4.5.3"
+              ]
+            },
+            {
+              "name": "blender_headless",
+              "status": "PASS",
+              "required": true,
+              "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)\n\nBlender quit"
+            },
+            {
+              "name": "numerical_import",
+              "status": "PASS",
+              "required": true,
+              "detail": "NUMERIC_OK"
+            },
+            {
+              "name": "openusd",
+              "status": "PASS",
+              "required": true,
+              "detail": "USD_OK"
+            },
+            {
+              "name": "qt_offscreen",
+              "status": "PASS",
+              "required": true,
+              "detail": "QT_OK"
+            },
+            {
+              "name": "human3d",
+              "status": "PASS",
+              "required": true,
+              "detail": "D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-source\\src\\human3d\\__init__.py"
+            },
+            {
+              "name": "assets:foundation",
+              "status": "PASS",
+              "required": true,
+              "detail": 357
+            },
+            {
+              "name": "assets:morph02",
+              "status": "PASS",
+              "required": true,
+              "detail": 10
+            },
+            {
+              "name": "assets:pose_lite",
+              "status": "PASS",
+              "required": true,
+              "detail": 1
+            },
+            {
+              "name": "assets:anatomical_torso",
+              "status": "PASS",
+              "required": true,
+              "detail": 6
+            },
+            {
+              "name": "mediapipe_init",
+              "status": "PASS",
+              "required": true,
+              "detail": "POSE_OK"
+            },
+            {
+              "name": "output_and_disk",
+              "status": "PASS",
+              "required": true,
+              "detail": 155299770368
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "schema_version": 1,
+          "id": "lr-004-smoke",
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "config_sha256": "7a315e01aa03305079cf8dede61b385012e643238491f4188979f8649188fb71",
+          "status": "PASS",
+          "stages": [
+            {
+              "operation": "numerical",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "numerical.json": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+              },
+              "seconds": 0.23499999999989996
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "7fdfb007a765ee3144864c1f51fb7a09a2946e8dea9199f08f5624be464de037",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "22648ef844b539001f8bab89d6ab262ece23ad2388b8ca51cb04427ecefc13ab",
+                "clay_front.png": "56077c7d873a70331a301658b28079bd27fdcdb8da35af253d4b76c9ca919ba0",
+                "clay_back.png": "1a6508e3e1862abeca914df573c9341fbf1ffdf2d0078b72b6adc8873206a0ca",
+                "clay_side.png": "ed48fe9fbea5fda7fcb26ec553bff629b5e6ed349b068e59911ef9cf39223b80",
+                "clay_three_quarter.png": "f3cbdc06a21252e4a67c5f4e19c27a92479bdbb0aed949e5d7626d9d836f01a3",
+                "textured_front.png": "4548d5d47763e8ecde9a21b491d14e8d7d9fe5da60a8688285e12bea1ab0645d",
+                "textured_back.png": "55ea5280bbb810c4bcfc9f5eabccf8bbec6392077c1dcca8147ee8818d825e4d",
+                "textured_side.png": "98869bbf13c109889566f43d2615ea32a2a5a514cfb7face614e4f729f1eab62",
+                "textured_three_quarter.png": "bdf3f3499a20688c019772fb845a319d4979e0ed188aaf75523ad4178612d03d",
+                "wireframe_front.png": "3c6531f37555166223965de8a18307e99372460f1dcf193dab5d64723d23fac1",
+                "wireframe_back.png": "0097b66a0f5a5d176615940e75072fb821bde3fbcd07202643d6cd632da79af4",
+                "wireframe_side.png": "f9d68a6c13c46c63825b4f1905694209b3f4e719601f3924955016456c50950b",
+                "wireframe_three_quarter.png": "a31c71ada768e96b6ec5fe709ef466f6a6edc5c8d63ea17921313de5bc192163"
+              },
+              "seconds": 20.71900000000005
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "1431c016e4ee5a33d5860638a59048985c0ba6bb8d285ffcc6f64098ccbb9e60",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "fea4b7fbd89a5d777740579d5b71d53848354a9420d7f592905d8f505954c518",
+                "clay_front.png": "357f1b20af5af70948d8eed10c28c7bd5949bd7698fee3091396a85bfdd0deef",
+                "clay_back.png": "b1507ed8850ca05d6fb71e008c75ebb7dcc1329dc0ffd088dd12b31e279dd7b5",
+                "clay_side.png": "41690e8661c8d0fd40cf668f905cbce0d02878e1a44ca1825a20071032c091bd",
+                "clay_three_quarter.png": "0d7d90ef141690b191c8a7e81ff18d35eb276b096c6f3ce19689d37b4bbe23dd",
+                "textured_front.png": "b60e9689590a075ab53ed0b3359a7091867234c448b537f5f0962ed7e3d88171",
+                "textured_back.png": "9e959ae6d98320dfc2916259df0514fb9a7e6881144d3087a085e0c4e58d0cf1",
+                "textured_side.png": "47a6bf2747273ccdcbc8f847f0ee6bbbf82d90e47fa49e4eb4095e2f623af501",
+                "textured_three_quarter.png": "23f16901d7b0ba987f4478fb1fe75e09a5008e0898485cc5559b6cc0f425588a",
+                "wireframe_front.png": "573298df4755f662b5b53725e8bdc01ddc54cf215b8a2c709e9f0fad4377665c",
+                "wireframe_back.png": "1b971f81acbcea7e34d328671fed1b493cb313d8d346d6de4b205b3ff8397ade",
+                "wireframe_side.png": "ac27ba817fa7a01993adb0d9b13c46aea743e3a127a2aac87b270bc0453588c0",
+                "wireframe_three_quarter.png": "2764bb8603b69a495c9f305488b09cbfd7d3d0a911719b55f1dc330be0d9cb24"
+              },
+              "seconds": 19.687000000000012
+            }
+          ]
+        }
+      ],
+      "cache_evidence": [
+        "2026-11-27T10:59:00.2078484Z Cache not found for input keys: lab-windows-2022-x64-59ab7cc3be2c569ef55eb8f732c07d4480ba601f189f77de1ecaf1f130561b6e\r",
+        "2026-11-27T11:01:40.9222197Z CACHE_HIT=\r",
+        "2026-11-27T11:02:26.5579440Z Cache saved with key: lab-windows-2022-x64-59ab7cc3be2c569ef55eb8f732c07d4480ba601f189f77de1ecaf1f130561b6e\r"
+      ]
+    },
+    {
+      "run_id": 45989159322,
+      "job_id": 140472388267,
+      "records": [
+        {
+          "status": "success",
+          "venv": "created",
+          "archive": "reused",
+          "blender": "extracted",
+          "assets": 374,
+          "reused": 372
+        },
+        {
+          "schema_version": 1,
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "platform": "windows",
+          "checks": [
+            {
+              "name": "source_revision",
+              "status": "PASS",
+              "required": true,
+              "detail": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db"
+            },
+            {
+              "name": "source_clean",
+              "status": "PASS",
+              "required": true,
+              "detail": ""
+            },
+            {
+              "name": "python",
+              "status": "PASS",
+              "required": true,
+              "detail": "3.11.9"
+            },
+            {
+              "name": "pip_check",
+              "status": "PASS",
+              "required": true,
+              "detail": "No broken requirements found."
+            },
+            {
+              "name": "dependency:numpy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.26.4"
+            },
+            {
+              "name": "dependency:scipy",
+              "status": "PASS",
+              "required": true,
+              "detail": "1.15.3"
+            },
+            {
+              "name": "dependency:pillow",
+              "status": "PASS",
+              "required": true,
+              "detail": "13.0.0"
+            },
+            {
+              "name": "dependency:mediapipe",
+              "status": "PASS",
+              "required": true,
+              "detail": "0.10.33"
+            },
+            {
+              "name": "dependency:usd-core",
+              "status": "PASS",
+              "required": true,
+              "detail": "25.11"
+            },
+            {
+              "name": "dependency:pyside6",
+              "status": "PASS",
+              "required": true,
+              "detail": "6.8.3"
+            },
+            {
+              "name": "dependency_lock",
+              "status": "PASS",
+              "required": true,
+              "detail": "6d2cd321e409f261616e691c157abc499e08cf531b9679cec66a3c25cb4088f4"
+            },
+            {
+              "name": "blender_archive",
+              "status": "PASS",
+              "required": true,
+              "detail": "6b657c8bdd3a7b65b07b9e1ae17eb4be7dd4aa23121da7f3d3354fc2551330a7"
+            },
+            {
+              "name": "blender_version",
+              "status": "PASS",
+              "required": true,
+              "detail": [
+                "Blender",
+                "4.5.3"
+              ]
+            },
+            {
+              "name": "blender_headless",
+              "status": "PASS",
+              "required": true,
+              "detail": "BPY_OK 4.5.3 LTS\nBlender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)\n\nBlender quit"
+            },
+            {
+              "name": "numerical_import",
+              "status": "PASS",
+              "required": true,
+              "detail": "NUMERIC_OK"
+            },
+            {
+              "name": "openusd",
+              "status": "PASS",
+              "required": true,
+              "detail": "USD_OK"
+            },
+            {
+              "name": "qt_offscreen",
+              "status": "PASS",
+              "required": true,
+              "detail": "QT_OK"
+            },
+            {
+              "name": "human3d",
+              "status": "PASS",
+              "required": true,
+              "detail": "D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-source\\src\\human3d\\__init__.py"
+            },
+            {
+              "name": "assets:foundation",
+              "status": "PASS",
+              "required": true,
+              "detail": 357
+            },
+            {
+              "name": "assets:morph02",
+              "status": "PASS",
+              "required": true,
+              "detail": 10
+            },
+            {
+              "name": "assets:pose_lite",
+              "status": "PASS",
+              "required": true,
+              "detail": 1
+            },
+            {
+              "name": "assets:anatomical_torso",
+              "status": "PASS",
+              "required": true,
+              "detail": 6
+            },
+            {
+              "name": "mediapipe_init",
+              "status": "PASS",
+              "required": true,
+              "detail": "POSE_OK"
+            },
+            {
+              "name": "output_and_disk",
+              "status": "PASS",
+              "required": true,
+              "detail": 155298672640
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "schema_version": 1,
+          "id": "lr-004-smoke",
+          "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+          "config_sha256": "7a315e01aa03305079cf8dede61b385012e643238491f4188979f8649188fb71",
+          "status": "PASS",
+          "stages": [
+            {
+              "operation": "numerical",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "numerical.json": "a1e40ae4e1882f40f7ec972d7463c0435866191c17959296d88a205a53c251de"
+              },
+              "seconds": 0.25
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "fbf9b7c837f2f299b82b549073eb4855f5af6f838e2d9c401ec135c7ba425d3c",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "22648ef844b539001f8bab89d6ab262ece23ad2388b8ca51cb04427ecefc13ab",
+                "clay_front.png": "9733afb5e38ff0805855f129f3a2a3285e5effbff037fc5984bb18eb7901b7bf",
+                "clay_back.png": "7b3eb7b20f0bdeb4ebee012116c30d0c6a003c7806debbc42a9c92233ecab68f",
+                "clay_side.png": "91d8823bfa2ccb0e61ce5657ee4defadc4cdeab8902d935bf1bbb8eb69e2986f",
+                "clay_three_quarter.png": "18d0a70f91fa532bf3169bb06f378ea28866d8241523350c8f2e5e70a864e89a",
+                "textured_front.png": "ed09370aa46eca36c3656826589fbadee06e2a0001b0cb991cd72dc626ceee80",
+                "textured_back.png": "cf693dcd9d3b5eafbf9a5b354abed406ceaa11370ceb1a867403145f770e20d3",
+                "textured_side.png": "4197e53f386ef96a28116069e97f55c5389a6b7aa378322584c49f87e1110e66",
+                "textured_three_quarter.png": "86c96fdbc1b79a9ff5ba5415a89761609ed16c41b2c80cc5af8877fe5aceec58",
+                "wireframe_front.png": "a0cabb7a340700e238028fd9b632a601f462c5d5d5b1cec47c1ef7940d759ef2",
+                "wireframe_back.png": "d809086c53dc491f748b4212b16767ef921ab4820666e01c53d0a30e726aa786",
+                "wireframe_side.png": "8b6676a5d89290c45098372a73cde0cdf5e8f3f5715c0734332d0fbb006d1d1f",
+                "wireframe_three_quarter.png": "85f419a0f242096a0833f5d1b20e9ff033fbc0acd5685db222a124f6c3a0e935"
+              },
+              "seconds": 28.922000000000025
+            },
+            {
+              "operation": "blender_roundtrip",
+              "status": "PASS",
+              "exit_code": 0,
+              "outputs": {
+                "scene.blend": "bda9d211f599831b82e39e9b9daee2f25bd3d0557b32dbe2d55e0ba5c20dd738",
+                "blender_metrics.json": "996b137e7acc523ffb51e12896f8b48631cc1e07d26de41e7b3c4cdf0ae40698",
+                "render_report.json": "fea4b7fbd89a5d777740579d5b71d53848354a9420d7f592905d8f505954c518",
+                "clay_front.png": "716689d3c45bd32d0dd92c609d63e2fd546c440c0812c8eed54ec74a29fc66d1",
+                "clay_back.png": "e0f5d20ae5bea838ed99d2e87b84fcb85d4cf83c1274eca1772f9f5f37bda457",
+                "clay_side.png": "683289deb274ead506603ced5a67841a01a7bc612360a35dd6c39e6e2fb08c26",
+                "clay_three_quarter.png": "7bf4b8cec32b57d6dda52ddb5c1cdceb6496f6891e190b7fb705eb7808a41cda",
+                "textured_front.png": "11fca3eea4fa261052b3f4352aa04d8c30d05ac8089b10241ff7418c3dcde71e",
+                "textured_back.png": "abdf5c2eb778beca6bac3e0fa1a72ea6cd0d1f770bbb8b6c9ae6dd44272d2e07",
+                "textured_side.png": "12e60f02fe5d0f9dd500ba3ffc6be063a803467a6436ec2e94b1b7d4045fbdfc",
+                "textured_three_quarter.png": "529bd0f090ecf0b3b835489d78031c960308f84e937a06536ec79dd1b2a6f189",
+                "wireframe_front.png": "b943136d0e44d265a7a34b9d6422701ada1c23b41a5758de25bbe60669ee1382",
+                "wireframe_back.png": "de3223bd3e7d2d39b9c77a5138120e553b81bba2ac9e76026de1ac164a605423",
+                "wireframe_side.png": "c049bd4be0f0b53f998bd9480335d14bdac6bc4b84c192129645e41dc4fc5a1f",
+                "wireframe_three_quarter.png": "c42742e6b08f4f490bfd20919653814370187a4ab2e9b2c9cfc220b2e10ca70f"
+              },
+              "seconds": 28.125
+            }
+          ]
+        }
+      ],
+      "cache_evidence": [
+        "2026-11-27T11:17:14.6378572Z Cache hit for: lab-windows-2022-x64-59ab7cc3be2c569ef55eb8f732c07d4480ba601f189f77de1ecaf1f130561b6e\r",
+        "2026-11-27T11:17:17.8508242Z Cache restored successfully\r",
+        "2026-11-27T11:17:18.3350493Z CORRUPTION_INJECTED=D:\\a\\Human3D-2.0\\Human3D-2.0\\.lab-runtime\\assets\\foundation\\makehuman\\data\\3dobjs\\base.obj\r",
+        "2026-11-27T11:18:07.8987205Z CACHE_HIT=true\r",
+        "2026-11-27T11:18:07.9737019Z CACHE_REPAIR_PASS reused=372 repaired=1\r"
+      ]
+    }
+  ],
+  "limitations": [
+    "procedural fixture only",
+    "artifact transfer deferred LR-007",
+    "Linux deferred"
+  ]
+}
