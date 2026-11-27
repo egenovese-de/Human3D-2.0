@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render native and calibrated neutral comparison panels using identical Blender framing."""
 import json
 import math
