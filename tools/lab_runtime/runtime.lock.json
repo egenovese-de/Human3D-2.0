@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "unqualified",
+  "python": {
+    "version": "3.11.9",
+    "license": "https://docs.python.org/3/license.html"
+  },
+  "platforms": {
+    "linux": {
+      "architecture": "x86_64",
+      "runner": "ubuntu-24.04",
+      "dependency_lock": "requirements-linux.lock",
+      "blender_archive": "blender-4.5.3-linux-x64.tar.xz",
+      "sha256": null
+    },
+    "windows": {
+      "architecture": "x86_64",
+      "runner": "windows-2022",
+      "dependency_lock": "requirements-windows.lock",
+      "blender_archive": "blender-4.5.3-windows-x64.zip",
+      "sha256": null
+    }
+  },
+  "blender": {
+    "version": "4.5.3",
+    "base_url": "https://download.blender.org/release/Blender4.5/",
+    "checksum_url": "https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256",
+    "license": "https://www.blender.org/about/license/",
+    "require_pinned_sha256": true
+  },
+  "dependencies": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "pillow": "13.0.0",
+    "mediapipe": "0.10.33",
+    "usd-core": "25.11",
+    "pyside6": "6.8.3"
+  },
+  "asset_groups": {
+    "foundation": {
+      "manifest": "DOCS/manifests/makehuman-v1.3.0.json",
+      "required": true,
+      "cache_allowed": true
+    },
+    "morph02": {
+      "manifest": "DOCS/manifests/makehuman-morph02.json",
+      "required": false,
+      "cache_allowed": true
+    }
+  },
+  "environment": {
+    "QT_QPA_PLATFORM": "offscreen",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "paths": {
+    "runtime": ".lab-runtime",
+    "cache": ".lab-runtime/cache",
+    "assets": ".lab-runtime/assets",
+    "venv": ".lab-runtime/venv",
+    "outputs": "lab-output"
+  },
+  "compatibility": {
+    "source_revision_required": true,
+    "source_revision_format": "full commit SHA",
+    "historical_runtime_overrides": "explicit versioned lock required"
+  },
+  "unresolved": [
+    "Official Blender archive hashes",
+    "MediaPipe model manifest",
+    "Additional anatomical asset group",
+    "Historical fixture inventory"
+  ]
+}
