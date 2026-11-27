@@ -1,0 +1,56 @@
+name: X P2 canonical pose benchmark
+on:
+  push:
+    branches: [lab/render]
+    paths: ['tools/lab_runtime/x_p2*.py', '.github/workflows/x-p2.yml']
+permissions:
+  contents: read
+concurrency:
+  group: lab-experiments-lab/render
+  cancel-in-progress: false
+jobs:
+  p2:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e0ae4eae57347466b5757bbcdaaa7194bdd31c94
+          path: .lab-source
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: .lab-runtime/assets/foundation
+          key: x-p1-foundation-${{ hashFiles('DOCS/manifests/makehuman-v1.3.0.json') }}
+      - name: Provision locked Lab
+        run: |
+          python tools/lab_runtime/bootstrap.py --group anatomical_torso --group p1_anatomy
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tools/lab_runtime/verify.py --source .lab-source --source-revision e0ae4eae57347466b5757bbcdaaa7194bdd31c94 --group anatomical_torso --group p1_anatomy
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Execute P2 pose comparison
+        run: |
+          $env:PYTHONPATH = (Resolve-Path .lab-source/src).Path
+          .lab-runtime/venv/Scripts/python.exe tools/lab_runtime/x_p2.py --runtime .lab-runtime --output lab-output/x-p2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check triangle intersections in Blender
+        run: |
+          .lab-runtime/blender/blender.exe --background --factory-startup --python-exit-code 1 --python tools/lab_runtime/x_p2_bvh.py -- lab-output/x-p2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Admit P2 evidence
+        run: |
+          python tools/lab_runtime/x_p2_admission.py --input lab-output/x-p2 --runtime .lab-runtime --output p2-admitted
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Publish admitted P2 evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: x-p2-admitted
+          path: p2-admitted/
+          if-no-files-found: error
+          retention-days: 7
