@@ -67,13 +67,22 @@ def stage(root, runtime, out):
     require_inventory(root / "x-p1-renders", renders)
     require_inventory(root / "x-p1-editable", editable)
 
+    pilot_meshes = {row["mesh"] for row in metrics["integrity"]}
+    pilot_meshes.update(Path(row["mesh"]).stem + "_local_repair.obj"
+                        for row in metrics["local_repairs"] if row["status"] == "PASS")
+    pilot_meshes.update(f"warp{i:02}_{suffix}.obj" for i in range(1, 5)
+                        for suffix in ("truth", "neutral", "parametric"))
     regional_names = {
         f"{kind}{i:02}_{suffix}.obj"
         for kind, count in (("warp", 4), ("proxy", 2))
         for i in range(1, count + 1)
         for suffix in ("truth", "neutral", "parametric", "prototype", "hybrid")
     } | {"metrics.json"}
-    require_inventory(pilot / "regional", regional_names)
+    require_inventory(pilot, pilot_meshes | {"metrics.json"} |
+                      {f"regional/{name}" for name in regional_names} |
+                      {f"assets/{name}" for name in assets})
+    if {p.name for p in root.iterdir()} != {"x-p1", "x-p1-renders", "x-p1-editable"}:
+        raise ValueError("Unexpected P1 output directory")
 
     out.mkdir(parents=True, exist_ok=False)
     publish = {"x-p1/metrics.json", "x-p1-editable/editable.json"}
@@ -89,6 +98,7 @@ def stage(root, runtime, out):
         shutil.copyfile(src, dest)
     shutil.copyfile(runtime_file, out / "runtime_report.json")
     shutil.copyfile(ROOT / "LICENSE", out / "LICENSE")
+    shutil.copyfile(ROOT / "DOCS/LAB_RUNTIME_LICENSES.md", out / "LAB_RUNTIME_LICENSES.md")
     for name in ("makehuman-v1.3.0.json", "makehuman-anatomical-torso.json", "makehuman-p1-anatomy.json"):
         paths = [ROOT / parent / name for parent in ("DOCS/manifests", "lab/manifests")]
         shutil.copyfile(next(p for p in paths if p.is_file()), out / name)
@@ -100,6 +110,7 @@ def stage(root, runtime, out):
         "source_revision": SOURCE,
         "lab_revision": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
         "run_id": os.environ.get("GITHUB_RUN_ID"),
+        "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
         "files": {name: {"sha256": digest(out / name), "bytes": (out / name).stat().st_size} for name in sorted(inventory(out))},
     }
     (out / "artifact_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

@@ -44,4 +44,4 @@ Pinned [MakeHuman source](https://github.com/makehumancommunity/makehuman/tree/1
 
 The modifier definitions under upstream `makehuman/data/modifiers` define dependencies and pairings. Sparse displacement targets preserve base vertex indices, connectivity and UV indexing. Overlapping fields can be redundant or distort a region when combined. Rig compatibility requires rebinding and validation.
 
-The Lab manifest admits 20 additional targets with byte lengths and SHA-256 digests computed from the pinned checkout. The data assets are credited to MakeHuman Community under CC0-1.0.
+The Lab manifest admits 26 additional targets with byte lengths and SHA-256 digests computed from the pinned checkout. The data assets are credited to MakeHuman Community under CC0-1.0.

@@ -6,7 +6,7 @@
   "job_id": 140527220405,
   "conclusion": "success",
   "pose_movement_unit": "Blender scene units",
-  "sha256_scope": "edited mesh coordinates and polygon connectivity",
+  "sha256_scope": "saved Blender scene file bytes",
   "subjects": [
     {
       "subject": "dev01",

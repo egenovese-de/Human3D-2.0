@@ -49,12 +49,12 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Admit P1 evidence
         run: |
-          python tools/lab_runtime/x_p1_admission.py --root lab-output --runtime .lab-runtime --output lab-output/p1-admitted
+          python tools/lab_runtime/x_p1_admission.py --root lab-output --runtime .lab-runtime --output p1-admitted
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Publish admitted P1 evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: x-p1-admitted
-          path: lab-output/p1-admitted/
+          path: p1-admitted/
           if-no-files-found: error
           retention-days: 7

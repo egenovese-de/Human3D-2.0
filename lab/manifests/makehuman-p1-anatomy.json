@@ -104,6 +104,36 @@
       "path": "makehuman/data/targets/pelvis/pelvis-tone-incr.target",
       "bytes": 18926,
       "sha256": "cdf7cb0e84292141e8c2862f467310529fb6e8a015761bb02ee3f7e9195ea1d1"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-upperarm-scale-horiz-decr.target",
+      "bytes": 41190,
+      "sha256": "c03c978a63bfe7e40e7fce0abc92b3316ed58359e3235671a9f8b20d2b3c2158"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-upperarm-scale-horiz-incr.target",
+      "bytes": 43440,
+      "sha256": "b947543cedd93d2c6ed0561ec8f01d3b6ffa592e76c1c1c64a299722fb3b98ea"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-upperleg-scale-horiz-decr.target",
+      "bytes": 9393,
+      "sha256": "91a2d656fe2dc04f204ceada36bbca9d8709d1489fc95585888b5a95462321ae"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-upperleg-scale-horiz-incr.target",
+      "bytes": 12309,
+      "sha256": "98301ec81e4771f0c367e08734a7a421986f6b7dea8e10846d5f69e86c78243d"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-lowerleg-scale-horiz-decr.target",
+      "bytes": 7674,
+      "sha256": "e0b927142b28b4493b745434a83887b34f6e2ce09a43044c328bb0bef66afddb"
+    },
+    {
+      "path": "makehuman/data/targets/armslegs/r-lowerleg-scale-horiz-incr.target",
+      "bytes": 10296,
+      "sha256": "171ae3ccbc187e1fcdf86dd2b6b3ff04a3c29c2be93b7e9fc61fdc5ddaa29d98"
     }
   ]
 }

@@ -292,17 +292,20 @@ def main(runtime,out):
                     if not 0 <= index < len(base):
                         raise ValueError(f"Invalid target index: {rel}")
                     field[index] = [float(value) for value in delta]
-            if "/l-" in rel:
-                from scipy.spatial import cKDTree
-                reflection = np.array([-1, 1, 1])
-                mirrored = cKDTree(base).query(base * reflection)[1]
-                field += field[mirrored] * reflection
+            if not np.isfinite(field).all():
+                raise ValueError(f"Nonfinite regional target: {rel}")
             regional_fields.append(field)
     report["regional_experiment"] = benchmark(base, tri, basis, np.asarray(regional_fields), body, out / "regional")
     regional = report["regional_experiment"]
     (out / "regional" / "metrics.json").write_text(json.dumps(regional, indent=2, allow_nan=False))
     (out/"metrics.json").write_text(json.dumps(report,indent=2))
     print("X_P1="+json.dumps({k: v for k, v in report.items() if k != "regional_experiment"}))
-    print("X_P1_REGIONAL_COMPLETE", len(regional["rows"]))
+    print("X_P1_REGIONAL=" + json.dumps({
+        "fixtures": [{k: f[k] for k in ("subject", "vertices", "faces")} for f in regional["fixtures"]],
+        "rows": [{k: r[k] for k in ("subject", "method", "phase", "native_rebind")} | {
+            "forward": r["target_to_candidate"]["global"],
+            "reverse": r["candidate_to_target"]["global"],
+        } for r in regional["rows"]],
+    }))
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--runtime",type=Path,required=True);p.add_argument("--output",type=Path,required=True);a=p.parse_args();main(a.runtime,a.output)

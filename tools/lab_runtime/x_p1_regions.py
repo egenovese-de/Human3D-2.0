@@ -1,5 +1,4 @@
 """Oracle anatomy controls on held-out surfaces in the native frame."""
-from pathlib import Path
 from time import perf_counter
 
 import numpy as np
@@ -122,18 +121,36 @@ def sections(vertices, faces):
     return result
 
 
+def topology(vertices, faces):
+    a, b, c = vertices[faces].transpose(1, 0, 2)
+    double_area = np.linalg.norm(np.cross(b - a, c - a), axis=1)
+    edges = np.concatenate((faces[:, [0, 1]], faces[:, [1, 2]], faces[:, [2, 0]]))
+    edges = np.sort(edges, axis=1)
+    _, counts = np.unique(edges, axis=0, return_counts=True)
+    volume = None
+    if np.all(counts == 2):
+        volume = float(abs(np.einsum("ij,ij->i", a, np.cross(b, c)).sum()) / 6)
+    return {"boundary_edges": int(np.count_nonzero(counts == 1)),
+            "nonmanifold_edges": int(np.count_nonzero(counts > 2)),
+            "collapsed_triangles": int(np.count_nonzero(double_area <= 1e-10)),
+            "volume_l": volume}
+
+
 def benchmark(base, triangles, macro, fields, body, out):
-    from human3d.native_rig import validate_rebind
+    from human3d.native_rig import pose_transforms, skin_vertices, validate_pose, validate_rebind
+    from human3d.alignment import Alignment, Camera
 
     out.mkdir()
     body_ids = np.unique(triangles)
     train = body_ids[::3]
     heldout = np.setdiff1d(body_ids, train)
     base_joints = validate_rebind(body, base)
+    rig = body["rig"]
+    alignment = Alignment(Camera(0, 200 / np.ptp(base[:, 1]), 0j, 1), 0, {"lowerarm01.L": .15})
     regional_design = fields[:, train].reshape(len(fields), -1).T
     macro_design = macro[:, train].reshape(len(macro), -1).T
     rows, fixtures = [], []
-    x, y, z = base.T
+    x, y, _ = base.T
     for kind, amplitudes in (("warp", (.12, -.10, .18, -.16)), ("proxy", (-.10, .16))):
         for index, amplitude in enumerate(amplitudes, 1):
             subject = f"{kind}{index:02}"
@@ -154,10 +171,11 @@ def benchmark(base, triangles, macro, fields, body, out):
                 eval_points = samples(truth, truth_faces, 24000, 202)
             save_obj(out / f"{subject}_truth.obj", truth, truth_faces)
             reference_sections = sections(truth, truth_faces)
+            fixture_topology = topology(truth, truth_faces)
             fixtures.append({"subject": subject, "vertices": len(truth), "faces": len(truth_faces),
                              "section_perimeters_mm": reference_sections, "pose": "fixed native-frame proxy",
                              "registration": "fixed authored frame; no subject-specific transform",
-                             "volume": None, "volume_reason": "benchmark does not establish comparable closed anatomical regions"})
+                             "topology": fixture_topology})
             weights = lsq_linear(macro_design, (observations - base[train]).reshape(-1), bounds=(0, 1)).x
             endpoints = macro[:, train] + base[train]
             prototype = macro[np.argmin(np.mean(np.linalg.norm(endpoints - observations, axis=2), axis=1))]
@@ -175,30 +193,45 @@ def benchmark(base, triangles, macro, fields, body, out):
                 for phase, candidate in (("initial", initial), ("refined", final)):
                     tree = cKDTree(samples(candidate, triangles, 80000, 203))
                     d_target = tree.query(eval_points)[0]
-                    d_candidate = cKDTree(eval_points).query(samples(candidate, triangles, len(eval_points), 204))[0]
                     candidate_samples = samples(candidate, triangles, len(eval_points), 204)
+                    d_candidate = cKDTree(eval_points).query(candidate_samples)[0]
                     try:
                         joints = validate_rebind(body, candidate)
                         shift = max(np.linalg.norm(joints[k] - base_joints[k]) for k in joints) * 100
                         joint_error = max(np.linalg.norm(joints[k] - truth_joints[k]) for k in joints) * 100 if truth_joints else None
+                        transforms = pose_transforms(rig, joints, alignment)
+                        posed = np.asarray(skin_vertices(candidate, rig["skin"], transforms))
+                        validate_pose(body, candidate, posed)
+                        movement = np.linalg.norm(posed - candidate, axis=1).max() * 100
+                        if movement <= 1e-4:
+                            raise ValueError("pose_no_effect")
                         structural = {"status": "PASS", "maximum_joint_shift_mm": float(shift),
+                                      "articulation_max_movement_mm": float(movement),
                                       "maximum_joint_error_mm": None if joint_error is None else float(joint_error)}
                     except ValueError as exc:
                         structural = {"status": "FAIL", "reason": str(exc)}
                     perimeters = sections(candidate, triangles)
+                    candidate_topology = topology(candidate, triangles)
+                    v_target, v_candidate = fixture_topology["volume_l"], candidate_topology["volume_l"]
                     rows.append({
                         "subject": subject, "method": method, "phase": phase,
                         "target_to_candidate": statistics(d_target, regions(eval_points)),
                         "candidate_to_target": statistics(d_candidate, regions(candidate_samples)),
                         "paired_heldout": statistics(np.linalg.norm(candidate[heldout] - truth[heldout], axis=1), regions(base[heldout])) if kind == "warp" else None,
                         "section_deviations_mm": {k: perimeters[k] - v if perimeters[k] is not None and v is not None else None for k, v in reference_sections.items()},
-                        "native_rebind": structural, "uv": "native mesh indexing unchanged",
+                        "native_rebind": structural, "topology": candidate_topology,
+                        "volume_delta_l": v_candidate - v_target if v_candidate is not None and v_target is not None else None,
+                        "uv": "native mesh indexing unchanged",
                         "refinement_seconds": seconds if phase == "refined" else None,
                     })
     return {"fixture_license": "Apache-2.0 original procedural generator",
             "observation_scope": "oracle native-frame 3D, no images; fixed nearest-point correspondences for proxy",
             "distance_scope": "bidirectional nearest sampled surface estimates, not exact point-to-triangle distances",
             "section_scope": "convex-hull cross-section proxies at fixed levels",
+            "volume_scope": "signed closed-surface volume only; unavailable for open or nonmanifold meshes",
+            "error_separation": {"morphology": "held-out surface residual in fixed frame",
+                                 "registration": "no per-subject fit; proxy landmark registration error unavailable",
+                                 "pose": "shared native pose for warps; proxy pose mismatch unmeasured"},
             "proxy_limitation": "abstract unrigged ellipsoid union; unresolved pose and anatomical landmark mismatch",
             "warp_training_vertices": len(train), "warp_heldout_vertices": len(heldout),
             "fixtures": fixtures, "rows": rows}
