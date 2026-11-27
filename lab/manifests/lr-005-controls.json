@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "run_id": 45983389038,
+  "job_id": 140452693297,
+  "lab_revision": "f80b4ee64146894545f84359218ed531f259761e",
+  "status": "PASS",
+  "scope": "Q original boundary script and M6 procedural function adapter only; H historical dataset replay pending",
+  "manifests": [
+    {
+      "schema_version": 1,
+      "id": "lr-005-q-boundaries",
+      "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+      "config_sha256": "71169eabff80e625c6a7d5b92d6ca877b0e6a306696f046667eb774177eb1b2d",
+      "status": "PASS",
+      "stages": [
+        {
+          "operation": "q_evidence_boundaries",
+          "status": "PASS",
+          "script_sha256": "a844aa5bed7357416590bc5ee730eb7d06ccfe116a9044e73e2fbdb7883379db",
+          "exit_code": 0,
+          "outputs": {
+            "metrics.json": "754e35bee19e6153788d2c7f9a025a67164757cdb43e61872254cc5863b74444"
+          },
+          "seconds": 0.07800000000003138
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "id": "lr-005-m6-bind",
+      "source_revision": "e0ae4eae57347466b5757bbcdaaa7194bdd31c94",
+      "config_sha256": "e958683bdba1eb64f420a4faa8e38608a95c10502c71ebd44dbf4a19ebbc6738",
+      "status": "PASS",
+      "stages": [
+        {
+          "operation": "m6_bind_control",
+          "status": "PASS",
+          "script_sha256": "15b0946bb01f03ab2b00a6e640fc3b77ee737282ac147549af143167ad758bc4",
+          "original_script_sha256": "f9b9a340879100e660f26dffffe2614908ec6d000c95e20e1be7d442e4876326",
+          "exit_code": 0,
+          "outputs": {
+            "metrics.json": "dedf2b59655de38a47d169a584f2f6de8f7bde38236d97c3b4f89f8c32a60cf7"
+          },
+          "seconds": 0.20400000000000773
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "binding": [
+        {
+          "candidates": 0,
+          "digest_matches": true,
+          "candidate_index": 0,
+          "attached": false
+        },
+        {
+          "candidates": 0,
+          "digest_matches": false,
+          "candidate_index": 0,
+          "attached": false
+        },
+        {
+          "candidates": 0,
+          "digest_matches": true,
+          "candidate_index": 1,
+          "attached": false
+        },
+        {
+          "candidates": 1,
+          "digest_matches": true,
+          "candidate_index": 0,
+          "attached": true
+        },
+        {
+          "candidates": 1,
+          "digest_matches": false,
+          "candidate_index": 0,
+          "attached": false
+        },
+        {
+          "candidates": 1,
+          "digest_matches": true,
+          "candidate_index": 1,
+          "attached": false
+        },
+        {
+          "candidates": 2,
+          "digest_matches": true,
+          "candidate_index": 0,
+          "attached": false
+        },
+        {
+          "candidates": 2,
+          "digest_matches": false,
+          "candidate_index": 0,
+          "attached": false
+        },
+        {
+          "candidates": 2,
+          "digest_matches": true,
+          "candidate_index": 1,
+          "attached": false
+        }
+      ],
+      "visibility": [
+        {
+          "confidence": 0.799,
+          "provider_visible": false,
+          "suppressed_indices": []
+        },
+        {
+          "confidence": 0.799,
+          "provider_visible": true,
+          "suppressed_indices": []
+        },
+        {
+          "confidence": 0.8,
+          "provider_visible": false,
+          "suppressed_indices": [
+            13,
+            15,
+            17,
+            19,
+            21
+          ]
+        },
+        {
+          "confidence": 0.8,
+          "provider_visible": true,
+          "suppressed_indices": []
+        },
+        {
+          "confidence": 1,
+          "provider_visible": false,
+          "suppressed_indices": [
+            13,
+            15,
+            17,
+            19,
+            21
+          ]
+        },
+        {
+          "confidence": 1,
+          "provider_visible": true,
+          "suppressed_indices": []
+        }
+      ],
+      "yaw": [
+        {
+          "provider_deg": 45,
+          "detector_deg": 0,
+          "confidence": 0.799,
+          "conflict": false
+        },
+        {
+          "provider_deg": 45,
+          "detector_deg": 0,
+          "confidence": 0.8,
+          "conflict": false
+        },
+        {
+          "provider_deg": 45,
+          "detector_deg": 0,
+          "confidence": 1,
+          "conflict": false
+        },
+        {
+          "provider_deg": 45.001,
+          "detector_deg": 0,
+          "confidence": 0.799,
+          "conflict": false
+        },
+        {
+          "provider_deg": 45.001,
+          "detector_deg": 0,
+          "confidence": 0.8,
+          "conflict": true
+        },
+        {
+          "provider_deg": 45.001,
+          "detector_deg": 0,
+          "confidence": 1,
+          "conflict": true
+        },
+        {
+          "provider_deg": -179,
+          "detector_deg": 179,
+          "confidence": 0.799,
+          "conflict": false
+        },
+        {
+          "provider_deg": -179,
+          "detector_deg": 179,
+          "confidence": 0.8,
+          "conflict": false
+        },
+        {
+          "provider_deg": -179,
+          "detector_deg": 179,
+          "confidence": 1,
+          "conflict": false
+        },
+        {
+          "provider_deg": 90,
+          "detector_deg": null,
+          "confidence": 0.799,
+          "conflict": false
+        },
+        {
+          "provider_deg": 90,
+          "detector_deg": null,
+          "confidence": 0.8,
+          "conflict": false
+        },
+        {
+          "provider_deg": 90,
+          "detector_deg": null,
+          "confidence": 1,
+          "conflict": false
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "angle_deg": 90,
+          "chain_residual": 0,
+          "sign": -1
+        },
+        {
+          "angle_deg": 90,
+          "chain_residual": 0,
+          "sign": 1
+        }
+      ],
+      "scope": "procedural M6 bind-frame function control"
+    }
+  ]
+}
