@@ -7,7 +7,7 @@ def main():
     request=json.loads((ROOT/"lab/experiments/request.json").read_text())
     if set(request)!={"schema_version","experiment","source_revision","groups","request_id"} or request["schema_version"]!=1:
         raise ValueError("invalid request")
-    if request["experiment"] not in ("lr-004-smoke","lr-005-q-boundaries","lr-005-m6-bind"):
+    if request["experiment"] not in ("lr-004-smoke","lr-005-q-boundaries","lr-005-m6-bind","lr-009-native"):
         raise ValueError("experiment not admitted")
     if not re.fullmatch(r"[a-zA-Z0-9_-]+",request["request_id"]):
         raise ValueError("invalid request id")
