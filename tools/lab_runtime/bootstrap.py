@@ -114,8 +114,9 @@ def main():
         else:
             report["blender"] = "reused"
         version = subprocess.check_output([str(exe), "--version"], env=env, timeout=60, text=True)
-        if version.splitlines()[0] != "Blender " + lock["blender"]["version"]:
-            raise RuntimeError("Blender version mismatch")
+        print("Blender version output:", repr(version.splitlines()[0]), flush=True)
+        if version.splitlines()[0].split()[:2] != ["Blender", lock["blender"]["version"]]:
+            raise RuntimeError("Blender version mismatch: " + repr(version))
         groups = set(args.group) | {k for k,v in lock["asset_groups"].items() if v["required"]}
         for name in sorted(groups):
             group = lock["asset_groups"][name]
