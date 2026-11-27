@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Render native topology, sampled error color and released UV texture in Blender."""
 import json
 import math
