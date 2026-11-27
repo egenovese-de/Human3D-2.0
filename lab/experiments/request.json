@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "experiment": "lr-004-smoke",
+  "source_revision": "480195f05fb2d1ed6c71dceabf4ba54b8bed69db",
+  "groups": [
+    "morph02",
+    "anatomical_torso"
+  ],
+  "request_id": "lr006-cache-qualification-a"
+}
