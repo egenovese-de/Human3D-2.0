@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "required_platforms": [
+    "windows-2022"
+  ],
+  "deferred_platforms": [
+    "ubuntu-24.04"
+  ],
+  "reason": "Repeated external HTTP 403 provisioning failures; Project Lead authorized Windows-only mandatory qualification",
+  "decision_evidence": {
+    "run_id": 45981727501,
+    "linux_job_id": 140447030088
+  },
+  "preserve_prior_linux_evidence": true,
+  "linux_support_removed": false,
+  "applies_to": "remaining Permanent Lab Runtime qualification",
+  "prior_tests": "A and D historical cross-platform evidence retained"
+}
