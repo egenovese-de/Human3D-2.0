@@ -80,6 +80,9 @@ def run_case(a,case,basis,raster,source):
         ('G4_ORACLE','calibrated_oracle','contour',True,True),
         ('G4_G3_SECTOR','g3_sector_rgb','contour',True,True),
     ]
+    if not a.quick and case=='A_slim':
+        settings.extend([('G4_RGB_BEFORE_REBIND_REFINEMENT','calibrated_rgb','contour',True,True),
+                         ('G4_M6_BEFORE_REBIND_REFINEMENT','calibrated_m6','contour',True,True)])
     if a.quick:
         settings=[row for row in settings if row[0]=='G4_RGB']
     if not a.quick and case in ('A_heldout_1','A_high_mass'):
@@ -91,7 +94,8 @@ def run_case(a,case,basis,raster,source):
     held_mask=raster.draw(holdout,ref,rt,384)
     for key,track,mode,robust,multistart in settings:
         vertices,row=fitter.fit(obs[track],mode=mode,budget=200 if a.quick else 670,robust=robust,multistart=multistart,
-                                allow_unanchored_height=key=='G4_G3_SECTOR')
+                                allow_unanchored_height=key=='G4_G3_SECTOR',
+                                refine_rebind=not key.endswith('_BEFORE_REBIND_REFINEMENT'))
         if vertices is not None:
             row['heldout_135']=mask_metrics(raster.draw(holdout,vertices,faces,384),held_mask)
             row['g1_section_errors_mm']=(np.mean(abs(measurements(vertices,faces,sections)-exact),axis=0)*10).tolist()

@@ -143,7 +143,7 @@ class AnatomicalFitter:
         self.faces=faces
 
     def fit(self, views, *, mode='contour', budget=650, levels=(112,192), robust=True,
-            multistart=True, allow_unanchored_height=False):
+            multistart=True, allow_unanchored_height=False, refine_rebind=True):
         if budget<80 or not levels:
             raise ValueError('insufficient optimizer configuration')
         start=perf_counter()
@@ -266,13 +266,36 @@ class AnatomicalFitter:
         checkpoints.append(seed)
         ranked=sorted(((final(z),z) for z in checkpoints),key=lambda row:row[0])
         invalid=[]
+        rejected_best=None
         for rank,(loss,parameters) in enumerate(ranked):
             mesh=basis.evaluate(parameters)
             try:
                 basis.validate(mesh)
             except ValueError as exc:
                 invalid.append(str(exc))
+                if rejected_best is None:
+                    rejected_best=parameters
                 continue
+            rebind_refined=False
+            if refine_rebind and rejected_best is not None and calls<budget:
+                safe=parameters.copy()
+                brackets=[0.,1.]
+                for _ in range(10):
+                    if calls>=budget:
+                        break
+                    alpha=sum(brackets)/2
+                    probe=(1-alpha)*safe+alpha*rejected_best
+                    shape=basis.evaluate(probe)
+                    try:
+                        basis.validate(shape)
+                    except ValueError:
+                        brackets[1]=alpha
+                        continue
+                    brackets[0]=alpha
+                    probe_loss=final(probe)
+                    if probe_loss<loss:
+                        mesh,parameters,loss=shape,probe,probe_loss
+                        rebind_refined=True
             return mesh,dict(status='ok',canonical_sha256=sha256(mesh.tobytes()).hexdigest(),objective=loss,
                              parameters=dict(zip(basis.names,parameters.tolist())),calls=calls,
                              seconds=perf_counter()-start,views=[v.key for v in views],excluded=dropped,
@@ -280,6 +303,6 @@ class AnatomicalFitter:
                              scale_sources={v.key:v.scale_source for v in views},metric_scale=independently_scaled,
                              locked_controls=[basis.names[i] for i in locked],
                              weights=dict(zip([v.key for v in views],weights.tolist())),checkpoints_rejected=invalid,
-                             checkpoint_rank=rank,stages=stage_log)
+                             checkpoint_rank=rank,rebind_refined=rebind_refined,stages=stage_log)
         return None,dict(status='abstained',reason='no_structurally_valid_checkpoint',excluded=dropped,
                          checkpoints_rejected=invalid,calls=calls,seconds=perf_counter()-start)
