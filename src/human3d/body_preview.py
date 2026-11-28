@@ -12,42 +12,105 @@ from .native_rig import foot_height_difference, pose_transforms, validate_pose, 
 
 
 class MeshCanvas(QWidget):
-    def __init__(self, mesh, neutral, posed, face_colors=None):
+    def __init__(self, mesh, neutral, posed, face_colors=None, *, minimum=(600, 480)):
         super().__init__()
-        self.setMinimumSize(600, 480)
+        self.setMinimumSize(*minimum)
         self.vertices = (np.asarray(neutral), np.asarray(posed))
         self.faces = np.asarray([
             [index for index, _ in face["corners"]] for face in mesh["faces"] if face["group"] == "body"
         ])
         self.face_colors = face_colors
         self.angle = 0
+        self.elevation = 0
+        self.zoom = 1
+        self.pan = QPointF()
+        self.pointer = None
         self.posed = False
         self.bootstrap = np.asarray(mesh["vertices"])
         self.show_bootstrap = False
+        self.mode = "Clay"
+        self.garment = None
+        self.show_garment = True
 
     def paintEvent(self, event):
-        vertices = self.bootstrap if self.show_bootstrap else self.vertices[int(self.posed)]
-        angle = radians(self.angle)
-        horizontal = vertices[:, 0] * cos(angle) + vertices[:, 2] * sin(angle)
-        depth = -vertices[:, 0] * sin(angle) + vertices[:, 2] * cos(angle)
-        vertical = vertices[:, 1]
-        visible = self.faces.ravel()
-        left, right = horizontal[visible].min(), horizontal[visible].max()
-        bottom, top = vertical[visible].min(), vertical[visible].max()
-        ratio = 0.88 * min(self.width() / (right - left), self.height() / (top - bottom))
-        x = (horizontal - (right + left) / 2) * ratio + self.width() / 2
-        y = ((top + bottom) / 2 - vertical) * ratio + self.height() / 2
         painter = QPainter(self)
-        painter.fillRect(self.rect(), QColor("#141b24"))
-        painter.setPen(QColor("#344652"))
-        painter.setBrush(QColor("#8aacbe"))
-        for index in np.argsort(depth[self.faces].mean(axis=1)):
-            if self.face_colors is not None:
+        painter.fillRect(self.rect(), QColor("#18222c"))
+        if not len(self.faces):
+            return
+        vertices = self.bootstrap if self.show_bootstrap else self.vertices[int(self.posed)]
+        angle, tilt = radians(self.angle), radians(self.elevation)
+
+        def project(points):
+            horizontal = points[:, 0] * cos(angle) + points[:, 2] * sin(angle)
+            depth = -points[:, 0] * sin(angle) + points[:, 2] * cos(angle)
+            return np.stack((horizontal, points[:, 1] * cos(tilt) - depth * sin(tilt),
+                             points[:, 1] * sin(tilt) + depth * cos(tilt)), axis=1)
+
+        projected = project(vertices)
+        visible = projected[self.faces.ravel(), :2]
+        low, high = visible.min(axis=0), visible.max(axis=0)
+        ratio = 0.88 * self.zoom * min(self.width() / max(high[0] - low[0], .001),
+                                      self.height() / max(high[1] - low[1], .001))
+        center = (low + high) / 2
+        polygons = projected[self.faces]
+        depths = polygons[:, :, 2].mean(axis=1)
+        normals = np.cross(polygons[:, 1] - polygons[:, 0], polygons[:, 2] - polygons[:, 0])
+        shading = .55 + .45 * np.abs(normals[:, 2]) / np.maximum(np.linalg.norm(normals, axis=1), 1e-9)
+        layers = [(depths, polygons, shading)]
+        if self.posed and self.show_garment and self.garment is not None:
+            points, faces = self.garment
+            shells = project(points)[faces]
+            layers.append((shells[:, :, 2].mean(axis=1), shells, np.ones(len(shells))))
+        order = sorted((z, layer, index) for layer, (values, _, _) in enumerate(layers)
+                       for index, z in enumerate(values))
+        wireframe = self.mode == "Wireframe"
+        painter.setPen(QColor("#647685") if wireframe else Qt.PenStyle.NoPen)
+        for _, layer, index in order:
+            _, shapes, light = layers[layer]
+            if wireframe:
+                painter.setBrush(Qt.BrushStyle.NoBrush)
+            elif layer:
+                painter.setBrush(QColor("#546f9d"))
+            elif self.face_colors is not None and self.mode == "Textured":
                 painter.setBrush(self.face_colors[index])
-            painter.drawPolygon(QPolygonF([QPointF(x[i], y[i]) for i in self.faces[index]]))
+            else:
+                shade = light[index]
+                painter.setBrush(QColor(int(177 * shade), int(203 * shade), int(216 * shade)))
+            coords = (shapes[index, :, :2] - center) * ratio
+            painter.drawPolygon(QPolygonF([
+                QPointF(float(x) + self.width() / 2 + self.pan.x(),
+                        self.height() / 2 - float(y) + self.pan.y()) for x, y in coords
+            ]))
+
+    def reset_camera(self, angle=0):
+        self.angle, self.elevation, self.zoom = angle, 0, 1
+        self.pan = QPointF()
+        self.update()
 
     def set_angle(self, angle):
         self.angle = angle
+        self.update()
+
+    def mousePressEvent(self, event):
+        self.pointer = event.position()
+
+    def mouseReleaseEvent(self, event):
+        self.pointer = None
+
+    def mouseMoveEvent(self, event):
+        if self.pointer is None:
+            return
+        delta = event.position() - self.pointer
+        self.pointer = event.position()
+        if event.buttons() & Qt.MouseButton.LeftButton:
+            self.angle += delta.x() * .6
+            self.elevation = min(89, max(-89, self.elevation + delta.y() * .5))
+        elif event.buttons() & (Qt.MouseButton.RightButton | Qt.MouseButton.MiddleButton):
+            self.pan += delta
+        self.update()
+
+    def wheelEvent(self, event):
+        self.zoom = min(8, max(.25, self.zoom * 1.15 ** (event.angleDelta().y() / 120)))
         self.update()
 
     def set_bootstrap(self, checked):

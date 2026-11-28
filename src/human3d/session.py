@@ -2,7 +2,7 @@
 from dataclasses import dataclass, replace
 from pathlib import Path
 from threading import RLock
-from .project import Project
+from .project import PhotoSet, Project
 from .project_store import ProjectStore
 from .orchestration import Coordinator, Job
 from .ingestion import import_photos
@@ -80,6 +80,23 @@ class Session:
                 project = self.store.save(project.with_photos(project.photos.select(photo_id)))
             self._sync(project)
             return project
+
+    def remove_photo(self, photo_id):
+        with self._lock:
+            project = self.store.load()
+            photos = tuple(photo for photo in project.photos.photos if photo.id != photo_id)
+            if len(photos) == len(project.photos.photos):
+                return project
+            target = project.photos.target
+            if target == photo_id:
+                target = next((photo.id for photo in photos if photo.included), None)
+                if target is None and photos:
+                    photos = (replace(photos[0], included=True), *photos[1:])
+                    target = photos[0].id
+            observations = tuple(ref for ref in project.observations if ref.photo_id != photo_id)
+            updated = self.store.save(replace(project, photos=PhotoSet(photos, target), observations=observations))
+            self._sync(updated)
+            return updated
 
     def include_reference(self, photo_id: str, included: bool):
         with self._lock:

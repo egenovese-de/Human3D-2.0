@@ -16,8 +16,15 @@ Q_RENDER_BLOBS = {
     "DOCS/q/followup/articulation-atlas.png": "7e248e26f8e9d0ff2bb337539e7eff91fb781201",
     "DOCS/q/followup/layered-atlas.png": "5e5ba42a89ca5dcb0c941af81bebda07f7697b60",
     "DOCS/q/holdout_atlas.png": "2b6834e0d80bd26654c482d0fe84e0f5bfbc0e53",
+    "lab/fixtures/x-vlm/front.jpg": "14369064d52fbaf0146e71df617e551d95c94e3e",
+    "lab/fixtures/x-vlm/side.jpg": "15ff5a4da911aeafa4b4db0aa3312806d5850d07",
+    "lab/fixtures/x-vlm/threequarter.jpg": "ded4b1d4fc2cad5a75dc1f715b4d555970674bf5",
 }
-LAB_REFS = {"refs/heads/lab/render", "refs/remotes/origin/lab/render"}
+LAB_REFS = {
+    prefix + branch for prefix in ("refs/heads/", "refs/remotes/origin/") for branch in
+    ("lab/render", "lab/g1-makehuman", "lab/g2-photographic-evidence",
+     "lab/g3-camera-registration", "lab/g4-anatomical-fitting")
+}
 
 
 def prohibited(name):

@@ -1,0 +1,92 @@
+name: M7 empirical desktop
+on:
+  push:
+    branches: [development/m7]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m7-empirical-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  qualify:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.9'
+      - if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libgl1 libgles2 libglib2.0-0t64
+          python -m pip install --only-binary=:all: --require-hashes --no-deps -r requirements-linux.lock
+          python -m pip check
+          python tools/provision_m7_assets.py local-data/m7-runtime
+      - if: runner.os == 'Windows'
+        name: Package revision and run native Windows setup from extracted distribution
+        shell: pwsh
+        run: |
+          python tools/package_m7.py dist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $bundle = Get-ChildItem dist -Filter *.zip
+          Expand-Archive $bundle.FullName -DestinationPath extracted
+          $root = (Get-ChildItem extracted -Directory | Select-Object -First 1).FullName
+          & "$root\Setup-Human3D.ps1"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          "M7_EXTRACTED=$root" >> $env:GITHUB_ENV
+      - name: Drive the actual Qt application against pinned synthetic references
+        shell: bash
+        run: |
+          mkdir -p qualification
+          if [ "$RUNNER_OS" = Windows ]; then
+            exe="$M7_EXTRACTED/.venv/Scripts/python.exe"
+            assets="$M7_EXTRACTED/local-data/m7-runtime"
+          else
+            exe=python
+            assets=local-data/m7-runtime
+            export QT_QPA_PLATFORM=offscreen
+          fi
+          set -o pipefail
+          "$exe" -u tools/qualify_m7_desktop.py --assets "$assets" --output qualification --geometry 2>&1 | tee qualification/session.log
+      - if: runner.os == 'Windows'
+        name: Verify representative M7 exports in Blender 4.5.3
+        shell: pwsh
+        run: |
+          $base = 'https://download.blender.org/release/Blender4.5'
+          $archive = 'blender-4.5.3-windows-x64.zip'
+          Invoke-WebRequest "$base/$archive" -OutFile $archive
+          $line = (Invoke-RestMethod "$base/blender-4.5.3.sha256") -split "`n" | Where-Object { $_.Trim().EndsWith($archive) }
+          if (@($line).Count -ne 1 -or (Get-FileHash $archive -Algorithm SHA256).Hash -ine (($line.Trim() -split '\s+')[0])) { throw 'Blender checksum mismatch' }
+          Expand-Archive $archive -DestinationPath blender
+          $exe = (Get-ChildItem blender -Recurse -Filter blender.exe | Select-Object -First 1).FullName
+          $sources = @(Get-ChildItem qualification -Filter '*.usd*' | ForEach-Object FullName)
+          if ($sources.Count -lt 3) { throw 'Missing representative export assets' }
+          & $exe --background --factory-startup --threads 2 --python-exit-code 1 --python tools/qualify_m7_blender.py -- qualification/blender @sources
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: m7-qualification-${{ runner.os }}
+          path: |
+            qualification/session.log
+            qualification/qualification.json
+            qualification/screenshots/*.png
+            qualification/blender/blender-roundtrip.json
+            qualification/blender/*-blender.png
+            extracted/*/local-data/m7-setup.log
+            extracted/*/local-data/m7-startup.png
+            dist/Human3D-*.zip
+          if-no-files-found: warn
+          retention-days: 14
