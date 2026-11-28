@@ -3,7 +3,6 @@ import argparse
 from hashlib import sha256
 import json
 import os
-import shutil
 from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 from urllib.request import urlopen
@@ -45,9 +44,11 @@ def provision(destination, *, experimental=True):
 
 def provision_native(destination):
     registry = ROOT / "DOCS/manifests/m7-g1-native.json"
-    doc = json.loads(registry.read_text(encoding="utf-8"))
+    # Git may expand canonical text to CRLF in an existing Windows checkout.
+    canonical = registry.read_bytes().replace(b"\r\n", b"\n")
+    doc = json.loads(canonical)
     archive = json.loads((ROOT / "DOCS/manifests/m7-g1-archive.json").read_text(encoding="utf-8"))
-    if sha256(registry.read_bytes()).hexdigest() != archive["registry_sha256"] or doc["upstream"] != archive["revision"]:
+    if sha256(canonical).hexdigest() != archive["registry_sha256"] or doc["upstream"] != archive["revision"]:
         raise ValueError("Native registry integrity failure.")
     native = destination / "native"
 
@@ -74,7 +75,7 @@ def provision_native(destination):
                     path = native / relative
                     path.parent.mkdir(parents=True, exist_ok=True)
                     path.write_bytes(data)
-    shutil.copyfile(registry, destination / "native-registry.json")
+    (destination / "native-registry.json").write_bytes(canonical)
     print(f"Verified {len(doc['files'])} pinned G1 morph targets.")
 
 
