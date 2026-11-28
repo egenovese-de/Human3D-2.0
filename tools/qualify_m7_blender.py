@@ -54,7 +54,7 @@ def snapshot(directory):
     bpy.ops.render.render(write_still=True)
 
 
-def verify(source, output):
+def verify(source, output, *, render):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     assert bpy.app.build_options.usd
     assert bpy.ops.wm.usd_import(filepath=str(source)) == {"FINISHED"}, source
@@ -97,7 +97,7 @@ def verify(source, output):
         if image.source == "FILE" and image.has_data and not image.packed_file:
             image.pack()
     destination = output / (source.stem + ".blend")
-    if "target" in source.stem:
+    if render and "target" in source.stem:
         snapshot(output / (source.stem + "-blender.png"))
     bpy.ops.wm.save_as_mainfile(filepath=str(destination))
     bpy.ops.wm.open_mainfile(filepath=str(destination))
@@ -118,8 +118,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("sources", type=Path, nargs="+")
+    parser.add_argument("--no-render", action="store_true", help="Test import, deformation and save/reopen without a display or GPU.")
     args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    rows = [verify(source.resolve(), output) for source in args.sources]
+    rows = [verify(source.resolve(), output, render=not args.no_render) for source in args.sources]
     (output / "blender-roundtrip.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")

@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: m7-empirical-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   qualify:
     strategy:
@@ -78,7 +78,7 @@ jobs:
           $exe = (Get-ChildItem blender -Recurse -Filter blender.exe | Select-Object -First 1).FullName
           $sources = @(Get-ChildItem qualification -Filter '*.usd*' | ForEach-Object FullName)
           if ($sources.Count -lt 3) { throw 'Missing representative export assets' }
-          & $exe --background --factory-startup --threads 2 --python-exit-code 1 --python tools/qualify_m7_blender.py -- qualification/blender @sources
+          & $exe --background --factory-startup --threads 2 --python-exit-code 1 --python tools/qualify_m7_blender.py -- qualification/blender --no-render @sources 2>&1 | Tee-Object -FilePath qualification/blender-session.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
@@ -90,7 +90,7 @@ jobs:
             qualification/g3-registration.json
             qualification/screenshots/*.png
             qualification/blender/blender-roundtrip.json
-            qualification/blender/*-blender.png
+            qualification/blender-session.log
             extracted/*/local-data/m7-setup.log
             extracted/*/local-data/m7-startup.png
             extracted/*/local-data/m7-launch.png
