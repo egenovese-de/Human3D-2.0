@@ -88,6 +88,7 @@ def subject(args):
                'view_order': [angles_by_id[view.id] for view in views],
                'mode': projection_mode, 'perturbation': args.perturb, 'normal_convention': 'physical-outward-v2',
                'attempt_stages': report['diagnostics']['stages'],
+               'normal_intrinsics': args.normal_intrinsics,
                'photo_ids': {view.id: angles_by_id[view.id] for view in views},
                'alignment_and_preprocess_seconds': perf_counter() - init}
     if args.resume and (output / 'fit.json').exists():
@@ -163,5 +164,6 @@ if __name__ == '__main__':
     parser.add_argument('--perturb')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--parity', action='store_true')
+    parser.add_argument('--normal-intrinsics', default='synthetic calibrated')
     cv2.setNumThreads(1)
     subject(parser.parse_args())

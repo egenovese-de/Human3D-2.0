@@ -41,7 +41,7 @@ def depth_model(weight):
     return infer
 
 
-def normal_model(weight, source):
+def normal_model(weight, source, fov=None):
     import torch
 
     if sha256(weight.read_bytes()).hexdigest() != '629472c66ea9ec83bab6ba7c957ad7d983bb9c91063a54ad74ff5b8229cbf22f':
@@ -78,7 +78,8 @@ def normal_model(weight, source):
     def infer(rgb, size):
         image = resized(rgb, size, cv2.INTER_AREA)
         pixels = (image.astype(np.float32) / 255 - MEAN) / STD
-        focal = size * CONFIG['main_camera_cm']['distance'] / CONFIG['main_camera_cm']['span']
+        focal = (size / (2 * np.tan(np.deg2rad(fov / 2))) if fov is not None else
+                 size * CONFIG['main_camera_cm']['distance'] / CONFIG['main_camera_cm']['span'])
         intrinsics = torch.tensor([[[focal, 0, size / 2], [0, focal, size / 2], [0, 0, 1]]])
         with torch.inference_mode():
             raw = model(torch.from_numpy(pixels.transpose(2, 0, 1)[None]), intrins=intrinsics)[-1]
@@ -96,17 +97,21 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--source', type=Path)
     parser.add_argument('--cases', nargs='*')
+    parser.add_argument('--fov', type=float, help='Optional assumed normal-camera field of view')
+    parser.add_argument('--front-only', action='store_true')
     options = parser.parse_args()
     cv2.setNumThreads(1)
     start = perf_counter()
-    infer = depth_model(options.weight) if options.kind == 'depth' else normal_model(options.weight, options.source)
+    infer = depth_model(options.weight) if options.kind == 'depth' else normal_model(options.weight, options.source, options.fov)
     report = {'initialization_s': perf_counter() - start, 'weight_bytes': options.weight.stat().st_size,
               'sha256': sha256(options.weight.read_bytes()).hexdigest(), 'cpu_threads': CONFIG['cpu_threads'],
-              'images': {}}
+              'conditioned_camera_fov_degrees': options.fov, 'images': {}}
     options.output.mkdir(parents=True, exist_ok=True)
     for path in sorted(options.images.glob('*/*.png')):
         case = path.parent.name
         if options.cases and case not in options.cases:
+            continue
+        if options.front_only and path.stem != '0':
             continue
         if path.stem.isdigit() and int(path.stem) not in CONFIG['fit_yaw_deg']:
             continue

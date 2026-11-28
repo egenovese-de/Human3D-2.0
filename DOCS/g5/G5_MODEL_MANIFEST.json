@@ -1,0 +1,27 @@
+{
+  "depth": {
+    "family": "Depth Anything V2 Small",
+    "export": "onnx-community/depth-anything-v2-small",
+    "revision": "4472b7362082",
+    "filename": "onnx/model.onnx",
+    "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c",
+    "bytes": 99060839,
+    "input_sizes": [392, 280],
+    "runtime": "ONNX Runtime 1.24.1 CPUExecutionProvider",
+    "representation": "relative inverse depth, higher is closer",
+    "url": "https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/4472b7362082/onnx/model.onnx",
+    "weights_card_license": "Apache-2.0"
+  },
+  "normal": {
+    "family": "DSINE v02",
+    "source_revision": "ef0c2afa32b4dd19cb8ca4567c652802cd92591c",
+    "weights_revision": "eb7c7991e19351cef4ead99811fc1117595b6bff",
+    "sha256": "629472c66ea9ec83bab6ba7c957ad7d983bb9c91063a54ad74ff5b8229cbf22f",
+    "bytes": 291298581,
+    "input_sizes": [384, 256],
+    "runtime": "PyTorch 2.7.1+cpu, geffnet 1.0.2, strict checkpoint load",
+    "representation": "DSINE forward-frame normal, converted to physical outward in G4",
+    "url": "https://huggingface.co/camenduru/DSINE/resolve/eb7c7991e19351cef4ead99811fc1117595b6bff/dsine.pt",
+    "weights_rights": "No separate checkpoint license on retrieved mirror. Exclude from redistribution."
+  }
+}

@@ -40,8 +40,9 @@ def mean(xs):
 
 
 def table(head, rows):
-    return '\n'.join(['| ' + ' | '.join(head) + ' |', '| ' + ' | '.join(['---'] * len(head)) + ' |',
-                     *['| ' + ' | '.join(map(str, row)) + ' |' for row in rows]])
+    escape = lambda row: ' | '.join(str(cell).replace('|', r'\|') for cell in row)
+    return '\n'.join(['| ' + escape(head) + ' |', '| ' + ' | '.join(['---'] * len(head)) + ' |',
+                     *['| ' + escape(row) + ' |' for row in rows]])
 
 
 def rows_for(mode, cohort, held):
@@ -118,6 +119,12 @@ pred_quality = read(OUT / 'maps/quality.json', {})
 ray = read(OUT / 'rays.json', {})
 timings = {k: read(OUT / 'pred' / f'{k}-runtime.json', {}) for k in ('depth', 'normal')}
 ci = {p.stem: read(p) for p in sorted((OUT / 'ci').glob('*.json'))}
+ci_seconds = lambda row: row.get('cpu_392_inference_seconds') or row['cpu_384_inference_seconds']
+windows_normal = any('cpu_384_inference_seconds' in row for row in ci.values())
+windows_status = ('Both models also ran on Windows Server 2022 CI. '
+                  'The physical Windows 11 i7-1355U workstation remains unmeasured.'
+                  if windows_normal else 'Depth also ran on Windows Server 2022 CI. '
+                  'The physical Windows 11 i7-1355U workstation and Windows DSINE deployment remain unmeasured.')
 stress = read(OUT / 'stress-surface.json', {})
 robust = read(OUT / 'robustness-surface.json', {})
 if robust:
@@ -201,13 +208,13 @@ exec_summary += f'''
 
 1. Exact depth had {headline('D1')}. Exact normals had {headline('D2')}. Combining exact channels had {headline('D3')}. The best observed gain represents a single subject under the frozen configuration.
 2. Predicted depth had {headline('D4')}. Directly predicted normals had {headline('D5')}. Predicted fusion had {headline('D6')}. Compare held-out IoU and depth against the paired geometry result. D3 and D6 show joint performance, and D1 and D2 separate individual effects.
-3. Both models executed offline on Linux CPU with pinned assets. Depth also ran on a Windows Server 2022 CI runner. The physical Windows 11 i7-1355U workstation and Windows DSINE deployment remain unmeasured.
+3. Both models executed offline on Linux CPU with pinned assets. {windows_status}
 
 ## Remaining qualification
 
 1. The ten authored fixtures cover two asset families and a small held-out cohort. Real photographs, consented scans, independent metric scale, and a broader set of camera and body poses remain open.
 2. Camera registration and pose attribution can change the result materially. The supplied camera and pose controls isolate error sources. They leave automatic onboarding from arbitrary photos unresolved.
-3. D7 and D8 examine a single restricted displacement family. Retained local candidates and rejected proposals are separated. A production topology and rig round-trip for the experiment and broader human-specific normal-model evidence remain unqualified.
+3. D7 and D8 examine a single restricted displacement family. Retained local candidates and rejected proposals are separated. Representative USD and Blender rig save/reopen checks passed. A full textured desktop export regression and broader human-specific normal-model evidence remain open.
 
 See the anatomical region, multiview, registration and local-refinement reports for gains, regressions and exact coverage. Positive gain means lower error than D0. Runtime covers the measured fit, including registration for D0, and excludes predictor inference. Concurrent workload timings include contention.
 '''
@@ -282,7 +289,7 @@ write('G5_REGISTRATION_SENSITIVITY.md', controls_block(camera_rows, 'G5 camera, 
       '\n\n## Pose, clothing and occlusion controls\n\n' +
       controls_block(stress, 'Controlled reference-surface changes',
       'These are calibrated two-view oracle controls on high mass. Garment shells are procedural geometry offsets and external occlusion is a pixel exclusion control. True pose and assumed pose angles are logged for each run. '
-      'This matrix isolates geometry and leaves RGB predictions on clothed and occluded photos open.'))
+      'This matrix isolates geometry. The separate appearance report measures RGB channel quality against exposed and covered surfaces.'))
 write('G5_LOCAL_REFINEMENT_BENCHMARK.md', benchmark_report(['D0','L0','D3','D7','D6','D8','D9'], 'G5 local refinement and native capacity') +
       '\n\nD7 and D8 use the same smoothed normal-direction field with a 5 mm bound. L0 uses projected contour corrections from Engine B masks. '
       'Rebind, face flips and new Blender BVH crossings are evaluated separately. Local candidates introducing new disjoint-index crossings are rejected in the reported result. '
@@ -323,11 +330,11 @@ write('G5_RUNTIME_AND_RESOURCES.md', '# G5 CPU runtime and resources\n\nLinux ho
       table(['Model','N','Init s','First s','Warm median s','Reduced median s','Weights MiB','Peak RSS MiB'], profile) +
       '\n\n## Windows and Linux CI\n\n' +
       table(['Artifact','System','Init s','First s','Warm median s','RSS MiB after runs'],
-            [[key, r['platform'], value(r['initialization_s']), value(r['cpu_392_inference_seconds'][0]),
-             value(med(r['cpu_392_inference_seconds'][1:])), value(r['working_set_rss_bytes_after_runs']/1024**2)]
+            [[key, r['platform'], value(r['initialization_s']), value(ci_seconds(r)[0]),
+             value(med(ci_seconds(r)[1:])), value(r['working_set_rss_bytes_after_runs']/1024**2)]
                 for key,r in ci.items()]) +
-      '\n\nWindows CI used a synthetic geometric RGB smoke and measured depth only. The hardware differs from the physical Windows 11 target. '
-      'Fit timing varies with admitted views and host contention. Full Windows memory, normal inference, quantization, host-specific cache throughput and target hardware power modes remain unmeasured. '
+      '\n\nWindows CI used a synthetic geometric RGB smoke. The hardware differs from the physical Windows 11 target. '
+      'Fit timing varies with admitted views and host contention. Full Windows application memory, quantization, host-specific cache throughput and target hardware power modes remain unmeasured. '
       'Per-image model inference is cacheable. Cache identity must include oriented RGB digest, checkpoint hash, image transform, calibrated or assumed intrinsics for DSINE, and evidence convention version. '
       'D0 depth alignment depends on canonical solve, visibility and calibration, so aligned artifacts need an additional fit-dependent key.')
 
@@ -440,7 +447,7 @@ descriptions = [
     'Bounded local refinement controls','Held-out and structural validation','Runtime and memory profiling',
     'Intermediate snapshots and Blender evidence','Production integration assessment','Comparative strategy evaluation',
     'Final feasibility and impact decision','Evidence consolidation and handoff']
-done = {1,2,3,4,5,6,7,9,14,15,16,33,34}
+done = {1,2,3,4,5,6,7,9,12,14,15,16,33,34,35}
 for i, arm in enumerate(['D1','D2','D3','D4','D5','D6'], 17):
     if sum(arm in track for family in ('A','B') for track in ALL['calibrated',family].values()) == 10:
         done.add(i)
@@ -458,3 +465,96 @@ statuses = {i: 'DONE' if i in done else 'PARTIAL' for i in range(1,37)}
 statuses[36] = 'DONE'
 write('BACKLOG_G5.md', '# G5 backlog\n\n' + table(
     ['ID','Task','Status'], [(f'G5-{i:03d}',d,statuses[i]) for i,d in enumerate(descriptions,1)]))
+
+appearance = read(OUT / 'appearance-quality.json', {})
+if appearance:
+    text = (REPORTS / 'G5_EVIDENCE_QUALITY.md').read_text()
+    display = []
+    for condition, views in appearance.items():
+        for yaw, items in views.items():
+            for support, row in items.items():
+                display.append((condition, yaw, support, row['pixels'], value(row['depth_mae_mm']),
+                                value(row['normal_median_deg'])))
+    write('G5_EVIDENCE_QUALITY.md', text + '\n## Blender appearance perturbations\n\n'
+          'An independent high-mass RGB series uses a close patterned torso shell, a loose shell, an occluding panel '
+          'and striped background props. Separate masks score the visible altered surface and underlying body. '
+          'The affine depth transform is estimated against the visible surface. This isolates appearance and '
+          'surface-attribution errors without estimating real-world metric scale.\n\n' +
+          table(['Condition','Yaw °','Evaluation support','Pixels','Depth MAE mm','Median normal error °'], display))
+
+fov_surfaces = read(OUT / 'estimated-fov-surface.json', {})
+if fov_surfaces:
+    path = REPORTS / 'G5_REGISTRATION_SENSITIVITY.md'
+    rows = []
+    for case, arms in fov_surfaces.items():
+        for arm in ('D5','D6'):
+            if arm not in arms:
+                continue
+            old = ALL['estimated',case[0]].get(case, {}).get(arm, {})
+            rows.append((case, arm, value(old.get('mean_mm')), value(arms[arm]['symmetric_mm']['mean'])))
+    write(path.name, path.read_text() + '\n## Normal-intrinsics sensitivity on estimated registrations\n\n'
+          'The main estimated table uses the synthetic RGB capture intrinsics for DSINE only. '
+          'This supplementary block replaces them with the model’s 60° default and scores the same estimated M7 registration.\n\n' +
+          table(['Subject','Arm','Known intrinsics mm','Assumed 60° mm'], rows))
+
+rig = {}
+for folder in sorted((OUT / 'roundtrip').glob('*')):
+    rows = read(folder / 'blender-roundtrip.json', [])
+    invariants = read(folder / 'm7_export_validation.json', {})
+    if rows:
+        rig[folder.name] = {'blender': rows, 'openusd_invariants': invariants}
+result['roundtrip'] = rig
+write('G5_MEASUREMENTS.json', json.dumps(result, indent=2, allow_nan=False))
+if rig:
+    path = REPORTS / 'G5_LOCAL_REFINEMENT_BENCHMARK.md'
+    lines = [[f, row['source'], row['vertices'], row['faces'], row['uv_layers'], row['bones'],
+              f"{row['max_weight_sum_error']:.2e}", row['editable_geometry_save_reopen']]
+             for f,data in rig.items() for row in data['blender']]
+    write(path.name, path.read_text() + '\n## M7 USD and Blender round trip\n\n'
+         'Accepted representatives retain topology, UV coordinates and indices, skin indices and weights relative to the same subject’s D0 export. '
+         'Blender 4.5.16 imported and articulated the rig, edited a vertex, and reopened the saved scene. '
+         'The archive includes the numeric verification for Family B.\n\n' +
+         table(['Subject','Source','Vertices','Faces','UV layers','Bones','Max skin sum error','Edit/reopen'], lines))
+detail = (REPORTS / 'G5_EVIDENCE_QUALITY.md').read_text()
+reductions = []
+for model, res, metric in [('depth', 280, 'affine_inverse_pixel_mae_mm'), ('normal', 256, 'median_deg')]:
+    matches = [p for views in pred_quality.values() for p in views.values() if f'{model}_{res}' in p]
+    if matches:
+        reductions.append([model, res, len(matches), value(mean([r[model][metric] for r in matches])),
+                           value(mean([r[f'{model}_{res}'][metric] for r in matches])), metric])
+write('G5_EVIDENCE_QUALITY.md', detail + '\n## Reduced-resolution development controls\n\n' +
+      table(['Model','Reduced input px','Paired images','Mean full input error','Mean reduced input error','Metric'], reductions))
+
+executive = (REPORTS / 'G5_EXECUTIVE_REPORT.md').read_text()
+for arm in ('D1','D2','D3','D7'):
+    available = [(s,v[arm]['delta_mm']) for f in ('A','B') for s,v in ALL['calibrated',f].items() if arm in v]
+    if available:
+        name, gain = max(available, key=lambda x:x[1])
+        executive += f'\n- Maximum calibrated gain for {arm}, including development cases, was {gain:+.2f} mm on {name}.'
+worst_est = [(s,k,v['delta_mm']) for family in ('A','B') for s,arms in ALL['estimated',family].items()
+             for k,v in arms.items() if k in ('D4','D5','D6')]
+if worst_est:
+    case, key, gain = min(worst_est, key=lambda x:x[2])
+    executive += f'\n- Worst predicted result in the main estimated-camera matrix regressed {abs(gain):.2f} mm on {case} ({key}).'
+if 'loose_shell_naive' in stress and 'loose_shell_exclude' in stress:
+    row = stress['loose_shell_naive']; excluded = stress['loose_shell_exclude']
+    base, naive, gated = [r[k]['symmetric_mm']['mean'] for r, k in ((row,'D0'),(row,'D3'),(excluded,'D3'))]
+    executive += f'\n- Treating the loose shell as anatomy increased error from {base:.2f} to {naive:.2f} mm. Excluding covered dense observations reduced it to {gated:.2f} mm.'
+write('G5_EXECUTIVE_REPORT.md', executive)
+
+# Resample bodies, never individual viewpoints. The small authored cohort
+# supports descriptive intervals only.
+rng = np.random.default_rng(1128)
+intervals = {}
+for arm in ('D1','D2','D3','D4','D5','D6','D7','D8'):
+    delta = np.array([row[arm]['delta_mm'] for row in cal_held.values() if arm in row])
+    if len(delta) >= 5:
+        draws = rng.choice(delta, size=(10000, len(delta)), replace=True).mean(axis=1)
+        intervals[arm] = [float(x) for x in np.percentile(draws, [2.5, 97.5])]
+result['descriptive_subject_bootstrap_mean_gain_mm_95_percent'] = intervals
+write('G5_MEASUREMENTS.json', json.dumps(result, indent=2, allow_nan=False))
+if intervals:
+    path = REPORTS / 'G5_EXECUTIVE_REPORT.md'
+    write(path.name, path.read_text() + '\n## Descriptive 95% mean-gain intervals\n\n' +
+         table(['Arm','Lower mm','Upper mm'], [[key, value(lo), value(hi)] for key,(lo,hi) in intervals.items()]) +
+         '\n\nThe bootstrap resamples subjects and describes this small authored cohort. Population-level inference remains open.')

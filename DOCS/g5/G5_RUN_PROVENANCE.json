@@ -1,0 +1,18 @@
+{
+  "baseline": "020fcc793e7417d6927d9e07346678e110ae9ddc",
+  "experimental_branch": "lab/g5-depth-normals",
+  "native_no_extra_schedule_parity_max_mm": 0.0,
+  "schedule_parity_fixture": "A_high_mass calibrated, four views",
+  "compute": "AMD EPYC 9V74 Linux, Python 3.11.9, Blender 4.3.2 rendering and BVH, Blender 4.5.16 USD round trips",
+  "ci": [
+    {"run_id": 46128747656, "commit": "94c834930ed400f16b4778f2d342a706d7175d4b",
+     "conclusion": "success", "scope": "Linux and Windows depth CPU and evidence math"},
+    {"run_id": 46129530884, "commit": "fe544b101b300e906f8c336d74d8239323cc288a",
+     "conclusion": "success", "scope": "Linux and Windows depth CPU, Windows DSINE CPU, evidence math",
+     "artifacts": [
+       {"id": 15257147746, "sha256": "1a313480cb577a8b8cd4466f8f954541693cb238c81fbafe773b7f6771965d32"},
+       {"id": 15256968497, "sha256": "b31fbb515272f9e628108aff9101089a4953bbfa112f4d26ca596f7f5dd01431"},
+       {"id": 15256829058, "sha256": "c9a9674e92a0f0bd30170663a9ff23fdd9bd137cfaf34853c4f2613b66acbc33"}
+     ]}
+  ]
+}

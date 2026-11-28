@@ -1,0 +1,50 @@
+{
+  "application_baseline": "020fcc793e7417d6927d9e07346678e110ae9ddc",
+  "m7_docs": "2a91df9f8dcab0279981e90a2a77c7ce7976bea9",
+  "lab_render": "66d84ba5775b0ab22f6e587e83efa0999180255c",
+  "g1": "8743a0fe45cc8a68781cf19cbc0a7cc59cb964c5",
+  "g2": "495f7be86628b35ae220de2897e4951507179400",
+  "g3": "f0884a858cc196f9d709fc234cfed4f9a622a402",
+  "g4": "ca90165d259bada9b3cea945d1227be0f83656ef",
+  "makehuman": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "makehuman_core_asset_license": "CC0",
+  "engine_b_target_count": 582,
+  "makehuman_archive": {
+    "revision": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+    "url": "https://codeload.github.com/makehumancommunity/makehuman/zip/1f508f6083b2f823dab15de924b3bde72e08d77c",
+    "bytes": 45587410,
+    "sha256": "e425c23c6109d65ee6c5163dee3235383310d279ff030a82ea0802dc32c96ffd",
+    "registry_sha256": "7c67a811ff4f8c137372810474af44bcb3a42476de293a20a194de90ddc01c30",
+    "prefix": "makehuman-1f508f6083b2f823dab15de924b3bde72e08d77c/makehuman/"
+  },
+  "pose_landmarker": {
+    "name": "MediaPipe Pose Landmarker Lite, float16, version 1",
+    "url": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+    "bytes": 5777746,
+    "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+  },
+  "model_manifest": "G5_MODEL_MANIFEST.json",
+  "independent_geometry": "Original G4 SHA-256-verified MB-Lab blobs; numeric results only",
+  "independent_reference_files": [
+    {
+      "id": "B_female",
+      "preset": "f_ca01",
+      "source_mesh_sha256": "f31fdf0277097373219b89f1c4fd3b051a3dfe5ae78ffe5b9e676ddbc9f6dd40"
+    },
+    {
+      "id": "B_male",
+      "preset": "m_la01",
+      "source_mesh_sha256": "dc1854813d4b44714340ea13a725cafd8c552e18ed386db4e6e7bb6880e4f66d"
+    },
+    {
+      "id": "B_female_expanded",
+      "preset": "f_af01",
+      "source_mesh_sha256": "fd64ed3de8260dccb45e55f518c875553af4567f27ceb9d78c1ac00980f75b9a"
+    },
+    {
+      "id": "B_male_expanded",
+      "preset": "m_as01",
+      "source_mesh_sha256": "6b6faf01b4c7ef156d9518bbea774294a40674d7f3d821c5bbc18d196c3ddc19"
+    }
+  ]
+}

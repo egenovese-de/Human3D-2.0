@@ -1,0 +1,11 @@
+# G5 limitations and open qualification
+
+- All ten reference bodies are authored assets from two families. The seven designated evaluation subjects do not establish population-level significance. Repeated views inform fits but are not independent subjects.
+- The G4 families and generation profiles were selected before G5. MakeHuman is a same-family capacity control. MB-Lab has an independent topology within one authored asset family, with the historical fixed scale and floor alignment.
+- The fixed predeclared weights use the G2 study as prior evidence. A full development-only model and objective selection sweep, followed by a second independently collected holdout, remains open.
+- The completed nested view and perturbation cells are listed explicitly. Strongly articulated scenarios have controlled geometry and known pose offsets. Targeted cloth and occlusion RGB quality are measured on high mass. Paired predicted reconstruction for clothed and occluded photos, weak garment outer bounds and real-photo geometry remain open.
+- DSINE is the tested direct normal predictor. ECON and Metric3D V2 are feasibility reviews. A human-specific normal inference and paired fitting benchmark remain open.
+- Calibrated learned depth is anchored to M7 geometry. Pixel-quality metrics fit an optimistic affine transform using reference pixels. Physical body scale cannot be recovered from relative depth in arbitrary photos.
+- Local handling is a bounded displacement diagnostic. Additional native modifiers, circumference and cross-sectional loop metrics, exact anatomical semantic masks, alternate regularizers, stochastic uncertainty intervals, and a fully converged independent geometry optimization remain open.
+- Model inference uses FP32. Windows inference qualification is a Server 2022 CI smoke for both predictors. Physical workstation latency and memory, model quantization, ONNX conversion for normals, synchronized cache profiling and GPU comparisons remain open.
+- Local refinement candidates undergo product rebind and a Blender crossing screen. G5 staged geometry retains indices and triangle topology. Six USDs across one body per family passed Blender import, deformation and edit/save/reopen. Full textured desktop export regression remains open.
