@@ -1,0 +1,15 @@
+{
+  "image_size": 384,
+  "fit_yaw_deg": [0, 90, 180, 270, 45, 135, 225, 315],
+  "holdout_yaw_deg": [22, 112, 202, 292],
+  "main_views": 4,
+  "main_camera_cm": {"span": 215, "center_y": 0, "distance": 420, "perspective": true},
+  "development": ["A_high_mass", "A_muscular", "B_female"],
+  "held_out": ["A_adult_asymmetric", "A_slim", "A_heldout_1", "A_heldout_2", "B_male", "B_female_expanded", "B_male_expanded"],
+  "depth_weight": 0.20,
+  "normal_weight": 0.20,
+  "depth_huber_cm": 2.5,
+  "normal_huber_deg": 20,
+  "local_max_mm": 5,
+  "cpu_threads": 2
+}
