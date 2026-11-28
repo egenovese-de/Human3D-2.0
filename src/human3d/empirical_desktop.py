@@ -111,7 +111,12 @@ class EmpiricalWindow(QMainWindow):
             action = toolbar.addAction(text)
             action.triggered.connect(handler)
             self.actions[text] = action
-        self.actions["Generate 3D"].setObjectName("generate3d")
+        primary = toolbar.widgetForAction(self.actions["Generate 3D"])
+        primary.setObjectName("generate3d")
+        primary.setStyleSheet(
+            "QToolButton#generate3d:enabled {background:#1769ad;color:white;padding:6px 9px;border-radius:3px;}"
+            "QToolButton#generate3d:hover {background:#105685;}"
+        )
 
         split = QSplitter()
         page.addWidget(split, 1)
@@ -135,6 +140,7 @@ class EmpiricalWindow(QMainWindow):
         inspect.addWidget(self.results)
         controls = QHBoxLayout()
         self.pose = QComboBox()
+        self.pose.setMinimumContentsLength(11)
         self.pose.currentIndexChanged.connect(self.update_preview)
         controls.addWidget(self.pose)
         self.style = QComboBox()
@@ -255,7 +261,13 @@ class EmpiricalWindow(QMainWindow):
             raise RuntimeError("Wait for the reconstruction to stop.")
         session = Session(Path(directory).resolve(), create=create)
         self.service = ReconstructionService(session, self.engines, self.revision)
-        self.calibration = self.settings.value("calibration/" + session.store.load().id, "") or None
+        project_id = session.store.load().id
+        self.calibration = self.settings.value("calibration/" + project_id, "") or None
+        for control, key in ((self.engine, "engine"), (self.garment, "garment")):
+            value = self.settings.value(f"{key}/{project_id}", self.settings.value(key, ""))
+            control.blockSignals(True)
+            control.setCurrentIndex(max(control.findData(value), 0))
+            control.blockSignals(False)
         self.calibration_button.setText("Manifest Loaded" if self.calibration else "Calibration Manifest")
         self.photo_icons.clear()
         self.settings.setValue("last_project", str(session.store.directory))
@@ -362,6 +374,10 @@ class EmpiricalWindow(QMainWindow):
     def settings_changed(self):
         self.settings.setValue("engine", self.engine.currentData())
         self.settings.setValue("garment", self.garment.currentData() or "")
+        if self.service is not None:
+            project_id = self.service.session.store.load().id
+            self.settings.setValue("engine/" + project_id, self.engine.currentData())
+            self.settings.setValue("garment/" + project_id, self.garment.currentData() or "")
         self.update_actions()
 
     def update_actions(self):
@@ -475,7 +491,20 @@ class EmpiricalWindow(QMainWindow):
         self.diagnostics.clear()
         if selected is not None:
             info = selected.metadata
-            self.diagnostics.setPlainText(json.dumps(info, indent=2, ensure_ascii=False))
+            diagnostics = info["diagnostics"]
+            metrics = diagnostics["metrics"]
+            target = next((photo["name"] for photo in info["request"]["photos"]["photos"]
+                           if photo["id"] == info["request"]["photos"]["target"]), "Unavailable")
+            lines = [
+                f"{ENGINE_NAMES.get(info['request']['engine'], info['request']['engine'])} · {info['status']} · {info['duration_seconds']:.1f} s",
+                f"Target: {target} · Camera: {metrics.get('target_camera', 'unavailable')} · "
+                f"Scale: {metrics.get('metric_scale', 'unavailable')} · "
+                f"Target pose: {metrics.get('target_pose', 'unavailable')}",
+                *diagnostics["warnings"],
+            ]
+            if info["error"]:
+                lines.append(info["error"])
+            self.diagnostics.setPlainText("\n".join(lines) + "\n\n" + json.dumps(info, indent=2, ensure_ascii=False))
             if info["status"] == "complete":
                 self.guard(lambda: self.load_preview(selected))
         self.refresh_comparison()

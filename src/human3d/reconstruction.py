@@ -211,7 +211,10 @@ class ReconstructionService:
                     canonical = None
                 status = ("complete" if failure is None else "cancelled" if isinstance(failure, Cancelled)
                           else "stale" if isinstance(failure, StaleRequest) else "failed")
-                metadata = {"schema_version": SCHEMA_VERSION, "request": asdict(request),
+                request_metadata = asdict(request)
+                if request.calibration:
+                    request_metadata["calibration"] = Path(request.calibration).name
+                metadata = {"schema_version": SCHEMA_VERSION, "request": request_metadata,
                             "status": status, "canonical_id": canonical,
                             "target_result_id": request.id if any(name.startswith("target.usd") for name in artifacts) else None,
                             "diagnostics": asdict(diagnostics), "artifacts": artifacts,

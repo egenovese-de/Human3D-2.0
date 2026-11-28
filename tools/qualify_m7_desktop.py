@@ -34,6 +34,14 @@ def fixtures(directory):
             path.write_bytes(response.read(1024 * 1024))
         if sha_file(path) != digest:
             raise ValueError(f"Fixture integrity failure: {name}")
+        # The admitted source is a four-subject contact sheet. Use subject 04
+        # across every view and remove the panel labels.
+        with Image.open(path) as sheet:
+            if sheet.size != (920, 470):
+                raise ValueError(f"Unexpected contact sheet size: {name}")
+            frame = sheet.crop((694, 2, 920, 442))
+        path.unlink()
+        frame.save(path.with_suffix(".png"))
     Image.new("RGB", (400, 500), "white").save(directory / "blank.png")
 
 
@@ -49,6 +57,8 @@ def qualify(assets, output, revision, *, geometry=False):
     app = QApplication([])
     settings = QSettings(str(runtime / "qualification.ini"), QSettings.Format.IniFormat)
     engines = configured_engines(assets)
+    if geometry and "geometry" not in engines:
+        raise RuntimeError("Engine B qualification requires its verified native asset registry.")
     window = EmpiricalWindow(engines, revision, settings=settings, reopen=False)
     window.show()
     QTest.qWaitForWindowExposed(window, 5000)
@@ -96,7 +106,7 @@ def qualify(assets, output, revision, *, geometry=False):
     shot("01-initial")
     window.attach(runtime / "project", create=True)
     start = perf_counter()
-    window.ingest([photos / "front.jpg"])
+    window.ingest([photos / "front.png"])
     profile["single_import_seconds"] = perf_counter() - start
     assert window.photos.count() == 1 and "TARGET" in window.photos.currentItem().text()
     shot("02-imported")
@@ -114,12 +124,14 @@ def qualify(assets, output, revision, *, geometry=False):
     window.diagnostics_toggle.setChecked(True)
     shot("09-diagnostics")
     window.engine.showPopup()
-    shot("10-engine-menu")
+    app.processEvents()
+    if not window.engine.view().window().grab().save(str(screenshots / "10-engine-menu.png")):
+        raise RuntimeError("Could not capture the engine selector.")
     window.engine.hidePopup()
     window.compare_toggle.setChecked(False)
 
     start = perf_counter()
-    window.ingest([photos / name for name in ("side.jpg", "threequarter.jpg")])
+    window.ingest([photos / name for name in ("side.png", "threequarter.png")])
     profile["additional_import_seconds"] = perf_counter() - start
     assert window.active_result.id == single.id
     click_target(2)
@@ -132,7 +144,7 @@ def qualify(assets, output, revision, *, geometry=False):
     assert changed.metadata["canonical_id"] == multi.metadata["canonical_id"]
     assert changed.metadata["diagnostics"]["metrics"]["canonical_fit_reused"]
     assert changed.metadata["target_result_id"] == changed.id
-    if geometry and "geometry" in engines:
+    if geometry:
         window.engine.setCurrentIndex(window.engine.findData("geometry"))
         experimental = attempt("I Engine B, same references")
         assert experimental.metadata["diagnostics"]["executed_engine"] == "geometry"
@@ -151,6 +163,7 @@ def qualify(assets, output, revision, *, geometry=False):
     window.ingest([photos / "blank.png"])
     click_target(3)
     adverse = attempt("D unsupported target with usable references")
+    shot("11-unresolved-target")
     assert adverse.metadata["target_result_id"] is None
     assert any("Target pose unresolved" in warning for warning in adverse.metadata["diagnostics"]["warnings"])
     window.garment.setCurrentIndex(1)

@@ -98,6 +98,12 @@ def download(path, url, size, digest):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("destination", type=Path)
-    parser.add_argument("--baseline-only", action="store_true")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--baseline-only", action="store_true")
+    scope.add_argument("--experimental-only", action="store_true")
     args = parser.parse_args()
-    provision(args.destination, experimental=not args.baseline_only)
+    if args.experimental_only:
+        args.destination.mkdir(parents=True, exist_ok=True)
+        provision_native(args.destination)
+    else:
+        provision(args.destination, experimental=not args.baseline_only)

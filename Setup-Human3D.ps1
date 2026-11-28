@@ -31,8 +31,12 @@ try {
     $env:OPENBLAS_NUM_THREADS = '1'
     $env:OMP_NUM_THREADS = '1'
     $runtime = Join-Path $local 'm7-runtime'
-    & $python tools/provision_m7_assets.py $runtime
+    & $python tools/provision_m7_assets.py $runtime --baseline-only
     Confirm-Exit 'Runtime asset provisioning'
+    & $python tools/provision_m7_assets.py $runtime --experimental-only
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning 'Engine B asset provisioning failed. Engine A can run. Review the setup log and rerun setup when the source is reachable.'
+    }
     & $python -c "from pathlib import Path; from human3d.vision import _NativePoseLandmarker; detector = _NativePoseLandmarker(Path('local-data/m7-runtime/pose.task'), segmentation=True); detector.close()"
     Confirm-Exit 'MediaPipe CPU initialization'
     $stamp = Join-Path $PSScriptRoot 'M7-REVISION.txt'

@@ -46,13 +46,17 @@ jobs:
           & "$root\Setup-Human3D.ps1"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           "M7_EXTRACTED=$root" >> $env:GITHUB_ENV
+          $env:HUMAN3D_LAUNCH_SMOKE = Join-Path $root 'local-data/m7-launch.png'
+          & "$root\Launch-Human3D.cmd"
+          if ($LASTEXITCODE -ne 0 -or !(Test-Path $env:HUMAN3D_LAUNCH_SMOKE)) { throw 'Launch-Human3D.cmd smoke failed' }
       - name: Drive the actual Qt application against pinned synthetic references
         shell: bash
         run: |
           mkdir -p qualification
           if [ "$RUNNER_OS" = Windows ]; then
-            exe="$M7_EXTRACTED/.venv/Scripts/python.exe"
-            assets="$M7_EXTRACTED/local-data/m7-runtime"
+            extracted="$(cygpath -u "$M7_EXTRACTED")"
+            exe="$extracted/.venv/Scripts/python.exe"
+            assets="$extracted/local-data/m7-runtime"
           else
             exe=python
             assets=local-data/m7-runtime
@@ -87,6 +91,7 @@ jobs:
             qualification/blender/*-blender.png
             extracted/*/local-data/m7-setup.log
             extracted/*/local-data/m7-startup.png
+            extracted/*/local-data/m7-launch.png
             dist/Human3D-*.zip
           if-no-files-found: warn
           retention-days: 14
