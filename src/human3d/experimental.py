@@ -1,5 +1,6 @@
 """Bounded G1 anatomy and G4 contour fitting for the empirical application."""
-from dataclasses import dataclass, replace
+from copy import copy
+from dataclasses import dataclass
 from hashlib import sha256
 from io import BytesIO
 from math import prod
@@ -13,9 +14,11 @@ from scipy.ndimage import binary_erosion, distance_transform_edt
 from scipy.sparse import csc_matrix
 
 from .alignment import refine_views
+from .experimental_camera import Camera
+from . import experimental_registration as g3
 from .fitting import Fit, SharedFit
 from .native_rig import pose_transforms, rebind_joints, validate_rebind
-from .reconstruction import M6Engine, sha_file
+from .reconstruction import M6Engine
 
 EXPERIMENTAL = "geometry"
 G4_REVISION = "ca90165d259bada9b3cea945d1227be0f83656ef"
@@ -103,42 +106,6 @@ class NativeBasis:
 
 
 @dataclass(frozen=True)
-class CalibratedCamera:
-    """G4 camera convention, with geometry supplied in MakeHuman decimeters."""
-    yaw: float
-    span: float = 215.
-    center_y: float = 0.
-    elevation: float = 0.
-    distance: float = 650.
-    perspective: bool = False
-    roll: float = 0.
-    dx: float = 0.
-    dy: float = 0.
-
-    def __post_init__(self):
-        values = (self.yaw, self.span, self.center_y, self.elevation, self.distance, self.roll, self.dx, self.dy)
-        if not np.isfinite(values).all() or self.span <= 0 or self.distance <= 0 or type(self.perspective) is not bool:
-            raise ValueError("Invalid calibrated camera.")
-
-    def project(self, vertices, size):
-        azimuth, elevation = np.deg2rad([self.yaw, self.elevation])
-        right = np.array([np.cos(azimuth), 0, -np.sin(azimuth)])
-        towards = np.array([np.sin(azimuth) * np.cos(elevation), np.sin(elevation),
-                            np.cos(azimuth) * np.cos(elevation)])
-        up = np.cross(towards, right)
-        roll = np.deg2rad(self.roll)
-        axes = np.stack((right * np.cos(roll) + up * np.sin(roll),
-                         -right * np.sin(roll) + up * np.cos(roll), towards))
-        xyz = (vertices * 10 - [0, self.center_y, 0]) @ axes.T
-        z = self.distance - xyz[:, 2]
-        if self.perspective and (z <= 0).any():
-            raise ValueError("Calibrated perspective lies inside the candidate body.")
-        scale = size / self.span * (self.distance / z if self.perspective else 1.)
-        return np.column_stack((size * (.5 + self.dx) + xyz[:, 0] * scale,
-                                size * (.5 + self.dy) - xyz[:, 1] * scale))
-
-
-@dataclass(frozen=True)
 class Observation:
     id: str
     mask: np.ndarray
@@ -192,11 +159,85 @@ def raster(camera, vertices, faces, size):
     return mask.astype(bool)
 
 
-def registrations(body, evidence, manifest, diagnostics):
+class RegistrationRaster:
+    @staticmethod
+    def draw(camera, vertices, faces, size):
+        return raster(camera.project, vertices, faces, size)
+
+
+@dataclass(frozen=True)
+class RegisteredPose:
+    rig: g3.Rig
+    angles: np.ndarray
+
+    def transforms(self, joints):
+        posed = copy(self.rig)
+        posed.joints = {name: point * 10 for name, point in joints.items()}
+        return {name: (rotation, translation / 10)
+                for name, (rotation, translation) in posed.transforms(self.angles, posed.full_order).items()}
+
+
+def g3_observation(body, view, mask, source_size, offset, definition, checkpoint):
+    width, height = source_size
+    left, top = offset
+    length = max(source_size)
+    landmarks = view.detection.visible_pose(view.candidate)
+    xy = np.array([((landmarks[i].x * width + left) * g3.FIT_SIZE / length,
+                    (landmarks[i].y * height + top) * g3.FIT_SIZE / length) for i in g3.INDEX])
+    confidence = np.array([landmarks[i].visibility * landmarks[i].presence if landmarks[i].observed else 0.
+                           for i in g3.INDEX])
+    original = np.asarray(body["mesh"]["vertices"], dtype=float)
+    rig = g3.Rig(body["rig"], original * 10)
+    quads = np.asarray([[index for index, _ in f["corners"]] for f in body["mesh"]["faces"]
+                        if f["group"] == "body"], dtype=np.int32)
+    foreground = cv2.resize(mask.astype(np.uint8), (g3.FIT_SIZE, g3.FIT_SIZE),
+                            interpolation=cv2.INTER_NEAREST_EXACT).astype(bool)
+    calibrated = Camera(**definition["camera"]) if "camera" in definition else None
+    if calibrated and width != height:
+        raise ValueError("Calibrated input requires the original square G4 raster.")
+    if calibrated and definition["canonical_pose"]:
+        return Observation(view.ref.photo_id, mask,
+                           lambda vertices, size: calibrated.project(vertices * 10, size),
+                           None, "calibrated", 0,
+                           "independent" if definition["independent_scale"] else "unknown"), {
+                               "status": "manifest calibrated with canonical observation pose"
+                           }
+    sector = definition.get("capture_yaw_sector")
+    if not calibrated and (sector is None or not np.isfinite(sector)):
+        raise ValueError("G3 estimated registration requires an externally verified capture sector.")
+    focal = definition.get("focal_px_on_384")
+    if focal is not None and (not np.isfinite(focal) or focal <= 0):
+        raise ValueError("Invalid G3 focal prior.")
+    observation = g3.Observation(xy, confidence, foreground, np.zeros_like(foreground),
+                                 focal_px_prior=focal, capture_yaw_sector=sector)
+    anchors = np.asarray([index not in (15, 16, 27, 28) for index in g3.INDEX])
+    fit = g3.select_landmark_parity(rig, observation, quads, RegistrationRaster(), anchors,
+                                   calibrated_camera=calibrated, checkpoint=checkpoint)
+    if fit["status"] != "ok":
+        return None, {"status": fit["status"]}
+    camera, angles = fit["camera"], fit["pose"]
+    sigma = float(np.median(g3.anchor_projection_std(rig, fit))) if not calibrated else 0.
+    detail = {key: fit[key] for key in ("status", "iou", "ambiguity_gap", "detector_parity", "parity_gap",
+                                        "effective_data_rank", "alternatives", "parity_alternatives")}
+    detail.update(yaw_degrees=float(camera.yaw), landmark_camera_uncertainty_px=sigma if not calibrated else None,
+                  scale={"metric": definition["independent_scale"], "source": "supplied calibration"}
+                  if calibrated else fit["scale"])
+    if calibrated:
+        detail["effective_data_rank"] = None
+    if not calibrated and (fit["iou"] < .50 or sigma > 36 or fit["effective_data_rank"] < 5):
+        detail["status"] = "unreliable G3 framing"
+        return None, detail
+    return Observation(view.ref.photo_id, mask, lambda vertices, size: camera.project(vertices * 10, size),
+                       RegisteredPose(rig, angles), "calibrated" if calibrated else "G3 external sector",
+                       sigma if calibrated else max(10., sigma),
+                       "independent" if calibrated and definition["independent_scale"] else "unknown"), detail
+
+
+def registrations(body, evidence, calibrations, diagnostics, checkpoint):
     alignments, unresolved = refine_views(body, evidence)
     rejections = dict(unresolved)
     observations = []
-    calibrations = {} if not manifest else calibration_entries(Path(manifest))
+    g3_details = {}
     for view in evidence.views:
         key = view.ref.photo_id
         candidate = alignments.get(key)
@@ -212,18 +253,19 @@ def registrations(body, evidence, manifest, diagnostics):
             squared.paste(image, (offset_x, offset_y))
             squared.thumbnail((384, 384), Image.Resampling.NEAREST)
             mask = np.array(squared) > 0
-        calibrated = calibrations.get(view.ref.photo_digest)
-        if calibrated:
-            if width != height:
-                raise ValueError("Calibrated input requires the original square G4 raster.")
-            if not calibrated["canonical_pose"]:
-                raise ValueError("Calibrated manifest requires canonical-pose fitting views.")
-            camera = CalibratedCamera(**calibrated["camera"])
-            observations.append(Observation(key, mask, camera.project, None, "calibrated", 0,
-                                            "independent" if calibrated["independent_scale"] else "unknown"))
+        definition = calibrations.get(view.ref.photo_digest)
+        if definition:
+            registration, diagnostics_ = g3_observation(
+                body, view, mask, (width, height), (offset_x, offset_y), definition, checkpoint
+            )
+            g3_details[key] = diagnostics_
+            if registration:
+                observations.append(registration)
+            else:
+                rejections[key] = diagnostics_["status"]
             continue
-        if manifest:
-            rejections[key] = "No calibrated camera for this digest."
+        if calibrations:
+            rejections[key] = "No registered camera or external sector for this digest."
             continue
         if candidate is None or view.geometry_only:
             rejections[key] = "Unresolved orientation or observation pose."
@@ -245,9 +287,11 @@ def registrations(body, evidence, manifest, diagnostics):
 
         observations.append(Observation(key, mask, project, candidate, "estimated weak perspective",
                                         max(10., torso_pixels)))
+    diagnostics.metrics["g3_registration"] = g3_details
     diagnostics.metrics["experimental_registration_exclusions"] = rejections
     diagnostics.metrics["experimental_registration_sources"] = {
-        view.id: {"camera": view.source, "scale": view.scale, "sigma_on_384_px": view.uncertainty}
+        view.id: {"camera": view.source, "scale": view.scale,
+                  "sigma_on_384_px": None if view.source == "calibrated" else view.uncertainty}
         for view in observations
     }
     if not observations:
@@ -255,14 +299,16 @@ def registrations(body, evidence, manifest, diagnostics):
     return observations, alignments
 
 
-def calibration_entries(path):
-    data = json.loads(path.read_text(encoding="utf-8"))
+def calibration_entries(contents):
+    data = json.loads(contents)
     if data.get("schema_version") != 1:
         raise ValueError("Unsupported calibration manifest.")
     entries = {}
     for item in data["views"]:
         key = item["photo_sha256"]
-        if key in entries or len(key) != 64 or type(item["canonical_pose"]) is not bool or type(item["independent_scale"]) is not bool:
+        if (key in entries or len(key) != 64 or any(c not in "0123456789abcdef" for c in key)
+                or type(item["canonical_pose"]) is not bool or type(item["independent_scale"]) is not bool
+                or ("camera" not in item and "capture_yaw_sector" not in item)):
             raise ValueError("Invalid calibrated view declaration.")
         entries[key] = item
     return entries
@@ -299,10 +345,12 @@ def bounded_fit(basis, body, observations, checkpoint):
             costs, overlap = [], {}
             for view, loss in zip(observations, losses):
                 points = mesh
-                if view.pose is not None and view.pose.limb_angles:
+                if view.pose is not None:
                     points = mesh.copy()
                     points[skinned] = 0
-                    for name, (rotation, translation) in pose_transforms(rig, joints, view.pose).items():
+                    transforms = (view.pose.transforms(joints) if isinstance(view.pose, RegisteredPose)
+                                  else pose_transforms(rig, joints, view.pose))
+                    for name, (rotation, translation) in transforms.items():
                         if name in packed:
                             indices, weights_ = packed[name]
                             points[indices] += (mesh[indices] @ rotation.T + translation) * weights_
@@ -385,7 +433,11 @@ class GeometryEngine(M6Engine):
 
     def fit_canonical(self, session, request, execution, body, evidence):
         diagnostics = execution.diagnostics
-        manifest_identity = sha_file(Path(request.calibration)) if request.calibration else None
+        calibration = Path(request.calibration).read_bytes() if request.calibration else None
+        manifest_identity = sha256(calibration).hexdigest() if calibration is not None else None
+        entries = calibration_entries(calibration) if calibration is not None else {}
+        if calibration is not None and not entries:
+            raise ValueError("The calibration manifest contains no registered views.")
         key = sha256(f"{evidence.dependency_digest}:{manifest_identity}:{request.application_revision}".encode()).hexdigest()
         cache = session.store.directory / "experimental-canonical" / f"{key}.npz"
         if self.basis is None:
@@ -398,7 +450,7 @@ class GeometryEngine(M6Engine):
         native_body = body | {"mesh": body["mesh"] | {"vertices": native_home},
                               "rig": body["rig"] | {"joints": rebind_joints(body["rig"], native_home)}}
         validate_rebind(body, native_home)
-        observations, alignments = registrations(native_body, evidence, request.calibration, diagnostics)
+        observations, alignments = registrations(native_body, evidence, entries, diagnostics, execution.checkpoint)
         diagnostics.metrics["canonical_fit_reused"] = cache.is_file()
         if cache.is_file():
             with np.load(cache, allow_pickle=False) as data:

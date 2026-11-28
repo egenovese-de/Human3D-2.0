@@ -10,7 +10,7 @@ from time import monotonic
 import numpy as np
 from PIL import Image, ImageOps
 from PIL.ImageQt import ImageQt
-from PySide6.QtCore import QSettings, QSize, QStandardPaths, Qt, QThread, QTimer, Signal
+from PySide6.QtCore import QBuffer, QIODevice, QSettings, QSize, QStandardPaths, Qt, QThread, QTimer, Signal
 from PySide6.QtGui import QColor, QIcon, QPainter, QPixmap
 from PySide6.QtWidgets import (
     QApplication, QCheckBox, QComboBox, QFileDialog, QFrame, QHBoxLayout, QLabel,
@@ -606,7 +606,15 @@ class EmpiricalWindow(QMainWindow):
                                            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                            QMessageBox.StandardButton.No)
             def export():
-                self.service.export_evidence(result, Path(destination), include_photos=include == QMessageBox.StandardButton.Yes)
+                screenshot = None
+                if self.canvas is not None and self.active_result is not None and self.active_result.id == result.id:
+                    buffer = QBuffer()
+                    if buffer.open(QIODevice.OpenModeFlag.WriteOnly) and self.canvas.grab().save(buffer, "PNG"):
+                        screenshot = bytes(buffer.data())
+                    buffer.close()
+                self.service.export_evidence(result, Path(destination),
+                                             include_photos=include == QMessageBox.StandardButton.Yes,
+                                             viewport_png=screenshot)
                 self.status.setText("Evidence archive exported.")
             self.guard(export)
 

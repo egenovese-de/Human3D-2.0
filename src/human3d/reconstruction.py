@@ -202,6 +202,13 @@ class ReconstructionService:
                     try:
                         execution.checkpoint()
                         self._check_inputs(request)
+                        evidence_digest = diagnostics.metrics.get("photographic_evidence_digest")
+                        if evidence_digest is not None:
+                            from .fusion import fuse_observations
+
+                            latest = fuse_observations(self.session.store.load(), self.session.observations)
+                            if latest.dependency_digest != evidence_digest:
+                                raise StaleRequest("Photographic evidence changed. Run Generate 3D again.")
                     except (Cancelled, StaleRequest) as error:
                         failure = error
                 if failure is not None:
@@ -268,7 +275,7 @@ class ReconstructionService:
             if temporary is not None:
                 temporary.unlink(missing_ok=True)
 
-    def export_evidence(self, result, destination: Path, *, include_photos=False):
+    def export_evidence(self, result, destination: Path, *, include_photos=False, viewport_png=None):
         metadata = result.metadata
         diagnostics = metadata["diagnostics"]
         temporary = None
@@ -286,6 +293,8 @@ class ReconstructionService:
                 archive.writestr("summary.md", "\n".join(summary) + "\n")
                 if "overlay.png" in metadata["artifacts"]:
                     archive.write(result.file("overlay.png"), "overlay.png")
+                if viewport_png is not None:
+                    archive.writestr("viewport.png", viewport_png)
                 if include_photos:
                     originals = OriginalStore(self.session.store.directory)
                     for photo in metadata["request"]["photos"]["photos"]:
@@ -351,7 +360,18 @@ class M6Engine:
             diagnostics.warnings.extend(f"{names.get(key, key)}: {reason.replace('_', ' ')}."
                                         for key, reason in evidence.unresolved)
             body, shared = self.fit_canonical(session, request, execution, body, evidence)
-            diagnostics.metrics.update(contributing_photos=len(shared.scores), silhouette_iou=shared.scores)
+            from .fusion import REGIONS
+
+            confidence = {}
+            for view in evidence.views:
+                points = view.detection.visible_pose(view.candidate)
+                confidence[view.ref.photo_id] = {
+                    region: min(points[index].visibility * points[index].presence for index in REGIONS[region])
+                    for region in view.observed_regions
+                }
+            diagnostics.metrics.update(contributing_photos=len(shared.scores), silhouette_iou=shared.scores,
+                                       photographic_evidence_digest=shared.evidence_digest,
+                                       regional_evidence_confidence=confidence)
         return build_artifacts(session, request, output, execution, body, shared, evidence)
 
     def fit_canonical(self, session, request, execution, body, evidence):

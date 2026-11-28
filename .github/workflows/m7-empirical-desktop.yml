@@ -63,6 +63,7 @@ jobs:
             export QT_QPA_PLATFORM=offscreen
           fi
           set -o pipefail
+          "$exe" tools/qualify_m7_registration.py "$assets" qualification/g3-registration.json
           "$exe" -u tools/qualify_m7_desktop.py --assets "$assets" --output qualification --geometry 2>&1 | tee qualification/session.log
       - if: runner.os == 'Windows'
         name: Verify representative M7 exports in Blender 4.5.3
@@ -86,6 +87,7 @@ jobs:
           path: |
             qualification/session.log
             qualification/qualification.json
+            qualification/g3-registration.json
             qualification/screenshots/*.png
             qualification/blender/blender-roundtrip.json
             qualification/blender/*-blender.png
