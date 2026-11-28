@@ -1,0 +1,15 @@
+{
+  "baseline": "020fcc793e7417d6927d9e07346678e110ae9ddc",
+  "g5_revision": "2c9bc5e6d4a3103e7f691add806bcaff90a61b6b",
+  "g4_revision": "ca90165d259bada9b3cea945d1227be0f83656ef",
+  "units": "centimetres in geometry arrays, millimetres for reported error",
+  "development": ["A_high_mass", "A_muscular", "B_female"],
+  "held_out": ["A_adult_asymmetric", "A_slim", "A_heldout_1", "A_heldout_2", "B_male", "B_female_expanded", "B_male_expanded"],
+  "photographic_subjects": ["A_heldout_1", "B_female_expanded", "B_male"],
+  "geometry_fit": {"source_points_seed": 47, "native_target_seed": 153, "deformation_target_seed": 601,
+                   "maximum_motion_mm": 55, "budgets": [6,14,28], "fine_lattice": [5,8,5],
+                   "coarse_lattice": [3,5,3], "graph_nodes": [48,120]},
+  "evaluation": {"area_samples_per_direction": 12000, "sample_seeds": [818,819]},
+  "photography": {"silhouette_motion_cap_mm": 18, "oracle_depth_motion_cap_mm": 30, "nominal_view_counts": [1,2,4,8]},
+  "dependencies": {"python":"3.11.9","numpy":"1.26.4","scipy":"1.15.3","blender_raster":"4.3.2","blender_usd":"4.5.16"}
+}

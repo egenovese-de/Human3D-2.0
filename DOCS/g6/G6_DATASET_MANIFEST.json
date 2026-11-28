@@ -1,0 +1,5104 @@
+{
+  "g6_branch": "lab/g6-geometry-capacity",
+  "M7_qualified": "020fcc793e7417d6927d9e07346678e110ae9ddc",
+  "G5": "2c9bc5e6d4a3103e7f691add806bcaff90a61b6b",
+  "G4": "ca90165d259bada9b3cea945d1227be0f83656ef",
+  "MakeHuman": "1f508f6083b2f823dab15de924b3bde72e08d77c",
+  "geometry_cases": {
+    "A_high_mass": {
+      "cohort": "MakeHuman",
+      "partition": "development",
+      "generated_reference_npz_sha256": "ddbcb3d7bf6ba105723d96236774ad4816c15d3a81290d3c860bf32060c5df55",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.34,
+        "macrodetails/Age": 0.74,
+        "macrodetails-universal/Weight": 0.91,
+        "macrodetails-universal/Muscle": 0.44,
+        "macrodetails-height/Height": 0.49,
+        "macrodetails-proportions/BodyProportions": 0.29,
+        "breast/BreastSize": 0.79,
+        "breast/BreastFirmness": 0.22,
+        "torso/torso-scale-depth-decr|incr": 0.31,
+        "torso/torso-scale-horiz-decr|incr": 0.15,
+        "torso/torso-scale-vert-decr|incr": -0.23,
+        "torso/torso-vshape-decr|incr": -0.32
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "d336a5840f2e8cc5f07167df29588173b7032227545b4bb9ec35cda138fb97b8",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "819ef7b61c944169d5f3fec13d020ceef26e9b28537b926602462aae305d18e6",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "22bed074bc0680700e46b29c5ffe21cd69da852254eb68d3900cb3daf0e831d1",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "f15d2b72bde16da9a32994fed04fb85d9362032e455d86a830c2d4995309574b",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "1f72b10292ca8c3ad6dffa9fad435efc54c8b41f87c53265e1eec5c22a13aead",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "c1174067c94a71a71bd87365aeae74cbad136d6ac8888f163fa012bbd6a140ed",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "4dca11fca8234d81feef85a5af065db0317fcd5298efb0ef8a81e71e437ae939",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "2f98011e7bebba084f71ff8739f1a69abee523839f6edd2a8fd94b5e6d1249ab",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "e7e4236b087b6ff8014c93a8ec0d4832dcdfa3431c0f0ace3d22f3e6c8bdb1a4",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "e0a3fc47bffef589a4ce9c3982d903c8920ec84dc4c5e5337254dabf86bfff53",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "1769a5938d8f8e0eddb9dc7caa316e8c7674ffe0985b2eb7673a354ff6d7f96f",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "98e75b69ec481b942873f7f51cefa4e391860015c8d08236ee134fa73663ca15",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "ac15487f0001ff300386368517e5d0c9dba4f077b943bdab15654cdf87466488",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "43b812c36001f1ad98c6bd409fa942bd9c9c8048b8386579975463c134c6aa43",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "A_muscular": {
+      "cohort": "MakeHuman",
+      "partition": "development",
+      "generated_reference_npz_sha256": "37141c1385e5bc9ba30be319102b49012ca855344729cbd2632b143852655418",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.91,
+        "macrodetails/Age": 0.51,
+        "macrodetails-universal/Weight": 0.49,
+        "macrodetails-universal/Muscle": 0.96,
+        "macrodetails-height/Height": 0.74,
+        "macrodetails-proportions/BodyProportions": 0.55,
+        "breast/BreastSize": 0.48,
+        "breast/BreastFirmness": 0.56,
+        "torso/torso-scale-depth-decr|incr": 0.11,
+        "torso/torso-scale-horiz-decr|incr": 0.25,
+        "torso/torso-scale-vert-decr|incr": -0.11,
+        "torso/torso-vshape-decr|incr": 0.38
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "139442f7a1a4ccaa42701bd677af06cc4d0499f8356ec8b811cfda270186e9de",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "f838b5061a150c396fe339f61967892476d110c57b7682db1ebf973b57d11ea3",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "99422e438a2b6c5bf4dee2885f2f42ed01ff54e3abb1d4f318c59e1408ec0a50",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "d56ce6c0fbc7fec18e03741b3f44958bc10cc7f0f9b0ef92a2cba9889c312ada",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "969f9574e0194bcb5689d2537d26a9bce01874b2e9ed7f5b0476f9016324479c",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "457a2e201dca449aa07ae83b11b84c2df04dae5955cc10411609897b585e4a24",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "cb2a4a2b34b6f629aa8b16d8848a867262ab188e62c4fd7d33e489e205625b6a",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "cad77eabc2db44f0ef55f07fe2b2d59cbadf10b89382aefece92c451894f6d1d",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "421461c0e33361615c4ca158441b932325905fea90882c9051009e120753690a",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "b5589f387414d56cc510029d885bedfe19c91806646556aa9d5e52ea8c00d114",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "631ad1c5a80351a9ea1cde8205adfe25e6457eab1498b8999ed9bb7718483bb3",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "f5d6ce4dcee960af21d5698c40fdde223f7743b311979d77c5bbe1eac202389d",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "a596d32960ef95a788d7b0fcfe9159aafe6ba5eb1d735d34e24322f3b87e7ec2",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "7c2ef5d1e107d1b274141f27ab945d369ef1b5d4abdf0a063332f983e83d3298",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "B_female": {
+      "cohort": "MB-Lab",
+      "partition": "development",
+      "generated_reference_npz_sha256": "6d2397e28781763b8b7edcf8f24060790d892e0ff8ee694db8000e386808f674",
+      "original_generation_params": null,
+      "publish_geometry_and_maps": false,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "4aafc71bdc35fa57d66dbe152a8e9911b3c4aefe00c6548c9846c7c9ef925ded",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "a756482edaaf3e33d4e7ab4a6bcb8c4b75fa212056e4a39aa76536f3f7df5276",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "fbf874f4be581124dab96a7314df994276a0d98e7d042d2432e228642045bb2a",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "10c0a8fa525ab783dec55461faae9381bf15ec7af973060d13cbf68d0a8ac1c4",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "706af05b8f1adc5497ecc6772800af07af556d04922718b66b3d4551a32f3b86",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "88557aa7406297a0421fa27c29e076000a65ff0de0d94ec62b70f75eec70e311",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "4f301deb024559dd6c38c711ef05185fcaa6311483144ad835ff0bcfaab0a412",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "4ffe15a947ba89248005d6ea9515c8efec6aae8b9e537781bbe7e20798d70791",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "7218d67dfde03c2c788fcf258633b4aef14aed154a4e49013e919e8fd545654a",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "cc5eaf331f045d8fbbd2c9d220e1d028351f3c7a91132348c6208461223df7f2",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "fa048212d553c2b4c78169cbe8029941d6f8cdde1faa036d91677d32720c7c21",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "acabbc51122712f88f64aaa0e656863d9be3ac3c4cf4d5b1e55fe7d3b60c9108",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "0f235894e084223a8d7131b2f5e4bf06c08f177c68c4f8710c5e02c6f8b88217",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "11b86690c8ed6c9204425990a0fa13e87391871c3b318f6994b7d8f85dcd6a32",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "A_adult_asymmetric": {
+      "cohort": "MakeHuman",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "2b7db9c71bae2cc6dac2a358a9befaf9f1d0ff048ff9bef31466c34187bdffdb",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.73,
+        "macrodetails/Age": 0.64,
+        "macrodetails-universal/Weight": 0.61,
+        "macrodetails-universal/Muscle": 0.67,
+        "macrodetails-height/Height": 0.58,
+        "macrodetails-proportions/BodyProportions": 0.37,
+        "breast/BreastSize": 0.39,
+        "breast/BreastFirmness": 0.65,
+        "torso/torso-scale-depth-decr|incr": -0.24,
+        "torso/torso-scale-horiz-decr|incr": 0.13,
+        "torso/torso-scale-vert-decr|incr": 0.26,
+        "torso/torso-vshape-decr|incr": -0.17,
+        "armslegs/l-upperarm-scale-depth-decr|incr": 0.35
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "02e7169442de6ab5a3d0d33491fd7cbf114e0df39c0be7cd86a960c399dc6436",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "1aaa432a38aab8753edcf39907df17053f97feeafe0c9031e7b217ac172f7c06",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "3c8930eecb0a90c16648da34843bcd73cfdebe0dd4985b624c6a168e4fc950e4",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "4d13ae7e7b6a1d73bb5636c2838b244b565a6c367a45fe6199908003b306c698",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "09a5ec64d6536e591170844c6818802c2622cace1817360603ea082ed1557119",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "a5a4ac46ab68e4a46aa6aca7206971eb93f5da64a649e85438e45571baed0773",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "33be9eb542deb67707b8c30ace7ead8ab531ab624c71799a8816fb9c37189be5",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "e82f65eff938c1a7954a5d55d9d45767996383021045321066dc21c76c55b0a1",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "966b72a53085d845b7744b8de23f87ba666e9795becb950794bdbd646d285a22",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "7f074df1d7a0b17676e2f81d2e0aaa6300aaf88bcf86548a9826a83220a28c03",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "3a3ef9251fde36ceab0db56d02eadcbc730300d1ab7c37faa606af1e60f183b9",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "0a683e96c25a131d6c3b3331480d2f411072118b613a356bdb4b34b0e75b1310",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "d4a547ec7f51be344376e4cb4c6a7ef61880594bf9f777c0ea164487bfcf3a9c",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "b4bb325637f58db2d6f388974e5b156d65b684c6d94cc8270518145288dadc4d",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "A_slim": {
+      "cohort": "MakeHuman",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "4236c7f35a95d30669f582ca176839f2cdd337d4c5fcdc33db2ab0ec63e61309",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.1,
+        "macrodetails/Age": 0.58,
+        "macrodetails-universal/Weight": 0.73,
+        "macrodetails-universal/Muscle": 0.28,
+        "macrodetails-height/Height": 0.39,
+        "macrodetails-proportions/BodyProportions": 0.68,
+        "breast/BreastSize": 0.3,
+        "breast/BreastFirmness": 0.57,
+        "torso/torso-scale-depth-decr|incr": 0.22,
+        "torso/torso-scale-horiz-decr|incr": -0.21,
+        "torso/torso-scale-vert-decr|incr": 0.15,
+        "torso/torso-vshape-decr|incr": 0.28
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "d1296c7290dad77ac053dc8385c8f0c74bd017a317a382d430131446163316c9",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "cd0106b396ec8f250b0510708fe06f996749841fc2b02ed363f846f803dfa278",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "b6df10a865b60848ec5bc19f61b3858c842e324765438a4c684b75412a968007",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "059bcf196725d04d352e57f529672f7168128f330ed47a1c9099d90b4a424691",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "35f6ca1e9d3eb5f478ca76520ad4dde6152d176a53cf2fb6a2c5cb2542803ea5",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "4544174215e4b662ef2bf564b3f1bae6a6d471ec7f20dbb3169b717023869018",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "5e31bf32391af61b70a4ddc1f5514dd4851b1a1542a14b59a6607d1c12a6165e",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "0c6bd3e71c3632df309560280ac906b3ceffb7c98cd7aeb038c4d7b806fc5cb6",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "330d6ef23382e9a234ad407fec379e2a7335063e28a1e7c357ed822a98b177c8",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "764371ac79a4f36be004a7b8b492f8546cb13faca27e5c4ff9dfe718afb7e2f6",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "208244867323d9cf288d5c5caabfbca5cf38610280d8b01b662c0ad44aac9b03",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "7b25cda69bd25a9acc0fded2d7e7bd8bf7bb8c6f6a7267a9596b8c38d490b8b2",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "4851cf8dd03130f9256de75a20937c73569693d0bd80841eb9ec8d480014b9c1",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "28b4e07aaef32643e3b887bc4d0b06e89950a8f6f122ceb53063921fea0105e4",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "A_heldout_1": {
+      "cohort": "MakeHuman",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "f1291225ede3203ae65e96a2bf9499e677442d07f6e1dd2386184fa1f056c8cd",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.24,
+        "macrodetails/Age": 0.59,
+        "macrodetails-universal/Weight": 0.57,
+        "macrodetails-universal/Muscle": 0.71,
+        "macrodetails-height/Height": 0.55,
+        "breast/BreastSize": 0.68,
+        "hip/hip-scale-horiz-decr|incr": 0.24,
+        "buttocks/buttocks-volume-decr|incr": 0.28
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "4cc53d68e001c63b62b008b7587ee27fb1b8deb09951637e736ee74c15998248",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "f28e70d2215214302dc43ab815561eecbe32564ab57e1969fbb5ac67f473ae62",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "ad87060bafc598831e05ab59caa5b8ad8fa37b866f2656b44f4358acf085fbe0",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "f9fdc4fa536dc814637bfcfc39f424088728dc8f2e1e353acc9610780e2b8150",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "780c056e5a03d04a4f77c728767854d75a67f3c3fc577f111411d1dedde868ab",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "6531f4449bf1e2506cacdf723aa6c54ed6eaea18f4f310906bb00b35cb7eb871",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "0f21e023da29dc8701f1e585322598f88298936c823af8afb06aea9d55d924f4",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "3e3fdb10d6dcb44ce2cb33ece07856849d01b20997fd36627d50a78ff8d78644",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "30e4e0ffa2c1431b3ef00452a007a2ac8dbcf4b5b1c26bc32250343ef30d5350",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "66822f7bfb1c0315059e5136eb56da2aa1e2365b2f7b004b766666fa2999c9a3",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "b7902e0867d9da115b6deb4d0a6d405fedad91723940b5f37fb5e857fd2e5219",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "7049810445d8f3963dfc50c3d02720f42632683c37555ba071daeb1abfa75022",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "99049d564b1940a8a88a2a644067e9c4438f63893f3039f0286a8c5fed7193b8",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "bf720b9054f8d7e9c13e19c8671a7264f1479e2f5b4f88cfa24e8b1a62f7732a",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "A_heldout_2": {
+      "cohort": "MakeHuman",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "a3320768bb850d3342ac44a00829bbfe77b910fa42229ee21e6a291fdffac178",
+      "original_generation_params": {
+        "macrodetails/Gender": 0.78,
+        "macrodetails/Age": 0.76,
+        "macrodetails-universal/Weight": 0.81,
+        "macrodetails-universal/Muscle": 0.35,
+        "macrodetails-height/Height": 0.34,
+        "macrodetails-proportions/BodyProportions": 0.57,
+        "torso/torso-scale-depth-decr|incr": -0.22,
+        "armslegs/l-upperarm-scale-horiz-decr|incr": 0.31,
+        "measure/measure-thigh-circ-decr|incr": 0.2
+      },
+      "publish_geometry_and_maps": true,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "601ac32b67f5da7d159e8ffafb9eae7dccce782e2eea344f667d1b9863a0b339",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "b10765d63935acff2841b3fb01a8866c0a36700103431d278deddc4461acf26f",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "546ebfbc29e91d005f03a319089ce23bc65c890e3cad14be04570f0052ff0e3a",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "83dfacb36fedf4db844fca012e5c39aad3788c2761184312f0d0add7751be518",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "8d31bc863f8aa2a22986597832133ae4ddf051e3d3aba08251fcf64f10f203ee",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "0b5ca8b4ed0211a3ec9936f12420f66ea957b6e32b3a3bd143dbeee823e43363",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "7dbf1642ddc11b4d19b7a141dd7274b300e623cdcd3b376a4ea620008ce2d65a",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "acb2423432e1951767ecc4762275a5ff0111eb0b872e84a60e97824f953d1f04",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "208c4c554de290e510155a75143a2fdf19e5fbb65ef37f20014854065d6d17f7",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "2ada6c7771ae89cc9922f83d4d20f274415ee9073e5b1703ee0fb919e582a6cd",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "eb778f91dcd6342ae919e43cb0b8132b54e42b955b4a3c5d4f6eb2c56c7d5933",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "3d620b6d86c96c16c7723ebbc3e21b6e069fb1aacb2adf14981bdca89e8024db",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "4088b8c23e825c1f662ad3fc719cb3c84cfef5803b86f260146dd3d07eeb391d",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "831e58819b0ff0684b83b5624bb899fce484a5ec0de611fb95960b1f7885ce44",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "B_male": {
+      "cohort": "MB-Lab",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "1ca20627336216f6c4a2e64efdd04072ca28bc1b969b43e17754cbfb007a7ca9",
+      "original_generation_params": null,
+      "publish_geometry_and_maps": false,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "4c223dbddc02d88cc9678944bacf82aa303d5409d9bde21d04d85685f21a8e54",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "c4417f53f0645782f41c8a130d23debee8fba711bfeb87049f2c5232658ec493",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "38488699fd46c1693dedb94dbbc205259ba90a6358921f973c02dddb310e146f",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "8557833874b6d751922a870e332b60a81d4f100476a4db7b7638522a6e509754",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "1537f37c70b8516fb2a4260cf30f49250a487322457dc4c2fb26991aeb2da6b0",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "8614c6c66d3e95dffa54110a0c027ed909958abe86ed799e5455fe3dc2eede6d",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "f4439f18aaa73832dce0ce0ffe0947e932729dcae419a43132b423de6cfc7a2d",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "4dd27102362151b97d7adbdbf195a36a60ca8ae8ea23022c6529bf0a75861a0f",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "3a33d41e1b1865caac5949d699dbb0c77ae952467bf486a48bdc24f07c8f7e46",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "79e588b2e441bf65be8e5997e692377ce52cf3c147b1793900f63e24a0a0bd3b",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "4faefab9b53dc1e829c4136c2a33573ceb6ccad219dd47ff6dce8023405cb993",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "5e46a15e4a618a7c15bafebdb17d90f800a8a452368ca4cf04ea49f4bd661f52",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "28f127d9abb9ca808fe411d8dc73e031412349ac2812ef167d827c6b139e95bf",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "473cf7ff8f204699670e3c9a5d9fbcc289e5389cb495e26b75febaf1c24c7136",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "B_female_expanded": {
+      "cohort": "MB-Lab",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "d2a88386a18ea23ba750b5136ed073b578cb6c88681098b2fdd16b5640a29e69",
+      "original_generation_params": null,
+      "publish_geometry_and_maps": false,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "145cf6fc56205bcb71a0cd820f21016f1189d86ca675f49ef081c2564bf7794e",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "3bb2223adba016d72492ff3b471bcb961981c67fcf0b8f9c7682335c1b4bf722",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "b212a0c45638b0d091f9a8aac61df1a1ed9e89fc7b75f08b53bce8600621c065",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "4a8728d835fc5c41d4f518544af764d8d5c1bca893eec826a4df86ebf063236d",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "fbbbb904d380064f56906ebfae2b41c6241daf1a0cfc2e3a0e668f8a4168e247",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "df549a51635eb84b99952bc8a3730ab063783acef86cb5218e334103d9e6a8d8",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "9cc07d3c8493b48b754fb5ea1f440bc5f5f08d0c109928ca256371515c4b4d27",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "1019a1ff7edd1a59a811977088b938df61f16b6209012be47bad6ed6dc93d234",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "f37beace147bfd1b59107a4b61d98ea1a2cd322dcfcf11600c6df4e0699a5039",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "cc9264adaab589c3237e4fe9032d4edbbbb8e717a453e3234ace5eef7a03c3b4",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "5e1670d6b11010de4f3e1b8793974132b304a6ba7fba07706c3d91d390666441",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "fc1f694696448297127372be06f7fbec4cac0c97d90f7f843fe0cf688f6651bb",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "aba3d1598b673178c1452c0c098f9892245594d98140e63e5511cfff74e4a0cb",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "34039eefb66b066a8656faf846207b7201dbe81ec84f9cc71b509e743ceb900c",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    },
+    "B_male_expanded": {
+      "cohort": "MB-Lab",
+      "partition": "held-out",
+      "generated_reference_npz_sha256": "61f8a40159070da3b9baa88a214bc0532f97883f8729b63f4c5f6a64458f1664",
+      "original_generation_params": null,
+      "publish_geometry_and_maps": false,
+      "photos": {
+        "0-alternate": {
+          "sha256_rgb": "7ed57d52add4d42e379358231cdb55ef9a247c1f350c0d610ce099db60847657",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "0": {
+          "sha256_rgb": "789aea7a35e628cb21c9d8bb9d29fd9316a3603b81dcb79ed6e6d3329ce7fa60",
+          "camera": {
+            "yaw": 0,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "112": {
+          "sha256_rgb": "a2162fbd564777dd94b3fd74d3b20bdd0c3554a7c27867ca6192307fee815d69",
+          "camera": {
+            "yaw": 112,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.37460659341591207,
+                0.0,
+                -0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.9271838545667874,
+                0.0,
+                -0.37460659341591207
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "135": {
+          "sha256_rgb": "efce7cf043e6ef15a039b0e8935cbe4756a6fd9634fa24c7d6e1b6e696f4d1f1",
+          "camera": {
+            "yaw": 135,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865476
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "180": {
+          "sha256_rgb": "121e8c0981a4d256cd22949df07fc35ef7fb290ea62549b002b1e4128941b817",
+          "camera": {
+            "yaw": 180,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.0,
+                0.0,
+                -1.2246467991473532e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "202": {
+          "sha256_rgb": "4605cd4007f10afc92861e97284354834586d5025a26094c88000f7b7c906112",
+          "camera": {
+            "yaw": 202,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.9271838545667874,
+                0.0,
+                0.374606593415912
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.374606593415912,
+                0.0,
+                -0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "22": {
+          "sha256_rgb": "0030f7a7d9373901093b1128e48d092736d87541fac6364b24f4074c4ed63453",
+          "camera": {
+            "yaw": 22,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.9271838545667874,
+                0.0,
+                -0.374606593415912
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.374606593415912,
+                0.0,
+                0.9271838545667874
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "225": {
+          "sha256_rgb": "9816d70391684151ab445244564606cfddc55d070b88330dabbb9688457b9015",
+          "camera": {
+            "yaw": 225,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865475
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                -0.7071067811865477
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "270": {
+          "sha256_rgb": "ef504dd1989faf15c450d2016733ba939b18d894f4bf974fbf64139e4d0965f6",
+          "camera": {
+            "yaw": 270,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -1.8369701987210297e-16
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "292": {
+          "sha256_rgb": "ba43177b45555277abb7323c16b68b02de4172b9dad180c012a338f1ac27620c",
+          "camera": {
+            "yaw": 292,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.37460659341591196,
+                0.0,
+                0.9271838545667874
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.9271838545667874,
+                0.0,
+                0.37460659341591196
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "315": {
+          "sha256_rgb": "881c4c9bb94a12830f4c454c0b2d8574cc628901aac267ebb1380a16a42acb9e",
+          "camera": {
+            "yaw": 315,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865474,
+                0.0,
+                0.7071067811865477
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                -0.7071067811865477,
+                0.0,
+                0.7071067811865474
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "45": {
+          "sha256_rgb": "e9fe2f3977dfc5773724d96e1d93437dd9e1862672bb218c0f45425723774a85",
+          "camera": {
+            "yaw": 45,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                0.7071067811865476,
+                0.0,
+                -0.7071067811865475
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                0.7071067811865476
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90-alternate": {
+          "sha256_rgb": "3ddb4b2fffb94c838239c3ca22b2b15f4433302febcd4d217e054ae9adb06ff8",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        },
+        "90": {
+          "sha256_rgb": "6de957a3cee41d981b3b036f02aee0f8ee00e699b6c62e7a9dc781cd5e25bd53",
+          "camera": {
+            "yaw": 90,
+            "span": 215,
+            "center_y": 0,
+            "elevation": 0.0,
+            "distance": 420,
+            "perspective": true,
+            "roll": 0.0,
+            "dx": 0.0,
+            "dy": 0.0,
+            "world_to_camera_axes": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                -1.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0,
+                6.123233995736766e-17
+              ]
+            ],
+            "units": "cm",
+            "raster_px": 384,
+            "focal_px": 750.1395348837209
+          },
+          "observation_pose": "native rest"
+        }
+      }
+    }
+  },
+  "development": [
+    "A_high_mass",
+    "A_muscular",
+    "B_female"
+  ],
+  "held_out": [
+    "A_adult_asymmetric",
+    "A_heldout_1",
+    "A_heldout_2",
+    "A_slim",
+    "B_female_expanded",
+    "B_male",
+    "B_male_expanded"
+  ],
+  "Family_C": {
+    "admitted": false,
+    "candidate": "MPI FAUST",
+    "blocker": "Authenticated download and admission of license-bound original scans were unavailable.",
+    "source": "https://faust-leaderboard.is.tuebingen.mpg.de/"
+  },
+  "stress_test": "A_heldout_1, B_male, B_female_expanded synthetic camera controls",
+  "subject_result_hashes": {
+    "A_adult_asymmetric": "2b7db9c71bae2cc6dac2a358a9befaf9f1d0ff048ff9bef31466c34187bdffdb",
+    "A_heldout_1": "f1291225ede3203ae65e96a2bf9499e677442d07f6e1dd2386184fa1f056c8cd",
+    "A_heldout_2": "a3320768bb850d3342ac44a00829bbfe77b910fa42229ee21e6a291fdffac178",
+    "A_high_mass": "ddbcb3d7bf6ba105723d96236774ad4816c15d3a81290d3c860bf32060c5df55",
+    "A_muscular": "37141c1385e5bc9ba30be319102b49012ca855344729cbd2632b143852655418",
+    "A_slim": "4236c7f35a95d30669f582ca176839f2cdd337d4c5fcdc33db2ab0ec63e61309",
+    "B_female": "6d2397e28781763b8b7edcf8f24060790d892e0ff8ee694db8000e386808f674",
+    "B_female_expanded": "d2a88386a18ea23ba750b5136ed073b578cb6c88681098b2fdd16b5640a29e69",
+    "B_male": "1ca20627336216f6c4a2e64efdd04072ca28bc1b969b43e17754cbfb007a7ca9",
+    "B_male_expanded": "61f8a40159070da3b9baa88a214bc0532f97883f8729b63f4c5f6a64458f1664"
+  }
+}

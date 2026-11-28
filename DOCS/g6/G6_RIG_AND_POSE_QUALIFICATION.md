@@ -1,0 +1,5 @@
+# G6 · Rig, skin, pose and export
+
+The product rebind path recovers joints using canonical locator indices. Across 10 subjects the neutral, arm elevation, elbow, hip, knee, torso and asymmetric routines logged **980** original-joint/rebound checks and **0** product pose-validator failures. Same-topology reference articulation permits a vertex comparison. Independent poses use the same controller and lack measured pose ground truth.
+
+Pose outside the canonical geometry preserves the canonical digest. Edge ratios, inferred joint differences and sampled Blender pose crossings are archived. Four representative D0 and fine-FFD USD artifacts across A_slim and B_male were submitted to Blender. **4** passed import, bone deformation, vertex editing and save/reopen. USD invariants compare topology, UV and skin arrays with the M7 anchor. Blender pose intersection evidence covers the subset captured in poses.npz. Finite checks and successful export do not guarantee collision-free motion. Textured desktop export and independent pose/weight adaptation remain open.
