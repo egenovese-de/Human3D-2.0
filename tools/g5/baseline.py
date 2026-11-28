@@ -16,7 +16,7 @@ from human3d.session import Session
 BASELINE = '020fcc793e7417d6927d9e07346678e110ae9ddc'
 
 
-def engine_b(runtime, rgb, work, *, num_views=None, full=False, estimated=False):
+def engine_b(runtime, rgb, work, *, num_views=None, estimated=False):
     work.mkdir(parents=True, exist_ok=True)
     folder = work / 'project'
     session = Session(folder, create=not folder.exists())

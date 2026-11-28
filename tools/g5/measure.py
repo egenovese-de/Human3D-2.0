@@ -58,11 +58,11 @@ def cross_section(vertices, faces, height):
 
 
 def intersection_pairs(bvh, faces):
-    result = set()
-    for a, b in bvh.overlap(bvh):
-        if a < b and not np.isin(faces[a], faces[b]).any():
-            result.add((a, b))
-    return result
+    pairs = np.asarray(bvh.overlap(bvh), dtype=np.int32).reshape(-1, 2)
+    pairs = pairs[pairs[:, 0] < pairs[:, 1]]
+    first, second = pairs.T
+    shared = (faces[first, :, None] == faces[second, None, :]).any(axis=(1, 2))
+    return set(map(tuple, pairs[~shared]))
 
 
 def compare(file, case):
