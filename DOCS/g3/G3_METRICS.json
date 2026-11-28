@@ -1,0 +1,230 @@
+{
+  "subjects": 6,
+  "rgb_views": 26,
+  "articulated_controls": 18,
+  "articulated_rgb": 6,
+  "camera": [
+    {
+      "view": "0",
+      "n": 6,
+      "m6": "12.99",
+      "raw": "5.76",
+      "yaw": "27.42",
+      "sector": "6.40",
+      "contour": "5.79",
+      "heldout": "8.62",
+      "iou": "0.744",
+      "coarse_residual_yaw": "24.37"
+    },
+    {
+      "view": "45",
+      "n": 6,
+      "m6": "9.91",
+      "raw": "5.14",
+      "yaw": "6.68",
+      "sector": "5.29",
+      "contour": "4.76",
+      "heldout": "3.44",
+      "iou": "0.804",
+      "coarse_residual_yaw": "3.00"
+    },
+    {
+      "view": "90",
+      "n": 6,
+      "m6": "7.09",
+      "raw": "7.41",
+      "yaw": "0.82",
+      "sector": "7.13",
+      "contour": "7.00",
+      "heldout": "10.46",
+      "iou": "0.752",
+      "coarse_residual_yaw": "1.42"
+    },
+    {
+      "view": "180",
+      "n": 6,
+      "m6": "9.21",
+      "raw": "81.38",
+      "yaw": "158.01",
+      "sector": "5.34",
+      "contour": "4.33",
+      "heldout": "5.48",
+      "iou": "0.801",
+      "coarse_residual_yaw": "21.01"
+    },
+    {
+      "view": "perspective",
+      "n": 2,
+      "m6": "8.43",
+      "raw": "6.32",
+      "yaw": "8.82",
+      "sector": "\u2014",
+      "contour": "\u2014",
+      "heldout": "\u2014",
+      "iou": "\u2014",
+      "coarse_residual_yaw": "\u2014"
+    }
+  ],
+  "pose": [
+    [
+      "near_articulated",
+      "oracle_camera_all_anchors",
+      6,
+      "0.53",
+      "0.45",
+      "0.965",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "near_articulated",
+      "oracle_camera_and_fit_pose",
+      6,
+      "6.38",
+      "18.59",
+      "0.689",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "near_articulated",
+      "oracle_anchors_perspective",
+      6,
+      "6.57",
+      "18.61",
+      "0.682",
+      "1.93",
+      "0.33"
+    ],
+    [
+      "near_articulated",
+      "oracle_anchors_weak",
+      6,
+      "6.57",
+      "17.96",
+      "0.667",
+      "6.98",
+      "\u2014"
+    ],
+    [
+      "near_articulated",
+      "oracle_pose_ignored",
+      6,
+      "8.97",
+      "14.73",
+      "0.654",
+      "3.27",
+      "0.19"
+    ],
+    [
+      "far_articulated",
+      "oracle_camera_all_anchors",
+      6,
+      "0.37",
+      "0.29",
+      "0.972",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "far_articulated",
+      "oracle_camera_and_fit_pose",
+      6,
+      "3.53",
+      "10.18",
+      "0.796",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "far_articulated",
+      "oracle_anchors_perspective",
+      6,
+      "3.66",
+      "10.29",
+      "0.790",
+      "0.10",
+      "0.21"
+    ],
+    [
+      "far_articulated",
+      "oracle_anchors_weak",
+      6,
+      "3.80",
+      "10.21",
+      "0.780",
+      "2.41",
+      "\u2014"
+    ],
+    [
+      "far_articulated",
+      "oracle_pose_ignored",
+      6,
+      "8.03",
+      "13.45",
+      "0.768",
+      "0.63",
+      "2.63"
+    ],
+    [
+      "cropped_occluded",
+      "oracle_camera_all_anchors",
+      6,
+      "4.01",
+      "9.29",
+      "0.822",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "cropped_occluded",
+      "oracle_camera_and_fit_pose",
+      5,
+      "6.76",
+      "18.56",
+      "0.743",
+      "0.00",
+      "0.00"
+    ],
+    [
+      "cropped_occluded",
+      "oracle_anchors_perspective",
+      5,
+      "9.35",
+      "22.88",
+      "0.644",
+      "6.75",
+      "2.58"
+    ],
+    [
+      "cropped_occluded",
+      "oracle_anchors_weak",
+      5,
+      "8.02",
+      "20.47",
+      "0.717",
+      "10.98",
+      "\u2014"
+    ],
+    [
+      "cropped_occluded",
+      "oracle_pose_ignored",
+      5,
+      "8.98",
+      "11.56",
+      "0.685",
+      "26.12",
+      "4.94"
+    ],
+    [
+      "cropped_occluded",
+      "corrupt_hidden_anchors_trusted",
+      6,
+      "23.70",
+      "38.72",
+      "0.339",
+      "46.17",
+      "22.94"
+    ]
+  ]
+}
