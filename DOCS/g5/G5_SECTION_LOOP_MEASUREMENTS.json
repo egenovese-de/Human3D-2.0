@@ -1,0 +1,1016 @@
+{
+  "A_high_mass": {
+    "chest": {
+      "height_cm": 38.833993673324585,
+      "reference_circumference_cm": 90.1902147032943,
+      "reference_area_cm2": 592.9542900441068,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -53.37711000590474,
+          "area_error_cm2": -72.3110738942413,
+          "symmetric_shape_mean_mm": 8.260287008656409,
+          "symmetric_shape_p95_mm": 16.664553729623265
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 11.372049147022238,
+          "area_error_cm2": 16.26186690324539,
+          "symmetric_shape_mean_mm": 2.2169881171417125,
+          "symmetric_shape_p95_mm": 5.574626750982588
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -38.54214729201274,
+          "area_error_cm2": -54.97320918714615,
+          "symmetric_shape_mean_mm": 6.358551426375513,
+          "symmetric_shape_p95_mm": 11.406512073920254
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 6.327418280481822,
+          "area_error_cm2": 10.930407445613582,
+          "symmetric_shape_mean_mm": 1.598260636260593,
+          "symmetric_shape_p95_mm": 4.36901139279302
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -46.757691425106884,
+          "area_error_cm2": -64.40476631091451,
+          "symmetric_shape_mean_mm": 7.735573882633325,
+          "symmetric_shape_p95_mm": 15.790565465056215
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -41.53068250588447,
+          "area_error_cm2": -50.54738432089357,
+          "symmetric_shape_mean_mm": 5.736042349434749,
+          "symmetric_shape_p95_mm": 11.086563561988168
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": -67.726070280861,
+          "area_error_cm2": -84.11026563523814,
+          "symmetric_shape_mean_mm": 9.687378671065035,
+          "symmetric_shape_p95_mm": 16.763012212118372
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 6.327418280481822,
+          "area_error_cm2": 10.930407445613582,
+          "symmetric_shape_mean_mm": 1.598260636260593,
+          "symmetric_shape_p95_mm": 4.36901139279302
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": -67.726070280861,
+          "area_error_cm2": -84.11026563523814,
+          "symmetric_shape_mean_mm": 9.687378671065035,
+          "symmetric_shape_p95_mm": 16.763012212118372
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": 579.7793295014519,
+          "area_error_cm2": 188.31234881125033,
+          "symmetric_shape_mean_mm": 16.66280325978609,
+          "symmetric_shape_p95_mm": 108.461603252305
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -53.377131023160445,
+          "area_error_cm2": -72.31109047191842,
+          "symmetric_shape_mean_mm": 8.260289000524121,
+          "symmetric_shape_p95_mm": 16.664553736724653
+        }
+      }
+    },
+    "abdomen": {
+      "height_cm": 26.770801901817336,
+      "reference_circumference_cm": 79.39376031367277,
+      "reference_area_cm2": 486.71016155433546,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -58.894078654455626,
+          "area_error_cm2": -72.10796100226338,
+          "symmetric_shape_mean_mm": 9.431778298527467,
+          "symmetric_shape_p95_mm": 13.913087678126303
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -13.194908327625967,
+          "area_error_cm2": -17.231026374354826,
+          "symmetric_shape_mean_mm": 2.8306800218464696,
+          "symmetric_shape_p95_mm": 6.9030560128172835
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -30.907763807853996,
+          "area_error_cm2": -37.64508113518906,
+          "symmetric_shape_mean_mm": 4.861429688144124,
+          "symmetric_shape_p95_mm": 8.78388523358811
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -6.464916484953562,
+          "area_error_cm2": -8.69505374636293,
+          "symmetric_shape_mean_mm": 1.7995315403823338,
+          "symmetric_shape_p95_mm": 3.938099847014922
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -33.926444028824676,
+          "area_error_cm2": -52.009306824229554,
+          "symmetric_shape_mean_mm": 6.992202290715424,
+          "symmetric_shape_p95_mm": 14.730222848970095
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -25.86281872695764,
+          "area_error_cm2": -29.443406061705673,
+          "symmetric_shape_mean_mm": 3.7699323361667947,
+          "symmetric_shape_p95_mm": 6.178301001056021
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": -20.418437990716996,
+          "area_error_cm2": -30.246911564820493,
+          "symmetric_shape_mean_mm": 4.184044243350859,
+          "symmetric_shape_p95_mm": 9.844802523145228
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -6.464916484953562,
+          "area_error_cm2": -8.69505374636293,
+          "symmetric_shape_mean_mm": 1.7995315403823338,
+          "symmetric_shape_p95_mm": 3.938099847014922
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": -20.418437990716996,
+          "area_error_cm2": -30.246911564820493,
+          "symmetric_shape_mean_mm": 4.184044243350859,
+          "symmetric_shape_p95_mm": 9.844802523145228
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -10.547468617777156,
+          "area_error_cm2": -9.702344741660681,
+          "symmetric_shape_mean_mm": 2.0083236750771833,
+          "symmetric_shape_p95_mm": 5.8766653683901655
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -58.894078654455626,
+          "area_error_cm2": -72.10796100226338,
+          "symmetric_shape_mean_mm": 9.431778298527467,
+          "symmetric_shape_p95_mm": 13.913087678126303
+        }
+      }
+    },
+    "waist": {
+      "height_cm": 17.924461269378668,
+      "reference_circumference_cm": 83.83548181832835,
+      "reference_area_cm2": 526.2341734700292,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -42.4982451944399,
+          "area_error_cm2": -53.932551096071506,
+          "symmetric_shape_mean_mm": 6.600777956315985,
+          "symmetric_shape_p95_mm": 8.312657069901924
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -12.940724930476222,
+          "area_error_cm2": -16.409149016370975,
+          "symmetric_shape_mean_mm": 1.9726166419052695,
+          "symmetric_shape_p95_mm": 3.558971111888737
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -12.959407030906505,
+          "area_error_cm2": -16.310909886098443,
+          "symmetric_shape_mean_mm": 1.9650527590401037,
+          "symmetric_shape_p95_mm": 4.008716628294746
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -3.232868446965398,
+          "area_error_cm2": -2.1370530964145473,
+          "symmetric_shape_mean_mm": 0.6553409204529379,
+          "symmetric_shape_p95_mm": 1.4606954578475708
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -21.44239882313954,
+          "area_error_cm2": -37.332610803775594,
+          "symmetric_shape_mean_mm": 4.510817531742012,
+          "symmetric_shape_p95_mm": 9.970532254719041
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -7.125582978263338,
+          "area_error_cm2": -2.8804985434283026,
+          "symmetric_shape_mean_mm": 2.051119317213743,
+          "symmetric_shape_p95_mm": 4.4536443269980195
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 8.14164150056456,
+          "area_error_cm2": 6.516133434288122,
+          "symmetric_shape_mean_mm": 2.229523397490862,
+          "symmetric_shape_p95_mm": 3.497982036583664
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -3.232868446965398,
+          "area_error_cm2": -2.1370530964145473,
+          "symmetric_shape_mean_mm": 0.6553409204529379,
+          "symmetric_shape_p95_mm": 1.4606954578475708
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 8.14164150056456,
+          "area_error_cm2": 6.516133434288122,
+          "symmetric_shape_mean_mm": 2.229523397490862,
+          "symmetric_shape_p95_mm": 3.497982036583664
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -13.413972732208919,
+          "area_error_cm2": -11.279982361445036,
+          "symmetric_shape_mean_mm": 1.7787608358839693,
+          "symmetric_shape_p95_mm": 4.747634788394061
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -42.4982451944399,
+          "area_error_cm2": -53.932551096071506,
+          "symmetric_shape_mean_mm": 6.600777956315985,
+          "symmetric_shape_p95_mm": 8.312657069901924
+        }
+      }
+    },
+    "pelvis": {
+      "height_cm": 4.2528439283371,
+      "reference_circumference_cm": 100.46901880481461,
+      "reference_area_cm2": 709.7665354454317,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -24.440908468342144,
+          "area_error_cm2": -32.45607956016113,
+          "symmetric_shape_mean_mm": 3.3163733111558837,
+          "symmetric_shape_p95_mm": 4.7034111553820255
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 1.8894880353801113,
+          "area_error_cm2": 8.975425824171339,
+          "symmetric_shape_mean_mm": 1.2836653749440239,
+          "symmetric_shape_p95_mm": 2.7406966458999156
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -3.112904299549797,
+          "area_error_cm2": -0.19642759683495115,
+          "symmetric_shape_mean_mm": 0.545339626807143,
+          "symmetric_shape_p95_mm": 1.161009115949966
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 4.074613429073253,
+          "area_error_cm2": 20.635362781493654,
+          "symmetric_shape_mean_mm": 2.0597824934526985,
+          "symmetric_shape_p95_mm": 4.9052933662028835
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": 20.074248200291862,
+          "area_error_cm2": 32.26252597471432,
+          "symmetric_shape_mean_mm": 3.666205954345434,
+          "symmetric_shape_p95_mm": 7.677227385244877
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 12.707152035125375,
+          "area_error_cm2": 29.91988065681835,
+          "symmetric_shape_mean_mm": 2.9636527716906085,
+          "symmetric_shape_p95_mm": 6.277953647812292
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 15.352039609237096,
+          "area_error_cm2": 27.677327446808818,
+          "symmetric_shape_mean_mm": 3.2005790607775793,
+          "symmetric_shape_p95_mm": 6.654437839670809
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 4.074613429073253,
+          "area_error_cm2": 20.635362781493654,
+          "symmetric_shape_mean_mm": 2.0597824934526985,
+          "symmetric_shape_p95_mm": 4.9052933662028835
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 15.352039609237096,
+          "area_error_cm2": 27.677327446808818,
+          "symmetric_shape_mean_mm": 3.2005790607775793,
+          "symmetric_shape_p95_mm": 6.654437839670809
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -7.7007915074038635,
+          "area_error_cm2": -11.170265160027498,
+          "symmetric_shape_mean_mm": 1.1163588459303506,
+          "symmetric_shape_p95_mm": 2.024332049649715
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -24.440908468342144,
+          "area_error_cm2": -32.45607956016113,
+          "symmetric_shape_mean_mm": 3.3163733111558837,
+          "symmetric_shape_p95_mm": 4.7034111553820255
+        }
+      }
+    }
+  },
+  "A_heldout_1": {
+    "chest": {
+      "height_cm": 45.06592512130737,
+      "reference_circumference_cm": 91.00071456876361,
+      "reference_area_cm2": 586.4650961404282,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -9.368324025664947,
+          "area_error_cm2": -7.719567064021021,
+          "symmetric_shape_mean_mm": 7.328335676872544,
+          "symmetric_shape_p95_mm": 12.707145178828267
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -16.41271742924488,
+          "area_error_cm2": -15.18546455789351,
+          "symmetric_shape_mean_mm": 7.3407977217107225,
+          "symmetric_shape_p95_mm": 14.507595051001514
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": 703.5576338697958,
+          "area_error_cm2": 206.82355902757922,
+          "symmetric_shape_mean_mm": 25.892579736128553,
+          "symmetric_shape_p95_mm": 123.24956473809104
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -2.7543693301510075,
+          "area_error_cm2": -11.338740160323141,
+          "symmetric_shape_mean_mm": 7.428389036307767,
+          "symmetric_shape_p95_mm": 14.524800212365093
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -38.448655713009714,
+          "area_error_cm2": -45.588591114633346,
+          "symmetric_shape_mean_mm": 10.68355770299954,
+          "symmetric_shape_p95_mm": 19.48097090984584
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 22.568747563928326,
+          "area_error_cm2": 20.554021713993507,
+          "symmetric_shape_mean_mm": 9.872437244253021,
+          "symmetric_shape_p95_mm": 14.189958025894677
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": -15.95974609756496,
+          "area_error_cm2": -22.370363024303174,
+          "symmetric_shape_mean_mm": 9.405684886511754,
+          "symmetric_shape_p95_mm": 19.69911317255601
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -2.7543693301510075,
+          "area_error_cm2": -11.338740160323141,
+          "symmetric_shape_mean_mm": 7.428389036307767,
+          "symmetric_shape_p95_mm": 14.524800212365093
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": -15.95974609756496,
+          "area_error_cm2": -22.370363024303174,
+          "symmetric_shape_mean_mm": 9.405684886511754,
+          "symmetric_shape_p95_mm": 19.69911317255601
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -11.716812624895852,
+          "area_error_cm2": -14.124694733855904,
+          "symmetric_shape_mean_mm": 1.6283655242366146,
+          "symmetric_shape_p95_mm": 5.026311185106398
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -10.67767253748329,
+          "area_error_cm2": -9.578701708656126,
+          "symmetric_shape_mean_mm": 7.132092081572607,
+          "symmetric_shape_p95_mm": 12.627705943954135
+        }
+      }
+    },
+    "abdomen": {
+      "height_cm": 32.375199079513564,
+      "reference_circumference_cm": 72.04224902999658,
+      "reference_area_cm2": 391.9001710859851,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": 63.51802184829296,
+          "area_error_cm2": 71.51437508789354,
+          "symmetric_shape_mean_mm": 10.198123849180504,
+          "symmetric_shape_p95_mm": 17.21465360122078
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 55.911998122376474,
+          "area_error_cm2": 59.351044463309506,
+          "symmetric_shape_mean_mm": 10.138671041012216,
+          "symmetric_shape_p95_mm": 15.720856360237907
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": 22.444217674281504,
+          "area_error_cm2": 24.997608945915317,
+          "symmetric_shape_mean_mm": 10.217888926868998,
+          "symmetric_shape_p95_mm": 18.690578732570547
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 48.96343604134856,
+          "area_error_cm2": 52.5052774213417,
+          "symmetric_shape_mean_mm": 10.378797759045476,
+          "symmetric_shape_p95_mm": 18.784503252181345
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": 45.04625329708318,
+          "area_error_cm2": 44.32122893374782,
+          "symmetric_shape_mean_mm": 14.11048747995084,
+          "symmetric_shape_p95_mm": 21.490661079204546
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 59.12587053360852,
+          "area_error_cm2": 61.198880124726884,
+          "symmetric_shape_mean_mm": 11.817806480161344,
+          "symmetric_shape_p95_mm": 19.61102415522174
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 71.4623466704792,
+          "area_error_cm2": 74.79523021242096,
+          "symmetric_shape_mean_mm": 14.520835238230351,
+          "symmetric_shape_p95_mm": 22.322387309916444
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 48.96343604134856,
+          "area_error_cm2": 52.5052774213417,
+          "symmetric_shape_mean_mm": 10.378797759045476,
+          "symmetric_shape_p95_mm": 18.784503252181345
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 71.4623466704792,
+          "area_error_cm2": 74.79523021242096,
+          "symmetric_shape_mean_mm": 14.520835238230351,
+          "symmetric_shape_p95_mm": 22.322387309916444
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": 6.044273233123647,
+          "area_error_cm2": 5.537052347659369,
+          "symmetric_shape_mean_mm": 1.7447242029279801,
+          "symmetric_shape_p95_mm": 4.690035026233384
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": 57.57590033207066,
+          "area_error_cm2": 64.67612181816014,
+          "symmetric_shape_mean_mm": 9.329101304563274,
+          "symmetric_shape_p95_mm": 15.560598058672742
+        }
+      }
+    },
+    "waist": {
+      "height_cm": 23.06866664886475,
+      "reference_circumference_cm": 73.48118075253558,
+      "reference_area_cm2": 392.58567022276713,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -1.2715286668948522,
+          "area_error_cm2": 7.36397517297587,
+          "symmetric_shape_mean_mm": 6.809849438991077,
+          "symmetric_shape_p95_mm": 13.373918194900071
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 5.790273806501318,
+          "area_error_cm2": 6.2944610795246945,
+          "symmetric_shape_mean_mm": 7.375005321935397,
+          "symmetric_shape_p95_mm": 12.66009295548099
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -23.510775263407595,
+          "area_error_cm2": -18.54326822267842,
+          "symmetric_shape_mean_mm": 7.6451221415364845,
+          "symmetric_shape_p95_mm": 12.491806532360991
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 10.086057104293928,
+          "area_error_cm2": 16.260700615794804,
+          "symmetric_shape_mean_mm": 6.107053352276651,
+          "symmetric_shape_p95_mm": 13.026907539678756
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": 34.217202270327505,
+          "area_error_cm2": 25.197445216477945,
+          "symmetric_shape_mean_mm": 9.759652220853985,
+          "symmetric_shape_p95_mm": 13.734418352008477
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 17.543764438516973,
+          "area_error_cm2": 18.566798556894412,
+          "symmetric_shape_mean_mm": 6.824811602710877,
+          "symmetric_shape_p95_mm": 10.993612591390727
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 44.558011548626695,
+          "area_error_cm2": 43.813076325179566,
+          "symmetric_shape_mean_mm": 9.706913806790736,
+          "symmetric_shape_p95_mm": 13.618524148560105
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 10.086057104293928,
+          "area_error_cm2": 16.260700615794804,
+          "symmetric_shape_mean_mm": 6.107053352276651,
+          "symmetric_shape_p95_mm": 13.026907539678756
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 44.558011548626695,
+          "area_error_cm2": 43.813076325179566,
+          "symmetric_shape_mean_mm": 9.706913806790736,
+          "symmetric_shape_p95_mm": 13.618524148560105
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": 2.13229143517367,
+          "area_error_cm2": 1.1383633010560743,
+          "symmetric_shape_mean_mm": 1.105078138749187,
+          "symmetric_shape_p95_mm": 2.187303647079135
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -3.2320801316625136,
+          "area_error_cm2": 4.991107819235651,
+          "symmetric_shape_mean_mm": 6.5580331324222065,
+          "symmetric_shape_p95_mm": 12.211873409981674
+        }
+      }
+    },
+    "pelvis": {
+      "height_cm": 8.685843801498422,
+      "reference_circumference_cm": 97.87532004099842,
+      "reference_area_cm2": 651.5974314167757,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -70.87735367111918,
+          "area_error_cm2": -73.50272595639387,
+          "symmetric_shape_mean_mm": 8.092920663672281,
+          "symmetric_shape_p95_mm": 14.121292472397856
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 0.1449081946162778,
+          "area_error_cm2": 12.506197635004924,
+          "symmetric_shape_mean_mm": 1.691834732155038,
+          "symmetric_shape_p95_mm": 5.7031954026057585
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -22.675413803908953,
+          "area_error_cm2": -29.49889951396517,
+          "symmetric_shape_mean_mm": 3.2330190524508637,
+          "symmetric_shape_p95_mm": 8.200212984724617
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -2.2425018289833076,
+          "area_error_cm2": 8.239481257996545,
+          "symmetric_shape_mean_mm": 2.2678289105134484,
+          "symmetric_shape_p95_mm": 4.328079056364362
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": 3.5376859086726142,
+          "area_error_cm2": 10.864904496554345,
+          "symmetric_shape_mean_mm": 3.34301553214802,
+          "symmetric_shape_p95_mm": 7.134607700256642
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -22.41237512240744,
+          "area_error_cm2": -16.67099054393782,
+          "symmetric_shape_mean_mm": 2.3794605376443734,
+          "symmetric_shape_p95_mm": 6.054683991357562
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 6.457086343983889,
+          "area_error_cm2": 24.092040891556167,
+          "symmetric_shape_mean_mm": 3.870100789902801,
+          "symmetric_shape_p95_mm": 7.218108355112757
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -2.2425018289833076,
+          "area_error_cm2": 8.239481257996545,
+          "symmetric_shape_mean_mm": 2.2678289105134484,
+          "symmetric_shape_p95_mm": 4.328079056364362
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 6.457086343983889,
+          "area_error_cm2": 24.092040891556167,
+          "symmetric_shape_mean_mm": 3.870100789902801,
+          "symmetric_shape_p95_mm": 7.218108355112757
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": 1.2313174955394857,
+          "area_error_cm2": 2.0059144044822688,
+          "symmetric_shape_mean_mm": 1.104192038681037,
+          "symmetric_shape_p95_mm": 2.299408707881034
+        },
+        "L0": {
+          "geometry": "L0",
+          "circumference_error_mm": -70.99138938154084,
+          "area_error_cm2": -73.61727748230453,
+          "symmetric_shape_mean_mm": 8.102081949444877,
+          "symmetric_shape_p95_mm": 14.12305404263078
+        }
+      }
+    }
+  },
+  "A_slim": {
+    "chest": {
+      "height_cm": 33.60307574272156,
+      "reference_circumference_cm": 127.69587043873946,
+      "reference_area_cm2": 738.7444318986595,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -440.73067981082716,
+          "area_error_cm2": -242.9250307345369,
+          "symmetric_shape_mean_mm": 23.976544951337473,
+          "symmetric_shape_p95_mm": 104.65291396675956
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": 107.90803671735404,
+          "area_error_cm2": -37.9414586741791,
+          "symmetric_shape_mean_mm": 4.182149626927444,
+          "symmetric_shape_p95_mm": 11.88647395082486
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -6.062711565951986,
+          "area_error_cm2": -7.421897413192482,
+          "symmetric_shape_mean_mm": 4.732543278499312,
+          "symmetric_shape_p95_mm": 10.280300052684547
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -61.77455018899906,
+          "area_error_cm2": -24.817301082732797,
+          "symmetric_shape_mean_mm": 5.3865696516357815,
+          "symmetric_shape_p95_mm": 13.077961914506584
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -439.4708456419404,
+          "area_error_cm2": -238.37407269895925,
+          "symmetric_shape_mean_mm": 23.505347906579534,
+          "symmetric_shape_p95_mm": 104.8835139245847
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -63.49143103735301,
+          "area_error_cm2": -33.51158871933876,
+          "symmetric_shape_mean_mm": 5.637161832273941,
+          "symmetric_shape_p95_mm": 14.318004299217462
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": -64.60669355165635,
+          "area_error_cm2": -56.589863313005935,
+          "symmetric_shape_mean_mm": 6.829191463500626,
+          "symmetric_shape_p95_mm": 20.413398682391104
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -61.77455018899906,
+          "area_error_cm2": -24.817301082732797,
+          "symmetric_shape_mean_mm": 5.3865696516357815,
+          "symmetric_shape_p95_mm": 13.077961914506584
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": -64.60669355165635,
+          "area_error_cm2": -56.589863313005935,
+          "symmetric_shape_mean_mm": 6.829191463500626,
+          "symmetric_shape_p95_mm": 20.413398682391104
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -440.12416374003834,
+          "area_error_cm2": -242.25246662439656,
+          "symmetric_shape_mean_mm": 23.909332826997925,
+          "symmetric_shape_p95_mm": 105.02787589929711
+        },
+        "L0": {
+          "geometry": "D0",
+          "circumference_error_mm": -440.73067981082716,
+          "area_error_cm2": -242.9250307345369,
+          "symmetric_shape_mean_mm": 23.976544951337473,
+          "symmetric_shape_p95_mm": 104.65291396675956
+        }
+      }
+    },
+    "abdomen": {
+      "height_cm": 22.061999201774597,
+      "reference_circumference_cm": 74.57488661607483,
+      "reference_area_cm2": 429.68918290908283,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -58.54723848900832,
+          "area_error_cm2": -71.54556926669812,
+          "symmetric_shape_mean_mm": 9.985867306286927,
+          "symmetric_shape_p95_mm": 16.258849293622575
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -6.45369009045865,
+          "area_error_cm2": -14.912203851674292,
+          "symmetric_shape_mean_mm": 2.8530024874791744,
+          "symmetric_shape_p95_mm": 8.748920589588153
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -5.77414178129473,
+          "area_error_cm2": -10.354810796214224,
+          "symmetric_shape_mean_mm": 9.845623897755459,
+          "symmetric_shape_p95_mm": 18.469941813569264
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 22.39518564662845,
+          "area_error_cm2": 19.789935071930643,
+          "symmetric_shape_mean_mm": 7.510745863456625,
+          "symmetric_shape_p95_mm": 12.561223821798702
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -27.599431910572036,
+          "area_error_cm2": -44.120062174810755,
+          "symmetric_shape_mean_mm": 6.7982167489142515,
+          "symmetric_shape_p95_mm": 15.633149209863708
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 18.372985879236126,
+          "area_error_cm2": 14.39656873151415,
+          "symmetric_shape_mean_mm": 7.359431021612728,
+          "symmetric_shape_p95_mm": 13.690259069130258
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 16.80118376986954,
+          "area_error_cm2": 6.34691781511691,
+          "symmetric_shape_mean_mm": 10.723232492820406,
+          "symmetric_shape_p95_mm": 23.32481468686095
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 22.39518564662845,
+          "area_error_cm2": 19.789935071930643,
+          "symmetric_shape_mean_mm": 7.510745863456625,
+          "symmetric_shape_p95_mm": 12.561223821798702
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 16.80118376986954,
+          "area_error_cm2": 6.34691781511691,
+          "symmetric_shape_mean_mm": 10.723232492820406,
+          "symmetric_shape_p95_mm": 23.32481468686095
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -58.06776610723162,
+          "area_error_cm2": -71.21742572520094,
+          "symmetric_shape_mean_mm": 9.937068113181256,
+          "symmetric_shape_p95_mm": 15.868405351685709
+        },
+        "L0": {
+          "geometry": "D0",
+          "circumference_error_mm": -58.54723848900832,
+          "area_error_cm2": -71.54556926669812,
+          "symmetric_shape_mean_mm": 9.985867306286927,
+          "symmetric_shape_p95_mm": 16.258849293622575
+        }
+      }
+    },
+    "waist": {
+      "height_cm": 13.598543071746832,
+      "reference_circumference_cm": 72.7347809116267,
+      "reference_area_cm2": 409.1091259037754,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -75.33610918485394,
+          "area_error_cm2": -92.79026448464947,
+          "symmetric_shape_mean_mm": 13.45044210060883,
+          "symmetric_shape_p95_mm": 23.289144074608807
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -16.667816649302836,
+          "area_error_cm2": -29.611585607754876,
+          "symmetric_shape_mean_mm": 6.2573490866698736,
+          "symmetric_shape_p95_mm": 11.726308976137172
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -41.43562639086909,
+          "area_error_cm2": -50.926351814443706,
+          "symmetric_shape_mean_mm": 8.063729534159979,
+          "symmetric_shape_p95_mm": 24.27716454060639
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": 8.49318960446766,
+          "area_error_cm2": 4.468331954843336,
+          "symmetric_shape_mean_mm": 6.978875421110266,
+          "symmetric_shape_p95_mm": 14.075216791512993
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -3.5103458220986283,
+          "area_error_cm2": -26.6446328865689,
+          "symmetric_shape_mean_mm": 9.64516697059351,
+          "symmetric_shape_p95_mm": 16.971193735958394
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": 9.356914211776655,
+          "area_error_cm2": 3.9299125307793474,
+          "symmetric_shape_mean_mm": 7.327711313763549,
+          "symmetric_shape_p95_mm": 15.38140290216718
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": 14.38029590562266,
+          "area_error_cm2": 0.6841321921314716,
+          "symmetric_shape_mean_mm": 10.193709946577794,
+          "symmetric_shape_p95_mm": 21.810819269632297
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": 8.49318960446766,
+          "area_error_cm2": 4.468331954843336,
+          "symmetric_shape_mean_mm": 6.978875421110266,
+          "symmetric_shape_p95_mm": 14.075216791512993
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": 14.38029590562266,
+          "area_error_cm2": 0.6841321921314716,
+          "symmetric_shape_mean_mm": 10.193709946577794,
+          "symmetric_shape_p95_mm": 21.810819269632297
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -74.54735334741414,
+          "area_error_cm2": -91.9044988415884,
+          "symmetric_shape_mean_mm": 13.314495932743542,
+          "symmetric_shape_p95_mm": 22.963453159487536
+        },
+        "L0": {
+          "geometry": "D0",
+          "circumference_error_mm": -75.33610918485394,
+          "area_error_cm2": -92.79026448464947,
+          "symmetric_shape_mean_mm": 13.45044210060883,
+          "symmetric_shape_p95_mm": 23.289144074608807
+        }
+      }
+    },
+    "pelvis": {
+      "height_cm": 0.5186563253402738,
+      "reference_circumference_cm": 94.73690435195914,
+      "reference_area_cm2": 660.8982040812953,
+      "fits": {
+        "D0": {
+          "geometry": "D0",
+          "circumference_error_mm": -79.5786167087033,
+          "area_error_cm2": -133.4533079236487,
+          "symmetric_shape_mean_mm": 14.736844855628764,
+          "symmetric_shape_p95_mm": 22.362708483808632
+        },
+        "D1": {
+          "geometry": "D1",
+          "circumference_error_mm": -50.02196283651003,
+          "area_error_cm2": -76.26970867902924,
+          "symmetric_shape_mean_mm": 8.273564494343386,
+          "symmetric_shape_p95_mm": 11.926375532913854
+        },
+        "D2": {
+          "geometry": "D2",
+          "circumference_error_mm": -38.60167908342234,
+          "area_error_cm2": -81.37776516065458,
+          "symmetric_shape_mean_mm": 8.789142270064243,
+          "symmetric_shape_p95_mm": 17.407855797949914
+        },
+        "D3": {
+          "geometry": "D3",
+          "circumference_error_mm": -9.835674367442664,
+          "area_error_cm2": -20.326378929391126,
+          "symmetric_shape_mean_mm": 3.9769629756230422,
+          "symmetric_shape_p95_mm": 7.306758418429159
+        },
+        "D4": {
+          "geometry": "D4",
+          "circumference_error_mm": -15.476319725260055,
+          "area_error_cm2": -38.964467943817,
+          "symmetric_shape_mean_mm": 5.027491467723289,
+          "symmetric_shape_p95_mm": 12.133800994795449
+        },
+        "D5": {
+          "geometry": "D5",
+          "circumference_error_mm": -13.317216186134857,
+          "area_error_cm2": -29.255916134389395,
+          "symmetric_shape_mean_mm": 3.9447123880682597,
+          "symmetric_shape_p95_mm": 9.346376036296906
+        },
+        "D6": {
+          "geometry": "D6",
+          "circumference_error_mm": -7.523308802076087,
+          "area_error_cm2": -26.282856753803003,
+          "symmetric_shape_mean_mm": 4.5345932642973015,
+          "symmetric_shape_p95_mm": 6.282972428110922
+        },
+        "D7": {
+          "geometry": "D3",
+          "circumference_error_mm": -9.835674367442664,
+          "area_error_cm2": -20.326378929391126,
+          "symmetric_shape_mean_mm": 3.9769629756230422,
+          "symmetric_shape_p95_mm": 7.306758418429159
+        },
+        "D8": {
+          "geometry": "D8",
+          "circumference_error_mm": -7.523308802076087,
+          "area_error_cm2": -26.282856753803003,
+          "symmetric_shape_mean_mm": 4.5345932642973015,
+          "symmetric_shape_p95_mm": 6.282972428110922
+        },
+        "D9": {
+          "geometry": "D9",
+          "circumference_error_mm": -80.43622830668099,
+          "area_error_cm2": -132.8783684754212,
+          "symmetric_shape_mean_mm": 14.678374339582899,
+          "symmetric_shape_p95_mm": 21.90853555547164
+        },
+        "L0": {
+          "geometry": "D0",
+          "circumference_error_mm": -79.5786167087033,
+          "area_error_cm2": -133.4533079236487,
+          "symmetric_shape_mean_mm": 14.736844855628764,
+          "symmetric_shape_p95_mm": 22.362708483808632
+        }
+      }
+    }
+  }
+}

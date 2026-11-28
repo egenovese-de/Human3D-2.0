@@ -1,6 +1,6 @@
 # G5 anatomical region impact
 
-Calibrated held-out average gain in millimetres versus the same subject’s D0. Positive values indicate improved geometry. Regions use fixed anatomical height and lateral bands and have overlapping support at selected borders. Region labels are approximate on independent topology, particularly the shoulder and forearm. Signed width, depth and anterior/posterior section errors are included in G5_MEASUREMENTS.json. Circumference and shape-loop errors remain open.
+Calibrated held-out average gain in millimetres versus the same subject’s D0. Positive values indicate improved geometry. Regions use fixed anatomical height and lateral bands and have overlapping support at selected borders. Region labels are approximate on independent topology, particularly the shoulder and forearm. Signed width, depth and anterior/posterior section errors are included in G5_MEASUREMENTS.json. An archived three-subject follow-up measures closed-loop circumferences and shape error. See [the torso cross-section addendum](G5_SECTION_LOOP_ADDENDUM.md) for results and coverage.
 
 | Region | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
