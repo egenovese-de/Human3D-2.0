@@ -9,7 +9,7 @@ Run these PowerShell commands. A linked working tree lets you keep your current 
 ```powershell
 Set-Location 'C:\Users\Asus\Documents\GitHub\Human3D-2.0'
 git fetch origin development/m7
-git worktree add --detach '..\Human3D-M7' origin/development/m7
+git worktree add --detach '..\Human3D-M7' 020fcc793e7417d6927d9e07346678e110ae9ddc
 Set-Location '..\Human3D-M7'
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Setup-Human3D.ps1
 .\Launch-Human3D.cmd
