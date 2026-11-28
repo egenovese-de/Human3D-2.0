@@ -221,7 +221,10 @@ class ReconstructionService:
                 request_metadata = asdict(request)
                 if request.calibration:
                     request_metadata["calibration"] = Path(request.calibration).name
+                publication_sequence = max((result.metadata.get("publication_sequence", 0)
+                                            for result in self.results(include_failures=True)), default=0) + 1
                 metadata = {"schema_version": SCHEMA_VERSION, "request": request_metadata,
+                            "publication_sequence": publication_sequence,
                             "status": status, "canonical_id": canonical,
                             "target_result_id": request.id if any(name.startswith("target.usd") for name in artifacts) else None,
                             "diagnostics": asdict(diagnostics), "artifacts": artifacts,
@@ -248,7 +251,9 @@ class ReconstructionService:
                         results.append(Result(path.parent, data))
             except (OSError, ValueError, KeyError, TypeError):
                 continue
-        return sorted(results, key=lambda result: result.metadata["request"]["started_at"], reverse=True)
+        return sorted(results, key=lambda result: (result.metadata.get("publication_sequence", 0),
+                                                   result.metadata["request"]["started_at"], result.id),
+                      reverse=True)
 
     def export(self, result, destination: Path, *, target=True):
         if result.metadata["status"] != "complete":

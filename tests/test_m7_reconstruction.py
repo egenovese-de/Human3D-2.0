@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 from threading import Event, Thread
 from time import monotonic, sleep
 import unittest
+from unittest.mock import patch
 from zipfile import ZipFile
 
 import numpy as np
@@ -61,7 +62,8 @@ class ReconstructionTests(unittest.TestCase):
     def generate(self):
         return self.service.generate(self.service.request(), Event(), lambda progress: None)
 
-    def test_atomic_attempts_cancel_failure_reopen_and_private_archive(self):
+    @patch("human3d.reconstruction.utc_now", return_value="2026-11-28T12:00:00+00:00")
+    def test_atomic_attempts_cancel_failure_reopen_and_private_archive(self, _clock):
         first = self.generate()
         request = self.service.request()
         cancel = Event()
